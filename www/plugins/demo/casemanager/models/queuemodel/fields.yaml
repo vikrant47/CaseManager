@@ -46,6 +46,11 @@ tabs:
             hidden: 0
             type: codeeditor
             tab: Input
+        trigger:
+            label: Trigger
+            span: auto
+            type: checkboxlist
+            tab: Input
         script:
             label: Script
             size: large
@@ -53,6 +58,13 @@ tabs:
             span: auto
             hidden: 0
             type: codeeditor
+            tab: Output
+        assignment_groups:
+            label: 'Assignment Groups'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
             tab: Output
         queue_order:
             label: 'Queue Order Type'

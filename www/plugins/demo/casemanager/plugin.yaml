@@ -6,10 +6,14 @@ plugin:
     homepage: ''
 navigation:
     main-menu-item:
-        label: Queue
-        url: demo/casemanager/queue
-        icon: icon-stack-overflow
+        label: Workflow
+        url: demo/casemanager/workflow
+        icon: icon-recycle
         sideMenu:
+            side-menu-item2:
+                label: Workflows
+                url: demo/casemanager/workflow
+                icon: icon-recycle
             side-menu-item:
                 label: Queues
                 url: demo/casemanager/queue

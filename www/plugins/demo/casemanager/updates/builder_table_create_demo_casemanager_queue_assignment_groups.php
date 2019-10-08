@@ -3,27 +3,26 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoCasemanagerWorkflows extends Migration
+class BuilderTableCreateDemoCasemanagerQueueAssignmentGroups extends Migration
 {
     public function up()
     {
-        Schema::create('demo_casemanager_workflows', function($table)
+        Schema::create('demo_casemanager_queue_assignment_groups', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('active')->default(1);
-            $table->string('name');
-            $table->text('description');
-            $table->text('definition');
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
+            $table->integer('group_id');
+            $table->integer('queue_id');
+            $table->integer('sort_order');
         });
     }
     
     public function down()
     {
-        Schema::dropIfExists('demo_casemanager_workflows');
+        Schema::dropIfExists('demo_casemanager_queue_assignment_groups');
     }
 }

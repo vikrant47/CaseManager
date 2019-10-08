@@ -12,3 +12,12 @@
 1.0.5:
     - 'Created table demo_casemanager_workflows'
     - builder_table_create_demo_casemanager_workflows.php
+1.0.6:
+    - 'Created table demo_casemanager_workflow_entities'
+    - builder_table_create_demo_casemanager_workflow_entities.php
+1.0.7:
+    - 'Created table demo_casemanager_workflow_transitions'
+    - builder_table_create_demo_casemanager_workflow_transitions.php
+1.0.8:
+    - 'Created table demo_casemanager_queue_assignment_groups'
+    - builder_table_create_demo_casemanager_queue_assignment_groups.php

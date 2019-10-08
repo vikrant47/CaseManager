@@ -1,0 +1,39 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+tabs:
+    fields:
+        definition:
+            label: Definitaion
+            prompt: 'Add new item'
+            span: auto
+            type: repeater
+            tab: Definition
+            form:
+                fields:
+                    from_state:
+                        label: 'From State'
+                        span: auto
+                        type: dropdown
+                    to_state:
+                        label: 'To State'
+                        span: auto
+                        type: dropdown
+                    queue:
+                        label: Queue
+                        nameFrom: name
+                        descriptionFrom: description
+                        span: auto
+                        type: relation
