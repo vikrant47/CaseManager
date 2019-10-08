@@ -1,0 +1,11 @@
+name: Triggers
+modelClass: Briddle\Workflow\Models\Trigger
+form: $/briddle/workflow/models/trigger/fields.yaml
+defaultRedirect: briddle/workflow/triggers
+create:
+    redirect: 'briddle/workflow/triggers/update/:id'
+    redirectClose: briddle/workflow/triggers
+update:
+    redirect: briddle/workflow/triggers
+    redirectClose: briddle/workflow/triggers
+preview: {  }

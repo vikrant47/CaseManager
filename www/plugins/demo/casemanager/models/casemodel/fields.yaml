@@ -1,0 +1,11 @@
+fields:
+    title:
+        label: 'Enter Title'
+        span: auto
+        placeholder: 'Enter Title'
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor

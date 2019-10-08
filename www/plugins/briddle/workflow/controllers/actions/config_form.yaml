@@ -1,0 +1,10 @@
+name: Actions
+form: $/briddle/workflow/models/action/fields.yaml
+modelClass: Briddle\Workflow\Models\Action
+defaultRedirect: briddle/workflow/actions
+create:
+    redirect: 'briddle/workflow/actions/update/:id'
+    redirectClose: briddle/workflow/actions
+update:
+    redirect: briddle/workflow/actions
+    redirectClose: briddle/workflow/actions

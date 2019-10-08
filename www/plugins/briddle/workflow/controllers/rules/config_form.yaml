@@ -1,0 +1,10 @@
+name: Rules
+form: $/briddle/workflow/models/rule/fields.yaml
+modelClass: Briddle\Workflow\Models\Rule
+defaultRedirect: briddle/workflow/rules
+create:
+    redirect: 'briddle/workflow/rules/update/:id'
+    redirectClose: briddle/workflow/rules
+update:
+    redirect: briddle/workflow/rules
+    redirectClose: briddle/workflow/rules

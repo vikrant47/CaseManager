@@ -1,0 +1,12 @@
+.DS_Store
+*.log
+/bootstrap
+/config
+/install_files
+/modules
+/storage
+/vendor
+/artisan
+/install.php
+/install-master
+install-master.zip

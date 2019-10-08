@@ -1,0 +1,87 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table briddle_workflow_rules'
+    - builder_table_create_briddle_workflow_rules.php
+1.0.3:
+    - 'Created table briddle_workflow_actions'
+    - builder_table_create_briddle_workflow_actions.php
+1.0.4:
+    - 'Created table briddle_workflow_triggers'
+    - builder_table_create_briddle_workflow_triggers.php
+1.0.5:
+    - 'Updated table briddle_workflow_actions'
+    - builder_table_update_briddle_workflow_actions.php
+1.0.6:
+    - 'Updated table briddle_workflow_triggers'
+    - builder_table_update_briddle_workflow_triggers.php
+1.0.7:
+    - 'Updated table briddle_workflow_actions'
+    - builder_table_update_briddle_workflow_actions_2.php
+1.0.8:
+    - 'Updated table briddle_workflow_triggers'
+    - builder_table_update_briddle_workflow_triggers_2.php
+1.0.9:
+    - 'Updated table briddle_workflow_triggers'
+    - builder_table_update_briddle_workflow_triggers_3.php
+1.0.10:
+    - 'Updated table briddle_workflow_triggers'
+    - builder_table_update_briddle_workflow_triggers_4.php
+1.0.11:
+    - 'Updated table briddle_workflow_actions'
+    - builder_table_update_briddle_workflow_actions_3.php
+1.0.12:
+    - 'Updated table briddle_workflow_rules'
+    - builder_table_update_briddle_workflow_rules.php
+1.0.13:
+    - 'Updated table briddle_workflow_rules'
+    - builder_table_update_briddle_workflow_rules_2.php
+1.0.14:
+    - 'Updated table briddle_workflow_rules'
+    - builder_table_update_briddle_workflow_rules_3.php
+1.0.15:
+    - 'Updated table briddle_workflow_rules'
+    - builder_table_update_briddle_workflow_rules_4.php
+1.1.0:
+    - 'Added Log action and some bugs squashed'
+1.1.1:
+    - 'Fixed bug triggering next rule from log action and added backend translations'
+1.1.2:
+    - 'Created table briddle_workflow_workflows'
+    - builder_table_create_briddle_workflow_workflows.php
+1.1.3:
+    - 'Updated table briddle_workflow_workflows'
+    - builder_table_update_briddle_workflow_workflows.php
+1.1.4:
+    - 'Created table briddle_workflow_rule_workflow'
+    - builder_table_create_briddle_workflow_rule_workflow.php
+1.1.5:
+    - 'Updated table briddle_workflow_workflows'
+    - builder_table_update_briddle_workflow_workflows_2.php
+1.1.6:
+    - 'Updated table briddle_workflow_workflows'
+    - builder_table_update_briddle_workflow_workflows_3.php
+1.1.7:
+    - 'Updated table briddle_workflow_workflows'
+    - builder_table_update_briddle_workflow_workflows_4.php
+1.1.8:
+    - 'Drop table briddle_workflow_rule_workflow'
+    - builder_table_delete_briddle_workflow_rule_workflow.php
+1.1.9:
+    - 'Updated table briddle_workflow_rules'
+    - builder_table_update_briddle_workflow_rules_5.php
+1.1.10:
+    - 'Updated table briddle_workflow_workflows'
+    - builder_table_update_briddle_workflow_workflows_5.php
+1.1.11:
+    - 'Updated table briddle_workflow_rules'
+    - builder_table_update_briddle_workflow_rules_6.php
+1.1.12:
+    - 'Updated table briddle_workflow_workflows'
+    - builder_table_update_briddle_workflow_workflows_6.php
+1.2.0:
+    - 'Major improvement in triggering multiple actions now in beta'
+1.2.1:
+    - 'Added query action'
+1.2.2:
+    - 'Added inline help sections'

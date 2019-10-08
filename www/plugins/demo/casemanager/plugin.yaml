@@ -1,0 +1,29 @@
+plugin:
+    name: 'demo.casemanager::lang.plugin.name'
+    description: 'demo.casemanager::lang.plugin.description'
+    author: demo
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Queue
+        url: demo/casemanager/queue
+        icon: icon-stack-overflow
+        sideMenu:
+            side-menu-item:
+                label: Queues
+                url: demo/casemanager/queue
+                icon: icon-stack-overflow
+            side-menu-item3:
+                label: 'Queue Items'
+                url: demo/casemanager/queueitem
+                icon: icon-stack-exchange
+    main-menu-item2:
+        label: Workspace
+        url: demo/casemanager/casecontroller
+        icon: icon-user-secret
+        sideMenu:
+            side-menu-item:
+                label: Cases
+                url: demo/casemanager/casecontroller
+                icon: icon-book

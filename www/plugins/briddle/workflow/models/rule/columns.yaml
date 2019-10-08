@@ -1,0 +1,10 @@
+columns:
+    name:
+        label: 'briddle.workflow::lang.rule'
+        type: text
+        searchable: true
+        sortable: true
+    active:
+        label: 'briddle.workflow::lang.active'
+        type: switch
+        sortable: true

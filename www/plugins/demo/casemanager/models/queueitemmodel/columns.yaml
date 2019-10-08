@@ -1,0 +1,25 @@
+columns:
+    id:
+        label: id
+        type: number
+    queue_id:
+        label: queue_id
+        type: number
+    item_id:
+        label: item_id
+        type: number
+    item_type:
+        label: item_type
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by:
+        label: created_by
+        type: number
+    updated_by:
+        label: updated_by
+        type: number

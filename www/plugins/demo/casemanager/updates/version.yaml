@@ -1,0 +1,14 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table demo_casemanager_cases'
+    - builder_table_create_demo_casemanager_cases.php
+1.0.3:
+    - 'Created table demo_casemanager_queues'
+    - builder_table_create_demo_casemanager_queues.php
+1.0.4:
+    - 'Created table demo_casemanager_queue_items'
+    - builder_table_create_demo_casemanager_queue_items.php
+1.0.5:
+    - 'Created table demo_casemanager_workflows'
+    - builder_table_create_demo_casemanager_workflows.php
