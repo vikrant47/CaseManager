@@ -1,10 +1,12 @@
 <?php namespace Demo\Casemanager\Models;
 
 use Backend\Models\UserGroup;
+use Illuminate\Support\Collection;
 use Model;
 use Event;
 use Backend\Models\User;
 use October\Rain\Auth\Models\Group;
+
 
 /**
  * Model
@@ -57,7 +59,7 @@ class QueueModel extends Model
      */
     public function pushItem($item, $existingItem)
     {
-        if ($this->virtual === false) {
+        if ($this->virtual === 0) {
             $insert = true;
             if (!empty($existingItem)) {
                 if ($this->redundancy_policy === QueueModel::$OVERRIDE_POLICY) {
@@ -85,21 +87,23 @@ class QueueModel extends Model
         eval($this->script);
     }
 
-    public static function listenEntityEvants($eventName, $model)
+    public static function listenEntityEvents($eventName, $model)
     {
         $ignoreModels = [QueueItemModel::class];
         $includedPackage = ['Casemanager'];
         if (!in_array(get_class($model), $ignoreModels) && in_array(explode('\\', get_class($model))[1], $includedPackage)) {
             $existingItems = QueueItemModel::where(['item_id' => $model->id, 'item_type' => get_class($model)])->get();
+            /**@var $queues Collection<QueueModel> */
             $queues = QueueModel::where('active', 1)->where(function ($query) use ($model) {
                 $query->where('supported_item_type', '=', 'any')
                     ->orWhere('supported_item_type', '=', get_class($model));
             })->get();
+            /**@var  $queue QueueModel */
             foreach ($queues as $queue) {
                 if (in_array($eventName, $queue->trigger)) {
                     $value = eval($queue->input_condition);
                     if ($value === true) {
-                        $queue->push($model, $existingItems->first());
+                        $queue->pushItem($model, $existingItems->first());
                     }
                 }
             }
@@ -114,13 +118,13 @@ class QueueModel extends Model
     public static function registerQueueListener()
     {
         Event::listen('eloquent.created: *', function ($model) {
-            QueueModel::listenEntityEvants('created', $model);
+            QueueModel::listenEntityEvents('created', $model);
         });
         Event::listen('eloquent.updated: *', function ($model) {
-            QueueModel::listenEntityEvants('updated', $model);
+            QueueModel::listenEntityEvents('updated', $model);
         });
         Event::listen('eloquent.deleted: *', function ($model) {
-            QueueModel::listenEntityEvants('deleted', $model);
+            QueueModel::listenEntityEvents('deleted', $model);
         });
     }
 }

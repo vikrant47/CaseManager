@@ -3,7 +3,7 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 
-class CaseController extends Controller
+class WorkflowEntities extends Controller
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
     
@@ -14,6 +14,6 @@ class CaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Demo.Casemanager', 'main-menu-item2');
+        BackendMenu::setContext('Demo.Casemanager', 'main-menu-item', 'side-menu-item4');
     }
 }
