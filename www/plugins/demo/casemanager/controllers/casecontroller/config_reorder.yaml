@@ -1,4 +1,4 @@
-title: Case
+title: CaseController
 modelClass: Demo\Casemanager\Models\CaseModel
 toolbar:
     buttons: reorder_toolbar

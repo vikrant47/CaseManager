@@ -1,4 +1,4 @@
-name: Case
+name: CaseController
 form: $/demo/casemanager/models/casemodel/fields.yaml
 modelClass: Demo\Casemanager\Models\CaseModel
 defaultRedirect: demo/casemanager/casecontroller

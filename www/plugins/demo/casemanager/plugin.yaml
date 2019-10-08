@@ -14,6 +14,10 @@ navigation:
                 label: Workflows
                 url: demo/casemanager/workflow
                 icon: icon-recycle
+            side-menu-item4:
+                label: 'Workflow Entities'
+                url: demo/casemanager/workflowentities
+                icon: icon-tag
             side-menu-item:
                 label: Queues
                 url: demo/casemanager/queue

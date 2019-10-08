@@ -1,0 +1,10 @@
+name: WorkflowEntities
+form: $/demo/casemanager/models/workflowentitiesmodel/fields.yaml
+modelClass: Demo\Casemanager\Models\WorkflowEntitiesModel
+defaultRedirect: demo/casemanager/workflowentities
+create:
+    redirect: 'demo/casemanager/workflowentities/update/:id'
+    redirectClose: demo/casemanager/workflowentities
+update:
+    redirect: demo/casemanager/workflowentities
+    redirectClose: demo/casemanager/workflowentities
