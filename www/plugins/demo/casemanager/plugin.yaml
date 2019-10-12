@@ -9,6 +9,8 @@ navigation:
         label: Workflow
         url: demo/casemanager/workflow
         icon: icon-recycle
+        permissions:
+            - workflow.table.read
         sideMenu:
             side-menu-item2:
                 label: Workflows
@@ -18,6 +20,10 @@ navigation:
                 label: 'Workflow Entities'
                 url: demo/casemanager/workflowentities
                 icon: icon-tag
+            side-menu-item5:
+                label: 'Workflow Transitions'
+                url: demo/casemanager/workflowtransitions
+                icon: icon-long-arrow-right
             side-menu-item:
                 label: Queues
                 url: demo/casemanager/queue
@@ -35,3 +41,34 @@ navigation:
                 label: Cases
                 url: demo/casemanager/casecontroller
                 icon: icon-book
+permissions:
+    case.table.create:
+        tab: Case
+        label: 'Create Case'
+    case.table.update:
+        tab: Case
+        label: 'Update Case'
+    case.table.delete:
+        tab: Case
+        label: 'Delete Case'
+    case.table.read:
+        tab: Case
+        label: 'Read Case'
+    case.table.workflow:
+        tab: Case
+        label: 'Workflow Case'
+    workflow.table.create:
+        tab: Workflow
+        label: 'Create Workflow'
+    workflow.table.update:
+        tab: Workflow
+        label: 'Update Workflow'
+    workflow.table.delete:
+        tab: Workflow
+        label: 'Delete Workflow'
+    workflow.table.read:
+        tab: Workflow
+        label: 'Read Workflow'
+    workflow.table.workflow:
+        tab: Workflow
+        label: 'Workflow Workflow'
