@@ -1,6 +1,6 @@
 fields:
     title:
-        label: 'Enter Title'
+        label: Title
         span: auto
         placeholder: 'Enter Title'
         type: text

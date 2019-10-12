@@ -36,4 +36,14 @@ class WorkflowModel extends Model
     {
         return ['approver1' => 'Approver1', 'approver2' => 'Approver2', 'approver3' => 'Approver3', 'end' => 'End'];
     }
+
+    public function getNextState($current_state)
+    {
+        foreach ($this->definition as $entry) {
+            if ($entry->from_state === $current_state) {
+                return $entry->to_state;
+            }
+        }
+        return null;
+    }
 }

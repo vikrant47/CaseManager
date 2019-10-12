@@ -45,7 +45,9 @@ class QueueModel extends Model
 
     public function getSupportedItemTypeOptions()
     {
-        return ['any' => 'Any', CaseModel::class => 'Case', QueueModel::class => 'Queue'];
+        return ['any' => 'Any', CaseModel::class => 'Case', QueueModel::class => 'Queue',
+            WorkflowEntitiesModel::class => 'Workflow Entity',
+        ];
     }
 
     public function getTriggerOptions()

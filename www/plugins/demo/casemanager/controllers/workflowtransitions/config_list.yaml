@@ -1,0 +1,12 @@
+list: $/demo/casemanager/models/workflowtransionmodel/columns.yaml
+modelClass: Demo\Casemanager\Models\WorkflowTransionModel
+title: WorkflowTransitions
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'demo/casemanager/workflowtransitions/update/:id'

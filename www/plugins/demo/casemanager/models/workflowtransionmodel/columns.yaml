@@ -8,21 +8,21 @@ columns:
     updated_at:
         label: updated_at
         type: datetime
-    active:
-        label: active
-        type: number
-    name:
-        label: name
-        type: text
-    description:
-        label: description
-        type: text
-    definition[queue]:
-        label: definition
-        type: switch
     created_by_id:
         label: created_by_id
         type: number
     updated_by_id:
         label: updated_by_id
         type: number
+    workflow_entities_id:
+        label: workflow_entities_id
+        type: number
+    from_state:
+        label: from_state
+        type: text
+    to_state:
+        label: to_state
+        type: text
+    data:
+        label: data
+        type: text
