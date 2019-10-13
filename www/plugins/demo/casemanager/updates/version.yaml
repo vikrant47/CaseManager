@@ -21,3 +21,9 @@
 1.0.8:
     - 'Created table demo_casemanager_queue_assignment_groups'
     - builder_table_create_demo_casemanager_queue_assignment_groups.php
+1.0.9:
+    - 'Created table demo_casemanager_case_priorities'
+    - builder_table_create_demo_casemanager_case_priority.php
+1.0.10:
+    - 'Created table demo_casemanager_workflow_states'
+    - builder_table_create_demo_casemanager_workflow_states.php

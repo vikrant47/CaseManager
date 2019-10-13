@@ -19,8 +19,9 @@ class BuilderTableCreateDemoCasemanagerQueues extends Migration
             $table->smallInteger('virtual')->default(1);
             $table->smallInteger('virtual')->default(1);
             $table->string('queue_order', 255);
-            $table->string('sort_order', 255);
+            $table->integer('sort_order', 255);
             $table->text('script');
+            $table->text('pop_criteria');
             $table->text('input_condition');
             $table->string('supported_items_type',255);
             $table->string('redundancy_policy',255);

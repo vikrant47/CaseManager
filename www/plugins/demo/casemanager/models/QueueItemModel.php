@@ -8,7 +8,7 @@ use Backend\Models\User;
 class QueueItemModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use \Demo\CaseManager\Classes\Traits\UserAuditSupport;
+    use \Demo\CaseManager\Classes\Traits\ModelHelper;
 
     /**
      * @var string The database table used by the model.
@@ -26,4 +26,6 @@ class QueueItemModel extends Model
      */
     public $rules = [
     ];
+
+    public $attachAuditedBy = true;
 }

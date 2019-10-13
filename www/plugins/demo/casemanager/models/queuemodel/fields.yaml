@@ -30,8 +30,8 @@ tabs:
         redundancy_policy:
             label: 'Redundancy Policy'
             options:
-                addNew: 'Add New'
                 override: Override
+                addNew: 'Add New'
                 ignore: Ignore
             showSearch: true
             span: auto
@@ -51,6 +51,35 @@ tabs:
             span: auto
             type: checkboxlist
             tab: Input
+        sort_order:
+            label: 'Sort Order'
+            options:
+                asc: Ascending
+                desc: Descending
+            showSearch: true
+            span: auto
+            type: number
+            tab: Input
+        queue_order:
+            label: 'Queue Order Type'
+            options:
+                simple_queue: Simple
+                stack: Stack
+                ordered: Ordered
+                custom: Custom
+            showSearch: true
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Display
+        pop_criteria:
+            label: 'Pop Criteria'
+            size: large
+            language: php
+            span: auto
+            hidden: 0
+            type: codeeditor
+            tab: Output
         script:
             label: Script
             size: large
@@ -66,24 +95,3 @@ tabs:
             span: auto
             type: relation
             tab: Output
-        queue_order:
-            label: 'Queue Order Type'
-            options:
-                simple_queue: Simple
-                stack: Stack
-                ordered: Ordered
-                custom: Custom
-            showSearch: true
-            span: auto
-            required: 1
-            type: dropdown
-            tab: Display
-        sort_order:
-            label: 'Sort Order'
-            options:
-                asc: Ascending
-                desc: Descending
-            showSearch: true
-            span: auto
-            type: dropdown
-            tab: Display

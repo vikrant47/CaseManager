@@ -9,3 +9,9 @@ fields:
         size: ''
         span: auto
         type: richeditor
+    priority:
+        label: Priority
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation

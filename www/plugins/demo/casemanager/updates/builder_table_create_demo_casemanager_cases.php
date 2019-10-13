@@ -17,6 +17,7 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id')->nullable();
             $table->integer('updated_by_id')->nullable();
+            $table->integer('priority_id')->nullable();
         });
     }
     
