@@ -19,7 +19,8 @@ class BuilderTableCreateDemoCasemanagerWorkflowEntities extends Migration
             $table->integer('entity_id');
             $table->integer('workflow_id');
             $table->integer('assigned_to_id');
-            $table->string('current_state');
+            $table->integer('current_state_id');
+            $table->timestamp('finished_at')->nullable();
         });
     }
     

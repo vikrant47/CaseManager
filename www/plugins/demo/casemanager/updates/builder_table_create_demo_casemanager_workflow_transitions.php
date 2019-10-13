@@ -16,9 +16,10 @@ class BuilderTableCreateDemoCasemanagerWorkflowTransitions extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->integer('workflow_entities_id');
-            $table->string('from_state');
-            $table->string('to_state');
-            $table->text('data');
+            $table->integer('from_state_id');
+            $table->integer('to_state_id');
+            $table->integer('workflow_entity_id');
+            $table->text('data')->nullable();
         });
     }
     

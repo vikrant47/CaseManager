@@ -1,7 +1,7 @@
 fields:
     workflow_entity:
         label: 'Workflow Entity'
-        nameFrom: name
+        nameFrom: id
         descriptionFrom: description
         span: auto
         required: 1
@@ -14,8 +14,8 @@ fields:
     from_state:
         label: 'From State'
         span: auto
-        type: text
+        type: relation
     to_state:
         label: 'To State'
         span: auto
-        type: text
+        type: relation

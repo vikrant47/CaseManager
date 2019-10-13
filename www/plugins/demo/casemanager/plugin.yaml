@@ -24,6 +24,10 @@ navigation:
                 label: 'Workflow Transitions'
                 url: demo/casemanager/workflowtransitions
                 icon: icon-long-arrow-right
+            side-menu-item7:
+                label: 'Workflow States'
+                url: demo/casemanager/workflowstate
+                icon: icon-dot-circle-o
             side-menu-item:
                 label: Queues
                 url: demo/casemanager/queue
@@ -32,6 +36,10 @@ navigation:
                 label: 'Queue Items'
                 url: demo/casemanager/queueitem
                 icon: icon-stack-exchange
+            side-menu-item6:
+                label: 'Case Priority'
+                url: demo/casemanager/casepriority
+                icon: icon-flash
     main-menu-item2:
         label: Workspace
         url: demo/casemanager/casecontroller

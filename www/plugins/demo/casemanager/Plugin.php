@@ -1,7 +1,10 @@
 <?php namespace Demo\Casemanager;
 
+use Demo\Casemanager\Models\QueueItemModel;
 use Demo\Casemanager\Models\QueueModel;
 use System\Classes\PluginBase;
+use BackendAuth;
+use Event;
 
 class Plugin extends PluginBase
 {
@@ -13,6 +16,33 @@ class Plugin extends PluginBase
     {
     }
 
+    public static function beforeCreateAudit($model)
+    {
+        if ($model->attachAuditedBy === true) {
+            $user = BackendAuth::getUser();
+            $model->created_by = $user;
+            $model->updated_by = $user;
+        }
+    }
+
+    public static function beforeUpdateAudit($model)
+    {
+        if ($model->attachAuditedBy === true) {
+            $user = BackendAuth::getUser();
+            $model->updated_by = $user;
+        }
+    }
+
+    public static function registerAuditListener()
+    {
+        Event::listen('eloquent.creating: *', function ($model) {
+            Plugin::beforeCreateAudit($model);
+        });
+        Event::listen('eloquent.updating: *', function ($model) {
+            Plugin::beforeUpdateAudit($model);
+        });
+    }
+
     /**
      * Bootstrap any application services.
      *
@@ -20,6 +50,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        Plugin::registerAuditListener();
         QueueModel::registerQueueListener();
     }
 }

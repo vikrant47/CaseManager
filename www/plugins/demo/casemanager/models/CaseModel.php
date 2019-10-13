@@ -9,7 +9,8 @@ use Backend\Models\User;
 class CaseModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use \Demo\CaseManager\Classes\Traits\UserAuditSupport;
+    use \Demo\CaseManager\Classes\Traits\ModelHelper;
+    use \Demo\CaseManager\Classes\Traits\WorkflowEntity;
 
     /**
      * @var string The database table used by the model.
@@ -19,6 +20,7 @@ class CaseModel extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
+        'priority' => [CasePriorityModel::class, 'key' => 'priority_id'],
     ];
 
     /**
@@ -26,5 +28,6 @@ class CaseModel extends Model
      */
     public $rules = [
     ];
+    public $attachAuditedBy = true;
 
 }

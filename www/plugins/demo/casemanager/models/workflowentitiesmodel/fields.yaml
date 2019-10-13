@@ -8,7 +8,7 @@ fields:
     current_state:
         label: 'Current State'
         span: auto
-        type: text
+        type: relation
     entity_type:
         label: 'Entity Type'
         span: auto

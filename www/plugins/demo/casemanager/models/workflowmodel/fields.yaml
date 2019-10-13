@@ -3,6 +3,13 @@ fields:
         label: Name
         span: auto
         type: text
+    code:
+        label: Code
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text
     description:
         label: Description
         size: ''
@@ -26,11 +33,11 @@ tabs:
                     from_state:
                         label: 'From State'
                         span: auto
-                        type: dropdown
+                        type: relation
                     to_state:
                         label: 'To State'
                         span: auto
-                        type: dropdown
+                        type: relation
                     queue:
                         label: Queue
                         nameFrom: name

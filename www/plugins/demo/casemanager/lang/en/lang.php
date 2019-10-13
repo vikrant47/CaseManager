@@ -4,7 +4,7 @@
         'description' => '',
     ],
     'workflow' => [
-        'submit' => 'Submit',
-        'confirm_submit' => 'Are you sure',
+        'push' => 'Push',
+        'confirm_push' => 'Are you sure?',
     ],
 ];
