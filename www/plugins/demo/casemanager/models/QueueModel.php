@@ -2,6 +2,7 @@
 
 use Backend\Models\UserGroup;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Model;
 use Event;
 use Backend\Models\User;
@@ -56,6 +57,17 @@ class QueueModel extends Model
     public function getTriggerOptions()
     {
         return ['created' => 'Create', 'updated' => 'Update', 'deleted' => 'Delete'];
+    }
+
+    /***Scope query definition start*/
+
+    public function scopeGetQueuesForUser($query, User $user)
+    {
+        return $query->with(['assignment_groups' => function ($query) use ($user) {
+            $query->with(['users' => function ($query) use ($user) {
+                $query->where('id', $user->id);
+            }]);
+        }])->where('active', '=', 1)->orderBy('sort_order', 'ASC');
     }
 
     /**
@@ -116,19 +128,58 @@ class QueueModel extends Model
         $elem = eval($this->pop_criteria);
         if ($elem instanceof Collection) {
             $elem = $elem->first();
+        } elseif ($elem instanceof \October\Rain\Database\QueryBuilder) {
+            $elem = $elem->where('queue_id', $this->id)->get()->first();
         }
-        if (!empty($elem) && !empty($elem->id) && (!array_key_exists('item_type', $elem) || !array_key_exists('item_id', $elem))) {
-            throw new ApplicationException('Provided pop_criteria should return record of QueueItemModel');
+        if (
+            empty($elem)
+            || empty($elem->id)
+            || $elem->queue_id !== $this->id
+        ) {
+            throw new ApplicationException('Invalid pop criteria');
         } else {
-            $queueItem = DB::table('demo_casemanager_queue_items')->where('id', '=', $elem->id)->lockForUpdate()->get();
-            if (!empty($queueItem) && array_key_exists('item_type', $queueItem) && array_key_exists('item_id', $queueItem)) {
+            $queueItem = DB::table('demo_casemanager_queue_items')->where('id', '=', $elem->id)->lockForUpdate()->get()->first();
+            if (!empty($queueItem) && !empty($queueItem->item_type) && !empty($queueItem->item_id)) {
                 DB::table('demo_casemanager_queue_items')->where('id', '=', $elem->id)->delete();
                 return $elem->item_type::find($elem->item_id);
             } else {
-                return $this->pop();
+                return $this->popItem();
             }
         }
         return null;
+    }
+
+    /**
+     * Assign a queue item automatically
+     * Steps -
+     * Step 1. Check if user exists in queue's assignment group
+     * Step 2. Pop an item from queue
+     * Step 3. Search an workflow entity for this item
+     * Step 4. Set assignedTo to given user in workflow entity.
+     */
+    public function popAndAssignTo(User $user)
+    {
+        $userAssignmentGroup = UserGroup::with(['users' => function ($query) use ($user) {
+                $query->where('id', $user->id);
+            }])->whereIn('id', $this->assignment_groups->map(function ($group) {
+                return $group->id;
+            })->toArray())->count() > 0;
+        if ($userAssignmentGroup === true) {
+            $item = $this->popItem();
+            if (!empty($item)) {
+                $workflowEntity = WorkflowEntitiesModel::where(['entity_type' => get_class($item), 'entity_id' => $item->id])->first();
+                if (empty($workflowEntity)) {
+                    throw new ApplicationException('No corresponding entry found in workflow entity');
+                }
+                $workflowEntity->assigned_to = $user;
+                $workflowEntity->save();
+            } else {
+                throw new ApplicationException('No item left to assign');
+            }
+        } else {
+            throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
+        }
+
     }
 
     public static function listenEntityEvents($eventName, $model)
