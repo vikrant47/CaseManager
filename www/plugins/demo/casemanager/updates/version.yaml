@@ -1,0 +1,29 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table demo_casemanager_cases'
+    - builder_table_create_demo_casemanager_cases.php
+1.0.3:
+    - 'Created table demo_casemanager_queues'
+    - builder_table_create_demo_casemanager_queues.php
+1.0.4:
+    - 'Created table demo_casemanager_queue_items'
+    - builder_table_create_demo_casemanager_queue_items.php
+1.0.5:
+    - 'Created table demo_casemanager_workflows'
+    - builder_table_create_demo_casemanager_workflows.php
+1.0.6:
+    - 'Created table demo_casemanager_workflow_entities'
+    - builder_table_create_demo_casemanager_workflow_entities.php
+1.0.7:
+    - 'Created table demo_casemanager_workflow_transitions'
+    - builder_table_create_demo_casemanager_workflow_transitions.php
+1.0.8:
+    - 'Created table demo_casemanager_queue_assignment_groups'
+    - builder_table_create_demo_casemanager_queue_assignment_groups.php
+1.0.9:
+    - 'Created table demo_casemanager_case_priorities'
+    - builder_table_create_demo_casemanager_case_priority.php
+1.0.10:
+    - 'Created table demo_casemanager_workflow_states'
+    - builder_table_create_demo_casemanager_workflow_states.php

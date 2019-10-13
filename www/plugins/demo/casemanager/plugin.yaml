@@ -1,0 +1,82 @@
+plugin:
+    name: 'demo.casemanager::lang.plugin.name'
+    description: 'demo.casemanager::lang.plugin.description'
+    author: demo
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Workflow
+        url: demo/casemanager/workflow
+        icon: icon-recycle
+        permissions:
+            - workflow.table.read
+        sideMenu:
+            side-menu-item2:
+                label: Workflows
+                url: demo/casemanager/workflow
+                icon: icon-recycle
+            side-menu-item4:
+                label: 'Workflow Entities'
+                url: demo/casemanager/workflowentities
+                icon: icon-tag
+            side-menu-item5:
+                label: 'Workflow Transitions'
+                url: demo/casemanager/workflowtransitions
+                icon: icon-long-arrow-right
+            side-menu-item7:
+                label: 'Workflow States'
+                url: demo/casemanager/workflowstate
+                icon: icon-dot-circle-o
+            side-menu-item:
+                label: Queues
+                url: demo/casemanager/queue
+                icon: icon-stack-overflow
+            side-menu-item3:
+                label: 'Queue Items'
+                url: demo/casemanager/queueitem
+                icon: icon-stack-exchange
+            side-menu-item6:
+                label: 'Case Priority'
+                url: demo/casemanager/casepriority
+                icon: icon-flash
+    main-menu-item2:
+        label: Workspace
+        url: demo/casemanager/casecontroller
+        icon: icon-user-secret
+        sideMenu:
+            side-menu-item:
+                label: Cases
+                url: demo/casemanager/casecontroller
+                icon: icon-book
+permissions:
+    case.table.create:
+        tab: Case
+        label: 'Create Case'
+    case.table.update:
+        tab: Case
+        label: 'Update Case'
+    case.table.delete:
+        tab: Case
+        label: 'Delete Case'
+    case.table.read:
+        tab: Case
+        label: 'Read Case'
+    case.table.workflow:
+        tab: Case
+        label: 'Workflow Case'
+    workflow.table.create:
+        tab: Workflow
+        label: 'Create Workflow'
+    workflow.table.update:
+        tab: Workflow
+        label: 'Update Workflow'
+    workflow.table.delete:
+        tab: Workflow
+        label: 'Delete Workflow'
+    workflow.table.read:
+        tab: Workflow
+        label: 'Read Workflow'
+    workflow.table.workflow:
+        tab: Workflow
+        label: 'Workflow Workflow'

@@ -1,0 +1,21 @@
+fields:
+    workflow_entity:
+        label: 'Workflow Entity'
+        nameFrom: id
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    data:
+        label: Data
+        size: ''
+        span: auto
+        type: textarea
+    from_state:
+        label: 'From State'
+        span: auto
+        type: relation
+    to_state:
+        label: 'To State'
+        span: auto
+        type: relation

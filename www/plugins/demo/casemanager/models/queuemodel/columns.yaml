@@ -1,0 +1,29 @@
+columns:
+    id:
+        label: id
+        type: number
+    name:
+        label: name
+        type: text
+    description:
+        label: description
+        type: text
+    supported_item_type:
+        label: type
+        type: text
+    sort_order:
+        label: sort_order
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by[first_name]:
+        label: created_by
+        type: number
+    updated_by[first_name]:
+        label: updated_by
+        type: number
+

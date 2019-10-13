@@ -1,0 +1,10 @@
+name: CaseController
+form: $/demo/casemanager/models/casemodel/fields.yaml
+modelClass: Demo\Casemanager\Models\CaseModel
+defaultRedirect: demo/casemanager/casecontroller
+create:
+    redirect: 'demo/casemanager/casecontroller/update/:id'
+    redirectClose: demo/casemanager/casecontroller
+update:
+    redirect: demo/casemanager/casecontroller
+    redirectClose: demo/casemanager/casecontroller

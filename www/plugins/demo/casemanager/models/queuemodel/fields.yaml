@@ -1,0 +1,97 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        span: auto
+        type: text
+    active:
+        label: Active
+        span: auto
+        type: switch
+    virtual:
+        label: Virtual
+        span: auto
+        type: switch
+        comment: 'A virtual queue item won''t be associated in database'
+tabs:
+    fields:
+        supported_item_type:
+            label: 'Supported Item Type'
+            showSearch: true
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Input
+            comment: 'Items which are qualified for queue.'
+        redundancy_policy:
+            label: 'Redundancy Policy'
+            options:
+                override: Override
+                addNew: 'Add New'
+                ignore: Ignore
+            showSearch: true
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Input
+        input_condition:
+            label: 'Input Condition'
+            size: large
+            language: php
+            span: auto
+            hidden: 0
+            type: codeeditor
+            tab: Input
+        trigger:
+            label: Trigger
+            span: auto
+            type: checkboxlist
+            tab: Input
+        sort_order:
+            label: 'Sort Order'
+            options:
+                asc: Ascending
+                desc: Descending
+            showSearch: true
+            span: auto
+            type: number
+            tab: Input
+        queue_order:
+            label: 'Queue Order Type'
+            options:
+                simple_queue: Simple
+                stack: Stack
+                ordered: Ordered
+                custom: Custom
+            showSearch: true
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Display
+        pop_criteria:
+            label: 'Pop Criteria'
+            size: large
+            language: php
+            span: auto
+            hidden: 0
+            type: codeeditor
+            tab: Output
+        script:
+            label: Script
+            size: large
+            language: php
+            span: auto
+            hidden: 0
+            type: codeeditor
+            tab: Output
+        assignment_groups:
+            label: 'Assignment Groups'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Output

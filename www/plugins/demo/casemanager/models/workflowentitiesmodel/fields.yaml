@@ -1,0 +1,25 @@
+fields:
+    workflow:
+        label: Workflow
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    current_state:
+        label: 'Current State'
+        span: auto
+        type: relation
+    entity_type:
+        label: 'Entity Type'
+        span: auto
+        type: text
+    entity_id:
+        label: 'Entity Id'
+        span: auto
+        type: text
+    assigned_to:
+        label: 'Assigned To'
+        nameFrom: email
+        descriptionFrom: description
+        span: auto
+        type: relation

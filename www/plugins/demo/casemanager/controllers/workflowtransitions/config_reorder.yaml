@@ -1,0 +1,4 @@
+title: WorkflowTransitions
+modelClass: Demo\Casemanager\Models\WorkflowTransionModel
+toolbar:
+    buttons: reorder_toolbar

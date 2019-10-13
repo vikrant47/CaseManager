@@ -1,0 +1,30 @@
+fields:
+    case_number:
+        label: 'Case Number'
+        span: auto
+        required: 1
+        type: text
+        comment: 'Enter Case Number'
+    version:
+        label: Version
+        span: auto
+        type: text
+        comment: 'Enter Version'
+    suspect:
+        label: Suspect
+        span: auto
+        type: text
+        comment: 'Enter Suspect'
+    priority:
+        label: Priority
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+        comment: 'Select Priority'
+    comments:
+        label: Comments
+        size: small
+        span: auto
+        type: richeditor
