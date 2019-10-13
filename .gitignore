@@ -1,0 +1,17 @@
+.DS_Store
+*.log
+conf
+www/bootstrap
+www/config
+www/install_files
+www/modules
+www/storage
+www/vendor
+www/artisan
+www/install.php
+www/install-master
+install-master.zip
+.idea
+.idea/*
+conf/*
+www/themes/*
