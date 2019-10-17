@@ -1,0 +1,10 @@
+name: QueueItem
+form: $/demo/core/models/queueitemmodel/fields.yaml
+modelClass: Demo\Core\Models\QueueItemModel
+defaultRedirect: demo/core/queueitem
+create:
+    redirect: 'demo/core/queueitem/update/:id'
+    redirectClose: demo/core/queueitem
+update:
+    redirect: demo/core/queueitem
+    redirectClose: demo/core/queueitem

@@ -1,4 +1,0 @@
-title: WorkflowState
-modelClass: Demo\Casemanager\Models\WorkflowStateModel
-toolbar:
-    buttons: reorder_toolbar

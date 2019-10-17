@@ -1,0 +1,4 @@
+title: WorkflowState
+modelClass: Demo\Core\Models\WorkflowStateModel
+toolbar:
+    buttons: reorder_toolbar

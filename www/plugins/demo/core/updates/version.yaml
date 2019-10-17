@@ -1,0 +1,23 @@
+1.0.1:
+  - 'Initialize plugin.'
+1.0.2:
+  - 'Created table demo_core_queues'
+  - builder_table_create_demo_core_queues.php
+1.0.3:
+  - 'Created table demo_core_queue_items'
+  - builder_table_create_demo_core_queue_items.php
+1.0.4:
+  - 'Created table demo_core_workflows'
+  - builder_table_create_demo_core_workflows.php
+1.0.5:
+  - 'Created table demo_core_workflow_entities'
+  - builder_table_create_demo_core_workflow_entities.php
+1.0.6:
+  - 'Created table demo_core_workflow_transitions'
+  - builder_table_create_demo_core_workflow_transitions.php
+1.0.7:
+  - 'Created table demo_core_queue_assignment_groups'
+  - builder_table_create_demo_core_queue_assignment_groups.php
+1.0.8:
+  - 'Created table demo_core_workflow_states'
+  - builder_table_create_demo_core_workflow_states.php

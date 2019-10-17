@@ -1,26 +1,24 @@
-<?php namespace Demo\Casemanager\Models;
+<?php namespace Demo\Core\Models;
 
 use Model;
 use Backend\Models\User;
-
 /**
  * Model
  */
-class CaseModel extends Model
+class QueueItemModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;
-    use \Demo\Core\Classes\Traits\WorkflowEntity;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_casemanager_cases';
+    public $table = 'demo_core_queue_items';
 
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'priority' => [CasePriorityModel::class, 'key' => 'priority_id'],
+        'queue' => [QueueModel::class, 'key' => 'queue_id'],
     ];
 
     /**
@@ -28,6 +26,6 @@ class CaseModel extends Model
      */
     public $rules = [
     ];
-    public $attachAuditedBy = true;
 
+    public $attachAuditedBy = true;
 }
