@@ -7,8 +7,7 @@ class BuilderTableCreateDemoCasemanagerWorkflowEntities extends Migration
 {
     public function up()
     {
-        Schema::create('demo_casemanager_workflow_entities', function($table)
-        {
+        Schema::create('demo_casemanager_workflow_entities', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
@@ -21,9 +20,11 @@ class BuilderTableCreateDemoCasemanagerWorkflowEntities extends Migration
             $table->integer('assigned_to_id');
             $table->integer('current_state_id');
             $table->timestamp('finished_at')->nullable();
+
+            $table->unique('entity_type', 'entity_id');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_casemanager_workflow_entities');

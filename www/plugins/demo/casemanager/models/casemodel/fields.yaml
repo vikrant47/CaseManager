@@ -1,4 +1,8 @@
 fields:
+    workflow:
+        span: full
+        path: $/demo/casemanager/controllers/workflow/_entity_flow.htm
+        type: partial
     case_number:
         label: 'Case Number'
         span: auto
