@@ -61,13 +61,16 @@ class QueueModel extends Model
 
     /***Scope query definition start*/
 
-    public function scopeGetQueuesForUser($query, User $user)
+    public static function getQueuesForUser(User $user)
     {
-        return $query->with(['assignment_groups' => function ($query) use ($user) {
-            $query->with(['users' => function ($query) use ($user) {
-                $query->where('id', $user->id);
-            }]);
-        }])->where('active', '=', 1)->orderBy('sort_order', 'ASC');
+        return DB::select('SELECT queue.* from demo_casemanager_queues queue'
+            . ' join demo_casemanager_queue_assignment_groups ag '
+            . ' on ag.queue_id = queue.id '
+            . ' join backend_user_groups grp on grp.id = ag.group_id'
+            . ' join backend_users_groups usergroup on usergroup.user_group_id = grp.id '
+            . ' join backend_users usr on usr.id = usergroup.user_id '
+            . ' where queue.active = 1 and usr.id = ? '
+            . ' order by queue.name ', [$user->id]);
     }
 
     /**
@@ -157,7 +160,7 @@ class QueueModel extends Model
      * Step 3. Search an workflow entity for this item
      * Step 4. Set assignedTo to given user in workflow entity.
      */
-    public function popAndAssignTo(User $user)
+    public function popAndAssign(User $user)
     {
         $userAssignmentGroup = UserGroup::with(['users' => function ($query) use ($user) {
                 $query->where('id', $user->id);

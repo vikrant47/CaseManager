@@ -50,6 +50,9 @@ navigation:
                 url: demo/casemanager/casecontroller
                 icon: icon-book
 permissions:
+    case.table.pick:
+        tab: Case
+        label: 'Pick a Case'
     case.table.create:
         tab: Case
         label: 'Create Case'
@@ -62,6 +65,9 @@ permissions:
     case.table.read:
         tab: Case
         label: 'Read Case'
+    case.table.read.all:
+        tab: Case
+        label: 'Read All Cases'
     case.table.workflow:
         tab: Case
         label: 'Workflow Case'
@@ -80,3 +86,6 @@ permissions:
     workflow.table.workflow:
         tab: Workflow
         label: 'Workflow Workflow'
+    workflow.item.push:
+        tab: Workflow
+        label: 'Push item to workflow'
