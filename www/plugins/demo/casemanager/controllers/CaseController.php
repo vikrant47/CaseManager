@@ -2,7 +2,7 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
-use Demo\Casemanager\Classes\Traits\WorkflowControllerTrait;
+use Demo\Core\Classes\Traits\WorkflowControllerTrait;
 use Demo\Casemanager\Models\CaseModel;
 use Demo\Casemanager\Models\WorkflowEntitiesModel;
 use Model;
@@ -21,7 +21,7 @@ class CaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Demo.Casemanager', 'main-menu-item2');
+        BackendMenu::setContext('Demo.Casemanager', 'main-menu-item');
     }
 
     public function formBeforeCreate(Model $model)

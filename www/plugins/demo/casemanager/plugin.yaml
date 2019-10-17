@@ -6,41 +6,6 @@ plugin:
     homepage: ''
 navigation:
     main-menu-item:
-        label: Workflow
-        url: demo/casemanager/workflow
-        icon: icon-recycle
-        permissions:
-            - workflow.table.read
-        sideMenu:
-            side-menu-item2:
-                label: Workflows
-                url: demo/casemanager/workflow
-                icon: icon-recycle
-            side-menu-item4:
-                label: 'Workflow Entities'
-                url: demo/casemanager/workflowentities
-                icon: icon-tag
-            side-menu-item5:
-                label: 'Workflow Transitions'
-                url: demo/casemanager/workflowtransitions
-                icon: icon-long-arrow-right
-            side-menu-item7:
-                label: 'Workflow States'
-                url: demo/casemanager/workflowstate
-                icon: icon-dot-circle-o
-            side-menu-item:
-                label: Queues
-                url: demo/casemanager/queue
-                icon: icon-stack-overflow
-            side-menu-item3:
-                label: 'Queue Items'
-                url: demo/casemanager/queueitem
-                icon: icon-stack-exchange
-            side-menu-item6:
-                label: 'Case Priority'
-                url: demo/casemanager/casepriority
-                icon: icon-flash
-    main-menu-item2:
         label: Workspace
         url: demo/casemanager/casecontroller
         icon: icon-user-secret
@@ -49,6 +14,10 @@ navigation:
                 label: Cases
                 url: demo/casemanager/casecontroller
                 icon: icon-book
+            'Case Priority':
+                label: 'Case Priority'
+                url: demo/casemanager/casepriority
+                icon: icon-flash
 permissions:
     case.table.pick:
         tab: Case
@@ -70,22 +39,3 @@ permissions:
         label: 'Read All Cases'
     case.table.workflow:
         tab: Case
-        label: 'Workflow Case'
-    workflow.table.create:
-        tab: Workflow
-        label: 'Create Workflow'
-    workflow.table.update:
-        tab: Workflow
-        label: 'Update Workflow'
-    workflow.table.delete:
-        tab: Workflow
-        label: 'Delete Workflow'
-    workflow.table.read:
-        tab: Workflow
-        label: 'Read Workflow'
-    workflow.table.workflow:
-        tab: Workflow
-        label: 'Workflow Workflow'
-    workflow.item.push:
-        tab: Workflow
-        label: 'Push item to workflow'

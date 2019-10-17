@@ -1,4 +1,0 @@
-title: Queue
-modelClass: Demo\Casemanager\Models\QueueModel
-toolbar:
-    buttons: reorder_toolbar
