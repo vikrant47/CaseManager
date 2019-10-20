@@ -6,11 +6,12 @@ plugin:
     homepage: ''
 navigation:
     main-menu-item:
-        label: Workflow
+        label: Core
         url: demo/core/workflow
-        icon: icon-recycle
+        icon: icon-university
         permissions:
             - workflow.table.read
+        order: '50'
         sideMenu:
             side-menu-item2:
                 label: Workflows
