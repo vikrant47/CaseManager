@@ -5,6 +5,7 @@ use Demo\Core\Models\QueueModel;
 use System\Classes\PluginBase;
 use BackendAuth;
 use Event;
+use App;
 
 class Plugin extends PluginBase
 {
@@ -43,6 +44,11 @@ class Plugin extends PluginBase
         });
     }
 
+    public static function registerServiceProviders()
+    {
+        App::register('\Demo\Core\Console\CommandServiceProvider');
+    }
+
     /**
      * Bootstrap any application services.
      *
@@ -52,5 +58,6 @@ class Plugin extends PluginBase
     {
         Plugin::registerAuditListener();
         QueueModel::registerQueueListener();
+        Plugin::registerServiceProviders();
     }
 }
