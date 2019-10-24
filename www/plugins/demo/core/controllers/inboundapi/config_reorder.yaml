@@ -1,0 +1,4 @@
+title: InboundApi
+modelClass: Demo\Core\Models\InboundApiModel
+toolbar:
+    buttons: reorder_toolbar
