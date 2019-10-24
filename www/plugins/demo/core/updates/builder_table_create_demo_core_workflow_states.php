@@ -19,6 +19,7 @@ class BuilderTableCreateDemoCoreWorkflowStates extends Migration
             $table->text('description');
             $table->integer('active');
             $table->string('code');
+            $table->integer('plugin_id');
         });
     }
     

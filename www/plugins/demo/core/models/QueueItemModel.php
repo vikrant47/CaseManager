@@ -2,6 +2,7 @@
 
 use Model;
 use Backend\Models\User;
+
 /**
  * Model
  */
@@ -19,6 +20,7 @@ class QueueItemModel extends Model
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'queue' => [QueueModel::class, 'key' => 'queue_id'],
+        'plugin' => [PluginModel::class, 'key' => 'plugin_id']
     ];
 
     /**

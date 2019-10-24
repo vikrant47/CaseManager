@@ -20,6 +20,7 @@ class BuilderTableCreateDemoCoreWorkflowTransitions extends Migration
             $table->integer('to_state_id');
             $table->integer('workflow_entity_id');
             $table->text('data')->nullable();
+            $table->integer('plugin_id');
         });
     }
     

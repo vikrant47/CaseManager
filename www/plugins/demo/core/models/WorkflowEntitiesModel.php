@@ -26,6 +26,7 @@ class WorkflowEntitiesModel extends Model
         'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
         'workflow' => [WorkflowModel::class, 'key' => 'workflow_id'],
         'current_state' => [WorkflowStateModel::class, 'key' => 'current_state_id'],
+        'plugin' => [PluginModel::class, 'key' => 'plugin_id']
     ];
 
     /**
