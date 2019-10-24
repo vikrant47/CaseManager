@@ -8,10 +8,10 @@ navigation:
     main-menu-item:
         label: Core
         url: demo/core/workflow
-        icon: icon-university
+        icon: icon-gears
         permissions:
             - workflow.table.read
-        order: '50'
+        order: '500'
         sideMenu:
             side-menu-item2:
                 label: Workflows
