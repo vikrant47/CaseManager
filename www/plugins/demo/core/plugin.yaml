@@ -6,7 +6,7 @@ plugin:
     homepage: ''
 navigation:
     main-menu-item:
-        label: Core
+        label: Engine
         url: demo/core/workflow
         icon: icon-gears
         permissions:
@@ -37,6 +37,10 @@ navigation:
                 label: 'Queue Items'
                 url: demo/core/queueitem
                 icon: icon-stack-exchange
+            side-menu-item6:
+                label: 'Inbound Api'
+                url: demo/core/inboundapi
+                icon: icon-space-shuttle
 permissions:
     workflow.table.create:
         tab: Workflow

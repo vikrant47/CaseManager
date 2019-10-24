@@ -18,6 +18,7 @@ class BuilderTableCreateDemoCoreQueueAssignmentGroups extends Migration
             $table->integer('group_id');
             $table->integer('queue_id');
             $table->integer('sort_order');
+            $table->integer('plugin_id');
         });
     }
     

@@ -22,6 +22,7 @@ class BuilderTableCreateDemoCoreWorkflowEntities extends Migration
             $table->timestamp('finished_at')->nullable();
 
             $table->unique('entity_type', 'entity_id');
+            $table->integer('plugin_id');
         });
     }
 

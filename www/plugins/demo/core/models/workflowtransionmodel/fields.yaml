@@ -19,3 +19,10 @@ fields:
         label: 'To State'
         span: auto
         type: relation
+    plugin:
+        label: 'Plugin'
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation

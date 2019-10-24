@@ -15,6 +15,7 @@ class BuilderTableCreateDemoCoreInboundApi extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('method');
+            $table->integer('plugin_id');
             $table->text('script');
             $table->string('name');
             $table->text('description')->nullable();

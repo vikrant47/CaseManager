@@ -18,6 +18,7 @@ class BuilderTableCreateDemoCoreQueueItems extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
+            $table->integer('plugin_id');
         });
     }
     
