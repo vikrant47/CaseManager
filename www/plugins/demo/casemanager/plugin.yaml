@@ -9,6 +9,7 @@ navigation:
         label: Workspace
         url: demo/casemanager/casecontroller
         icon: icon-user-secret
+        order: '501'
         sideMenu:
             side-menu-item:
                 label: Cases
