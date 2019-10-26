@@ -49,6 +49,10 @@ navigation:
                 label: 'Event Handler'
                 url: demo/core/eventhandler
                 icon: icon-code
+            side-menu-item9:
+                label: Commands
+                url: demo/core/command
+                icon: icon-chain-broken
 permissions:
     workflow.table.create:
         tab: Workflow

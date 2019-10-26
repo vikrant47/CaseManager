@@ -27,3 +27,6 @@
 1.0.10:
     - 'Created table demo_core_event_handlers'
     - builder_table_create_demo_core_event_handlers.php
+1.0.11:
+    - 'Created table demo_core_commands'
+    - builder_table_create_demo_core_commands.php
