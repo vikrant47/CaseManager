@@ -1,0 +1,10 @@
+name: Command
+form: $/demo/core/models/commandmodel/fields.yaml
+modelClass: Demo\Core\Models\CommandModel
+defaultRedirect: demo/core/command
+create:
+    redirect: 'demo/core/command/update/:id'
+    redirectClose: demo/core/command
+update:
+    redirect: demo/core/command
+    redirectClose: demo/core/command
