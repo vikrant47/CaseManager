@@ -4,7 +4,9 @@
 namespace Demo\Core\Services;
 
 
+use Demo\Core\Models\EventHandlerModel;
 use Demo\Core\Plugin;
+use October\Rain\Exception\ApplicationException;
 use October\Rain\Support\ServiceProvider;
 use System\Classes\PluginManager;
 use Event;
@@ -25,8 +27,14 @@ class EventHandlerServiceProvider extends ServiceProvider
     {
         $handlers = $this->events[$eventName];
         foreach ($handlers as $handler) {
-            if ($handler->model === 'universal' || $handler->model === get_class($model))
+            if ($handler->model === 'universal' || $handler->model === get_class($model)) {
                 $handler->handler($eventName, $model);
+            }
+        }
+        $dbHandlers = $this->loadFromDatabase($eventName, get_class($model));
+        // throw new ApplicationException($dbHandlers->count());
+        foreach ($dbHandlers as $handler) {
+            $handler->handler($eventName, $model);
         }
     }
 
@@ -76,13 +84,17 @@ class EventHandlerServiceProvider extends ServiceProvider
 
     public function loadFromDatabase($event, $model)
     {
-
+        return EventHandlerModel::where('event', $event)->where(function ($query) use ($model) {
+            $query->where('model', '=', 'universal')
+                ->orWhere('model', '=', $model);
+        })->where('active', 1)->orderBy('sort_order')->get();
     }
 
     public function register()
     {
         if ($this->handlerRegistered === false) {
             $this->loadFromFileSystem();
+            $this->registerHandlers();
             $this->handlerRegistered = true;
         }
     }
