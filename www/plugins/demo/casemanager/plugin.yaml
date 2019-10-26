@@ -4,30 +4,41 @@ plugin:
     author: demo
     icon: oc-icon-adjust
     homepage: ''
+model-alias:
+    CaseModel: 'Cases'
 navigation:
     main-menu-item:
-        label: Workflow
-        url: demo/casemanager/workflow
-        icon: icon-recycle
-        sideMenu:
-            side-menu-item2:
-                label: Workflows
-                url: demo/casemanager/workflow
-                icon: icon-recycle
-            side-menu-item:
-                label: Queues
-                url: demo/casemanager/queue
-                icon: icon-stack-overflow
-            side-menu-item3:
-                label: 'Queue Items'
-                url: demo/casemanager/queueitem
-                icon: icon-stack-exchange
-    main-menu-item2:
         label: Workspace
         url: demo/casemanager/casecontroller
         icon: icon-user-secret
+        order: '501'
         sideMenu:
             side-menu-item:
                 label: Cases
                 url: demo/casemanager/casecontroller
                 icon: icon-book
+            'Case Priority':
+                label: 'Case Priority'
+                url: demo/casemanager/casepriority
+                icon: icon-flash
+permissions:
+    case.table.pick:
+        tab: Case
+        label: 'Pick a Case'
+    case.table.create:
+        tab: Case
+        label: 'Create Case'
+    case.table.update:
+        tab: Case
+        label: 'Update Case'
+    case.table.delete:
+        tab: Case
+        label: 'Delete Case'
+    case.table.read:
+        tab: Case
+        label: 'Read Case'
+    case.table.read.all:
+        tab: Case
+        label: 'Read All Cases'
+    case.table.workflow:
+        tab: Case

@@ -1,0 +1,66 @@
+plugin:
+    name: 'demo.core::lang.plugin.name'
+    description: 'demo.core::lang.plugin.description'
+    author: vikrant
+    icon: oc-icon-adjust
+    homepage: ''
+model-alias:
+    EventHandlerModel: 'Event Handlers'
+    InboundApiModel: 'Inbound Apis'
+    PluginModel: 'Plugins'
+navigation:
+    main-menu-item:
+        label: Engine
+        url: demo/core/workflow
+        icon: icon-gears
+        permissions:
+            - workflow.table.read
+        order: '500'
+        sideMenu:
+            side-menu-item2:
+                label: Workflows
+                url: demo/core/workflow
+                icon: icon-recycle
+            side-menu-item4:
+                label: 'Workflow Entities'
+                url: demo/core/workflowentities
+                icon: icon-tag
+            side-menu-item5:
+                label: 'Workflow Transitions'
+                url: demo/core/workflowtransitions
+                icon: icon-long-arrow-right
+            side-menu-item7:
+                label: 'Workflow States'
+                url: demo/core/workflowstate
+                icon: icon-dot-circle-o
+            side-menu-item:
+                label: Queues
+                url: demo/core/queue
+                icon: icon-stack-overflow
+            side-menu-item3:
+                label: 'Queue Items'
+                url: demo/core/queueitem
+                icon: icon-stack-exchange
+            side-menu-item6:
+                label: 'Inbound Api'
+                url: demo/core/inboundapi
+                icon: icon-space-shuttle
+permissions:
+    workflow.table.create:
+        tab: Workflow
+        label: 'Create Workflow'
+    workflow.table.update:
+        tab: Workflow
+        label: 'Update Workflow'
+    workflow.table.delete:
+        tab: Workflow
+        label: 'Delete Workflow'
+    workflow.table.read:
+        tab: Workflow
+        label: 'Read Workflow'
+    workflow.table.workflow:
+        tab: Workflow
+        label: 'Workflow Workflow'
+    workflow.item.push:
+        tab: Workflow
+        label: 'Push item to workflow'

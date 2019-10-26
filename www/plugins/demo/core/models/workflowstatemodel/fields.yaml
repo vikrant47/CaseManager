@@ -1,0 +1,31 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    code:
+        label: Code
+        span: auto
+        defaultFrom: name
+        preset:
+            field: name
+            type: slug
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    plugin:
+        label: 'Plugin'
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation

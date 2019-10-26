@@ -14,9 +14,9 @@ columns:
     updated_at:
         label: updated_at
         type: datetime
-    created_by:
+    created_by[first_name]:
         label: created_by
         type: number
-    updated_by:
+    updated_by[first_name]:
         label: updated_by
         type: number

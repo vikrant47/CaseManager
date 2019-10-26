@@ -1,0 +1,28 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    active:
+        label: active
+        type: number
+    name:
+        label: name
+        type: text
+    description:
+        label: description
+        type: text
+    definition[queue]:
+        label: definition
+        type: switch
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number

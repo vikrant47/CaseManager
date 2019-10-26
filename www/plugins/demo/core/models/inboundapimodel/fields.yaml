@@ -1,0 +1,46 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+        required: 1
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        url:
+            label: URL
+            span: auto
+            type: text
+            tab: 'Api Details'
+            required: 1
+        method:
+            label: Method
+            options:
+                get: Get
+                put: Put
+                post: Post
+                delete: Delete
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'Api Details'
+            required: 1
+        script:
+            label: Script
+            size: large
+            language: php
+            span: full
+            type: codeeditor
+            tab: 'Api Details'
+            required: 1

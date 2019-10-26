@@ -1,6 +1,6 @@
 list: $/demo/casemanager/models/casemodel/columns.yaml
 modelClass: Demo\Casemanager\Models\CaseModel
-title: Case
+title: Cases
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true

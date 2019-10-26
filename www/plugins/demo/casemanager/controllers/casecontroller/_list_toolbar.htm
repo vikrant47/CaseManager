@@ -1,19 +1,52 @@
 <div data-control="toolbar">
-        <a href="<?= Backend::url('demo/casemanager/casecontroller/create') ?>" class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
-            <a href="<?= Backend::url('demo/casemanager/casecontroller/reorder') ?>" class="btn btn-default oc-icon-list"><?= e(trans('backend::lang.reorder.default_title')) ?></a>
+    <?php if ($this->user->hasAccess('case.table.create')) { ?>
+        <a href="<?= Backend::url('demo/casemanager/casecontroller/create') ?>"
+           class="btn btn-primary oc-icon-plus"><?= e(trans('backend::lang.form.create')) ?></a>
+    <?php } ?>
+
+    <a href="<?= Backend::url('demo/casemanager/casecontroller/reorder') ?>"
+       class="btn btn-default oc-icon-list"><?= e(trans('backend::lang.reorder.default_title')) ?></a>
+    <?php if ($this->user->hasAccess('case.table.delete')) { ?>
         <button
-        class="btn btn-default oc-icon-trash-o"
-        disabled="disabled"
-        onclick="$(this).data('request-data', {
+                class="btn btn-default oc-icon-trash-o"
+                disabled="disabled"
+                onclick="$(this).data('request-data', {
             checked: $('.control-list').listWidget('getChecked')
         })"
-        data-request="onDelete"
-        data-request-confirm="<?= e(trans('backend::lang.list.delete_selected_confirm')) ?>"
-        data-trigger-action="enable"
-        data-trigger=".control-list input[type=checkbox]"
-        data-trigger-condition="checked"
-        data-request-success="$(this).prop('disabled', true)"
-        data-stripe-load-indicator>
-        <?= e(trans('backend::lang.list.delete_selected')) ?>
-    </button>
+                data-request="onDelete"
+                data-request-confirm="<?= e(trans('backend::lang.list.delete_selected_confirm')) ?>"
+                data-trigger-action="enable"
+                data-trigger=".control-list input[type=checkbox]"
+                data-trigger-condition="checked"
+                data-request-success="$(this).prop('disabled', true)"
+                data-stripe-load-indicator>
+            <?= e(trans('backend::lang.list.delete_selected')) ?>
+        </button>
+    <?php }
+    if ($this->user->hasAccess('case.table.pick')) {
+        $queues = $this->getQueuesForCurrentUser();
+        if (count($queues) > 0) {
+            ?>
+            <select id="queueDropdown" class="form-control custom-select select2-hidden-accessible">
+                <?php
+                foreach ($queues as $queue) {
+                    ?>
+                    <option value="<?= $queue->id ?>"><?= $queue->name ?></option>
+                <?php } ?>
+            </select>
+            <button
+                    type="button"
+                    class="btn btn-default"
+                    id="casePicker">
+                Pick Case
+            </button>
+        <?php }
+    } ?>
 </div>
+<script>
+    $('#casePicker').click(function () {
+        $.request('onPickItemFromQueue', {
+            data: {queueId: $('#queueDropdown').val()}
+        });
+    });
+</script>

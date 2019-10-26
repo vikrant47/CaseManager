@@ -1,4 +1,0 @@
-title: Workflow
-modelClass: Demo\Casemanager\Models\WorkflowModel
-toolbar:
-    buttons: reorder_toolbar
