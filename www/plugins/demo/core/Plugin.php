@@ -46,7 +46,7 @@ class Plugin extends PluginBase
 
     public static function registerServiceProviders()
     {
-        App::register('\Demo\Core\Console\CommandServiceProvider');
+        App::register('\Demo\Core\Services\CommandServiceProvider');
     }
 
     /**

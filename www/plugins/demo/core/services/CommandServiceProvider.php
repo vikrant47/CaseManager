@@ -1,5 +1,6 @@
-<?php namespace Demo\Core\Console;
+<?php namespace Demo\Core\Services;
 
+use Demo\Core\Console\SeedRunner;
 use October\Rain\Support\ServiceProvider;
 
 class CommandServiceProvider extends ServiceProvider
