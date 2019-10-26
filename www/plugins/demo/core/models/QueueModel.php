@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Models;
 
 use Backend\Models\UserGroup;
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Model;
@@ -50,9 +51,7 @@ class QueueModel extends Model
 
     public function getSupportedItemTypeOptions()
     {
-        return ['any' => 'Any', CaseModel::class => 'Case', QueueModel::class => 'Queue',
-            WorkflowEntitiesModel::class => 'Workflow Entity',
-        ];
+        return PluginConnection::getAllModelAlias();
     }
 
     public function getTriggerOptions()

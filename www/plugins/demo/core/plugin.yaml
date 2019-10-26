@@ -4,6 +4,10 @@ plugin:
     author: vikrant
     icon: oc-icon-adjust
     homepage: ''
+model-alias:
+    EventHandlerModel: 'Event Handlers'
+    InboundApiModel: 'Inbound Apis'
+    PluginModel: 'Plugins'
 navigation:
     main-menu-item:
         label: Engine

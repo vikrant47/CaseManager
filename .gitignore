@@ -1,5 +1,5 @@
 .idea
-./conf
+conf
 www/.DS_Store
 www/*.log
 www/bootstrap
@@ -11,6 +11,5 @@ www/vendor
 www/artisan
 www/install.php
 www/install-master
-.idea
 www/themes
 
