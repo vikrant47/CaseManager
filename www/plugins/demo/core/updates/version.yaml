@@ -24,3 +24,6 @@
 1.0.9:
     - 'Created table demo_core_inbound_api'
     - builder_table_create_demo_core_inbound_api.php
+1.0.10:
+    - 'Created table demo_core_event_handlers'
+    - builder_table_create_demo_core_event_handlers.php

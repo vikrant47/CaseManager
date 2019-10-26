@@ -65,7 +65,7 @@ class SeedRunner extends Command
     }
 
     /**
-     * Run "up" a migration instance.
+     * Run "up" a seed instance.
      *
      * @param string $file
      * @param int $batch
@@ -75,8 +75,8 @@ class SeedRunner extends Command
     protected function runSeed($files)
     {
         $this->info('Running Seeds ........... ');
-        // First we will resolve a "real" instance of the migration class from this
-        // migration file name. Once we have the instances we can run the actual
+        // First we will resolve a "real" instance of the seed class from this
+        // seed file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
         $this->requireFiles($files);
 
@@ -90,7 +90,7 @@ class SeedRunner extends Command
     }
 
     /**
-     * Get the path to the migration directory.
+     * Get the path to the seed directory.
      *
      * @return string
      */
@@ -116,7 +116,7 @@ class SeedRunner extends Command
     }
 
     /**
-     * Require in all the migration files in a given path.
+     * Require in all the seed files in a given path.
      *
      * @param array $files
      * @return void
@@ -130,7 +130,7 @@ class SeedRunner extends Command
     }
 
     /**
-     * Resolve a migration instance from a file.
+     * Resolve a seed instance from a file.
      *
      * @param string $file
      * @return object
@@ -145,7 +145,7 @@ class SeedRunner extends Command
     }
 
     /**
-     * Get the name of the migration.
+     * Get the name of the seed.
      *
      * @param string $path
      * @return string
@@ -156,7 +156,7 @@ class SeedRunner extends Command
     }
 
     /**
-     * Get all of the migration files in a given path.
+     * Get all of the seed files in a given path.
      *
      * @param string|array $paths
      * @return array
