@@ -4,6 +4,8 @@ plugin:
     author: demo
     icon: oc-icon-adjust
     homepage: ''
+model-alias:
+    CaseModel: 'Cases'
 navigation:
     main-menu-item:
         label: Workspace

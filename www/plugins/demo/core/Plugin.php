@@ -1,5 +1,6 @@
 <?php namespace Demo\Core;
 
+use Demo\Core\EventHandlers\Any\BeforeCreateOrUpdate;
 use Demo\Core\Models\QueueItemModel;
 use Demo\Core\Models\QueueModel;
 use System\Classes\PluginBase;
@@ -9,6 +10,11 @@ use App;
 
 class Plugin extends PluginBase
 {
+    public function getEventHandlers()
+    {
+        return [BeforeCreateOrUpdate::class];
+    }
+
     public function registerComponents()
     {
     }
@@ -17,36 +23,10 @@ class Plugin extends PluginBase
     {
     }
 
-    public static function beforeCreateAudit($model)
-    {
-        if ($model->attachAuditedBy === true) {
-            $user = BackendAuth::getUser();
-            $model->created_by = $user;
-            $model->updated_by = $user;
-        }
-    }
-
-    public static function beforeUpdateAudit($model)
-    {
-        if ($model->attachAuditedBy === true) {
-            $user = BackendAuth::getUser();
-            $model->updated_by = $user;
-        }
-    }
-
-    public static function registerAuditListener()
-    {
-        Event::listen('eloquent.creating: *', function ($model) {
-            Plugin::beforeCreateAudit($model);
-        });
-        Event::listen('eloquent.updating: *', function ($model) {
-            Plugin::beforeUpdateAudit($model);
-        });
-    }
-
     public static function registerServiceProviders()
     {
         App::register('\Demo\Core\Services\CommandServiceProvider');
+        App::register('\Demo\Core\Services\EventHandlerServiceProvider');
     }
 
     /**
@@ -56,7 +36,6 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        Plugin::registerAuditListener();
         QueueModel::registerQueueListener();
         Plugin::registerServiceProviders();
     }
