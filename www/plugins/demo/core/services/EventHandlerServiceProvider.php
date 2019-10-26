@@ -59,11 +59,18 @@ class EventHandlerServiceProvider extends ServiceProvider
                     $eventHandlers = $plugin->getEventHandlers();
                     foreach ($eventHandlers as $eventHandler) {
                         $instance = new $eventHandler();
-                        foreach ($instance->events as $event) {
-                            array_push($this->events[$event], $instance);
+                        foreach ($instance->events as $eventName) {
+                            array_push($this->events[$eventName], $instance);
                         }
                     }
                 }
+            }
+            $events = array_keys($this->events);
+
+            foreach ($events as $eventName) {
+                usort($this->events[$eventName], function ($a, $b) {
+                    return $a->sort_order - $b->sort_order;
+                });
             }
             $this->registerHandlers();
             $this->handlerRegistered = true;

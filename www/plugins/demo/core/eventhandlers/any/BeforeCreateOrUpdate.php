@@ -8,6 +8,7 @@ class BeforeCreateOrUpdate
 {
     public $model = 'any';
     public $events = ['beforeCreate', 'beforeUpdate'];
+    public $sort_order = -1000;
 
     public function handler($event, $model)
     {
