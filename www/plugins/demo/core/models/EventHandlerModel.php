@@ -24,6 +24,12 @@ class EventHandlerModel extends Model
 
     public $attachAuditedBy = true;
 
+    public $belongsTo = [
+        'created_by' => [User::class, 'key' => 'created_by_id'],
+        'updated_by' => [User::class, 'key' => 'updated_by_id'],
+        'plugin' => [PluginModel::class, 'key' => 'plugin_id']
+    ];
+
     public function getModelOptions()
     {
         return PluginConnection::getAllModelAlias(true);

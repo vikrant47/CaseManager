@@ -9,11 +9,6 @@ fields:
         size: ''
         span: auto
         type: richeditor
-    sort_order:
-        label: 'Sort Order'
-        span: auto
-        required: 1
-        type: number
     active:
         label: Active
         span: auto
@@ -23,9 +18,16 @@ fields:
     model:
         label: Model
         showSearch: true
-        span: auto
+        span: left
         required: 1
         type: dropdown
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: left
+        required: 1
+        type: relation
     event:
         label: Event
         options:
@@ -39,6 +41,11 @@ fields:
         span: auto
         required: 1
         type: dropdown
+    sort_order:
+        label: 'Sort Order'
+        span: auto
+        required: 1
+        type: number
     script:
         label: Script
         size: large

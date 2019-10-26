@@ -9,11 +9,15 @@ fields:
         size: ''
         span: auto
         type: richeditor
+    active:
+        label: Active
+        span: auto
+        type: switch
     plugin:
         label: Plugin
         nameFrom: code
         descriptionFrom: version
-        span: auto
+        span: left
         required: 1
         type: relation
 tabs:
