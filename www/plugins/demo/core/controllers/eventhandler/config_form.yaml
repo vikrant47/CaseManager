@@ -1,0 +1,10 @@
+name: EventHandler
+form: $/demo/core/models/eventhandlermodel/fields.yaml
+modelClass: Demo\Core\Models\EventHandlerModel
+defaultRedirect: demo/core/eventhandler
+create:
+    redirect: 'demo/core/eventhandler/update/:id'
+    redirectClose: demo/core/eventhandler
+update:
+    redirect: demo/core/eventhandler
+    redirectClose: demo/core/eventhandler

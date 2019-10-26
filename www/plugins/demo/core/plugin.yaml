@@ -7,7 +7,7 @@ plugin:
 model-alias:
     EventHandlerModel: 'Event Handlers'
     InboundApiModel: 'Inbound Apis'
-    PluginModel: 'Plugins'
+    PluginModel: Plugins
 navigation:
     main-menu-item:
         label: Engine
@@ -45,6 +45,10 @@ navigation:
                 label: 'Inbound Api'
                 url: demo/core/inboundapi
                 icon: icon-space-shuttle
+            side-menu-item8:
+                label: 'Event Handler'
+                url: demo/core/eventhandler
+                icon: icon-code
 permissions:
     workflow.table.create:
         tab: Workflow

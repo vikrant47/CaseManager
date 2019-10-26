@@ -75,7 +75,7 @@ class PluginConnection
     /**
      * Return all model alias
      */
-    public static function getAllModelAlias()
+    public static function getAllModelAlias($INCLUDE_ANY = false)
     {
         $mappedAlias = [];
         /**@var $plugin PluginBase */
@@ -90,6 +90,9 @@ class PluginConnection
             } catch (\Exception $exception) {
 
             }
+        }
+        if($INCLUDE_ANY){
+            $mappedAlias['universal'] = 'Universal';
         }
         return $mappedAlias;
     }

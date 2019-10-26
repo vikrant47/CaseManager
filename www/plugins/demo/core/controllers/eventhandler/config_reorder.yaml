@@ -1,0 +1,4 @@
+title: EventHandler
+modelClass: Demo\Core\Models\EventHandlerModel
+toolbar:
+    buttons: reorder_toolbar

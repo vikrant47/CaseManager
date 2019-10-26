@@ -19,6 +19,10 @@ class BuilderTableCreateDemoCoreEventHandlers extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('model', 255);
+            $table->text('script');
+            $table->integer('sort_order');
+            $table->smallInteger('active')->default(1);
+            $table->integer('plugin_id');
         });
     }
     

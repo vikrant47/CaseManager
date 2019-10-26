@@ -1,12 +1,12 @@
 <?php
 
-namespace Demo\Core\EventHandlers\Any;
+namespace Demo\Core\EventHandlers\Universal;
 
 use BackendAuth;
 
 class BeforeCreateOrUpdate
 {
-    public $model = 'any';
+    public $model = 'universal';
     public $events = ['beforeCreate', 'beforeUpdate'];
     public $sort_order = -1000;
 
