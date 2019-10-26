@@ -25,7 +25,8 @@ class EventHandlerServiceProvider extends ServiceProvider
     {
         $handlers = $this->events[$eventName];
         foreach ($handlers as $handler) {
-            $handler->handler($eventName, $model);
+            if ($handler->model === 'universal' || $handler->model === get_class($model))
+                $handler->handler($eventName, $model);
         }
     }
 
@@ -51,28 +52,37 @@ class EventHandlerServiceProvider extends ServiceProvider
         });
     }
 
-    public function register()
+    public function loadFromFileSystem()
     {
-        if ($this->handlerRegistered === false) {
-            foreach (PluginManager::instance()->getPlugins() as $plugin) {
-                if (method_exists($plugin, 'getEventHandlers')) {
-                    $eventHandlers = $plugin->getEventHandlers();
-                    foreach ($eventHandlers as $eventHandler) {
-                        $instance = new $eventHandler();
-                        foreach ($instance->events as $eventName) {
-                            array_push($this->events[$eventName], $instance);
-                        }
+        foreach (PluginManager::instance()->getPlugins() as $plugin) {
+            if (method_exists($plugin, 'getEventHandlers')) {
+                $eventHandlers = $plugin->getEventHandlers();
+                foreach ($eventHandlers as $eventHandler) {
+                    $instance = new $eventHandler();
+                    foreach ($instance->events as $eventName) {
+                        array_push($this->events[$eventName], $instance);
                     }
                 }
             }
-            $events = array_keys($this->events);
+        }
+        $events = array_keys($this->events);
 
-            foreach ($events as $eventName) {
-                usort($this->events[$eventName], function ($a, $b) {
-                    return $a->sort_order - $b->sort_order;
-                });
-            }
-            $this->registerHandlers();
+        foreach ($events as $eventName) {
+            usort($this->events[$eventName], function ($a, $b) {
+                return $a->sort_order - $b->sort_order;
+            });
+        }
+    }
+
+    public function loadFromDatabase($event, $model)
+    {
+
+    }
+
+    public function register()
+    {
+        if ($this->handlerRegistered === false) {
+            $this->loadFromFileSystem();
             $this->handlerRegistered = true;
         }
     }

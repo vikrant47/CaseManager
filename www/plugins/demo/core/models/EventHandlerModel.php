@@ -1,5 +1,6 @@
 <?php namespace Demo\Core\Models;
 
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Model;
 
 /**
@@ -20,4 +21,9 @@ class EventHandlerModel extends Model
      */
     public $rules = [
     ];
+
+    public function getModelOptions()
+    {
+        return PluginConnection::getAllModelAlias(true);
+    }
 }
