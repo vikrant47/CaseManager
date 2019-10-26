@@ -1,6 +1,6 @@
 <?php namespace Demo\Core;
 
-use Demo\Core\EventHandlers\Any\BeforeCreateOrUpdate;
+use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdate;
 use Demo\Core\Models\QueueItemModel;
 use Demo\Core\Models\QueueModel;
 use System\Classes\PluginBase;

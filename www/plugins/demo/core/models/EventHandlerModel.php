@@ -9,7 +9,7 @@ use Model;
 class EventHandlerModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    
+
 
     /**
      * @var string The database table used by the model.
@@ -22,8 +22,15 @@ class EventHandlerModel extends Model
     public $rules = [
     ];
 
+    public $attachAuditedBy = true;
+
     public function getModelOptions()
     {
         return PluginConnection::getAllModelAlias(true);
+    }
+
+    public function handler($eventName, $model)
+    {
+        return eval($this->script);
     }
 }
