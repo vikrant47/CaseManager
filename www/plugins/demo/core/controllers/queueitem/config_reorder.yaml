@@ -1,4 +1,0 @@
-title: QueueItem
-modelClass: Demo\Core\Models\QueueItemModel
-toolbar:
-    buttons: reorder_toolbar

@@ -1,0 +1,10 @@
+name: Workflow
+form: $/demo/workflow/models/workflowmodel/fields.yaml
+modelClass: Demo\Workflow\Models\WorkflowModel
+defaultRedirect: demo/workflow/workflow
+create:
+    redirect: 'demo/workflow/workflow/update/:id'
+    redirectClose: demo/workflow/workflow
+update:
+    redirect: demo/workflow/workflow
+    redirectClose: demo/workflow/workflow

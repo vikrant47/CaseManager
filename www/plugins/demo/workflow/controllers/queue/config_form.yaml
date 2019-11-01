@@ -1,0 +1,10 @@
+name: Queue
+form: $/demo/workflow/models/queuemodel/fields.yaml
+modelClass: Demo\Workflow\Models\QueueModel
+defaultRedirect: demo/workflow/queue
+create:
+    redirect: 'demo/workflow/queue/update/:id'
+    redirectClose: demo/workflow/queue
+update:
+    redirect: demo/workflow/queue
+    redirectClose: demo/workflow/queue

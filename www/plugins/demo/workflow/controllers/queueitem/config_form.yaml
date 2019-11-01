@@ -1,0 +1,10 @@
+name: QueueItem
+form: $/demo/workflow/models/queueitemmodel/fields.yaml
+modelClass: Demo\Workflow\Models\QueueItemModel
+defaultRedirect: demo/workflow/queueitem
+create:
+    redirect: 'demo/workflow/queueitem/update/:id'
+    redirectClose: demo/workflow/queueitem
+update:
+    redirect: demo/workflow/queueitem
+    redirectClose: demo/workflow/queueitem
