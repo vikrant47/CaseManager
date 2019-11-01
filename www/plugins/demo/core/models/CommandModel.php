@@ -1,5 +1,6 @@
 <?php namespace Demo\Core\Models;
 
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Model;
 
 /**
@@ -27,4 +28,16 @@ class CommandModel extends Model
         'plugin' => [PluginModel::class, 'key' => 'plugin_id']
     ];
     public $attachAuditedBy = true;
+
+    public $jsonable = ['parameters', 'arguments'];
+
+    public function getModelOptions()
+    {
+        return PluginConnection::getAllModelAlias(true);
+    }
+
+    public function execute()
+    {
+        return eval($this->script);
+    }
 }
