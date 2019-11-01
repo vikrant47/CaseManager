@@ -1,8 +1,6 @@
 <?php namespace Demo\Core;
 
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdate;
-use Demo\Core\Models\QueueItemModel;
-use Demo\Core\Models\QueueModel;
 use System\Classes\PluginBase;
 use BackendAuth;
 use Event;
@@ -36,7 +34,6 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        QueueModel::registerQueueListener();
         Plugin::registerServiceProviders();
     }
 }

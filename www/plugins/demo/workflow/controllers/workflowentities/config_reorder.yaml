@@ -1,0 +1,4 @@
+title: WorkflowEntities
+modelClass: Demo\Workflow\Models\WorkflowEntitityModel
+toolbar:
+    buttons: reorder_toolbar
