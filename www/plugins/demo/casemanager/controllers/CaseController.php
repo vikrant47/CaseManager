@@ -2,7 +2,7 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
-use Demo\Core\Classes\Traits\WorkflowControllerTrait;
+use Demo\Workflow\Classes\Traits\WorkflowControllerTrait;
 use Demo\Casemanager\Models\CaseModel;
 use Demo\Casemanager\Models\WorkflowEntitiesModel;
 use Model;

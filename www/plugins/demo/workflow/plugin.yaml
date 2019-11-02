@@ -1,0 +1,63 @@
+plugin:
+    name: 'demo.workflow::lang.plugin.name'
+    description: 'demo.workflow::lang.plugin.description'
+    author: vikrant
+    icon: icon-recycle
+    homepage: ''
+model-alias:
+    WorkflowModel: 'Workflows'
+    QueueModel: 'Queues'
+    QueueItemModel: 'Queue Items'
+navigation:
+    main-menu-item:
+        label: Workflow
+        url: demo/workflow/workflow
+        icon: icon-recycle
+        permissions:
+            - workflow.table.read
+        order: '500'
+        sideMenu:
+            side-menu-item2:
+                label: Workflows
+                url: demo/workflow/workflow
+                icon: icon-recycle
+            side-menu-item4:
+                label: 'Workflow Entities'
+                url: demo/workflow/workflowentities
+                icon: icon-tag
+            side-menu-item5:
+                label: 'Workflow Transitions'
+                url: demo/workflow/workflowtransitions
+                icon: icon-long-arrow-right
+            side-menu-item7:
+                label: 'Workflow States'
+                url: demo/workflow/workflowstate
+                icon: icon-dot-circle-o
+            side-menu-item:
+                label: Queues
+                url: demo/workflow/queue
+                icon: icon-stack-overflow
+            side-menu-item3:
+                label: 'Queue Items'
+                url: demo/workflow/queueitem
+                icon: icon-stack-exchange
+permissions:
+    workflow.table.create:
+        tab: Workflow
+        label: 'Create Workflow'
+    workflow.table.update:
+        tab: Workflow
+        label: 'Update Workflow'
+    workflow.table.delete:
+        tab: Workflow
+        label: 'Delete Workflow'
+    workflow.table.read:
+        tab: Workflow
+        label: 'Read Workflow'
+    workflow.table.workflow:
+        tab: Workflow
+        label: 'Workflow Workflow'
+    workflow.item.push:
+        tab: Workflow
+        label: 'Push item to workflow'
+
