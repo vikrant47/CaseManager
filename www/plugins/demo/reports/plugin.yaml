@@ -1,0 +1,16 @@
+plugin:
+    name: 'demo.reports::lang.plugin.name'
+    description: 'demo.reports::lang.plugin.description'
+    author: vikrant
+    icon: oc-icon-adjust
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Reports
+        url: demo/reports/reports
+        icon: icon-book
+        sideMenu:
+            side-menu-item:
+                label: Reports
+                url: demo/reports/reports
+                icon: icon-book

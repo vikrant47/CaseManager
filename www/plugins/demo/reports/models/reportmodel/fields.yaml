@@ -1,0 +1,31 @@
+fields:
+    title:
+        label: Title
+        span: auto
+        type: text
+    type:
+        label: Type
+        options:
+            simple: simple
+        showSearch: true
+        span: auto
+        type: dropdown
+    description:
+        label: Description
+        size: ''
+        span: full
+        type: textarea
+    script_type:
+        label: 'Script Type'
+        options:
+            sql: SQL
+            php: PHP
+        showSearch: true
+        span: auto
+        type: dropdown
+    script:
+        label: Script
+        size: large
+        language: php
+        span: full
+        type: codeeditor

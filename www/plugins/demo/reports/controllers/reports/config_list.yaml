@@ -1,0 +1,12 @@
+list: $/demo/reports/models/reportmodel/columns.yaml
+modelClass: Demo\Reports\Models\ReportModel
+title: Reports
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'demo/reports/reports/update/:id'
