@@ -1,5 +1,5 @@
-list: $/demo/workflow/models/workflowmodel/columns.yaml
-modelClass: Demo\Workflow\Models\WorkflowModel
+list: $/demo/workflow/models/workflow/columns.yaml
+modelClass: Demo\Workflow\Models\Workflow
 title: Workflow
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

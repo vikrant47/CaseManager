@@ -6,7 +6,7 @@ use Model;
 /**
  * Model
  */
-class EventHandlerModel extends Model
+class EventHandler extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
@@ -27,7 +27,7 @@ class EventHandlerModel extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [PluginModel::class, 'key' => 'plugin_id']
+        'plugin' => [PluginVersions::class, 'key' => 'plugin_id']
     ];
 
     public function getModelOptions()

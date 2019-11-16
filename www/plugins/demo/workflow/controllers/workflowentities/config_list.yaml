@@ -1,5 +1,5 @@
-list: $/demo/workflow/models/workflowentitiesmodel/columns.yaml
-modelClass: Demo\Workflow\Models\WorkflowEntitityModel
+list: $/demo/workflow/models/workflowentity/columns.yaml
+modelClass: Demo\Workflow\Models\WorkflowEntity
 title: WorkflowEntities
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

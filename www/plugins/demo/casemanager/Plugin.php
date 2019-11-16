@@ -1,7 +1,7 @@
 <?php namespace Demo\Casemanager;
 
-use Demo\Casemanager\Models\QueueItemModel;
-use Demo\Casemanager\Models\QueueModel;
+use Demo\Casemanager\Models\QueueItem;
+use Demo\Casemanager\Models\Queue;
 use System\Classes\PluginBase;
 use BackendAuth;
 use Event;

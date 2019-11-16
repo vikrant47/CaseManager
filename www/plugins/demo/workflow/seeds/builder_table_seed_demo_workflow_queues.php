@@ -51,7 +51,7 @@ class BuilderTableSeedDemoWorkflowQueues extends Seeder
             [
                 "id" => 3,
                 "queue_order" => "simple_queue",
-                "script" => "\$workflowEntity = new Demo\Casemanager\Models\WorkflowEntitityModel();\r\n\$workflowEntity->workflow = Demo\Casemanager\Models\WorkflowModel=>=>where('code','case-workflow')->get()->first();\r\n\$workflowEntity->entity_id = \$item->id;\r\n\$workflowEntity->entity_type = get_class(\$item);\r\n// throw new \Error(json_encode(\$workflowEntity->workflow->definition,true));\r\n\$from_state = new Demo\Casemanager\Models\WorkflowStateModel();\r\n\$from_state->id  = \$workflowEntity->workflow->definition[0]['from_state'];\r\n\$workflowEntity->current_state = \$from_state;\r\n\$workflowEntity->assigned_to = \$this->getCurrentUser();\r\n\$workflowEntity->save();",
+                "script" => "\$workflowEntity = new Demo\Casemanager\Models\WorkflowEntity();\r\n\$workflowEntity->workflow = Demo\Casemanager\Models\Workflow=>=>where('code','case-workflow')->get()->first();\r\n\$workflowEntity->entity_id = \$item->id;\r\n\$workflowEntity->entity_type = get_class(\$item);\r\n// throw new \Error(json_encode(\$workflowEntity->workflow->definition,true));\r\n\$from_state = new Demo\Casemanager\Models\WorkflowState();\r\n\$from_state->id  = \$workflowEntity->workflow->definition[0]['from_state'];\r\n\$workflowEntity->current_state = \$from_state;\r\n\$workflowEntity->assigned_to = \$this->getCurrentUser();\r\n\$workflowEntity->save();",
                 "created_at" => "2019-10-06 10:07:03",
                 "updated_at" => "2019-10-14 08:38:59",
                 "created_by_id" => 1,

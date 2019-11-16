@@ -1,5 +1,5 @@
-list: $/demo/core/models/eventhandlermodel/columns.yaml
-modelClass: Demo\Core\Models\EventHandlerModel
+list: $/demo/core/models/eventhandler/columns.yaml
+modelClass: Demo\Core\Models\EventHandler
 title: EventHandler
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

@@ -5,9 +5,9 @@ plugin:
     icon: icon-recycle
     homepage: ''
 model-alias:
-    WorkflowModel: 'Workflows'
-    QueueModel: 'Queues'
-    QueueItemModel: 'Queue Items'
+    Workflow: 'Workflows'
+    Queue: 'Queues'
+    QueueItem: 'Queue Items'
 navigation:
     main-menu-item:
         label: Workflow

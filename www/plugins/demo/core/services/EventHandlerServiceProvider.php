@@ -4,7 +4,7 @@
 namespace Demo\Core\Services;
 
 
-use Demo\Core\Models\EventHandlerModel;
+use Demo\Core\Models\EventHandler;
 use Demo\Core\Plugin;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Support\ServiceProvider;
@@ -84,7 +84,7 @@ class EventHandlerServiceProvider extends ServiceProvider
 
     public function loadFromDatabase($event, $model)
     {
-        return EventHandlerModel::where('event', $event)->where(function ($query) use ($model) {
+        return EventHandler::where('event', $event)->where(function ($query) use ($model) {
             $query->where('model', '=', 'universal')
                 ->orWhere('model', '=', $model);
         })->where('active', 1)->orderBy('sort_order')->get();

@@ -14,7 +14,7 @@ use October\Rain\Exception\ApplicationException;
 /**
  * Model
  */
-class QueueModel extends Model
+class Queue extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;
@@ -28,7 +28,7 @@ class QueueModel extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [\Demo\Core\Models\PluginModel::class, 'key' => 'plugin_id']
+        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
     ];
 
     public $belongsToMany = [
@@ -80,20 +80,20 @@ class QueueModel extends Model
     public function pushItem($item)
     {
         if ($this->supported_item_type === 'any' || $this->supported_item_type === get_class($item)) {
-            $existingItems = QueueItemModel::where(['item_id' => $item->id, 'item_type' => get_class($item)])->get();
+            $existingItems = QueueItem::where(['item_id' => $item->id, 'item_type' => get_class($item)])->get();
             if ($this->virtual === 0) {
                 $insert = true;
                 if (!empty($existingItem)) {
-                    if ($this->redundancy_policy === QueueModel::$OVERRIDE_POLICY) {
+                    if ($this->redundancy_policy === Queue::$OVERRIDE_POLICY) {
                         $existingItem->updated_at = new \DateTime();
                         $existingItem->save();
                         $insert = false;
-                    } elseif ($this->redundancy_policy === QueueModel::$ADD_NEW_POLICY) {
+                    } elseif ($this->redundancy_policy === Queue::$ADD_NEW_POLICY) {
                         $insert = true;
                     }
                 }
                 if ($insert === true) {
-                    $queueItem = new QueueItemModel();
+                    $queueItem = new QueueItem();
                     $queueItem->queue = $this;
                     $queueItem->item_id = $item->id;
                     $queueItem->item_type = get_class($item);
@@ -170,7 +170,7 @@ class QueueModel extends Model
         if ($userAssignmentGroup === true) {
             $item = $this->popItem();
             if (!empty($item)) {
-                $workflowEntity = WorkflowEntitityModel::where(['entity_type' => get_class($item), 'entity_id' => $item->id])->first();
+                $workflowEntity = WorkflowEntity::where(['entity_type' => get_class($item), 'entity_id' => $item->id])->first();
                 if (empty($workflowEntity)) {
                     throw new ApplicationException('No corresponding entry found in workflow entity');
                 }
@@ -187,15 +187,15 @@ class QueueModel extends Model
 
     public static function listenEntityEvents($eventName, $model)
     {
-        $ignoreModels = [QueueItemModel::class];
+        $ignoreModels = [QueueItem::class];
         $includedPackage = ['Workflow'];
         if (!in_array(get_class($model), $ignoreModels) && in_array(explode('\\', get_class($model))[1], $includedPackage)) {
-            /**@var $queues Collection<QueueModel> */
-            $queues = QueueModel::where('active', 1)->where(function ($query) use ($model) {
+            /**@var $queues Collection<Queue> */
+            $queues = Queue::where('active', 1)->where(function ($query) use ($model) {
                 $query->where('supported_item_type', '=', 'any')
                     ->orWhere('supported_item_type', '=', get_class($model));
             })->orderBy('sort_order', 'ASC')->get();
-            /**@var  $queue QueueModel */
+            /**@var  $queue Queue */
             foreach ($queues as $queue) {
 
                 // if trigger are empty than it returns integer so should check if its array
@@ -218,13 +218,13 @@ class QueueModel extends Model
     public static function registerQueueListener()
     {
         Event::listen('eloquent.created: *', function ($model) {
-            QueueModel::listenEntityEvents('created', $model);
+            Queue::listenEntityEvents('created', $model);
         });
         Event::listen('eloquent.updated: *', function ($model) {
-            QueueModel::listenEntityEvents('updated', $model);
+            Queue::listenEntityEvents('updated', $model);
         });
         Event::listen('eloquent.deleted: *', function ($model) {
-            QueueModel::listenEntityEvents('deleted', $model);
+            Queue::listenEntityEvents('deleted', $model);
         });
     }
 }

@@ -1,4 +1,4 @@
 title: Command
-modelClass: Demo\Core\Models\CommandModel
+modelClass: Demo\Core\Models\Command
 toolbar:
     buttons: reorder_toolbar

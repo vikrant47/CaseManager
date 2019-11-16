@@ -4,7 +4,7 @@
 namespace Demo\Core\Classes\Beans;
 
 use \Demo\Core\Classes\Helpers\PluginHelper;
-use Demo\Core\Models\CommandModel;
+use Demo\Core\Models\Command as CommandModel;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,8 +15,8 @@ use Illuminate\Support\Collection;
 
 class EngineCommandAdaptor extends Command
 {
-    /**@var $commandModel CommandModel */
-    protected $commandModel;
+    /**@var $command CommandModel */
+    protected $command;
     /**
      * @var string The console command name.
      */
@@ -28,12 +28,12 @@ class EngineCommandAdaptor extends Command
     protected $description;
 
 
-    public function __construct(CommandModel $commandModel)
+    public function __construct(CommandModel $command)
     {
         parent::__construct();
-        $this->commandModel = $commandModel;
-        $this->name = $commandModel->slug;
-        $this->description = $commandModel->description;
+        $this->command = $command;
+        $this->name = $command->slug;
+        $this->description = $command->description;
     }
 
     /**
@@ -42,7 +42,7 @@ class EngineCommandAdaptor extends Command
      */
     public function handle()
     {
-        $this->commandModel->execute();
+        $this->command->execute();
     }
 
     /**
@@ -51,7 +51,7 @@ class EngineCommandAdaptor extends Command
      */
     protected function getArguments()
     {
-        return $this->commandModel->arguments;
+        return $this->command->arguments;
     }
 
     /**
@@ -60,7 +60,7 @@ class EngineCommandAdaptor extends Command
      */
     protected function getOptions()
     {
-        return $this->commandModel->parameters;
+        return $this->command->parameters;
     }
 
 }

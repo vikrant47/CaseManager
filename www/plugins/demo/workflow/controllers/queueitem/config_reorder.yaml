@@ -1,4 +1,4 @@
 title: QueueItem
-modelClass: Demo\Workflow\Models\QueueItemModel
+modelClass: Demo\Workflow\Models\QueueItem
 toolbar:
     buttons: reorder_toolbar

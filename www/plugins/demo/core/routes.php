@@ -46,7 +46,7 @@ Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{wildcard}',
     /**@var $currentRoute  Illuminate\Routing\Route */
     $currentRoute = Route::getCurrentRoute();
     $path = $request->getPathInfo();
-    $apis = \Demo\Core\Models\InboundApiModel::where('method', strtolower($request->method()))->get();
+    $apis = \Demo\Core\Models\InboundApi::where('method', strtolower($request->method()))->get();
     foreach ($apis as $api) {
         $pattern = str_replace('/', '\\/', preg_replace('/\{(\s*?.*?)*?\}/', '(.*)', $api->url));
         $pathVariables = [];

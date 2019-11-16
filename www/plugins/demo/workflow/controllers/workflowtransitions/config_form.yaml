@@ -1,6 +1,6 @@
 name: WorkflowTransitions
-form: $/demo/workflow/models/workflowtransionmodel/fields.yaml
-modelClass: Demo\Workflow\Models\WorkflowTransionModel
+form: $/demo/workflow/models/workflowtransition/fields.yaml
+modelClass: Demo\Workflow\Models\WorkflowTransition
 defaultRedirect: demo/workflow/workflowtransitions
 create:
     redirect: 'demo/workflow/workflowtransitions/update/:id'

@@ -1,6 +1,6 @@
 name: Workflow
-form: $/demo/workflow/models/workflowmodel/fields.yaml
-modelClass: Demo\Workflow\Models\WorkflowModel
+form: $/demo/workflow/models/workflow/fields.yaml
+modelClass: Demo\Workflow\Models\Workflow
 defaultRedirect: demo/workflow/workflow
 create:
     redirect: 'demo/workflow/workflow/update/:id'

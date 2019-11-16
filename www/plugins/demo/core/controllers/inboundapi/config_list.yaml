@@ -1,5 +1,5 @@
-list: $/demo/core/models/inboundapimodel/columns.yaml
-modelClass: Demo\Core\Models\InboundApiModel
+list: $/demo/core/models/inboundapi/columns.yaml
+modelClass: Demo\Core\Models\InboundApi
 title: InboundApi
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

@@ -6,7 +6,7 @@ use Model;
 /**
  * Model
  */
-class CommandModel extends Model
+class Command extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
@@ -25,7 +25,7 @@ class CommandModel extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [PluginModel::class, 'key' => 'plugin_id']
+        'plugin' => [PluginVersions::class, 'key' => 'plugin_id']
     ];
     public $attachAuditedBy = true;
 

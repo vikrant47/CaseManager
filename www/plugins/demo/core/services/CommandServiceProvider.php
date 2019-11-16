@@ -2,8 +2,8 @@
 
 use Demo\Core\Classes\Beans\EngineCommandAdaptor;
 use Demo\Core\Console\SeedRunner;
-use Demo\Core\Models\CommandModel;
-use Demo\Core\Models\EventHandlerModel;
+use Demo\Core\Models\Command;
+use Demo\Core\Models\EventHandler;
 use Illuminate\Support\Facades\App;
 use October\Rain\Support\ServiceProvider;
 
@@ -18,8 +18,8 @@ class CommandServiceProvider extends ServiceProvider
 
     public function loadFromDatabase()
     {
-        return CommandModel::where('active', 1)->get()->map(function ($commandModel) {
-            return new EngineCommandAdaptor($commandModel);
+        return Command::where('active', 1)->get()->map(function ($command) {
+            return new EngineCommandAdaptor($command);
         });
     }
 
