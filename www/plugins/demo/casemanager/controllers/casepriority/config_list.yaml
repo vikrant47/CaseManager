@@ -1,5 +1,5 @@
-list: $/demo/casemanager/models/caseprioritymodel/columns.yaml
-modelClass: Demo\Casemanager\Models\CasePriorityModel
+list: $/demo/casemanager/models/casepriority/columns.yaml
+modelClass: Demo\Casemanager\Models\CasePriority
 title: CasePriority
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

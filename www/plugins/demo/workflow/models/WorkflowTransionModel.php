@@ -28,6 +28,6 @@ class WorkflowTransionModel extends Model
         'workflow_entity' => [WorkflowEntitityModel::class, 'key' => 'workflow_entity_id'],
         'from_state' => [WorkflowStateModel::class, 'key' => 'from_state_id'],
         'to_state' => [WorkflowStateModel::class, 'key' => 'to_state_id'],
-        'plugin' => [\Demo\Core\Models\PluginModel::class, 'key' => 'plugin_id']
+        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
     ];
 }

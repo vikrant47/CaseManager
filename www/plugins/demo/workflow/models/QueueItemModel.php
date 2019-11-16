@@ -20,7 +20,7 @@ class QueueItemModel extends Model
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'queue' => [QueueModel::class, 'key' => 'queue_id'],
-        'plugin' => [\Demo\Core\Models\PluginModel::class, 'key' => 'plugin_id']
+        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
     ];
 
     /**

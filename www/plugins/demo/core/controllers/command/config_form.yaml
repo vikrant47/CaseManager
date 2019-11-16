@@ -1,6 +1,6 @@
 name: Command
-form: $/demo/core/models/commandmodel/fields.yaml
-modelClass: Demo\Core\Models\CommandModel
+form: $/demo/core/models/command/fields.yaml
+modelClass: Demo\Core\Models\Command
 defaultRedirect: demo/core/command
 create:
     redirect: 'demo/core/command/update/:id'

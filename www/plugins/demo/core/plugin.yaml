@@ -5,9 +5,9 @@ plugin:
     icon: oc-icon-adjust
     homepage: ''
 model-alias:
-    EventHandlerModel: 'Event Handlers'
-    InboundApiModel: 'Inbound Apis'
-    PluginModel: Plugins
+    EventHandler: 'Event Handlers'
+    InboundApi: 'Inbound Apis'
+    PluginVersions: 'Plugin Versions'
 navigation:
     main-menu-item:
         label: Engine

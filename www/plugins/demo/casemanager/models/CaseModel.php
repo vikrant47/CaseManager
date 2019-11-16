@@ -20,7 +20,7 @@ class CaseModel extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'priority' => [CasePriorityModel::class, 'key' => 'priority_id'],
+        'priority' => [CasePriority::class, 'key' => 'priority_id'],
     ];
 
     /**

@@ -1,5 +1,5 @@
-list: $/demo/core/models/commandmodel/columns.yaml
-modelClass: Demo\Core\Models\CommandModel
+list: $/demo/core/models/command/columns.yaml
+modelClass: Demo\Core\Models\Command
 title: Command
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
