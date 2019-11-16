@@ -10,7 +10,7 @@ use October\Rain\Exception\ApplicationException;
  * Model
  * An entity can only be part of 1 workflow. A unique index has been added on entity_id,entity_name combination
  */
-class WorkflowEntitityModel extends Model
+class WorkflowEntity extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;
@@ -24,8 +24,8 @@ class WorkflowEntitityModel extends Model
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
-        'workflow' => [WorkflowModel::class, 'key' => 'workflow_id'],
-        'current_state' => [WorkflowStateModel::class, 'key' => 'current_state_id'],
+        'workflow' => [Workflow::class, 'key' => 'workflow_id'],
+        'current_state' => [WorkflowState::class, 'key' => 'current_state_id'],
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
     ];
 
@@ -71,7 +71,7 @@ class WorkflowEntitityModel extends Model
             throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next queue not found for ' . $this->current_state);
         }
         $next_queue->pushItem($model);
-        $transition = new WorkflowTransionModel();
+        $transition = new WorkflowTransition();
         $transition->workflow_entity = $this;
         $transition->from_state = $this->current_state;
         $transition->to_state = $next_state;
@@ -83,6 +83,6 @@ class WorkflowEntitityModel extends Model
 
     public function forceUpdate()
     {
-        WorkflowEntitityModel::where('id', $this->id)->update($this->toArray());
+        WorkflowEntity::where('id', $this->id)->update($this->toArray());
     }
 }

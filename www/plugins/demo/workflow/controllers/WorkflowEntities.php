@@ -3,7 +3,7 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use BackendAuth;
-use Demo\Workflow\Models\WorkflowModel;
+use Demo\Workflow\Models\Workflow;
 use October\Rain\Exception\ApplicationException;
 
 class WorkflowEntities extends Controller

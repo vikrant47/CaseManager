@@ -7,7 +7,7 @@ use Backend\Models\User;
 /**
  * Model
  */
-class WorkflowModel extends Model
+class Workflow extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;
@@ -26,9 +26,9 @@ class WorkflowModel extends Model
     ];
 
     public $hasOne = [
-        'queue' => QueueModel::class,
-        'from_state' => WorkflowStateModel::class,
-        'to_state' => WorkflowStateModel::class,
+        'queue' => Queue::class,
+        'from_state' => WorkflowState::class,
+        'to_state' => WorkflowState::class,
     ];
 
     /**
@@ -38,10 +38,10 @@ class WorkflowModel extends Model
     ];
     public $attachAuditedBy = true;
 
-    public function getNextStateId(WorkflowStateModel $current_state)
+    public function getNextStateId(WorkflowState $current_state)
     {
         $current_stateId = $current_state;
-        if($current_state instanceof WorkflowStateModel){
+        if($current_state instanceof WorkflowState){
             $current_stateId = $current_state->id;
         }
         foreach ($this->definition as $entry) {
@@ -55,7 +55,7 @@ class WorkflowModel extends Model
     public function getCurrentQueueId($current_state)
     {
         $current_stateId = $current_state;
-        if($current_state instanceof WorkflowStateModel){
+        if($current_state instanceof WorkflowState){
             $current_stateId = $current_state->id;
         }
         foreach ($this->definition as $entry) {
@@ -66,23 +66,23 @@ class WorkflowModel extends Model
         return null;
     }
 
-    public function getNextQueueId(WorkflowStateModel $current_state)
+    public function getNextQueueId(WorkflowState $current_state)
     {
         return $this->getCurrentQueueId($this->getNextStateId($current_state));
     }
 
-    public function getNextState(WorkflowStateModel $current_state)
+    public function getNextState(WorkflowState $current_state)
     {
-        return WorkflowStateModel::find($this->getNextStateId($current_state));
+        return WorkflowState::find($this->getNextStateId($current_state));
     }
 
-    public function getCurrentQueue(WorkflowStateModel $current_state)
+    public function getCurrentQueue(WorkflowState $current_state)
     {
-        return QueueModel::find($this->getCurrentQueueId($current_state));
+        return Queue::find($this->getCurrentQueueId($current_state));
     }
 
-    public function getNextQueue(WorkflowStateModel $current_state)
+    public function getNextQueue(WorkflowState $current_state)
     {
-        return QueueModel::find($this->getNextQueueId($current_state));
+        return Queue::find($this->getNextQueueId($current_state));
     }
 }

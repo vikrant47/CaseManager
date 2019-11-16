@@ -5,7 +5,7 @@ use Backend\Models\User;
 /**
  * Model
  */
-class WorkflowTransionModel extends Model
+class WorkflowTransition extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;
@@ -25,9 +25,9 @@ class WorkflowTransionModel extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'workflow_entity' => [WorkflowEntitityModel::class, 'key' => 'workflow_entity_id'],
-        'from_state' => [WorkflowStateModel::class, 'key' => 'from_state_id'],
-        'to_state' => [WorkflowStateModel::class, 'key' => 'to_state_id'],
+        'workflow_entity' => [WorkflowEntity::class, 'key' => 'workflow_entity_id'],
+        'from_state' => [WorkflowState::class, 'key' => 'from_state_id'],
+        'to_state' => [WorkflowState::class, 'key' => 'to_state_id'],
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
     ];
 }

@@ -1,4 +1,4 @@
 title: Workflow
-modelClass: Demo\Workflow\Models\WorkflowModel
+modelClass: Demo\Workflow\Models\Workflow
 toolbar:
     buttons: reorder_toolbar

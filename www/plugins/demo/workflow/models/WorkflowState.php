@@ -6,7 +6,7 @@ use Backend\Models\User;
 /**
  * Model
  */
-class WorkflowStateModel extends Model
+class WorkflowState extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;

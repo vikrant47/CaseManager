@@ -5,13 +5,13 @@ namespace Demo\Workflow\Classes\Traits;
 
 use Backend\Models\User;
 use BackendAuth;
-use Demo\Workflow\Models\WorkflowEntitityModel;
+use Demo\Workflow\Models\WorkflowEntity;
 
 trait WorkflowEntity
 {
     public function isAssignedToCurrentUser(): boolean
     {
-        return WorkflowEntitityModel::where([
+        return WorkflowEntity::where([
                 'entity_type' => get_class($this),
                 'entity_id' => $this->id,
                 'assigned_to_id' => BackendAuth::getUser()->id,

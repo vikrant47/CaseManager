@@ -1,5 +1,5 @@
-list: $/demo/workflow/models/workflowtransionmodel/columns.yaml
-modelClass: Demo\Workflow\Models\WorkflowTransionModel
+list: $/demo/workflow/models/workflowtransition/columns.yaml
+modelClass: Demo\Workflow\Models\WorkflowTransition
 title: WorkflowTransitions
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
