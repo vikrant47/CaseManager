@@ -14,3 +14,4 @@ www/install-master
 www/themes
 www/composer.phar
 www/composer.lock
+.idea/*
