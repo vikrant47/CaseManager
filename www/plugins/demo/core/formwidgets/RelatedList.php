@@ -70,6 +70,12 @@ class RelatedList extends FormWidgetBase
                 'type' => 'string',
                 'ignoreIfEmpty' => true,
             ],
+            'otherKey' => [
+                'title' => 'Other Key',
+                'description' => 'This should be the key column of through table in HasMany relationship',
+                'type' => 'string',
+                'ignoreIfEmpty' => false
+            ],
             'recordUrl' => [
                 'title' => 'Record Url',
                 'type' => 'string',
@@ -116,6 +122,11 @@ class RelatedList extends FormWidgetBase
      */
     public $throughModel;
 
+    /**
+     * @var string other key column of the relation
+     */
+    public $otherKey;
+
     public $editable = false;
     public $recordUrl;
 
@@ -128,9 +139,16 @@ class RelatedList extends FormWidgetBase
         $widget->addFilter(function (\October\Rain\Database\Builder $query) use ($relatedList) {
             if ($relatedList->relation === 'HasMany') {
                 /** @var \October\Rain\Database\Builder $query */
-                if (empty($relatedList->throughModel)) {
+                if (empty($relatedList->throughModel) && empty($relatedList->throughTable)) {
                     return $query->where($relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
                 }
+                if (empty($relatedList->throughTable)) {
+                    $throughModel = new $relatedList->throughModel();
+                    $relatedList->throughTable = $throughModel->table;
+                }
+                $targetModel = new $relatedList->targetModel();
+                return $query->join($relatedList->throughTable, $targetModel->table.'.'.$relatedList->otherKey, '=', $relatedList->throughTable.'.id')
+                    ->where($relatedList->throughTable.'.'.$relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
                 // TODO: HasMany with through table
             }
         });
@@ -147,6 +165,7 @@ class RelatedList extends FormWidgetBase
             'throughTable',
             'throughModel',
             'recordUrl',
+            'otherKey',
         ]);
         $config = $this->makeConfig('$/' . strtolower($this->targetModel) . '/columns.yaml');
 
