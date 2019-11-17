@@ -1,5 +1,6 @@
 <?php
 
+use Demo\Core\Classes\Beans\ScriptContext;
 use Illuminate\Http\Request;
 
 Route::get('/engine/api/{pluginName}/models/{modelName}', function ($pluginName, $modelName) {
@@ -51,7 +52,8 @@ Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{wildcard}',
         $pattern = str_replace('/', '\\/', preg_replace('/\{(\s*?.*?)*?\}/', '(.*)', $api->url));
         $pathVariables = [];
         if (preg_match('/' . $pattern . '/', $path, $pathVariables)) {
-            $result = eval($api->script);
+            $context = new ScriptContext();
+            $result = $context->execute($api->script, ['request' => $request]);
             return $result;
         }
     }

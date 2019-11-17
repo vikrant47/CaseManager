@@ -31,12 +31,12 @@ fields:
     event:
         label: Event
         options:
-            beforeCreate: 'Before Create'
-            beforeUpdate: 'Before Update'
-            beforeDelete: 'Before Delete'
-            afterCreate: 'After Create'
-            afterUpdate: 'After Update'
-            afterDelete: 'After Delete'
+            creating: 'Before Create'
+            updating: 'Before Update'
+            deleting: 'Before Delete'
+            created: 'After Create'
+            updated: 'After Update'
+            deleted: 'After Delete'
         showSearch: true
         span: auto
         required: 1

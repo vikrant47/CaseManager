@@ -7,7 +7,7 @@ use Backend\Models\User;
 use BackendAuth;
 use Demo\Workflow\Models\WorkflowEntity;
 
-trait WorkflowEntity
+trait WorkflowEntityTrait
 {
     public function isAssignedToCurrentUser(): boolean
     {

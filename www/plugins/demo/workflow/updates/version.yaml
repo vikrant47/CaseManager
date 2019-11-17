@@ -1,23 +1,29 @@
 1.0.1:
-    - Initialize plugin.
+    - 'Initialize plugin.'
 1.0.2:
-  - 'Created table demo_workflow_queues'
-  - builder_table_create_demo_workflow_queues.php
+    - 'Created table demo_workflow_queues'
+    - builder_table_create_demo_workflow_queues.php
 1.0.3:
-  - 'Created table demo_workflow_queue_items'
-  - builder_table_create_demo_workflow_queue_items.php
+    - 'Created table demo_workflow_queue_items'
+    - builder_table_create_demo_workflow_queue_items.php
 1.0.4:
-  - 'Created table demo_workflow_workflows'
-  - builder_table_create_demo_workflow_workflows.php
+    - 'Created table demo_workflow_workflows'
+    - builder_table_create_demo_workflow_workflows.php
 1.0.5:
-  - 'Created table demo_workflow_workflow_entities'
-  - builder_table_create_demo_workflow_workflow_entities.php
+    - 'Created table demo_workflow_workflow_entities'
+    - builder_table_create_demo_workflow_workflow_entities.php
 1.0.6:
-  - 'Created table demo_workflow_workflow_transitions'
-  - builder_table_create_demo_workflow_workflow_transitions.php
+    - 'Created table demo_workflow_workflow_transitions'
+    - builder_table_create_demo_workflow_workflow_transitions.php
 1.0.7:
-  - 'Created table demo_workflow_queue_assignment_groups'
-  - builder_table_create_demo_workflow_queue_assignment_groups.php
+    - 'Created table demo_workflow_queue_assignment_groups'
+    - builder_table_create_demo_workflow_queue_assignment_groups.php
 1.0.8:
-  - 'Created table demo_workflow_workflow_states'
-  - builder_table_create_demo_workflow_workflow_states.php
+    - 'Created table demo_workflow_workflow_states'
+    - builder_table_create_demo_workflow_workflow_states.php
+1.0.9:
+    - 'Created table demo_workflow_queue_assignment_rules'
+    - builder_table_create_demo_workflow_queue_assignment_rules.php
+1.0.10:
+    - 'Created table demo_workflow_queue_pop_scripts'
+    - builder_table_create_demo_workflow_queue_pop_scripts.php

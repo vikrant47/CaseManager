@@ -75,14 +75,14 @@ class PluginConnection
     /**
      * Return all model alias
      */
-    public static function getAllModelAlias($INCLUDE_ANY = false)
+    public static function getAllModelAlias($INCLUDE_UNIVERSAL = false)
     {
         $mappedAlias = [];
         /**@var $plugin PluginBase */
         foreach (PluginManager::instance()->getPlugins() as $plugin) {
             try {
                 $config = PluginConnection::getPluginConfigurations($plugin);
-                $package = str_replace('Plugin\\', '', get_class($plugin));
+                $package = str_replace('\\Plugin', '', get_class($plugin));
                 $modelAlias = array_get($config, 'model-alias', []);
                 foreach ($modelAlias as $key => $value) {
                     $mappedAlias[$package . '\\Models\\' . $key] = $value;
@@ -91,7 +91,7 @@ class PluginConnection
 
             }
         }
-        if($INCLUDE_ANY){
+        if($INCLUDE_UNIVERSAL){
             $mappedAlias['universal'] = 'Universal';
         }
         return $mappedAlias;

@@ -4,7 +4,7 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Workflow\Classes\Traits\WorkflowControllerTrait;
 use Demo\Casemanager\Models\CaseModel;
-use Demo\Casemanager\Models\WorkflowEntitiesModel;
+use Demo\Workflow\Models\WorkflowEntity;
 use Model;
 use October\Rain\Exception\ApplicationException;
 
@@ -48,7 +48,7 @@ class CaseController extends Controller
     public function listExtendQuery($query)
     {
         if (!$this->user->hasAccess('case.table.view.all')) {
-            $workflowEntities = WorkflowEntitiesModel::where(['entity_type' => CaseModel::class, 'assigned_to_id' => $this->user->id])->select('entity_id')->get();
+            $workflowEntities = WorkflowEntity::where(['entity_type' => CaseModel::class, 'assigned_to_id' => $this->user->id])->select('entity_id')->get();
             $query->whereIn('id', $workflowEntities->map(function ($entity) {
                 return $entity->entity_id;
             }));

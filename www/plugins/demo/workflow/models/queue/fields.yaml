@@ -81,19 +81,21 @@ tabs:
             tab: Display
         pop_criteria:
             label: 'Pop Criteria'
-            size: large
-            language: php
+            nameFrom: name
+            descriptionFrom: description
             span: auto
-            hidden: 0
-            type: codeeditor
+            required: 1
+            type: relation
+            comment: 'Select Assignment Rule'
             tab: Output
-        script:
-            label: Script
-            size: large
-            language: php
+        assignment_rule:
+            label: 'Assignment Rule'
+            nameFrom: name
+            descriptionFrom: description
             span: auto
-            hidden: 0
-            type: codeeditor
+            required: 1
+            type: relation
+            comment: 'Select Assignment Rule'
             tab: Output
         assignment_groups:
             label: 'Assignment Groups'

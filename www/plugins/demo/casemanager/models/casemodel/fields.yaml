@@ -1,7 +1,7 @@
 fields:
     workflow:
         span: full
-        path: $/demo/core/controllers/workflow/_entity_flow.htm
+        path: $/demo/workflow/controllers/workflow/_entity_flow.htm
         type: partial
     case_number:
         label: 'Case Number'
