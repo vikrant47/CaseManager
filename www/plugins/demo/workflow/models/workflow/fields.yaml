@@ -21,7 +21,7 @@ fields:
         default: 1
         type: switch
     plugin:
-        label: 'Plugin'
+        label: Plugin
         nameFrom: code
         descriptionFrom: version
         span: auto
@@ -51,3 +51,24 @@ tabs:
                         descriptionFrom: description
                         span: auto
                         type: relation
+secondaryTabs:
+    fields:
+        workflow_entity:
+            label: 'Workflow Entities'
+            span: full
+            relation: HasMany
+            sourceKey: id
+            targetModel: Demo\Workflow\Models\WorkflowEntity
+            targetKey: workflow_id
+            type: relatedlist
+            tab: 'Workflow Entities'
+        workflow_transition:
+            label: Transitions
+            span: full
+            relation: HasMany
+            sourceKey: id
+            targetModel: Demo\Workflow\Models\WorkflowTransition
+            targetKey: workflow_id
+            throughModel: Demo\Workflow\Models\WorkflowEntity
+            type: relatedlist
+            tab: 'Workflow Transitions'

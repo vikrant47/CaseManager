@@ -18,7 +18,7 @@ fields:
         type: switch
         comment: 'A virtual queue item won''t be associated in database'
     plugin:
-        label: 'Plugin'
+        label: Plugin
         nameFrom: code
         descriptionFrom: version
         span: auto
@@ -104,3 +104,14 @@ tabs:
             span: auto
             type: relation
             tab: Output
+secondaryTabs:
+    fields:
+        queue_items:
+            label: 'Queue Items'
+            span: full
+            relation: HasMany
+            sourceKey: id
+            targetModel: Demo\Workflow\Models\QueueItem
+            targetKey: queue_id
+            type: relatedlist
+            tab: 'Queue Items'
