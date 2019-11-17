@@ -1,0 +1,36 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: false
+    created_at:
+        label: created_at
+        type: datetime
+        searchable: false
+    updated_at:
+        label: updated_at
+        type: datetime
+        searchable: false
+    created_by_id:
+        label: created_by_id
+        type: number
+        searchable: false
+    updated_by_id:
+        label: updated_by_id
+        type: number
+        searchable: false
+    script:
+        label: script
+        type: text
+        searchable: true
+    name:
+        label: name
+        type: text
+        searchable: true
+    description:
+        label: description
+        type: text
+        searchable: true
+    plugin_id:
+        label: Plugin
+        type: number

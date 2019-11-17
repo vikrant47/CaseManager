@@ -1,6 +1,7 @@
 <?php namespace Demo\Workflow\Models;
 
 use Backend\Models\UserGroup;
+use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,9 @@ class Queue extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
+        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
+        'pop_criteria' => [\Demo\Workflow\Models\QueuePopCriterias::class, 'key' => 'pop_criteria_id'],
+        'assignment_rule' => [\Demo\Workflow\Models\QueueAssignmentRule::class, 'key' => 'assignment_rule_id'],
     ];
 
     public $belongsToMany = [
@@ -51,12 +54,13 @@ class Queue extends Model
 
     public function getSupportedItemTypeOptions()
     {
-        return PluginConnection::getAllModelAlias();
+        return PluginConnection::getAllModelAlias(true);
     }
 
     public function getTriggerOptions()
     {
-        return ['created' => 'Create', 'updated' => 'Update', 'deleted' => 'Delete'];
+        return ['creating' => 'Creating', 'updating' => 'Updating', 'deleting' => 'Deleting',
+            'created' => 'Created', 'updated' => 'Updated', 'deleted' => 'Delete'];
     }
 
     /***Scope query definition start*/
@@ -79,9 +83,9 @@ class Queue extends Model
      */
     public function pushItem($item)
     {
-        if ($this->supported_item_type === 'any' || $this->supported_item_type === get_class($item)) {
-            $existingItems = QueueItem::where(['item_id' => $item->id, 'item_type' => get_class($item)])->get();
+        if ($this->supported_item_type === 'universal' || $this->supported_item_type === get_class($item)) {
             if ($this->virtual === 0) {
+                $existingItems = QueueItem::where(['item_id' => $item->id, 'item_type' => get_class($item)])->get();
                 $insert = true;
                 if (!empty($existingItem)) {
                     if ($this->redundancy_policy === Queue::$OVERRIDE_POLICY) {
@@ -100,16 +104,21 @@ class Queue extends Model
                     $queueItem->save();
                 }
             } else {
-                $this->processItem($item);
+                $this->assignItem($item);
             }
         } else {
             throw new ApplicationException('Unsupported element type .Unable to push element in queue');
         }
     }
 
-    public function processItem($item)
+    /**
+     * Processing poped item by assignment rule
+     */
+    public function assignItem($item)
     {
-        eval($this->script);
+        // creating context
+        $context = new ScriptContext();
+        $context->execute($this->assignment_rule->script, ['queue' => $this, 'item' => $item]);
     }
 
     /**
@@ -128,7 +137,8 @@ class Queue extends Model
         if ($this->virtual) {
             return null;
         }
-        $elem = eval($this->pop_criteria);
+        $context = new ScriptContext();
+        $elem = $context->execute($this->pop_criteria->script, ['queue' => $this]);
         if ($elem instanceof Collection) {
             $elem = $elem->first();
         } elseif ($elem instanceof \October\Rain\Database\QueryBuilder) {
@@ -139,11 +149,11 @@ class Queue extends Model
             || empty($elem->id)
             || $elem->queue_id !== $this->id
         ) {
-            throw new ApplicationException('Invalid pop criteria');
+            return null;
         } else {
             $queueItem = DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->lockForUpdate()->get()->first();
             if (!empty($queueItem) && !empty($queueItem->item_type) && !empty($queueItem->item_id)) {
-                DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->delete();
+                DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->update(['poped_at' => new \DateTime()]);
                 return $elem->item_type::find($elem->item_id);
             } else {
                 return $this->popItem();
@@ -160,42 +170,25 @@ class Queue extends Model
      * Step 3. Search an workflow entity for this item
      * Step 4. Set assignedTo to given user in workflow entity.
      */
-    public function popAndAssign(User $user)
+    public function popAndAssign()
     {
-        $userAssignmentGroup = UserGroup::with(['users' => function ($query) use ($user) {
-                $query->where('id', $user->id);
-            }])->whereIn('id', $this->assignment_groups->map(function ($group) {
-                return $group->id;
-            })->toArray())->count() > 0;
-        if ($userAssignmentGroup === true) {
-            $item = $this->popItem();
-            if (!empty($item)) {
-                $workflowEntity = WorkflowEntity::where(['entity_type' => get_class($item), 'entity_id' => $item->id])->first();
-                if (empty($workflowEntity)) {
-                    throw new ApplicationException('No corresponding entry found in workflow entity');
-                }
-                $workflowEntity->assigned_to = $user;
-                $workflowEntity->save();
-            } else {
-                throw new ApplicationException('No item left to assign');
-            }
-        } else {
-            throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
-        }
+        $item = $this->popItem();
+        $context = new ScriptContext();
+        return $context->execute($this->assignment_rule->script, ['queue' => $this, 'item' => $item]);
 
     }
 
-    public static function listenEntityEvents($eventName, $model)
+    /*public static function listenEntityEvents($eventName, $model)
     {
         $ignoreModels = [QueueItem::class];
         $includedPackage = ['Workflow'];
         if (!in_array(get_class($model), $ignoreModels) && in_array(explode('\\', get_class($model))[1], $includedPackage)) {
-            /**@var $queues Collection<Queue> */
+            // @var $queues Collection<Queue>
             $queues = Queue::where('active', 1)->where(function ($query) use ($model) {
                 $query->where('supported_item_type', '=', 'any')
                     ->orWhere('supported_item_type', '=', get_class($model));
             })->orderBy('sort_order', 'ASC')->get();
-            /**@var  $queue Queue */
+            // @var  $queue Queue
             foreach ($queues as $queue) {
 
                 // if trigger are empty than it returns integer so should check if its array
@@ -209,13 +202,13 @@ class Queue extends Model
                 }
             }
         }
-    }
+    }*/
 
     /**
      * Bootstrap any application services.
      * @return void
      */
-    public static function registerQueueListener()
+    /*public static function registerQueueListener()
     {
         Event::listen('eloquent.created: *', function ($model) {
             Queue::listenEntityEvents('created', $model);
@@ -226,5 +219,5 @@ class Queue extends Model
         Event::listen('eloquent.deleted: *', function ($model) {
             Queue::listenEntityEvents('deleted', $model);
         });
-    }
+    }*/
 }

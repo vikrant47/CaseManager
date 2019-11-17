@@ -20,8 +20,6 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->smallInteger('virtual')->default(1);
             $table->string('queue_order', 255);
             $table->integer('sort_order', 255);
-            $table->text('script');
-            $table->text('pop_criteria');
             $table->text('input_condition');
             $table->string('supported_items_type',255);
             $table->string('redundancy_policy',255);
@@ -30,6 +28,8 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->integer('plugin_id');
+            $table->integer('pop_criteria_id');
+            $table->integer('assignment_rule_id');
         });
     }
     

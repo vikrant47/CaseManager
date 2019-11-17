@@ -15,12 +15,12 @@ class EventHandlerServiceProvider extends ServiceProvider
 {
     public $handlerRegistered = false;
     public $events = [
-        'beforeCreate' => [],
-        'beforeUpdate' => [],
-        'beforeDelete' => [],
-        'afterCreate' => [],
-        'afterDelete' => [],
-        'afterUpdate' => [],
+        'creating' => [],
+        'updating' => [],
+        'deleting' => [],
+        'created' => [],
+        'deleted' => [],
+        'updated' => [],
     ];
 
     public function executeEvents($eventName, $model)
@@ -41,22 +41,22 @@ class EventHandlerServiceProvider extends ServiceProvider
     public function registerHandlers()
     {
         Event::listen('eloquent.creating: *', function ($model) {
-            $this->executeEvents('beforeCreate', $model);
+            $this->executeEvents('creating', $model);
         });
         Event::listen('eloquent.updating: *', function ($model) {
-            $this->executeEvents('beforeUpdate', $model);
+            $this->executeEvents('updating', $model);
         });
         Event::listen('eloquent.deleting: *', function ($model) {
-            $this->executeEvents('beforeDelete', $model);
+            $this->executeEvents('deleting', $model);
         });
         Event::listen('eloquent.created: *', function ($model) {
-            $this->executeEvents('afterCreate', $model);
+            $this->executeEvents('created', $model);
         });
         Event::listen('eloquent.updated: *', function ($model) {
-            $this->executeEvents('afterUpdate', $model);
+            $this->executeEvents('updated', $model);
         });
         Event::listen('eloquent.deleted: *', function ($model) {
-            $this->executeEvents('afterDelete', $model);
+            $this->executeEvents('deleted', $model);
         });
     }
 

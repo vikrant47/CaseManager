@@ -5,8 +5,8 @@ plugin:
     icon: icon-recycle
     homepage: ''
 model-alias:
-    Workflow: 'Workflows'
-    Queue: 'Queues'
+    Workflow: Workflows
+    Queue: Queues
     QueueItem: 'Queue Items'
 navigation:
     main-menu-item:
@@ -41,6 +41,14 @@ navigation:
                 label: 'Queue Items'
                 url: demo/workflow/queueitem
                 icon: icon-stack-exchange
+            side-menu-item6:
+                label: 'Assignment Rules'
+                url: demo/workflow/queueassignmentrulecontroller
+                icon: icon-puzzle-piece
+            side-menu-item8:
+                label: 'Pop Criteria'
+                url: demo/workflow/queuepopcriteriacontroller
+                icon: icon-code
 permissions:
     workflow.table.create:
         tab: Workflow
@@ -60,4 +68,3 @@ permissions:
     workflow.item.push:
         tab: Workflow
         label: 'Push item to workflow'
-

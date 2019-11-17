@@ -1,0 +1,10 @@
+name: QueueAssignmentRuleController
+form: $/demo/workflow/models/queueassignmentrule/fields.yaml
+modelClass: Demo\Workflow\Models\QueueAssignmentRule
+defaultRedirect: demo/workflow/queueassignmentrulecontroller
+create:
+    redirect: 'demo/workflow/queueassignmentrulecontroller/update/:id'
+    redirectClose: demo/workflow/queueassignmentrulecontroller
+update:
+    redirect: demo/workflow/queueassignmentrulecontroller
+    redirectClose: demo/workflow/queueassignmentrulecontroller

@@ -1,5 +1,6 @@
 <?php namespace Demo\Core\Models;
 
+use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Model;
 
@@ -37,6 +38,7 @@ class EventHandler extends Model
 
     public function handler($eventName, $model)
     {
-        return eval($this->script);
+        $context = new ScriptContext();
+        return $context->execute($this->script);
     }
 }

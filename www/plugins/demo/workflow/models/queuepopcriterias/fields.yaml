@@ -1,0 +1,26 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    script:
+        label: Script
+        size: giant
+        language: php
+        span: full
+        required: 1
+        stretch: 1
+        type: codeeditor
+    plugin:
+        label: 'Plugin'
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation

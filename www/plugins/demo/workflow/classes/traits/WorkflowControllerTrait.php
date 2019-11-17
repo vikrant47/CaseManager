@@ -21,13 +21,13 @@ trait WorkflowControllerTrait
     {
         if ($this->user->hasAccess('workflow.item.push')) {
             $model = $this->formFindModelObject($modelId);
-            /**@var $workflowEntities Collection<WorkflowEntity> */
+            /**@var $workflowEntities Collection<WorkflowEntityTrait> */
             $workflowEntities = WorkflowEntity::where('entity_type', '=', get_class($model))->where('entity_id', '=', $model->id)->get();
             // throw new ApplicationException(json_encode($workflowEntities, true));
             if ($workflowEntities->count() === 0) {
                 throw new ApplicationException('Unable to submit. No active workflow found');
             } else {
-                /**@var $workflowEntity WorkflowEntity */
+                /**@var $workflowEntity WorkflowEntityTrait */
                 $workflowEntity = $workflowEntities->first();
                 $workflowEntity->makeTransition($model);
             }
@@ -46,8 +46,7 @@ trait WorkflowControllerTrait
         if (empty($queue)) {
             Flash::success('Unable to find queue with given id');
         }
-        $currentUser = BackendAuth::getUser();
-        $queue->popAndAssign($currentUser);
+        $queue->popAndAssign();
         Flash::success('A item has been assigned');
         return $this->makeRedirect('-close');
     }

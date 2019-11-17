@@ -1,5 +1,6 @@
 <?php namespace Demo\Core\Models;
 
+use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Model;
 
@@ -38,6 +39,7 @@ class Command extends Model
 
     public function execute()
     {
-        return eval($this->script);
+        $context = new ScriptContext();
+        return $context->execute($this->script, ['command' => $this]);
     }
 }
