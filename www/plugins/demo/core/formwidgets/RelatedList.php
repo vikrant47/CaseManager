@@ -1,0 +1,182 @@
+<?php
+
+namespace Demo\Core\FormWidgets;
+
+use Backend\Classes\FormWidgetBase;
+use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Workflow\Models\QueueItem;
+use October\Rain\Database\QueryBuilder;
+use October\Rain\Exception\ApplicationException;
+
+class RelatedList extends FormWidgetBase
+{
+    static function getProperties()
+    {
+        return [
+            'relation' => [
+                'title' => 'Type of the relation',
+                'type' => 'dropdown',
+                'options' => [
+                    'HasMany' => 'Has Many',
+                    'BelongsToMany' => 'Belongs To Many',
+                ],
+                'ignoreIfEmpty' => false,
+                'validation' => [
+                    'required' => [
+                        'message' => 'Please select the relation'
+                    ]
+                ]
+            ],
+            'sourceKey' => [
+                'title' => 'Source Key',
+                'type' => 'string',
+                'ignoreIfEmpty' => false,
+                'default' => 'id',
+                'validation' => [
+                    'required' => [
+                        'message' => 'Please enter Source Key'
+                    ]
+                ]
+            ],
+            'targetModel' => [
+                'title' => 'Target Model',
+                'type' => 'dropdown',
+                'options' => PluginConnection::getAllModelAlias(),
+                'ignoreIfEmpty' => false,
+                'validation' => [
+                    'required' => [
+                        'message' => 'Please select the Target Model'
+                    ]
+                ]
+            ],
+            'targetKey' => [
+                'title' => 'Target Key',
+                'type' => 'string',
+                'ignoreIfEmpty' => false,
+                'validation' => [
+                    'required' => [
+                        'message' => 'Please enter Target Key'
+                    ]
+                ]
+            ],
+            'throughModel' => [
+                'title' => 'Through Model',
+                'type' => 'dropdown',
+                'options' => PluginConnection::getAllModelAlias(),
+                'ignoreIfEmpty' => true,
+            ],
+            'throughTable' => [
+                'title' => 'Through Table',
+                'type' => 'string',
+                'ignoreIfEmpty' => true,
+            ],
+            'recordUrl' => [
+                'title' => 'Record Url',
+                'type' => 'string',
+            ],
+        ];
+    }
+
+    /**
+     * @var string A unique alias to identify this widget.
+     */
+    protected $defaultAlias = 'relatedlist';
+
+    //
+    // Configurable properties
+    //
+
+    /**
+     * @var string $relation HasMany or BelongsToMany.
+     */
+    public $relation = 'HasMany';
+
+    /**
+     * Target Model Class
+     */
+    public $targetModel = null;
+
+    /**
+     * @var string source key column of the relation
+     */
+    public $sourceKey = 'id';
+
+    /**
+     * @var string target key column of the relation
+     */
+    public $targetKey;
+
+    /**
+     * @var string through table name in case of BelongsToMany
+     */
+    public $throughTable;
+
+    /**
+     * @var string through model
+     */
+    public $throughModel;
+
+    public $editable = false;
+    public $recordUrl;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function applyRelationFilter(\Backend\Widgets\Lists $widget)
+    {
+        $relatedList = $this;
+        $widget->addFilter(function (\October\Rain\Database\Builder $query) use ($relatedList) {
+            if ($relatedList->relation === 'HasMany') {
+                /** @var \October\Rain\Database\Builder $query */
+                if (empty($relatedList->throughModel)) {
+                    return $query->where($relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
+                }
+                // TODO: HasMany with through table
+            }
+        });
+        return $widget;
+    }
+
+    public function init()
+    {
+        $this->fillFromConfig([
+            'relation',
+            'targetModel',
+            'sourceKey',
+            'targetKey',
+            'throughTable',
+            'throughModel',
+            'recordUrl',
+        ]);
+        $config = $this->makeConfig('$/' . strtolower($this->targetModel) . '/columns.yaml');
+
+        $config->model = new $this->targetModel;
+
+        $config->recordUrl = $this->recordUrl;
+
+        $widget = $this->makeWidget('Backend\Widgets\Lists', $config);
+
+        $widget->bindToController();
+        $this->applyRelationFilter($widget);
+        $this->vars['widget'] = $widget;
+
+    }
+
+    public function widgetDetails()
+    {
+        return [
+            'name' => 'Related List',
+            'description' => 'Widget to show related record as list'
+        ];
+    }
+
+    public function loadAssets()
+    {
+        parent::loadAssets(); // TODO: Change the autogenerated stub
+    }
+
+    public function render()
+    {
+        return $this->makePartial('relatedlist');
+    }
+}
