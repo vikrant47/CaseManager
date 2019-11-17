@@ -6,7 +6,7 @@ namespace Demo\Workflow\Classes\Traits;
 
 use Demo\Workflow\Controllers\WorkflowEntities;
 use Demo\Workflow\Models\Queue;
-use Demo\Workflow\Models\WorkflowEntity;
+use Demo\Workflow\Models\WorkflowItem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -21,15 +21,15 @@ trait WorkflowControllerTrait
     {
         if ($this->user->hasAccess('workflow.item.push')) {
             $model = $this->formFindModelObject($modelId);
-            /**@var $workflowEntities Collection<WorkflowEntityTrait> */
-            $workflowEntities = WorkflowEntity::where('entity_type', '=', get_class($model))->where('entity_id', '=', $model->id)->get();
+            /**@var $workflowEntities Collection<WorkflowItemTrait> */
+            $workflowEntities = WorkflowItem::where('item_type', '=', get_class($model))->where('entity_id', '=', $model->id)->get();
             // throw new ApplicationException(json_encode($workflowEntities, true));
             if ($workflowEntities->count() === 0) {
                 throw new ApplicationException('Unable to submit. No active workflow found');
             } else {
-                /**@var $workflowEntity WorkflowEntityTrait */
-                $workflowEntity = $workflowEntities->first();
-                $workflowEntity->makeTransition($model);
+                /**@var $workflowItem WorkflowItemTrait */
+                $workflowItem = $workflowEntities->first();
+                $workflowItem->makeTransition($model);
             }
             Flash::success('Pushed Successfully!');
             return $this->makeRedirect('-close');

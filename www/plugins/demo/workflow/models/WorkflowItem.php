@@ -10,7 +10,7 @@ use October\Rain\Exception\ApplicationException;
  * Model
  * An entity can only be part of 1 workflow. A unique index has been added on entity_id,entity_name combination
  */
-class WorkflowEntity extends Model
+class WorkflowItem extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;
@@ -83,6 +83,11 @@ class WorkflowEntity extends Model
 
     public function forceUpdate()
     {
-        WorkflowEntity::where('id', $this->id)->update($this->toArray());
+        WorkflowItem::where('id', $this->id)->update($this->toArray());
+    }
+
+    public function scopeFindByEntity($query, $entityType, $id)
+    {
+        return $query->where('item_type', $entityType)->where('id', $id);
     }
 }

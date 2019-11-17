@@ -103,6 +103,11 @@ class RelatedList extends FormWidgetBase
     public $targetModel = null;
 
     /**
+     * Target Model Class
+     */
+    public $targetTable = null;
+
+    /**
      * @var string source key column of the relation
      */
     public $sourceKey = 'id';
@@ -130,6 +135,16 @@ class RelatedList extends FormWidgetBase
     public $editable = false;
     public $recordUrl;
 
+    private function loadTableNames(RelatedList $relatedList)
+    {
+        if (empty($relatedList->throughTable)) {
+            $throughModel = new $relatedList->throughModel();
+            $relatedList->throughTable = $throughModel->table;
+        }
+        $targetModel = new $relatedList->targetModel();
+        $relatedList->targetTable = $targetModel->table;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -142,14 +157,14 @@ class RelatedList extends FormWidgetBase
                 if (empty($relatedList->throughModel) && empty($relatedList->throughTable)) {
                     return $query->where($relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
                 }
-                if (empty($relatedList->throughTable)) {
-                    $throughModel = new $relatedList->throughModel();
-                    $relatedList->throughTable = $throughModel->table;
-                }
-                $targetModel = new $relatedList->targetModel();
-                return $query->join($relatedList->throughTable, $targetModel->table.'.'.$relatedList->otherKey, '=', $relatedList->throughTable.'.id')
-                    ->where($relatedList->throughTable.'.'.$relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
+                $this->loadTableNames($relatedList);
+                return $query->join($relatedList->throughTable, $relatedList->targetTable . '.' . $relatedList->otherKey, '=', $relatedList->throughTable . '.id')
+                    ->where($relatedList->throughTable . '.' . $relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
                 // TODO: HasMany with through table
+            } else if ($relatedList->relation === 'BelongsToMany') {
+                $this->loadTableNames($relatedList);
+                return $query->join($relatedList->throughTable, $relatedList->targetTable . '.' . $relatedList->otherKey, '=', $relatedList->throughTable . '.id')
+                    ->where($relatedList->throughTable . '.' . $relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
             }
         });
         return $widget;

@@ -9,7 +9,7 @@ fields:
         label: 'Current State'
         span: auto
         type: relation
-    entity_type:
+    item_type:
         label: 'Entity Type'
         span: auto
         type: text

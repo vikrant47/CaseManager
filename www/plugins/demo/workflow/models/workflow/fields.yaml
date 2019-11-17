@@ -58,7 +58,7 @@ secondaryTabs:
             span: full
             relation: HasMany
             sourceKey: id
-            targetModel: Demo\Workflow\Models\WorkflowEntity
+            targetModel: Demo\Workflow\Models\WorkflowItem
             targetKey: workflow_id
             type: relatedlist
             tab: 'Workflow Entities'
@@ -69,7 +69,7 @@ secondaryTabs:
             sourceKey: id
             targetModel: Demo\Workflow\Models\WorkflowTransition
             targetKey: workflow_id
-            throughModel: Demo\Workflow\Models\WorkflowEntity
+            throughModel: Demo\Workflow\Models\WorkflowItem
             otherKey: workflow_entity_id
             type: relatedlist
             tab: 'Workflow Transitions'

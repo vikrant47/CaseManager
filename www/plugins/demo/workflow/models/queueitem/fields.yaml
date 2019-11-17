@@ -10,7 +10,7 @@ fields:
         label: 'Item Type'
         span: auto
         type: text
-    item_id:
+    entity_id:
         label: 'Item Id'
         span: auto
         type: text
