@@ -4,6 +4,7 @@
 namespace Demo\Core\Services;
 
 
+use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Models\EventHandler;
 use Demo\Core\Plugin;
 use October\Rain\Exception\ApplicationException;
@@ -28,6 +29,7 @@ class EventHandlerServiceProvider extends ServiceProvider
         $handlers = $this->events[$eventName];
         foreach ($handlers as $handler) {
             if ($handler->model === 'universal' || $handler->model === get_class($model)) {
+                $context = new ScriptContext();
                 $handler->handler($eventName, $model);
             }
         }

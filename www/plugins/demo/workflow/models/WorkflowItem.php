@@ -66,16 +66,17 @@ class WorkflowItem extends Model
         if ($next_state === null) {
             throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next state not found for ' . $this->current_state);
         }
-        $next_queue = $this->workflow->getCurrentQueue($this->current_state);
+        /*$next_queue = $this->workflow->getCurrentQueue($this->current_state);
         if ($next_queue === null) {
             throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next queue not found for ' . $this->current_state);
         }
         $next_queue->pushItem($model);
         $transition = new WorkflowTransition();
-        $transition->workflow_entity = $this;
+        $transition->workflow_item = $this;
         $transition->from_state = $this->current_state;
         $transition->to_state = $next_state;
         $transition->save();
+        */
         $this->current_state = $next_state;
         $this->assigned_to = null;
         $this->update();

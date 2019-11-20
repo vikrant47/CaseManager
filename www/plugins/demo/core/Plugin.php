@@ -3,6 +3,7 @@
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdate;
 use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
 use Demo\Core\FormWidgets\RelatedList;
+use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
 use RainLab\Builder\Classes\ControlLibrary;
 use System\Classes\PluginBase;
 use BackendAuth;
@@ -13,7 +14,7 @@ class Plugin extends PluginBase
 {
     public function getEventHandlers()
     {
-        return [BeforeCreateOrUpdate::class];
+        return [BeforeCreateOrUpdate::class, BeforeUpdateWorkflowItemState::class];
     }
 
     public function registerComponents()

@@ -106,7 +106,7 @@ tabs:
             tab: Output
 secondaryTabs:
     fields:
-        queue_items:
+        _queue_items:
             label: 'Queue Items'
             span: full
             relation: HasMany

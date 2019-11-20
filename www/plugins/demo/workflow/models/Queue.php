@@ -27,8 +27,6 @@ class Queue extends Model
     public $table = 'demo_workflow_queues';
 
     public $belongsTo = [
-        'created_by' => [User::class, 'key' => 'created_by_id'],
-        'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
         'pop_criteria' => [\Demo\Workflow\Models\QueuePopCriterias::class, 'key' => 'pop_criteria_id'],
         'assignment_rule' => [\Demo\Workflow\Models\QueueAssignmentRule::class, 'key' => 'assignment_rule_id'],
@@ -84,12 +82,11 @@ class Queue extends Model
     public function pushItem($item)
     {
         if ($this->supported_item_type === 'universal' || $this->supported_item_type === get_class($item)) {
-            $queueItem = QueueItem::where(['item_id' => $item->id, 'item_type' => get_class($item)])->get();
+            $queueItem = QueueItem::where(['item_id' => $item->id, 'item_type' => get_class($item), 'assigned_to_id' => null])->first();
             $insert = true;
-            if (!empty($existingItem)) {
+            if (!empty($queueItem)) {
                 if ($this->redundancy_policy === Queue::$OVERRIDE_POLICY) {
-                    $existingItem->updated_at = new \DateTime();
-                    $existingItem->save();
+                    $queueItem->updated_at = new \DateTime();
                     $insert = false;
                 } elseif ($this->redundancy_policy === Queue::$ADD_NEW_POLICY) {
                     $insert = true;
@@ -100,10 +97,12 @@ class Queue extends Model
                 $queueItem->queue = $this;
                 $queueItem->item_id = $item->id;
                 $queueItem->item_type = get_class($item);
-                $queueItem->save();
             }
             if ($this->virtual == 1) {
+                $queueItem->poped_at = new \DateTime();
                 $this->assignItem($queueItem, $item); // if its a virtual queue than immediately call assign item
+            } else {
+                $queueItem->save();
             }
         } else {
             throw new ApplicationException('Unsupported element type .Unable to push element in queue');
@@ -122,9 +121,10 @@ class Queue extends Model
         if (empty($user)) {
             throw new ApplicationException('Assignment rule "' . $this->assignment_rule->name . '" din\'t return any user');
         }
+        if ($this->isUserInAssignmentGroups($user) === false) {
+            throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
+        }
         $queueItem->assigned_to_id = $user->id;
-        $item->assigned_to_id = $user->id;
-        $item->save();
         $queueItem->save();
     }
 
@@ -185,6 +185,17 @@ class Queue extends Model
 
     }
 
+    /**
+     * Check if user present in assignment groups
+     */
+    public function isUserInAssignmentGroups(User $user)
+    {
+        return \Backend\Models\UserGroup::with(['users' => function ($query) use ($user) {
+                $query->where('id', $user->id);
+            }])->whereIn('id', $this->assignment_groups->map(function ($group) {
+                return $group->id;
+            })->toArray())->count() > 0;
+    }
     /*public static function listenEntityEvents($eventName, $model)
     {
         $ignoreModels = [QueueItem::class];

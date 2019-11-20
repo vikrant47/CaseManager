@@ -21,14 +21,13 @@ trait WorkflowControllerTrait
     {
         if ($this->user->hasAccess('workflow.item.push')) {
             $model = $this->formFindModelObject($modelId);
-            /**@var $workflowEntities Collection<WorkflowItemTrait> */
-            $workflowEntities = WorkflowItem::where('item_type', '=', get_class($model))->where('item_id', '=', $model->id)->get();
+            /**@var $workflowItems Collection<WorkflowItem> */
+            $workflowItem = WorkflowItem::where('item_type', '=', get_class($model))->where('item_id', '=', $model->id)->first();
             // throw new ApplicationException(json_encode($workflowEntities, true));
-            if ($workflowEntities->count() === 0) {
+            if (empty($workflowItem)) {
                 throw new ApplicationException('Unable to submit. No active workflow found');
             } else {
-                /**@var $workflowItem WorkflowItemTrait */
-                $workflowItem = $workflowEntities->first();
+                /**@var $workflowItem WorkflowItem */
                 $workflowItem->makeTransition($model);
             }
             Flash::success('Pushed Successfully!');

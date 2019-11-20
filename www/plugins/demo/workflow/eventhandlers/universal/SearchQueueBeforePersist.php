@@ -12,9 +12,14 @@ use October\Rain\Exception\ApplicationException;
 class SearchQueueBeforePersist
 {
     public $model = 'universal';
-    public $events = ['creating', 'updating', 'deleting','created', 'updated', 'deleted'];
+    public $events = ['creating', 'updating', 'deleting', 'created', 'updated', 'deleted'];
     public $sort_order = -1000;
 
+    /**
+     * Find all queues based on supported item type and evaluate them one by one
+     * If a queue qualifies than break the loop.
+     * Only one queue is alloed to push an item
+     */
     public function handler($event, $model)
     {
         $ignoreModels = [QueueItem::class];
@@ -34,10 +39,11 @@ class SearchQueueBeforePersist
                     if (in_array($event, $queue->trigger)) {
                         // throw new ApplicationException('Queue found with name "'.$queue->name. '" , Evaluating input condition."');
                         $context = new ScriptContext();
-                        $value = $context->execute($queue->input_condition, ['queue' => $queue]);
+                        $value = $context->execute($queue->input_condition, ['queue' => $queue, 'event' => $event, 'model' => $model]);
                         if ($value === true) {
                             // throw new ApplicationException('Condition Evaluated to true for queue "'.$queue->name. '"');
                             $queue->pushItem($model);
+                            break;
                         }
                     }
                 }

@@ -48,7 +48,7 @@ class CaseController extends Controller
     public function listExtendQuery($query)
     {
         if (!$this->user->hasAccess('case.table.view.all')) {
-            $workflowEntities = WorkflowItem::where(['entity_type' => CaseModel::class, 'assigned_to_id' => $this->user->id])->select('item_id')->get();
+            $workflowEntities = WorkflowItem::where(['item_type' => CaseModel::class, 'assigned_to_id' => $this->user->id])->select('item_id')->get();
             $query->whereIn('id', $workflowEntities->map(function ($entity) {
                 return $entity->item_id;
             }));

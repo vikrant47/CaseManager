@@ -8,7 +8,7 @@ model-alias:
     Workflow: Workflows
     Queue: Queues
     QueueItem: 'Queue Items'
-    WorkflowItem: 'Workflow Entity'
+    WorkflowItem: 'Workflow Item'
     WorkflowTransition: 'Workflow Transition'
 navigation:
     main-menu-item:
