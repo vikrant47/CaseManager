@@ -4,7 +4,7 @@
 namespace Demo\Workflow\Classes\Traits;
 
 
-use Demo\Workflow\Controllers\WorkflowEntities;
+use Demo\Workflow\Controllers\WorkflowItemController;
 use Demo\Workflow\Models\Queue;
 use Demo\Workflow\Models\WorkflowItem;
 use Illuminate\Support\Collection;
@@ -22,7 +22,7 @@ trait WorkflowControllerTrait
         if ($this->user->hasAccess('workflow.item.push')) {
             $model = $this->formFindModelObject($modelId);
             /**@var $workflowEntities Collection<WorkflowItemTrait> */
-            $workflowEntities = WorkflowItem::where('item_type', '=', get_class($model))->where('entity_id', '=', $model->id)->get();
+            $workflowEntities = WorkflowItem::where('item_type', '=', get_class($model))->where('item_id', '=', $model->id)->get();
             // throw new ApplicationException(json_encode($workflowEntities, true));
             if ($workflowEntities->count() === 0) {
                 throw new ApplicationException('Unable to submit. No active workflow found');

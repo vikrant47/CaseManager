@@ -15,13 +15,14 @@ class BuilderTableCreateDemoWorkflowWorkflowItems extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('item_type', 255);
-            $table->integer('entity_id');
+            $table->integer('item_id');
+            $table->timestamp('assigned_at');
             $table->integer('workflow_id');
             $table->integer('assigned_to_id');
             $table->integer('current_state_id');
             $table->timestamp('finished_at')->nullable();
 
-            $table->unique('item_type', 'entity_id');
+            $table->unique('item_type', 'item_id');
             $table->integer('plugin_id');
         });
     }

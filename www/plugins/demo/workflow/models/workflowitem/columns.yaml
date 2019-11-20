@@ -17,8 +17,8 @@ columns:
     item_type:
         label: item_type
         type: text
-    entity_id:
-        label: entity_id
+    item_id:
+        label: item_id
         type: number
     current_state:
         label: current_state

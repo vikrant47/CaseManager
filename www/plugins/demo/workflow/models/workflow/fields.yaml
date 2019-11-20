@@ -70,6 +70,6 @@ secondaryTabs:
             targetModel: Demo\Workflow\Models\WorkflowTransition
             targetKey: workflow_id
             throughModel: Demo\Workflow\Models\WorkflowItem
-            otherKey: workflow_entity_id
+            otherKey: workflow_item_id
             type: relatedlist
             tab: 'Workflow Transitions'

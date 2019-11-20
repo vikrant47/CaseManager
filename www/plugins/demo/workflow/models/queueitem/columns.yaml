@@ -5,8 +5,8 @@ columns:
     queue_id:
         label: queue_id
         type: number
-    entity_id:
-        label: entity_id
+    item_id:
+        label: item_id
         type: number
     item_type:
         label: item_type

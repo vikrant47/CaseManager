@@ -84,27 +84,26 @@ class Queue extends Model
     public function pushItem($item)
     {
         if ($this->supported_item_type === 'universal' || $this->supported_item_type === get_class($item)) {
-            if ($this->virtual === 0) {
-                $existingItems = QueueItem::where(['entity_id' => $item->id, 'item_type' => get_class($item)])->get();
-                $insert = true;
-                if (!empty($existingItem)) {
-                    if ($this->redundancy_policy === Queue::$OVERRIDE_POLICY) {
-                        $existingItem->updated_at = new \DateTime();
-                        $existingItem->save();
-                        $insert = false;
-                    } elseif ($this->redundancy_policy === Queue::$ADD_NEW_POLICY) {
-                        $insert = true;
-                    }
+            $queueItem = QueueItem::where(['item_id' => $item->id, 'item_type' => get_class($item)])->get();
+            $insert = true;
+            if (!empty($existingItem)) {
+                if ($this->redundancy_policy === Queue::$OVERRIDE_POLICY) {
+                    $existingItem->updated_at = new \DateTime();
+                    $existingItem->save();
+                    $insert = false;
+                } elseif ($this->redundancy_policy === Queue::$ADD_NEW_POLICY) {
+                    $insert = true;
                 }
-                if ($insert === true) {
-                    $queueItem = new QueueItem();
-                    $queueItem->queue = $this;
-                    $queueItem->entity_id = $item->id;
-                    $queueItem->item_type = get_class($item);
-                    $queueItem->save();
-                }
-            } else {
-                $this->assignItem($item);
+            }
+            if ($insert === true) {
+                $queueItem = new QueueItem();
+                $queueItem->queue = $this;
+                $queueItem->item_id = $item->id;
+                $queueItem->item_type = get_class($item);
+                $queueItem->save();
+            }
+            if ($this->virtual == 1) {
+                $this->assignItem($queueItem, $item); // if its a virtual queue than immediately call assign item
             }
         } else {
             throw new ApplicationException('Unsupported element type .Unable to push element in queue');
@@ -113,17 +112,20 @@ class Queue extends Model
 
     /**
      * Processing poped item by assignment rule
+     * Item can be any model in queue
      */
-    public function assignItem(QueueItem $item)
+    public function assignItem(QueueItem $queueItem, $item)
     {
         // creating context
         $context = new ScriptContext();
-        $user = $context->execute($this->assignment_rule->script, ['queue' => $this, 'item' => $item]);
+        $user = $context->execute($this->assignment_rule->script, ['queue' => $this, 'item' => $item, 'queueItem' => $queueItem]);
         if (empty($user)) {
             throw new ApplicationException('Assignment rule "' . $this->assignment_rule->name . '" din\'t return any user');
         }
+        $queueItem->assigned_to_id = $user->id;
         $item->assigned_to_id = $user->id;
         $item->save();
+        $queueItem->save();
     }
 
     /**
@@ -157,9 +159,9 @@ class Queue extends Model
             return null;
         } else {
             $queueItem = DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->lockForUpdate()->get()->first();
-            if (!empty($queueItem) && !empty($queueItem->item_type) && !empty($queueItem->entity_id)) {
+            if (!empty($queueItem) && !empty($queueItem->item_type) && !empty($queueItem->item_id)) {
                 DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->update(['poped_at' => new \DateTime()]);
-                return $elem->item_type::find($elem->entity_id);
+                return $elem->item_type::find($elem->item_id);
             } else {
                 return $this->popItem();
             }

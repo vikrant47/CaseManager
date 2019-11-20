@@ -24,8 +24,8 @@ navigation:
                 url: demo/workflow/workflow
                 icon: icon-recycle
             side-menu-item4:
-                label: 'Workflow Entities'
-                url: demo/workflow/workflowentities
+                label: 'Workflow Items'
+                url: demo/workflow/workflowitemcontroller
                 icon: icon-tag
             side-menu-item5:
                 label: 'Workflow Transitions'

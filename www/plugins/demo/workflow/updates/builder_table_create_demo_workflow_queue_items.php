@@ -13,7 +13,7 @@ class BuilderTableCreateDemoWorkflowQueueItems extends Migration
             $table->increments('id')->unsigned();
             $table->integer('queue_id');
             $table->integer('assigned_to_id');
-            $table->integer('entity_id');
+            $table->integer('item_id');
             $table->string('item_type', 255);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

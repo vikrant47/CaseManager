@@ -26,7 +26,7 @@ class BuilderTableSeedDemoWorkflowQueues extends Seeder
                 "redundancy_policy" => "override",
                 "virtual" => 0,
                 "trigger" => "0",
-                "pop_criteria" => "return Illuminate\Support\Facades\DB=>=>table('demo_casemanager_queue_items')\r\n            ->select('demo_casemanager_queue_items.*')\r\n            ->join('demo_casemanager_cases', 'demo_casemanager_queue_items.entity_id', '=', 'demo_casemanager_cases.id')\r\n            ->where('demo_casemanager_queue_items.item_type','Demo\Casemanager\Models\CaseModel');",
+                "pop_criteria" => "return Illuminate\Support\Facades\DB=>=>table('demo_casemanager_queue_items')\r\n            ->select('demo_casemanager_queue_items.*')\r\n            ->join('demo_casemanager_cases', 'demo_casemanager_queue_items.item_id', '=', 'demo_casemanager_cases.id')\r\n            ->where('demo_casemanager_queue_items.item_type','Demo\Casemanager\Models\CaseModel');",
                 "sort_order" => -900
             ],
             [
@@ -45,13 +45,13 @@ class BuilderTableSeedDemoWorkflowQueues extends Seeder
                 "redundancy_policy" => "override",
                 "virtual" => 0,
                 "trigger" => "0",
-                "pop_criteria" => "return Illuminate\Support\Facades\DB=>=>table('demo_casemanager_queue_items')\r\n            ->select('demo_casemanager_queue_items.*')\r\n            ->join('demo_casemanager_cases', 'demo_casemanager_queue_items.entity_id', '=', 'demo_casemanager_cases.id')\r\n            ->where('demo_casemanager_queue_items.item_type','Demo\Casemanager\Models\CaseModel');",
+                "pop_criteria" => "return Illuminate\Support\Facades\DB=>=>table('demo_casemanager_queue_items')\r\n            ->select('demo_casemanager_queue_items.*')\r\n            ->join('demo_casemanager_cases', 'demo_casemanager_queue_items.item_id', '=', 'demo_casemanager_cases.id')\r\n            ->where('demo_casemanager_queue_items.item_type','Demo\Casemanager\Models\CaseModel');",
                 "sort_order" => -900
             ],
             [
                 "id" => 3,
                 "queue_order" => "simple_queue",
-                "script" => "\$workflowItem = new Demo\Casemanager\Models\WorkflowItem();\r\n\$workflowItem->workflow = Demo\Casemanager\Models\Workflow=>=>where('code','case-workflow')->get()->first();\r\n\$workflowItem->entity_id = \$item->id;\r\n\$workflowItem->item_type = get_class(\$item);\r\n// throw new \Error(json_encode(\$workflowItem->workflow->definition,true));\r\n\$from_state = new Demo\Casemanager\Models\WorkflowState();\r\n\$from_state->id  = \$workflowItem->workflow->definition[0]['from_state'];\r\n\$workflowItem->current_state = \$from_state;\r\n\$workflowItem->assigned_to = \$this->getCurrentUser();\r\n\$workflowItem->save();",
+                "script" => "\$workflowItem = new Demo\Casemanager\Models\WorkflowItem();\r\n\$workflowItem->workflow = Demo\Casemanager\Models\Workflow=>=>where('code','case-workflow')->get()->first();\r\n\$workflowItem->item_id = \$item->id;\r\n\$workflowItem->item_type = get_class(\$item);\r\n// throw new \Error(json_encode(\$workflowItem->workflow->definition,true));\r\n\$from_state = new Demo\Casemanager\Models\WorkflowState();\r\n\$from_state->id  = \$workflowItem->workflow->definition[0]['from_state'];\r\n\$workflowItem->current_state = \$from_state;\r\n\$workflowItem->assigned_to = \$this->getCurrentUser();\r\n\$workflowItem->save();",
                 "created_at" => "2019-10-06 10:07:03",
                 "updated_at" => "2019-10-14 08:38:59",
                 "created_by_id" => 1,
@@ -83,7 +83,7 @@ class BuilderTableSeedDemoWorkflowQueues extends Seeder
                 "redundancy_policy" => "override",
                 "virtual" => 0,
                 "trigger" => "0",
-                "pop_criteria" => "return Illuminate\Support\Facades\DB=>=>table('demo_casemanager_queue_items')\r\n            ->select('demo_casemanager_queue_items.*')\r\n            ->join('demo_casemanager_cases', 'demo_casemanager_queue_items.entity_id', '=', 'demo_casemanager_cases.id')\r\n            ->where('demo_casemanager_queue_items.item_type','Demo\Casemanager\Models\CaseModel');",
+                "pop_criteria" => "return Illuminate\Support\Facades\DB=>=>table('demo_casemanager_queue_items')\r\n            ->select('demo_casemanager_queue_items.*')\r\n            ->join('demo_casemanager_cases', 'demo_casemanager_queue_items.item_id', '=', 'demo_casemanager_cases.id')\r\n            ->where('demo_casemanager_queue_items.item_type','Demo\Casemanager\Models\CaseModel');",
                 "sort_order" => -900
             ]
         ]);

@@ -8,7 +8,7 @@ use October\Rain\Exception\ApplicationException;
 
 /**
  * Model
- * An entity can only be part of 1 workflow. A unique index has been added on entity_id,entity_name combination
+ * An entity can only be part of 1 workflow. A unique index has been added on item_id,entity_name combination
  */
 class WorkflowItem extends Model
 {
@@ -18,7 +18,7 @@ class WorkflowItem extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_workflow_workflow_entities';
+    public $table = 'demo_workflow_workflow_items';
 
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
