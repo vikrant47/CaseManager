@@ -22,7 +22,7 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->string('case_number', 255);
             $table->string('version', 255);
             $table->string('suspect', 255);
-            $table->bigInteger('tat_duration', 255);
+            $table->bigInteger('tat_duration');
             $table->text('comments', 255);
         });
     }

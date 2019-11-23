@@ -14,12 +14,10 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->string('name', 255);
             $table->text('description');
             $table->smallInteger('active')->default(1);
-            $table->smallInteger('virtual')->default(1);
             $table->text('event')->default();
             $table->smallInteger('virtual')->default(1);
-            $table->smallInteger('virtual')->default(1);
             $table->string('queue_order', 255);
-            $table->integer('sort_order', 255);
+            $table->integer('sort_order');
             $table->text('input_condition');
             $table->string('item_type',255);
             $table->string('redundancy_policy',255);
