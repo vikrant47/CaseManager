@@ -20,6 +20,6 @@ class WorkflowTransitions extends Controller
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'workflow_entity' => [WorkflowItem::class, 'key' => 'workflow_entities_id'],
+        'workflow_item' => [WorkflowItem::class, 'key' => 'workflow_entities_id'],
     ];
 }

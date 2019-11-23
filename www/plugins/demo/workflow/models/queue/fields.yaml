@@ -26,8 +26,8 @@ fields:
         type: relation
 tabs:
     fields:
-        supported_item_type:
-            label: 'Supported Item Type'
+        item_type:
+            label: 'Item Type'
             showSearch: true
             span: auto
             required: 1
@@ -53,8 +53,8 @@ tabs:
             hidden: 0
             type: codeeditor
             tab: Input
-        trigger:
-            label: Trigger
+        event:
+            label: Event
             span: auto
             type: checkboxlist
             tab: Input

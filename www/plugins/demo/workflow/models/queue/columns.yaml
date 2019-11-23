@@ -8,7 +8,7 @@ columns:
     description:
         label: description
         type: text
-    supported_item_type:
+    item_type:
         label: type
         type: text
     sort_order:

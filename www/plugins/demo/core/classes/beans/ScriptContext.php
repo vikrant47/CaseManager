@@ -3,6 +3,7 @@
 
 namespace Demo\Core\Classes\Beans;
 
+use Log;
 use BackendAuth;
 use October\Rain\Exception\ApplicationException;
 
@@ -48,7 +49,13 @@ class ScriptContext
         foreach (ScriptContext::$EXCEPTION_CLASSES as $key => $value) {
             $this->exception->{$key} = $value;
         }
-        return eval($script);
+
+        try {
+            return eval($script);
+        } catch (\Exception $ex) {
+            Log::debug('Error occurred while evaluating script ' . $ex->getMessage() . ' script = ' . $script . ' on ' . $ex->getLine());
+            throw $ex;
+        }
     }
 
     public static function executeScript($script, $attributes = [])

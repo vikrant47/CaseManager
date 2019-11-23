@@ -2,6 +2,8 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Services\EventHandlerServiceProvider;
 
 class Workflow extends Controller
 {
@@ -17,4 +19,5 @@ class Workflow extends Controller
         parent::__construct();
         BackendMenu::setContext('Demo.Workflow', 'main-menu-item', 'side-menu-item2');
     }
+
 }

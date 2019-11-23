@@ -1,9 +1,12 @@
 <?php namespace Demo\Workflow\Models;
 
+use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Services\EventHandlerServiceProvider;
 use Leafo\ScssPhp\Node\Number;
 use Model;
 use October\Rain\Exception\ApplicationException;
 use Backend\Models\User;
+
 /**
  * Model
  */
@@ -38,10 +41,37 @@ class Workflow extends Model
     ];
     public $attachAuditedBy = true;
 
+    public function getEventOptions()
+    {
+        return EventHandlerServiceProvider::$MODEL_EVENTS_OPTIONS;
+    }
+
+    public function getItemTypeOptions()
+    {
+        return PluginConnection::getAllModelAlias();
+    }
+
+    /**
+     * This will start workflow for given model
+     * Steps -
+     * Create entry in Workflow Items with given model and starting state of workflow.
+     */
+    public function start($model)
+    {
+        $workflowItem = new WorkflowItem();
+        $workflowItem->workflow = $this;
+        $workflowItem->item_id = $model->id;
+        $workflowItem->item_type = get_class($model);
+        $from_state = new WorkflowState();
+        $from_state->id = $this->definition[0]['from_state'];
+        $workflowItem->current_state = $from_state;
+        $workflowItem->save();
+    }
+
     public function getNextStateId(WorkflowState $current_state)
     {
         $current_stateId = $current_state;
-        if($current_state instanceof WorkflowState){
+        if ($current_state instanceof WorkflowState) {
             $current_stateId = $current_state->id;
         }
         foreach ($this->definition as $entry) {
@@ -55,7 +85,7 @@ class Workflow extends Model
     public function getCurrentQueueId($current_state)
     {
         $current_stateId = $current_state;
-        if($current_state instanceof WorkflowState){
+        if ($current_state instanceof WorkflowState) {
             $current_stateId = $current_state->id;
         }
         foreach ($this->definition as $entry) {
