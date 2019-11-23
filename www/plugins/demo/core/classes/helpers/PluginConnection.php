@@ -2,12 +2,15 @@
 
 use System\Classes\PluginBase;
 use System\Classes\PluginManager;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 /**
  * This will allow user to connect to another plugin from one plugin
  */
 class PluginConnection
 {
+    public static $LOGGERS = [];
     /**
      * The plugin code/namespace ,e.g. Demo.Core
      */
@@ -91,7 +94,7 @@ class PluginConnection
 
             }
         }
-        if($INCLUDE_UNIVERSAL){
+        if ($INCLUDE_UNIVERSAL) {
             $mappedAlias['universal'] = 'Universal';
         }
         return $mappedAlias;
@@ -167,5 +170,24 @@ class PluginConnection
     public function getEventHandler(string $name)
     {
         return $this->getClass('EventHandlers', $name);
+    }
+
+    public function getPluginLogger(): Logger
+    {
+        return PluginConnection::getLogger($this->identifier);
+    }
+
+    /**
+     * Crete new logger with given plugin identifier and return
+     */
+    public static function getLogger(string $identifier): Logger
+    {
+        $identifier = strtolower(trim($identifier));
+        if (empty(PluginConnection::$LOGGERS[$identifier])) {
+            $logger = new Logger($identifier);
+            $logger->pushHandler(new StreamHandler(storage_path('logs/' . $identifier . '.log')), Logger::INFO);
+            PluginConnection::$LOGGERS[$identifier] = $logger;
+        }
+        return PluginConnection::$LOGGERS[$identifier];
     }
 }

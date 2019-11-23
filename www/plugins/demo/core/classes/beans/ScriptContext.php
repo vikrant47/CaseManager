@@ -3,6 +3,7 @@
 
 namespace Demo\Core\Classes\Beans;
 
+use Log;
 use BackendAuth;
 use October\Rain\Exception\ApplicationException;
 
@@ -21,8 +22,7 @@ class ScriptContext
      */
     public function __construct()
     {
-        $this->currentUser = BackendAuth::getUser();
-        $this->exception = new EmptyClass();
+
     }
 
     public function setAttribute(string $key, $value): self
@@ -36,23 +36,26 @@ class ScriptContext
         return $this->attributes[$key];
     }
 
-    public function buildContext($attributes = [])
+    public function execute($script, $attributes = [])
     {
+        $context = $this;
         $this->attributes = $this->attributes + $attributes;
+        $this->currentUser = BackendAuth::getUser();
+        $this->exception = new EmptyClass();
         foreach ($this->attributes as $key => $value) {
+            ${$key} = $value;
             $this->{$key} = $value;
         }
         foreach (ScriptContext::$EXCEPTION_CLASSES as $key => $value) {
             $this->exception->{$key} = $value;
         }
 
-    }
-
-    public function execute($script, $attributes = [])
-    {
-        $context = $this;
-        $context->buildContext($attributes);
-        return eval($script);
+        try {
+            return eval($script);
+        } catch (\Exception $ex) {
+            Log::debug('Error occurred while evaluating script ' . $ex->getMessage() . ' script = ' . $script . ' on ' . $ex->getLine());
+            throw $ex;
+        }
     }
 
     public static function executeScript($script, $attributes = [])

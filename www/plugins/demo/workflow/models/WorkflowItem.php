@@ -8,9 +8,9 @@ use October\Rain\Exception\ApplicationException;
 
 /**
  * Model
- * An entity can only be part of 1 workflow. A unique index has been added on entity_id,entity_name combination
+ * An entity can only be part of 1 workflow. A unique index has been added on item_id,entity_name combination
  */
-class WorkflowEntity extends Model
+class WorkflowItem extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelHelper;
@@ -18,7 +18,7 @@ class WorkflowEntity extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_workflow_workflow_entities';
+    public $table = 'demo_workflow_workflow_items';
 
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
@@ -66,16 +66,17 @@ class WorkflowEntity extends Model
         if ($next_state === null) {
             throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next state not found for ' . $this->current_state);
         }
-        $next_queue = $this->workflow->getCurrentQueue($this->current_state);
+        /*$next_queue = $this->workflow->getCurrentQueue($this->current_state);
         if ($next_queue === null) {
             throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next queue not found for ' . $this->current_state);
         }
         $next_queue->pushItem($model);
         $transition = new WorkflowTransition();
-        $transition->workflow_entity = $this;
+        $transition->workflow_item = $this;
         $transition->from_state = $this->current_state;
         $transition->to_state = $next_state;
         $transition->save();
+        */
         $this->current_state = $next_state;
         $this->assigned_to = null;
         $this->update();
@@ -83,6 +84,11 @@ class WorkflowEntity extends Model
 
     public function forceUpdate()
     {
-        WorkflowEntity::where('id', $this->id)->update($this->toArray());
+        WorkflowItem::where('id', $this->id)->update($this->toArray());
+    }
+
+    public function scopeFindByEntity($query, $entityType, $id)
+    {
+        return $query->where('item_type', $entityType)->where('id', $id);
     }
 }

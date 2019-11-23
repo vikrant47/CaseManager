@@ -9,12 +9,12 @@ fields:
         label: 'Current State'
         span: auto
         type: relation
-    entity_type:
-        label: 'Entity Type'
+    item_type:
+        label: 'Item Type'
         span: auto
         type: text
-    entity_id:
-        label: 'Entity Id'
+    item_id:
+        label: 'Item Id'
         span: auto
         type: text
     assigned_to:
@@ -24,9 +24,20 @@ fields:
         span: auto
         type: relation
     plugin:
-        label: 'Plugin'
+        label: Plugin
         nameFrom: code
         descriptionFrom: version
         span: auto
         required: 1
         type: relation
+tabs:
+    fields:
+        _transitions:
+            label: Transitions
+            span: full
+            relation: HasMany
+            sourceKey: id
+            targetModel: Demo\Workflow\Models\WorkflowTransition
+            targetKey: workflow_item_id
+            type: relatedlist
+            tab: Transitions

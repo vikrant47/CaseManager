@@ -30,4 +30,9 @@ class QueueItem extends Model
     ];
 
     public $attachAuditedBy = true;
+
+    public function scopeFindByEntity($query, $entityType, $id)
+    {
+        return $query->where('item_type', $entityType)->where('id', $id);
+    }
 }

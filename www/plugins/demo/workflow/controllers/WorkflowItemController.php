@@ -6,7 +6,7 @@ use BackendAuth;
 use Demo\Workflow\Models\Workflow;
 use October\Rain\Exception\ApplicationException;
 
-class WorkflowEntities extends Controller
+class WorkflowItemController extends Controller
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 

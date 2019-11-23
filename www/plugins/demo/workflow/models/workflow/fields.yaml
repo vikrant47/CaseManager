@@ -30,7 +30,7 @@ fields:
 tabs:
     fields:
         definition:
-            label: Definitaion
+            label: Configuration
             prompt: 'Add new item'
             span: auto
             type: repeater
@@ -51,25 +51,51 @@ tabs:
                         descriptionFrom: description
                         span: auto
                         type: relation
+        item_type:
+            label: 'Item Type'
+            emptyOption: None
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'Auto Initialization Options'
+        event:
+            label: Event
+            emptyOption: None
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'Auto Initialization Options'
+        input_condition:
+            label: 'Input Condition'
+            size: large
+            language: php
+            span: auto
+            type: codeeditor
+            tab: 'Auto Initialization Options'
+        sort_order:
+            label: 'Sort Order'
+            span: auto
+            type: number
+            tab: 'Auto Initialization Options'
 secondaryTabs:
     fields:
-        workflow_entity:
-            label: 'Workflow Entities'
+        _workflow_item:
+            label: 'Workflow Items'
             span: full
             relation: HasMany
             sourceKey: id
-            targetModel: Demo\Workflow\Models\WorkflowEntity
+            targetModel: Demo\Workflow\Models\WorkflowItem
             targetKey: workflow_id
             type: relatedlist
-            tab: 'Workflow Entities'
-        workflow_transition:
+            tab: 'Workflow Items'
+        _workflow_transition:
             label: Transitions
             span: full
             relation: HasMany
             sourceKey: id
             targetModel: Demo\Workflow\Models\WorkflowTransition
             targetKey: workflow_id
-            throughModel: Demo\Workflow\Models\WorkflowEntity
-            otherKey: workflow_entity_id
+            throughModel: Demo\Workflow\Models\WorkflowItem
+            otherKey: workflow_item_id
             type: relatedlist
             tab: 'Workflow Transitions'

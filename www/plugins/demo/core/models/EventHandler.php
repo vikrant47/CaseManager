@@ -39,6 +39,6 @@ class EventHandler extends Model
     public function handler($eventName, $model)
     {
         $context = new ScriptContext();
-        return $context->execute($this->script);
+        return $context->execute($this->script, ['eventName' => $context, 'model' => $model]);
     }
 }

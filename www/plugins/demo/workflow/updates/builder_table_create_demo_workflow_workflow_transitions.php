@@ -15,10 +15,11 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('workflow_entities_id');
+            $table->integer('assigned_to_id');
+            $table->integer('workflow_item_id');
             $table->integer('from_state_id');
             $table->integer('to_state_id');
-            $table->integer('workflow_entity_id');
+            $table->integer('workflow_item_id');
             $table->text('data')->nullable();
             $table->integer('plugin_id');
         });

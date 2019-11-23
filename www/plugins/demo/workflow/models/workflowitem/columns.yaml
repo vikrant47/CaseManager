@@ -14,11 +14,11 @@ columns:
     updated_by_id:
         label: updated_by_id
         type: number
-    entity_type:
-        label: entity_type
+    item_type:
+        label: item_type
         type: text
-    entity_id:
-        label: entity_id
+    item_id:
+        label: item_id
         type: number
     current_state:
         label: current_state

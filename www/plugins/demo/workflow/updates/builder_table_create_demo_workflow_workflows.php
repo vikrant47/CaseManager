@@ -7,8 +7,7 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
 {
     public function up()
     {
-        Schema::create('demo_workflow_workflows', function($table)
-        {
+        Schema::create('demo_workflow_workflows', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
@@ -21,9 +20,13 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->integer('plugin_id');
+            $table->integer('sort_order');
+            $table->string('item_type',255);
+            $table->text('input_condition');
+            $table->string('event')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_workflow_workflows');
