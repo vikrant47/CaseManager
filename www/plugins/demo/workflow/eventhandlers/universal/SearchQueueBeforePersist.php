@@ -5,6 +5,7 @@ namespace Demo\Workflow\EventHandlers\Universal;
 
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Queue;
 use Demo\Workflow\Models\QueueItem;
 use Log;
@@ -33,7 +34,7 @@ class SearchQueueBeforePersist
                 $query->where('item_type', '=', 'universal')
                     ->orWhere('item_type', '=', get_class($model));
             })->orderBy('sort_order', 'ASC')->get();
-            $logger->info('Evaluating queue to accept item. total = ' . $queues->count());
+            $logger->info('Evaluating queue to accept item ' . ModelUtil::toString($model) . ' total = ' . $queues->count());
             // throw new ApplicationException('Queue found "'.$queues->count(). '" , Evaluating input condition."');
             /**@var  $queue Queue */
             foreach ($queues as $queue) {

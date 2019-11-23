@@ -45,12 +45,6 @@ tabs:
                         label: 'To State'
                         span: auto
                         type: relation
-                    queue:
-                        label: Queue
-                        nameFrom: name
-                        descriptionFrom: description
-                        span: auto
-                        type: relation
         item_type:
             label: 'Item Type'
             emptyOption: None

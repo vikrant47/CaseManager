@@ -9,7 +9,7 @@ class ModelUtil
         if (empty($model)) {
             return 'null';
         }
-        return get_class($model) . ' -> ' . ($model->{$prop} || 'new');
+        return '[' . get_class($model) . ' -> ' . ($model->{$prop} || 'new') . ']';
     }
 
     public static function isNew($model)
