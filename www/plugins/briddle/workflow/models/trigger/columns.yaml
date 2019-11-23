@@ -1,6 +1,0 @@
-columns:
-    name:
-        label: 'briddle.workflow::lang.trigger'
-        type: text
-        searchable: true
-        sortable: true

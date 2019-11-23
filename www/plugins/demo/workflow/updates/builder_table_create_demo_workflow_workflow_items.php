@@ -21,8 +21,6 @@ class BuilderTableCreateDemoWorkflowWorkflowItems extends Migration
             $table->integer('assigned_to_id');
             $table->integer('current_state_id');
             $table->timestamp('finished_at')->nullable();
-
-            $table->unique('item_type', 'item_id');
             $table->integer('plugin_id');
         });
     }
