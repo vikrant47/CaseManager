@@ -5,6 +5,7 @@ namespace Demo\Workflow\EventHandlers\Universal;
 
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Workflow;
 use Demo\Workflow\Models\WorkflowItem;
 use Demo\Workflow\Models\WorkflowTransition;
@@ -32,7 +33,7 @@ class SearchWorkflowBeforePersist
             /**@var $workflows Collection<Workflow> */
             $workflows = Workflow::where('active', 1)->where('event', $event)
                 ->where('item_type', '=', get_class($model))->orderBy('sort_order', 'ASC')->get();
-            $logger->info('Evaluating workflows to accept item. total = ' . $workflows->count());
+            $logger->info('Evaluating workflows to accept item' . ModelUtil::toString($model) . '. total = ' . $workflows->count());
             /**@var  $workflow Workflow */
             foreach ($workflows as $workflow) {
                 $context = new ScriptContext();
