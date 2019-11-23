@@ -19,7 +19,6 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
             $table->integer('workflow_item_id');
             $table->integer('from_state_id');
             $table->integer('to_state_id');
-            $table->integer('workflow_item_id');
             $table->text('data')->nullable();
             $table->integer('plugin_id');
         });
