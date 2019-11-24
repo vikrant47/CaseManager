@@ -43,20 +43,27 @@ Route::delete('/engine/api/{pluginName}/models/{modelName}/{id}', function ($plu
     return response($data->first(), 200);
 });
 
-Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{wildcard}', function (Request $request) {
+Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{pluginCode}/{wildcard}', function (Request $request, $pluginCode, $wildcard) {
+    $wildcard = '/' . $wildcard;
     /**@var $currentRoute  Illuminate\Routing\Route */
+    $plugin = \Demo\Core\Models\PluginVersions::where('code',str_replace(' ','.',ucwords(str_replace('-',' ',$pluginCode))))->first();
+    if (empty($plugin)) {
+        return response(['message' => 'No matching plugin found with code ' . $pluginCode], 404);
+    }
     $currentRoute = Route::getCurrentRoute();
-    $path = $request->getPathInfo();
-    $apis = \Demo\Core\Models\InboundApi::where('method', strtolower($request->method()))->get();
+    $apis = \Demo\Core\Models\InboundApi::where([
+        'method' => strtolower($request->method()),
+        'plugin_id' => $plugin->id,
+    ])->get();
     foreach ($apis as $api) {
         $pattern = str_replace('/', '\\/', preg_replace('/\{(\s*?.*?)*?\}/', '(.*)', $api->url));
         $pathVariables = [];
-        if (preg_match('/' . $pattern . '/', $path, $pathVariables)) {
+        if (preg_match('/' . $pattern . '/', $wildcard, $pathVariables)) {
             $context = new ScriptContext();
-            $result = $context->execute($api->script, ['request' => $request]);
+            $result = $context->execute($api->script, ['request' => $request, 'pathVariables' => $pathVariables]);
             return $result;
         }
     }
-    return response('', 404);
+    return response(['message' => 'No matching path found'], 404);
 
 })->where('wildcard', '.+');;

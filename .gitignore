@@ -1,4 +1,5 @@
 .idea
+.idea/*
 conf
 www/.DS_Store
 www/*.log
@@ -12,4 +13,8 @@ www/artisan
 www/install.php
 www/install-master
 www/themes
+www/tests
+www/phpunit.xml
+www/phpcs.xml
+www/.htaccess
 
