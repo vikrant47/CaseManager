@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoWorkflowWorkflowEntities extends Seeder
+class BuilderTableCreateDemoWorkflowWorkflowItems extends Seeder
 {
     public function run()
     {
