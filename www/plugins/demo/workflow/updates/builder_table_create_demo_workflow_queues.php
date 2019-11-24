@@ -27,7 +27,7 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->integer('updated_by_id');
             $table->integer('plugin_id');
             $table->integer('pop_criteria_id');
-            $table->integer('assignment_rule_id');
+            $table->integer('routing_rule_id');
         });
     }
     

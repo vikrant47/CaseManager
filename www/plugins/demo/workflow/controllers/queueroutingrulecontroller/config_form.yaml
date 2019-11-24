@@ -1,0 +1,10 @@
+name: QueueRoutingRuleController
+form: $/demo/workflow/models/queueroutingrule/fields.yaml
+modelClass: Demo\Workflow\Models\QueueRoutingRule
+defaultRedirect: demo/workflow/queueroutingrulecontroller
+create:
+    redirect: 'demo/workflow/queueroutingrulecontroller/update/:id'
+    redirectClose: demo/workflow/queueroutingrulecontroller
+update:
+    redirect: demo/workflow/queueroutingrulecontroller
+    redirectClose: demo/workflow/queueroutingrulecontroller

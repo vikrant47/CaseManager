@@ -5,7 +5,7 @@ use Model;
 /**
  * Model
  */
-class QueueAssignmentRule extends Model
+class QueueRoutingRule extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     
@@ -13,7 +13,7 @@ class QueueAssignmentRule extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_workflow_queue_assignment_rules';
+    public $table = 'demo_workflow_queue_routing_rules';
 
     public $belongsTo = [
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']

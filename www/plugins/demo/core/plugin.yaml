@@ -15,15 +15,15 @@ navigation:
         icon: icon-gears
         order: '500'
         sideMenu:
-           side-menu-item8:
+            side-menu-item8:
                 label: 'Event Handler'
                 url: demo/core/eventhandler
                 icon: icon-code
-           side-menu-item6:
+            side-menu-item6:
                 label: 'Inbound Api'
                 url: demo/core/inboundapi
                 icon: icon-space-shuttle
-           side-menu-item9:
+            side-menu-item9:
                 label: Commands
                 url: demo/core/command
-                icon: icon-chain-broken
+                icon: icon-terminal

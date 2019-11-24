@@ -3,11 +3,11 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoWorkflowQueueAssignmentRules extends Migration
+class BuilderTableCreateDemoWorkflowQueueRoutingRules extends Migration
 {
     public function up()
     {
-        Schema::create('demo_workflow_queue_assignment_rules', function($table)
+        Schema::create('demo_workflow_queue_routing_rules', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
@@ -24,6 +24,6 @@ class BuilderTableCreateDemoWorkflowQueueAssignmentRules extends Migration
     
     public function down()
     {
-        Schema::dropIfExists('demo_workflow_queue_assignment_rules');
+        Schema::dropIfExists('demo_workflow_queue_routing_rules');
     }
 }
