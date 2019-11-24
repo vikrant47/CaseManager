@@ -1,4 +1,0 @@
-title: QueueAssignmentRuleController
-modelClass: Demo\Workflow\Models\QueueAssignmentRule
-toolbar:
-    buttons: reorder_toolbar

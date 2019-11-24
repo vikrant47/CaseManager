@@ -1,0 +1,4 @@
+title: QueueRoutingRuleController
+modelClass: Demo\Workflow\Models\QueueRoutingRule
+toolbar:
+    buttons: reorder_toolbar

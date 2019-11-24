@@ -3,7 +3,7 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 
-class QueueAssignmentRuleController extends Controller
+class QueueRoutingRuleController extends Controller
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
     

@@ -86,16 +86,16 @@ tabs:
             span: auto
             required: 1
             type: relation
-            comment: 'Select Assignment Rule'
+            comment: 'Select Routing Rule'
             tab: Output
-        assignment_rule:
-            label: 'Assignment Rule'
+        routing_rule:
+            label: 'Routing Rule'
             nameFrom: name
             descriptionFrom: description
             span: auto
             required: 1
             type: relation
-            comment: 'Select Assignment Rule'
+            comment: 'Select Routing Rule'
             tab: Output
         assignment_groups:
             label: 'Assignment Groups'

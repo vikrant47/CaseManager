@@ -44,9 +44,9 @@ navigation:
                 url: demo/workflow/queueitem
                 icon: icon-stack-exchange
             side-menu-item6:
-                label: 'Assignment Rules'
-                url: demo/workflow/queueassignmentrulecontroller
-                icon: icon-puzzle-piece
+                label: 'Routing Rules'
+                url: demo/workflow/queueroutingrulecontroller
+                icon: icon-share-alt
             side-menu-item8:
                 label: 'Pop Criteria'
                 url: demo/workflow/queuepopcriteriacontroller

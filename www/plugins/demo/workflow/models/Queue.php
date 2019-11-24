@@ -34,7 +34,7 @@ class Queue extends Model
     public $belongsTo = [
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
         'pop_criteria' => [\Demo\Workflow\Models\QueuePopCriterias::class, 'key' => 'pop_criteria_id'],
-        'assignment_rule' => [\Demo\Workflow\Models\QueueAssignmentRule::class, 'key' => 'assignment_rule_id'],
+        'routing_rule' => [\Demo\Workflow\Models\QueueRoutingRule::class, 'key' => 'routing_rule_id'],
     ];
 
     public $belongsToMany = [
@@ -129,13 +129,13 @@ class Queue extends Model
      */
     public function assignItem($queueItem, $item)
     {
-        $this->logger->info('Assigning the item ' . ModelUtil::toString($item) . ' using assignment rule ' . ModelUtil::toString($this->assignment_rule, 'name'));
+        $this->logger->info('Assigning the item ' . ModelUtil::toString($item) . ' using assignment rule ' . ModelUtil::toString($this->routing_rule, 'name'));
         // creating context
         $context = new ScriptContext();
-        $user = $context->execute($this->assignment_rule->script, ['queue' => $this, 'item' => $item, 'queueItem' => $queueItem]);
+        $user = $context->execute($this->routing_rule->script, ['queue' => $this, 'item' => $item, 'queueItem' => $queueItem]);
         $this->logger->info('Assigning to user ' . $user->username);
         if (empty($user)) {
-            throw new ApplicationException('Assignment rule "' . $this->assignment_rule->name . '" din\'t return any user');
+            throw new ApplicationException('Routing Rule "' . $this->routing_rule->name . '" din\'t return any user');
         }
         if ($this->isUserInAssignmentGroups($user) === false) {
             throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
@@ -165,12 +165,12 @@ class Queue extends Model
             return null;
         }
         $context = new ScriptContext();
-        $elem = $context->execute($this->pop_criteria->script, ['queue' => $this]);
-        if ($elem instanceof Collection) {
-            $elem = $elem->first();
-        } elseif ($elem instanceof \October\Rain\Database\QueryBuilder) {
-            $elem = $elem->where('queue_id', $this->id)->get()->first();
+        $query = DB::table('demo_workflow_queue_items')->select('demo_workflow_queue_items.*');
+        $qyery = $context->execute($this->pop_criteria->script, ['queue' => $this, 'query' => $query]);
+        if (!($qyery instanceof \October\Rain\Database\QueryBuilder)) {
+            throw new ApplicationException('Pop criteria should return a QueryBuilder instance');
         }
+        $elem = $qyery->where('queue_id', $this->id)->first();
         if (
             empty($elem)
             || empty($elem->id)
@@ -202,7 +202,7 @@ class Queue extends Model
     {
         $item = $this->popItem();
         $context = new ScriptContext();
-        return $context->execute($this->assignment_rule->script, ['queue' => $this, 'item' => $item]);
+        return $context->execute($this->routing_rule->script, ['queue' => $this, 'item' => $item]);
 
     }
 

@@ -3,6 +3,7 @@
 
 namespace Demo\Core\Classes\Beans;
 
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Log;
 use BackendAuth;
 use October\Rain\Exception\ApplicationException;
@@ -53,7 +54,7 @@ class ScriptContext
         try {
             return eval($script);
         } catch (\Exception $ex) {
-            Log::debug('Error occurred while evaluating script ' . $ex->getMessage() . ' script = ' . $script . ' on ' . $ex->getLine());
+            PluginConnection::getLogger('demo.core')->debug('Error occurred while evaluating script ' . $ex->getMessage() . ' script = ' . $script . ' on ' . $ex->getLine());
             throw $ex;
         }
     }

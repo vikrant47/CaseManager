@@ -190,4 +190,10 @@ class PluginConnection
         }
         return PluginConnection::$LOGGERS[$identifier];
     }
+
+
+    public static function getConnection(string $identifier): PluginConnection
+    {
+        return new PluginConnection($identifier);
+    }
 }
