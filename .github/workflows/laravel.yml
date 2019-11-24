@@ -23,7 +23,7 @@ jobs:
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
     - name: Execute core plugin tests via PHPUnit
-          env:
-            DB_CONNECTION: sqlite
-            DB_DATABASE: database/database.sqlite
-          run: vendor/bin/phpunit plugins/demo/core
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: vendor/bin/phpunit plugins/demo/core
