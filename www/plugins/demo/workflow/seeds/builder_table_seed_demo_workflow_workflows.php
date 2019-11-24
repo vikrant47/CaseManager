@@ -13,15 +13,20 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Seeder
             [
                 "id" => 1,
                 "created_at" => "2019-10-08 08:17:55",
-                "updated_at" => "2019-10-13 06:06:39",
+                "updated_at" => "2019-11-23 05:20:51",
                 "active" => 1,
                 "name" => "Case Workflow",
                 "description" => "Case Workflow",
-                "definition" => '[{"from_state":"3","to_state":"4","queue":"21"},{"from_state":"4","to_state":"5","queue":"20"},{"from_state":"5","to_state":"6","queue":"22"}]',
+                "definition" => "[{\"from_state\":\"3\",\"to_state\":\"4\",\"queue\":\"1\"},{\"from_state\":\"4\",\"to_state\":\"5\",\"queue\":\"20\"},{\"from_state\":\"5\",\"to_state\":\"6\",\"queue\":\"3\"}]",
                 "created_by_id" => null,
                 "updated_by_id" => 1,
                 "workflow" => null,
-                "code" => "case-workflow"
+                "code" => "case-workflow",
+                "plugin_id" => 1,
+                "event" => "created",
+                "item_type" => "Demo\\Casemanager\\Models\\CaseModel",
+                "input_condition" => "return true;",
+                "sort_order" => 0
             ]
         ]);
     }
