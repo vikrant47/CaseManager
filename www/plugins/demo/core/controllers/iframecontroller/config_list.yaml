@@ -1,0 +1,12 @@
+list: $/demo/core/models/iframe/columns.yaml
+modelClass: Demo\Core\Models\Iframe
+title: IframeController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'demo/core/iframecontroller/update/:id'

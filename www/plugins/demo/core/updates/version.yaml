@@ -9,3 +9,6 @@
 1.0.4:
     - 'Created table demo_core_commands'
     - builder_table_create_demo_core_commands.php
+1.0.5:
+    - 'Created table demo_core_iframes'
+    - builder_table_create_demo_core_iframes.php
