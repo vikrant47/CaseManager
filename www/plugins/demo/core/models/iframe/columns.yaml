@@ -1,0 +1,34 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number
+    name:
+        label: name
+        type: text
+    slug:
+        label: slug
+        type: text
+    url:
+        label: url
+        type: text
+    active:
+        label: active
+        type: text
+    iframe:
+        label: iframe
+        type: text
+    description:
+        label: description
+        type: text

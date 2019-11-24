@@ -1,0 +1,10 @@
+name: IframeController
+form: $/demo/core/models/iframe/fields.yaml
+modelClass: Demo\Core\Models\Iframe
+defaultRedirect: demo/core/iframecontroller
+create:
+    redirect: 'demo/core/iframecontroller/update/:id'
+    redirectClose: demo/core/iframecontroller
+update:
+    redirect: demo/core/iframecontroller
+    redirectClose: demo/core/iframecontroller

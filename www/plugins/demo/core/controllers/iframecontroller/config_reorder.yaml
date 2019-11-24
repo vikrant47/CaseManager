@@ -1,0 +1,4 @@
+title: IframeController
+modelClass: Demo\Core\Models\Iframe
+toolbar:
+    buttons: reorder_toolbar
