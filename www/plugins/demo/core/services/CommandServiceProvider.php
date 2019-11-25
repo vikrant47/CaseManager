@@ -44,7 +44,7 @@ class CommandServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if ($_ENV['APP_ENV'] !== 'testing' && $this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->registerLocalCommands();
             // $this->registerDatabaseCommands();
         }
