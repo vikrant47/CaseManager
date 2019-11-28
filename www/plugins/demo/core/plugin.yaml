@@ -35,3 +35,7 @@ navigation:
                 label: Test
                 url: demo/core/iframecontroller/render-iframe/test
                 icon: icon-sitemap
+            side-menu-item3:
+                label: Webhooks
+                url: demo/core/webhookcontroller
+                icon: icon-chain
