@@ -196,4 +196,15 @@ class PluginConnection
     {
         return new PluginConnection($identifier);
     }
+
+    public static function getEnv($key = null)
+    {
+        if (empty($key)) {
+            return array_merge([], $_ENV, self::getEnv());
+        }
+        if (array_key_exists($key, $_ENV)) {
+            return $_ENV[$key];
+        }
+        return getenv($key);
+    }
 }

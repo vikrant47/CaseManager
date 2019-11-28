@@ -2,6 +2,7 @@
 
 use Model;
 use Backend\Models\User;
+
 /**
  * Model
  */
@@ -24,5 +25,7 @@ class InboundApi extends Model
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id']
     ];
+
+    protected $fillable = ['name', 'url', 'method', 'script', 'plugin_id'];
     public $attachAuditedBy = true;
 }

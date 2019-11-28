@@ -5,17 +5,18 @@ namespace Demo\Core\Tests;
 
 
 use Backend\Models\User;
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\InboundApi;
 use PluginTestCase;
 use BackendAuth;
 
 class PluginTestSetup extends PluginTestCase
 {
-    const TEST_CONFIG = ['login-user' => 'admin'];
 
     public function setUser()
     {
-        $loginuser = PluginTestSetup::TEST_CONFIG['login-user'];
+        $loginuser = PluginConnection::getEnv('user');
+        print json_encode($_ENV, true);
         BackendAuth::setUser(User::where('login', $loginuser)->first());
     }
 
