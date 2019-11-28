@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Services;
 
 use Demo\Core\Classes\Beans\EngineCommandAdaptor;
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Console\SeedRunner;
 use Demo\Core\Models\Command;
 use Demo\Core\Models\EventHandler;
@@ -44,7 +45,7 @@ class CommandServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if (!empty(getenv('loginname')) && $this->app->runningInConsole()) {
+        if (!empty(PluginConnection::getEnv('user')) && $this->app->runningInConsole()) {
             $this->registerLocalCommands();
             $this->registerDatabaseCommands();
         }

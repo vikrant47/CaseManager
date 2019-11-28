@@ -5,6 +5,7 @@ namespace Demo\Core\Tests;
 
 
 use Backend\Models\User;
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\InboundApi;
 use PluginTestCase;
 use BackendAuth;
@@ -14,7 +15,8 @@ class PluginTestSetup extends PluginTestCase
 
     public function setUser()
     {
-        $loginuser = getenv('loginname');
+        $loginuser = PluginConnection::getEnv('user');
+        print json_encode($_ENV, true);
         BackendAuth::setUser(User::where('login', $loginuser)->first());
     }
 
