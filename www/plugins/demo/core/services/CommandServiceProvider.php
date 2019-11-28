@@ -47,7 +47,7 @@ class CommandServiceProvider extends ServiceProvider
     {
         if (!empty(PluginConnection::getEnv('user')) && $this->app->runningInConsole()) {
             $this->registerLocalCommands();
-            $this->registerDatabaseCommands();
+            // $this->registerDatabaseCommands();
         }
     }
 }
