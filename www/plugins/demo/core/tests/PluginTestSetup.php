@@ -11,11 +11,10 @@ use BackendAuth;
 
 class PluginTestSetup extends PluginTestCase
 {
-    const TEST_CONFIG = ['login-user' => 'admin'];
 
     public function setUser()
     {
-        $loginuser = PluginTestSetup::TEST_CONFIG['login-user'];
+        $loginuser = getenv('loginname');
         BackendAuth::setUser(User::where('login', $loginuser)->first());
     }
 

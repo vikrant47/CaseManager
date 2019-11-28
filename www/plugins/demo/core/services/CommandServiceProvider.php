@@ -44,9 +44,9 @@ class CommandServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if ($this->app->runningInConsole()) {
+        if (!empty(getenv('loginname')) && $this->app->runningInConsole()) {
             $this->registerLocalCommands();
-            // $this->registerDatabaseCommands();
+            $this->registerDatabaseCommands();
         }
     }
 }
