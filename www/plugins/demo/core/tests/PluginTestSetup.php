@@ -16,7 +16,7 @@ class PluginTestSetup extends PluginTestCase
     public function setUser()
     {
         $loginuser = PluginConnection::getEnv('user');
-        print json_encode($_ENV, true);
+        print 'Setting loggedin user to -> ' . $loginuser;
         BackendAuth::setUser(User::where('login', $loginuser)->first());
     }
 
