@@ -29,10 +29,13 @@ Object.assign(Dashboard.prototype, {
         })
     },
     render: function () {
-        $(this.getContainer()).find('.grid-stack').gridstack({
+        $grid = $(this.getContainer()).find('.grid-stack').gridstack({
             resizable: {
                 handles: 'e, se, s, sw, w'
-            }
+            },
+            gridType: 'fit',
+        }).on('gsresizestop', function(event, elem) {
+            $(elem).find('.report-container').data('report').resize();
         });
     },
     fetchAndRender: function () {
