@@ -1,0 +1,4 @@
+title: JavascriptLibraryController
+modelClass: Demo\Core\Models\JavascriptLibrary
+toolbar:
+    buttons: reorder_toolbar

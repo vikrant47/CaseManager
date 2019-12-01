@@ -1,0 +1,12 @@
+<?php foreach ($report->library->getCssFiles() as $file) {
+    $this->addCss($file);
+} ?>
+<?php foreach ($report->library->getJsFiles() as $file) {
+    $this->addJs($file);
+} ?>
+<?php $this->addJs('/plugins/demo/report/controllers/reportcontroller/assets/js/report.data.js') ?>
+<div id="report-container-<?= $report->id ?>" style="width: 100%;height: 100%;"></div>
+<script>
+    var report = new Report(<?=$report->id?>);
+    report.fetchAndRender();
+</script>

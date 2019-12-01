@@ -4,6 +4,7 @@
 namespace Demo\Core\Classes\Beans;
 
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Db;
 use Log;
 use BackendAuth;
 use October\Rain\Exception\ApplicationException;

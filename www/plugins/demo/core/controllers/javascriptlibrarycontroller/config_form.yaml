@@ -1,0 +1,10 @@
+name: JavascriptLibraryController
+form: $/demo/core/models/javascriptlibrary/fields.yaml
+modelClass: Demo\Core\Models\JavascriptLibrary
+defaultRedirect: demo/core/javascriptlibrarycontroller
+create:
+    redirect: 'demo/core/javascriptlibrarycontroller/update/:id'
+    redirectClose: demo/core/javascriptlibrarycontroller
+update:
+    redirect: demo/core/javascriptlibrarycontroller
+    redirectClose: demo/core/javascriptlibrarycontroller

@@ -1,0 +1,49 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    website:
+        label: Website
+        span: full
+        type: text
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        css_files:
+            label: 'Css Files'
+            prompt: 'Add new item'
+            span: auto
+            type: repeater
+            tab: Resources
+            form:
+                fields:
+                    css_file:
+                        label: 'Css File'
+                        mode: file
+                        span: full
+                        type: mediafinder
+        javascript_files:
+            label: 'Javascript Files'
+            prompt: 'Add new item'
+            span: auto
+            type: repeater
+            tab: Resources
+            form:
+                fields:
+                    javascript_file:
+                        label: 'Javascript File'
+                        mode: file
+                        span: full
+                        type: mediafinder
