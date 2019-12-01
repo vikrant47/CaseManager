@@ -8,7 +8,7 @@
 <?php if ($preview === true) { ?>
     <a href="../render-report/<?= $report->id ?>" style="margin: 0;auto;">View</a>
 <?php } ?>
-<div id="report-container-<?= $report->id ?>" style="height: 100%;width: 100%;"></div>
+<div id="report-container-<?= $report->id ?>" style="height: 100%;width: 100%;" class="report-container"></div>
 
 <script>
     var report = new Report(<?=$report->id?>);

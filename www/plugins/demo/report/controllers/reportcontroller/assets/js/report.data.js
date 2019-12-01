@@ -3,6 +3,7 @@ if (!Object.assign) {
 }
 var Report = function (id) {
     this.id = id;
+    this.events = {resize: []};
 };
 Object.assign(Report.prototype, {
     getCanvas: function () {
@@ -19,7 +20,7 @@ Object.assign(Report.prototype, {
     loadData: function (callabck) {
         var _this = this;
         $.request('onData', {
-            url:'/backend/demo/report/reportcontroller/render-report/'+this.slug,
+            url: '/backend/demo/report/reportcontroller/render-report/' + this.slug,
             data: {id: this.id},
             success: function (data) {
                 var data = JSON.parse(data.result);
@@ -32,6 +33,7 @@ Object.assign(Report.prototype, {
     render: function (data) {
         var script = this.looseParseJSON(data.script);
         script.call(this);
+        $(this.getContainer()).data('report', this);
     },
     fetchAndRender: function () {
         var _this = this;
@@ -41,6 +43,13 @@ Object.assign(Report.prototype, {
     },
     looseParseJSON: function (script) {
         return new Function(script);
+    },
+    onResize: function (callback) {
+        this.events['resize'].push(callback);
+    }, resize: function () {
+        for (var i = 0; i < this.events['resize'].length; i++) {
+            this.events['resize'][i].call(this);
+        }
     }
 });
 
