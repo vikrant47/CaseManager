@@ -1,0 +1,70 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    slug:
+        label: Slug
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    public:
+        label: Public
+        span: auto
+        default: 0
+        type: switch
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+tabs:
+    fields:
+        reports_config:
+            label: Configuration
+            prompt: 'Add new item'
+            span: auto
+            type: repeater
+            tab: Configuration
+            form:
+                fields:
+                    report:
+                        label: Report
+                        nameFrom: name
+                        descriptionFrom: description
+                        span: full
+                        type: relation
+                    sort_order:
+                        label: 'Sort Order'
+                        span: full
+                        type: number
+                    x:
+                        label: X-Axis
+                        span: auto
+                        type: number
+                    'y':
+                        label: Y-Axis
+                        span: auto
+                        type: number
+                    width:
+                        label: Width
+                        span: auto
+                        type: number
+                    height:
+                        label: Height
+                        span: auto
+                        type: number

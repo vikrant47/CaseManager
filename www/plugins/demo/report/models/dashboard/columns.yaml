@@ -14,12 +14,12 @@ columns:
     updated_by_id:
         label: updated_by_id
         type: number
-    plugin_id:
-        label: plugin_id
-        type: number
     name:
         label: name
         type: text
-    website:
-        label: website
+    active:
+        label: active
+        type: text
+    public:
+        label: public
         type: text

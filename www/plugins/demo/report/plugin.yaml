@@ -11,6 +11,10 @@ navigation:
         icon: icon-book
         order: '450'
         sideMenu:
+            side-menu-item2:
+                label: Dashboards
+                url: demo/report/dashboardcontroller
+                icon: icon-tachometer
             side-menu-item:
                 label: Reports
                 url: demo/report/reportcontroller
