@@ -21,7 +21,7 @@ class ReportController extends Controller
 
     public function onData($id)
     {
-        // $id = Input::get('id');
+        $id = Input::get('id');
         $report = Report::where('id', $id)->first();
         if (empty($report)) {
             $this->setStatusCode(404);
@@ -44,9 +44,23 @@ class ReportController extends Controller
         return ['report' => $report->getOriginal()];
     }
 
+    public function addAssets($controller, Report $report)
+    {
+        foreach ($report->library->getCssFiles() as $file) {
+            $controller->addCss($file);
+        }
+        foreach ($report->library->getJsFiles() as $file) {
+            $controller->addJs($file);
+        }
+    }
+
     public function renderReport($id)
     {
-        $report = Report::where('id', $id)->first();
+        if ($id instanceof Report) {
+            $report = $id;
+        } else {
+            $report = Report::where('id', $id)->first();
+        }
         if (empty($report)) {
             $this->setStatusCode(404);
             return '';

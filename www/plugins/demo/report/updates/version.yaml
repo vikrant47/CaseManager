@@ -6,3 +6,6 @@
 1.0.3:
     - 'Created table demo_report_libraries'
     - builder_table_create_demo_report_libraries.php
+1.0.4:
+    - 'Created table demo_report_dashboards'
+    - builder_table_create_demo_report_dashboards.php

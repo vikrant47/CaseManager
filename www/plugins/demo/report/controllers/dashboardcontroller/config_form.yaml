@@ -1,0 +1,10 @@
+name: DashboardController
+form: $/demo/report/models/dashboard/fields.yaml
+modelClass: Demo\Report\Models\Dashboard
+defaultRedirect: demo/report/dashboardcontroller
+create:
+    redirect: 'demo/report/dashboardcontroller/update/:id'
+    redirectClose: demo/report/dashboardcontroller
+update:
+    redirect: demo/report/dashboardcontroller
+    redirectClose: demo/report/dashboardcontroller

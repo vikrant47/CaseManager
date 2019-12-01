@@ -1,0 +1,4 @@
+title: DashboardController
+modelClass: Demo\Report\Models\Dashboard
+toolbar:
+    buttons: reorder_toolbar
