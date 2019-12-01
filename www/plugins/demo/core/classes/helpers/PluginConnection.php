@@ -207,4 +207,40 @@ class PluginConnection
         }
         return getenv($key);
     }
+
+    public static function reloadModels()
+    {
+        // Get all models in the Model directory
+        $models_dir = dirname(__DIR__) . '/models';
+        $files = \File::files($models_dir);
+
+        // Exclude non *.php files
+        foreach ($files as $i => $file) if (!strpos($file, '.php')) {
+            unset($files[$i]);
+        }
+
+        // Remove the directory name and the .php from the filename
+        $files = str_replace($models_dir.'/', '', $files);
+        $files = str_replace('.php', '', $files);
+
+        // Remove "BaseModel" as we dont want to boot that moodel
+        $key = array_search('BaseModel', $files);
+        if ($key !== false) {
+            unset($files[$key]);
+        }
+
+        // Reset each model event listeners
+        foreach ($files as $model)
+        {
+            if (!method_exists($model, 'flushEventListeners')) {
+                continue;
+            }
+
+            // Flush any existing listeners
+            call_user_func(array($model, 'flushEventListeners'));
+
+            // Re-register them
+            call_user_func(array($model, 'boot'));
+        }
+    }
 }

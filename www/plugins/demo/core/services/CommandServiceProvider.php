@@ -19,9 +19,9 @@ class CommandServiceProvider extends ServiceProvider
 
     public function loadFromDatabase()
     {
-        return Command::where('active', 1)->get()->map(function ($command) {
+        return [];/*Command::where('active', 1)->get()->map(function ($command) {
             return new EngineCommandAdaptor($command);
-        });
+        });*/
     }
 
     public function registerLocalCommands()
@@ -45,6 +45,7 @@ class CommandServiceProvider extends ServiceProvider
 
     public function register()
     {
+        print json_encode(PluginConnection::getEnv(), true);
         if (!empty(PluginConnection::getEnv('user')) && $this->app->runningInConsole()) {
             $this->registerLocalCommands();
             $this->registerDatabaseCommands();
