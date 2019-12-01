@@ -23,7 +23,8 @@ class IframeController extends Controller
     {
         $iframe = Iframe::where('slug', $slug)->first();
         if (empty($iframe)) {
-            return $this->setResponse('', 404);
+            $this->setStatusCode( 404);
+            return '';
         }
         if (!empty($iframe->backend_menu)) {
             $menu = $iframe->backend_menu[0];

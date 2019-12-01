@@ -1,0 +1,8 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table demo_report_reports'
+    - builder_table_create_demo_report_reports.php
+1.0.3:
+    - 'Created table demo_report_libraries'
+    - builder_table_create_demo_report_libraries.php

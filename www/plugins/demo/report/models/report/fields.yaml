@@ -1,0 +1,53 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    slug:
+        label: Slug
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    public:
+        label: Public
+        span: auto
+        type: switch
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        library:
+            label: Library
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Configuration
+        script:
+            label: Script
+            size: large
+            language: php
+            span: full
+            stretch: 0
+            type: codeeditor
+            tab: Configuration
+        data:
+            label: Data
+            size: large
+            language: php
+            span: full
+            stretch: 0
+            type: codeeditor
+            tab: Configuration

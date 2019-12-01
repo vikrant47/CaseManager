@@ -1,0 +1,10 @@
+name: ReportController
+form: $/demo/report/models/report/fields.yaml
+modelClass: Demo\Report\Models\Report
+defaultRedirect: demo/report/reportcontroller
+create:
+    redirect: 'demo/report/reportcontroller/update/:id'
+    redirectClose: demo/report/reportcontroller
+update:
+    redirect: demo/report/reportcontroller
+    redirectClose: demo/report/reportcontroller

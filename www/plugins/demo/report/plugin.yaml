@@ -1,0 +1,17 @@
+plugin:
+    name: 'demo.report::lang.plugin.name'
+    description: 'demo.report::lang.plugin.description'
+    author: demo
+    icon: oc-icon-book
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Reports
+        url: demo/report/reportcontroller
+        icon: icon-book
+        order: '450'
+        sideMenu:
+            side-menu-item:
+                label: Reports
+                url: demo/report/reportcontroller
+                icon: icon-book

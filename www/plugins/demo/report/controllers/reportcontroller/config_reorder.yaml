@@ -1,0 +1,4 @@
+title: ReportController
+modelClass: Demo\Report\Models\Report
+toolbar:
+    buttons: reorder_toolbar

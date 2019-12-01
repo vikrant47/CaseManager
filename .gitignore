@@ -7,7 +7,13 @@ www/bootstrap
 www/config
 www/install_files
 www/modules
-www/storage
+!www/storage/app/media/system/plugins
+www/storage/app/uploads
+www/storage/app/*
+www/storage/cms
+www/storage/logs
+www/storage/temp
+www/storage/framework
 www/vendor
 www/artisan
 www/install.php
