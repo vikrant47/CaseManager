@@ -35,3 +35,7 @@ navigation:
                 label: Test
                 url: demo/core/iframecontroller/render-iframe/test
                 icon: icon-sitemap
+            side-menu-item7:
+                label: Libraries
+                url: demo/core/javascriptlibrarycontroller
+                icon: icon-files-o
