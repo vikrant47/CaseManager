@@ -4,6 +4,7 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Report\Models\Report;
 use Input;
+
 class ReportController extends Controller
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
@@ -20,7 +21,7 @@ class ReportController extends Controller
 
     public function onData($id)
     {
-        $id = Input::get('id');
+        // $id = Input::get('id');
         $report = Report::where('id', $id)->first();
         if (empty($report)) {
             $this->setStatusCode(404);
@@ -31,9 +32,20 @@ class ReportController extends Controller
         return json_encode($reportJson);
     }
 
-    public function renderReport($slug)
+    public function onPreview($id)
     {
-        $report = Report::where('slug', $slug)->first();
+        $report = Report::where('id', $id)->first();
+        if (empty($report)) {
+            $this->setStatusCode(404);
+            return '';
+        }
+        $this->vars['report'] = $report;
+        return  ['report' => $report->getOriginal()];
+    }
+
+    public function renderReport($id)
+    {
+        $report = Report::where('id', $id)->first();
         if (empty($report)) {
             $this->setStatusCode(404);
             return '';
