@@ -40,7 +40,8 @@ class ReportController extends Controller
             return '';
         }
         $this->vars['report'] = $report;
-        return  ['report' => $report->getOriginal()];
+        $this->vars['preview'] = true;
+        return ['report' => $report->getOriginal()];
     }
 
     public function renderReport($id)
@@ -50,6 +51,6 @@ class ReportController extends Controller
             $this->setStatusCode(404);
             return '';
         }
-        return $this->makePartial('report_renderer', ['report' => $report]);
+        return $this->makePartial('report_renderer', ['report' => $report, 'preview' => false]);
     }
 }
