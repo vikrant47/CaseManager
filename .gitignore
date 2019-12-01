@@ -17,4 +17,7 @@ www/tests
 www/phpunit.xml
 www/phpcs.xml
 www/.htaccess
-
+www/ed
+www/.travis.yml
+www/phpunit.phar
+www/.editorconfig
