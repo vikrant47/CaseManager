@@ -3,6 +3,8 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Report\Models\Dashboard;
+use Input;
+use October\Rain\Support\Facades\Flash;
 
 class DashboardController extends Controller
 {
@@ -29,6 +31,19 @@ class DashboardController extends Controller
         $dashboardJson = $dashboard->getOriginal();
         $dashboardJson['data'] = $dashboard->executeData();
         return json_encode($dashboardJson);
+    }
+
+    public function onSaveData($slug)
+    {
+        $dashboard = Dashboard::where('slug', $slug)->first();
+        if (empty($dashboard)) {
+            $this->setStatusCode(404);
+            return [];
+        }
+        $dashboard->reports_config = Input('reports_config');
+        $dashboard->save();
+        Flash::success('Dashboard Updated !');
+
     }
 
     public function onPreview($id)

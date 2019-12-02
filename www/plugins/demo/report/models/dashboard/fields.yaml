@@ -48,10 +48,6 @@ tabs:
                         descriptionFrom: description
                         span: full
                         type: relation
-                    sort_order:
-                        label: 'Sort Order'
-                        span: full
-                        type: number
                     x:
                         label: X-Axis
                         span: auto
