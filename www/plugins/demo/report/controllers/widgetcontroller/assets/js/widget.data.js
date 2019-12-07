@@ -93,6 +93,9 @@ Object.assign(Store.prototype, {
                 delete rec[key];
             }
         })
+    },
+    get: function () {
+        return this.data;
     }
 });
 window.Widget = Widget;
