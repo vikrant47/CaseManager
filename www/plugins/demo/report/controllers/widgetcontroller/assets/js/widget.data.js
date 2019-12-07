@@ -34,6 +34,7 @@ Object.assign(Widget.prototype, {
         })
     },
     render: function (data) {
+        $(this.getContainer()).append(data.template);
         var script = this.looseParseJSON(data.script);
         script.call(this);
     },
@@ -85,6 +86,13 @@ Object.assign(Store.prototype, {
 
         });
         return values;
+    }, replaceKey: function (key, newKey) {
+        this.data.forEach(function (rec) {
+            if (rec[key]) {
+                rec[newKey] = rec[key];
+                delete rec[key];
+            }
+        })
     }
 });
 window.Widget = Widget;

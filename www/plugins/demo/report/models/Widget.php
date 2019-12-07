@@ -1,6 +1,7 @@
 <?php namespace Demo\Report\Models;
 
 use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\PluginVersions;
 use Model;
@@ -11,6 +12,7 @@ use Db;
  */
 class Widget extends Model
 {
+    private $loadedData = null;
     use \October\Rain\Database\Traits\Validation;
 
 
@@ -39,13 +41,43 @@ class Widget extends Model
         return strtolower($startWord) === 'select';
     }
 
-    public function executeData()
+    public function loadData()
     {
-        $dataScript = $this->data;
-        if ($this->isSqlScript($dataScript)) {
-            return Db::select(Db::raw($dataScript));
+        if (empty($this->loadedData)) {
+            $dataScript = $this->data;
+            if ($this->isSqlScript($dataScript)) {
+                return Db::select(Db::raw($dataScript));
+            }
+            $context = new ScriptContext();
+            $this->loadedData = $context->execute($dataScript);
         }
-        $context = new ScriptContext();
-        return $context->execute($dataScript);
+        return $this->loadedData;
+    }
+
+    public function loadTemplate()
+    {
+        if (empty($this->template)) {
+            return null;
+        }
+        $twigEngine = new TwigEngine();
+        return $twigEngine->compile($this->template)->render(['data' => $this->loadData()]);
+    }
+
+    public function loadScript()
+    {
+        if (empty($this->script)) {
+            return null;
+        }
+        $twigEngine = new TwigEngine();
+        return $twigEngine->compile($this->script)->render(['data' => $this->loadData()]);
+    }
+
+    public function evaluate()
+    {
+        $original = $this->getOriginal();
+        $original['data'] = $this->loadData();
+        $original['script'] = $this->loadScript();
+        $original['template'] = $this->loadTemplate();
+        return $original;
     }
 }

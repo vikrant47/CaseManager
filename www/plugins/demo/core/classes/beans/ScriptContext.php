@@ -38,9 +38,8 @@ class ScriptContext
         return $this->attributes[$key];
     }
 
-    public function execute($script, $attributes = [])
+    public function buildContext($attributes)
     {
-        $context = $this;
         $this->attributes = $this->attributes + $attributes;
         $this->currentUser = BackendAuth::getUser();
         $this->exception = new EmptyClass();
@@ -51,7 +50,12 @@ class ScriptContext
         foreach (ScriptContext::$EXCEPTION_CLASSES as $key => $value) {
             $this->exception->{$key} = $value;
         }
+    }
 
+    public function execute($script, $attributes = [])
+    {
+        $context = $this;
+        $this->buildContext($attributes);
         try {
             return eval($script);
         } catch (\Exception $ex) {

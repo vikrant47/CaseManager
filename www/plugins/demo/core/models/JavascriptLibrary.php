@@ -1,5 +1,6 @@
 <?php namespace Demo\Core\Models;
 
+use Backend\Classes\Controller;
 use Demo\Core\Models\PluginVersions;
 use Model;
 use System\Classes\MediaLibrary;
@@ -60,10 +61,21 @@ class JavascriptLibrary extends Model
             return MediaLibrary::url($file['javascript_file']);
         }, $this->javascript_files);
     }
+
     public function getCssFiles()
     {
         return array_map(function ($file) {
             return MediaLibrary::url($file['css_file']);
         }, $this->css_files);
+    }
+
+    public function addAssets(Controller $controller)
+    {
+        foreach ($this->getCssFiles() as $file) {
+            $controller->addCss($file);
+        }
+        foreach ($this->getJsFiles() as $file) {
+            $controller->addJs($file);
+        }
     }
 }
