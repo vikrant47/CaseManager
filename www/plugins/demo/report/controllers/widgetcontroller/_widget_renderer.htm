@@ -1,0 +1,16 @@
+<?php foreach ($widget->library->getCssFiles() as $file) {
+    $this->addCss($file);
+} ?>
+<?php foreach ($widget->library->getJsFiles() as $file) {
+    $this->addJs($file);
+} ?>
+<?php $this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js') ?>
+<?php if ($preview === true) { ?>
+    <a href="../render-widget/<?= $widget->id ?>" style="margin: 0;auto;">View</a>
+<?php } ?>
+<div id="widget-container-<?= $widget->id ?>" style="height: 100%;width: 100%;" class="widget-container"></div>
+
+<script>
+    var widget = new Widget(<?=$widget->id?>);
+    widget.fetchAndRender();
+</script>

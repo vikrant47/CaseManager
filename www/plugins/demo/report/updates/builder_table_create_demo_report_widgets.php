@@ -3,11 +3,11 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoReportReports extends Migration
+class BuilderTableCreateDemoReportWidgets extends Migration
 {
     public function up()
     {
-        Schema::create('demo_report_reports', function($table)
+        Schema::create('demo_report_widgets', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
@@ -29,6 +29,6 @@ class BuilderTableCreateDemoReportReports extends Migration
     
     public function down()
     {
-        Schema::dropIfExists('demo_report_reports');
+        Schema::dropIfExists('demo_report_widgets');
     }
 }

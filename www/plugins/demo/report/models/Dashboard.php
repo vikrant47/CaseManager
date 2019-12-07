@@ -29,7 +29,7 @@ class Dashboard extends Model
 
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
-        'report' => [Report::class]
+        'report' => [Widget::class]
     ];
 
     public $jsonable = ['reports_config'];

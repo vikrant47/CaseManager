@@ -37,7 +37,7 @@ Object.assign(Dashboard.prototype, {
             },
             gridType: 'fit',
         }).on('gsresizestop', function (event, elem) {
-            $(elem).find('.report-container').data('report').resize();
+            $(elem).find('.widget-container').data('report').resize();
         });
     },
     fetchAndRender: function () {

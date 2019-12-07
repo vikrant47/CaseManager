@@ -1,7 +1,7 @@
 <?php $this->addCss('/plugins/demo/report/controllers/dashboardcontroller/assets/css/gridstack.min.css') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/dashboardcontroller/assets/js/gridstack.all.js') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/dashboardcontroller/assets/js/dashboard.data.js') ?>
-<?php $this->addJs('/plugins/demo/report/controllers/reportcontroller/assets/js/report.data.js') ?>
+<?php $this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js') ?>
 <?php if ($preview === true) { ?>
     <a href="../render-dashboard/<?= $dashboard->slug ?>" style="margin: 0;auto;">View</a>
 <?php } ?>
@@ -14,11 +14,11 @@
                  data-gs-width="<?= $config['width'] ?>" data-gs-height="<?= $config['height'] ?>">
                 <div class="grid-stack-item-content">
                     <?php
-                    $reportController = new \Demo\Report\Controllers\ReportController();
-                    $report = \Demo\Report\Models\Report::where('id', $config['report'])->first();
-                    $reportController->addAssets($this, $report);
+                    $widgetController = new \Demo\Report\Controllers\WidgetController();
+                    $widget = \Demo\Report\Models\Widget::where('id', $config['report'])->first();
+                    $widgetController->addAssets($this, $widget);
                     ?>
-                    <?= $reportController->renderReport($report) ?>
+                    <?= $widgetController->renderWidget($widget) ?>
                 </div>
             </div>
 

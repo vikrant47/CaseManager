@@ -2,10 +2,10 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
-use Demo\Report\Models\Report;
+use Demo\Report\Models\Widget;
 use Input;
 
-class ReportController extends Controller
+class WidgetController extends Controller
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 
@@ -22,49 +22,49 @@ class ReportController extends Controller
     public function onData($id)
     {
         $id = Input::get('id');
-        $report = Report::where('id', $id)->first();
-        if (empty($report)) {
+        $widget = Widget::where('id', $id)->first();
+        if (empty($widget)) {
             $this->setStatusCode(404);
             return [];
         }
-        $reportJson = $report->getOriginal();
-        $reportJson['data'] = $report->executeData();
-        return json_encode($reportJson);
+        $widgetJson = $widget->getOriginal();
+        $widgetJson['data'] = $widget->executeData();
+        return json_encode($widgetJson);
     }
 
     public function onPreview($id)
     {
-        $report = Report::where('id', $id)->first();
-        if (empty($report)) {
+        $widget = Widget::where('id', $id)->first();
+        if (empty($widget)) {
             $this->setStatusCode(404);
             return '';
         }
-        $this->vars['report'] = $report;
+        $this->vars['widget'] = $widget;
         $this->vars['preview'] = true;
-        return ['report' => $report->getOriginal()];
+        return ['widget' => $widget->getOriginal()];
     }
 
-    public function addAssets($controller, Report $report)
+    public function addAssets($controller, Widget $widget)
     {
-        foreach ($report->library->getCssFiles() as $file) {
+        foreach ($widget->library->getCssFiles() as $file) {
             $controller->addCss($file);
         }
-        foreach ($report->library->getJsFiles() as $file) {
+        foreach ($widget->library->getJsFiles() as $file) {
             $controller->addJs($file);
         }
     }
 
-    public function renderReport($id)
+    public function renderWidget($id)
     {
-        if ($id instanceof Report) {
-            $report = $id;
+        if ($id instanceof Widget) {
+            $widget = $id;
         } else {
-            $report = Report::where('id', $id)->first();
+            $widget = Widget::where('id', $id)->first();
         }
-        if (empty($report)) {
+        if (empty($widget)) {
             $this->setStatusCode(404);
             return '';
         }
-        return $this->makePartial('report_renderer', ['report' => $report, 'preview' => false]);
+        return $this->makePartial('widget_renderer', ['widget' => $widget, 'preview' => false]);
     }
 }
