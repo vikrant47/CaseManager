@@ -27,9 +27,7 @@ class WidgetController extends Controller
             $this->setStatusCode(404);
             return [];
         }
-        $widgetJson = $widget->getOriginal();
-        $widgetJson['data'] = $widget->executeData();
-        return json_encode($widgetJson);
+        return json_encode($widget->evaluate());
     }
 
     public function onPreview($id)
@@ -51,11 +49,8 @@ class WidgetController extends Controller
 
     public function addAssets($controller, Widget $widget)
     {
-        foreach ($widget->library->getCssFiles() as $file) {
-            $controller->addCss($file);
-        }
-        foreach ($widget->library->getJsFiles() as $file) {
-            $controller->addJs($file);
+        if (!empty($widget->library)) {
+            $widget->library->addAssets($controller);
         }
     }
 

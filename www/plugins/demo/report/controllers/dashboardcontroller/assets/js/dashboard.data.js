@@ -1,23 +1,11 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
-
 var Dashboard = function (id) {
     this.id = id;
     this.$el = $('#dashboard-container-' + this.id);
     this.$el.data('dashboard', this);
     this.registerEvents();
-};
-Dashboard.confirm = function (message, callback) {
-    var _event = jQuery.Event('ajaxConfirmMessage')
-
-    _event.promise = $.Deferred();
-    if ($(window).triggerHandler(_event, [message]) !== undefined) {
-        _event.promise.done(function () {
-            callback();
-        });
-        return false
-    }
 };
 
 Object.assign(Dashboard.prototype, {
@@ -87,7 +75,7 @@ Object.assign(Dashboard.prototype, {
     },
     removeWidget(widget) {
         var _this = this;
-        Dashboard.confirm('Are you sure?', function () {
+        Engine.instance.confirm('Are you sure?', function () {
             var gridStack = _this.getGridStack();
             gridStack.removeWidget($(widget.getContainer()).parents('.grid-stack-item').eq(0));
         });

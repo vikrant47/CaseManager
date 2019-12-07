@@ -35,10 +35,18 @@ tabs:
             span: auto
             type: relation
             tab: Configuration
+        template:
+            label: Template
+            size: large
+            language: html
+            span: full
+            stretch: 0
+            type: codeeditor
+            tab: Configuration
         script:
             label: Script
             size: large
-            language: php
+            language: javascript
             span: full
             stretch: 0
             type: codeeditor

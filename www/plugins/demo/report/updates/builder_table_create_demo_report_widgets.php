@@ -18,6 +18,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description');
+            $table->text('template');
             $table->text('data');
             $table->text('script');
             $table->smallInteger('public');

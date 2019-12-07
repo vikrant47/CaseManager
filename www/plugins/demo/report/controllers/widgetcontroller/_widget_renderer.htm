@@ -17,7 +17,9 @@ $randomId = substr(md5(mt_rand()), 0, 7);
     </button>
 <?php } ?>
 <div id="widget-container-<?= $randomId ?>" style="height: 100%;width: 100%;" class="widget-container"
-     data-widget-id="<?= $widget->id ?>"></div>
+     data-widget-id="<?= $widget->id ?>">
+
+</div>
 
 <script>
     var widget = new Widget('<?=$widget->id?>', '<?=$randomId?>');
