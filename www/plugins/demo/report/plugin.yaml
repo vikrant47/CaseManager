@@ -16,6 +16,6 @@ navigation:
                 url: demo/report/dashboardcontroller
                 icon: icon-tachometer
             side-menu-item:
-                label: Reports
+                label: Widgets
                 url: demo/report/widgetcontroller
-                icon: icon-book
+                icon: icon-codepen

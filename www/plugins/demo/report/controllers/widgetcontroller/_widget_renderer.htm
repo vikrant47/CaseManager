@@ -1,3 +1,6 @@
+<?php
+$randomId = substr(md5(mt_rand()), 0, 7);
+?>
 <?php foreach ($widget->library->getCssFiles() as $file) {
     $this->addCss($file);
 } ?>
@@ -6,11 +9,17 @@
 } ?>
 <?php $this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js') ?>
 <?php if ($preview === true) { ?>
-    <a href="../render-widget/<?= $widget->id ?>" style="margin: 0;auto;">View</a>
+    <a class="preview-link" href="../render-widget/<?= $widget->id ?>" style="margin: 0;auto;">View</a>
 <?php } ?>
-<div id="widget-container-<?= $widget->id ?>" style="height: 100%;width: 100%;" class="widget-container"></div>
+<?php if ($dashboard === true) { ?>
+    <button type="button" class="close widget-control close-widget" data-dismiss="popover"
+            aria-hidden="true">×
+    </button>
+<?php } ?>
+<div id="widget-container-<?= $randomId ?>" style="height: 100%;width: 100%;" class="widget-container"
+     data-widget-id="<?= $widget->id ?>"></div>
 
 <script>
-    var widget = new Widget(<?=$widget->id?>);
+    var widget = new Widget('<?=$widget->id?>', '<?=$randomId?>');
     widget.fetchAndRender();
 </script>

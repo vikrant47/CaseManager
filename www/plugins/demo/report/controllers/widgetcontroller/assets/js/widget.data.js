@@ -1,9 +1,10 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
-var Widget = function (id) {
+var Widget = function (id, containerId) {
     this.id = id;
-    this.$el = $('#widget-container-' + this.id);
+    this.containerId = containerId || id;
+    this.$el = $('#widget-container-' + this.containerId);
     this.$el.data('widget', this);
     this.events = {resize: []};
 };

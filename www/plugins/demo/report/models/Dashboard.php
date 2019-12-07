@@ -32,5 +32,5 @@ class Dashboard extends Model
         'report' => [Widget::class]
     ];
 
-    public $jsonable = ['reports_config'];
+    public $jsonable = ['config_widgets'];
 }

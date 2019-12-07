@@ -8,14 +8,17 @@
 <div id="dashboard-container-<?= $dashboard->id ?>" style="height: 100%;width: 100%;" class="dashboard-container">
     <div class="grid-stack">
         <?php
-        foreach ($dashboard->reports_config as $config) {
+        foreach ($dashboard->config_widgets as $config) {
             ?>
             <div class="grid-stack-item" data-gs-x="<?= $config['x'] ?>" data-gs-y="<?= $config['y'] ?>"
                  data-gs-width="<?= $config['width'] ?>" data-gs-height="<?= $config['height'] ?>">
                 <div class="grid-stack-item-content">
+                    <button type="button" class="close widget-control close-widget" data-dismiss="popover"
+                            aria-hidden="true">×
+                    </button>
                     <?php
                     $widgetController = new \Demo\Report\Controllers\WidgetController();
-                    $widget = \Demo\Report\Models\Widget::where('id', $config['report'])->first();
+                    $widget = \Demo\Report\Models\Widget::where('id', $config['widget'])->first();
                     $widgetController->addAssets($this, $widget);
                     ?>
                     <?= $widgetController->renderWidget($widget) ?>
@@ -35,18 +38,19 @@
         <ul class="dropdown-menu" role="menu" data-dropdown-title="Manage dashboard">
             <li role="presentation">
                 <a role="menuitem" href="javascript:;" data-control="popup"
-                   data-handler="reportContainer::onLoadAddPopup" class="oc-icon-plus" tabindex="-1">
+                   data-handler="onLoadAddPopup" class="oc-icon-plus" tabindex="-1">
                     Add widget </a>
             </li>
             <li role="separator" class="divider"></li>
             <li role="presentation">
-                <a role="menuitem" href="javascript:;" class="oc-icon-floppy-o save-dashboard" data-hotkey="ctrl+enter, cmd+enter">
+                <a role="menuitem" href="javascript:;" class="oc-icon-floppy-o save-dashboard"
+                   data-hotkey="ctrl+enter, cmd+enter">
                     Save </a>
             </li>
             <li role="presentation">
                 <a role="menuitem" href="javascript:;"
                    data-request-success="$(window).trigger('oc.reportWidgetRefresh')"
-                   data-request="reportContainer::onResetWidgets" data-request-confirm="Reset layout back to default?"
+                   data-request="onResetWidgets" data-request-confirm="Reset layout back to default?"
                    class="oc-icon-repeat" tabindex="-1">
                     Reset layout </a>
             </li>
@@ -75,6 +79,15 @@
         -moz-border-radius: 3px;
         border-radius: 3px;
         margin-left: 5px;
+    }
+
+    .close-widget {
+        cursor: pointer;
+        position: relative;
+        right: 0;
+        top: 0;
+        z-index: 9999;
+    }
 </style>
 <script>
     var dashboard = new Dashboard('<?= $dashboard->id ?>');

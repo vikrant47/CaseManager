@@ -41,6 +41,11 @@ class WidgetController extends Controller
         }
         $this->vars['widget'] = $widget;
         $this->vars['preview'] = true;
+        $this->vars['dashboard'] = false;
+        if (Input::get('dashboardId')) {
+            $this->vars['dashboard'] = true;
+            $this->vars['preview'] = false;
+        }
         return ['widget' => $widget->getOriginal()];
     }
 
@@ -65,6 +70,6 @@ class WidgetController extends Controller
             $this->setStatusCode(404);
             return '';
         }
-        return $this->makePartial('widget_renderer', ['widget' => $widget, 'preview' => false]);
+        return $this->makePartial('widget_renderer', ['widget' => $widget, 'preview' => false, 'dashboard' => false]);
     }
 }

@@ -18,7 +18,7 @@ class BuilderTableCreateDemoReportDashboards extends Migration
             $table->string('name');
             $table->text('description');
             $table->smallInteger('active');
-            $table->text('reports_config');
+            $table->text('config_widgets');
             $table->smallInteger('public');
         });
     }
