@@ -7,7 +7,7 @@ plugin:
 navigation:
     main-menu-item:
         label: Reports
-        url: demo/report/reportcontroller
+        url: demo/report/widgetcontroller
         icon: icon-book
         order: '450'
         sideMenu:
@@ -16,6 +16,6 @@ navigation:
                 url: demo/report/dashboardcontroller
                 icon: icon-tachometer
             side-menu-item:
-                label: Reports
-                url: demo/report/reportcontroller
-                icon: icon-book
+                label: Widgets
+                url: demo/report/widgetcontroller
+                icon: icon-codepen

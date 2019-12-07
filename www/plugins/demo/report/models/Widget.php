@@ -9,7 +9,7 @@ use Db;
 /**
  * Model
  */
-class Report extends Model
+class Widget extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
@@ -17,7 +17,7 @@ class Report extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_report_reports';
+    public $table = 'demo_report_widgets';
 
     /**
      * @var array Validation rules

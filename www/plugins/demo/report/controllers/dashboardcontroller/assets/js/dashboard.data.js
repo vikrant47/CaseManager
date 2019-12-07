@@ -1,12 +1,29 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
+
 var Dashboard = function (id) {
     this.id = id;
     this.$el = $('#dashboard-container-' + this.id);
     this.$el.data('dashboard', this);
+    this.registerEvents();
 };
+Dashboard.confirm = function (message, callback) {
+    var _event = jQuery.Event('ajaxConfirmMessage')
+
+    _event.promise = $.Deferred();
+    if ($(window).triggerHandler(_event, [message]) !== undefined) {
+        _event.promise.done(function () {
+            callback();
+        });
+        return false
+    }
+};
+
 Object.assign(Dashboard.prototype, {
+    getGridStack: function () {
+        return this.$el.find('.grid-stack').data('gridstack');
+    },
     getCanvas: function () {
         var $elem = this.$el;
         var $canvas = $elem.find('canvas');
@@ -17,6 +34,15 @@ Object.assign(Dashboard.prototype, {
     },
     getContainer: function () {
         return this.$el.get(0);
+    },
+    registerEvents: function () {
+        var _this = this;
+        $(window).on('demo.dashboardWidgetAdded', function (event, data) {
+            _this.addWidget(data.widget, data.size);
+        });
+        $(document).on('click', '.close-widget', function () {
+            _this.removeWidget($(this).next().data('widget'));
+        });
     },
     loadData: function (callabck) {
         var _this = this;
@@ -37,7 +63,7 @@ Object.assign(Dashboard.prototype, {
             },
             gridType: 'fit',
         }).on('gsresizestop', function (event, elem) {
-            $(elem).find('.report-container').data('report').resize();
+            $(elem).find('.widget-container').data('widget').resize();
         });
     },
     fetchAndRender: function () {
@@ -46,12 +72,32 @@ Object.assign(Dashboard.prototype, {
             _this.render(data);
         });
     },
+    addWidget: function (widget, size) {
+        var gridStack = this.getGridStack();
+        var $template = $('<div class="widget-template"><button type="button" class="close widget-control close-widget" >×</button></div>');
+        $template.request('onPreview', {
+            url: '/backend/demo/report/widgetcontroller/render-widget/' + widget.id,
+            data: Object.assign({dashboard: true}, widget),
+            update: {widget_renderer: '#widget-template'}
+        });
+        $template.on('ajaxSuccess', function (event, context, data) {
+            gridStack.addWidget($template.append(data.widget_renderer).get(0), 0, 0, size, 5);
+            $template.find('.preview-link').hide();
+        });
+    },
+    removeWidget(widget) {
+        var _this = this;
+        Dashboard.confirm('Are you sure?', function () {
+            var gridStack = _this.getGridStack();
+            gridStack.removeWidget($(widget.getContainer()).parents('.grid-stack-item').eq(0));
+        });
+    },
     looseParseJSON: function (script) {
         return new Function(script);
     },
     serialize: function () {
         var items = [];
-        var $grid = this.$el.find('.grid-stack')
+        var $grid = this.$el.find('.grid-stack');
         $grid.find('.grid-stack-item.ui-draggable').each(function () {
             var $this = $(this);
             items.push({
@@ -59,7 +105,7 @@ Object.assign(Dashboard.prototype, {
                 y: $this.attr('data-gs-y'),
                 width: $this.attr('data-gs-width'),
                 height: $this.attr('data-gs-height'),
-                report: $this.find('.report-container').data('report').id
+                widget: $this.find('.widget-container').data('widget').id
             });
         });
         return items;
@@ -70,7 +116,7 @@ Object.assign(Dashboard.prototype, {
             // confirm: 'Are you sure?',
             data: {
                 id: this.id,
-                reports_config: data,
+                config_widgets: data,
             },
             flash: 1,
         })

@@ -1,0 +1,4 @@
+title: Widget
+modelClass: Demo\Report\Models\Widget
+toolbar:
+    buttons: reorder_toolbar

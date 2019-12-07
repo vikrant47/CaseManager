@@ -1,6 +1,6 @@
-list: $/demo/report/models/report/columns.yaml
-modelClass: Demo\Report\Models\Report
-title: ReportController
+list: $/demo/report/models/widget/columns.yaml
+modelClass: Demo\Report\Models\Widget
+title: Widget
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true
@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'demo/report/reportcontroller/update/:id'
+recordUrl: 'demo/report/widgetcontroller/update/:id'

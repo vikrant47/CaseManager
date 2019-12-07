@@ -34,7 +34,7 @@ fields:
         type: switch
 tabs:
     fields:
-        reports_config:
+        config_widgets:
             label: Configuration
             prompt: 'Add new item'
             span: auto

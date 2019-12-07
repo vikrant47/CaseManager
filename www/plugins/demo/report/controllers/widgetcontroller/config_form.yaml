@@ -1,0 +1,10 @@
+name: Widget
+form: $/demo/report/models/widget/fields.yaml
+modelClass: Demo\Report\Models\Widget
+defaultRedirect: demo/report/widgetcontroller
+create:
+    redirect: 'demo/report/widgetcontroller/update/:id'
+    redirectClose: demo/report/widgetcontroller
+update:
+    redirect: demo/report/widgetcontroller
+    redirectClose: demo/report/widgetcontroller

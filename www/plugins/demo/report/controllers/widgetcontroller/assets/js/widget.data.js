@@ -1,13 +1,14 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
-var Report = function (id) {
+var Widget = function (id, containerId) {
     this.id = id;
-    this.$el = $('#report-container-' + this.id);
-    this.$el.data('report', this);
+    this.containerId = containerId || id;
+    this.$el = $('#widget-container-' + this.containerId);
+    this.$el.data('widget', this);
     this.events = {resize: []};
 };
-Object.assign(Report.prototype, {
+Object.assign(Widget.prototype, {
     getCanvas: function () {
         var $elem = this.$el;
         var $canvas = $elem.find('canvas');
@@ -22,7 +23,7 @@ Object.assign(Report.prototype, {
     loadData: function (callabck) {
         var _this = this;
         $.request('onData', {
-            url: '/backend/demo/report/reportcontroller/render-report/' + this.slug,
+            url: '/backend/demo/report/widgetcontroller/render-widget/' + this.slug,
             data: {id: this.id},
             success: function (data) {
                 var data = JSON.parse(data.result);
@@ -86,5 +87,5 @@ Object.assign(Store.prototype, {
         return values;
     }
 });
-window.Report = Report;
+window.Widget = Widget;
 
