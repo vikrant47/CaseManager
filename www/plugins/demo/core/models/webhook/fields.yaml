@@ -1,0 +1,72 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        span: auto
+        type: text
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+tabs:
+    fields:
+        condition:
+            label: Condition
+            size: large
+            language: php
+            span: full
+            type: codeeditor
+            tab: input
+        url:
+            label: URL
+            span: auto
+            type: text
+            tab: 'API Config'
+        method:
+            label: Method
+            options:
+                get: Get
+                put: Put
+                delete: Delete
+                post: Post
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'API Config'
+        request_headers:
+            label: 'Request Headers'
+            prompt: 'Add new item'
+            span: auto
+            type: repeater
+            tab: 'API Config'
+            form:
+                fields:
+                    name:
+                        label: Name
+                        span: auto
+                        type: text
+                    value:
+                        label: Value
+                        span: auto
+                        type: text
+        request_body:
+            label: 'Request Body'
+            prompt: 'Add new item'
+            span: auto
+            type: repeater
+            tab: 'API Config'
+            form:
+                fields:
+                    name:
+                        label: Name
+                        span: auto
+                        type: text
+                    value:
+                        label: Value
+                        span: auto
+                        type: text

@@ -56,7 +56,7 @@ class EventHandlerServiceProvider extends ServiceProvider
         $this->logger->debug(get_class($model) . ' ' . $eventName . ' database handler loaded ' . $dbHandlers->count());
         // throw new ApplicationException($dbHandlers->count());
         foreach ($dbHandlers as $handler) {
-            $this->logger->debug(get_class($model) . ' ' . $eventName . ' Executing ' . $dbHandlers->name);
+            $this->logger->debug(get_class($model) . ' ' . $eventName . ' Executing ' . $handler->name);
             $handler->handler($eventName, $model);
         }
     }

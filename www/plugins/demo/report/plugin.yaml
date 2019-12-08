@@ -4,6 +4,9 @@ plugin:
     author: demo
     icon: oc-icon-book
     homepage: ''
+model-alias:
+    Widget: 'Widget'
+    Dashboard: 'Dashboard'
 navigation:
     main-menu-item:
         label: Reports

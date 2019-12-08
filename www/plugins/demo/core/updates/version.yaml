@@ -12,3 +12,6 @@
 1.0.5:
     - 'Created table demo_core_iframes'
     - builder_table_create_demo_core_iframes.php
+1.0.6:
+    - 'Created table demo_core_webhooks'
+    - builder_table_create_demo_core_webhooks.php
