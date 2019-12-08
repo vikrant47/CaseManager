@@ -4,7 +4,6 @@ conf
 www/.DS_Store
 www/*.log
 www/bootstrap
-www/config
 www/install_files
 www/modules
 !www/storage/app/media/system/plugins

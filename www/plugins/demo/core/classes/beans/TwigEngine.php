@@ -5,22 +5,23 @@ namespace Demo\Core\Classes\Beans;
 
 use BackendAuth;
 use October\Rain\Exception\ApplicationException;
+use October\Rain\Parse\Twig;
+use App;
 
-class TwigEngine
+class TwigEngine extends Twig
 {
-    /**@var \Twig\Environment */
-    private $twig;
+    /**@var \Twig\TemplateWrapper */
+    private $template;
     private $context = [];
 
     public function compile($template): self
     {
-        if(empty($template)){
+        if (empty($template)) {
             throw new \Exception('Provided template is emmpty');
         }
-        $loader = new \Twig\Loader\ArrayLoader([
-            'index.html' => $template,
-        ]);
-        $this->twig = new \Twig\Environment($loader);
+        /**@var $twig \Twig\Environment */
+        $twig = App::make('twig.environment');
+        $this->template = $twig->createTemplate($template);
         return $this;
     }
 
@@ -32,6 +33,6 @@ class TwigEngine
 
     public function render($context = [])
     {
-        return $this->twig->render('index.html', $this->buildContext($context));
+        return $this->template->render($this->buildContext($context));
     }
 }
