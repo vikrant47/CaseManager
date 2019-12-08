@@ -14,9 +14,6 @@
             <div class="grid-stack-item" data-gs-x="<?= $config['x'] ?>" data-gs-y="<?= $config['y'] ?>"
                  data-gs-width="<?= $config['width'] ?>" data-gs-height="<?= $config['height'] ?>">
                 <div class="grid-stack-item-content">
-                    <button type="button" class="close widget-control close-widget" data-dismiss="popover"
-                            aria-hidden="true">×
-                    </button>
                     <?php
                     $widgetController = new \Demo\Report\Controllers\WidgetController();
                     $widget = \Demo\Report\Models\Widget::where('id', $config['widget'])->first();
@@ -86,10 +83,15 @@
         cursor: pointer;
         z-index: 9999;
     }
-    .grid-stack>.grid-stack-item>.grid-stack-item-content{
+
+    .grid-stack > .grid-stack-item > .grid-stack-item-content {
         overflow: hidden;
         background-color: white;
         /*padding: 10px 10px 10px 10px;*/
+    }
+
+    .grid-stack > .grid-stack-item > .ui-resizable-se, .grid-stack > .grid-stack-item > .ui-resizable-sw {
+        background-image: none;
     }
 </style>
 <script>

@@ -28,9 +28,9 @@ Object.assign(Dashboard.prototype, {
         $(window).on('demo.dashboardWidgetAdded', function (event, data) {
             _this.addWidget(data.widget, data.size);
         });
-        $(document).on('click', '.close-widget', function () {
+        /*$(document).on('click', '.close-widget', function () {
             _this.removeWidget($(this).next().data('widget'));
-        });
+        });*/
     },
     loadData: function (callabck) {
         var _this = this;
@@ -59,6 +59,24 @@ Object.assign(Dashboard.prototype, {
         this.loadData(function (data) {
             _this.render(data);
         });
+    },
+    getGridStackNode: function (widget) {
+        return $(widget.getContainer()).parents('.grid-stack-item').eq(0).data('_gridstack_node');
+    },
+    getWidth: function (widget) {
+        return this.getGridStackNode(widget).width;
+    },
+    resize: function (widget, dimension) {
+        if (!dimension.width) {
+            dimension.width = this.getWidth(widget);
+        }
+        if (!dimension.height) {
+            dimension.height = this.getHeight(widget);
+        }
+        return this.getGridStack().resize($(widget.getContainer()).parents('.grid-stack-item').eq(0), dimension.width, dimension.height);
+    },
+    getHeight: function (widget, height) {
+        return this.getGridStackNode(widget).height;
     },
     addWidget: function (widget, size) {
         var gridStack = this.getGridStack();

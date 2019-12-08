@@ -1,0 +1,4 @@
+title: WebhookController
+modelClass: Demo\Core\Models\Webhook
+toolbar:
+    buttons: reorder_toolbar

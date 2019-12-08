@@ -3,29 +3,72 @@ if (!Object.assign) {
 }
 var Widget = function (id, containerId) {
     this.id = id;
+    this.option = {};
     this.containerId = containerId || id;
     this.model = {id: id};
-    this.$el = $('#widget-container-' + this.containerId);
-    this.$header = this.$el.find('.widget-header');
-    this.$body = this.$el.find('.widget-body');
-    this.$footer = this.$el.find('.widget-footer');
-    this.$el.data('widget', this);
+    this.$container = $('#widget-container-' + this.containerId);
+    this.$header = this.$container.find('.widget-header');
+    this.$body = this.$container.find('.widget-body');
+    this.$footer = this.$container.find('.widget-footer');
+    this.$container.data('widget', this);
     this.events = {resize: []};
 };
 Widget.defaultOptions = {
     header: {
-        title: '',
+        title: function () {
+            return this.model.name;
+        },
         actions: [],
         defaultActions: [{
-
+            text: '',
+            icon: 'icon-minus',
+            cls: 'widget-control minimize-widget',
+            handler: function (event, widget) {
+                var $this = $(this);
+                $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus');
+                var dashboard = widget.getDashboard();
+                if (dashboard) {
+                    if (!widget.$body.is(':hidden')) {
+                        widget.height = dashboard.getHeight(widget);
+                        dashboard.resize(widget, {height: 1});
+                    } else {
+                        dashboard.resize(widget, {height: widget.height});
+                    }
+                }
+                widget.$body.slideToggle();
+            }
+        }, {
+            text: '',
+            icon: 'icon-trash',
+            cls: 'close-widget',
+            handler: function (event, widget) {
+                widget.getDashboard().removeWidget(this);
+            }
         }],
     }, footer: {
         title: '',
         actions: []
     },
 };
+Widget.defaultActionOption = {
+    template: '<button class="btn"><i class=""></i> </button>',
+    icon: 'icon-link',
+    event: 'click',
+    cls: '',
+    handler: function () {
+
+    }
+};
 Object.assign(Widget.prototype, {
-    init: function (options) {
+    init: function (option) {
+        options = Object.assign(Widget.defaultOptions, option);
+        this.setDefaultHeaderActions(options.header.defaultActions);
+        this.setHeaderActions(options.header.actions);
+        this.setFooterActions(options.footer.actions);
+        this.setTitle(options.header.title);
+    },
+    getDashboard: function () {
+        return this.$container.parents('.dashboard-container').eq(0).data('dashboard');
     },
     getCanvas: function () {
         var $elem = this.$body;
@@ -36,7 +79,7 @@ Object.assign(Widget.prototype, {
         return $canvas.get(0);
     },
     getContainer: function () {
-        return this.$el.get(0);
+        return this.$container.get(0);
     },
     getHeader: function () {
         return this.$header.get(0);
@@ -47,33 +90,39 @@ Object.assign(Widget.prototype, {
     getBody: function () {
         return this.$body.get(0);
     },
+    setOption: function (option) {
+        this.option = option;
+    },
     addActions: function ($element, actions) {
-        var defaultActionOption = {
-            template: '<button><i class=""></i> </button>',
-            icon: 'icon-link',
-            event: 'click',
-            handler: function () {
-
-            }
-        };
         var _this = this;
         actions.forEach(function (action) {
-            action = Object.assign(defaultActionOption, action);
-            var $template = $(action.template).on(action.event, function () {
-                action.handler.apply(this, arguments);
-            }).find('i').addClass(action.icon);
+            action = Object.assign({}, Widget.defaultActionOption, action);
+            var $template = $(action.template);
             if (action.text) {
                 $template.text(action.text);
             }
+            $template.addClass(action.cls).on(action.event, function (event) {
+                action.handler.apply(this, [event, _this]);
+            }).find('i').addClass(action.icon);
             $element.append($template);
         });
     },
+    setTitle: function (title) {
+        if (typeof title === 'function') {
+            title = title.apply(this);
+        }
+        this.$header.find('h3').text(title);
+    },
+    setDefaultHeaderActions: function (actions) {
+        var $toolbar = this.$header.find('.default-toolbar');
+        this.addActions($toolbar, actions);
+    },
     setHeaderActions: function (actions) {
-        var $toolbar = this.$header.find('widget-toolbar');
+        var $toolbar = this.$header.find('.user-toolbar');
         this.addActions($toolbar, actions);
     },
     setFooterActions: function (actions) {
-        var $toolbar = this.$header.find('widget-toolbar');
+        var $toolbar = this.$header.find('.widget-toolbar');
         this.addActions($toolbar, actions);
     },
     loadData: function (callabck) {
@@ -90,6 +139,7 @@ Object.assign(Widget.prototype, {
         })
     },
     render: function (widget) {
+        this.init(this.option);
         $(this.getBody()).append(widget.model.template);
         var script = this.looseParseJSON(widget.model.script);
         script.call(this);
