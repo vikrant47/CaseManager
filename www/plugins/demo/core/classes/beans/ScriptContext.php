@@ -43,6 +43,7 @@ class ScriptContext
         $this->attributes = $this->attributes + $attributes;
         $this->currentUser = BackendAuth::getUser();
         $this->exception = new EmptyClass();
+        $this->request = request();
         foreach ($this->attributes as $key => $value) {
             ${$key} = $value;
             $this->{$key} = $value;

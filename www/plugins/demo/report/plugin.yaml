@@ -9,7 +9,7 @@ navigation:
         label: Reports
         url: demo/report/widgetcontroller
         icon: icon-book
-        order: '450'
+        order: '500'
         sideMenu:
             side-menu-item2:
                 label: Dashboards

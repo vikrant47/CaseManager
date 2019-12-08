@@ -4,13 +4,31 @@ if (!Object.assign) {
 var Widget = function (id, containerId) {
     this.id = id;
     this.containerId = containerId || id;
+    this.model = {id: id};
     this.$el = $('#widget-container-' + this.containerId);
+    this.$header = this.$el.find('.widget-header');
+    this.$body = this.$el.find('.widget-body');
+    this.$footer = this.$el.find('.widget-footer');
     this.$el.data('widget', this);
     this.events = {resize: []};
 };
+Widget.defaultOptions = {
+    header: {
+        title: '',
+        actions: [],
+        defaultActions: [{
+
+        }],
+    }, footer: {
+        title: '',
+        actions: []
+    },
+};
 Object.assign(Widget.prototype, {
+    init: function (options) {
+    },
     getCanvas: function () {
-        var $elem = this.$el;
+        var $elem = this.$body;
         var $canvas = $elem.find('canvas');
         if ($canvas.length === 0) {
             $canvas = $('<canvas style="width: 100%;height: 100%;"/>').appendTo($elem);
@@ -20,28 +38,66 @@ Object.assign(Widget.prototype, {
     getContainer: function () {
         return this.$el.get(0);
     },
+    getHeader: function () {
+        return this.$header.get(0);
+    },
+    getFooter: function () {
+        return this.$footer.get(0);
+    },
+    getBody: function () {
+        return this.$body.get(0);
+    },
+    addActions: function ($element, actions) {
+        var defaultActionOption = {
+            template: '<button><i class=""></i> </button>',
+            icon: 'icon-link',
+            event: 'click',
+            handler: function () {
+
+            }
+        };
+        var _this = this;
+        actions.forEach(function (action) {
+            action = Object.assign(defaultActionOption, action);
+            var $template = $(action.template).on(action.event, function () {
+                action.handler.apply(this, arguments);
+            }).find('i').addClass(action.icon);
+            if (action.text) {
+                $template.text(action.text);
+            }
+            $element.append($template);
+        });
+    },
+    setHeaderActions: function (actions) {
+        var $toolbar = this.$header.find('widget-toolbar');
+        this.addActions($toolbar, actions);
+    },
+    setFooterActions: function (actions) {
+        var $toolbar = this.$header.find('widget-toolbar');
+        this.addActions($toolbar, actions);
+    },
     loadData: function (callabck) {
         var _this = this;
         $.request('onData', {
-            url: '/backend/demo/report/widgetcontroller/render-widget/' + this.slug,
-            data: {id: this.id},
+            url: '/backend/demo/report/widgetcontroller/render-widget/' + this.model.slug,
+            data: {id: this.model.id},
             success: function (data) {
-                var data = JSON.parse(data.result);
-                Object.assign(_this, data);
-                _this.data = new Store(_this.data);
+                var result = JSON.parse(data.result);
+                Object.assign(_this.model, result);
+                _this.data = new Store(_this.model.data);
                 callabck(_this);
             }
         })
     },
-    render: function (data) {
-        $(this.getContainer()).append(data.template);
-        var script = this.looseParseJSON(data.script);
+    render: function (widget) {
+        $(this.getBody()).append(widget.model.template);
+        var script = this.looseParseJSON(widget.model.script);
         script.call(this);
     },
     fetchAndRender: function () {
         var _this = this;
-        this.loadData(function (data) {
-            _this.render(data);
+        this.loadData(function (widget) {
+            _this.render(widget);
         });
     },
     looseParseJSON: function (script) {
