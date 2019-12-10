@@ -1,6 +1,7 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
+
 var Widget = function (id, containerId) {
     this.id = id;
     this.option = {};
@@ -35,14 +36,31 @@ Widget.defaultOptions = {
                         dashboard.resize(widget, {height: widget.height});
                     }
                 }
-                widget.$body.slideToggle();
+                widget.$body.slideToggle('slow');
+            }
+        }, {
+            text: '',
+            icon: 'icon-wrench',
+            cls: 'setting-widget',
+            type: 'dropdown',
+            actions: [{
+                text: 'Export',
+                icon: 'icon-trash',
+                cls: 'export-widget',
+                type: 'dropdownItem',
+                handler: function (event, widget) {
+
+                }
+            }],
+            handler: function (event, widget) {
+
             }
         }, {
             text: '',
             icon: 'icon-trash',
             cls: 'close-widget',
             handler: function (event, widget) {
-                widget.getDashboard().removeWidget(this);
+                widget.getDashboard().removeWidget(widget);
             }
         }],
     }, footer: {
@@ -50,15 +68,7 @@ Widget.defaultOptions = {
         actions: []
     },
 };
-Widget.defaultActionOption = {
-    template: '<button class="btn"><i class=""></i> </button>',
-    icon: 'icon-link',
-    event: 'click',
-    cls: '',
-    handler: function () {
 
-    }
-};
 Object.assign(Widget.prototype, {
     init: function (option) {
         options = Object.assign(Widget.defaultOptions, option);
@@ -93,20 +103,6 @@ Object.assign(Widget.prototype, {
     setOption: function (option) {
         this.option = option;
     },
-    addActions: function ($element, actions) {
-        var _this = this;
-        actions.forEach(function (action) {
-            action = Object.assign({}, Widget.defaultActionOption, action);
-            var $template = $(action.template);
-            if (action.text) {
-                $template.text(action.text);
-            }
-            $template.addClass(action.cls).on(action.event, function (event) {
-                action.handler.apply(this, [event, _this]);
-            }).find('i').addClass(action.icon);
-            $element.append($template);
-        });
-    },
     setTitle: function (title) {
         if (typeof title === 'function') {
             title = title.apply(this);
@@ -115,15 +111,15 @@ Object.assign(Widget.prototype, {
     },
     setDefaultHeaderActions: function (actions) {
         var $toolbar = this.$header.find('.default-toolbar');
-        this.addActions($toolbar, actions);
+        Engine.instance.addActions($toolbar, actions, this);
     },
     setHeaderActions: function (actions) {
         var $toolbar = this.$header.find('.user-toolbar');
-        this.addActions($toolbar, actions);
+        Engine.instance.addActions($toolbar, actions, this);
     },
     setFooterActions: function (actions) {
         var $toolbar = this.$header.find('.widget-toolbar');
-        this.addActions($toolbar, actions);
+        Engine.instance.addActions($toolbar, actions, this);
     },
     loadData: function (callabck) {
         var _this = this;
