@@ -3,7 +3,39 @@ if (!Object.assign) {
 }
 var Engine = function () {
 };
+Engine.defaultActionOption = {
+    button: {
+        template: '<button class="action action-button"><i></i> </button>',
+        icon: 'icon-link',
+        event: 'click',
+        cls: '',
+        handler: function () {
 
+        }
+    },
+    dropdown: {
+        template: '<div class="dropdown action action-list">   <a href="#" data-toggle="dropdown" class="dropdown-title"></a>' +
+            '<ul class="dropdown-menu" role="menu" data-dropdown-title="Add something large"></ul>' +
+            '</div>',
+        element: {text: '.dropdown-title', appendTo: 'ul', icon: '.dropdown-title'},
+        icon: 'icon-link',
+        event: 'click',
+        cls: '',
+        handler: function () {
+
+        }
+    },
+    dropdownItem: {
+        template: '<li class="action-list-item" role="presentation"><a role="menuitem" tabindex="-1" href="#" class=" dropdown-item-title"></a></li>',
+        element: {text: '.dropdown-item-title', appendTo: 'li', icon: '.dropdown-item-title'},
+        icon: 'icon-link',
+        event: 'click',
+        cls: '',
+        handler: function () {
+
+        }
+    }
+};
 Object.assign(Engine.prototype, {
     boot: function () {
         this.addNavFlyout();
@@ -14,7 +46,7 @@ Object.assign(Engine.prototype, {
         var _this = this;
     },
     confirm: function (message, callback) {
-        var _event = jQuery.Event('ajaxConfirmMessage')
+        var _event = jQuery.Event('ajaxConfirmMessage');
 
         _event.promise = $.Deferred();
         if ($(window).triggerHandler(_event, [message]) !== undefined) {
@@ -86,9 +118,44 @@ Object.assign(Engine.prototype, {
             this.$resizeFlyout.data('flyout-state', 'maximized');
             this.$navFlyout.hide();
         }
+    },
+    addActions: function ($element, actions, scope) {
+        var _this = this;
+        if (!scope) {
+            scope = this;
+        }
+        actions.forEach(function (action) {
+            action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
+            var $template = $(action.template);
+            if (action.text) {
+                var $textElement = $template;
+                if (action.element && action.element.text) {
+                    $textElement = $template.find(action.element.text);
+                }
+                $textElement.text(action.text);
+            }
+            $template.addClass(action.cls).on(action.event, function (event) {
+                action.handler.apply(this, [event, scope]);
+            });
+            if (action.icon) {
+                var $icon = $template.find('i');
+                if (action.element && action.element.icon) {
+                    $icon = $template.find(action.element.icon);
+                }
+                $icon.addClass(action.icon);
+            }
+            $element.append($template);
+            if (action.actions && action.actions.length > 0) {
+                var $appendTo = $template;
+                if (action.element.appendTo) {
+                    $appendTo = $template.find(action.element.appendTo);
+                }
+                _this.addActions($appendTo, action.actions, scope);
+            }
+        });
     }
-})
-;
+});
+window.Engine = Engine;
 Engine.instance = new Engine();
 $(document).ready(function () {
     Engine.instance.boot();

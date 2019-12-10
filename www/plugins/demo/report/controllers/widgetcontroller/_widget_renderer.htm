@@ -31,24 +31,27 @@ $randomId = substr(md5(mt_rand()), 0, 7);
     <div class="widget-footer"></div>
 </div>
 <style>
+    .widget-container:hover {
+        cursor: move;
+    }
     .widget-container {
-        border-top-color: #00a65a;
+        box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
         position: relative;
-        border-radius: 3px;
+        border-radius: 0px;
         background: #ffffff;
-        border-top: 3px solid #d2d6de;
+        border-top: 3px solid #759ec7;
         margin-bottom: 20px;
         width: 100%;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     }
 
-    .widget-container .widget-toolbar button {
+    .widget-container .widget-toolbar .action,.widget-container .widget-toolbar .action-item-list {
         padding: 5px;
         font-size: 12px;
         background: transparent;
         color: #97a0b3;
+        border: none;
+        display: inline;
     }
-
     .widget-container .widget-toolbar {
         position: absolute;
         right: 10px;
@@ -65,7 +68,7 @@ $randomId = substr(md5(mt_rand()), 0, 7);
 
     .widget-container .widget-header .widget-title {
         display: inline-block;
-        font-size: 18px;
+        font-size: 16px;
         margin: 0;
         line-height: 1;
     }
