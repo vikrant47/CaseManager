@@ -44,12 +44,28 @@ Widget.defaultOptions = {
             cls: 'setting-widget',
             type: 'dropdown',
             actions: [{
-                text: 'Export',
-                icon: 'icon-trash',
+                text: 'Export to CSV',
+                icon: 'icon-csv',
                 cls: 'export-widget',
                 type: 'dropdownItem',
                 handler: function (event, widget) {
-
+                    window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/csv');
+                }
+            }, {
+                text: 'Export to Excel',
+                icon: 'icon-csv',
+                cls: 'export-widget',
+                type: 'dropdownItem',
+                handler: function (event, widget) {
+                    window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/xls');
+                }
+            }, {
+                text: 'Export to Pdf',
+                icon: 'icon-csv',
+                cls: 'export-widget',
+                type: 'dropdownItem',
+                handler: function (event, widget) {
+                    window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/pdf');
                 }
             }],
             handler: function (event, widget) {
