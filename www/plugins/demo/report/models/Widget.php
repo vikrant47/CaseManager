@@ -4,14 +4,20 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\PluginVersions;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Model;
 use Db;
+use October\Rain\Support\Collection;
 
 /**
  * Model
  */
-class Widget extends Model
+class Widget extends Model implements FromCollection
 {
+    use \Maatwebsite\Excel\Concerns\Exportable;
+    const SUPPORTED_EXPORT_FORMATS = ['xls', 'pdf', 'csv'];
+
     private $loadedData = null;
     use \October\Rain\Database\Traits\Validation;
 
@@ -79,5 +85,15 @@ class Widget extends Model
         $original['script'] = $this->loadScript();
         $original['template'] = $this->loadTemplate();
         return $original;
+    }
+
+    /**Excel collection export implementation*/
+    public function collection()
+    {
+        $data = $this->loadData();
+        if (is_array($data)) {
+            $data = new Collection($data);
+        }
+        return $data;
     }
 }

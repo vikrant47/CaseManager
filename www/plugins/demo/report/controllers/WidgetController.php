@@ -4,6 +4,7 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Report\Models\Widget;
 use Input;
+use Maatwebsite\Excel\Excel;
 
 class WidgetController extends Controller
 {
@@ -66,5 +67,26 @@ class WidgetController extends Controller
             return '';
         }
         return $this->makePartial('widget_renderer', ['widget' => $widget, 'preview' => false, 'dashboard' => false]);
+    }
+
+    /**
+     * This will export data in given format
+     */
+    public function export($id, $format)
+    {
+
+        if (array_search($format, Widget::SUPPORTED_EXPORT_FORMATS) < 0) {
+            $this->setStatusCode(400);
+            return 'Invalid format ' . $format;
+        }
+        $widget = Widget::where('id', $id)->first();
+        if (empty($widget)) {
+            $this->setStatusCode(404);
+            return '';
+        }
+        if ($format === 'json') {
+            return $widget->collection()->toJson();
+        }
+        return $widget->download(camel_case($widget->name) . '.' . $format);
     }
 }

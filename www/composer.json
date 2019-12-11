@@ -40,7 +40,9 @@
         "october/cms": "~1.0",
         "laravel/framework": "5.5.*",
         "wikimedia/composer-merge-plugin": "dev-master",
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "maatwebsite/excel": "^3.1",
+        "dompdf/dompdf": "^0.8.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.7",
