@@ -2,6 +2,7 @@
 
 namespace Demo\Core\EventHandlers\CustomField;
 
+use October\Rain\Exception\ApplicationException;
 use Schema;
 use BackendAuth;
 use Demo\Core\Classes\Helpers\PluginConnection;
@@ -35,6 +36,10 @@ class BeforeCreateOrUpdateCustomField
 
     public function handlerUpdated($model)
     {
+        $original = $model->getOriginal();
+        if ($original['model'] !== $model->attributes['model']) {
+            throw new ApplicationException('Changing model is not allowed');
+        }
         $targetModel = new $model->model();
         $this->updateColumn($targetModel->table, $model->name, $this->attributes);
     }

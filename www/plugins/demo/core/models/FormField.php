@@ -30,8 +30,11 @@ class FormField extends Model
         'field' => [CustomField::class, 'key' => 'field_id']
     ];
 
-    public function getFormOptions()
+    public function getFormOptions($value, $data)
     {
+        if(isset($data->field)){
+            return PluginConnection::getFormsAlias($data->field->model);
+        }
         return PluginConnection::getAllFormsAlias();
     }
 

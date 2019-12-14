@@ -9,6 +9,8 @@ fields:
         label: Form
         showSearch: true
         span: auto
+        dependsOn:
+            - field
         type: dropdown
     active:
         label: Active
