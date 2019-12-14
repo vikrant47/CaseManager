@@ -75,19 +75,36 @@ class PluginConnection
         return $configurations;
     }
 
-    public static function getAllFormsAlias()
+    public static function getFormsAlias($modelClass, $modelName = null)
     {
+        if (empty($modelName)) {
+            $modelName = substr($modelClass, strripos($modelClass, '\\') + 1);
+        }
+        $forms = [];
+        $modelDirPath = base_path() . '/plugins/' . strtolower($modelClass);
+        if (file_exists($modelDirPath)) {
+            $formFiles = scandir($modelDirPath);
+            foreach ($formFiles as $file) {
+                if (strpos($file, 'field') > -1) {
+                    $forms['$/' . str_replace('\\', '/', strtolower($modelClass)) . '/' . $file] = str_replace('.yaml', '', $file) . ' - ' . $modelName . '';
+                }
+            }
+        }
+        return $forms;
+    }
+
+    public static function getAllFormsAlias($model = null)
+    {
+        if (!empty($model)) {
+            return self::getFormsAlias($model);
+        }
         $forms = [];
         $modelAlias = PluginConnection::getAllModelAlias();
         foreach ($modelAlias as $modelClass => $modelNames) {
             $modelDirPath = base_path() . '/plugins/' . strtolower($modelClass);
             if (file_exists($modelDirPath)) {
                 $formFiles = scandir($modelDirPath);
-                foreach ($formFiles as $file) {
-                    if (strpos($file, 'field') > -1) {
-                        $forms['$/' . str_replace('\\', '/', strtolower($modelClass)) . '/' . $file] = $file . ' (' . $modelNames . ')';
-                    }
-                }
+                $forms = array_merge($forms, PluginConnection::getFormsAlias($modelClass, $modelNames));
             }
         }
         return $forms;

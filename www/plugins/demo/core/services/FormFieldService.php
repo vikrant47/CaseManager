@@ -26,11 +26,14 @@ class FormFieldService extends ServiceProvider
         Event::listen('backend.form.extendFields', function ($widget) {
             $controller = $widget->getController();
             // Only for the User controller
-            $formConfigPath = $controller->asExtension('FormController')->getConfig()->form;
-            $formFields = FormField::where('form', $formConfigPath)->get();
-            foreach ($formFields as $formField) {
-                // Add an extra birthday field
-                $widget->addFields($formField->controls['fields']);
+            $formController = $controller->asExtension('FormController');
+            if (isset($formController)) {
+                $formConfigPath = $formController->getConfig()->form;
+                $formFields = FormField::where('form', $formConfigPath)->where('active', 1)->get();
+                foreach ($formFields as $formField) {
+                    // Add an extra birthday field
+                    $widget->addFields($formField->controls['fields']);
+                }
             }
         });
     }
