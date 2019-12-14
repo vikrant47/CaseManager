@@ -15,3 +15,9 @@
 1.0.6:
     - 'Created table demo_core_webhooks'
     - builder_table_create_demo_core_webhooks.php
+1.0.7:
+    - 'Created table demo_core_custom_fields'
+    - builder_table_create_demo_core_custom_fields.php
+1.0.8:
+    - 'Created table demo_core_form_fields'
+    - builder_table_create_demo_core_form_fields.php

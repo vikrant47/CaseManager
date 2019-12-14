@@ -1,0 +1,4 @@
+title: FormFieldController
+modelClass: Demo\Core\Models\FormField
+toolbar:
+    buttons: reorder_toolbar

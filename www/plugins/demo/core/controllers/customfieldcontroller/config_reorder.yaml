@@ -1,0 +1,4 @@
+title: CustomFieldController
+modelClass: Demo\Core\Models\CustomField
+toolbar:
+    buttons: reorder_toolbar

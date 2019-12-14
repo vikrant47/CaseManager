@@ -1,6 +1,7 @@
 <?php namespace Demo\Core;
 
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdate;
+use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
 use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
 use Demo\Core\FormWidgets\RelatedList;
 use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
@@ -14,7 +15,11 @@ class Plugin extends PluginBase
 {
     public function getEventHandlers()
     {
-        return [BeforeCreateOrUpdate::class, BeforeUpdateWorkflowItemState::class];
+        return [
+            BeforeCreateOrUpdate::class,
+            BeforeUpdateWorkflowItemState::class,
+            BeforeCreateOrUpdateCustomField::class
+        ];
     }
 
     public function registerComponents()
@@ -36,6 +41,7 @@ class Plugin extends PluginBase
     {
         // App::register('\Demo\Core\Services\CommandServiceProvider');
         App::register('\Demo\Core\Services\EventHandlerServiceProvider');
+        App::register('\Demo\Core\Services\FormFieldService');
     }
 
     /**

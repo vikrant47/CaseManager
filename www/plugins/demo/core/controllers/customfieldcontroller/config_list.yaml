@@ -1,0 +1,12 @@
+list: $/demo/core/models/customfield/columns.yaml
+modelClass: Demo\Core\Models\CustomField
+title: CustomFieldController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'demo/core/customfieldcontroller/update/:id'

@@ -1,0 +1,60 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    model:
+        label: Model
+        showSearch: true
+        span: auto
+        type: dropdown
+    type:
+        label: Type
+        showSearch: true
+        span: auto
+        type: dropdown
+        options:
+            integer: Integer
+            smallInteger: 'Small Integer'
+            bigInteger: 'Big Integer'
+            date: Date
+            time: Time
+            dateTime: 'Date and Time'
+            timestamp: Timestamp
+            string: String
+            text: Text
+            binary: Binary
+            boolean: Boolean
+            decimal: Decimal
+            double: Double
+    length:
+        label: Length
+        span: auto
+        type: number
+    unsigned:
+        label: Unsugned
+        span: auto
+        type: switch
+    allow_null:
+        label: Allow Null
+        span: auto
+        default: 1
+        type: switch
+    default:
+        label: Default
+        size: ''
+        span: auto
+        type: textarea
+    description:
+        label: Description
+        size: tiny
+        span: auto
+        type: textarea
+    plugin:
+        label: 'Plugin'
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
