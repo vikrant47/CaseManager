@@ -79,6 +79,7 @@ Object.assign(Dashboard.prototype, {
         return this.getGridStackNode(widget).height;
     },
     addWidget: function (widget, size) {
+        var _this = this;
         var gridStack = this.getGridStack();
         var $template = $('<div class="widget-template"><button type="button" class="close widget-control close-widget" >×</button></div>');
         $template.request('onPreview', {
@@ -87,7 +88,8 @@ Object.assign(Dashboard.prototype, {
             update: {widget_renderer: '#widget-template'}
         });
         $template.on('ajaxSuccess', function (event, context, data) {
-            gridStack.addWidget($template.append(data.widget_renderer).get(0), 0, 0, size, 5);
+            var lastGrid = gridStack.grid.nodes[gridStack.grid.nodes.length - 1];
+            gridStack.addWidget($template.append(data.widget_renderer).get(0), 0, lastGrid.y + lastGrid.height, size, 5);
             $template.find('.preview-link').hide();
         });
     },

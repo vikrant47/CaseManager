@@ -125,36 +125,43 @@ Object.assign(Engine.prototype, {
             scope = this;
         }
         actions.forEach(function (action) {
-            action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
-            var $template = $(action.template);
-            if (action.text) {
-                var $textElement = $template;
-                if (action.element && action.element.text) {
-                    $textElement = $template.find(action.element.text);
-                }
-                $textElement.text(action.text);
+            action.scope = scope;
+            if (typeof action.active === 'function') {
+                action.active = action.active.call(action, $element, scope);
             }
-            $template.addClass(action.cls).on(action.event, function (event) {
-                action.handler.apply(this, [event, scope]);
-            });
-            if (action.icon) {
-                var $icon = $template.find('i');
-                if (action.element && action.element.icon) {
-                    $icon = $template.find(action.element.icon);
+            if (action.active) {
+                action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
+                var $template = $(action.template).data('action', action).data('scope', scope);
+                if (action.text) {
+                    var $textElement = $template;
+                    if (action.element && action.element.text) {
+                        $textElement = $template.find(action.element.text);
+                    }
+                    $textElement.text(action.text);
                 }
-                $icon.addClass(action.icon);
-            }
-            $element.append($template);
-            if (action.actions && action.actions.length > 0) {
-                var $appendTo = $template;
-                if (action.element.appendTo) {
-                    $appendTo = $template.find(action.element.appendTo);
+                $template.addClass(action.cls).on(action.event, function (event) {
+                    action.handler.apply(this, [event, scope, action, $element]);
+                });
+                if (action.icon) {
+                    var $icon = $template.find('i');
+                    if (action.element && action.element.icon) {
+                        $icon = $template.find(action.element.icon);
+                    }
+                    $icon.addClass(action.icon);
                 }
-                _this.addActions($appendTo, action.actions, scope);
+                $element.append($template);
+                if (action.actions && action.actions.length > 0) {
+                    var $appendTo = $template;
+                    if (action.element.appendTo) {
+                        $appendTo = $template.find(action.element.appendTo);
+                    }
+                    _this.addActions($appendTo, action.actions, scope);
+                }
             }
         });
     }
-});
+})
+;
 window.Engine = Engine;
 Engine.instance = new Engine();
 $(document).ready(function () {

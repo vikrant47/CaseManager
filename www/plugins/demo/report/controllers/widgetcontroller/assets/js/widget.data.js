@@ -23,6 +23,9 @@ Widget.defaultOptions = {
         defaultActions: [{
             text: '',
             icon: 'icon-minus',
+            active: function () {
+                return this.scope.getDashboard();
+            },
             cls: 'widget-control minimize-widget',
             handler: function (event, widget) {
                 var $this = $(this);
@@ -36,17 +39,19 @@ Widget.defaultOptions = {
                         dashboard.resize(widget, {height: widget.height});
                     }
                 }
-                widget.$body.slideToggle('slow');
+                widget.$body.slideToggle();
             }
         }, {
             text: '',
             icon: 'icon-wrench',
             cls: 'setting-widget',
+            active: true,
             type: 'dropdown',
             actions: [{
                 text: 'Export to CSV',
                 icon: 'icon-csv',
                 cls: 'export-widget',
+                active: true,
                 type: 'dropdownItem',
                 handler: function (event, widget) {
                     window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/csv');
@@ -55,6 +60,7 @@ Widget.defaultOptions = {
                 text: 'Export to Excel',
                 icon: 'icon-csv',
                 cls: 'export-widget',
+                active: true,
                 type: 'dropdownItem',
                 handler: function (event, widget) {
                     window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/xls');
@@ -63,6 +69,7 @@ Widget.defaultOptions = {
                 text: 'Export to Pdf',
                 icon: 'icon-csv',
                 cls: 'export-widget',
+                active: true,
                 type: 'dropdownItem',
                 handler: function (event, widget) {
                     window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/pdf');
@@ -75,6 +82,9 @@ Widget.defaultOptions = {
             text: '',
             icon: 'icon-trash',
             cls: 'close-widget',
+            active: function () {
+                return this.scope.getDashboard();
+            },
             handler: function (event, widget) {
                 widget.getDashboard().removeWidget(widget);
             }
