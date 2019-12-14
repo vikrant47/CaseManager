@@ -1,0 +1,34 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number
+    label:
+        label: label
+        type: text
+    field_id:
+        label: field_id
+        type: number
+    form:
+        label: form
+        type: text
+    plugin_id:
+        label: plugin_id
+        type: number
+    config:
+        label: config
+        type: text
+    active:
+        label: active
+        type: text

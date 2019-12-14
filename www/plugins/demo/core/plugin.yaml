@@ -19,6 +19,14 @@ navigation:
                 label: 'Event Handler'
                 url: demo/core/eventhandler
                 icon: icon-code
+            side-menu-item4:
+                label: Fields
+                url: demo/core/customfieldcontroller
+                icon: icon-th-list
+            side-menu-item5:
+                label: 'Form Fields'
+                url: demo/core/formfieldcontroller
+                icon: icon-magic
             side-menu-item6:
                 label: 'Inbound Api'
                 url: demo/core/inboundapi

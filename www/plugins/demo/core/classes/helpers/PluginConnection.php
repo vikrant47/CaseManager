@@ -75,6 +75,24 @@ class PluginConnection
         return $configurations;
     }
 
+    public static function getAllFormsAlias()
+    {
+        $forms = [];
+        $modelAlias = PluginConnection::getAllModelAlias();
+        foreach ($modelAlias as $modelClass => $modelNames) {
+            $modelDirPath = base_path() . '/plugins/' . strtolower($modelClass);
+            if (file_exists($modelDirPath)) {
+                $formFiles = scandir($modelDirPath);
+                foreach ($formFiles as $file) {
+                    if (strpos($file, 'field') > -1) {
+                        $forms['$/' . str_replace('\\', '/', strtolower($modelClass)) . '/' . $file] = $file . ' (' . $modelNames . ')';
+                    }
+                }
+            }
+        }
+        return $forms;
+    }
+
     /**
      * Return all model alias
      */
@@ -220,7 +238,7 @@ class PluginConnection
         }
 
         // Remove the directory name and the .php from the filename
-        $files = str_replace($models_dir.'/', '', $files);
+        $files = str_replace($models_dir . '/', '', $files);
         $files = str_replace('.php', '', $files);
 
         // Remove "BaseModel" as we dont want to boot that moodel
@@ -230,8 +248,7 @@ class PluginConnection
         }
 
         // Reset each model event listeners
-        foreach ($files as $model)
-        {
+        foreach ($files as $model) {
             if (!method_exists($model, 'flushEventListeners')) {
                 continue;
             }

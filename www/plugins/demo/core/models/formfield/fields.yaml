@@ -1,0 +1,35 @@
+fields:
+    field:
+        label: Field
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    form:
+        label: Form
+        showSearch: true
+        span: auto
+        type: dropdown
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    controls:
+        type: RainLab\Builder\FormWidgets\FormBuilder
+        stretch: true
+        cssClass: layout
+        tab: 'rainlab.builder::lang.form.controls'
+        span: auto
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation

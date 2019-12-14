@@ -1,0 +1,98 @@
+<?php Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= Backend::url('demo/core/formfieldcontroller') ?>">FormFieldController</a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
+<?php Block::endPut() ?>
+<div id="builder-master-tabs">
+    <?php if (!$this->fatalError): ?>
+
+        <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                        type="submit"
+                        data-request="onSave"
+                        data-hotkey="ctrl+s, cmd+s"
+                        data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+                        class="btn btn-primary">
+                    <?= e(trans('backend::lang.form.create')) ?>
+                </button>
+                <button
+                        type="button"
+                        data-request="onSave"
+                        data-request-data="close:1"
+                        data-hotkey="ctrl+enter, cmd+enter"
+                        data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+                        class="btn btn-default">
+                    <?= e(trans('backend::lang.form.create_and_close')) ?>
+                </button>
+                <span class="btn-text">
+                    <?= e(trans('backend::lang.form.or')) ?> <a
+                            href="<?= Backend::url('demo/core/formfieldcontroller') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
+                </span>
+            </div>
+        </div>
+        <style>
+            #Form-field-FormField-controls-group .builder-building-area ul.builder-control-list > li.control.span-left {
+                width: 100%;
+            }
+
+            #Form-field-FormField-controls-group div.control-scrollpad {
+                height: 110px;
+            }
+
+            #Form-field-FormField-controls-group .layout-container {
+                padding: 0;
+            }
+
+            #Form-field-FormField-controls-group .layout-absolute {
+                height: 100px;
+            }
+
+            #Form-field-FormField-controls-group .scrollpad-scrollbar {
+                display: none;
+            }
+
+            #Form-field-FormField-controls-group div.control-scrollpad > div {
+                overflow-y: hidden;
+            }
+
+            #Form-field-FormField-controls-group .builder-control-list .placeholder {
+                display: none !important;
+            }
+
+            #Form-field-FormField-controls-group .builder-control-list .placeholder:first-child {
+                display: list-item !important;
+            }
+        </style>
+    <input style="display: none;" type="text" value="demo.core" name="plugin_code"/>
+    <input style="display: none;" type="text" value="[]" name="FormField[controls]"/>
+        <script>
+            var $definitionWrapper = $('#Form-field-FormField-controls-group');
+            // $definitionWrapper.append('')
+            $('#Form-field-FormField-controls-group .builder-control-list>li').hide().eq(0).show().html(function () {
+                return $(this).html().replace('Add control', 'Add Definition')
+            }).on('change', function () {
+                var value = JSON.parse($(this).find('input[data-inspector-values]').val());
+                $('[name="FormField[controls]"]').val(JSON.stringify({
+                    fields: value,
+                }));
+            })
+        </script>
+    <?php
+    $this->addFormBuilderAssets();
+    ?>
+    <?= Form::close() ?>
+
+    <?php else: ?>
+        <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+        <p><a href="<?= Backend::url('demo/core/formfieldcontroller') ?>"
+              class="btn btn-default"><?= e(trans('backend::lang.form.return_to_list')) ?></a></p>
+    <?php endif ?>
+</div>

@@ -1,0 +1,10 @@
+name: FormFieldController
+form: $/demo/core/models/formfield/fields.yaml
+modelClass: Demo\Core\Models\FormField
+defaultRedirect: demo/core/formfieldcontroller
+create:
+    redirect: 'demo/core/formfieldcontroller/update/:id'
+    redirectClose: demo/core/formfieldcontroller
+update:
+    redirect: demo/core/formfieldcontroller
+    redirectClose: demo/core/formfieldcontroller

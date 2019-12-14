@@ -1,0 +1,10 @@
+name: CustomFieldController
+form: $/demo/core/models/customfield/fields.yaml
+modelClass: Demo\Core\Models\CustomField
+defaultRedirect: demo/core/customfieldcontroller
+create:
+    redirect: 'demo/core/customfieldcontroller/update/:id'
+    redirectClose: demo/core/customfieldcontroller
+update:
+    redirect: demo/core/customfieldcontroller
+    redirectClose: demo/core/customfieldcontroller

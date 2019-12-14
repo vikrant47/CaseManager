@@ -1,0 +1,37 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number
+    name:
+        label: name
+        type: text
+    type:
+        label: type
+        type: text
+    length:
+        label: length
+        type: number
+    unsigned:
+        label: unsigned
+        type: text
+    nullable:
+        label: nullable
+        type: text
+    default:
+        label: default
+        type: text
+    plugin_id:
+        label: plugin_id
+        type: number
