@@ -1,5 +1,6 @@
 fields:
     field:
+        emptyOption: -- None --
         label: Field
         nameFrom: name
         descriptionFrom: description

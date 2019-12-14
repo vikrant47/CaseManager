@@ -22,6 +22,8 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
             $table->text('controls');
             $table->text('description')->nullable();
             $table->smallInteger('active');
+
+            $table->unique('form', 'field_id');
         });
     }
     

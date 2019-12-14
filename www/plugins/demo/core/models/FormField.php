@@ -17,10 +17,13 @@ class FormField extends Model
      */
     public $table = 'demo_core_form_fields';
 
+
     /**
      * @var array Validation rules
      */
     public $rules = [
+        'field' => 'required',
+        'form' => 'required'
     ];
 
     public $attachAuditedBy = true;
@@ -32,7 +35,7 @@ class FormField extends Model
 
     public function getFormOptions($value, $data)
     {
-        if(isset($data->field)){
+        if (isset($data->field)) {
             return PluginConnection::getFormsAlias($data->field->model);
         }
         return PluginConnection::getAllFormsAlias();
