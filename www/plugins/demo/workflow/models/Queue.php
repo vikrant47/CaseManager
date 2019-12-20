@@ -33,7 +33,7 @@ class Queue extends Model
 
     public $belongsTo = [
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
-        'pop_criteria' => [\Demo\Workflow\Models\QueuePopCriterias::class, 'key' => 'pop_criteria_id'],
+        'pop_criteria' => [\Demo\Workflow\Models\QueuePopCriteria::class, 'key' => 'pop_criteria_id'],
         'routing_rule' => [\Demo\Workflow\Models\QueueRoutingRule::class, 'key' => 'routing_rule_id'],
     ];
 

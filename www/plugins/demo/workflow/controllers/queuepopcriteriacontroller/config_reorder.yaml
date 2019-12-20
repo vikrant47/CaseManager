@@ -1,4 +1,4 @@
 title: QueuePopCriteriaController
-modelClass: Demo\Workflow\Models\QueuePopCriterias
+modelClass: Demo\Workflow\Models\QueuePopCriteria
 toolbar:
     buttons: reorder_toolbar

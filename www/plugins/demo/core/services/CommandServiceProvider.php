@@ -45,8 +45,7 @@ class CommandServiceProvider extends ServiceProvider
 
     public function register()
     {
-        print json_encode(PluginConnection::getEnv(), true);
-        if (!empty(PluginConnection::getEnv('user')) && $this->app->runningInConsole()) {
+        if ($this->app->runningInConsole()) {
             $this->registerLocalCommands();
             $this->registerDatabaseCommands();
         }

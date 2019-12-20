@@ -16,12 +16,13 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('label');
-            $table->integer('field_id');
+            $table->integer('field_id')->nullable();
             $table->string('form');
             $table->integer('plugin_id');
             $table->text('controls');
             $table->text('description')->nullable();
             $table->smallInteger('active');
+            $table->smallInteger('virtual');
 
             $table->unique('form', 'field_id');
         });

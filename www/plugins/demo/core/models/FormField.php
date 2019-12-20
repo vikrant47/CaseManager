@@ -2,6 +2,7 @@
 
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Model;
+use October\Rain\Exception\ValidationException;
 use RainLab\Builder\Classes\PluginCode;
 
 /**
@@ -22,7 +23,7 @@ class FormField extends Model
      * @var array Validation rules
      */
     public $rules = [
-        'field' => 'required',
+        // 'field' => 'required',
         'form' => 'required'
     ];
 
@@ -53,6 +54,9 @@ class FormField extends Model
 
     public function beforeSave()
     {
+        if ($this->virtual == 0 && empty($this->field)) {
+            throw new ValidationException('Field is required!');
+        }
         if (array_key_exists('controls', $this->attributes) && !is_array($this->attributes['controls'])) {
             $controls = json_decode($this->attributes['controls'], true);
             if (!is_array($controls)) {
@@ -64,7 +68,15 @@ class FormField extends Model
             $fields = $controls['fields'];
             $newFields = [];
             foreach ($fields as $key => $value) {
-                $newFields[$this->field->name] = $value;
+                if ($this->virtual == 1) {
+                    if (strpos($key, '_') !== 0) {
+                        $newFields['_' . $key] = $value;
+                    } else {
+                        $newFields[$key] = $value;
+                    }
+                } else {
+                    $newFields[$this->field->name] = $value;
+                }
             }
             $controls['fields'] = $newFields;
             $this->attributes['controls'] = json_encode($controls);

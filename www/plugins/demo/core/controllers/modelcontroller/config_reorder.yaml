@@ -1,0 +1,4 @@
+title: ModelController
+modelClass: Demo\Core\Models\ModelModel
+toolbar:
+    buttons: reorder_toolbar

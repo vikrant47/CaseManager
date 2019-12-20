@@ -1,11 +1,23 @@
 fields:
+    virtual:
+        label: Virtual
+        span: auto
+        type: switch
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
     field:
-        emptyOption: -- None --
+        emptyOption: '-- None --'
         label: Field
         nameFrom: name
         descriptionFrom: description
         span: auto
         type: relation
+        dependsOn:
+            - virtual
+        trigger: show
     form:
         label: Form
         showSearch: true
@@ -13,11 +25,6 @@ fields:
         dependsOn:
             - field
         type: dropdown
-    active:
-        label: Active
-        span: auto
-        default: 1
-        type: switch
     description:
         label: Description
         size: ''

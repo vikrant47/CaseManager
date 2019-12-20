@@ -1,0 +1,10 @@
+name: ModelController
+form: $/demo/core/models/modelmodel/fields.yaml
+modelClass: Demo\Core\Models\ModelModel
+defaultRedirect: demo/core/modelcontroller
+create:
+    redirect: 'demo/core/modelcontroller/update/:id'
+    redirectClose: demo/core/modelcontroller
+update:
+    redirect: demo/core/modelcontroller
+    redirectClose: demo/core/modelcontroller

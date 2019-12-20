@@ -5,11 +5,11 @@ use Schema;
 use October\Rain\Database\Updates\Migration;
 use Db;
 
-class BuilderTableSeedDemoQueuePopCriterias extends Seeder
+class BuilderTableSeedDemoWorkflowQueuePopCriteria extends Seeder
 {
     public function run()
     {
-        Db::table('demo_workflow_queues_pop_criterias')->insert([
+        Db::table('demo_workflow_queue_pop_criterias')->insert([
             [
                 "id" => 3,
                 "created_at" => "2019-11-16 13:07:42",

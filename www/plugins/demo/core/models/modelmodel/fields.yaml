@@ -1,0 +1,44 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    model_type:
+        label: 'Model Type'
+        span: auto
+        type: text
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        audit:
+            label: Audit
+            span: auto
+            type: switch
+            tab: 'Audit Settings'
+        attach_audited_by:
+            label: 'Attach Audited By'
+            span: auto
+            type: switch
+            tab: 'Audit Settings'
+        record_history:
+            label: 'Record History'
+            span: auto
+            type: switch
+            tab: 'Audit Settings'
+        audit_columns:
+            label: 'Audit Columns'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'Audit Settings'

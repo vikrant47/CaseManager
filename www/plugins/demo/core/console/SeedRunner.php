@@ -86,6 +86,7 @@ class SeedRunner extends Command
                 $name = $this->getSeedName($file)
             );
             $seed->run();
+            $this->info('Seed executed from file ' . $file);
         }
     }
 

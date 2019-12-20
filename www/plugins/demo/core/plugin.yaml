@@ -11,14 +11,14 @@ model-alias:
 navigation:
     main-menu-item:
         label: Engine
-        url: demo/core/eventhandler
+        url: demo/core/modelcontroller
         icon: icon-gears
         order: '500'
         sideMenu:
-            side-menu-item8:
-                label: 'Event Handler'
-                url: demo/core/eventhandler
-                icon: icon-code
+            side-menu-item10:
+                label: Models
+                url: demo/core/modelcontroller
+                icon: icon-table
             side-menu-item4:
                 label: Fields
                 url: demo/core/customfieldcontroller
@@ -27,6 +27,10 @@ navigation:
                 label: 'Form Fields'
                 url: demo/core/formfieldcontroller
                 icon: icon-magic
+            side-menu-item8:
+                label: 'Event Handler'
+                url: demo/core/eventhandler
+                icon: icon-code
             side-menu-item6:
                 label: 'Inbound Api'
                 url: demo/core/inboundapi
