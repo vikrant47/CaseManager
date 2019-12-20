@@ -19,6 +19,10 @@ navigation:
                 label: Models
                 url: demo/core/modelcontroller
                 icon: icon-table
+            side-menu-item11:
+                label: 'Model Association'
+                url: demo/core/modelassociationcontroller
+                icon: icon-puzzle-piece
             side-menu-item4:
                 label: Fields
                 url: demo/core/customfieldcontroller

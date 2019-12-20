@@ -1,0 +1,10 @@
+name: ModelAssociationController
+form: $/demo/core/models/modelassociation/fields.yaml
+modelClass: Demo\Core\Models\ModelAssociation
+defaultRedirect: demo/core/modelassociationcontroller
+create:
+    redirect: 'demo/core/modelassociationcontroller/update/:id'
+    redirectClose: demo/core/modelassociationcontroller
+update:
+    redirect: demo/core/modelassociationcontroller
+    redirectClose: demo/core/modelassociationcontroller
