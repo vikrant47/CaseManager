@@ -21,3 +21,9 @@
 1.0.8:
     - 'Created table demo_core_form_fields'
     - builder_table_create_demo_core_form_fields.php
+1.0.9:
+    - 'Created table demo_core_models'
+    - builder_table_create_demo_core_models.php
+1.0.10:
+    - 'Created table demo_core_model_associations'
+    - builder_table_create_demo_core_model_associations.php

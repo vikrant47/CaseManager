@@ -47,61 +47,7 @@
                 </span>
             </div>
         </div>
-        <style>
-            #Form-field-FormField-controls-group .builder-building-area ul.builder-control-list > li.control.span-left {
-                width: 100%;
-            }
-
-            #Form-field-FormField-controls-group div.control-scrollpad {
-                height: 110px;
-            }
-
-            #Form-field-FormField-controls-group .layout-container {
-                padding: 0;
-            }
-
-            #Form-field-FormField-controls-group .layout-absolute {
-                height: 100px;
-            }
-
-            #Form-field-FormField-controls-group .scrollpad-scrollbar {
-                display: none;
-            }
-
-            #Form-field-FormField-controls-group div.control-scrollpad > div {
-                overflow-y: hidden;
-            }
-
-            #Form-field-FormField-controls-group .builder-control-list .placeholder {
-                display: none !important;
-            }
-
-            #Form-field-FormField-controls-group .builder-control-list .placeholder:first-child {
-                display: list-item !important;
-            }
-        </style>
-        <pre></pre>
-    <input style="display: none;" type="text" value="demo.core" name="plugin_code"/>
-    <input style="display: none;" type="text" value="[]" name="FormField[controls]" />
-        <script>
-            // {"fields":{"test":{"label":"test"}}}
-            var $definitionWrapper = $('#Form-field-FormField-controls-group');
-            // $definitionWrapper.append('')
-            $('#Form-field-FormField-controls-group .builder-control-list>li').hide().eq(0).show().html(function () {
-                return $(this).html().replace('Add control', 'Add Definition')
-            }).on('change', function () {
-                var value = JSON.parse($(this).find('input[data-inspector-values]').val());
-                var field = {};
-                field[value['oc.fieldName']] = value;
-                $('[name="FormField[controls]"]').val(JSON.stringify({
-                    fields: field,
-                }));
-            })
-            $('[name="FormField[controls]"]').val(JSON.stringify(<?=json_encode($this->vars['formModel']->controls)?>));
-        </script>
-    <?php
-    $this->addFormBuilderAssets();
-    ?>
+        <?= $this->makePartial('field_builder') ?>
     <?= Form::close() ?>
 
     <?php else: ?>

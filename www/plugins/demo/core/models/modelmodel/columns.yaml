@@ -1,0 +1,25 @@
+columns:
+    id:
+        label: id
+        type: number
+    name:
+        label: name
+        type: text
+    model_type:
+        label: model_type
+        type: text
+    plugin_id:
+        label: plugin_id
+        type: number
+    audit:
+        label: audit
+        type: text
+    record_history:
+        label: record_history
+        type: text
+    audit_columns:
+        label: audit_columns
+        type: text
+    attach_audited_by:
+        label: attach_audited_by
+        type: text

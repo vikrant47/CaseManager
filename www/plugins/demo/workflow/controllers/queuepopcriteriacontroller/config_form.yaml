@@ -1,6 +1,6 @@
 name: QueuePopCriteriaController
-form: $/demo/workflow/models/queuepopcriterias/fields.yaml
-modelClass: Demo\Workflow\Models\QueuePopCriterias
+form: $/demo/workflow/models/queuepopcriteria/fields.yaml
+modelClass: Demo\Workflow\Models\QueuePopCriteria
 defaultRedirect: demo/workflow/queuepopcriteriacontroller
 create:
     redirect: 'demo/workflow/queuepopcriteriacontroller/update/:id'

@@ -1,0 +1,37 @@
+columns:
+    id:
+        label: id
+        type: number
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number
+    source_model:
+        label: source_model
+        type: text
+    target_model:
+        label: target_model
+        type: text
+    foreign_key:
+        label: foreign_key
+        type: text
+    cascade:
+        label: cascade
+        type: text
+    plugin_id:
+        label: plugin_id
+        type: number
+    name:
+        label: name
+        type: text
+    active:
+        label: active
+        type: text
+    relation:
+        label: relation
+        type: text

@@ -5,7 +5,7 @@ use Model;
 /**
  * Model
  */
-class QueuePopCriterias extends Model
+class QueuePopCriteria extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     

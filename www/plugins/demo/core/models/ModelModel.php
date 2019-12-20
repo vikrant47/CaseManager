@@ -1,0 +1,78 @@
+<?php namespace Demo\Core\Models;
+
+use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\Table;
+use Dotenv\Exception\ValidationException;
+use Model;
+use RainLab\Builder\Classes\DatabaseTableModel;
+
+/**
+ * Model
+ */
+class ModelModel extends Model
+{
+    use \October\Rain\Database\Traits\Validation;
+
+
+    /**
+     * @var string The database table used by the model.
+     */
+    public $table = 'demo_core_models';
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'name' => 'required',
+        'model_type' => 'required',
+    ];
+
+    public $attachAuditedBy = true;
+    public $belongsTo = [
+        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+    ];
+
+    /**
+     * Return the model table instance
+     * @return Table
+     */
+    public function getModelTable()
+    {
+        if (empty($this->model_type)) {
+            return null;
+        }
+        $model = new $this->model_type();
+        $schema = DatabaseTableModel::getSchema();
+        $table = $schema->getTable($model->table);
+        return $table;
+    }
+
+    public function getAuditColumnsOptions()
+    {
+        /**@var Column[] $columns */
+        $table = $this->getModelTable();
+        if ($table === null) {
+            return ['*'];
+        }
+        $columns = $table->getColumns();
+        $columnNames = array_map(function ($column) {
+            /**@var  $column Column */
+            return $column->getName();
+        }, $columns);
+        array_push($columnNames, '*');
+        return $columnNames;
+    }
+
+    public function beforeSave()
+    {
+        if (!class_exists($this->model_type)) {
+            throw new ValidationException('Invalid model type ' . $this->model_type);
+        }
+        if ($this->attach_audited_by == 1) {
+            $table = $this->getModelTable();
+            if (!($table->hasColumn('created_by_id') && $table->hasColumn('updated_by_id'))) {
+                throw new ValidationException('created_by_id and updated_by_id filed not defined');
+            }
+        }
+    }
+}

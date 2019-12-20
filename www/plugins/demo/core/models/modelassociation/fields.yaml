@@ -1,0 +1,65 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    cascade:
+        label: Cascade
+        options:
+            none: None
+            clear: Clear
+            delete: Delete
+            restrict: Restrict
+        showSearch: true
+        span: auto
+        type: dropdown
+    relation:
+        label: Relation
+        options:
+            belongs_to: 'Belongs To'
+            belongs_to_many: 'Belongs To Many'
+            has_many: 'Has Many'
+            morph_to: 'Morph To'
+            morph_to_many: 'Morph To Many'
+            has_one: 'Has One'
+        showSearch: true
+        span: auto
+        required: 1
+        type: dropdown
+        tab: Association
+tabs:
+    fields:
+        source_model_ref:
+            label: 'Source Model'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Association
+        target_model_ref:
+            label: 'Target Model'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            required: 1
+            type: relation
+            tab: Association
+        foreign_key:
+            label: 'Foreign Key'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: Association
+            dependsOn:
+                - source_model_ref

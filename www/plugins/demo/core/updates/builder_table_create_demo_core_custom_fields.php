@@ -15,7 +15,7 @@ class BuilderTableCreateDemoCoreCustomFields extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->text('description');
             $table->string('type');
             $table->string('model');
@@ -24,6 +24,8 @@ class BuilderTableCreateDemoCoreCustomFields extends Migration
             $table->smallInteger('allow_null');
             $table->text('default');
             $table->integer('plugin_id');
+
+            $table->unique('model', 'name');
         });
     }
     

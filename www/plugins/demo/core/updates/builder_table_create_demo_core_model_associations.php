@@ -3,11 +3,11 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoCoreFormFields extends Migration
+class BuilderTableCreateDemoCoreModelAssociations extends Migration
 {
     public function up()
     {
-        Schema::create('demo_core_form_fields', function($table)
+        Schema::create('demo_core_model_associations', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
@@ -15,21 +15,19 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->string('label');
-            $table->integer('field_id')->nullable();
-            $table->string('form');
+            $table->string('source_model', 255);
+            $table->string('target_model', 255);
+            $table->string('foreign_key', 255)->nullable();
+            $table->string('cascade')->default('none');
             $table->integer('plugin_id');
-            $table->text('controls');
             $table->text('description')->nullable();
-            $table->smallInteger('active');
-            $table->smallInteger('virtual');
-
-            $table->unique('form', 'field_id');
+            $table->string('name', 255);
+            $table->boolean('active');
         });
     }
     
     public function down()
     {
-        Schema::dropIfExists('demo_core_form_fields');
+        Schema::dropIfExists('demo_core_model_associations');
     }
 }

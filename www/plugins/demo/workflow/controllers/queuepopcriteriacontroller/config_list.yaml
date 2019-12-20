@@ -1,5 +1,5 @@
-list: $/demo/workflow/models/queuepopcriterias/columns.yaml
-modelClass: Demo\Workflow\Models\QueuePopCriterias
+list: $/demo/workflow/models/queuepopcriteria/columns.yaml
+modelClass: Demo\Workflow\Models\QueuePopCriteria
 title: QueuePopCriteriaController
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

@@ -13,6 +13,16 @@ use BackendAuth;
 class PluginTestSetup extends PluginTestCase
 {
 
+    /**
+     * Current timestamp of system
+     * @return double
+     */
+    public function getCurrentTimestamp()
+    {
+        $date = new \DateTime();
+        return $date->getTimestamp();
+    }
+
     public function setUser()
     {
         $loginuser = PluginConnection::getEnv('user');
