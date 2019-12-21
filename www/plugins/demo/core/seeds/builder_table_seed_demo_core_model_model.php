@@ -129,6 +129,19 @@ class BuilderTableSeedDemoCoreModelModel extends Seeder
                 'updated_by_id' => 1,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
+            ], [
+                'id' => 10,
+                'name' => 'Model Association',
+                'model_type' => 'Demo\Core\Models\ModelAssociation',
+                'plugin_id' => 10,
+                'audit' => 0,
+                'record_history' => 0,
+                'audit_columns' => '["*"]',
+                'attach_audited_by' => 1,
+                'created_by_id' => 1,
+                'updated_by_id' => 1,
+                'created_at' => '2019-12-20 14:15:39',
+                'updated_at' => '2019-12-20 14:15:39',
             ],
         ]);
     }

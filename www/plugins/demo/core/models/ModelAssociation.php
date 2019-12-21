@@ -1,6 +1,8 @@
 <?php namespace Demo\Core\Models;
 
+use Dotenv\Exception\ValidationException;
 use Model;
+use Schema;
 
 /**
  * Model
@@ -19,15 +21,37 @@ class ModelAssociation extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'source_model_ref' => ['required'],
+        'target_model_ref' => ['required'],
+        'cascade' => ['required'],
+        'name' => ['required'],
     ];
 
     public $belongsTo = [
-        'source_model_ref' => [ModelModel::class, 'key' => 'source_model', 'other_key' => 'model_type'],
-        'target_model_ref' => [ModelModel::class, 'key' => 'target_model', 'other_key' => 'model_type']
+        'source_model_ref' => [ModelModel::class, 'key' => 'source_model', 'otherKey' => 'model_type'],
+        'target_model_ref' => [ModelModel::class, 'key' => 'target_model', 'otherKey' => 'model_type'],
+        'plugin' => [PluginVersions::class, 'key' => 'plugin_id']
     ];
 
     public function getForeignKeyOptions()
     {
-        return [];
+        $options = [];
+        if (!empty($this->source_model)) {
+            $sourceModelRef = new $this->source_model();
+            $columns = Schema::getColumnListing($sourceModelRef->table);
+            foreach ($columns as $column) {
+                $options[$column] = $column;
+            }
+        }
+        return $options;
+    }
+
+    public function beforeSave()
+    {
+        $sourceModelRef = new $this->source_model();
+        $columns = Schema::getColumnListing($sourceModelRef->table);
+        if (!array_search($this->foreign_key, $columns)) {
+            throw new ValidationException('Foreign key doesn\'t belongs to source table');
+        }
     }
 }
