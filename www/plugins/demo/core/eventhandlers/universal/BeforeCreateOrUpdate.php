@@ -17,7 +17,9 @@ class BeforeCreateOrUpdate
         $attachAuditedBy = $model->attachAuditedBy;
         if (empty($attachAuditedBy)) {
             $modelModel = ModelModel::where('model_type', get_class($model))->first();
-            $attachAuditedBy = $modelModel->attach_audited_by;
+            if (!empty($modelModel)) {
+                $attachAuditedBy = $modelModel->attach_audited_by;
+            }
         }
         if ($attachAuditedBy) {
             PluginConnection::getLogger('demo.core')->debug('Attaching created_by and updated_by');
