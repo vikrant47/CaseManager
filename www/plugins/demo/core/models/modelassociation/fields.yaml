@@ -24,6 +24,14 @@ fields:
         showSearch: true
         span: auto
         type: dropdown
+        required: 1
+    plugin:
+        label: 'Plugin'
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        type: relation
+        required: 1
     relation:
         label: Relation
         options:
@@ -47,6 +55,8 @@ tabs:
             span: auto
             type: relation
             tab: Association
+            emptyOption: -- None --
+            required: 1
         target_model_ref:
             label: 'Target Model'
             nameFrom: name
@@ -55,6 +65,7 @@ tabs:
             required: 1
             type: relation
             tab: Association
+            emptyOption: -- None --
         foreign_key:
             label: 'Foreign Key'
             showSearch: true

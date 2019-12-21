@@ -4,6 +4,7 @@ namespace Demo\Core\EventHandlers\Universal;
 
 use BackendAuth;
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Models\ModelModel;
 
 class BeforeCreateOrUpdate
 {
@@ -13,7 +14,12 @@ class BeforeCreateOrUpdate
 
     public function handler($event, $model)
     {
-        if ($model->attachAuditedBy === true) {
+        $attachAuditedBy = $model->attachAuditedBy;
+        if (empty($attachAuditedBy)) {
+            $modelModel = ModelModel::where('model_type', get_class($model))->first();
+            $attachAuditedBy = $modelModel->attach_audited_by;
+        }
+        if ($attachAuditedBy) {
             PluginConnection::getLogger('demo.core')->debug('Attaching created_by and updated_by');
             $user = BackendAuth::getUser();
             if ($event === 'creating') {
