@@ -2,6 +2,7 @@
 
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdate;
 use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
+use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
 use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
 use Demo\Core\FormWidgets\RelatedList;
 use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
@@ -18,7 +19,8 @@ class Plugin extends PluginBase
         return [
             BeforeCreateOrUpdate::class,
             BeforeUpdateWorkflowItemState::class,
-            BeforeCreateOrUpdateCustomField::class
+            BeforeCreateOrUpdateCustomField::class,
+            BeforeDeleteCascade::class,
         ];
     }
 
