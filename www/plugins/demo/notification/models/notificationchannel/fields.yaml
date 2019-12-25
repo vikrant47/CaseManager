@@ -1,0 +1,44 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    configuration:
+        label: Configuration
+        prompt: 'Add new item'
+        span: auto
+        type: repeater
+        form:
+            fields:
+                configuration:
+                    label: Configuration
+                    prompt: 'Add new item'
+                    span: auto
+                    type: text
+                value:
+                    label: Value
+                    span: auto
+                    type: text
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    script:
+        label: Script
+        size: large
+        language: php
+        span: full
+        type: codeeditor
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        type: relation

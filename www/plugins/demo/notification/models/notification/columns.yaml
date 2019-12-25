@@ -1,0 +1,43 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number
+    event:
+        label: event
+        type: text
+    model:
+        label: model
+        type: text
+    condition:
+        label: condition
+        type: text
+    plugin_id:
+        label: plugin_id
+        type: number
+    active:
+        label: active
+        type: text
+    template_id:
+        label: template_id
+        type: number
+    channel_id:
+        label: channel_id
+        type: number
+    name:
+        label: name
+        type: text
+    description:
+        label: description
+        type: text

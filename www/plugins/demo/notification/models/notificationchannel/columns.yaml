@@ -1,0 +1,25 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    script:
+        label: script
+        type: text
+    active:
+        label: active
+        type: text
+    plugin_id:
+        label: plugin_id
+        type: number
+    name:
+        label: name
+        type: text
+    description:
+        label: description
+        type: text

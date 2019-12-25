@@ -1,0 +1,10 @@
+name: NotificationSubscriberController
+form: $/demo/notification/models/notificationsubscriber/fields.yaml
+modelClass: Demo\Notification\Models\NotificationSubscriber
+defaultRedirect: demo/notification/notificationsubscribercontroller
+create:
+    redirect: 'demo/notification/notificationsubscribercontroller/update/:id'
+    redirectClose: demo/notification/notificationsubscribercontroller
+update:
+    redirect: demo/notification/notificationsubscribercontroller
+    redirectClose: demo/notification/notificationsubscribercontroller
