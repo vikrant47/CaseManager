@@ -47,10 +47,6 @@ navigation:
                 label: Iframe
                 url: demo/core/iframecontroller
                 icon: icon-external-link
-            side-menu-item2:
-                label: Test
-                url: demo/core/iframecontroller/render-iframe/test
-                icon: icon-sitemap
             side-menu-item3:
                 label: Webhooks
                 url: demo/core/webhookcontroller
