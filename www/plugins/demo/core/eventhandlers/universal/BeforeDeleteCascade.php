@@ -27,7 +27,7 @@ class BeforeDeleteCascade
             'active' => 1,
             'target_model' => get_class($model),
             'relation' => 'belongsTo',
-        ])->where('cascade', '!=', 'none')->order('cascade_priority_order')->all();
+        ])->where('cascade', '!=', 'none')->orderBy('cascade_priority_order')->get();
         if (count($associations) === 0) {
             return;
         }

@@ -1,0 +1,4 @@
+title: NotificationChannelController
+modelClass: Demo\Notification\Models\NotificationChannel
+toolbar:
+    buttons: reorder_toolbar

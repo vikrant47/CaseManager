@@ -1,0 +1,31 @@
+fields:
+    notification:
+        label: Notification
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    subscriber_group:
+        emptyOption: '--None--'
+        label: 'Subscriber Group'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    subscriber:
+        emptyOption: '--None--'
+        label: Subscriber
+        nameFrom: first_name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation

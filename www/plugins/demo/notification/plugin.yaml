@@ -1,0 +1,24 @@
+plugin:
+    name: 'demo.notification::lang.plugin.name'
+    description: 'demo.notification::lang.plugin.description'
+    author: demo
+    icon: oc-icon-envelope
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Notification
+        url: demo/notification/notificationchannelcontroller
+        icon: icon-envelope
+        sideMenu:
+            side-menu-item:
+                label: Channels
+                url: demo/notification/notificationchannelcontroller
+                icon: icon-signal
+            side-menu-item2:
+                label: Notifications
+                url: demo/notification/notificationcontroller
+                icon: icon-comment
+            'Notification Subscribers':
+                label: 'Notification Subscribers'
+                url: demo/notification/notificationsubscribercontroller
+                icon: icon-users

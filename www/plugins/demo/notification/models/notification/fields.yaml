@@ -1,0 +1,81 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        size: tiny
+        span: auto
+        type: textarea
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    queued:
+        label: Queued
+        span: auto
+        default: 0
+        type: switch
+    channel:
+        label: Channel
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    template:
+        label: Template
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        model_ref:
+            label: Model
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            required: 1
+            type: relation
+            tab: Execution
+        event:
+            label: Event
+            options:
+                created: Created
+                updated: Updated
+                deleted: Deleted
+            showSearch: true
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Execution
+        condition:
+            label: Condition
+            size: large
+            language: php
+            span: auto
+            type: codeeditor
+            tab: Execution
+secondaryTabs:
+    fields:
+        _notification_subscribers:
+            label: Subscribers
+            span: full
+            relation: HasMany
+            sourceKey: id
+            targetModel: Demo\Notification\Models\NotificationSubscriber
+            targetKey: notification_id
+            type: relatedlist
+            tab: Subscribers

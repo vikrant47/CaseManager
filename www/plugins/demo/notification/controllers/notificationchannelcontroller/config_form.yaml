@@ -1,0 +1,10 @@
+name: NotificationChannelController
+form: $/demo/notification/models/notificationchannel/fields.yaml
+modelClass: Demo\Notification\Models\NotificationChannel
+defaultRedirect: demo/notification/notificationchannelcontroller
+create:
+    redirect: 'demo/notification/notificationchannelcontroller/update/:id'
+    redirectClose: demo/notification/notificationchannelcontroller
+update:
+    redirect: demo/notification/notificationchannelcontroller
+    redirectClose: demo/notification/notificationchannelcontroller

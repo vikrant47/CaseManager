@@ -1,0 +1,4 @@
+title: NotificationSubscriberController
+modelClass: Demo\Notification\Models\NotificationSubscriber
+toolbar:
+    buttons: reorder_toolbar
