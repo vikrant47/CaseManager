@@ -39,19 +39,18 @@ class Notification extends Model
 
     public function getSubscribers()
     {
-        $subscribers = new Collection();
+        $subscriberCollection = new Collection();
         if (!empty($this->subscribers)) {
             foreach ($this->subscribers as $subscriber) {
-                $users = new Collection();
                 if (!empty($subscriber->subscriber_group_id)) {
-                    $users->concat($subscriber->subscriber_group->users);
+                    $subscriberCollection = $subscriberCollection->concat($subscriber->subscriber_group->users);
                 }
-                if (!empty($subscriber->subscriber_user_id)) {
-                    $users->push($subscriber->subscriber);
+                if (!empty($subscriber->subscriber_id)) {
+                    $subscriberCollection->push($subscriber->subscriber);
                 }
             }
         }
-        return $subscribers;
+        return $subscriberCollection;
     }
 
     public function send($context)

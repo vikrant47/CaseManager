@@ -1,6 +1,7 @@
 <?php namespace Demo\Notification\Models;
 
 use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\PluginVersions;
 use Illuminate\Support\Facades\Mail;
@@ -61,8 +62,15 @@ class NotificationChannel extends Model
 
     public function sendNotification(Notification $notification, $context)
     {
+        $pluginConnection = PluginConnection::getConnection('demo.notification');
+        $logger = $pluginConnection->getPluginLogger();
+        $logger->debug('Sending notification with name ' . $notification->name);
         $this->setContext($context);
         $scriptContext = new ScriptContext();
-        $scriptContext->execute($this->script, ['notification' => $notification, 'self' => $this, 'Mail' => Mail::class]);
+        $scriptContext->execute($this->script, [
+            'notification' => $notification,
+            'self' => $this, 'Mail' => Mail::class,
+        ]);
+        $logger->debug('Notification ' . $notification->name . ' has been sent ');
     }
 }

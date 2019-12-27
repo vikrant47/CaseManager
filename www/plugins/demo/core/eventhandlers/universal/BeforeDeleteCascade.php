@@ -55,7 +55,7 @@ class BeforeDeleteCascade
                         $model->source_model::where($association->foreign_key, $model->{$otherKey})->update([$association->foreign_key => null]);
                     } else if ($association->cascade === CascadeRecord::DELETE) {
                         // $model->source_model::where($association->foreign_key, $model->{$otherKey})->delete(); // this should trigger delete event handlers
-                        $childRecords = $model->source_model::where($association->foreign_key, $model->{$otherKey})->all();
+                        $childRecords = $model->source_model::where($association->foreign_key, $model->{$otherKey})->get();
                         foreach ($childRecords as $childRecord) {
                             $childRecord->delete();
                         }

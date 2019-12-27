@@ -38,6 +38,11 @@ class ScriptContext
         return $this->attributes[$key];
     }
 
+    public function toArray()
+    {
+        return $this->attributes;
+    }
+
     public function buildContext($attributes)
     {
         $this->attributes = $this->attributes + $attributes;
