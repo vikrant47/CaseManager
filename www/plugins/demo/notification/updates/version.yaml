@@ -9,3 +9,6 @@
 1.0.4:
     - 'Created table demo_notification_subscribers'
     - builder_table_create_demo_notification_subscribers.php
+1.0.5:
+    - 'Created table demo_notification_logs'
+    - builder_table_create_demo_notification_logs.php

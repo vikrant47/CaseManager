@@ -22,3 +22,7 @@ navigation:
                 label: 'Notification Subscribers'
                 url: demo/notification/notificationsubscribercontroller
                 icon: icon-users
+            side-menu-item3:
+                label: Logs
+                url: /log
+                icon: icon-file

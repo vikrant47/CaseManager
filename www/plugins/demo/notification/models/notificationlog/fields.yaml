@@ -1,0 +1,18 @@
+fields:
+    notification:
+        label: Notification
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+    created_at:
+        label: 'Created At'
+        mode: datetime
+        span: auto
+        disabled: 1
+        type: datepicker
+    status:
+        label: Status
+        size: ''
+        span: auto
+        type: textarea

@@ -22,7 +22,7 @@ class BuilderTableCreateDemoNotificationNotifications extends Migration
             $table->text('condition');
             $table->integer('plugin_id');
             $table->boolean('active');
-            $table->boolean('queued');
+            $table->boolean('enable_logging')->default(false);
             $table->integer('template_id');
             $table->integer('channel_id');
         });

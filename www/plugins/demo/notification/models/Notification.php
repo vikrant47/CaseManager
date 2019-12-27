@@ -1,5 +1,6 @@
 <?php namespace Demo\Notification\Models;
 
+use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\PluginVersions;
 use Model;
@@ -13,6 +14,7 @@ class Notification extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
+    const IGNORE_MODELS = [NotificationLog::class];
 
     /**
      * @var string The database table used by the model.
@@ -39,23 +41,38 @@ class Notification extends Model
 
     public function getSubscribers()
     {
-        $subscribers = new Collection();
+        $subscriberCollection = new Collection();
         if (!empty($this->subscribers)) {
             foreach ($this->subscribers as $subscriber) {
-                $users = new Collection();
                 if (!empty($subscriber->subscriber_group_id)) {
-                    $users->concat($subscriber->subscriber_group->users);
+                    $subscriberCollection = $subscriberCollection->concat($subscriber->subscriber_group->users);
                 }
-                if (!empty($subscriber->subscriber_user_id)) {
-                    $users->push($subscriber->subscriber);
+                if (!empty($subscriber->subscriber_id)) {
+                    $subscriberCollection->push($subscriber->subscriber);
                 }
             }
         }
-        return $subscribers;
+        return $subscriberCollection;
     }
 
     public function send($context)
     {
-        $this->channel->sendNotification($this, $context);
+        $condition = $this->condition;
+        $scriptContext = new ScriptContext();
+        if (trim(strlen($condition)) === 0 || $scriptContext->execute($condition, $context) === true) {
+            $notificationLog = new NotificationLog();
+            $notificationLog->notification_id = $this->id;
+            try {
+                $this->channel->sendNotification($this, $context);
+                $notificationLog->delivered = true;
+                $notificationLog->status = 'success';
+            } catch (\Exception $ex) {
+                $notificationLog->delivered = false;
+                $notificationLog->status = $ex->getTraceAsString();
+            }
+            if ($this->enable_logging) {
+                $notificationLog->save();
+            }
+        }
     }
 }
