@@ -1,0 +1,10 @@
+name: NotificationLogController
+form: $/demo/notification/models/notificationlog/fields.yaml
+modelClass: Demo\Notification\Models\NotificationLog
+defaultRedirect: demo/notification/notificationlogcontroller
+create:
+    redirect: 'demo/notification/notificationlogcontroller/update/:id'
+    redirectClose: demo/notification/notificationlogcontroller
+update:
+    redirect: demo/notification/notificationlogcontroller
+    redirectClose: demo/notification/notificationlogcontroller
