@@ -40,7 +40,7 @@ class ScriptContext
 
     public function toArray()
     {
-        return $this->attributes;
+        return $this->attributes + ['exception' => $this->exception, 'currentUser' => $this->currentUser, 'request' => $this->request];
     }
 
     public function buildContext($attributes)

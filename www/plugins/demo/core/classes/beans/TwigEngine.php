@@ -27,12 +27,19 @@ class TwigEngine extends Twig
 
     public function buildContext($context = [])
     {
-        $this->context['user'] = BackendAuth::getUser();
-        return array_merge($this->context, $context);
+        $scriptContext = new ScriptContext();
+        $scriptContext->buildContext($context);
+        $this->context = $scriptContext->toArray();
+        return $this->context;
     }
 
     public function render($context = [])
     {
         return $this->template->render($this->buildContext($context));
+    }
+
+    public function evalArray($array, $context = [])
+    {
+        return json_decode($this->compile(json_encode($array))->render($context), true);
     }
 }

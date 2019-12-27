@@ -1,5 +1,6 @@
 <?php namespace Demo\Notification\Models;
 
+use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\PluginVersions;
 use Model;
@@ -13,6 +14,7 @@ class Notification extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
+    const IGNORE_MODELS = [NotificationLog::class];
 
     /**
      * @var string The database table used by the model.
@@ -55,6 +57,22 @@ class Notification extends Model
 
     public function send($context)
     {
-        $this->channel->sendNotification($this, $context);
+        $condition = $this->condition;
+        $scriptContext = new ScriptContext();
+        if (trim(strlen($condition)) === 0 || $scriptContext->execute($condition, $context) === true) {
+            $notificationLog = new NotificationLog();
+            $notificationLog->notification_id = $this->id;
+            try {
+                $this->channel->sendNotification($this, $context);
+                $notificationLog->delivered = true;
+                $notificationLog->status = 'success';
+            } catch (\Exception $ex) {
+                $notificationLog->delivered = false;
+                $notificationLog->status = $ex->getTraceAsString();
+            }
+            if ($this->enable_logging) {
+                $notificationLog->save();
+            }
+        }
     }
 }
