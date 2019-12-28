@@ -5,6 +5,7 @@ use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
 use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
 use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
 use Demo\Core\FormWidgets\RelatedList;
+use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
 use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
 use RainLab\Builder\Classes\ControlLibrary;
 use System\Classes\PluginBase;
@@ -21,6 +22,7 @@ class Plugin extends PluginBase
             BeforeUpdateWorkflowItemState::class,
             BeforeCreateOrUpdateCustomField::class,
             BeforeDeleteCascade::class,
+            UniversalWebhookHandler::class,
         ];
     }
 

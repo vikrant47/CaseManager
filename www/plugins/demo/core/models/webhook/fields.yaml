@@ -13,11 +13,6 @@ fields:
         span: auto
         default: 1
         type: switch
-    async:
-        label: Async
-        span: auto
-        default: 1
-        type: switch
     plugin:
         label: Plugin
         nameFrom: code
@@ -67,6 +62,19 @@ tabs:
             showSearch: true
             span: auto
             type: dropdown
+            tab: 'API Config'
+        async:
+            label: Async
+            span: auto
+            default: 1
+            type: switch
+            tab: 'API Config'
+        timeout:
+            label: Timeout
+            span: auto
+            default: '3600'
+            required: 1
+            type: number
             tab: 'API Config'
         request_headers:
             label: 'Request Headers'

@@ -38,8 +38,16 @@ class TwigEngine extends Twig
         return $this->template->render($this->buildContext($context));
     }
 
-    public function evalArray($array, $context = [])
+    public static function evalArray($array, $context = [])
     {
-        return json_decode($this->compile(json_encode($array))->render($context), true);
+        $twigEngine = new TwigEngine();
+        return json_decode($twigEngine->compile(json_encode($array))->render($context), true);
     }
+
+    public static function eval($template, $context = [])
+    {
+        $twigEngine = new TwigEngine();
+        return $twigEngine->compile($template)->render($context);
+    }
+
 }
