@@ -133,10 +133,10 @@ class Queue extends Model
         // creating context
         $context = new ScriptContext();
         $user = $context->execute($this->routing_rule->script, ['queue' => $this, 'item' => $item, 'queueItem' => $queueItem]);
-        $this->logger->info('Assigning to user ' . $user->username);
         if (empty($user)) {
             throw new ApplicationException('Routing Rule "' . $this->routing_rule->name . '" din\'t return any user');
         }
+        $this->logger->info('Assigning to user ' . $user->username);
         if ($this->isUserInAssignmentGroups($user) === false) {
             throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
         }
