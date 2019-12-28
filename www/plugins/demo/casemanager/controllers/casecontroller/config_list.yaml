@@ -1,4 +1,5 @@
 list: $/demo/casemanager/models/casemodel/columns.yaml
+filter: $/demo/casemanager/models/casemodel/filter.yaml
 modelClass: Demo\Casemanager\Models\CaseModel
 title: Cases
 noRecordsMessage: 'backend::lang.list.no_records'
