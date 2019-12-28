@@ -26,6 +26,7 @@ class BuilderTableCreateDemoCoreWebhooks extends Migration
             $table->string('event', 255);
             $table->string('model', 255);
             $table->boolean('async')->default(true);
+            $table->integer('timeout')->default(3600);
         });
     }
     

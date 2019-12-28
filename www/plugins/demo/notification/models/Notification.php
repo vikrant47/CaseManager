@@ -1,6 +1,7 @@
 <?php namespace Demo\Notification\Models;
 
 use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\PluginVersions;
 use Model;
@@ -57,6 +58,8 @@ class Notification extends Model
 
     public function send($context)
     {
+        $pluginConnection = PluginConnection::getConnection('demo.notification');
+        $logger = $pluginConnection->getPluginLogger();
         $condition = $this->condition;
         $scriptContext = new ScriptContext();
         if (trim(strlen($condition)) === 0 || $scriptContext->execute($condition, $context) === true) {
@@ -68,7 +71,8 @@ class Notification extends Model
                 $notificationLog->status = 'success';
             } catch (\Exception $ex) {
                 $notificationLog->delivered = false;
-                $notificationLog->status = $ex->getTraceAsString();
+                $notificationLog->status = $ex->getMessage();
+                $logger->error('Error while sending notification '.$ex->getMessage());
             }
             if ($this->enable_logging) {
                 $notificationLog->save();

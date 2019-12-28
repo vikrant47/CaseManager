@@ -43,6 +43,11 @@ class ScriptContext
         return $this->attributes + ['exception' => $this->exception, 'currentUser' => $this->currentUser, 'request' => $this->request];
     }
 
+    public function getPluginConnection($code)
+    {
+        return PluginConnection::getConnection($code);
+    }
+
     public function buildContext($attributes)
     {
         $this->attributes = $this->attributes + $attributes;

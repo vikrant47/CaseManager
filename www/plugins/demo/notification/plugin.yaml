@@ -24,5 +24,5 @@ navigation:
                 icon: icon-users
             side-menu-item3:
                 label: Logs
-                url: /log
+                url: demo/notification/notificationlogcontroller
                 icon: icon-file
