@@ -19,6 +19,8 @@ navigation:
                 label: Models
                 url: demo/core/modelcontroller
                 icon: icon-table
+                permissions:
+                    - 'demo.core::models.model.row.read.*'
             side-menu-item11:
                 label: 'Model Association'
                 url: demo/core/modelassociationcontroller
@@ -55,3 +57,16 @@ navigation:
                 label: Libraries
                 url: demo/core/javascriptlibrarycontroller
                 icon: icon-files-o
+permissions:
+    'demo.core::models.model.row.read':
+        tab: 'Read Permission'
+        label: 'Model Model Row Read Permission'
+    'demo.core::models.model.row.delete':
+        tab: 'Delete Permission'
+        label: 'Model Model Row Delete Permission'
+    'demo.core::models.model.row.create':
+        tab: 'Create Permission'
+        label: 'Model Model Row Create Permission'
+    'demo.core::models.model.row.update':
+        tab: 'Update Permission'
+        label: 'Model Model Row Update Permission'
