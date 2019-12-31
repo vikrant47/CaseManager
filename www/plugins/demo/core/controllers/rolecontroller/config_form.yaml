@@ -1,0 +1,10 @@
+name: RoleController
+form: $/demo/core/models/role/fields.yaml
+modelClass: Demo\Core\Models\Role
+defaultRedirect: demo/core/rolecontroller
+create:
+    redirect: 'demo/core/rolecontroller/update/:id'
+    redirectClose: demo/core/rolecontroller
+update:
+    redirect: demo/core/rolecontroller
+    redirectClose: demo/core/rolecontroller

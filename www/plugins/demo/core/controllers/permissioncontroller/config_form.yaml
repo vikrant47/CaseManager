@@ -1,0 +1,10 @@
+name: PermissionController
+form: $/demo/core/models/permission/fields.yaml
+modelClass: Demo\Core\Models\Permission
+defaultRedirect: demo/core/permissioncontroller
+create:
+    redirect: 'demo/core/permissioncontroller/update/:id'
+    redirectClose: demo/core/permissioncontroller
+update:
+    redirect: demo/core/permissioncontroller
+    redirectClose: demo/core/permissioncontroller

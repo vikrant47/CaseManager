@@ -1,0 +1,10 @@
+name: RolePolicyAssociationController
+form: $/demo/core/models/rolepolicyassociation/fields.yaml
+modelClass: Demo\Core\Models\RolePolicyAssociation
+defaultRedirect: demo/core/rolepolicyassociationcontroller
+create:
+    redirect: 'demo/core/rolepolicyassociationcontroller/update/:id'
+    redirectClose: demo/core/rolepolicyassociationcontroller
+update:
+    redirect: demo/core/rolepolicyassociationcontroller
+    redirectClose: demo/core/rolepolicyassociationcontroller
