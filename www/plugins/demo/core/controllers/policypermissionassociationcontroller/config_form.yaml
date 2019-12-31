@@ -1,0 +1,10 @@
+name: PolicyPermissionAssociationController
+form: $/demo/core/models/permissionpolicyassociation/fields.yaml
+modelClass: Demo\Core\Models\PermissionPolicyAssociation
+defaultRedirect: demo/core/policypermissionassociationcontroller
+create:
+    redirect: 'demo/core/policypermissionassociationcontroller/update/:id'
+    redirectClose: demo/core/policypermissionassociationcontroller
+update:
+    redirect: demo/core/policypermissionassociationcontroller
+    redirectClose: demo/core/policypermissionassociationcontroller

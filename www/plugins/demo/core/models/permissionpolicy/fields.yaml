@@ -1,0 +1,17 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    permissions:
+        label: Permissions
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation

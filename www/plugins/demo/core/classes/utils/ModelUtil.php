@@ -1,6 +1,11 @@
 <?php namespace Demo\Core\Classes\Utils;
 
 
+use Demo\Core\Services\SecurityService;
+use October\Rain\Database\Collection;
+use October\Rain\Database\Relations\BelongsToMany;
+use BackendAuth;
+
 class ModelUtil
 {
     /**Return given model as classname -> recordId format*/
@@ -15,5 +20,23 @@ class ModelUtil
     public static function isNew($model)
     {
         return empty($model->id);
+    }
+
+    public static function fillDefaultColumnsInBelongsToMany(BelongsToMany $association, Collection $data, $pluginId)
+    {
+        $user = BackendAuth::getUser();
+        $pivotValues = [
+            'created_at' => new \DateTime(),
+            'updated_at' => new \DateTime(),
+            'plugin_id' => $pluginId,
+            'created_by_id' => $user->id,
+            'updated_by_id' => $user->id,
+        ];
+        $associationSync = [];
+        foreach ($data as $record) {
+            $associationSync[$record->id] = $pivotValues;
+            $association->detach($record->id);
+            $association->attach($record->id, $pivotValues);
+        }
     }
 }

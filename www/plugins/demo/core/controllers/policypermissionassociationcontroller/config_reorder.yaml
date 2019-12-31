@@ -1,0 +1,4 @@
+title: PolicyPermissionAssociationController
+modelClass: Demo\Core\Models\PermissionPolicyAssociation
+toolbar:
+    buttons: reorder_toolbar

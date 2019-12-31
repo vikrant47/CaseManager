@@ -57,6 +57,26 @@ navigation:
                 label: Libraries
                 url: demo/core/javascriptlibrarycontroller
                 icon: icon-files-o
+            side-menu-item15:
+                label: Roles
+                url: demo/core/rolecontroller
+                icon: icon-users
+            side-menu-item2:
+                label: Permissions
+                url: demo/core/permissioncontroller
+                icon: icon-key
+            side-menu-item13:
+                label: Policies
+                url: demo/core/permissionpolicycontroller
+                icon: icon-circle-o-notch
+            side-menu-item12:
+                label: 'Policy Permissions'
+                url: demo/core/permissionpolicycontroller
+                icon: icon-sitemap
+            side-menu-item14:
+                label: 'Role Policy Associations'
+                url: /rpa
+                icon: icon-dot-circle-o
 permissions:
     'demo.core::models.model.row.read':
         tab: 'Read Permission'

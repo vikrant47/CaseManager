@@ -1,0 +1,81 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: textarea
+    code:
+        label: Code
+        span: auto
+        disabled: 1
+        readOnly: 1
+        type: text
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        type: relation
+        required: 1
+tabs:
+    fields:
+        model_ref:
+            label: Model
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Definition
+            emptyOption: '-- None --'
+            required: 1
+        operation:
+            label: Operation
+            options:
+                read: Read
+                write: Write
+                create: Create
+                delete: Delete
+            showSearch: true
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Definition
+        columns:
+            label: Columns
+            showSearch: true
+            span: auto
+            dependsOn:
+                - model_ref
+            type: dropdown
+            tab: Definition
+            attributes:
+                multiple: true
+        condition:
+            label: Condition
+            size: small
+            language: sql
+            span: auto
+            type: codeeditor
+            tab: Definition
+        policies:
+            label: Policies
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Policies

@@ -1,0 +1,23 @@
+fields:
+    policy:
+        label: Policy
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    permission:
+        label: Permission
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+

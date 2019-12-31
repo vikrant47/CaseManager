@@ -1,0 +1,4 @@
+title: PermissionController
+modelClass: Demo\Core\Models\Permission
+toolbar:
+    buttons: reorder_toolbar

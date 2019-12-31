@@ -43,13 +43,13 @@ abstract class AbstractController extends Controller
     /**
      * Before read permission can be evaluated here
      */
-    /*public function listExtendQuery(\October\Rain\Database\Builder $query)
+    public function listExtendQuery(\October\Rain\Database\Builder $query)
     {
         $permission = $this->securiyService->getReadPermission($this->modelClass);
         if (!$this->user->hasAccess($permission)) {
             return $this->forwardToAccessDenied();
         }
-    }*/
+    }
 
     /**
      * Before creating the model
