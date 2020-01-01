@@ -1,0 +1,10 @@
+name: UserGroupController
+form: $/demo/core/models/usergroupmodel/fields.yaml
+modelClass: Demo\Core\Models\UserGroupModel
+defaultRedirect: demo/core/usergroupcontroller
+create:
+    redirect: 'demo/core/usergroupcontroller/update/:id'
+    redirectClose: demo/core/usergroupcontroller
+update:
+    redirect: demo/core/usergroupcontroller
+    redirectClose: demo/core/usergroupcontroller

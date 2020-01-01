@@ -1,0 +1,4 @@
+title: UserRoleAssociationController
+modelClass: Demo\Core\Models\UserRoleAssociation
+toolbar:
+    buttons: reorder_toolbar

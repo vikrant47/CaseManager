@@ -39,7 +39,7 @@ class Permission extends Model
 
     public $belongsToMany = [
         'policies' => [
-            PermissionPolicy::class,
+            SecurityPolicy::class,
             'table' => 'demo_core_permission_policy_associations',
             'key' => 'permission_id',
             'otherKey' => 'policy_id'

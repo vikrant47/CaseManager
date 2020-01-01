@@ -18,5 +18,25 @@ fields:
         type: textarea
         size: tiny
 
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        type: relation
+        required: 1
 tabs:
-    stretch: true
+    fields:
+        policies:
+            label: Policies
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Policies

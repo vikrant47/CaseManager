@@ -1,0 +1,23 @@
+fields:
+    role:
+        label: Role
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    user:
+        label: User
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+

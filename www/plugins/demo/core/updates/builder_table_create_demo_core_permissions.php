@@ -24,6 +24,7 @@ class BuilderTableCreateDemoCorePermissions extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('active');
+            $table->boolean('system')->default(false);
         });
     }
     

@@ -2,30 +2,6 @@ columns:
     id:
         label: id
         type: number
-    created_at:
-        label: created_at
-        type: datetime
-    updated_at:
-        label: updated_at
-        type: datetime
-    plugin_id:
-        label: plugin_id
-        type: number
-    model:
-        label: model
-        type: number
-    operation:
-        label: operation
-        type: text
-    columns:
-        label: columns
-        type: text
-    row_level:
-        label: row_level
-        type: text
-    condition:
-        label: condition
-        type: text
     code:
         label: code
         type: text
@@ -35,3 +11,28 @@ columns:
     active:
         label: active
         type: text
+    model:
+        label: model
+        type: number
+    operation:
+        label: operation
+        type: text
+    columns:
+        label: columns
+        type: text
+        invisible: true
+    condition:
+        label: condition
+        type: text
+        invisible: true
+    created_at:
+        label: created_at
+        type: datetime
+        invisible: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        invisible: true
+    plugin_id:
+        label: plugin_id
+        type: number
