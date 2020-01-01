@@ -27,7 +27,7 @@ class RolePolicyAssociation extends Model
 
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
-        'policy' => [PermissionPolicy::class, 'key' => 'policy_id'],
+        'policy' => [SecurityPolicy::class, 'key' => 'policy_id'],
         'role' => [UserRole::class, 'key' => 'role_id'],
     ];
 

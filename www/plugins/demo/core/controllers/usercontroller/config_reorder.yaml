@@ -1,0 +1,4 @@
+title: UserController
+modelClass: Demo\Core\Models\UserModel
+toolbar:
+    buttons: reorder_toolbar

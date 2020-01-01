@@ -14,6 +14,6 @@ class RolePolicyAssociationController extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Demo.Core', 'main-menu-item', 'side-menu-item14');
+        BackendMenu::setContext('Demo.Core', 'main-menu-item2', 'side-menu-item14');
     }
 }

@@ -1,0 +1,4 @@
+title: PermissionPolicyController
+modelClass: Demo\Core\Models\SecurityPolicy
+toolbar:
+    buttons: reorder_toolbar

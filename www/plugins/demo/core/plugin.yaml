@@ -57,26 +57,44 @@ navigation:
                 label: Libraries
                 url: demo/core/javascriptlibrarycontroller
                 icon: icon-files-o
+    main-menu-item2:
+        label: Security
+        url: demo/core/usercontroller
+        icon: icon-lock
+        order: '500'
+        sideMenu:
+            side-menu-item17:
+                label: Users
+                url: demo/core/usercontroller
+                icon: icon-user
+            side-menu-item:
+                label: Groups
+                url: demo/core/usergroupcontroller
+                icon: icon-users
             side-menu-item15:
                 label: Roles
                 url: demo/core/rolecontroller
-                icon: icon-users
+                icon: icon-suitcase
+            side-menu-item13:
+                label: Policies
+                url: demo/core/securitypolicycontroller
+                icon: icon-circle-o-notch
             side-menu-item2:
                 label: Permissions
                 url: demo/core/permissioncontroller
                 icon: icon-key
-            side-menu-item13:
-                label: Policies
-                url: demo/core/permissionpolicycontroller
-                icon: icon-circle-o-notch
             side-menu-item12:
                 label: 'Policy Permissions'
-                url: demo/core/permissionpolicycontroller
+                url: demo/core/securitypolicycontroller
                 icon: icon-sitemap
             side-menu-item14:
                 label: 'Role Policy Associations'
                 url: /rpa
                 icon: icon-dot-circle-o
+            side-menu-item16:
+                label: 'User Role Associations'
+                url: demo/core/userroleassociationcontroller
+                icon: icon-user-plus
 permissions:
     'demo.core::models.model.row.read':
         tab: 'Read Permission'

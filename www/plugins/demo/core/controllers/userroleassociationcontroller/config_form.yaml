@@ -1,0 +1,10 @@
+name: UserRoleAssociationController
+form: $/demo/core/models/userroleassociation/fields.yaml
+modelClass: Demo\Core\Models\UserRoleAssociation
+defaultRedirect: demo/core/userroleassociationcontroller
+create:
+    redirect: 'demo/core/userroleassociationcontroller/update/:id'
+    redirectClose: demo/core/userroleassociationcontroller
+update:
+    redirect: demo/core/userroleassociationcontroller
+    redirectClose: demo/core/userroleassociationcontroller

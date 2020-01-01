@@ -1,0 +1,10 @@
+name: PermissionPolicyController
+form: $/demo/core/models/securitypolicy/fields.yaml
+modelClass: Demo\Core\Models\SecurityPolicy
+defaultRedirect: demo/core/securitypolicycontroller
+create:
+    redirect: 'demo/core/securitypolicycontroller/update/:id'
+    redirectClose: demo/core/securitypolicycontroller
+update:
+    redirect: demo/core/securitypolicycontroller
+    redirectClose: demo/core/securitypolicycontroller
