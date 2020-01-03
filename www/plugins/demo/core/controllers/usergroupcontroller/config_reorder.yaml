@@ -1,4 +1,4 @@
 title: UserGroupController
-modelClass: Demo\Core\Models\UserGroupModel
+modelClass: Demo\Core\Models\CoreUserGroup
 toolbar:
     buttons: reorder_toolbar

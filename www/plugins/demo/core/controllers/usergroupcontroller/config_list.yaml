@@ -1,5 +1,5 @@
-list: $/demo/core/models/usergroupmodel/columns.yaml
-modelClass: Demo\Core\Models\UserGroupModel
+list: $/demo/core/models/coreusergroup/columns.yaml
+modelClass: Demo\Core\Models\CoreUserGroup
 title: UserGroupController
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

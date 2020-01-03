@@ -495,7 +495,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 34,
-                'model' => 'Demo\Core\Models\UserModel',
+                'model' => 'Demo\Core\Models\CoreUser',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -505,11 +505,11 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Read Permission',
-                'code' => 'demo.core::models.usermodel.row.read'
+                'code' => 'demo.core::models.coreuser.row.read'
             ],
             [
                 'id' => 35,
-                'model' => 'Demo\Core\Models\UserGroupModel',
+                'model' => 'Demo\Core\Models\CoreUserGroup',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -519,7 +519,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Read Permission',
-                'code' => 'demo.core::models.usergroupmodel.row.read'
+                'code' => 'demo.core::models.coreusergroup.row.read'
             ],
             [
                 'id' => 36,
@@ -533,7 +533,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Widget Read Permission',
-                'code' => 'demo.workflow::emo.report.models.widget.row.read'
+                'code' => 'demo.report::models.widget.row.read'
             ],
             [
                 'id' => 37,
@@ -547,7 +547,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Dashboard Read Permission',
-                'code' => 'demo.workflow::emo.report.models.dashboard.row.read'
+                'code' => 'demo.report::models.dashboard.row.read'
             ], [
                 'id' => 41,
                 'model' => 'Demo\Workflow\Models\Queue',
@@ -1012,7 +1012,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 74,
-                'model' => 'Demo\Core\Models\UserModel',
+                'model' => 'Demo\Core\Models\CoreUser',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -1022,11 +1022,11 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Write Permission',
-                'code' => 'demo.core::models.usermodel.row.write'
+                'code' => 'demo.core::models.coreuser.row.write'
             ],
             [
                 'id' => 75,
-                'model' => 'Demo\Core\Models\UserGroupModel',
+                'model' => 'Demo\Core\Models\CoreUserGroup',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -1036,7 +1036,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Write Permission',
-                'code' => 'demo.core::models.usergroupmodel.row.write'
+                'code' => 'demo.core::models.coreusergroup.row.write'
             ],
             [
                 'id' => 76,
@@ -1050,7 +1050,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Widget Write Permission',
-                'code' => 'demo.workflow::emo.report.models.widget.row.write'
+                'code' => 'demo.report::models.widget.row.write'
             ],
             [
                 'id' => 77,
@@ -1064,7 +1064,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Dashboard Write Permission',
-                'code' => 'demo.workflow::emo.report.models.dashboard.row.write'
+                'code' => 'demo.report::models.dashboard.row.write'
             ], [
                 'id' => 81,
                 'model' => 'Demo\Workflow\Models\Queue',
@@ -1529,7 +1529,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 114,
-                'model' => 'Demo\Core\Models\UserModel',
+                'model' => 'Demo\Core\Models\CoreUser',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -1539,11 +1539,11 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Create Permission',
-                'code' => 'demo.core::models.usermodel.row.create'
+                'code' => 'demo.core::models.coreuser.row.create'
             ],
             [
                 'id' => 115,
-                'model' => 'Demo\Core\Models\UserGroupModel',
+                'model' => 'Demo\Core\Models\CoreUserGroup',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -1553,7 +1553,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Create Permission',
-                'code' => 'demo.core::models.usergroupmodel.row.create'
+                'code' => 'demo.core::models.coreusergroup.row.create'
             ],
             [
                 'id' => 116,
@@ -1567,7 +1567,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Widget Create Permission',
-                'code' => 'demo.workflow::emo.report.models.widget.row.create'
+                'code' => 'demo.report::models.widget.row.create'
             ],
             [
                 'id' => 117,
@@ -1581,7 +1581,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Dashboard Create Permission',
-                'code' => 'demo.workflow::emo.report.models.dashboard.row.create'
+                'code' => 'demo.report::models.dashboard.row.create'
             ], [
                 'id' => 121,
                 'model' => 'Demo\Workflow\Models\Queue',
@@ -2046,7 +2046,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 154,
-                'model' => 'Demo\Core\Models\UserModel',
+                'model' => 'Demo\Core\Models\CoreUser',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -2056,11 +2056,11 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Delete Permission',
-                'code' => 'demo.core::models.usermodel.row.delete'
+                'code' => 'demo.core::models.coreuser.row.delete'
             ],
             [
                 'id' => 155,
-                'model' => 'Demo\Core\Models\UserGroupModel',
+                'model' => 'Demo\Core\Models\CoreUserGroup',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -2070,7 +2070,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'User Delete Permission',
-                'code' => 'demo.core::models.usergroupmodel.row.delete'
+                'code' => 'demo.core::models.coreusergroup.row.delete'
             ],
             [
                 'id' => 156,
@@ -2084,7 +2084,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Widget Delete Permission',
-                'code' => 'demo.workflow::emo.report.models.widget.row.delete'
+                'code' => 'demo.report::models.widget.row.delete'
             ],
             [
                 'id' => 157,
@@ -2098,7 +2098,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
                 'active' => true,
                 'system' => true,
                 'name' => 'Dashboard Delete Permission',
-                'code' => 'demo.workflow::emo.report.models.dashboard.row.delete'
+                'code' => 'demo.report::models.dashboard.row.delete'
             ]
 
         ]);

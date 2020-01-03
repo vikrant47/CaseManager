@@ -1,0 +1,55 @@
+fields:
+    login:
+        span: left
+        label: 'backend::lang.user.login'
+        type: text
+    email:
+        span: right
+        label: 'backend::lang.user.email'
+        type: text
+    send_invite:
+        context: create
+        type: checkbox
+        label: 'backend::lang.user.send_invite'
+        comment: 'backend::lang.user.send_invite_comment'
+        default: true
+    first_name:
+        span: left
+        label: 'backend::lang.user.first_name'
+        type: text
+    last_name:
+        span: right
+        label: 'backend::lang.user.last_name'
+        type: text
+    password:
+        type: password
+        span: left
+        label: 'backend::lang.user.password'
+    password_confirmation:
+        type: password
+        span: right
+        label: 'backend::lang.user.password_confirmation'
+    avatar:
+        label: 'backend::lang.user.avatar'
+        type: fileupload
+        mode: image
+        imageHeight: 250
+        imageWidth: 250
+tabs:
+    fields:
+        roles:
+            label: Roles
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Roles
+        groups:
+            context:
+                - create
+                - update
+            label: 'backend::lang.user.groups'
+            commentAbove: 'backend::lang.user.groups_comment'
+            type: checkboxlist
+            tab: Groups
+            span: auto

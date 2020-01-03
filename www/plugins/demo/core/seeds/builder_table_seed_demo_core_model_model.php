@@ -210,7 +210,7 @@ class BuilderTableSeedDemoCoreModelModel extends Seeder
             ], [
                 'id' => 65,
                 'name' => 'User',
-                'model_type' => 'Demo\Core\Models\UserModel',
+                'model_type' => 'Demo\Core\Models\CoreUser',
                 'plugin_id' => 10,
                 'audit' => 0,
                 'record_history' => 0,
@@ -223,7 +223,7 @@ class BuilderTableSeedDemoCoreModelModel extends Seeder
             ], [
                 'id' => 80,
                 'name' => 'User',
-                'model_type' => 'Demo\Core\Models\UserGroupModel',
+                'model_type' => 'Demo\Core\Models\CoreUserGroup',
                 'plugin_id' => 10,
                 'audit' => 0,
                 'record_history' => 0,
