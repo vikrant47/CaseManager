@@ -22,8 +22,11 @@ class ModelUtil
         return empty($model->id);
     }
 
-    public static function fillDefaultColumnsInBelongsToMany(BelongsToMany $association, Collection $data, $pluginId)
+    public static function fillDefaultColumnsInBelongsToMany(BelongsToMany $association, Collection $data, $pluginId = 10)
     {
+        if(empty($pluginId)){
+            $pluginId = 10;
+        }
         $user = BackendAuth::getUser();
         $pivotValues = [
             'created_at' => new \DateTime(),

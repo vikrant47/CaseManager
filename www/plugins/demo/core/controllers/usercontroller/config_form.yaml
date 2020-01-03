@@ -1,6 +1,6 @@
 name: UserController
-form: $/demo/core/models/usermodel/fields.yaml
-modelClass: Demo\Core\Models\UserModel
+form: $/demo/core/models/coreuser/fields.yaml
+modelClass: Demo\Core\Models\CoreUser
 defaultRedirect: demo/core/usercontroller
 create:
     redirect: 'demo/core/usercontroller/update/:id'

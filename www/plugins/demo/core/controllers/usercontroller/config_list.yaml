@@ -1,5 +1,5 @@
-list: $/demo/core/models/usermodel/columns.yaml
-modelClass: Demo\Core\Models\UserModel
+list: $/demo/core/models/coreuser/columns.yaml
+modelClass: Demo\Core\Models\CoreUser
 title: UserController
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

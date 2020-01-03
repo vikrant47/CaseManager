@@ -87,14 +87,20 @@ navigation:
                 label: 'Policy Permissions'
                 url: demo/core/securitypolicycontroller
                 icon: icon-sitemap
+                attributes:
+                    - 'style="display:none;"'
             side-menu-item14:
                 label: 'Role Policy Associations'
                 url: /rpa
                 icon: icon-dot-circle-o
+                attributes:
+                    - 'style="display:none;"'
             side-menu-item16:
                 label: 'User Role Associations'
                 url: demo/core/userroleassociationcontroller
                 icon: icon-user-plus
+                attributes:
+                    - 'style="display:none;"'
 permissions:
     'demo.core::models.model.row.read':
         tab: 'Read Permission'

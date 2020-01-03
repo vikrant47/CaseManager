@@ -7,7 +7,7 @@ namespace Demo\Core\Models;
 use Backend\Models\User;
 use Backend\Models\UserGroup;
 
-class UserGroupModel extends UserGroup
+class CoreUserGroup extends UserGroup
 {
     /**
      * @var array Relations
