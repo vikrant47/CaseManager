@@ -2,10 +2,11 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 use Demo\Core\Models\Iframe;
 use Demo\Core\Models\PluginVersions;
 
-class IframeController extends Controller
+class IframeController extends AbstractSecurityController
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 

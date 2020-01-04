@@ -2,8 +2,9 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 
-class InboundApi extends Controller
+class InboundApi extends AbstractSecurityController
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
     

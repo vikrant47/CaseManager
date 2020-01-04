@@ -3,6 +3,7 @@
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdate;
 use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
 use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
+use Demo\Core\EventHandlers\Universal\RestrictSystemRecordHandler;
 use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
 use Demo\Core\FormWidgets\RelatedList;
 use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
@@ -23,6 +24,7 @@ class Plugin extends PluginBase
             BeforeCreateOrUpdateCustomField::class,
             BeforeDeleteCascade::class,
             UniversalWebhookHandler::class,
+            RestrictSystemRecordHandler::class,
         ];
     }
 

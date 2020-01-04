@@ -2,13 +2,14 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 use Demo\Workflow\Classes\Traits\WorkflowControllerTrait;
 use Demo\Casemanager\Models\CaseModel;
 use Demo\Workflow\Models\WorkflowItem;
 use Model;
 use October\Rain\Exception\ApplicationException;
 
-class CaseController extends Controller
+class CaseController extends AbstractSecurityController
 {
     use WorkflowControllerTrait;
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];

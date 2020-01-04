@@ -8,17 +8,22 @@ fields:
         size: ''
         span: auto
         type: textarea
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    admin_override:
+        label: 'Admin Override'
+        span: auto
+        default: 1
+        type: switch
     code:
         label: Code
         span: auto
         disabled: 1
         readOnly: 1
         type: text
-    active:
-        label: Active
-        span: auto
-        default: 1
-        type: switch
     plugin:
         label: Plugin
         nameFrom: code

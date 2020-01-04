@@ -6,11 +6,14 @@ use Model;
 /**
  * Model
  */
-class Role  extends Model
+class Role extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
-
+    const ADMIN = 'admin';
+    const EVERYONE = 'everyone';
+    const SUPER_ADMIN = 'super_admin';
+    const SYSTEM_ROLES = [self::ADMIN, self::EVERYONE, self::SUPER_ADMIN];
     /**
      * @var string The database table used by the model.
      */

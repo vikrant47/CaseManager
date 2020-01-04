@@ -7,8 +7,7 @@ class BuilderTableCreateDemoCoreRoles extends Migration
 {
     public function up()
     {
-        Schema::create('demo_core_roles', function($table)
-        {
+        Schema::create('demo_core_roles', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
@@ -16,12 +15,12 @@ class BuilderTableCreateDemoCoreRoles extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->text('description');
             $table->integer('plugin_id');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_core_roles');

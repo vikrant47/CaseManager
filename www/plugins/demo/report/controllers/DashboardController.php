@@ -3,6 +3,7 @@
 use Backend\Classes\Controller;
 use Backend\Classes\WidgetManager;
 use BackendMenu;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 use Demo\Report\Models\Dashboard;
 use Demo\Report\Models\Widget;
 use Input;
@@ -11,7 +12,7 @@ use October\Rain\Support\Facades\Flash;
 use Lang;
 use Request;
 
-class DashboardController extends Controller
+class DashboardController extends AbstractSecurityController
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 

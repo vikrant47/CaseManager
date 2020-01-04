@@ -3,10 +3,11 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use BackendAuth;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 use Demo\Workflow\Models\Workflow;
 use October\Rain\Exception\ApplicationException;
 
-class WorkflowItemController extends Controller
+class WorkflowItemController extends AbstractSecurityController
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 
