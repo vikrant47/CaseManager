@@ -4,7 +4,9 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Config;
 use Backend;
-class CustomFieldController extends Controller
+use Demo\Core\Classes\Beans\AbstractSecurityController;
+
+class CustomFieldController extends AbstractSecurityController
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
     

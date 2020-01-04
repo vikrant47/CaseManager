@@ -2,10 +2,11 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Services\EventHandlerServiceProvider;
 
-class Workflow extends Controller
+class Workflow extends AbstractSecurityController
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 

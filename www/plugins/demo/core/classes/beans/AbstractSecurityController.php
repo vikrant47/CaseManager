@@ -67,8 +67,8 @@ abstract class AbstractSecurityController extends Controller
             return $this->forwardToAccessDenied();
         }
         if (!$this->userSecuriyService->hasAstrixPermission($permission)) {
-            $record = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->first();
-            if (empty($record)) {
+            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->count();
+            if ($count === 0) {
                 return $this->forwardToAccessDenied();
             }
         }
@@ -84,8 +84,8 @@ abstract class AbstractSecurityController extends Controller
             return $this->forwardToAccessDenied();
         }
         if (!$this->userSecuriyService->hasAstrixPermission($permission)) {
-            $record = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->first();
-            if (empty($record)) {
+            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->count();
+            if ($count === 0) {
                 return $this->forwardToAccessDenied();
             }
         }
@@ -101,8 +101,8 @@ abstract class AbstractSecurityController extends Controller
             return $this->forwardToAccessDenied();
         }
         if (!$this->userSecuriyService->hasAstrixPermission($permission)) {
-            $record = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->first();
-            if (empty($record)) {
+            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->count();
+            if ($count === 0) {
                 return $this->forwardToAccessDenied();
             }
         }
@@ -123,5 +123,13 @@ abstract class AbstractSecurityController extends Controller
         $model = $this->formFindModelObject($recordId);
         $this->formBeforeDelete($model);
         return parent::update_onDelete($recordId);
+    }
+
+    /**
+     * This is a controller callback for flushing session cache
+     */
+    public function onFlushSessionCache()
+    {
+        $this->userSecuriyService->flushCache();
     }
 }

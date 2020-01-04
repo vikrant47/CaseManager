@@ -285,7 +285,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 19,
-                'model' => 'Demo\Core\Models\Model',
+                'model' => 'Demo\Core\Models\ModelModel',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -802,7 +802,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 59,
-                'model' => 'Demo\Core\Models\Model',
+                'model' => 'Demo\Core\Models\ModelModel',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -1319,7 +1319,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 99,
-                'model' => 'Demo\Core\Models\Model',
+                'model' => 'Demo\Core\Models\ModelModel',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
@@ -1836,7 +1836,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
             ],
             [
                 'id' => 139,
-                'model' => 'Demo\Core\Models\Model',
+                'model' => 'Demo\Core\Models\ModelModel',
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',

@@ -2,11 +2,12 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 use Demo\Report\Models\Widget;
 use Input;
 use Maatwebsite\Excel\Excel;
 
-class WidgetController extends Controller
+class WidgetController extends AbstractSecurityController
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 

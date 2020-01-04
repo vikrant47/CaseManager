@@ -4,7 +4,9 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Config;
 use Backend;
-class FormFieldController extends Controller
+use Demo\Core\Classes\Beans\AbstractSecurityController;
+
+class FormFieldController extends AbstractSecurityController
 {
     public $implement = [
         'Backend\Behaviors\ListController',

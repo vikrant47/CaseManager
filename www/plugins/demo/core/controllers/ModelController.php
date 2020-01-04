@@ -2,9 +2,9 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
-use Demo\Core\Classes\Beans\AbstractController;
+use Demo\Core\Classes\Beans\AbstractSecurityController;
 
-class ModelController extends AbstractController
+class ModelController extends AbstractSecurityController
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 

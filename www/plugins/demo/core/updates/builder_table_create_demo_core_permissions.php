@@ -7,8 +7,7 @@ class BuilderTableCreateDemoCorePermissions extends Migration
 {
     public function up()
     {
-        Schema::create('demo_core_permissions', function($table)
-        {
+        Schema::create('demo_core_permissions', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
@@ -21,13 +20,14 @@ class BuilderTableCreateDemoCorePermissions extends Migration
             $table->text('columns')->nullable();
             $table->text('condition')->nullable();
             $table->string('code');
+            $table->boolean('admin_override')->default(true);
             $table->string('name');
             $table->text('description')->nullable();
             $table->boolean('active');
             $table->boolean('system')->default(false);
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_core_permissions');
