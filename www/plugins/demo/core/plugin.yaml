@@ -67,10 +67,6 @@ navigation:
                 label: Users
                 url: demo/core/usercontroller
                 icon: icon-user
-            side-menu-item:
-                label: Groups
-                url: demo/core/usergroupcontroller
-                icon: icon-users
             side-menu-item15:
                 label: Roles
                 url: demo/core/rolecontroller
@@ -83,6 +79,10 @@ navigation:
                 label: Permissions
                 url: demo/core/permissioncontroller
                 icon: icon-key
+            side-menu-item:
+                label: Groups
+                url: demo/core/usergroupcontroller
+                icon: icon-users
             side-menu-item12:
                 label: 'Policy Permissions'
                 url: demo/core/securitypolicycontroller

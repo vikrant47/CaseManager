@@ -16,6 +16,11 @@ class Permission extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
+    const READ = 'read';
+    const WRITE = 'write';
+    const DELETE = 'delete';
+    const CREATE = 'create';
+
 
     /**
      * @var string The database table used by the model.
@@ -68,7 +73,7 @@ class Permission extends Model
         $securityService = new SecurityService();
         $level = empty($this->columns) ? 'row' : 'column';
         $this->code = $securityService->getPermissionPrefix($this->model) . '.' . $level . '.' . $this->operation;
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(),$this->policies,$this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(), $this->policies, $this->plugin_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
     }
 }
