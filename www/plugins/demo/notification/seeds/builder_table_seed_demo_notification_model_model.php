@@ -14,7 +14,7 @@ class BuilderTableSeedDemoNotificationModelModel extends Seeder
         Db::table('demo_core_models')->insert([
             [
                 'id' => 51,
-                'name' => 'Case Model',
+                'name' => 'Notification Channel',
                 'model_type' => 'Demo\Notification\Models\NotificationChannel',
                 'plugin_id' => 10,
                 'audit' => 0,
@@ -27,7 +27,7 @@ class BuilderTableSeedDemoNotificationModelModel extends Seeder
                 'updated_at' => '2019-12-20 14:15:39',
             ], [
                 'id' => 52,
-                'name' => 'Case Priority',
+                'name' => 'Notification',
                 'model_type' => 'Demo\Notification\Models\Notification',
                 'plugin_id' => 10,
                 'audit' => 0,
@@ -40,7 +40,7 @@ class BuilderTableSeedDemoNotificationModelModel extends Seeder
                 'updated_at' => '2019-12-20 14:15:39',
             ], [
                 'id' => 53,
-                'name' => 'Case Priority',
+                'name' => 'Notification Subscriber',
                 'model_type' => 'Demo\Notification\Models\NotificationSubscriber',
                 'plugin_id' => 10,
                 'audit' => 0,

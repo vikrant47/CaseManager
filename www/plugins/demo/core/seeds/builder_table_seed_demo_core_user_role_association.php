@@ -4,8 +4,9 @@ namespace Demo\Core\Seeds;
 
 use Schema;
 use Seeder;
+use Db;
 
-class BuilderTableSeedDemoCoreRole extends Seeder
+class BuilderTableSeedDemoCoreUserRoleAssociation extends Seeder
 {
     public function run()
     {

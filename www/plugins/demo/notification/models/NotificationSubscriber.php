@@ -2,6 +2,8 @@
 
 use Backend\Models\User;
 use Backend\Models\UserGroup;
+use Demo\Core\Models\CoreUser;
+use Demo\Core\Models\CoreUserGroup;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\PluginVersions;
 use Illuminate\Validation\UnauthorizedException;
@@ -34,8 +36,8 @@ class NotificationSubscriber extends Model
 
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
-        'subscriber' => [User::class, 'key' => 'subscriber_id'],
-        'subscriber_group' => [UserGroup::class, 'key' => 'subscriber_group_id'],
+        'subscriber' => [CoreUser::class, 'key' => 'subscriber_id'],
+        'subscriber_group' => [CoreUserGroup::class, 'key' => 'subscriber_group_id'],
         'notification' => [Notification::class, 'key' => 'notification_id'],
     ];
 

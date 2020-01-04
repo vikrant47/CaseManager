@@ -25,34 +25,14 @@ class CaseController extends AbstractSecurityController
         BackendMenu::setContext('Demo.Casemanager', 'main-menu-item');
     }
 
-    public function formBeforeCreate(Model $model)
-    {
-        if (!$this->user->hasAccess('case.table.create')) {
-            throw new ApplicationException('Access denied.');
-        }
-    }
-
-    public function formBeforeUpdate(Model $model)
-    {
-        if (!$this->user->hasAccess('case.table.update')) {
-            throw new ApplicationException('Access denied.');
-        }
-    }
-
-    public function formBeforeDelete(Model $model)
-    {
-        if (!$this->user->hasAccess('case.table.delete')) {
-            throw new ApplicationException('Access denied.');
-        }
-    }
-
     public function listExtendQuery($query)
     {
-        if (!$this->user->hasAccess('case.table.view.all')) {
+        parent::listExtendQuery($query);
+        /*if (!$this->user->hasAccess('case.table.view.all')) {
             $workflowEntities = WorkflowItem::where(['item_type' => CaseModel::class, 'assigned_to_id' => $this->user->id])->select('item_id')->get();
             $query->whereIn('id', $workflowEntities->map(function ($entity) {
                 return $entity->item_id;
             }));
-        }
+        }*/
     }
 }
