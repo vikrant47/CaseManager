@@ -1,10 +1,14 @@
 <?php namespace Demo\Core\Models;
 
+use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\Table;
 use Dotenv\Exception\ValidationException;
 use Model;
+use October\Rain\Parse\Yaml;
 use RainLab\Builder\Classes\DatabaseTableModel;
+use RainLab\Builder\Classes\ModelFormModel;
 
 /**
  * Model
@@ -74,5 +78,32 @@ class ModelModel extends Model
                 throw new ValidationException('created_by_id and updated_by_id filed not defined');
             }
         }
+    }
+
+    /**@return ModelFormModel */
+    public function getFormDefinition()
+    {
+        $formModel = new ModelFormModel();
+        $formModel->setModelClassName(ModelUtil::getShortName($this->model_type));
+        $formModel->setPluginCode(PluginConnection::getPluginCodeFromClass($this->model_type));
+        $modelDirPath = 'fields.yaml';
+        $formModel->loadForm($modelDirPath);
+        return $formModel;
+    }
+
+    public function getDefinition()
+    {
+        $formDefinition = $this->getFormDefinition();
+        return ['form' => ['controls' => $formDefinition->controls], 'model' => $this->model_type];
+    }
+
+    public static function getModelAsDropdownOptions()
+    {
+        $options = [];
+        $allModels = ModelModel::all();
+        foreach ($allModels as $model) {
+            $options[$model->model_type] = $model->name;
+        }
+        return $options;
     }
 }

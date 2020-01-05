@@ -1,5 +1,6 @@
 <?php namespace Demo\Core\Classes\Helpers;
 
+use Demo\Core\Classes\Utils\StringUtil;
 use System\Classes\PluginBase;
 use System\Classes\PluginManager;
 use Monolog\Logger;
@@ -112,6 +113,7 @@ class PluginConnection
 
     /**
      * Return all model alias
+     * @Depricated use getModelsAsOptions of ModelModel class
      */
     public static function getAllModelAlias($INCLUDE_UNIVERSAL = false)
     {
@@ -276,5 +278,12 @@ class PluginConnection
             // Re-register them
             call_user_func(array($model, 'boot'));
         }
+    }
+
+    public static function getPluginCodeFromClass($class)
+    {
+        $classPrefix = str_replace('\\', '.', $class);
+        $pluginPos = StringUtil::strposX($classPrefix, '.', 2);
+        return substr($classPrefix, 0, $pluginPos);
     }
 }

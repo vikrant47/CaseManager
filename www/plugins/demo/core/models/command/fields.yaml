@@ -20,12 +20,6 @@ fields:
         default: 1
         required: 1
         type: switch
-    model:
-        label: Model
-        showSearch: true
-        span: left
-        required: 1
-        type: dropdown
     plugin:
         label: Plugin
         nameFrom: code
@@ -33,24 +27,6 @@ fields:
         span: left
         required: 1
         type: relation
-    event:
-        label: Event
-        options:
-            creating: 'Before Create'
-            updating: 'Before Update'
-            deleting: 'Before Delete'
-            created: 'After Create'
-            updated: 'After Update'
-            deleted: 'After Delete'
-        showSearch: true
-        span: auto
-        required: 1
-        type: dropdown
-    sort_order:
-        label: 'Sort Order'
-        span: auto
-        required: 1
-        type: number
     script:
         label: Script
         size: large

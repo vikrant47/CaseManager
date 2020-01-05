@@ -5,6 +5,7 @@ use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
 use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
 use Demo\Core\EventHandlers\Universal\RestrictSystemRecordHandler;
 use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
+use Demo\Core\FormWidgets\QueryBuilderWidget;
 use Demo\Core\FormWidgets\RelatedList;
 use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
 use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
@@ -39,7 +40,8 @@ class Plugin extends PluginBase
     public function registerFormWidgets()
     {
         return [
-            RelatedList::class => ['code' => 'relatedlist', 'Label' => 'Related List']
+            RelatedList::class => ['code' => 'relatedlist', 'Label' => 'Related List'],
+            QueryBuilderWidget::class => ['code' => 'querybuilderwidget', 'Label' => 'Query Builder']
         ];
     }
 
