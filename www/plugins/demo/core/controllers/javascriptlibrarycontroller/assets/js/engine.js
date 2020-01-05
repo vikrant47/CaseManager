@@ -3,6 +3,29 @@ if (!Object.assign) {
 }
 var Engine = function () {
 };
+Engine.QUERY_BUILDER_TYPE_MAPPINGS = {
+    dropdown: function (field) {
+        field.id = field.name;
+        field.input = 'select';
+        field.type = 'string';
+        field.values = field.options || {};
+        return field;
+    }, text: function (field) {
+        field.id = field.name;
+        field.type = 'string';
+        return field;
+    }, switch: function (field) {
+        field.id = field.name;
+        field.input = 'radio';
+        field.type = 'boolean';
+        field.values = {1: 'Yes', 0: 'No'};
+        return field;
+    }, number: function (field) {
+        field.id = field.name;
+        field.type = 'double';
+        return field;
+    }
+};
 Engine.defaultActionOption = {
     button: {
         template: '<button class="action action-button"><i></i> </button>',
@@ -159,6 +182,28 @@ Object.assign(Engine.prototype, {
                 }
             }
         });
+    },
+    // definition form field manipulation
+    getFields(definition) {
+        var fields = definition.form.controls.fields;
+        if (definition.form.controls.tabs) {
+            fields = Object.assign(fields, definition.form.controls.tabs.fields);
+        }
+        return fields;
+    },
+    mapFieldsToQueryBuilderFields: function (fields) {
+        var qbFields = [];
+        Object.keys(fields).map(function (fieldName) {
+            var field = fields[fieldName];
+            if (typeof Engine.QUERY_BUILDER_TYPE_MAPPINGS[field.type] === 'function') {
+                var qbField = Engine.QUERY_BUILDER_TYPE_MAPPINGS[field.type](Object.assign({
+                    name: fieldName,
+                    id: fieldName
+                }, field));
+                qbFields.push(qbField);
+            }
+        });
+        return qbFields;
     }
 })
 ;
