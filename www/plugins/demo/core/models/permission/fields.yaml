@@ -66,10 +66,10 @@ tabs:
                 multiple: true
         condition:
             label: Condition
-            size: small
-            language: sql
             span: auto
-            type: codeeditor
+            modelField: model
+            modelType: Demo\Core\Models\Webhook
+            type: querybuilderwidget
             tab: Definition
         policies:
             label: Policies

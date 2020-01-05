@@ -24,7 +24,7 @@ class ModelUtil
 
     public static function fillDefaultColumnsInBelongsToMany(BelongsToMany $association, Collection $data, $pluginId = 10)
     {
-        if(empty($pluginId)){
+        if (empty($pluginId)) {
             $pluginId = 10;
         }
         $user = BackendAuth::getUser();
@@ -41,5 +41,11 @@ class ModelUtil
             $association->detach($record->id);
             $association->attach($record->id, $pivotValues);
         }
+    }
+
+    public static function getShortName($class)
+    {
+        $reflect = new \ReflectionClass($class);
+        return $reflect->getShortName();
     }
 }

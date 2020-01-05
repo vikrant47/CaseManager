@@ -2,6 +2,7 @@
 
 namespace Demo\Core\FormWidgets\DesignProviders;
 
+use Demo\Core\FormWidgets\QueryBuilderWidget;
 use Event;
 use File;
 use Demo\Core\FormWidgets\RelatedList;
@@ -48,6 +49,15 @@ class DefaultDesignProvider extends ControlDesignTimeProviderBase
                 ControlLibrary::GROUP_WIDGETS,
                 'icon-file-image-o',
                 $controlLibrary->getStandardProperties([], RelatedList::getProperties()),
+                DefaultDesignProvider::class
+            );
+            $controlLibrary->registerControl(
+                'querybuilderwidget',
+                'Query Builder',
+                'All user to build sql queries',
+                ControlLibrary::GROUP_WIDGETS,
+                'icon-eyedropper',
+                $controlLibrary->getStandardProperties([], QueryBuilderWidget::getProperties()),
                 DefaultDesignProvider::class
             );
         });
