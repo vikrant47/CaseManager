@@ -5,11 +5,11 @@ use Schema;
 use October\Rain\Database\Updates\Migration;
 use Db;
 
-class BuilderTableSeedDemoQueueRoutingRules extends Seeder
+class BuilderTableSeedDemoWorkflowQueueRoutingRules extends Seeder
 {
     public function run()
     {
-        Db::table('demo_workflow_queues_routing_rules')->insert([
+        Db::table('demo_workflow_queue_routing_rules')->insert([
             "id" => 3,
             "created_at" => "2019-11-16 14:33:18",
             "updated_at" => "2019-11-24 03:58:03",

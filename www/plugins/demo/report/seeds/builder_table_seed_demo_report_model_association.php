@@ -1,13 +1,13 @@
 <?php
 
-namespace Demo\Core\Seeds;
+namespace Demo\Report\Seeds;
 
 use Demo\Core\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
 
-class BuilderTableSeedDemoCoreModelAssociation extends Seeder
+class BuilderTableSeedDemoReportModelAssociation extends Seeder
 {
     public function run()
     {

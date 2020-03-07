@@ -37,7 +37,7 @@ class RestrictSystemRecordHandler
         if ($model instanceof Permission) {
             if ($event === 'updating' || $event === 'deleting') {
                 if ($model->system) {
-                   // throw new ApplicationException('Unable to update / delete the system permissions');
+                    throw new ApplicationException('Unable to update / delete the system permissions');
                 }
             }
         }

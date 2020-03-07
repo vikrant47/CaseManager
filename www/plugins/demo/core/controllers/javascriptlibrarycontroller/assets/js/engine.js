@@ -205,8 +205,7 @@ Object.assign(Engine.prototype, {
         });
         return qbFields;
     }
-})
-;
+});
 window.Engine = Engine;
 Engine.instance = new Engine();
 $(document).ready(function () {

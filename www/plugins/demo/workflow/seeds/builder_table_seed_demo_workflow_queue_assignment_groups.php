@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Schema;
+use Db;
 use October\Rain\Database\Updates\Migration;
 
 class BuilderTableSeedDemoWorkflowQueueAssignmentGroups extends Seeder

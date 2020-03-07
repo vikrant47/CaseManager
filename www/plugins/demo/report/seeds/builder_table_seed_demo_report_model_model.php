@@ -13,7 +13,7 @@ class BuilderTableSeedDemoReportModelModel extends Seeder
     {
         Db::table('demo_core_models')->insert([
             [
-                'id' => 10,
+                'id' => 31,
                 'name' => 'Widget',
                 'model_type' => 'Demo\Report\Models\Widget',
                 'plugin_id' => 14,
@@ -26,7 +26,7 @@ class BuilderTableSeedDemoReportModelModel extends Seeder
                 'created_at' => '2019-12-20 14:15:39',
                 'updated_at' => '2019-12-20 14:15:39',
             ], [
-                'id' => 11,
+                'id' => 32,
                 'name' => 'Dashboard',
                 'model_type' => 'Demo\Report\Models\Dashboard',
                 'plugin_id' => 14,
