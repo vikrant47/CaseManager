@@ -3,10 +3,11 @@
 use Illuminate\Database\Seeder;
 use Schema;
 use October\Rain\Database\Updates\Migration;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableCreateDemoWorkflowWorkflowStates extends Seeder
+class BuilderTableCreateDemoWorkflowWorkflowStates implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_workflow_states')->insert([
             [
@@ -58,5 +59,12 @@ class BuilderTableCreateDemoWorkflowWorkflowStates extends Seeder
                 "plugin_id" => null
             ]
         ]);
+
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_workflow_states')->where('plugin_id', 10)->delete();
     }
 }

@@ -6,10 +6,11 @@ use Demo\Core\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoCoreModelModel extends Seeder
+class BuilderTableSeedDemoCoreModelModel implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_core_models')->insert(json_decode('[
   {
@@ -312,10 +313,10 @@ class BuilderTableSeedDemoCoreModelModel extends Seeder
     "attach_audited_by": true,
     "description": null
   }
-]'));
+]', true));
     }
 
-    public function down()
+    public function uninstall()
     {
         Db::table('demo_core_models')->where('plugin_id', 10)->delete();
     }

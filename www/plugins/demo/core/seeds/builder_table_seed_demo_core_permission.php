@@ -6,8 +6,9 @@ use Demo\Core\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoCorePermission extends Seeder
+class BuilderTableSeedDemoCorePermission implements Seedable
 {
     /*select row_number() OVER () as id,
     model.model_type as model,
@@ -28,7 +29,7 @@ class BuilderTableSeedDemoCorePermission extends Seeder
     delete from demo_core_models where plugin_id = 10;
     delete from demo_core_permissions;
     delete from demo_core_model_associations where plugin_id = 10;*/
-    public function run()
+    public function install()
     {
         Db::table('demo_core_permissions')->insert(json_decode('[
   {
@@ -1255,6 +1256,12 @@ class BuilderTableSeedDemoCorePermission extends Seeder
     "system": true,
     "admin_override": true
   }
-]'));
+]', true));
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_core_permissions')->where('plugin_id', 10)->delete();
     }
 }

@@ -4,10 +4,11 @@ use Illuminate\Database\Seeder;
 use Schema;
 use Db;
 use October\Rain\Database\Updates\Migration;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoWorkflowQueueAssignmentGroups extends Seeder
+class BuilderTableSeedDemoWorkflowQueueAssignmentGroups implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_workflow_queue_assignment_groups')->insert([
             [
@@ -41,5 +42,11 @@ class BuilderTableSeedDemoWorkflowQueueAssignmentGroups extends Seeder
                 "plugin_id" => null
             ]
         ]);
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_workflow_queue_assignment_groups')->delete();
     }
 }

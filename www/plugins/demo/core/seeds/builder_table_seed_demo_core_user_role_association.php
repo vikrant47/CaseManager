@@ -5,10 +5,11 @@ namespace Demo\Core\Seeds;
 use Schema;
 use Seeder;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoCoreUserRoleAssociation extends Seeder
+class BuilderTableSeedDemoCoreUserRoleAssociation implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_core_user_role_associations')->insert([
             'id' => 1,
@@ -20,5 +21,11 @@ class BuilderTableSeedDemoCoreUserRoleAssociation extends Seeder
             'updated_by_id' => 1,
             'plugin_id' => 10,
         ]);
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_core_user_role_associations')->where('plugin_id', 10)->delete();
     }
 }

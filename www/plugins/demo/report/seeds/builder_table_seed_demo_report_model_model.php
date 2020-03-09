@@ -6,10 +6,11 @@ use Demo\Report\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoReportModelModel extends Seeder
+class BuilderTableSeedDemoReportModelModel implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_core_models')->insert([
             [
@@ -40,5 +41,10 @@ class BuilderTableSeedDemoReportModelModel extends Seeder
                 'updated_at' => '2019-12-20 14:15:39',
             ]
         ]);
+    }
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_core_models')->where('plugin_id', 14)->delete();
     }
 }

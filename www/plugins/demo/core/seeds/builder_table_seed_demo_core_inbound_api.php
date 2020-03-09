@@ -3,11 +3,18 @@ namespace Demo\Core\Seeds;
 
 use Schema;
 use Seeder;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoCoreInboundApi extends Seeder
+class BuilderTableSeedDemoCoreInboundApi implements Seedable
 {
-    public function run()
+    public function install()
     {
 
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        // TODO: Implement down() method.
     }
 }

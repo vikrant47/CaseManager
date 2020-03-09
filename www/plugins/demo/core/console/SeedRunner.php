@@ -41,7 +41,12 @@ class SeedRunner extends Command
         $seedPath = $this->getSeedsPath();
         $this->info('Collecting seeds files from path ' . $seedPath);
         $seedFiles = $this->getSeedsFiles($seedPath);
-        $this->runSeed($seedFiles);
+        $operation = $this->argument('operation');
+        if ($operation === 'uninstall' || $operation === 'u') {
+            $this->runUninstall($seedFiles);
+        } else {
+            $this->runInstall($seedFiles);
+        }
     }
 
     /**
@@ -52,6 +57,7 @@ class SeedRunner extends Command
     {
         return [
             ['plugin', InputArgument::OPTIONAL, 'Plugin Name to run seeds.'],
+            ['operation', InputArgument::OPTIONAL, 'Operation - install or i  / uninstall or u.'],
         ];
     }
 
@@ -72,21 +78,47 @@ class SeedRunner extends Command
      * @param bool $pretend
      * @return void
      */
-    protected function runSeed($files)
+    protected function runInstall($files)
     {
-        $this->info('Running Seeds ........... ');
+        $this->info('Installing Seeds ........... ');
         // First we will resolve a "real" instance of the seed class from this
         // seed file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
         $this->requireFiles($files);
 
         foreach ($files as $file) {
-            $this->info('Running Seed from file ' . $file);
+            $this->info('Installing Seed from file ' . $file);
             $seed = $this->resolveToClass(
                 $name = $this->getSeedName($file)
             );
-            $seed->run();
-            $this->info('Seed executed from file ' . $file);
+            $seed->install();
+            $this->info('Seed installed from file ' . $file);
+        }
+    }
+
+    /**
+     * Run "down" a seed instance.
+     *
+     * @param string $file
+     * @param int $batch
+     * @param bool $pretend
+     * @return void
+     */
+    protected function runUninstall($files)
+    {
+        $this->info('Uninstalling Seeds ........... ');
+        // First we will resolve a "real" instance of the seed class from this
+        // seed file name. Once we have the instances we can run the actual
+        // command such as "up" or "down", or we can just simulate the action.
+        $this->requireFiles($files);
+
+        foreach ($files as $file) {
+            $this->info('Uninstalling Seed from file ' . $file);
+            $seed = $this->resolveToClass(
+                $name = $this->getSeedName($file)
+            );
+            $seed->uninstall();
+            $this->info('Seed uninstalled from file ' . $file);
         }
     }
 

@@ -6,10 +6,11 @@ use Demo\Core\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoCoreModelAssociation extends Seeder
+class BuilderTableSeedDemoCoreModelAssociation implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_core_model_associations')->insert(json_decode(
             '[
@@ -166,11 +167,11 @@ class BuilderTableSeedDemoCoreModelAssociation extends Seeder
     "relation": "belongs_to",
     "cascade_priority_order": 0
   }
-]'
+]', true
         ));
     }
 
-    public function down()
+    public function uninstall()
     {
         Db::table('demo_core_model_associations')->where('plugin_id', 10)->delete();
     }

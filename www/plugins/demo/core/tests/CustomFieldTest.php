@@ -23,12 +23,12 @@ class CustomFieldTest extends PluginTestSetup
         $customField = CustomField::create([
             'name' => $columnName,
             'type' => 'string',
-            'model' => CaseModel::class
+            'model' => InboundApi::class
         ]);
         $this->assertNotEmpty($customField->id);
         $this->assertAuditableFields($customField);
-        $caseModel = new CaseModel();
-        $caseManagerTable = new Table($caseModel->table);
-        $this->assertArrayHasKey($columnName, $caseManagerTable->getColumns());
+        $inboundApiModel = new InboundApi();
+        $apiTable = new Table($inboundApiModel->table);
+        $this->assertArrayHasKey($columnName, $apiTable->getColumns());
     }
 }
