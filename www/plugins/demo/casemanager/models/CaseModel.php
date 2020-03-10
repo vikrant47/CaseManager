@@ -9,7 +9,7 @@ use Backend\Models\User;
 class CaseModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use \Demo\Core\Classes\Traits\ModelHelper;
+    use \Demo\Core\Classes\Traits\ModelTrait;
     use \Demo\Workflow\Classes\Traits\WorkflowItemTrait;
 
     /**

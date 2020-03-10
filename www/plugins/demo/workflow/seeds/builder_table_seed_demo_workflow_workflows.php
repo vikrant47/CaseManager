@@ -6,11 +6,11 @@ use October\Rain\Database\Updates\Migration;
 use Db;
 use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableCreateDemoWorkflowWorkflows implements Seedable
+class BuilderTableSeedDemoWorkflowWorkflows implements Seedable
 {
     public function install()
     {
-        Db::table('demo_workflow_queues')->insert([
+        Db::table('demo_workflow_workflows')->insert([
             [
                 "id" => 1,
                 "created_at" => "2019-10-08 08:17:55",
@@ -35,6 +35,6 @@ class BuilderTableCreateDemoWorkflowWorkflows implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-        Db::table('demo_workflow_queues')->where('plugin_id', 1)->delete();
+        Db::table('demo_workflow_workflows')->where('plugin_id', 1)->delete();
     }
 }

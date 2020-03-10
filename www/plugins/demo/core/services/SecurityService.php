@@ -19,23 +19,23 @@ class SecurityService
         return substr($permissionPrefix, 0, $pluginPos) . '::' . substr($permissionPrefix, $pluginPos + 1);
     }
 
-    public function getReadPermission($modelClass)
+    public function getReadPermission($modelClass, $level = 'row')
     {
-        return $this->getPermissionPrefix($modelClass) . '.row.read';
+        return $this->getPermissionPrefix($modelClass) . '.' . $level . '.read';
     }
 
-    public function getWritePermission($model)
+    public function getWritePermission($model, $level = 'row')
     {
-        return $this->getPermissionPrefix($model) . '.row.write';
+        return $this->getPermissionPrefix($model) . '.' . $level . '.write';
     }
 
-    public function getCreatePermission($model)
+    public function getCreatePermission($model, $level = 'row')
     {
-        return $this->getPermissionPrefix($model) . '.row.create';
+        return $this->getPermissionPrefix($model) . '.' . $level . '.create';
     }
 
-    public function getDeletePermission($model)
+    public function getDeletePermission($model, $level = 'row')
     {
-        return $this->getPermissionPrefix($model) . '.row.delete';
+        return $this->getPermissionPrefix($model) . '.' . $level . '.delete';
     }
 }

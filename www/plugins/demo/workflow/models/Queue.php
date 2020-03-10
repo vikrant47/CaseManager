@@ -20,7 +20,7 @@ use October\Rain\Exception\ApplicationException;
 class Queue extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use \Demo\Core\Classes\Traits\ModelHelper;
+    use \Demo\Core\Classes\Traits\ModelTrait;
     public static $ADD_NEW_POLICY = 'addNew';
     public static $OVERRIDE_POLICY = 'override';
 

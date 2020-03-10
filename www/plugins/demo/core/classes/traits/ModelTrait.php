@@ -4,7 +4,7 @@ use Backend\Models\User;
 use BackendAuth;
 
 /**Provide support for created by and updated by*/
-trait ModelHelper
+trait ModelTrait
 {
     public function getCurrentUser(): User
     {

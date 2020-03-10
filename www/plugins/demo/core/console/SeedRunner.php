@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Db;
 
 class SeedRunner extends Command
 {
@@ -38,14 +39,34 @@ class SeedRunner extends Command
      */
     public function handle()
     {
-        $seedPath = $this->getSeedsPath();
-        $this->info('Collecting seeds files from path ' . $seedPath);
-        $seedFiles = $this->getSeedsFiles($seedPath);
-        $operation = $this->argument('operation');
-        if ($operation === 'uninstall' || $operation === 'u') {
-            $this->runUninstall($seedFiles);
-        } else {
-            $this->runInstall($seedFiles);
+        try {
+            $plugins = [];
+            $plugin = $this->argument('plugin');
+            if (!empty($plugin) && $plugin !== 'all') {
+                $plugins[] = $plugin;
+            } else {
+                $plugins = Db::table('system_plugin_versions')->where('code', 'like', 'Demo%')->orderBy('id','ASC')->get(['code'])
+                    ->map(function ($plugin) {
+                        return $plugin->code;
+                    });
+            }
+            foreach ($plugins as $plugin) {
+                $this->info('***************** Collecting seeds for plugin ' . $plugin.' ******************');
+                $seedPath = $this->getSeedsPath($plugin);
+                $seedFiles = $this->getSeedsFiles($seedPath);
+                $operation = $this->argument('operation');
+                if ($operation === 'uninstall' || $operation === 'u') {
+                    $this->runUninstall($plugin, $seedFiles);
+                } else {
+                    $this->runInstall($plugin, $seedFiles);
+                }
+            }
+        } catch (\Exception $e) {
+             if (!empty($this->option('debug'))) {
+                 $this->error($e);
+             } else {
+                 throw $e;
+             }
         }
     }
 
@@ -67,7 +88,9 @@ class SeedRunner extends Command
      */
     protected function getOptions()
     {
-        return [];
+        return [
+            ['debug', null, InputOption::VALUE_OPTIONAL, 'Print debug logs on console']
+        ];
     }
 
     /**
@@ -78,9 +101,8 @@ class SeedRunner extends Command
      * @param bool $pretend
      * @return void
      */
-    protected function runInstall($files)
+    protected function runInstall($plugin, $files)
     {
-        $this->info('Installing Seeds ........... ');
         // First we will resolve a "real" instance of the seed class from this
         // seed file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
@@ -89,6 +111,7 @@ class SeedRunner extends Command
         foreach ($files as $file) {
             $this->info('Installing Seed from file ' . $file);
             $seed = $this->resolveToClass(
+                $plugin,
                 $name = $this->getSeedName($file)
             );
             $seed->install();
@@ -104,7 +127,7 @@ class SeedRunner extends Command
      * @param bool $pretend
      * @return void
      */
-    protected function runUninstall($files)
+    protected function runUninstall($plugin, $files)
     {
         $this->info('Uninstalling Seeds ........... ');
         // First we will resolve a "real" instance of the seed class from this
@@ -115,6 +138,7 @@ class SeedRunner extends Command
         foreach ($files as $file) {
             $this->info('Uninstalling Seed from file ' . $file);
             $seed = $this->resolveToClass(
+                $plugin,
                 $name = $this->getSeedName($file)
             );
             $seed->uninstall();
@@ -127,9 +151,8 @@ class SeedRunner extends Command
      *
      * @return string
      */
-    protected function getSeedsPath()
+    protected function getSeedsPath($plugin)
     {
-        $plugin = $this->getPlugin();
         $paths = explode('.', $plugin);
         $path = $this->laravel->basePath() . DIRECTORY_SEPARATOR
             . 'plugins' . DIRECTORY_SEPARATOR
@@ -168,9 +191,8 @@ class SeedRunner extends Command
      * @param string $file
      * @return object
      */
-    public function resolveToClass($file)
+    public function resolveToClass($plugin, $file)
     {
-        $plugin = $this->getPlugin();
         $plugin = explode('.', $plugin);
         $class = '\\' . $plugin[0] . '\\' . $plugin[1] . '\\Seeds\\' . Str::studly($file);
         $this->info('Loading class ' . $class . '');

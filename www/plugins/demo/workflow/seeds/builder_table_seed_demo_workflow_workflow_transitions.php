@@ -4,8 +4,9 @@ use Illuminate\Database\Seeder;
 use Schema;
 use October\Rain\Database\Updates\Migration;
 use Demo\Core\Classes\Ifs\Seedable;
+use Db;
 
-class BuilderTableCreateDemoWorkflowWorkflowTransitions implements Seedable
+class BuilderTableSeedDemoWorkflowWorkflowTransitions implements Seedable
 {
     public function install()
     {

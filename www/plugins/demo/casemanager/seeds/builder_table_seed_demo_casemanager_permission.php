@@ -2,6 +2,8 @@
 
 namespace Demo\Casemanager\Seeds;
 
+use Demo\Core\Classes\Helpers\JSON;
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Ifs\Seedable;
 use Demo\Core\Models\ModelModel;
 use Schema;
@@ -21,7 +23,7 @@ class BuilderTableSeedDemoCasemanagerPermission implements Seedable
     true as active,
     true as system,
     concat(model.name,' Delete Permission') as name,
-    concat(lower(plugin.code),'::',replace(lower(substr(replace(model.model_type,replace(plugin.code,'.','\'),''),2)),'\','.'),'.row.delete') as code
+    concat(lower(plugin.code],'::',replace(lower(substr(replace(model.model_type,replace(plugin.code,'.','\'],''],2)],'\','.'],'.row.delete') as code
     from demo_core_models model
            join system_plugin_versions plugin on plugin.id = model.plugin_id;
 
@@ -31,120 +33,130 @@ class BuilderTableSeedDemoCasemanagerPermission implements Seedable
     delete from demo_core_model_associations where plugin_id = 10;*/
     public function install()
     {
-        Db::table('demo_core_permissions')->insert(json_decode('[
-              {
-                "id": 61,
-                "model": "Demo\\CaseManager\\Models\\CaseModel",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "read",
-                "active": true,
-                "system": true,
-                "name": "Case Model Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casemodel.row.delete"
-              },
-              {
-                "id": 62,
-                "model": "Demo\\CaseManager\\Models\\CasePriority",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "read",
-                "active": true,
-                "system": true,
-                "name": "Case Priority Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casepriority.row.delete"
-              },
-              {
-                "id": 63,
-                "model": "Demo\\CaseManager\\Models\\CaseModel",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "write",
-                "active": true,
-                "system": true,
-                "name": "Case Model Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casemodel.row.delete"
-              },
-              {
-                "id": 64,
-                "model": "Demo\\CaseManager\\Models\\CasePriority",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "write",
-                "active": true,
-                "system": true,
-                "name": "Case Priority Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casepriority.row.delete"
-              },
-              {
-                "id": 65,
-                "model": "Demo\\CaseManager\\Models\\CaseModel",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "create",
-                "active": true,
-                "system": true,
-                "name": "Case Model Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casemodel.row.delete"
-              },
-              {
-                "id": 66,
-                "model": "Demo\\CaseManager\\Models\\CasePriority",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "create",
-                "active": true,
-                "system": true,
-                "name": "Case Priority Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casepriority.row.delete"
-              },
-              {
-                "id": 67,
-                "model": "Demo\\CaseManager\\Models\\CaseModel",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "delete",
-                "active": true,
-                "system": true,
-                "name": "Case Model Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casemodel.row.delete"
-              },
-              {
-                "id": 68,
-                "model": "Demo\\CaseManager\\Models\\CasePriority",
-                "plugin_id": 6,
-                "created_at": "2019-12-20 14:15:39",
-                "updated_at": "2019-12-20 14:15:39",
-                "created_by_id": 1,
-                "updated_by_id": 1,
-                "operation": "delete",
-                "active": true,
-                "system": true,
-                "name": "Case Priority Delete Permission",
-                "code": "demo.casemanager::emo.casemanager.models.casepriority.row.delete"
-              }
-]', true));
+
+
+        Db::table('demo_core_permissions')->insert([
+
+                [
+                    'id' => 81,
+                    'model' => 'Demo\\Casemanager\\Models\\CaseModel',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'read',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Model Read Permission',
+                    'code' => 'demo.casemanager::models.casemodel.row.read',
+                ],
+                [
+                    'id' => 82,
+                    'model' => 'Demo\\Casemanager\\Models\\CasePriority',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'read',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Priority Read Permission',
+                    'code' => 'demo.casemanager::models.casepriority.row.read',
+                ],
+
+                [
+                    'id' => 83,
+                    'model' => 'Demo\\Casemanager\\Models\\CaseModel',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'write',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Model Write Permission',
+                    'code' => 'demo.casemanager::models.casemodel.row.write',
+                ],
+
+                [
+                    'id' => 84,
+                    'model' => 'Demo\\Casemanager\\Models\\CasePriority',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'write',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Priority Write Permission',
+                    'code' => 'demo.casemanager::models.casepriority.row.write',
+                ],
+
+                [
+                    'id' => 85,
+                    'model' => 'Demo\\Casemanager\\Models\\CaseModel',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'create',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Model Create Permission',
+                    'code' => 'demo.casemanager::models.casemodel.row.create',
+                ],
+
+                [
+                    'id' => 86,
+                    'model' => 'Demo\\Casemanager\\Models\\CasePriority',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'create',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Priority Create Permission',
+                    'code' => 'demo.casemanager::models.casepriority.row.create',
+                ],
+
+                [
+                    'id' => 87,
+                    'model' => 'Demo\\Casemanager\\Models\\CaseModel',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'delete',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Model Delete Permission',
+                    'code' => 'demo.casemanager::models.casemodel.row.delete',
+                ],
+
+                [
+                    'id' => 88,
+                    'model' => 'Demo\\Casemanager\\Models\\CasePriority',
+                    'plugin_id' => 6,
+                    'created_at' => '2019-12-20 14:15:39',
+                    'updated_at' => '2019-12-20 14:15:39',
+                    'created_by_id' => 1,
+                    'updated_by_id' => 1,
+                    'operation' => 'delete',
+                    'active' => true,
+                    'system' => true,
+                    'name' => 'Case Priority Delete Permission',
+                    'code' => 'demo.casemanager::models.casepriority.row.delete',
+                ]
+            ]
+        );
     }
 
     /**This will be executed to uninstall seeds*/
