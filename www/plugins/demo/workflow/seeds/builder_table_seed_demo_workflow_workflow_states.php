@@ -3,12 +3,14 @@
 use Illuminate\Database\Seeder;
 use Schema;
 use October\Rain\Database\Updates\Migration;
+use Demo\Core\Classes\Ifs\Seedable;
+use Db;
 
-class BuilderTableCreateDemoWorkflowWorkflowStates extends Seeder
+class BuilderTableSeedDemoWorkflowWorkflowStates implements Seedable
 {
-    public function run()
+    public function install()
     {
-        Db::table('demo_workflow_states')->insert([
+        Db::table('demo_workflow_workflow_states')->insert([
             [
                 "id" => 3,
                 "created_at" => "2019-10-12 10:40:02",
@@ -19,7 +21,7 @@ class BuilderTableCreateDemoWorkflowWorkflowStates extends Seeder
                 "description" => "",
                 "active" => 1,
                 "code" => "start",
-                "plugin_id" => null
+                "plugin_id" => 10
             ],
             [
                 "id" => 4,
@@ -31,7 +33,7 @@ class BuilderTableCreateDemoWorkflowWorkflowStates extends Seeder
                 "description" => "",
                 "active" => 1,
                 "code" => "quality",
-                "plugin_id" => null
+                "plugin_id" => 10
             ],
             [
                 "id" => 5,
@@ -43,7 +45,7 @@ class BuilderTableCreateDemoWorkflowWorkflowStates extends Seeder
                 "description" => "",
                 "active" => 1,
                 "code" => "doctor",
-                "plugin_id" => null
+                "plugin_id" => 10
             ],
             [
                 "id" => 6,
@@ -55,8 +57,15 @@ class BuilderTableCreateDemoWorkflowWorkflowStates extends Seeder
                 "description" => "",
                 "active" => 1,
                 "code" => "finish",
-                "plugin_id" => null
+                "plugin_id" => 10
             ]
         ]);
+
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_workflow_workflow_states')->where('plugin_id', 10)->delete();
     }
 }

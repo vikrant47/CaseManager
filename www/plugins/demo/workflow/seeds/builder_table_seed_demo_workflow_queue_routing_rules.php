@@ -4,10 +4,11 @@ use October\Rain\Database\Updates\Seeder;
 use Schema;
 use October\Rain\Database\Updates\Migration;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoWorkflowQueueRoutingRules extends Seeder
+class BuilderTableSeedDemoWorkflowQueueRoutingRules implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_workflow_queue_routing_rules')->insert([
             "id" => 3,
@@ -20,5 +21,11 @@ class BuilderTableSeedDemoWorkflowQueueRoutingRules extends Seeder
             "description" => "Route to current User",
             "plugin_id" => 1
         ]);
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_workflow_queue_routing_rules')->where('plugin_id', 1)->delete();
     }
 }

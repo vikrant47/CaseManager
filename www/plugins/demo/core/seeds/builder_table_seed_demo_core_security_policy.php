@@ -6,8 +6,9 @@ use Demo\Core\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoCoreSecurityPolicy extends Seeder
+class BuilderTableSeedDemoCoreSecurityPolicy implements Seedable
 {
     /*select row_number() OVER () as id,
            model.plugin_id,
@@ -19,7 +20,7 @@ class BuilderTableSeedDemoCoreSecurityPolicy extends Seeder
            concat('Security Policy for all operations on ',model.name) as description
     from demo_core_models model
            join system_plugin_versions plugin on plugin.id = model.plugin_id;*/
-    public function run()
+    public function install()
     {
         Db::table('demo_core_security_policies')->insert([
             [
@@ -393,5 +394,11 @@ class BuilderTableSeedDemoCoreSecurityPolicy extends Seeder
                 'description' => 'Security Policy for all operations on User'
             ]
         ]);
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_core_security_policies')->where('plugin_id', 10)->delete();
     }
 }

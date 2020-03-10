@@ -48,4 +48,10 @@ class ModelUtil
         $reflect = new \ReflectionClass($class);
         return $reflect->getShortName();
     }
+
+    public static function getPluginCode($class)
+    {
+        $classPaths = str_split($class, '\\');
+        return $classPaths[0] . '.' . $classPaths[1];
+    }
 }

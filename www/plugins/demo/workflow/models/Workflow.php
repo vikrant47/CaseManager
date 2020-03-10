@@ -13,7 +13,7 @@ use Backend\Models\User;
 class Workflow extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use \Demo\Core\Classes\Traits\ModelHelper;
+    use \Demo\Core\Classes\Traits\ModelTrait;
 
     /**
      * @var string The database table used by the model.

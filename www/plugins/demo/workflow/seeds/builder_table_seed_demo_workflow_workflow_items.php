@@ -3,11 +3,17 @@
 use Illuminate\Database\Seeder;
 use Schema;
 use October\Rain\Database\Updates\Migration;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoWorkflowWorkflowItems extends Seeder
+class BuilderTableSeedDemoWorkflowWorkflowItems implements Seedable
 {
-    public function run()
+    public function install()
     {
 
+    }
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        // Db::table('demo_core_security_policies')->where('plugin_id', 10)->delete();
     }
 }

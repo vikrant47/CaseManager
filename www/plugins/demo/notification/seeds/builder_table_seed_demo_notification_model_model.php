@@ -6,10 +6,11 @@ use Demo\Notification\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
+use Demo\Core\Classes\Ifs\Seedable;
 
-class BuilderTableSeedDemoNotificationModelModel extends Seeder
+class BuilderTableSeedDemoNotificationModelModel implements Seedable
 {
-    public function run()
+    public function install()
     {
         Db::table('demo_core_models')->insert([
             [
@@ -53,5 +54,11 @@ class BuilderTableSeedDemoNotificationModelModel extends Seeder
                 'updated_at' => '2019-12-20 14:15:39',
             ]
         ]);
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        Db::table('demo_core_models')->where('plugin_id', 10)->delete();
     }
 }

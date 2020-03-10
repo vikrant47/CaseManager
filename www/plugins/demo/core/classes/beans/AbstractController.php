@@ -12,6 +12,9 @@ use Flash;
 use Response;
 use View;
 
+/**
+ * @Depricated - This has been depricated use AbstractSecurityController instead
+ */
 abstract class AbstractController extends Controller
 {
     private $securiyService;
@@ -56,7 +59,7 @@ abstract class AbstractController extends Controller
      */
     public function formBeforeCreate($model)
     {
-        $permission = $this->securiyService->getReadPermission($this->modelClass);
+        $permission = $this->securiyService->getCreatePermission($this->modelClass);
         if (!$this->user->hasAccess($permission)) {
             $this->forwardToAccessDenied(true);
         }
@@ -67,7 +70,7 @@ abstract class AbstractController extends Controller
      */
     public function formBeforeUpdate($model)
     {
-        $permission = $this->securiyService->getReadPermission($this->modelClass);
+        $permission = $this->securiyService->getWritePermission($this->modelClass);
         if (!$this->user->hasAccess($permission)) {
             $this->forwardToAccessDenied(true);
         }
@@ -78,7 +81,7 @@ abstract class AbstractController extends Controller
      */
     public function formBeforeDelete($model)
     {
-        $permission = $this->securiyService->getReadPermission($model);
+        $permission = $this->securiyService->getDeletePermission($model);
         if (!$this->user->hasAccess($permission)) {
             $this->forwardToAccessDenied(true);
         }

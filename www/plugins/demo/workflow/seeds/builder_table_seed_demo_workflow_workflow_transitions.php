@@ -3,11 +3,19 @@
 use Illuminate\Database\Seeder;
 use Schema;
 use October\Rain\Database\Updates\Migration;
+use Demo\Core\Classes\Ifs\Seedable;
+use Db;
 
-class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Seeder
+class BuilderTableSeedDemoWorkflowWorkflowTransitions implements Seedable
 {
-    public function run()
+    public function install()
     {
 
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        // Db::table('demo_workflow_queues')->where('plugin_id', 1)->delete();
     }
 }
