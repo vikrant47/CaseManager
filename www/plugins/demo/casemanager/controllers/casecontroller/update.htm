@@ -33,6 +33,8 @@
                     class="btn btn-default">
                 <?= e(trans('backend::lang.form.save_and_close')) ?>
             </button>
+            <?=$this->user->id?>
+            <?=$this->formGetModel()->toJSON()?>
             <?php if ($this->user->id === $this->formGetModel()->assigned_to_id) { ?>
                 <button
                         type="button"

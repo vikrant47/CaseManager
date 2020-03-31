@@ -32,3 +32,10 @@ fields:
         size: small
         span: auto
         type: richeditor
+    assigned_to:
+        label: 'Assigned To'
+        nameFrom: email
+        emptyOption: Select a user
+        descriptionFrom: description
+        span: auto
+        type: relation
