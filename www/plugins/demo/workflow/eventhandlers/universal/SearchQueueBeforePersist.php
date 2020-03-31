@@ -24,7 +24,7 @@ class SearchQueueBeforePersist
      */
     public function handler($event, $model)
     {
-        $logger = PluginConnection::getLogger('demo.workflow');
+        $logger = PluginConnection::getCurrentLogger();
         $ignoreModels = [QueueItem::class];
         $includedPackage = ['Workflow'];
         if (!in_array(get_class($model), $ignoreModels) /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/) {
@@ -44,7 +44,7 @@ class SearchQueueBeforePersist
                         $logger->info('Queue found with name ' . $queue->name . ' , evaluating input condition');
                         // throw new ApplicationException('Queue found with name "'.$queue->name. '" , Evaluating input condition."');
                         $context = new ScriptContext();
-                        $value = $context->execute($queue->input_condition, ['queue' => $queue, 'event' => $event, 'model' => $model]);
+                        $value = $context->execute($queue->input_condition, ['queue' => $queue, 'event' => $event, 'item' => $model]);
                         $logger->info('Input condition evaluated to ' . $value);
                         if ($value === true) {
                             // throw new ApplicationException('Condition Evaluated to true for queue "'.$queue->name. '"');

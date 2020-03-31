@@ -60,7 +60,7 @@ class Queue extends Model
      */
     public function __construct()
     {
-        $this->logger = PluginConnection::getLogger('demo.workflow');
+        $this->logger = PluginConnection::getCurrentLogger();
     }
 
     public function getItemTypeOptions()

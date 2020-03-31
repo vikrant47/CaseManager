@@ -18,6 +18,7 @@ class CaseModel extends Model
     public $table = 'demo_casemanager_cases';
 
     public $belongsTo = [
+        'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'priority' => [CasePriority::class, 'key' => 'priority_id'],

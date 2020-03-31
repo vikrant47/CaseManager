@@ -70,7 +70,8 @@ class ScriptContext
         try {
             return eval($script);
         } catch (\Exception $ex) {
-            PluginConnection::getLogger('demo.core')->debug('Error occurred while evaluating script ' . $ex->getMessage() . ' script = ' . $script . ' on ' . $ex->getLine());
+            $msg = 'Error occurred while evaluating script ' . $ex->getMessage() . ' script = ' . $script . ' on ' . $ex->getLine();
+            PluginConnection::getCurrentLogger()->debug($msg);
             throw $ex;
         }
     }

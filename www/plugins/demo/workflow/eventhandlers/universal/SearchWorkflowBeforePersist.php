@@ -26,7 +26,7 @@ class SearchWorkflowBeforePersist
      */
     public function handler($event, $model)
     {
-        $logger = PluginConnection::getLogger('demo.workflow');
+        $logger = PluginConnection::getCurrentLogger();
         $ignoreModels = [WorkflowItem::class, WorkflowTransition::class, EventLog::class];
         $includedPackage = ['Workflow'];
         if (!in_array(get_class($model), $ignoreModels) /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/) {

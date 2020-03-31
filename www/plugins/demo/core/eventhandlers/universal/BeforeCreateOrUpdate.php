@@ -22,7 +22,7 @@ class BeforeCreateOrUpdate
             }
         }
         if ($attachAuditedBy) {
-            PluginConnection::getLogger('demo.core')->debug('Attaching created_by and updated_by');
+            PluginConnection::getCurrentLogger();
             $user = BackendAuth::getUser();
             if ($event === 'creating') {
                 $model->created_by_id = $user->id;

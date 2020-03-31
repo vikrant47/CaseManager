@@ -8,6 +8,7 @@ use Demo\Casemanager\Models\CaseModel;
 use Demo\Workflow\Models\WorkflowItem;
 use Model;
 use October\Rain\Exception\ApplicationException;
+use October\Rain\Support\Facades\Flash;
 
 class CaseController extends AbstractSecurityController
 {
@@ -22,7 +23,7 @@ class CaseController extends AbstractSecurityController
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Demo.Casemanager', 'main-menu-item');
+        BackendMenu::setContext('Demo.Casemanager', 'main-menu-item', 'side-menu-item');
     }
 
     public function listExtendQuery($query)
@@ -34,5 +35,14 @@ class CaseController extends AbstractSecurityController
                 return $entity->item_id;
             }));
         }*/
+    }
+
+    public function onPushCase($id)
+    {
+        $model = $this->formFindModelObject($id);
+        if ($model->assigned_to_id === $this->user->id) {
+            $this->onSubmitWorkflowItem($model);
+        }
+        Flash::error('Unable to push case as it\'s not assigned to you !');
     }
 }

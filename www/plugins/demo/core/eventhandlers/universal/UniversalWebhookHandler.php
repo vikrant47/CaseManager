@@ -17,7 +17,7 @@ class UniversalWebhookHandler
     public function handler($event, $model)
     {
         if(!in_array($model,Webhook::IGNORE_MODELS)) {
-            $logger = PluginConnection::getLogger('demo.core');
+            $logger = PluginConnection::getCurrentLogger();
             $webhooks = Webhook::where(['event' => $event, 'model' => get_class($model), 'active' => true])->get();
             $logger->debug($webhooks->count().' webhooks eligible to be executed');
             foreach ($webhooks as $webhook) {

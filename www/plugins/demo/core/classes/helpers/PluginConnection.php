@@ -211,7 +211,14 @@ class PluginConnection
 
     public function getPluginLogger(): Logger
     {
-        return PluginConnection::getLogger($this->identifier);
+        return PluginConnection::getCurrentLogger();
+    }
+
+    public static function getCurrentLogger()
+    {
+        $request = request();
+        $identifier = $request->request->get('CURRENT_PLUGIN');
+        return static::getLogger('demo.core');
     }
 
     /**

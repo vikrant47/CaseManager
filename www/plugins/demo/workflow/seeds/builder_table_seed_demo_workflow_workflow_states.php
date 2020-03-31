@@ -57,7 +57,7 @@ class BuilderTableSeedDemoWorkflowWorkflowStates implements Seedable
                 "description" => "",
                 "active" => 1,
                 "code" => "finish",
-                "plugin_id" => 10
+                "plugin_id" => 11
             ]
         ]);
 
@@ -66,6 +66,6 @@ class BuilderTableSeedDemoWorkflowWorkflowStates implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-        Db::table('demo_workflow_workflow_states')->where('plugin_id', 10)->delete();
+        Db::table('demo_workflow_workflow_states')->where('plugin_id', 11)->delete();
     }
 }

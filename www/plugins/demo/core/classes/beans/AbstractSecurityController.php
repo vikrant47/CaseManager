@@ -15,9 +15,9 @@ use Flash;
 use Response;
 use View;
 
-abstract class AbstractSecurityController extends Controller
+abstract class AbstractSecurityController extends AbstractPluginController
 {
-    private $userSecuriyService;
+    private $userSecurityService;
     private $modelClass;
     public $requiredPermissions = [];
 
@@ -27,7 +27,7 @@ abstract class AbstractSecurityController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->userSecuriyService = UserSecurityService::getInstance();
+        $this->userSecurityService = UserSecurityService::getInstance();
         $listController = new ListController($this);
         $this->modelClass = $listController->getConfig('modelClass');
         // $this->requiredPermissions[] = $this->userSecuriyService->getReadPermission($this->modelClass);
@@ -48,12 +48,12 @@ abstract class AbstractSecurityController extends Controller
      */
     public function listExtendQuery(\October\Rain\Database\Builder $query)
     {
-        $permission = $this->userSecuriyService->getRowLevelPermissions($this->modelClass, Permission::READ);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::READ);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied();
         }
-        if (!$this->userSecuriyService->hasAstrixPermission($permission)) {
-            $query->where(DB::raw($this->userSecuriyService->mergeConditions($permission)));
+        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
+            $query->where(DB::raw($this->userSecurityService->mergeConditions($permission)));
         }
     }
 
@@ -62,12 +62,12 @@ abstract class AbstractSecurityController extends Controller
      */
     public function formBeforeCreate($model)
     {
-        $permission = $this->userSecuriyService->getRowLevelPermissions($this->modelClass, Permission::CREATE);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::CREATE);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied();
         }
-        if (!$this->userSecuriyService->hasAstrixPermission($permission)) {
-            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->count();
+        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
+            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
             if ($count === 0) {
                 return $this->forwardToAccessDenied();
             }
@@ -79,12 +79,12 @@ abstract class AbstractSecurityController extends Controller
      */
     public function formBeforeUpdate($model)
     {
-        $permission = $this->userSecuriyService->getRowLevelPermissions($this->modelClass, Permission::WRITE);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::WRITE);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied();
         }
-        if (!$this->userSecuriyService->hasAstrixPermission($permission)) {
-            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->count();
+        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
+            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
             if ($count === 0) {
                 return $this->forwardToAccessDenied();
             }
@@ -96,12 +96,12 @@ abstract class AbstractSecurityController extends Controller
      */
     public function formBeforeDelete($model)
     {
-        $permission = $this->userSecuriyService->getRowLevelPermissions($this->modelClass, Permission::DELETE);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::DELETE);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied();
         }
-        if (!$this->userSecuriyService->hasAstrixPermission($permission)) {
-            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecuriyService->mergeConditions($permission)))->count();
+        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
+            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
             if ($count === 0) {
                 return $this->forwardToAccessDenied();
             }
@@ -130,6 +130,6 @@ abstract class AbstractSecurityController extends Controller
      */
     public function onFlushSessionCache()
     {
-        $this->userSecuriyService->flushCache();
+        $this->userSecurityService->flushCache();
     }
 }
