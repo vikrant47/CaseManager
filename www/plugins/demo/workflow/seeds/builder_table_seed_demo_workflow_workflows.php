@@ -14,18 +14,18 @@ class BuilderTableSeedDemoWorkflowWorkflows implements Seedable
             [
                 "id" => 1,
                 "created_at" => "2019-10-08 08:17:55",
-                "updated_at" => "2019-11-23 05:20:51",
+                "updated_at" => "2020-03-15 14:40:45",
                 "active" => 1,
                 "name" => "Case Workflow",
                 "description" => "Case Workflow",
-                "definition" => "[{\"from_state\"=>\"3\",\"to_state\"=>\"4\",\"queue\"=>\"1\"},{\"from_state\"=>\"4\",\"to_state\"=>\"5\",\"queue\"=>\"20\"},{\"from_state\"=>\"5\",\"to_state\"=>\"6\",\"queue\"=>\"3\"}]",
+                "definition" => '[{"from_state":"3","to_state":"4"},{"from_state":"4","to_state":"5"},{"from_state":"5","to_state":"6"}]',
                 "created_by_id" => null,
                 "updated_by_id" => 1,
                 "workflow" => null,
                 "code" => "case-workflow",
-                "plugin_id" => 1,
+                "plugin_id" => 11,
                 "event" => "created",
-                "item_type" => "Demo\\Casemanager\\Models\\CaseModel",
+                "item_type" => "Demo\Casemanager\Models\CaseModel",
                 "input_condition" => "return true;",
                 "sort_order" => 0
             ]
@@ -35,6 +35,6 @@ class BuilderTableSeedDemoWorkflowWorkflows implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-        Db::table('demo_workflow_workflows')->where('plugin_id', 1)->delete();
+        Db::table('demo_workflow_workflows')->where('plugin_id', 11)->delete();
     }
 }

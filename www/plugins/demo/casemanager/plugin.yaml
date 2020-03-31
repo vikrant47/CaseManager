@@ -5,7 +5,7 @@ plugin:
     icon: oc-icon-adjust
     homepage: ''
 model-alias:
-    CaseModel: 'Cases'
+    CaseModel: Cases
 navigation:
     main-menu-item:
         label: Workspace

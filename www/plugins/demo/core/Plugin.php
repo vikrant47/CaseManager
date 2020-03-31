@@ -8,6 +8,7 @@ use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
 use Demo\Core\FormWidgets\QueryBuilderWidget;
 use Demo\Core\FormWidgets\RelatedList;
 use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
+use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
 use RainLab\Builder\Classes\ControlLibrary;
 use System\Classes\PluginBase;
@@ -26,6 +27,12 @@ class Plugin extends PluginBase
             BeforeDeleteCascade::class,
             UniversalWebhookHandler::class,
             RestrictSystemRecordHandler::class,
+        ];
+    }
+    public function getPluginMiddleware()
+    {
+        return [
+            CorePluginMiddlerware::class,
         ];
     }
 

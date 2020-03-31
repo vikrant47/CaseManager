@@ -17,24 +17,22 @@ use Backend\Models\User;
 
 trait WorkflowControllerTrait
 {
-    public function onSubmit($modelId)
+    public function onSubmitWorkflowItem($model)
     {
-        if ($this->user->hasAccess('workflow.item.push')) {
-            $model = $this->formFindModelObject($modelId);
-            /**@var $workflowItems Collection<WorkflowItem> */
-            $workflowItem = WorkflowItem::where('item_type', '=', get_class($model))->where('item_id', '=', $model->id)->first();
-            // throw new ApplicationException(json_encode($workflowEntities, true));
-            if (empty($workflowItem)) {
-                throw new ApplicationException('Unable to submit. No active workflow found');
-            } else {
-                /**@var $workflowItem WorkflowItem */
-                $workflowItem->makeTransition($model);
-            }
-            Flash::success('Pushed Successfully!');
-            return $this->makeRedirect('-close');
-        } else {
-            Flash::error('You are not authorized to perform this action');
+        if (is_numeric($model)) {
+            $model = $this->formFindModelObject($model);
         }
+        /**@var $workflowItems Collection<WorkflowItem> */
+        $workflowItem = WorkflowItem::where('item_type', '=', get_class($model))->where('item_id', '=', $model->id)->first();
+        // throw new ApplicationException(json_encode($workflowEntities, true));
+        if (empty($workflowItem)) {
+            throw new ApplicationException('Unable to submit. No active workflow found');
+        } else {
+            /**@var $workflowItem WorkflowItem */
+            $workflowItem->makeTransition($model);
+        }
+        Flash::success('Pushed Successfully!');
+        return $this->makeRedirect('-close');
     }
 
     public function onPickItemFromQueue()

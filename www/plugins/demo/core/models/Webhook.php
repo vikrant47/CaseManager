@@ -42,7 +42,7 @@ class Webhook extends Model
 
     public function execute($context)
     {
-        $logger = PluginConnection::getLogger('demo.core');
+        $logger = PluginConnection::getCurrentLogger();
         $condition = $this->condition;
         $scriptContext = new ScriptContext();
         if (trim(strlen($condition)) === 0 || $scriptContext->execute($condition, $context) === true) {

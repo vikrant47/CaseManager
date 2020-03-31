@@ -97,9 +97,28 @@
       <path value="$PROJECT_DIR$/www/vendor/phar-io/manifest" />
       <path value="$PROJECT_DIR$/www/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/www/vendor/meyfa/phpunit-assert-gd" />
+      <path value="$PROJECT_DIR$/www/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/www/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/www/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/www/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/www/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/www/vendor/sabberworm/php-css-parser" />
+      <path value="$PROJECT_DIR$/www/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/www/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/www/vendor/phenx/php-svg-lib" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
+  <component name="PhpStepFilterConfiguration">
+    <skipped_functions>
+      <skipped_function name="Demo\Casemanager\Controllers\CaseController-&gt;onSubmitWorkflowItem" />
+    </skipped_functions>
+    <option name="skippedFunctions">
+      <list>
+        <option value="Demo\Casemanager\Controllers\CaseController-&gt;onSubmitWorkflowItem" />
+      </list>
+    </option>
+  </component>
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="$PROJECT_DIR$/www/vendor/autoload.php" />

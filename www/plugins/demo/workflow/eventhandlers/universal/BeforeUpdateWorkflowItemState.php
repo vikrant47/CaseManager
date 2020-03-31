@@ -30,7 +30,7 @@ class BeforeUpdateWorkflowItemState
             $transition->from_state_id = $original['current_state_id'];
             $transition->to_state_id = $model->current_state_id;
             $transition->workflow_item_id = $model->id;
-            PluginConnection::getLogger('demo.workflow')->info('Workflow Item state has been changed so Making transition from ' . $transition->from_state_id . ' to state ' . $model->current_state_id);
+            PluginConnection::getCurrentLogger();
             $transition->save();
         }
     }

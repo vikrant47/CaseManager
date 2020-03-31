@@ -33,11 +33,11 @@
                     class="btn btn-default">
                 <?= e(trans('backend::lang.form.save_and_close')) ?>
             </button>
-            <?php if ($this->user->hasAccess('workflow.item.push')) { ?>
+            <?php if ($this->user->id === $this->formGetModel()->assigned_to_id) { ?>
                 <button
                         type="button"
                         class="btn btn-default"
-                        data-request="onSubmit"
+                        data-request="onPushCase"
                         data-hotkey="ctrl+shift+enter, cmd+shift+enter"
                         data-request-flash
                         data-load-indicator="<?= e(trans('demo.casemanager::lang.workflow.submit')) ?>"

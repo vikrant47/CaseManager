@@ -28,6 +28,6 @@ class BuilderTableSeedDemoWorkflowQueuePopCriteria implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-        Db::table('demo_workflow_queue_pop_criterias')->where('plugin_id', 6)->delete();
+        Db::table('demo_workflow_queue_pop_criterias')->where('plugin_id', 11)->delete();
     }
 }
