@@ -21,7 +21,7 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
             $table->integer('updated_by_id');
             $table->integer('plugin_id');
             $table->integer('sort_order');
-            $table->string('item_type',255);
+            $table->string('model',255);
             $table->text('input_condition');
             $table->string('event')->nullable();
         });

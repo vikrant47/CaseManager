@@ -25,7 +25,7 @@ class BuilderTableSeedDemoWorkflowWorkflows implements Seedable
                 "code" => "case-workflow",
                 "plugin_id" => 11,
                 "event" => "created",
-                "item_type" => "Demo\Casemanager\Models\CaseModel",
+                "model" => "Demo\Casemanager\Models\CaseModel",
                 "input_condition" => "return true;",
                 "sort_order" => 0
             ]

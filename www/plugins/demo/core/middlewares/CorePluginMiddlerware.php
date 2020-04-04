@@ -24,7 +24,7 @@ class CorePluginMiddlerware implements IPluginMiddleware
     }
 
     /**This will be executed after request execution*/
-    public function after(Request $request, Response $response)
+    public function after(Request $request, $response)
     {
 
     }

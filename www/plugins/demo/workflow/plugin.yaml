@@ -35,6 +35,10 @@ navigation:
                 label: 'Workflow States'
                 url: demo/workflow/workflowstate
                 icon: icon-dot-circle-o
+            side-menu-item9:
+                label: 'Service Channel'
+                url: demo/workflow/servicechannelcontroller
+                icon: icon-sitemap
             side-menu-item:
                 label: Queues
                 url: demo/workflow/queue

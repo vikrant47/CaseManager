@@ -2,7 +2,6 @@
 
 namespace Demo\CaseManager\Seeds;
 
-use Demo\CaseManager\Models\ModelModel;
 use Schema;
 use Seeder;
 use Db;
@@ -16,7 +15,7 @@ class BuilderTableSeedDemoCaseManagerModelModel implements Seedable
             [
                 'id' => 41,
                 'name' => 'Case Model',
-                'model_type' => 'Demo\CaseManager\Models\CaseModel',
+                'model_type' => 'Demo\Casemanager\Models\CaseModel',
                 'plugin_id' => 6,
                 'audit' => 0,
                 'record_history' => 0,
@@ -29,7 +28,7 @@ class BuilderTableSeedDemoCaseManagerModelModel implements Seedable
             ], [
                 'id' => 42,
                 'name' => 'Case Priority',
-                'model_type' => 'Demo\CaseManager\Models\CasePriority',
+                'model_type' => 'Demo\Casemanager\Models\CasePriority',
                 'plugin_id' => 6,
                 'audit' => 0,
                 'record_history' => 0,

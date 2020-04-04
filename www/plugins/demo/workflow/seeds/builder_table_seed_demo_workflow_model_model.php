@@ -119,8 +119,8 @@ class BuilderTableSeedDemoWorkflowModelModel implements Seedable
                 'updated_at' => '2019-12-20 14:15:39',
             ], [
                 'id' => 121,
-                'name' => 'Webhook',
-                'model_type' => 'Demo\Workflow\Models\Webhook',
+                'name' => 'Service Channel',
+                'model_type' => 'Demo\Workflow\Models\ServiceChannel',
                 'plugin_id' => 11,
                 'audit' => 0,
                 'record_history' => 0,

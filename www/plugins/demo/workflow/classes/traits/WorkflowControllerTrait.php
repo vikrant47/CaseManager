@@ -23,7 +23,7 @@ trait WorkflowControllerTrait
             $model = $this->formFindModelObject($model);
         }
         /**@var $workflowItems Collection<WorkflowItem> */
-        $workflowItem = WorkflowItem::where('item_type', '=', get_class($model))->where('item_id', '=', $model->id)->first();
+        $workflowItem = WorkflowItem::where('model', '=', get_class($model))->where('record_id', '=', $model->id)->first();
         // throw new ApplicationException(json_encode($workflowEntities, true));
         if (empty($workflowItem)) {
             throw new ApplicationException('Unable to submit. No active workflow found');

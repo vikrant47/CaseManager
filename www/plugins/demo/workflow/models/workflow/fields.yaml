@@ -45,12 +45,12 @@ tabs:
                         label: 'To State'
                         span: auto
                         type: relation
-        item_type:
-            label: 'Item Type'
+        model_ref:
+            label: 'Model'
             emptyOption: None
             showSearch: true
             span: auto
-            type: dropdown
+            type: relation
             tab: 'Auto Initialization Options'
         event:
             label: Event

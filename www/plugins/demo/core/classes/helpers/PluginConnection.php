@@ -218,7 +218,10 @@ class PluginConnection
     {
         $request = request();
         $identifier = $request->request->get('CURRENT_PLUGIN');
-        return static::getLogger('demo.core');
+        if (empty($identifier)) {
+            $identifier = 'demo.core';
+        }
+        return static::getLogger($identifier);
     }
 
     /**

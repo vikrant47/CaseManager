@@ -8,7 +8,7 @@ columns:
     description:
         label: description
         type: text
-    item_type:
+    model:
         label: type
         type: text
     sort_order:

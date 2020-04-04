@@ -1,0 +1,77 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    description:
+        label: Description
+        span: auto
+        type: text
+    active:
+        label: Active
+        span: auto
+        default: 1
+        type: switch
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        model_ref:
+            emptyOption: '-- Select --'
+            label: Model
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            required: 1
+            type: relation
+            tab: Input
+            comment: 'Qualified Model for channel.'
+        event:
+            label: Event
+            span: auto
+            type: checkboxlist
+            tab: Input
+        condition:
+            label: Condition
+            size: large
+            language: php
+            span: auto
+            hidden: 0
+            type: codeeditor
+            tab: Input
+        inbox_order:
+            label: 'Inbox Order'
+            showSearch: true
+            span: auto
+            type: number
+            tab: 'Agent Config'
+        assignment_capacity:
+            label: 'Assignment Capacity'
+            showSearch: true
+            span: auto
+            type: number
+            tab: 'Agent Config'
+            default: -1
+        assigned_to_field:
+            label: 'Assign To Field'
+            showSearch: true
+            span: auto
+            type: text
+            tab: 'Agent Config'
+            default: assigned_to_id
+        _queues:
+            label: '&nbsp;'
+            span: full
+            relation: HasMany
+            sourceKey: id
+            targetModel: Demo\Workflow\Models\Queue
+            targetKey: service_channel_id
+            type: relatedlist
+            tab: 'Queues'
+

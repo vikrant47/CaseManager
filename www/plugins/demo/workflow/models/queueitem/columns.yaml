@@ -5,11 +5,11 @@ columns:
     queue_id:
         label: queue_id
         type: number
-    item_id:
-        label: item_id
+    record_id:
+        label: record_id
         type: number
-    item_type:
-        label: item_type
+    model:
+        label: model
         type: text
     created_at:
         label: created_at

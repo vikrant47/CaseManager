@@ -8,7 +8,7 @@ use October\Rain\Exception\ApplicationException;
 
 /**
  * Model
- * An entity can only be part of 1 workflow. A unique index has been added on item_id,entity_name combination
+ * An entity can only be part of 1 workflow. A unique index has been added on record_id,entity_name combination
  */
 class WorkflowItem extends Model
 {
@@ -50,7 +50,7 @@ class WorkflowItem extends Model
      * Step 9. Update current state in current QueueEntity record
      * Step 10. Update current QueueEntity record
      */
-    public function makeTransition($model)
+    public function makeTransition()
     {
         if ($this->workflow->active === 0) {
             throw new ApplicationException('Unable to execute an inactive workflow.');
@@ -89,6 +89,6 @@ class WorkflowItem extends Model
 
     public function scopeFindByEntity($query, $entityType, $id)
     {
-        return $query->where('item_type', $entityType)->where('id', $id);
+        return $query->where('model', $entityType)->where('id', $id);
     }
 }
