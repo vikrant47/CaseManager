@@ -1,6 +1,7 @@
 <?php namespace Demo\Workflow\Models;
 
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Models\ModelModel;
 use Demo\Core\Services\EventHandlerServiceProvider;
 use Leafo\ScssPhp\Node\Number;
 use Model;
@@ -25,7 +26,8 @@ class Workflow extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
+        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
+        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model_type'],
     ];
 
     public $hasOne = [
@@ -60,8 +62,8 @@ class Workflow extends Model
     {
         $workflowItem = new WorkflowItem();
         $workflowItem->workflow = $this;
-        $workflowItem->item_id = $model->id;
-        $workflowItem->item_type = get_class($model);
+        $workflowItem->record_id = $model->id;
+        $workflowItem->model = get_class($model);
         $from_state = new WorkflowState();
         $from_state->id = $this->definition[0]['from_state'];
         $workflowItem->current_state = $from_state;

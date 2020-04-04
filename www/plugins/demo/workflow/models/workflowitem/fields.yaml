@@ -9,12 +9,12 @@ fields:
         label: 'Current State'
         span: auto
         type: relation
-    item_type:
-        label: 'Item Type'
+    model:
+        label: 'Model'
         span: auto
         type: text
-    item_id:
-        label: 'Item Id'
+    record_id:
+        label: 'Record Id'
         span: auto
         type: text
     assigned_to:

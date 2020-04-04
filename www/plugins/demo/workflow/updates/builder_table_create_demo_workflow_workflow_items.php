@@ -14,8 +14,8 @@ class BuilderTableCreateDemoWorkflowWorkflowItems extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->string('item_type', 255);
-            $table->integer('item_id');
+            $table->string('model', 255);
+            $table->integer('record_id');
             $table->timestamp('assigned_at');
             $table->integer('workflow_id');
             $table->integer('assigned_to_id');

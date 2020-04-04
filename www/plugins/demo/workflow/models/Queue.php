@@ -21,8 +21,9 @@ class Queue extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelTrait;
-    public static $ADD_NEW_POLICY = 'addNew';
-    public static $OVERRIDE_POLICY = 'override';
+    const ADD_NEW_POLICY = 'addNew';
+    const OVERRIDE_POLICY = 'override';
+    const REJECT_POLICY = 'reject';
 
     /**@var $logger \Monolog\Logger */
     private $logger;
@@ -33,6 +34,7 @@ class Queue extends Model
 
     public $belongsTo = [
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
+        'service_channel' => [\Demo\Workflow\Models\ServiceChannel::class, 'key' => 'service_channel_id'],
         'pop_criteria' => [\Demo\Workflow\Models\QueuePopCriteria::class, 'key' => 'pop_criteria_id'],
         'routing_rule' => [\Demo\Workflow\Models\QueueRoutingRule::class, 'key' => 'routing_rule_id'],
     ];
@@ -91,31 +93,35 @@ class Queue extends Model
      * Push an item to queue
      * If queue is virtual then process item othewise push item to database
      */
-    public function pushItem($item)
+    public function pushItem($model)
     {
-        $this->logger->info('Pushing item to queue [' . $this->name . ']' . ModelUtil::toString($item));
+        $modelClass = get_class($model);
+        $this->logger->info('Pushing item to queue [' . $this->name . ']' . ModelUtil::toString($model));
         if ($this->virtual == 1) {
             $this->logger->info('Queue is virtual do assigning item');
-            $this->assignItem(null, $item); // if its a virtual queue than immediately call assign item
+            $this->assignItem(null, $model); // if its a virtual queue than immediately call assign item
             return;
         }
-        if ($this->item_type === 'universal' || $this->item_type === get_class($item)) {
-            $queueItem = QueueItem::where(['item_id' => $item->id, 'item_type' => get_class($item), 'assigned_to_id' => null])->first();
+        if ($this->service_channel->model === $modelClass) {
+            $queueItem = QueueItem::where(['record_id' => $model->id, 'model' => $modelClass, 'poped_at' => null])->first();
             $insert = true;
             if (!empty($queueItem)) {
                 $this->logger->info('Item already exists applying redendancy policy');
-                if ($this->redundancy_policy === Queue::$OVERRIDE_POLICY) {
+                if ($this->redundancy_policy === Queue::OVERRIDE_POLICY) {
                     $queueItem->updated_at = new \DateTime();
                     $insert = false;
-                } elseif ($this->redundancy_policy === Queue::$ADD_NEW_POLICY) {
+                } elseif ($this->redundancy_policy === Queue::ADD_NEW_POLICY) {
                     $insert = true;
+                } elseif ($this->redundancy_policy === Queue::REJECT_POLICY) {
+                    $this->logger->info('Rejecting item as redendancy policy is reject');
+                    throw new ApplicationException('Same item already exits in queue');
                 }
             }
             if ($insert === true) {
                 $queueItem = new QueueItem();
                 $queueItem->queue = $this;
-                $queueItem->item_id = $item->id;
-                $queueItem->item_type = get_class($item);
+                $queueItem->record_id = $model->id;
+                $queueItem->model = $modelClass;
                 $queueItem->save();
             }
         } else {
@@ -127,12 +133,12 @@ class Queue extends Model
      * Processing poped item by assignment rule
      * Item can be any model in queue
      */
-    public function assignItem($queueItem, $item)
+    public function assignItem($queueItem, $model)
     {
-        $this->logger->info('Assigning the item ' . ModelUtil::toString($item) . ' using assignment rule ' . ModelUtil::toString($this->routing_rule, 'name'));
+        $this->logger->info('Assigning the item ' . ModelUtil::toString($model) . ' using assignment rule ' . ModelUtil::toString($this->routing_rule, 'name'));
         // creating context
         $context = new ScriptContext();
-        $user = $context->execute($this->routing_rule->script, ['queue' => $this, 'item' => $item, 'queueItem' => $queueItem]);
+        $user = $context->execute($this->routing_rule->script, ['queue' => $this, 'model' => $model, 'queueItem' => $queueItem]);
         if (empty($user)) {
             throw new ApplicationException('Routing Rule "' . $this->routing_rule->name . '" din\'t return any user');
         }
@@ -140,9 +146,14 @@ class Queue extends Model
         if ($this->isUserInAssignmentGroups($user) === false) {
             throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
         }
+        $assignToField = $this->service_channel->assigned_to_field;
         if (!empty($queueItem)) {
             $queueItem->assigned_to_id = $user->id;
             $queueItem->save();
+        }
+        $model->{$assignToField} = $user->id;
+        if ($model->exists) {
+            $model->update();
         }
     }
 
@@ -180,9 +191,9 @@ class Queue extends Model
             return null;
         } else {
             $queueItem = DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->lockForUpdate()->first();
-            if (!empty($queueItem) && !empty($queueItem->item_type) && !empty($queueItem->item_id)) {
+            if (!empty($queueItem) && !empty($queueItem->model) && !empty($queueItem->record_id)) {
                 DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->update(['poped_at' => new \DateTime()]);
-                return $elem->item_type::find($elem->item_id);
+                return $elem->model::find($elem->record_id);
             } else {
                 return $this->popItem();
             }
@@ -200,10 +211,8 @@ class Queue extends Model
      */
     public function popAndAssign()
     {
-        $item = $this->popItem();
-        $context = new ScriptContext();
-        return $context->execute($this->routing_rule->script, ['queue' => $this, 'item' => $item]);
-
+        $queueItem = $this->popItem();
+        return $this->assignItem($queueItem, $queueItem->getModel());
     }
 
     /**
@@ -224,8 +233,8 @@ class Queue extends Model
         if (!in_array(get_class($model), $ignoreModels) && in_array(explode('\\', get_class($model))[1], $includedPackage)) {
             // @var $queues Collection<Queue>
             $queues = Queue::where('active', 1)->where(function ($query) use ($model) {
-                $query->where('item_type', '=', 'any')
-                    ->orWhere('item_type', '=', get_class($model));
+                $query->where('model', '=', 'any')
+                    ->orWhere('model', '=', get_class($model));
             })->orderBy('sort_order', 'ASC')->get();
             // @var  $queue Queue
             foreach ($queues as $queue) {

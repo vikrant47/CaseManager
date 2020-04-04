@@ -33,6 +33,11 @@ class QueueItem extends Model
 
     public function scopeFindByEntity($query, $entityType, $id)
     {
-        return $query->where('item_type', $entityType)->where('id', $id);
+        return $query->where('model', $entityType)->where('id', $id);
+    }
+
+    public function getModel()
+    {
+        return $this->model::where('id', $this->record_id)->first();
     }
 }

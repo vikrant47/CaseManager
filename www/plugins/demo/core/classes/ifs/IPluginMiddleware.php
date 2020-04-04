@@ -9,5 +9,5 @@ interface IPluginMiddleware
     public function before(Request $request);
 
     /**This will be executed after request execution*/
-    public function after(Request $request,Response $response);
+    public function after(Request $request,$response);
 }

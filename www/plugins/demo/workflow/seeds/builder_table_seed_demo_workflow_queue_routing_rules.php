@@ -17,7 +17,7 @@ class BuilderTableSeedDemoWorkflowQueueRoutingRules implements Seedable
                 "updated_at" => "2019-11-24 03:58:03",
                 "created_by_id" => 1,
                 "updated_by_id" => 1,
-                "script" => "\$item = \$context->item; \r\n if(empty(\$item)){\r\n    throw new \$context->exception->ApplicationException('No item left to assign');\r\n}\r\n\$item->assigned_to = \$context->currentUser;\r\n\$item->save();\r\nreturn \$context->currentUser;",
+                "script" => "\$model = \$context->model;\n if(empty(\$model)){\nthrow new \$context->exception->ApplicationException('No item left to assign');\n}\nreturn \$context->currentUser;",
                 "name" => "Route to current User",
                 "description" => "Route to current User",
                 "plugin_id" => 1

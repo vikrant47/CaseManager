@@ -19,7 +19,7 @@ class BuilderTableSeedDemoWorkflowQueuePopCriteria implements Seedable
                 "updated_by_id" => 1,
                 "name" => "Simple Pop Criteria",
                 "description" => "This will pop any random item from queue",
-                "script" => "return \$query->where('demo_workflow_queue_items.item_type','Demo\\Workflow\\Models\\WorkflowItem');",
+                "script" => "return \$query->where('demo_workflow_queue_items.model','Demo\\Workflow\\Models\\WorkflowItem');",
                 "plugin_id" => 6
             ]
         ]);

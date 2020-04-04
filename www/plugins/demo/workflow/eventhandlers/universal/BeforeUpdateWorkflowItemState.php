@@ -18,7 +18,7 @@ class BeforeUpdateWorkflowItemState
     public $sort_order = -1000;
 
     /**
-     * Find all queues based on Item Type and evaluate them one by one
+     * Find all queues based on Model and evaluate them one by one
      * If a queue qualifies than break the loop.
      * Only one queue is alloed to push an item
      */

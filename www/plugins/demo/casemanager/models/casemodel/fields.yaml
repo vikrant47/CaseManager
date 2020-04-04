@@ -35,7 +35,17 @@ fields:
     assigned_to:
         label: 'Assigned To'
         nameFrom: email
-        emptyOption: Select a user
+        emptyOption: 'Select a user'
         descriptionFrom: description
         span: auto
         type: relation
+tabs:
+    fields:
+        assigned_to:
+            label: 'Assigned To'
+            nameFrom: login
+            descriptionFrom: email
+            span: auto
+            readOnly: 1
+            type: relation
+            tab: System

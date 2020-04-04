@@ -6,6 +6,7 @@ namespace Demo\Core\Classes\Beans;
 
 use Backend\Behaviors\ListController;
 use Backend\Classes\Controller;
+use BackendAuth;
 use Demo\Core\Models\Permission;
 use Demo\Core\Services\SecurityService;
 use Demo\Core\Services\UserSecurityService;

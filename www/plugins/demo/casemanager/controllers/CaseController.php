@@ -30,9 +30,9 @@ class CaseController extends AbstractSecurityController
     {
         parent::listExtendQuery($query);
         /*if (!$this->user->hasAccess('case.table.view.all')) {
-            $workflowEntities = WorkflowItem::where(['item_type' => CaseModel::class, 'assigned_to_id' => $this->user->id])->select('item_id')->get();
+            $workflowEntities = WorkflowItem::where(['model' => CaseModel::class, 'assigned_to_id' => $this->user->id])->select('record_id')->get();
             $query->whereIn('id', $workflowEntities->map(function ($entity) {
-                return $entity->item_id;
+                return $entity->record_id;
             }));
         }*/
     }
@@ -41,8 +41,14 @@ class CaseController extends AbstractSecurityController
     {
         $model = $this->formFindModelObject($id);
         if ($model->assigned_to_id === $this->user->id) {
-            $this->onSubmitWorkflowItem($model);
+            $workflowItem = WorkflowItem::where(['model' => get_class($model), 'record_id' => $id])->first();
+            if (empty($workflowItem)) {
+                throw new ApplicationException('No active workflow item found for case ', $id);
+            }
+            $workflowItem->makeTransition();
+            Flash::success('Case pushed successfully');
+        } else {
+            Flash::error('Unable to push case as it\'s not assigned to you !');
         }
-        Flash::error('Unable to push case as it\'s not assigned to you !');
     }
 }

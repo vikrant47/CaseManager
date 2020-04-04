@@ -14,12 +14,21 @@ columns:
     updated_by_id:
         label: updated_by_id
         type: number
+    plugin_id:
+        label: plugin_id
+        type: number
+    name:
+        label: name
+        type: text
     model:
         label: model
         type: text
-    record_id:
-        label: record_id
+    inbox_order:
+        label: inbox_order
         type: number
-    current_state:
-        label: current_state
+    active:
+        label: active
         type: text
+    assignment_capacity:
+        label: assignment_capacity
+        type: number

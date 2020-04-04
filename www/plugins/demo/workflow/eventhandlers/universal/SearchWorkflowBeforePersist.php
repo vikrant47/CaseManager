@@ -20,7 +20,7 @@ class SearchWorkflowBeforePersist
     public $sort_order = -1000;
 
     /**
-     * Find all queues based on Item Type and evaluate them one by one
+     * Find all queues based on Model and evaluate them one by one
      * If a queue qualifies than break the loop.
      * Only one queue is alloed to push an item
      */
@@ -29,10 +29,11 @@ class SearchWorkflowBeforePersist
         $logger = PluginConnection::getCurrentLogger();
         $ignoreModels = [WorkflowItem::class, WorkflowTransition::class, EventLog::class];
         $includedPackage = ['Workflow'];
-        if (!in_array(get_class($model), $ignoreModels) /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/) {
+        $modelClass = get_class($model);
+        if (!in_array($modelClass, $ignoreModels) /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/) {
             /**@var $workflows Collection<Workflow> */
             $workflows = Workflow::where('active', 1)->where('event', $event)
-                ->where('item_type', '=', get_class($model))->orderBy('sort_order', 'ASC')->get();
+                ->where('model', '=', $modelClass)->orderBy('sort_order', 'ASC')->get();
             $logger->info('Evaluating workflows to accept item' . ModelUtil::toString($model) . '. total = ' . $workflows->count());
             /**@var  $workflow Workflow */
             foreach ($workflows as $workflow) {
@@ -41,6 +42,7 @@ class SearchWorkflowBeforePersist
                 if ($value === true) {
                     $logger->info('Staring the workflow ' . $workflow->name . ' for model id ' . $model->id);
                     $workflow->start($model);
+                    break;
                 }
 
             }

@@ -12,8 +12,8 @@ trait WorkflowItemTrait
     public function isAssignedToCurrentUser(): boolean
     {
         return WorkflowItem::where([
-                'item_type' => get_class($this),
-                'item_id' => $this->id,
+                'model' => get_class($this),
+                'record_id' => $this->id,
                 'assigned_to_id' => BackendAuth::getUser()->id,
             ])->cont() > 0;
     }
