@@ -23,7 +23,7 @@ class Role extends Model
      * @var array Validation rules
      */
     public $rules = [
-        'name' => 'required|between:2,128|unique:backend_user_roles',
+        'name' => 'required|between:2,128|unique:demo_core_roles',
         'code' => 'unique:backend_user_roles',
     ];
 

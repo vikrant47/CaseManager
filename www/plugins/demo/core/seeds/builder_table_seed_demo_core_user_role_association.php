@@ -20,6 +20,24 @@ class BuilderTableSeedDemoCoreUserRoleAssociation implements Seedable
             'created_by_id' => 1,
             'updated_by_id' => 1,
             'plugin_id' => 10,
+        ], [
+            'id' => 2,
+            'role_id' => 3,
+            'user_id' => 6,
+            'created_at' => '2019-12-20 14:15:39',
+            'updated_at' => '2019-12-20 14:15:39',
+            'created_by_id' => 1,
+            'updated_by_id' => 1,
+            'plugin_id' => 10,
+        ], [
+            'id' => 3,
+            'role_id' => 3,
+            'user_id' => 3,
+            'created_at' => '2019-12-20 14:15:39',
+            'updated_at' => '2019-12-20 14:15:39',
+            'created_by_id' => 1,
+            'updated_by_id' => 1,
+            'plugin_id' => 10,
         ]);
     }
 

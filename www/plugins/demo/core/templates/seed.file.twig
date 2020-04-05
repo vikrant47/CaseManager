@@ -1,0 +1,40 @@
+<?php
+namespace {{ plugin.code|replace({'.':'\\'})}}\Seeds;
+
+use Schema;
+use Seeder;
+use Demo\Core\Classes\Ifs\Seedable;
+/**Auto generated using cmd _: php artisan core:run-seeds {{ plugin.code }} d */
+class {{ className }} implements Seedable
+{
+    /**This will be executed to install seeds*/
+    public function install()
+    {
+    {% if data|length > 0 %}
+        Db::table('{{ table }}')->insert([
+    {%for record in data %}
+        [
+        {% for key,value in record%}
+            {% set phpString =  '\''~key~'\'' ~ '=>' ~ '\''~value|replace({'$':'\\$',"\n":'\\n ', "\r":'\\n ','\'':'\\\''})~'\'' %}
+            {% if loop.last == false %}
+                {{ phpString|raw}},
+            {% else %}
+                {{ phpString|raw}}
+            {% endif %}
+        {% endfor %}
+        ] {% if loop.last == false %},{% endif %}
+    {% endfor %}
+        ]);
+    {% endif %}
+    }
+
+    /**This will be executed to uninstall seeds*/
+    public function uninstall()
+    {
+        {% if packagable == true %}
+            Db::table('{{ table }}')->where('plugin_id', {{ plugin.id }})->delete();
+        {% else %}
+            Db::table('{{ table }}')->where('1', 1)->delete();
+        {% endif %}
+    }
+}
