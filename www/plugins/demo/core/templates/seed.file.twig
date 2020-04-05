@@ -4,6 +4,8 @@ namespace {{ plugin.code|replace({'.':'\\'})}}\Seeds;
 use Schema;
 use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
+use Db;
+
 /**Auto generated using cmd _: php artisan core:run-seeds {{ plugin.code }} d */
 class {{ className }} implements Seedable
 {
@@ -15,7 +17,18 @@ class {{ className }} implements Seedable
     {%for record in data %}
         [
         {% for key,value in record%}
-            {% set phpString =  '\''~key~'\'' ~ '=>' ~ '\''~value|replace({'$':'\\$',"\n":'\\n ', "\r":'\\n ','\'':'\\\''})~'\'' %}
+
+            {% if value == '' %}
+                {% set phpString =  '\''~key~'\'' ~ '=> \'\''%}
+            {% elseif value == false %}
+                {% set phpString =  '\''~key~'\'' ~ '=> false'%}
+            {%elseif value == 0 %}
+                {% set phpString =  '\''~key~'\'' ~ '=> 0'%}
+            {%elseif value is empty %}
+                {% set phpString =  '\''~key~'\'' ~ '=> mull'%}
+            {% else %}
+                {% set phpString =  '\''~key~'\'' ~ '=>' ~ '\''~value|replace({'$':'\\$',"\n":'\\n ', "\r":'\\n ','\'':'\\\''})~'\'' %}
+            {% endif %}
             {% if loop.last == false %}
                 {{ phpString|raw}},
             {% else %}

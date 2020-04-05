@@ -5,6 +5,7 @@ namespace Demo\Casemanager\Seeds;
 use Schema;
 use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
+use Db;
 
 /**Auto generated using cmd _: php artisan core:run-seeds Demo.Casemanager d */
 class SeedDemoCoreModels implements Seedable
@@ -22,8 +23,8 @@ class SeedDemoCoreModels implements Seedable
                 'name' => 'Case Model',
                 'model_type' => 'Demo\Casemanager\Models\CaseModel',
                 'plugin_id' => '6',
-                'audit' => '',
-                'record_history' => '',
+                'audit' => true,
+                'record_history' => false,
                 'audit_columns' => '["*"]',
                 'attach_audited_by' => '1',
                 'description' => ''
@@ -36,8 +37,8 @@ class SeedDemoCoreModels implements Seedable
                 'name' => 'Case Priority',
                 'model_type' => 'Demo\Casemanager\Models\CasePriority',
                 'plugin_id' => '6',
-                'audit' => '',
-                'record_history' => '',
+                'audit' => true,
+                'record_history' => false,
                 'audit_columns' => '["*"]',
                 'attach_audited_by' => '1',
                 'description' => ''

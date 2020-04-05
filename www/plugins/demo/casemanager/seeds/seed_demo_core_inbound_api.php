@@ -5,6 +5,7 @@ namespace Demo\Casemanager\Seeds;
 use Schema;
 use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
+use Db;
 
 /**Auto generated using cmd _: php artisan core:run-seeds Demo.Casemanager d */
 class SeedDemoCoreInboundApi implements Seedable
@@ -15,15 +16,15 @@ class SeedDemoCoreInboundApi implements Seedable
         Db::table('demo_core_inbound_api')->insert([
             [
                 'id' => '1',
-                'created_at' => '',
+                'created_at' => null,
                 'updated_at' => '2020-03-16 05:05:03',
                 'created_by_id' => '1',
                 'updated_by_id' => '1',
-                'method' => 'get',
-                'script' => 'return \$context->pathVariables;',
-                'name' => 'Test',
-                'description' => '',
-                'url' => '/test/{name}',
+                'method' => '0',
+                'script' => '0',
+                'name' => '0',
+                'description' => 'false',
+                'url' => '0',
                 'plugin_id' => '6',
                 'active' => '1'
             ]]);
