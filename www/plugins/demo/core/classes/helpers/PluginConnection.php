@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Classes\Helpers;
 
 use Demo\Core\Classes\Utils\StringUtil;
+use File;
 use System\Classes\PluginBase;
 use System\Classes\PluginManager;
 use Monolog\Logger;
@@ -150,6 +151,18 @@ class PluginConnection
             $mappedAlias[$package . '\\Models\\' . $key] = $value;
         }
         return $mappedAlias;
+    }
+
+    /**
+     * Will return the template inside plugin
+     * @param $fileName string Name of the template file
+     * @return string Class with full namespace after loading it.
+     * @throws \October\Rain\Database\Attach\FileException
+     */
+    public function getTemplate(string $fileName)
+    {
+        $path = $this->pluginManager->getPluginPath($this->identifier) . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $fileName;
+        return File::get($path);
     }
 
     /**
