@@ -17,17 +17,20 @@ class {{ className }} implements Seedable
     {%for record in data %}
         [
         {% for key,value in record%}
-
-            {% if value == '' %}
-                {% set phpString =  '\''~key~'\'' ~ '=> \'\''%}
-            {% elseif value == false %}
-                {% set phpString =  '\''~key~'\'' ~ '=> false'%}
-            {%elseif value == 0 %}
-                {% set phpString =  '\''~key~'\'' ~ '=> 0'%}
+            {%if value matches '/^[-+]?[0-9]*\\.?[0-9]+$/'  %}
+                {% set phpString =  '"'~key~'"' ~ '=> ' ~ value%}
+            {% elseif value is same as(false)  %}
+                {% set phpString =  '"'~key~'"' ~ '=> false'%}
+            {% elseif value is same as(true)  %}
+                {% set phpString =  '"'~key~'"' ~ '=> true'%}
+            {%elseif value is same as(null) %}
+                {% set phpString =  '"'~key~'"' ~ '=> null'%}
+            {% elseif value|trim == '' %}
+                {% set phpString =  '"'~key~'"' ~ '=> ""'%}
             {%elseif value is empty %}
-                {% set phpString =  '\''~key~'\'' ~ '=> mull'%}
+                {% set phpString =  '"'~key~'"' ~ '=> null'%}
             {% else %}
-                {% set phpString =  '\''~key~'\'' ~ '=>' ~ '\''~value|replace({'$':'\\$',"\n":'\\n ', "\r":'\\n ','\'':'\\\''})~'\'' %}
+                {% set phpString =  '"'~key~'"' ~ '=>' ~ '"'~value|replace({'$':'\\$','\n':'\\n', "\r":'\\r','"':'\\"'})~'"' %}
             {% endif %}
             {% if loop.last == false %}
                 {{ phpString|raw}},

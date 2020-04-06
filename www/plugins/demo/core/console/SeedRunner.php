@@ -249,7 +249,7 @@ class SeedRunner extends Command
     public function dumpSeed($tables, $plugin, $template, $path)
     {
         $seedDir = $path;
-       /* $seedDir = $path . DIRECTORY_SEPARATOR . strtolower($plugin->code);
+        /*$seedDir = $path . DIRECTORY_SEPARATOR . strtolower($plugin->code);
         File::isDirectory($seedDir) or File::makeDirectory($seedDir, 0777, true, true);*/
         foreach ($tables as $table) {
             $this->info('Searching seed for table ' . $table);

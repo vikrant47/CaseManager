@@ -14,15 +14,15 @@ class SeedDemoCoreRoles implements Seedable
     {
             Db::table('demo_core_roles')->insert([
             [
-                                                            'id'=>'2',
-                                                                        'created_at'=>'2020-04-04 14:10:36',
-                                                                        'updated_at'=>'2020-04-04 14:10:36',
-                                                                        'created_by_id'=>'1',
-                                                                        'updated_by_id'=>'1',
-                                                                        'plugin_id'=>'6',
-                                                                                                    'code'=>'0',
-                                                                                                    'name'=>'0',
-                                                                                                    'description'=>'false'
+                                                                            "id"=> 2,
+                                                                                        "created_at"=>"2020-04-04 14:10:36",
+                                                                                        "updated_at"=>"2020-04-04 14:10:36",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "code"=>"agent",
+                                                                                        "name"=>"Agent",
+                                                                                        "description"=> ""
                             ]             ]);
         }
 

@@ -14,27 +14,27 @@ class SeedDemoWorkflowWorkflowStates implements Seedable
     {
             Db::table('demo_workflow_workflow_states')->insert([
             [
-                                                            'id'=>'5',
-                                                                        'created_at'=>'2019-10-12 10:41:21',
-                                                                        'updated_at'=>'2019-10-12 10:41:21',
-                                                                        'created_by_id'=>'1',
-                                                                        'updated_by_id'=>'1',
-                                                                                                    'name'=>'0',
-                                                                                                    'description'=>'false',
-                                                                        'active'=>'1',
-                                                                                                    'code'=>'0',
-                                                                        'plugin_id'=>'6'
+                                                                            "id"=> 5,
+                                                                                        "created_at"=>"2019-10-12 10:41:21",
+                                                                                        "updated_at"=>"2019-10-12 10:41:21",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Doctor",
+                                                                                        "description"=> "",
+                                                                                        "active"=> 1,
+                                                                                        "code"=>"doctor",
+                                                                                        "plugin_id"=> 6
                             ] ,            [
-                                                            'id'=>'4',
-                                                                        'created_at'=>'2019-10-12 10:41:09',
-                                                                        'updated_at'=>'2019-10-12 10:41:09',
-                                                                        'created_by_id'=>'1',
-                                                                        'updated_by_id'=>'1',
-                                                                                                    'name'=>'0',
-                                                                                                    'description'=>'false',
-                                                                        'active'=>'1',
-                                                                                                    'code'=>'0',
-                                                                        'plugin_id'=>'6'
+                                                                            "id"=> 4,
+                                                                                        "created_at"=>"2019-10-12 10:41:09",
+                                                                                        "updated_at"=>"2019-10-12 10:41:09",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Quality",
+                                                                                        "description"=> "",
+                                                                                        "active"=> 1,
+                                                                                        "code"=>"quality",
+                                                                                        "plugin_id"=> 6
                             ]             ]);
         }
 

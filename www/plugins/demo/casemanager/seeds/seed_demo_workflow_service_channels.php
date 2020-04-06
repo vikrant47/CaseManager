@@ -14,21 +14,21 @@ class SeedDemoWorkflowServiceChannels implements Seedable
     {
             Db::table('demo_workflow_service_channels')->insert([
             [
-                                                            'id'=>'1',
-                                                                        'created_at'=>'2020-04-04 06:03:08',
-                                                                        'updated_at'=>'2020-04-04 07:22:51',
-                                                                        'created_by_id'=>'1',
-                                                                        'updated_by_id'=>'1',
-                                                                        'plugin_id'=>'6',
-                                                                                                    'name'=>'0',
-                                                                                                    'description'=>'false',
-                                                                                                    'model'=>'0',
-                                                                        'inbox_order'=>'1',
-                                                                        'active'=>'1',
-                                                                                                    'assigned_to_field'=>'0',
-                                                                        'assignment_capacity'=>'-1',
-                                                                                                    'condition'=>'0',
-                                                                                                    'event'=>'0'
+                                                                            "id"=> 1,
+                                                                                        "created_at"=>"2020-04-04 06:03:08",
+                                                                                        "updated_at"=>"2020-04-04 07:22:51",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "name"=>"Case Assignment Channel",
+                                                                                        "description"=> "",
+                                                                                        "model"=>"Demo\Workflow\Models\WorkflowItem",
+                                                                                        "inbox_order"=> 1,
+                                                                                        "active"=> 1,
+                                                                                        "assigned_to_field"=>"assigned_to_id",
+                                                                                        "assignment_capacity"=> -1,
+                                                                                        "condition"=>"return strtolower(\$context->model->model) === 'demo\casemanager\models\casemodel';",
+                                                                                        "event"=>"[\"creating\",\"updating\"]"
                             ]             ]);
         }
 
