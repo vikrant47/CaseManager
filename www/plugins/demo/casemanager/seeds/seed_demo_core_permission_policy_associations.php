@@ -49,6 +49,42 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "permission_id"=> 61,
                                                                                         "policy_id"=> 87
+                            ] ,            [
+                                                                            "id"=> 20,
+                                                                                        "created_at"=>"2020-04-06 07:58:19",
+                                                                                        "updated_at"=>"2020-04-06 07:58:19",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 62,
+                                                                                        "policy_id"=> 82
+                            ] ,            [
+                                                                            "id"=> 21,
+                                                                                        "created_at"=>"2020-04-06 07:58:19",
+                                                                                        "updated_at"=>"2020-04-06 07:58:19",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 62,
+                                                                                        "policy_id"=> 84
+                            ] ,            [
+                                                                            "id"=> 22,
+                                                                                        "created_at"=>"2020-04-06 07:58:19",
+                                                                                        "updated_at"=>"2020-04-06 07:58:19",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 62,
+                                                                                        "policy_id"=> 86
+                            ] ,            [
+                                                                            "id"=> 23,
+                                                                                        "created_at"=>"2020-04-06 07:58:19",
+                                                                                        "updated_at"=>"2020-04-06 07:58:19",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 62,
+                                                                                        "policy_id"=> 88
                             ]             ]);
         }
 
