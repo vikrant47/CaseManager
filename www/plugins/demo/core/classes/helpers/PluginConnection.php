@@ -236,6 +236,20 @@ class PluginConnection
         return PluginConnection::getCurrentLogger();
     }
 
+    /**
+     * Returns current plugin connection
+     * @return PluginConnection
+     */
+    public static function getCurrentConnection()
+    {
+        $request = request();
+        $identifier = $request->request->get('CURRENT_PLUGIN');
+        if (empty($identifier)) {
+            return null;
+        }
+        return PluginConnection::getConnection($identifier);
+    }
+
     public static function getCurrentLogger()
     {
         $request = request();

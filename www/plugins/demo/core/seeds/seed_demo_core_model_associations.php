@@ -2,14 +2,15 @@
 
 namespace Demo\Core\Seeds;
 
-use Demo\Core\Models\ModelModel;
 use Schema;
 use Seeder;
-use Db;
 use Demo\Core\Classes\Ifs\Seedable;
+use Db;
 
-class BuilderTableSeedDemoCoreModelAssociation implements Seedable
+/**Auto generated using cmd _: php artisan core:run-seeds Demo.Core d */
+class SeedDemoCoreModelAssociations implements Seedable
 {
+    /**This will be executed to install seeds*/
     public function install()
     {
         Db::table('demo_core_model_associations')->insert([
@@ -29,8 +30,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 2,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -46,8 +46,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 3,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -63,8 +62,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 4,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -80,8 +78,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 5,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -97,8 +94,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 6,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -114,8 +110,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 7,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -131,8 +126,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 8,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -148,8 +142,7 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ],
-            [
+            ], [
                 "id" => 9,
                 "created_at" => "2019-12-21 11:25:39",
                 "updated_at" => "2019-12-21 11:25:39",
@@ -165,10 +158,10 @@ class BuilderTableSeedDemoCoreModelAssociation implements Seedable
                 "active" => 1,
                 "relation" => "belongs_to",
                 "cascade_priority_order" => 0
-            ]
-        ]);
+            ]]);
     }
 
+    /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
         Db::table('demo_core_model_associations')->where('plugin_id', 10)->delete();

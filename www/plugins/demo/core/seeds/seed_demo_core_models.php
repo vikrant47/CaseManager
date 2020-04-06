@@ -2,14 +2,15 @@
 
 namespace Demo\Core\Seeds;
 
-use Demo\Core\Models\ModelModel;
 use Schema;
 use Seeder;
-use Db;
 use Demo\Core\Classes\Ifs\Seedable;
+use Db;
 
-class BuilderTableSeedDemoCoreModelModel implements Seedable
+/**Auto generated using cmd _: php artisan core:run-seeds Demo.Core d */
+class SeedDemoCoreModels implements Seedable
 {
+    /**This will be executed to install seeds*/
     public function install()
     {
         Db::table('demo_core_models')->insert([
@@ -24,11 +25,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 2,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -39,11 +39,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 3,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -54,11 +53,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 4,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -69,11 +67,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 5,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -84,11 +81,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 6,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -99,11 +95,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 7,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -114,11 +109,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 8,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -129,11 +123,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 9,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -144,11 +137,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 10,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -159,11 +151,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 11,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -174,11 +165,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 12,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -189,11 +179,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 13,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -204,11 +193,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 14,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -219,11 +207,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 15,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -234,11 +221,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 16,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -249,11 +235,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 17,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -264,11 +249,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 18,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -279,11 +263,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 19,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -294,11 +277,10 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ],
-            [
+            ], [
                 "id" => 20,
                 "created_at" => "2019-12-20 14:15:39",
                 "updated_at" => "2019-12-20 14:15:39",
@@ -309,13 +291,13 @@ class BuilderTableSeedDemoCoreModelModel implements Seedable
                 "plugin_id" => 10,
                 "audit" => false,
                 "record_history" => false,
-                "audit_columns" => '[" * "]',
-                "attach_audited_by" => true,
+                "audit_columns" => "[\" * \"]",
+                "attach_audited_by" => 1,
                 "description" => null
-            ]
-        ]);
+            ]]);
     }
 
+    /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
         Db::table('demo_core_models')->where('plugin_id', 10)->delete();

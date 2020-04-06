@@ -17,13 +17,13 @@ class SeedDemoCoreRoles implements Seedable
             [
                 "id" => 2,
                 "created_at" => "2020-04-04 14:10:36",
-                "updated_at" => "2020-04-04 14:10:36",
+                "updated_at" => "2020-04-06 07:16:12",
                 "created_by_id" => 1,
                 "updated_by_id" => 1,
                 "plugin_id" => 6,
                 "code" => "agent",
                 "name" => "Agent",
-                "description" => ""
+                "description" => "test"
             ]]);
     }
 

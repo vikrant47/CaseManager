@@ -47,7 +47,7 @@ class SeedRunner extends Command
         try {
             $plugins = [];
             $plugin = $this->argument('plugin');
-            if (!empty($plugin) && $plugin !== 'all') {
+            if (!empty($plugin) && $plugin !== 'all' && $plugin !== 'a') {
                 $plugins[] = $plugin;
             } else {
                 $plugins = Db::table('system_plugin_versions')->where('code', 'like', 'Demo%')->orderBy('id', 'ASC')->get(['code'])

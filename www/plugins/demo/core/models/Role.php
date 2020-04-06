@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Models;
 
 use Backend\Models\UserRole;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Model;
 
 /**
@@ -47,4 +48,10 @@ class Role extends Model
     ];
 
     public $attachAuditedBy = true;
+
+    public function beforeSave()
+    {
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(),$this->policies,$this->plugin_id);
+        // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
+    }
 }
