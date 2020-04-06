@@ -66,6 +66,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        trace_sql();
         Plugin::registerServiceProviders();
         DefaultDesignProvider::listenWidgetEvents();
     }

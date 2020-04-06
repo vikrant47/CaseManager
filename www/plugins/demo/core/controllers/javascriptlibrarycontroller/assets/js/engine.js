@@ -24,6 +24,19 @@ Engine.QUERY_BUILDER_TYPE_MAPPINGS = {
         field.id = field.name;
         field.type = 'double';
         return field;
+    }, relation: function (field, definition) {
+        var belongsToAssoc = definition.associations.belongsTo;
+        if (belongsToAssoc && belongsToAssoc[field.name]) {
+            field.id = belongsToAssoc[field.name].key;
+        } else {
+            field.id = field.name;
+        }
+        field.type = 'string';
+        return field;
+    }, richeditor: function (field) {
+        field.id = field.name;
+        field.type = 'string';
+        return field;
     }
 };
 Engine.defaultActionOption = {
@@ -191,7 +204,8 @@ Object.assign(Engine.prototype, {
         }
         return fields;
     },
-    mapFieldsToQueryBuilderFields: function (fields) {
+    mapFieldsToQueryBuilderFields: function (definition) {
+        var fields = Engine.instance.getFields(definition);
         var qbFields = [];
         Object.keys(fields).map(function (fieldName) {
             var field = fields[fieldName];
@@ -199,7 +213,7 @@ Object.assign(Engine.prototype, {
                 var qbField = Engine.QUERY_BUILDER_TYPE_MAPPINGS[field.type](Object.assign({
                     name: fieldName,
                     id: fieldName
-                }, field));
+                }, field), definition);
                 qbFields.push(qbField);
             }
         });

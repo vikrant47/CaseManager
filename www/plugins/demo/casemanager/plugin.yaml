@@ -21,24 +21,4 @@ navigation:
                 label: 'Case Priority'
                 url: demo/casemanager/casepriority
                 icon: icon-flash
-permissions:
-    case.table.pick:
-        tab: Case
-        label: 'Pick a Case'
-    case.table.create:
-        tab: Case
-        label: 'Create Case'
-    case.table.update:
-        tab: Case
-        label: 'Update Case'
-    case.table.delete:
-        tab: Case
-        label: 'Delete Case'
-    case.table.read:
-        tab: Case
-        label: 'Read Case'
-    case.table.read.all:
-        tab: Case
-        label: 'Read All Cases'
-    case.table.workflow:
-        tab: Case
+

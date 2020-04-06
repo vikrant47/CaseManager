@@ -26,13 +26,16 @@ if ($fetchModelFromField === false) {
     };
     console.log(definition);
     var $queryBuilder = $('#<?=$id?>');
+    if ($queryBuilder.queryBuilder && $queryBuilder.queryBuilder.destroy) {
+        $queryBuilder.queryBuilder.destroy();
+    }
     $queryBuilder.queryBuilder({
         plugins: [
             'bt-tooltip-errors',
             'not-group'
         ],
 
-        filters: Engine.instance.mapFieldsToQueryBuilderFields(Engine.instance.getFields(definition))/*[{
+        filters: Engine.instance.mapFieldsToQueryBuilderFields(definition)/*[{
             id: 'name',
             label: 'Name',
             type: 'string'

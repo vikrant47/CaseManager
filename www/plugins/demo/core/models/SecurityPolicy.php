@@ -34,8 +34,8 @@ class SecurityPolicy extends Model
         'permissions' => [
             Permission::class,
             'table' => 'demo_core_permission_policy_associations',
-            'key' => 'permission_id',
-            'otherKey' => 'policy_id'
+            'key' => 'policy_id',
+            'otherKey' => 'permission_id'
         ],
     ];
 

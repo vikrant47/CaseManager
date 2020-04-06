@@ -18,7 +18,6 @@ class CaseController extends AbstractSecurityController
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
     public $reorderConfig = 'config_reorder.yaml';
-    public $requiredPermissions = ['case.table.read'];
 
     public function __construct()
     {

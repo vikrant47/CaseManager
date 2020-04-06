@@ -54,7 +54,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
             return $this->forwardToAccessDenied();
         }
         if (!$this->userSecurityService->hasAstrixPermission($permission)) {
-            $query->where(DB::raw($this->userSecurityService->mergeConditions($permission)));
+            $query->whereRaw($this->userSecurityService->mergeConditions($permission));
         }
     }
 
