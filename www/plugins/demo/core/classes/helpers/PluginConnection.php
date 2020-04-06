@@ -154,6 +154,15 @@ class PluginConnection
     }
 
     /**
+     * Will return the seed path inside plugin
+     * @return string Path of the seed folder
+     */
+    function getSeedsPath()
+    {
+        return $this->pluginManager->getPluginPath($this->identifier) . DIRECTORY_SEPARATOR . 'seeds';
+    }
+
+    /**
      * Will return the template inside plugin
      * @param $fileName string Name of the template file
      * @return string Class with full namespace after loading it.

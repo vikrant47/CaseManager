@@ -24,16 +24,6 @@ class BuilderTableSeedDemoCoreSecurityPolicy implements Seedable
     {
         Db::table('demo_core_security_policies')->insert([
             [
-                'id' => 20,
-                'plugin_id' => 10,
-                'created_at' => '2019-12-20 14:15:39',
-                'updated_at' => '2019-12-28 14:43:57',
-                'created_by_id' => 1,
-                'updated_by_id' => 1,
-                'name' => 'Dashboard Security Policy',
-                'description' => 'Security Policy for all operations on Dashboard'
-            ],
-            [
                 'id' => 21,
                 'plugin_id' => 10,
                 'created_at' => '2019-12-20 14:15:39',

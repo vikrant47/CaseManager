@@ -17,7 +17,6 @@ use File;
 
 class SeedRunner extends Command
 {
-    protected $dumpSeedPath;
     protected $plugin;
     protected $files;
     /**
@@ -57,23 +56,28 @@ class SeedRunner extends Command
                     });
             }
             foreach ($plugins as $plugin) {
+                $pluginConnection = PluginConnection::getConnection($plugin);
+                $seedPath = $pluginConnection->getSeedsPath($plugin);
                 $operation = $this->argument('operation');
                 if ($operation === 'dump' || $operation === 'd') {
                     $path = $this->argument('path');
                     if (empty($path)) {
-                        $path = storage_path() . DIRECTORY_SEPARATOR . 'temp' . DIRECTORY_SEPARATOR . 'seeds';
+                        $path = $seedPath;
                     }
                     $this->info('***************** Dumping seeds for plugin ' . $plugin . ' ******************');
                     $this->info('path = ' . $path);
                     $this->runDump($plugin, $path);
                 } else {
                     $this->info('***************** Collecting seeds for plugin ' . $plugin . ' ******************');
-                    $seedPath = $this->getSeedsPath($plugin);
                     $seedFiles = $this->getSeedsFiles($seedPath);
-                    if ($operation === 'uninstall' || $operation === 'u') {
-                        $this->runUninstall($plugin, $seedFiles);
+                    if (count($seedFiles) === 0) {
+                        $this->info('***************** No seeds  found for plugin ' . $plugin . ' ******************');
                     } else {
-                        $this->runInstall($plugin, $seedFiles);
+                        if ($operation === 'uninstall' || $operation === 'u') {
+                            $this->runUninstall($plugin, $seedFiles);
+                        } else {
+                            $this->runInstall($plugin, $seedFiles);
+                        }
                     }
                 }
             }
@@ -95,7 +99,7 @@ class SeedRunner extends Command
         return [
             ['plugin', InputArgument::OPTIONAL, 'Plugin Name to run seeds.'],
             ['operation', InputArgument::OPTIONAL, 'Operation - install or i  / uninstall or u.'],
-            ['path', InputArgument::OPTIONAL, 'Path to dump the seeds ,default is ' . $this->dumpSeedPath],
+            ['path', InputArgument::OPTIONAL, 'Path to dump the seeds ,default is seed dir in plugin'],
         ];
     }
 
@@ -163,21 +167,6 @@ class SeedRunner extends Command
         }
     }
 
-    /**
-     * Get the path to the seed directory.
-     *
-     * @return string
-     */
-    protected function getSeedsPath($plugin)
-    {
-        $paths = explode('.', $plugin);
-        $path = $this->laravel->basePath() . DIRECTORY_SEPARATOR
-            . 'plugins' . DIRECTORY_SEPARATOR
-            . strtolower($paths[0]) . DIRECTORY_SEPARATOR
-            . strtolower($paths[1]) . DIRECTORY_SEPARATOR . 'seeds';
-
-        return $path;
-    }
 
     protected function getPlugin()
     {
@@ -248,7 +237,7 @@ class SeedRunner extends Command
         $pluginTables = Db::select("SELECT table_name
                                 FROM information_schema.tables 
                                 where table_name iLike '" . $tableNamespace . "%' and table_name not in (:pluggableTables)",
-            ['pluggableTables' => join("','",$pluggableTables)]);
+            ['pluggableTables' => join("','", $pluggableTables)]);
         $pluginTables = $this->collectionToArray($pluginTables, 'table_name');
         File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
         $this->dumpSeed(array_merge($pluggableTables, $pluginTables), $plugin, $corePluginConnection->getTemplate('seed.file.twig'), $path);
@@ -259,8 +248,9 @@ class SeedRunner extends Command
      */
     public function dumpSeed($tables, $plugin, $template, $path)
     {
-        $seedDir = $path . DIRECTORY_SEPARATOR . strtolower($plugin->code);
-        File::isDirectory($seedDir) or File::makeDirectory($seedDir, 0777, true, true);
+        $seedDir = $path;
+        /*$seedDir = $path . DIRECTORY_SEPARATOR . strtolower($plugin->code);
+        File::isDirectory($seedDir) or File::makeDirectory($seedDir, 0777, true, true);*/
         foreach ($tables as $table) {
             $this->info('Searching seed for table ' . $table);
             $data = new \October\Rain\Database\Collection();
@@ -301,7 +291,7 @@ class SeedRunner extends Command
     public function getSeedsFiles($paths)
     {
         return Collection::make($paths)->flatMap(function ($path) {
-            return $this->files->glob($path . DIRECTORY_SEPARATOR . ' * _ *.php');
+            return $this->files->glob($path . DIRECTORY_SEPARATOR . '*_*.php');
         })->filter()->sortBy(function ($file) {
             return $this->getSeedName($file);
         })->values()->keyBy(function ($file) {
