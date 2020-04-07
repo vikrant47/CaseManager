@@ -14,6 +14,15 @@ class SeedDemoCoreSecurityPolicies implements Seedable
     {
             Db::table('demo_core_security_policies')->insert([
             [
+                                                                            "id"=> 143,
+                                                                                        "created_at"=>"2020-04-06 14:06:17",
+                                                                                        "updated_at"=>"2020-04-06 14:06:17",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Agent Case Policy",
+                                                                                        "description"=> "",
+                                                                                        "plugin_id"=> 6
+                            ] ,            [
                                                                             "id"=> 61,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",

@@ -20,8 +20,8 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "created_by_id"=> 6,
                                                                                         "updated_by_id"=> 6,
                                                                                         "plugin_id"=> 14,
-                                                                                        "permission_id"=> 142,
-                                                                                        "policy_id"=> 242
+                                                                                        "policy_id"=> 142,
+                                                                                        "permission_id"=> 242
                             ] ,            [
                                                                             "id"=> 15,
                                                                                         "created_at"=>"2020-04-06 07:18:47",
@@ -29,8 +29,8 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "created_by_id"=> 6,
                                                                                         "updated_by_id"=> 6,
                                                                                         "plugin_id"=> 14,
-                                                                                        "permission_id"=> 142,
-                                                                                        "policy_id"=> 243
+                                                                                        "policy_id"=> 142,
+                                                                                        "permission_id"=> 243
                             ]             ]);
         }
 
