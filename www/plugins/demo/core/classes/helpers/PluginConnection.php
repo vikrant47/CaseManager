@@ -77,40 +77,60 @@ class PluginConnection
         return $configurations;
     }
 
-    public static function getFormsAlias($modelClass, $modelName = null)
+    /**
+     * This will return the list of all the views for a given model
+     * @param $view string - Type  of view can be 'forms' or 'lists'
+     * @return array of views
+     */
+    public static function getViewAlias(string $view, string $modelClass, $modelName = null)
     {
         if (empty($modelName)) {
             $modelName = substr($modelClass, strripos($modelClass, '\\') + 1);
         }
-        $forms = [];
+        $views = [];
         $modelDirPath = base_path() . '/plugins/' . strtolower($modelClass);
         if (file_exists($modelDirPath)) {
             $formFiles = scandir($modelDirPath);
             foreach ($formFiles as $file) {
-                if (strpos($file, 'field') > -1) {
-                    $forms['$/' . str_replace('\\', '/', strtolower($modelClass)) . '/' . $file] = str_replace('.yaml', '', $file) . ' - ' . $modelName . '';
+                if (strpos($file, $view) > -1) {
+                    $views['$/' . str_replace('\\', '/', strtolower($modelClass)) . '/' . $file] = str_replace('.yaml', '', $file) . ' - ' . $modelName . '';
                 }
             }
         }
-        return $forms;
+        return $views;
     }
 
-    public static function getAllFormsAlias($model = null)
+    public static function getAllModelsViewsAlias(string $view)
     {
-        if (!empty($model)) {
-            return self::getFormsAlias($model);
-        }
         $forms = [];
         $modelAlias = PluginConnection::getAllModelAlias();
         foreach ($modelAlias as $modelClass => $modelNames) {
             $modelDirPath = base_path() . '/plugins/' . strtolower($modelClass);
-            if (file_exists($modelDirPath)) {
-                $formFiles = scandir($modelDirPath);
-                $forms = array_merge($forms, PluginConnection::getFormsAlias($modelClass, $modelNames));
-            }
+            $forms = array_merge($forms, PluginConnection::getViewAlias($view, $modelClass, $modelNames));
         }
         return $forms;
     }
+
+    public static function getFormsAlias($modelClass, $modelName = null)
+    {
+        return self::getViewAlias('fields', $modelClass, $modelName);
+    }
+
+    public static function getAllFormsAlias()
+    {
+        return self::getAllModelsViewsAlias('fields');
+    }
+
+    public static function getListsAlias($modelClass, $modelName = null)
+    {
+        return self::getViewAlias('columns', $modelClass, $modelName);
+    }
+
+    public static function getAllListsAlias()
+    {
+        return self::getAllModelsViewsAlias('columns');
+    }
+
 
     /**
      * Return all model alias
@@ -152,6 +172,7 @@ class PluginConnection
         }
         return $mappedAlias;
     }
+
 
     /**
      * Will return the seed path inside plugin

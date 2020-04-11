@@ -3,7 +3,7 @@
 use Backend\Classes\Controller;
 use Backend\Classes\WidgetManager;
 use BackendMenu;
-use Demo\Core\Classes\Beans\AbstractSecurityController;
+use Demo\Core\Controllers\AbstractSecurityController;
 use Demo\Report\Models\Dashboard;
 use Demo\Report\Models\Widget;
 use Input;

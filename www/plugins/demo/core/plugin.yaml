@@ -57,6 +57,14 @@ navigation:
                 label: Libraries
                 url: demo/core/javascriptlibrarycontroller
                 icon: icon-files-o
+            side-menu-item2:
+                label: 'Form Actions'
+                url: demo/core/formactioncontroller
+                icon: icon-hand-o-up
+            side-menu-item12:
+                label: 'List Actions'
+                url: demo/core/listactioncontroller
+                icon: icon-rocket
     main-menu-item2:
         label: Security
         url: demo/core/usercontroller

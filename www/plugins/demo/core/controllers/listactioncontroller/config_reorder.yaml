@@ -1,0 +1,4 @@
+title: ListActionController
+modelClass: Demo\Core\Models\ListAction
+toolbar:
+    buttons: reorder_toolbar

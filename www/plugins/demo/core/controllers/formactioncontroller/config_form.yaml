@@ -1,0 +1,10 @@
+name: FormActionController
+form: $/demo/core/models/formaction/fields.yaml
+modelClass: Demo\Core\Models\FormAction
+defaultRedirect: demo/core/formactioncontroller
+create:
+    redirect: 'demo/core/formactioncontroller/update/:id'
+    redirectClose: demo/core/formactioncontroller
+update:
+    redirect: demo/core/formactioncontroller
+    redirectClose: demo/core/formactioncontroller

@@ -1,0 +1,12 @@
+list: $/demo/core/models/formaction/columns.yaml
+modelClass: Demo\Core\Models\FormAction
+title: FormActionController
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'demo/core/formactioncontroller/update/:id'

@@ -77,6 +77,7 @@ Object.assign(Engine.prototype, {
         this.addNavFlyout();
         this.addResizeFlyout();
         this.registerEvents();
+        this.moveActions();
     },
     registerEvents: function () {
         var _this = this;
@@ -120,6 +121,9 @@ Object.assign(Engine.prototype, {
                 $('.layout-sidenav-container').toggle()
             })
         }
+    },
+    moveActions: function () {
+        $('.engine-list-toolbar .engine-actions').appendTo($('.engine-list-toolbar .toolbar-item').children().eq(0))
     },
     removeNavFlyout: function () {
         this.$navFlyout.remove();

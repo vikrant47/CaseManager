@@ -45,3 +45,9 @@
 1.0.16:
     - 'Created table demo_core_user_role_associations'
     - builder_table_create_demo_core_user_role_associations.php
+1.0.17:
+    - 'Created table demo_core_form_actions'
+    - builder_table_create_demo_core_form_actions.php
+1.0.18:
+    - 'Created table demo_core_list_actions'
+    - builder_table_create_demo_core_list_actions.php

@@ -4,7 +4,7 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Config;
 use Backend;
-use Demo\Core\Classes\Beans\AbstractSecurityController;
+use Demo\Core\Controllers\AbstractSecurityController;
 
 class CustomFieldController extends AbstractSecurityController
 {

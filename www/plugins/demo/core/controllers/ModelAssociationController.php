@@ -2,7 +2,7 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
-use Demo\Core\Classes\Beans\AbstractSecurityController;
+use Demo\Core\Controllers\AbstractSecurityController;
 
 class ModelAssociationController extends AbstractSecurityController
 {

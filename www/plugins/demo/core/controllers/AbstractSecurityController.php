@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Demo\Core\Classes\Beans;
+namespace Demo\Core\Controllers;
 
 
 use Backend\Behaviors\ListController;

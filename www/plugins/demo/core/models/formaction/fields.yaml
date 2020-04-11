@@ -1,0 +1,78 @@
+fields:
+    label:
+        label: Label
+        span: auto
+        required: 1
+        type: text
+    name:
+        label: Name
+        span: auto
+        required: 1
+        preset:
+            field: label
+            type: slug
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    active:
+        label: Active
+        span: auto
+        default: 1
+        required: 1
+        type: switch
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        model_ref:
+            label: Model
+            showSearch: true
+            span: auto
+            required: 1
+            type: relation
+            emptyOption: '- Select Model -'
+            tab: Config
+        form:
+            label: Form
+            showSearch: true
+            span: auto
+            dependsOn:
+                - model_ref
+            type: dropdown
+            emptyOption: '- Select Form -'
+            tab: Config
+        script:
+            label: Script
+            size: large
+            language: php
+            span: auto
+            required: 1
+            type: codeeditor
+            tab: Config
+        sort_order:
+            label: 'Sort Order'
+            span: auto
+            required: 1
+            type: number
+            default: 0
+            tab: Config
+        icon:
+            label: Icon
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Config
+        css_class:
+            label: 'Css Class'
+            span: auto
+            required: 1
+            type: text
+            tab: Config
