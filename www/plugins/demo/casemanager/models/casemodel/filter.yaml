@@ -9,7 +9,7 @@ scopes:
     conditions: case_number iLike '%:filtered%'
     type: text
 
-  version:
+  case_version:
     label: Version
     conditions: version iLike '%:filtered%'
     type: text
