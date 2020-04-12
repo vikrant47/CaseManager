@@ -5,8 +5,8 @@ columns:
     name:
         label: name
         type: text
-    model_type:
-        label: model_type
+    model:
+        label: model
         type: text
     plugin_id:
         label: plugin_id

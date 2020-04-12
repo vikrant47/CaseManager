@@ -2,6 +2,7 @@
 
 use Demo\Core\Classes\Utils\StringUtil;
 use File;
+use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginBase;
 use System\Classes\PluginManager;
 use Monolog\Logger;
@@ -131,7 +132,6 @@ class PluginConnection
         return self::getAllModelsViewsAlias('columns');
     }
 
-
     /**
      * Return all model alias
      * @Depricated use getModelsAsOptions of ModelModel class
@@ -149,7 +149,7 @@ class PluginConnection
                     $mappedAlias[$package . '\\Models\\' . $key] = $value;
                 }
             } catch (\Exception $exception) {
-
+                // throw $exception;
             }
         }
         if ($INCLUDE_UNIVERSAL) {

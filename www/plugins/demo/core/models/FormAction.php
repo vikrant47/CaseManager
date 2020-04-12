@@ -27,7 +27,7 @@ class FormAction extends Model
     public $jsonable = ['dom_attributes', 'context'];
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
-        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model_type'],
+        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
 
     public function getIconOptions()

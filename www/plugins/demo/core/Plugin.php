@@ -1,6 +1,6 @@
 <?php namespace Demo\Core;
 
-use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdate;
+use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdateAudit;
 use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
 use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
 use Demo\Core\EventHandlers\Universal\RestrictSystemRecordHandler;
@@ -21,7 +21,7 @@ class Plugin extends PluginBase
     public function getEventHandlers()
     {
         return [
-            BeforeCreateOrUpdate::class,
+            BeforeCreateOrUpdateAudit::class,
             BeforeUpdateWorkflowItemState::class,
             BeforeCreateOrUpdateCustomField::class,
             BeforeDeleteCascade::class,

@@ -8,8 +8,8 @@ fields:
         size: ''
         span: auto
         type: richeditor
-    model_type:
-        label: 'Model Type'
+    model:
+        label: 'Model'
         span: auto
         type: text
     plugin:
@@ -40,5 +40,7 @@ tabs:
             label: 'Audit Columns'
             showSearch: true
             span: auto
-            type: dropdown
+            type: checkboxlist
             tab: 'Audit Settings'
+            attributes:
+                multiple: true

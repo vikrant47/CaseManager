@@ -15,7 +15,7 @@ class BuilderTableCreateDemoCoreModels extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('name', 255);
-            $table->string('model_type', 255);
+            $table->string('model', 255);
             $table->integer('plugin_id');
             $table->boolean('audit');
             $table->boolean('record_history');
@@ -24,7 +24,7 @@ class BuilderTableCreateDemoCoreModels extends Migration
             $table->boolean('attach_audited_by');
 
             // Index definitions
-            $table->unique('model_type');
+            $table->unique('model');
         });
     }
 
