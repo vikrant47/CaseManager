@@ -50,7 +50,6 @@ trait WorkflowControllerTrait
 
     public function getQueuesForCurrentUser()
     {
-        trace_sql();
         $currentUser = BackendAuth::getUser();
         $queues = Queue::getQueuesForUser($currentUser);
         return $queues;

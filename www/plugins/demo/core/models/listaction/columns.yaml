@@ -1,0 +1,40 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number
+    name:
+        label: name
+        type: text
+    label:
+        label: label
+        type: text
+    active:
+        label: active
+        type: text
+    description:
+        label: description
+        type: text
+    icon:
+        label: icon
+        type: text
+    css_class:
+        label: css_class
+        type: text
+    sort_order:
+        label: sort_order
+        type: number
+    script:
+        label: script
+        type: text

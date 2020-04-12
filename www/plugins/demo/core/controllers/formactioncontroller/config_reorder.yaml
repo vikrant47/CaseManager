@@ -1,0 +1,4 @@
+title: FormActionController
+modelClass: Demo\Core\Models\FormAction
+toolbar:
+    buttons: reorder_toolbar

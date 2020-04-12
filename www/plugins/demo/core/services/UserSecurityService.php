@@ -6,6 +6,7 @@ namespace Demo\Core\Services;
 
 use Backend\Models\User;
 use Demo\Core\Classes\Beans\SessionCache;
+use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\StringUtil;
 use BackendAuth;
 use Demo\Core\Models\CoreUserGroup;
@@ -103,7 +104,7 @@ class UserSecurityService
     {
         $self = $this;
         return SessionCache::get('USER_PERMISSIONS', function () use ($self) {
-            $permissions = Db::table('demo_core_permissions')
+            $permissions = Db::table('demo_core_permissions')->select('demo_core_permissions.*')
                 ->join('demo_core_permission_policy_associations', 'demo_core_permission_policy_associations.permission_id', '=', 'demo_core_permissions.id')
                 ->join('demo_core_security_policies', 'demo_core_security_policies.id', '=', 'demo_core_permission_policy_associations.policy_id')
                 ->join('demo_core_role_policy_associations', 'demo_core_role_policy_associations.policy_id', '=', 'demo_core_security_policies.id')
@@ -149,8 +150,8 @@ class UserSecurityService
     public function hasAstrixPermission($permissions)
     {
         return $permissions->filter(function ($permission) {
-            return empty(trim($permission->condition));
-        });
+                return empty(trim($permission->condition));
+            })->count() > 0;
     }
 
     /**
@@ -159,9 +160,9 @@ class UserSecurityService
     public function mergeConditions($permissions)
     {
         $condition = $permissions->map(function ($permission) {
-            return $permission->operation;
-        })->join(' ) or ( ');
-        return '(' . $condition . ')';
+            return $permission->condition;
+        })->implode(' ) or ( ');
+        return '(' . TwigEngine::eval($condition, []) . ')';
     }
 
     public function flushCache()

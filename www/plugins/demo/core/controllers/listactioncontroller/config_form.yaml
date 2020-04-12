@@ -1,0 +1,10 @@
+name: ListActionController
+form: $/demo/core/models/listaction/fields.yaml
+modelClass: Demo\Core\Models\ListAction
+defaultRedirect: demo/core/listactioncontroller
+create:
+    redirect: 'demo/core/listactioncontroller/update/:id'
+    redirectClose: demo/core/listactioncontroller
+update:
+    redirect: demo/core/listactioncontroller
+    redirectClose: demo/core/listactioncontroller

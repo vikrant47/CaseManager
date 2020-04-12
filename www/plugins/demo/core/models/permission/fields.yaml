@@ -71,6 +71,8 @@ tabs:
             modelType: Demo\Core\Models\Webhook
             type: querybuilderwidget
             tab: Definition
+            dependsOn:
+                - model_ref
         policies:
             label: Policies
             mode: relation

@@ -23,7 +23,6 @@
             <?= e(trans('backend::lang.list.delete_selected')) ?>
         </button>
     <?php }
-    if ($this->user->hasAccess('case.table.pick')) {
         $queues = $this->getQueuesForCurrentUser();
         if (count($queues) > 0) {
             ?>
@@ -41,7 +40,7 @@
                 Pick Case
             </button>
         <?php }
-    } ?>
+        ?>
 </div>
 <script>
     $('#casePicker').click(function () {

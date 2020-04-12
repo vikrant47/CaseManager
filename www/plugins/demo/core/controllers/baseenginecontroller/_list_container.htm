@@ -1,0 +1,30 @@
+<?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
+<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
+<div class="engine-list-wrapper">
+    <?php if ($toolbar): ?>
+        <div class="engine-list-toolbar">
+            <?= $toolbar->render() ?>
+            <div class="engine-actions">
+                <script>
+                    Engine.instance.addActions($('.engine-list-toolbar .toolbar-item').children().eq(0), <?=$this->getListActions()->toJSON()?>);
+                </script>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <?php if ($filter): ?>
+        <div class="engine-list-filter">
+            <?= $filter->render() ?>
+        </div>
+    <?php endif ?>
+
+    <div class="row row-flush">
+        <div class="col-sm-0">
+        </div>
+        <div class="col-sm-12 list-with-sidebar">
+            <div class="engine-list-content">
+                <?= $list->render() ?>
+            </div>
+        </div>
+    </div>
+</div>

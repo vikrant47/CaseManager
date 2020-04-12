@@ -16,12 +16,12 @@ class SeedDemoWorkflowQueuePopCriterias implements Seedable
             [
                                                                             "id"=> 3,
                                                                                         "created_at"=>"2019-11-16 13:07:42",
-                                                                                        "updated_at"=>"2020-04-04 07:27:01",
+                                                                                        "updated_at"=>"2020-04-06 16:22:31",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Simple Pop Criteria",
                                                                                         "description"=>"This will pop any random item from queue",
-                                                                                        "script"=>"return \$query->where('demo_workflow_queue_items.model','Demo\Workflow\Models\WorkflowItem');",
+                                                                                        "script"=>"return \$context->query->where('demo_workflow_queue_items.model','Demo\Workflow\Models\WorkflowItem');",
                                                                                         "plugin_id"=> 6
                             ]             ]);
         }

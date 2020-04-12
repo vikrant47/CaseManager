@@ -60,7 +60,11 @@ class QueryBuilderWidget extends FormWidgetBase
             'modelType',
             'modelField',
         ]);
-        $this->vars['modelType'] = $this->modelType;
+        if (!empty($this->modelField)) {
+            $this->vars['modelType'] = $this->model->{$this->modelField};
+        } else {
+            $this->vars['modelType'] = $this->modelType;
+        }
         $this->vars['modelField'] = $this->modelField;
         $this->vars['fetchModelFromField'] = empty($this->modelType);
         $this->vars['id'] = $this->getId();

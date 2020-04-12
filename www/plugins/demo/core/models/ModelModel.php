@@ -94,7 +94,17 @@ class ModelModel extends Model
     public function getDefinition()
     {
         $formDefinition = $this->getFormDefinition();
-        return ['form' => ['controls' => $formDefinition->controls], 'model' => $this->model_type];
+        $newModel = new $this->model_type;
+        return [
+            'form' => ['controls' => $formDefinition->controls],
+            'model_type' => $this->model_type,
+            'associations' => [
+                'belongsTo' => $newModel->belongsTo,
+                'hasMany' => $newModel->hasMany,
+                'hasOne' => $newModel->hasOne,
+                'belongsToMany' => $newModel->belongsToMany
+            ],
+        ];
     }
 
     public static function getModelAsDropdownOptions()
