@@ -24,6 +24,8 @@ class BuilderTableCreateDemoCoreFormActions extends Migration
             $table->integer('sort_order')->default(0);
             $table->integer('plugin_id');
             $table->text('script');
+            $table->text('context')->default('["create","update","delete"]');
+            $table->text('dom_attributes')->default('[]');
         });
     }
     

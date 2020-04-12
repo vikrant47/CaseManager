@@ -44,7 +44,8 @@ Engine.defaultActionOption = {
         template: '<button class="action action-button"><i></i> </button>',
         icon: 'icon-link',
         event: 'click',
-        cls: '',
+        css_class: '',
+        attributes: [],
         handler: function () {
 
         }
@@ -54,9 +55,10 @@ Engine.defaultActionOption = {
             '<ul class="dropdown-menu" role="menu" data-dropdown-title="Add something large"></ul>' +
             '</div>',
         element: {text: '.dropdown-title', appendTo: 'ul', icon: '.dropdown-title'},
+        attributes: [],
         icon: 'icon-link',
         event: 'click',
-        cls: '',
+        css_class: '',
         handler: function () {
 
         }
@@ -65,8 +67,9 @@ Engine.defaultActionOption = {
         template: '<li class="action-list-item" role="presentation"><a role="menuitem" tabindex="-1" href="#" class=" dropdown-item-title"></a></li>',
         element: {text: '.dropdown-item-title', appendTo: 'li', icon: '.dropdown-item-title'},
         icon: 'icon-link',
+        attributes: [],
         event: 'click',
-        cls: '',
+        css_class: '',
         handler: function () {
 
         }
@@ -171,15 +174,15 @@ Object.assign(Engine.prototype, {
             }
             if (action.active) {
                 action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
-                var $template = $(action.template).data('action', action).data('scope', scope);
-                if (action.text) {
+                var $template = $(action.template).data('action', action).data('scope', scope).prop('id',action.id);
+                if (action.label) {
                     var $textElement = $template;
                     if (action.element && action.element.text) {
                         $textElement = $template.find(action.element.text);
                     }
-                    $textElement.text(action.text);
+                    $textElement.text(action.label);
                 }
-                $template.addClass(action.cls).on(action.event, function (event) {
+                $template.addClass(action.css_class).on(action.event, function (event) {
                     action.handler.apply(this, [event, scope, action, $element]);
                 });
                 if (action.icon) {
@@ -188,6 +191,11 @@ Object.assign(Engine.prototype, {
                         $icon = $template.find(action.element.icon);
                     }
                     $icon.addClass(action.icon);
+                }
+                if (action.attributes) {
+                    action.attributes.forEach(function (attr) {
+                        $template.attr(attr.name, attr.value);
+                    });
                 }
                 $element.append($template);
                 if (action.actions && action.actions.length > 0) {
