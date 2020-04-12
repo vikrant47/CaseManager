@@ -21,12 +21,12 @@ Widget.defaultOptions = {
         },
         actions: [],
         defaultActions: [{
-            text: '',
+            label: '',
             icon: 'icon-minus',
             active: function () {
                 return this.scope.getDashboard();
             },
-            cls: 'widget-control minimize-widget',
+            css_class: 'widget-control minimize-widget',
             handler: function (event, widget) {
                 var $this = $(this);
                 $(this).find('i').toggleClass('icon-plus').toggleClass('icon-minus');
@@ -42,33 +42,33 @@ Widget.defaultOptions = {
                 widget.$body.slideToggle();
             }
         }, {
-            text: '',
+            label: '',
             icon: 'icon-wrench',
-            cls: 'setting-widget',
+            css_class: 'setting-widget',
             active: true,
             type: 'dropdown',
             actions: [{
-                text: 'Export to CSV',
+                label: 'Export to CSV',
                 icon: 'icon-csv',
-                cls: 'export-widget',
+                css_class: 'export-widget',
                 active: true,
                 type: 'dropdownItem',
                 handler: function (event, widget) {
                     window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/csv');
                 }
             }, {
-                text: 'Export to Excel',
+                label: 'Export to Excel',
                 icon: 'icon-csv',
-                cls: 'export-widget',
+                css_class: 'export-widget',
                 active: true,
                 type: 'dropdownItem',
                 handler: function (event, widget) {
                     window.open('/backend/demo/report/widgetcontroller/export/' + widget.model.id + '/xls');
                 }
             }, {
-                text: 'Export to Pdf',
+                label: 'Export to Pdf',
                 icon: 'icon-csv',
-                cls: 'export-widget',
+                css_class: 'export-widget',
                 active: true,
                 type: 'dropdownItem',
                 handler: function (event, widget) {
@@ -79,9 +79,9 @@ Widget.defaultOptions = {
 
             }
         }, {
-            text: '',
+            label: '',
             icon: 'icon-trash',
-            cls: 'close-widget',
+            css_class: 'close-widget',
             active: function () {
                 return this.scope.getDashboard();
             },

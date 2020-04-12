@@ -6,7 +6,15 @@
             <?= $toolbar->render() ?>
             <div class="engine-actions">
                 <script>
-                    Engine.instance.addActions($('.engine-list-toolbar .toolbar-item').children().eq(0), <?=$this->getListActions()->toJSON()?>);
+                    var actions = <?=$this->getListActions()->toJSON()?>;
+                    actions = actions.map(function (action) {
+                        action.css_class = 'btn btn-primary ' + action.css_class + ' ' + action.icon;
+                        action.handler = Function(action.script);
+                        action.id = 'list-action-' + action.id;
+                        delete action.icon;
+                        return action;
+                    });
+                    Engine.instance.addActions($('.engine-list-toolbar .toolbar-item').children().eq(0),actions);
                 </script>
             </div>
         </div>

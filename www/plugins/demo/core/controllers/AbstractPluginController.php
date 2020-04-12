@@ -63,6 +63,41 @@ class AbstractPluginController extends Controller
         return static::$pluginMiddleware;
     }
 
+    public function getBaseEnginePartial($partial = null)
+    {
+        $enginePlugin = PluginConnection::getConnection('Demo.Core');
+        $basePath = $enginePlugin->getPluginPath() . DIRECTORY_SEPARATOR .
+            'controllers' . DIRECTORY_SEPARATOR .
+            'baseenginecontroller';
+        if ($partial) {
+            return $basePath . DIRECTORY_SEPARATOR . $partial;
+        }
+        return $basePath;
+    }
+
+    /**
+     * Hijacking makeView of controller to provide custom partials
+     * Loads a view with the name specified. Applies layout if its name is provided by the parent object.
+     * The view file must be situated in the views directory, and has the extension "htm".
+     * @param string $view Specifies the view name, without extension. Eg: "index".
+     * @return string
+     */
+    public function makeView($view)
+    {
+        $viewPath = $this->getViewPath(strtolower($view) . '.htm');
+        $contents = $this->makeFileContents($viewPath);
+        if ($view === 'create' || $view === 'update' || $view === 'preview') {
+            $basePath = $this->getBaseEnginePartial();
+            $contents = $this->makePartial($basePath . '/form', [
+                'contents' => $contents,
+                'view' => $basePath . '/' . $view,
+                'context' => $view,
+            ]);
+        }
+        $viewContents = $this->makeViewContent($contents);
+        return $viewContents;
+    }
+
     /**
      * Hijacking makePartial of controller to provide custom partials
      * Render a partial file contents located in the views folder.
@@ -74,10 +109,7 @@ class AbstractPluginController extends Controller
     public function makePartial($partial, $params = [], $throwException = true)
     {
         if ($partial === 'list_container') {
-            $enginePlugin = PluginConnection::getConnection('Demo.Core');
-            $partial = $enginePlugin->getPluginPath() . DIRECTORY_SEPARATOR .
-                'controllers' . DIRECTORY_SEPARATOR .
-                'baseenginecontroller' . DIRECTORY_SEPARATOR . 'list_container';
+            $partial = $this->getBaseEnginePartial($partial);
         }
         $partialContent = parent::makePartial($partial, $params, $throwException);
         return $partialContent;
@@ -87,13 +119,18 @@ class AbstractPluginController extends Controller
     {
         $modelClass = $this->getConfig()->modelClass;
         $listConfig = $this->listGetConfig();
-        return ListAction::where(['active' => true, 'model' => $listConfig->modelClass, 'list' => $listConfig->list])->orderBy('sort_order', 'ASC')->get();
+        return ListAction::where(['active' => true, 'model' => $modelClass, 'list' => $listConfig->list])->orderBy('sort_order', 'ASC')->get();
     }
 
-    public function getFormActions()
+    public function getFormActions($context = 'create')
     {
         $modelClass = $this->getConfig()->modelClass;
-        $formConfig = $this->formGetConfig();
-        return FormAction::where(['active' => true, 'model' => $formConfig->modelClass, 'list' => $formConfig->list])->orderBy('sort_order', 'ASC')->get();
+        $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
+        $formConfig = $formController->getConfig();
+        return FormAction::where([
+                'active' => true,
+                'model' => $modelClass,
+                'form' => $formConfig->form]
+        )->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC')->get();
     }
 }

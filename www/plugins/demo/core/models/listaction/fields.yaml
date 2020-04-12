@@ -76,3 +76,19 @@ tabs:
             required: 1
             type: text
             tab: Config
+        dom_attributes:
+            label: Attributes
+            prompt: 'Add new item'
+            span: auto
+            type: repeater
+            tab: Config
+            form:
+                fields:
+                    name:
+                        label: Name
+                        span: auto
+                        type: text
+                    value:
+                        label: Value
+                        span: auto
+                        type: text

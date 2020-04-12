@@ -24,6 +24,7 @@ class BuilderTableCreateDemoCoreListActions extends Migration
             $table->integer('sort_order')->default(0);
             $table->integer('plugin_id');
             $table->text('script');
+            $table->text('dom_attributes')->default('[]');
         });
     }
     
