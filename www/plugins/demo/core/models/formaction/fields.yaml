@@ -39,6 +39,7 @@ tabs:
             required: 1
             type: relation
             emptyOption: '- Select Model -'
+            emptyValue: null
             tab: Config
         form:
             label: Form
@@ -48,6 +49,8 @@ tabs:
                 - model_ref
             type: dropdown
             emptyOption: '- Select Form -'
+            emptyValue: null
+            default: null
             tab: Config
         script:
             label: Script
@@ -76,7 +79,7 @@ tabs:
             required: 1
             type: text
             tab: Config
-        dom_attributes:
+        html_attributes:
             label: Attributes
             prompt: 'Add new item'
             span: auto
@@ -97,7 +100,7 @@ tabs:
             options:
                 create: Create
                 update: Update
-                delete: Delete
+                preview: Preview
             span: auto
             type: checkboxlist
             tab: Config

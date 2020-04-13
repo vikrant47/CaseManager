@@ -21,24 +21,22 @@ class BeforeCreateOrUpdateAudit
     public function handler($event, $model)
     {
         $modelClass = get_class($model);
+        $attachAuditedBy = $model->attachAuditedBy;
         if (!in_array($modelClass, $this->ignoreModels)) {
-            $attachAuditedBy = $model->attachAuditedBy;
-            if (empty($attachAuditedBy)) {
-                $modelModel = ModelModel::where('model', get_class($model))->first();
-                if (!empty($modelModel)) {
-                    $attachAuditedBy = $modelModel->attach_audited_by;
-                    if ($modelModel->audit) {
-                        $this->addAuditLog($modelModel, $model, $event);
-                    }
+            $modelModel = ModelModel::where('model', get_class($model))->first();
+            if (!empty($modelModel)) {
+                // $attachAuditedBy = $modelModel->attach_audited_by;
+                if ($modelModel->audit) {
+                    $this->addAuditLog($modelModel, $model, $event);
                 }
             }
-            if ($attachAuditedBy) {
-                $user = BackendAuth::getUser();
-                if ($event === 'creating') {
-                    $model->created_by_id = $user->id;
-                }
-                $model->updated_by_id = $user->id;
+        }
+        if ($attachAuditedBy) {
+            $user = BackendAuth::getUser();
+            if ($event === 'creating') {
+                $model->created_by_id = $user->id;
             }
+            $model->updated_by_id = $user->id;
         }
     }
 
@@ -55,14 +53,14 @@ class BeforeCreateOrUpdateAudit
             } else {
                 $previous = $original;
             }
-            AuditLog::create([
-                'model' => $modelRecord->model,
-                'record_id' => $modeInstance->id,
-                'operation' => $event,
-                'version' => $modelRecord->version,
-                'previous' => $previous,
-            ]);
-            $modeInstance->version = $modeInstance->version + 1;
+            $modeInstance->version = $modeInstance->version != null ? $modeInstance->version + 1 : 1;
+            $auditLog = new AuditLog();
+            $auditLog->model = $modelRecord->model;
+            $auditLog->record_id = $modeInstance->id;
+            $auditLog->operation = $event;
+            $auditLog->version = $modeInstance->version - 1;
+            $auditLog->previous = $previous;
+            $auditLog->save();
         } else {
             $modeInstance->version = 0;
         }

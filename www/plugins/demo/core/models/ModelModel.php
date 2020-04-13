@@ -42,12 +42,15 @@ class ModelModel extends Model
      */
     public function getModelTable()
     {
+        $table = null;
         if (empty($this->model)) {
             return null;
         }
         $model = new $this->model();
         $schema = DatabaseTableModel::getSchema();
-        $table = $schema->getTable($model->table);
+        if (property_exists($model, 'table')) {
+            $table = $schema->getTable($model->table);
+        }
         return $table;
     }
 
@@ -65,7 +68,11 @@ class ModelModel extends Model
         }, $columns);
         array_push($columnNames, '*');
         asort($columnNames);
-        return $columnNames;
+        $columnNameOptions = [];
+        foreach ($columnNames as $columnName) {
+            $columnNameOptions[$columnName] = $columnName;
+        }
+        return $columnNameOptions;
     }
 
     public function beforeSave()

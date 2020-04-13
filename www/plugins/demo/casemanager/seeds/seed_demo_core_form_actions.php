@@ -30,7 +30,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "form"=>"\$/demo/casemanager/models/casemodel/fields.yaml",
-                                                                                        "dom_attributes"=>"[]",
+                                                                                        "html_attributes"=>"[]",
                                                                                         "context"=>"[\"create\",\"update\",\"delete\"]"
                             ]             ]);
         }

@@ -84,6 +84,47 @@ Object.assign(Engine.prototype, {
     },
     registerEvents: function () {
         var _this = this;
+        $(document).ready(function () {
+            _this.onDocumentReady();
+        });
+    },
+    evalFunction: function (fun, scope, args) {
+        scope = scope || this;
+        return Function(fun).apply(scope, args);
+    },
+    onDocumentReady: function () {
+        var _this = this;
+        var dataActionConfig = {
+            show: function (value) {
+                if (value) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            }, hide: function (value) {
+                if (value) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            }, disable: function (value) {
+                $(this).prop('disabled', !!value);
+            }
+        };
+        $('[data-show],[data-disable],[data-hide]').each(function () {
+            var $this = $(this);
+            var data = $this.data();
+            for (var dataActionKey in dataActionConfig) {
+                if (data[dataActionKey]) {
+                    this.data = data;
+                    dataActionConfig[dataActionKey].call(
+                        this,
+                        data[dataActionKey] === 'true'
+                        || _this.evalFunction(data[dataActionKey], this, data)
+                    );
+                }
+            }
+        });
     },
     confirm: function (message, callback) {
         var _event = jQuery.Event('ajaxConfirmMessage');
@@ -174,7 +215,7 @@ Object.assign(Engine.prototype, {
             }
             if (action.active) {
                 action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
-                var $template = $(action.template).data('action', action).data('scope', scope).prop('id',action.id);
+                var $template = $(action.template).data('action', action).data('scope', scope).prop('id', action.id);
                 if (action.label) {
                     var $textElement = $template;
                     if (action.element && action.element.text) {

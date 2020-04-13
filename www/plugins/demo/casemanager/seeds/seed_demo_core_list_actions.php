@@ -30,7 +30,7 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "list"=>"\$/demo/casemanager/models/casemodel/columns.yaml",
-                                                                                        "dom_attributes"=>"[]"
+                                                                                        "html_attributes"=>"[]"
                             ]             ]);
         }
 
