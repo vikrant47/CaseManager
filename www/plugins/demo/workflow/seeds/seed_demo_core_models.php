@@ -26,7 +26,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\QueueController"
                             ] ,            [
                                                                             "id"=> 114,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -40,7 +41,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\QueueItemController"
                             ] ,            [
                                                                             "id"=> 115,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -54,7 +56,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\QueuePopCriteriaController"
                             ] ,            [
                                                                             "id"=> 116,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -68,7 +71,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\QueueRoutingRuleController"
                             ] ,            [
                                                                             "id"=> 117,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -82,7 +86,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\WorkflowController"
                             ] ,            [
                                                                             "id"=> 119,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -96,7 +101,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\WorkflowStateController"
                             ] ,            [
                                                                             "id"=> 120,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -110,7 +116,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\WorkflowTransitionController"
                             ] ,            [
                                                                             "id"=> 121,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -124,7 +131,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Workflow\Controllers\WebhookController"
                             ] ,            [
                                                                             "id"=> 118,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -138,7 +146,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"id\",\"created_at\",\"updated_at\",\"0\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> ""
+                                                                                        "description"=> "",
+                                                                                        "controller"=>"Demo\Workflow\Controllers\WorkflowItemController"
                             ]             ]);
         }
 

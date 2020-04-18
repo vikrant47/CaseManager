@@ -1,0 +1,26 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+
+  record_id:
+    label: Record Id
+    conditions: record_id = ':filtered'
+    type: number
+
+  model:
+    label: Version
+    conditions: version iLike '%:filtered%'
+    type: text
+
+  priority:
+    label: Priority
+    modelClass: Demo\CaseManager\Models\CasePriority
+    conditions: priority_id in (:filtered)
+    nameFrom: name
+
+  created_at:
+    label: Created
+    type: daterange
+    conditions: created_at >= ':after' AND created_at <= ':before'

@@ -26,7 +26,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Report\Controllers\WidgetController"
                             ] ,            [
                                                                             "id"=> 32,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -40,7 +41,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Report\Controllers\DashboardController"
                             ]             ]);
         }
 

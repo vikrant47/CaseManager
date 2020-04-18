@@ -31,7 +31,8 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "form"=>"\$/demo/casemanager/models/casemodel/fields.yaml",
                                                                                         "html_attributes"=>"[]",
-                                                                                        "context"=>"[\"create\",\"update\",\"delete\"]"
+                                                                                        "context"=>"[\"create\",\"update\",\"delete\"]",
+                                                                                        "display_condition"=> null
                             ]             ]);
         }
 

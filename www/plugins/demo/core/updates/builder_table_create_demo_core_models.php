@@ -16,6 +16,7 @@ class BuilderTableCreateDemoCoreModels extends Migration
             $table->integer('updated_by_id');
             $table->string('name', 255);
             $table->string('model', 255);
+            $table->string('controller', 255);
             $table->integer('plugin_id');
             $table->boolean('audit');
             $table->boolean('record_history');

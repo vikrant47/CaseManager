@@ -16,12 +16,15 @@ use System\Classes\PluginManager;
 
 class AbstractPluginController extends Controller
 {
+    use \Backend\Traits\SessionMaker;
+
     static $pluginMiddleware = [];
 
     /**
      * @var string Layout to use for the view.
      */
     public $layout;
+
 
     public function __construct()
     {
@@ -159,5 +162,15 @@ class AbstractPluginController extends Controller
             $query->where('model', $modelClass)
                 ->orWhere('model', UniversalModel::class);
         })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC')->get();
+    }
+
+    public function getControllerInfo()
+    {
+        return [
+            'userId' => $this->user->id,
+            'action' => $this->action,
+            'class' => get_class($this),
+            'modelClass' => $this->getConfig()->modelClass,
+        ];
     }
 }

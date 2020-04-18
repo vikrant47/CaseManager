@@ -2,6 +2,7 @@ if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
 var Engine = function () {
+
 };
 Engine.QUERY_BUILDER_TYPE_MAPPINGS = {
     dropdown: function (field) {

@@ -1,4 +1,5 @@
 list: $/demo/core/models/auditlog/columns.yaml
+filter: $/demo/core/models/auditlog/filter.yaml
 modelClass: Demo\Core\Models\AuditLog
 title: AuditLogController
 noRecordsMessage: 'backend::lang.list.no_records'

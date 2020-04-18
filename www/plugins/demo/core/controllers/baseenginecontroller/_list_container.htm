@@ -1,5 +1,6 @@
 <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
 <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
+<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <div class="engine-list-wrapper">
     <?php if ($toolbar): ?>
         <div class="engine-list-toolbar">
@@ -8,17 +9,9 @@
                 <script>
                     var actions = <?=$this->getListActions()->toJSON()?>;
                     var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
-                    actions = actions.map(function (action) {
-                        action.css_class = 'btn btn-primary ' + action.css_class + ' ' + action.icon;
-                        action.handler = Function(action.script);
-                        action.id = 'list-action-' + action.id;
-                        action.attributes = action.html_attributes;
-                        action.modelRecord = modelRecord;
-                        delete action.icon;
-                        delete action.html_attributes;
-                        return action;
-                    });
-                    Engine.instance.addActions($('.engine-list-toolbar .toolbar-item').children().eq(0),actions);
+                    var controller = <?=json_encode($this->getControllerInfo())?>;
+                    EngineUI.instance.setCurrentModel(modelRecord);
+                    EngineList.instance.addListActions(actions,modelRecord);
                 </script>
             </div>
         </div>

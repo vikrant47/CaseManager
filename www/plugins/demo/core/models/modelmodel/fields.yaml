@@ -19,6 +19,11 @@ fields:
         span: auto
         required: 1
         type: relation
+    controller:
+        label: 'Controller'
+        span: auto
+        type: text
+
 tabs:
     fields:
         audit:
