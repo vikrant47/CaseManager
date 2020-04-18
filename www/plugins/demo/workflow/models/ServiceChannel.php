@@ -25,7 +25,7 @@ class ServiceChannel extends Model
 
     public $belongsTo = [
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
-        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model_type'],
+        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
 
     public function getEventOptions()

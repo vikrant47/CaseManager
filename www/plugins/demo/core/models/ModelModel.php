@@ -28,9 +28,9 @@ class ModelModel extends Model
      */
     public $rules = [
         'name' => 'required',
-        'model_type' => 'required',
+        'model' => 'required',
     ];
-
+    public $jsonable = ['audit_columns'];
     public $attachAuditedBy = true;
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
@@ -42,12 +42,15 @@ class ModelModel extends Model
      */
     public function getModelTable()
     {
-        if (empty($this->model_type)) {
+        $table = null;
+        if (empty($this->model)) {
             return null;
         }
-        $model = new $this->model_type();
+        $model = new $this->model();
         $schema = DatabaseTableModel::getSchema();
-        $table = $schema->getTable($model->table);
+        if (property_exists($model, 'table')) {
+            $table = $schema->getTable($model->table);
+        }
         return $table;
     }
 
@@ -64,13 +67,18 @@ class ModelModel extends Model
             return $column->getName();
         }, $columns);
         array_push($columnNames, '*');
-        return $columnNames;
+        asort($columnNames);
+        $columnNameOptions = [];
+        foreach ($columnNames as $columnName) {
+            $columnNameOptions[$columnName] = $columnName;
+        }
+        return $columnNameOptions;
     }
 
     public function beforeSave()
     {
-        if (!class_exists($this->model_type)) {
-            throw new ValidationException('Invalid model type ' . $this->model_type);
+        if (!class_exists($this->model)) {
+            throw new ValidationException('Invalid model type ' . $this->model);
         }
         if ($this->attach_audited_by == 1) {
             $table = $this->getModelTable();
@@ -84,8 +92,8 @@ class ModelModel extends Model
     public function getFormDefinition()
     {
         $formModel = new ModelFormModel();
-        $formModel->setModelClassName(ModelUtil::getShortName($this->model_type));
-        $formModel->setPluginCode(PluginConnection::getPluginCodeFromClass($this->model_type));
+        $formModel->setModelClassName(ModelUtil::getShortName($this->model));
+        $formModel->setPluginCode(PluginConnection::getPluginCodeFromClass($this->model));
         $modelDirPath = 'fields.yaml';
         $formModel->loadForm($modelDirPath);
         return $formModel;
@@ -94,10 +102,10 @@ class ModelModel extends Model
     public function getDefinition()
     {
         $formDefinition = $this->getFormDefinition();
-        $newModel = new $this->model_type;
+        $newModel = new $this->model;
         return [
             'form' => ['controls' => $formDefinition->controls],
-            'model_type' => $this->model_type,
+            'model' => $this->model,
             'associations' => [
                 'belongsTo' => $newModel->belongsTo,
                 'hasMany' => $newModel->hasMany,
@@ -112,8 +120,13 @@ class ModelModel extends Model
         $options = [];
         $allModels = ModelModel::all();
         foreach ($allModels as $model) {
-            $options[$model->model_type] = $model->name;
+            $options[$model->model] = $model->name;
         }
         return $options;
+    }
+
+    public function getModelOptions()
+    {
+        return PluginConnection::getAllModelAlias(false);
     }
 }

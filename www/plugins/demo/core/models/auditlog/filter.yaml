@@ -4,12 +4,12 @@
 
 scopes:
 
-  case_number:
-    label: Case Number
-    conditions: case_number iLike '%:filtered%'
-    type: text
+  record_id:
+    label: Record Id
+    conditions: record_id = ':filtered'
+    type: number
 
-  case_version:
+  model:
     label: Version
     conditions: version iLike '%:filtered%'
     type: text

@@ -14,33 +14,35 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
-                                                                            "id"=> 41,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Case Model",
-                                                                                        "model_type"=>"Demo\Casemanager\Models\CaseModel",
-                                                                                        "plugin_id"=> 6,
-                                                                                        "audit"=> 1,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\"*\"]",
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "description"=> ""
-                            ] ,            [
                                                                             "id"=> 42,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Case Priority",
-                                                                                        "model_type"=>"Demo\Casemanager\Models\CasePriority",
+                                                                                        "model"=>"Demo\Casemanager\Models\CasePriority",
                                                                                         "plugin_id"=> 6,
                                                                                         "audit"=> 1,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> ""
+                                                                                        "description"=> "",
+                                                                                        "controller"=>"Demo\Casemanager\Controllers\CasePriorityController"
+                            ] ,            [
+                                                                            "id"=> 41,
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2020-04-12 15:57:19",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Case Model",
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "plugin_id"=> 6,
+                                                                                        "audit"=> 1,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\"*\"]",
+                                                                                        "attach_audited_by"=> 1,
+                                                                                        "description"=> "",
+                                                                                        "controller"=>"Demo\Casemanager\Controllers\CaseController"
                             ]             ]);
         }
 

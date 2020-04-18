@@ -51,3 +51,6 @@
 1.0.18:
     - 'Created table demo_core_list_actions'
     - builder_table_create_demo_core_list_actions.php
+1.0.19:
+    - 'Created table demo_core_audit_logs'
+    - builder_table_create_demo_core_audit_logs.php

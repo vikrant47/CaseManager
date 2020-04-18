@@ -76,7 +76,7 @@ tabs:
             required: 1
             type: text
             tab: Config
-        dom_attributes:
+        html_attributes:
             label: Attributes
             prompt: 'Add new item'
             span: auto

@@ -49,3 +49,9 @@ tabs:
             readOnly: 1
             type: relation
             tab: System
+        version:
+            label: 'Audit Version'
+            span: auto
+            readOnly: 1
+            type: number
+            tab: System

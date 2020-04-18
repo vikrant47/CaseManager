@@ -10,16 +10,21 @@ use Demo\Core\Classes\Ifs\IPluginMiddleware;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Core\Models\FormAction;
 use Demo\Core\Models\ListAction;
+use Demo\Core\Models\ModelModel;
+use Demo\Core\Models\UniversalModel;
 use System\Classes\PluginManager;
 
 class AbstractPluginController extends Controller
 {
+    use \Backend\Traits\SessionMaker;
+
     static $pluginMiddleware = [];
 
     /**
      * @var string Layout to use for the view.
      */
     public $layout;
+
 
     public function __construct()
     {
@@ -115,11 +120,31 @@ class AbstractPluginController extends Controller
         return $partialContent;
     }
 
+    public function getModelRecord()
+    {
+        $config = $this->getConfig();
+        if (empty($config->modelRecord)) {
+            $modelClass = $config->modelClass;
+            $config->modelRecord = ModelModel::where('model', $modelClass)->first();
+        }
+
+        return $config->modelRecord;
+    }
+
     public function getListActions()
     {
         $modelClass = $this->getConfig()->modelClass;
         $listConfig = $this->listGetConfig();
-        return ListAction::where(['active' => true, 'model' => $modelClass, 'list' => $listConfig->list])->orderBy('sort_order', 'ASC')->get();
+        return ListAction::where([
+            'active' => true,
+        ])->where(function ($query) use ($listConfig) {
+            $query->where('list', $listConfig->list)
+                ->orWhere('list', null)
+                ->orWhere('list', '');
+        })->where(function ($query) use ($modelClass) {
+            $query->where('model', $modelClass)
+                ->orWhere('model', UniversalModel::class);
+        })->orderBy('sort_order', 'ASC')->get();
     }
 
     public function getFormActions($context = 'create')
@@ -128,9 +153,24 @@ class AbstractPluginController extends Controller
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
         return FormAction::where([
-                'active' => true,
-                'model' => $modelClass,
-                'form' => $formConfig->form]
-        )->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC')->get();
+            'active' => true
+        ])->where(function ($query) use ($formConfig) {
+            $query->where('form', $formConfig->form)
+                ->orWhere('form', null)
+                ->orWhere('form', '');
+        })->where(function ($query) use ($modelClass) {
+            $query->where('model', $modelClass)
+                ->orWhere('model', UniversalModel::class);
+        })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC')->get();
+    }
+
+    public function getControllerInfo()
+    {
+        return [
+            'userId' => $this->user->id,
+            'action' => $this->action,
+            'class' => get_class($this),
+            'modelClass' => $this->getConfig()->modelClass,
+        ];
     }
 }

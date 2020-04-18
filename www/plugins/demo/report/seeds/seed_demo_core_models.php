@@ -20,13 +20,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Widget",
-                                                                                        "model_type"=>"Demo\Report\Models\Widget",
+                                                                                        "model"=>"Demo\Report\Models\Widget",
                                                                                         "plugin_id"=> 14,
                                                                                         "audit"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Report\Controllers\WidgetController"
                             ] ,            [
                                                                             "id"=> 32,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -34,13 +35,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Dashboard",
-                                                                                        "model_type"=>"Demo\Report\Models\Dashboard",
+                                                                                        "model"=>"Demo\Report\Models\Dashboard",
                                                                                         "plugin_id"=> 14,
                                                                                         "audit"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "description"=> null
+                                                                                        "description"=> null,
+                                                                                        "controller"=>"Demo\Report\Controllers\DashboardController"
                             ]             ]);
         }
 

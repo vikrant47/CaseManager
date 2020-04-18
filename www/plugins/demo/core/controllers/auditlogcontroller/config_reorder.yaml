@@ -1,0 +1,4 @@
+title: AuditLogController
+modelClass: Demo\Core\Models\AuditLog
+toolbar:
+    buttons: reorder_toolbar

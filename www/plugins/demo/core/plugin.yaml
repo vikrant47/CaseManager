@@ -65,6 +65,10 @@ navigation:
                 label: 'List Actions'
                 url: demo/core/listactioncontroller
                 icon: icon-rocket
+            side-menu-item13:
+                label: 'Audit Logs'
+                url: demo/core/auditlogcontroller
+                icon: icon-file-archive-o
     main-menu-item2:
         label: Security
         url: demo/core/usercontroller
