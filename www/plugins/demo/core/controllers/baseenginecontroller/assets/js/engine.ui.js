@@ -1,30 +1,28 @@
 var EngineUI = function () {
-    this.currentModelRecord = undefined;
-    this.currentController = undefined;
+    this.currentModelRecord = null;
 };
 var EngineList = function () {
 
 };
 var EngineFrom = function () {
-
+    this.formModel = null;
 };
 
 
 Object.assign(EngineUI.prototype, {
     navigate: function (model, type) {
 
-    }, getCurrentModel: function () {
+    },
+    getModelRecord: function () {
         return this.currentModelRecord;
-    }, setCurrentModel: function (modelRecord) {
+    },
+    setModelRecord: function (modelRecord) {
         this.currentModelRecord = modelRecord;
-    }, getCurrentController: function () {
-        return this.currentController;
-    }, getCurrentController: function (currentController) {
-        this.currentController = currentController;
-    }, toUIAction: function (dbActions, modelRecord) {
+    },
+    toUIAction: function (dbActions, modelRecord) {
         return dbActions.map(function (action) {
             action.css_class = 'btn btn-primary ' + action.css_class + ' ' + action.icon;
-            action.handler = Function(action.script);
+            action.handler = Function('return ' + action.script)();
             action.id = 'list-action-' + action.id;
             action.attributes = action.html_attributes;
             action.modelRecord = modelRecord;
@@ -36,31 +34,40 @@ Object.assign(EngineUI.prototype, {
 });
 
 Object.assign(EngineList.prototype, {
-    getLocation: function (controller, model) {
-        var packagePath = model.model.split('\\');
-        return ('/backend/' + packagePath[0] + '/' + packagePath[1]).toLocaleLowerCase();
+    getLocation: function (model) {
+        return ('/backend/' + model.controller.replace(/\\/g,'/').replace('/Controllers','')).toLocaleLowerCase();
     },
-    navigate: function (controller, model, queryParams = {}) {
-        window.location.href = this.getLocation(controller, model) + '?' + $.param(queryParams);
+    navigate: function (model, queryParams = {}, view = 'index') {
+        window.location.href = this.getLocation(model) + '/' + view + '?' + $.param(queryParams);
     },
     addListActions: function (actionRecords, modelRecord) {
         var actions = EngineUI.instance.toUIAction(actionRecords, modelRecord);
         Engine.instance.addActions($('.engine-list-toolbar .toolbar-item').children().eq(0), actions);
+    },
+    getSelectedRecordIds: function () {
+        return $('.control-list').listWidget('getChecked');
     }
 });
 
 Object.assign(EngineFrom.prototype, {
-    getLocation: function (controller, model, recordId, view = 'update') {
-        var formUrl = EngineList.getLocation(controller, model);
+
+    getFormModel: function () {
+        return this.formModel;
+    },
+    setFormModel: function (formModel) {
+        this.formModel = formModel;
+    },
+    getLocation: function (model, recordId, view = 'update', params = {}) {
+        var formUrl = EngineList.instance.getLocation(model);
         if (typeof recordId === 'undefined') {
             formUrl = formUrl + '/create';
         } else {
-            formUrl = formUrl + '/' + view;
+            formUrl = formUrl + '/' + view + '/' + recordId + '?' + $.param(params);
         }
         return formUrl;
     },
-    navigateToForm(controller, model, recordId, view = 'update') {
-        var formUrl = this.getLocation(controller, model, recordId, view);
+    navigate(model, recordId, view = 'update') {
+        var formUrl = this.getLocation(model, recordId, view);
         window.location.href = formUrl;
     },
     addFormActions: function (actionRecords, modelRecord) {

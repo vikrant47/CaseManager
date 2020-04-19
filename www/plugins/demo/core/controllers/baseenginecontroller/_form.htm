@@ -6,8 +6,10 @@
     <script>
         var actions = <?=$this->getFormActions($context)->toJSON()?>;
         var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
+        var formModel = <?=$this->formGetModel()->toJSON()?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
-        EngineUI.instance.setCurrentModel(modelRecord);
+        EngineUI.instance.setModelRecord(modelRecord);
+        EngineFrom.instance.setFormModel(formModel);
         EngineFrom.instance.addFormActions(actions,modelRecord);
     </script>
 </div>

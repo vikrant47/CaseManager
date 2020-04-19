@@ -10,7 +10,7 @@
                     var actions = <?=$this->getListActions()->toJSON()?>;
                     var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
                     var controller = <?=json_encode($this->getControllerInfo())?>;
-                    EngineUI.instance.setCurrentModel(modelRecord);
+                    EngineUI.instance.setModelRecord(modelRecord);
                     EngineList.instance.addListActions(actions,modelRecord);
                 </script>
             </div>

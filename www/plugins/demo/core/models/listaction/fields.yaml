@@ -52,7 +52,7 @@ tabs:
         script:
             label: Script
             size: large
-            language: php
+            language: javascript
             span: auto
             required: 1
             type: codeeditor

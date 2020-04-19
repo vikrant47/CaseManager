@@ -51,12 +51,13 @@ class AuditLogController extends AbstractPluginController
         return $controller->formRender(['preview' => true]);
     }
 
-    public function listFilterExtendScopes($filter)
+    /*public function listFilterExtendScopes($filter)
     {
         $request = request();
         $recordId = $request->get('record_id');
         if (!empty($recordId)) {
             $filter->setScopeValue($filter->getScope('record_id'), $recordId);
         }
-    }
+        parent::listFilterExtendScopes($filter);
+    }*/
 }

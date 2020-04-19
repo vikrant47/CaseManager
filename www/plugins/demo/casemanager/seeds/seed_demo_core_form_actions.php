@@ -16,14 +16,14 @@ class SeedDemoCoreFormActions implements Seedable
             [
                                                                             "id"=> 8,
                                                                                         "created_at"=>"2020-04-12 08:37:37",
-                                                                                        "updated_at"=>"2020-04-12 09:00:47",
+                                                                                        "updated_at"=>"2020-04-19 04:40:45",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"test",
                                                                                         "label"=>"Test",
                                                                                         "active"=> 1,
                                                                                         "description"=> "",
-                                                                                        "script"=>"alert('Alert from action');\r\nreturn false;",
+                                                                                        "script"=>"function(){\r\n        alert('Alert from action');\r\n        return false;\r\n}",
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"oc-icon-adjust",
                                                                                         "css_class"=> "",
@@ -31,7 +31,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "form"=>"\$/demo/casemanager/models/casemodel/fields.yaml",
                                                                                         "html_attributes"=>"[]",
-                                                                                        "context"=>"[\"create\",\"update\",\"delete\"]",
+                                                                                        "context"=>"[\"create\",\"update\"]",
                                                                                         "display_condition"=> null
                             ]             ]);
         }
