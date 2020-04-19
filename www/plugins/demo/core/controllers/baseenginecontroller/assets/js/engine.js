@@ -225,6 +225,7 @@ Object.assign(Engine.prototype, {
                     $textElement.text(action.label);
                 }
                 $template.addClass(action.css_class).on(action.event, function (event) {
+                    event.preventDefault();
                     action.handler.apply(this, [event, scope, action, $element]);
                 });
                 if (action.icon) {

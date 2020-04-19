@@ -173,4 +173,18 @@ class AbstractPluginController extends Controller
             'modelClass' => $this->getConfig()->modelClass,
         ];
     }
+
+    /**
+     * Handling filter provided in url
+     */
+    public function listFilterExtendScopes($filter)
+    {
+        $request = request();
+        $filterParams = $request->get('filter');
+        if (!empty($filterParams)) {
+            foreach ($filterParams as $key => $value) {
+                $filter->setScopeValue($filter->getScope($key), $value);
+            }
+        }
+    }
 }

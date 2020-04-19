@@ -14,6 +14,36 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
+                                                                            "id"=> 89,
+                                                                                        "created_at"=>"2020-04-18 15:35:39",
+                                                                                        "updated_at"=>"2020-04-18 15:35:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Audit Log",
+                                                                                        "model"=>"Demo\Core\Models\AuditLog",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "description"=> "",
+                                                                                        "controller"=>"Demo\Core\Controllers\AuditLogController"
+                            ] ,            [
+                                                                            "id"=> 88,
+                                                                                        "created_at"=>"2020-04-18 14:53:04",
+                                                                                        "updated_at"=>"2020-04-18 15:36:42",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Model Model",
+                                                                                        "model"=>"Demo\Core\Models\ModelModel",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "description"=> "",
+                                                                                        "controller"=>"Demo\Core\Controllers\ModelController"
+                            ] ,            [
                                                                             "id"=> 85,
                                                                                         "created_at"=>"2020-04-12 15:19:04",
                                                                                         "updated_at"=>"2020-04-12 15:28:59",
@@ -58,21 +88,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "attach_audited_by"=> 1,
                                                                                         "description"=> null,
                                                                                         "controller"=>"Demo\Notification\Controllers\NotificationSubscriberController"
-                            ] ,            [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Models Model",
-                                                                                        "model"=>"Demo\Core\Models\Model",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\" * \"]",
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "description"=> null,
-                                                                                        "controller"=>"Demo\Core\Controllers\ModelController"
                             ] ,            [
                                                                             "id"=> 2,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
