@@ -26,7 +26,7 @@
     - builder_table_create_demo_workflow_queue_routing_rules.php
 1.0.10:
     - 'Created table demo_workflow_queue_pop_scripts'
-    - builder_table_create_demo_workflow_queue_pop_scripts.php
+    - builder_table_create_demo_workflow_queue_pop_criterias.php
 1.0.11:
     - 'Created table demo_workflow_service_channels'
     - builder_table_create_demo_workflow_service_channels.php
