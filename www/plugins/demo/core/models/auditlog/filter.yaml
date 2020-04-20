@@ -1,0 +1,20 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+
+  record_id:
+    label: Record Id
+    conditions: record_id = :value
+    type: text
+
+  version:
+    label: Version
+    conditions: version = :value
+    type: text
+
+  created_at:
+    label: Created
+    type: daterange
+    conditions: created_at >= ':after' AND created_at <= ':before'

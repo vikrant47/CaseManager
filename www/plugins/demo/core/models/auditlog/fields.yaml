@@ -1,0 +1,5 @@
+fields:
+    version:
+        label: Version
+        span: auto
+        type: number

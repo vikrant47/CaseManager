@@ -32,7 +32,7 @@ class Webhook extends Model
 
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
-        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model_type'],
+        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
 
     public $jsonable = ['request_headers', 'request_body'];

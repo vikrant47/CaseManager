@@ -239,7 +239,6 @@ class SeedRunner extends Command
                                 where table_name iLike '" . $tableNamespace . "%' and table_name not in (:pluggableTables)",
             ['pluggableTables' => join("','", $pluggableTables)]);
         $pluginTables = $this->collectionToArray($pluginTables, 'table_name');
-        File::isDirectory($path) or File::makeDirectory($path, 0777, true, true);
         $this->dumpSeed(array_merge($pluggableTables, $pluginTables), $plugin, $corePluginConnection->getTemplate('seed.file.twig'), $path);
     }
 
@@ -263,6 +262,7 @@ class SeedRunner extends Command
                 $data = Db::table($table)->get();
                 $packagable = false;
             }
+            $seedPath = $seedDir . DIRECTORY_SEPARATOR . 'seed_' . $table . '.php';
             if ($data->count() > 0) {
                 $contents = TwigEngine::eval($template, [
                     'data' => array_map(function ($item) {
@@ -273,10 +273,11 @@ class SeedRunner extends Command
                     'packagable' => $packagable,
                     'className' => 'Seed' . Str::studly($table),
                 ]);
-                $seedPath = $seedDir . DIRECTORY_SEPARATOR . 'seed_' . $table . '.php';
+                File::isDirectory($seedDir) or File::makeDirectory($seedDir, 0777, true, true);
                 File::put($seedPath, $contents);
                 $this->info('Seed dumped for table ' . $table . ' at ' . $seedPath);
             } else {
+                File::delete($seedPath);
                 $this->info('No records found in table ' . $table . ' for plugin ' . $plugin->code);
             }
         }

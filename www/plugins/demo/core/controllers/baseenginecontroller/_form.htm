@@ -1,16 +1,15 @@
 <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
 <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
+<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <div class="engine-form-wrapper">
     <?= $this->makePartial($view, ['contents' => $contents]); ?>
     <script>
         var actions = <?=$this->getFormActions($context)->toJSON()?>;
-        actions = actions.map(function (action) {
-            action.css_class = 'btn btn-primary ' + action.css_class + ' ' + action.icon;
-            action.handler = Function(action.script);
-            action.id = 'list-action-' + action.id;
-            delete action.icon;
-            return action;
-        });
-        Engine.instance.addActions($('.engine-form-wrapper .form-buttons .loading-indicator-container'), actions);
+        var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
+        var formModel = <?=$this->formGetModel()->toJSON()?>;
+        var controller = <?=json_encode($this->getControllerInfo())?>;
+        EngineUI.instance.setModelRecord(modelRecord);
+        EngineFrom.instance.setFormModel(formModel);
+        EngineFrom.instance.addFormActions(actions,modelRecord);
     </script>
 </div>

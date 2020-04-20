@@ -1,0 +1,10 @@
+name: AuditLogController
+form: $/demo/core/models/auditlog/fields.yaml
+modelClass: Demo\Core\Models\AuditLog
+defaultRedirect: demo/core/auditlogcontroller
+create:
+    redirect: 'demo/core/auditlogcontroller/update/:id'
+    redirectClose: demo/core/auditlogcontroller
+update:
+    redirect: demo/core/auditlogcontroller
+    redirectClose: demo/core/auditlogcontroller

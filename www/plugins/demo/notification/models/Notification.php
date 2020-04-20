@@ -34,7 +34,7 @@ class Notification extends Model
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
         'channel' => [NotificationChannel::class, 'key' => 'channel_id'],
         'template' => [MailTemplate::class, 'key' => 'template_id'],
-        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model_type'],
+        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
     public $hasMany = [
         'subscribers' => [NotificationSubscriber::class, 'key' => 'notification_id']
