@@ -17,6 +17,7 @@ class BuilderTableCreateDemoCoreAuditLogs extends Migration
             $table->integer('updated_by_id');
             $table->integer('version');
             $table->string('model');
+            $table->string('operation');
             $table->integer('record_id');
             $table->text('previous');
             $table->text('current')->nullable();

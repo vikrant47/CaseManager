@@ -32,7 +32,7 @@
     - builder_table_create_demo_core_permissions.php
 1.0.12:
     - 'Created table demo_core_security_policies'
-    - builder_table_create_demo_core_permission_policies.php
+    - builder_table_create_demo_core_security_policies.php
 1.0.13:
     - 'Created table demo_core_role_policy_associations'
     - builder_table_create_demo_core_role_policy_associations.php
@@ -54,3 +54,6 @@
 1.0.19:
     - 'Created table demo_core_audit_logs'
     - builder_table_create_demo_core_audit_logs.php
+1.0.20:
+    - 'Created table demo_core_libraries'
+    - builder_table_create_demo_core_libraries.php

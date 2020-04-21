@@ -21,7 +21,7 @@ class BuilderTableCreateDemoCoreModels extends Migration
             $table->boolean('audit');
             $table->boolean('record_history');
             $table->text('audit_columns')->default('*');
-            $table->text('description')->default();
+            $table->text('description')->default('')->nullable();
             $table->boolean('attach_audited_by');
 
             // Index definitions

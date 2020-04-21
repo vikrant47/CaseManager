@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoCorePermissionPolicies extends Migration
+class BuilderTableCreateDemoCoreSecurityPolicies extends Migration
 {
     public function up()
     {
