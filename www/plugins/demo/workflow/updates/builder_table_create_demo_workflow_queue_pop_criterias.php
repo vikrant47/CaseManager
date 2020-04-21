@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoWorkflowQueuePopScripts extends Migration
+class BuilderTableCreateDemoWorkflowQueuePopCriterias extends Migration
 {
     public function up()
     {
@@ -24,6 +24,6 @@ class BuilderTableCreateDemoWorkflowQueuePopScripts extends Migration
     
     public function down()
     {
-        Schema::dropIfExists('demo_workflow_queue_pop_scripts');
+        Schema::dropIfExists('demo_workflow_queue_pop_criterias');
     }
 }

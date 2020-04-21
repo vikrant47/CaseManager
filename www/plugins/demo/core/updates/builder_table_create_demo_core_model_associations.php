@@ -18,6 +18,7 @@ class BuilderTableCreateDemoCoreModelAssociations extends Migration
             $table->string('target_model', 255);
             $table->string('foreign_key', 255)->nullable();
             $table->string('cascade')->default('none');
+            $table->string('relation');
             $table->integer('plugin_id');
             $table->integer('cascade_priority_order')->default(0);
             $table->text('description')->nullable();

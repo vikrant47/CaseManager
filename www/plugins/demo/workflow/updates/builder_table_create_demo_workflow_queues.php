@@ -13,6 +13,7 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->increments('id')->unsigned();
             $table->string('name', 255);
             $table->text('description');
+            $table->text('script');
             $table->smallInteger('active')->default(1);
             $table->smallInteger('virtual')->default(1);
             $table->string('queue_order', 255);

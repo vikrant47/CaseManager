@@ -17,6 +17,8 @@ class BuilderTableCreateDemoCoreListActions extends Migration
             $table->integer('updated_by_id');
             $table->string('name');
             $table->string('label')->nullable();
+            $table->string('list')->nullable();
+            $table->string('model')->nullable();
             $table->boolean('active')->default(true);
             $table->text('description')->nullable();
             $table->string('icon')->nullable();

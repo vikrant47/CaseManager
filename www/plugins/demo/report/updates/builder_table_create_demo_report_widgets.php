@@ -13,7 +13,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('created_by_d');
+            $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('name');
             $table->string('slug');
@@ -22,7 +22,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->text('data');
             $table->text('script');
             $table->smallInteger('public');
-            $table->string('library');
+            $table->integer('library_id');
             $table->integer('plugin_id');
             $table->integer('active');
         });
