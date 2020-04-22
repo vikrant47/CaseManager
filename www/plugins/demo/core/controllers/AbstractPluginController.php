@@ -20,6 +20,7 @@ class AbstractPluginController extends Controller
 
     static $pluginMiddleware = [];
 
+    protected $modelClass;
     /**
      * @var string Layout to use for the view.
      */
@@ -29,11 +30,17 @@ class AbstractPluginController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->modelClass = $this->getConfig()->modelClass;
         /*$this->layout = plugins_path() . DIRECTORY_SEPARATOR .
             'demo' . DIRECTORY_SEPARATOR .
             'core' . DIRECTORY_SEPARATOR .
             'layouts' . DIRECTORY_SEPARATOR .
             'enginelayout';*/
+    }
+
+    public function getModelClass()
+    {
+        return $this->modelClass;
     }
 
     /**Overriding default run method to inject code*/
@@ -133,7 +140,7 @@ class AbstractPluginController extends Controller
 
     public function getListActions()
     {
-        $modelClass = $this->getConfig()->modelClass;
+        $modelClass = $this->modelClass;
         $listConfig = $this->listGetConfig();
         return ListAction::where([
             'active' => true,
@@ -149,7 +156,7 @@ class AbstractPluginController extends Controller
 
     public function getFormActions($context = 'create')
     {
-        $modelClass = $this->getConfig()->modelClass;
+        $modelClass = $this->modelClass;
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
         return FormAction::where([
@@ -186,5 +193,65 @@ class AbstractPluginController extends Controller
                 $filter->setScopeValue($filter->getScope($key), $value);
             }
         }
+    }
+
+    /**
+     * Object API Definition start
+     */
+    public function onRead($id)
+    {
+        if (is_array($id)) {
+            $models = $this->modelClass::whereIn('id', $id)->get();
+            if ($models->count() === 0) {
+                $this->setResponse('No record found with ids ' . json_encode($id), 404);
+                return;
+            }
+            return $models;
+        }
+        $model = $this->modelClass::where('id', $id)->first();
+        if (empty($model)) {
+            $this->setResponse('No record found with id ' . $id, 404);
+            return;
+        }
+        return $model;
+    }
+
+    /**
+     * Object API Definition start
+     */
+    public function onCreate($data)
+    {
+        return $this->modelClass::insert($data);
+    }
+
+    /**
+     * Object API Definition start
+     */
+    public function onUpdate($id, $data)
+    {
+        $model = $this->modelClass::where('id', $id)->first();
+        if (empty($model)) {
+            $this->setResponse('No record found with id ' . $id, 404);
+            return;
+        }
+        foreach ($data as $key => $val) {
+            $model->{$key} = $val;
+        }
+        $model->save();
+        return $model;
+    }
+
+    /**
+     * Object API Definition start
+     */
+    public function onDelete($id)
+    {
+        $model = $this->modelClass::where('id', $id)->first();
+        if (empty($model)) {
+            $this->setResponse('No record found with id ' . $id, 404);
+            return;
+        }
+        $model->delete();
+        return $model;
     }
 }

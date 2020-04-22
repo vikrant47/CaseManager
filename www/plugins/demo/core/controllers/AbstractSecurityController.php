@@ -19,7 +19,6 @@ use View;
 abstract class AbstractSecurityController extends AbstractPluginController
 {
     private $userSecurityService;
-    private $modelClass;
     public $requiredPermissions = [];
 
     /**
@@ -29,9 +28,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
     {
         parent::__construct();
         $this->userSecurityService = UserSecurityService::getInstance();
-        $listController = new ListController($this);
-        $this->modelClass = $listController->getConfig('modelClass');
-        // $this->requiredPermissions[] = $this->userSecuriyService->getReadPermission($this->modelClass);
+        // $this->requiredPermissions[] = $this->userSecuriyService->getReadPermission($this->getModelClass());
     }
 
     public function forwardToAccessDenied($throwError = false)
@@ -49,7 +46,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function listExtendQuery(\October\Rain\Database\Builder $query)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::READ);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::READ);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied();
         }
@@ -63,7 +60,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function formBeforeCreate($model)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::CREATE);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::CREATE);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied(true);
         }
@@ -80,7 +77,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function formBeforeUpdate($model)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::WRITE);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::WRITE);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied(true);
         }
@@ -97,7 +94,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function formBeforeDelete($model)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::DELETE);
+        $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::DELETE);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied(true);
         }
