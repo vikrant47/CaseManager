@@ -12,29 +12,30 @@ if ($fetchModelFromField === false) {
 <script>
     var sql_import_export = $('<div/>').html('<?=e($value)?>').html().trim();
     var definition = <?=json_encode($modelInstance->getDefinition())?>;
-    var mongo_import_export = {
-        "$and": [{
-            "price": {"$lt": 10.25}
-        }, {
-            "$or": [{
-                "category": 2
+    if(definition) {
+        var mongo_import_export = {
+            "$and": [{
+                "price": {"$lt": 10.25}
             }, {
-                "category": 1
+                "$or": [{
+                    "category": 2
+                }, {
+                    "category": 1
+                }]
             }]
-        }]
-    };
-    console.log(definition);
-    var $queryBuilder = $('#<?=$id?>');
-    if ($queryBuilder.queryBuilder && $queryBuilder.queryBuilder.destroy) {
-        $queryBuilder.queryBuilder.destroy();
-    }
-    $queryBuilder.queryBuilder({
-        plugins: [
-            'bt-tooltip-errors',
-            'not-group'
-        ],
+        };
+        console.log(definition);
+        var $queryBuilder = $('#<?=$id?>');
+        if ($queryBuilder.queryBuilder && $queryBuilder.queryBuilder.destroy) {
+            $queryBuilder.queryBuilder.destroy();
+        }
+        $queryBuilder.queryBuilder({
+            plugins: [
+                'bt-tooltip-errors',
+                'not-group'
+            ],
 
-        filters: Engine.instance.mapFieldsToQueryBuilderFields(definition)/*[{
+            filters: Engine.instance.mapFieldsToQueryBuilderFields(definition)/*[{
             id: 'name',
             label: 'Name',
             type: 'string'
@@ -80,50 +81,51 @@ if ($fetchModelFromField === false) {
                 format: /^.{4}-.{4}-.{4}$/
             }
         }]*/
-    });
-    $queryBuilder.on('rulesChanged.queryBuilder', function (e, level) {
-        try {
-            var sql = $(this).queryBuilder('getSQL') || {};
-            if (!sql.sql) {
-                // TODO : prevent form to be submitted
+        });
+        $queryBuilder.on('rulesChanged.queryBuilder', function (e, level) {
+            try {
+                var sql = $(this).queryBuilder('getSQL') || {};
+                if (!sql.sql) {
+                    // TODO : prevent form to be submitted
+                }
+                $('#<?=$id?>-input').val(sql.sql);
+            } catch (e) {
+                console.error(e);
             }
-            $('#<?=$id?>-input').val(sql.sql);
-        } catch (e) {
-            console.error(e);
+        });
+        if (sql_import_export.trim().length > 0) {
+            $queryBuilder.queryBuilder('setRulesFromSQL', sql_import_export);
         }
-    });
-    if (sql_import_export.trim().length > 0) {
-        $queryBuilder.queryBuilder('setRulesFromSQL', sql_import_export);
+
+
+        /* $('#btn-reset').on('click', function () {
+             $('#builder-import_export').queryBuilder('reset');
+         });
+
+         $('#btn-set-sql').on('click', function () {
+             $('#builder-import_export').queryBuilder('setRulesFromSQL', sql_import_export);
+         });
+
+         $('#btn-set-mongo').on('click', function () {
+             $('#builder-import_export').queryBuilder('setRulesFromMongo', mongo_import_export);
+         });
+
+         $('#btn-get-sql').on('click', function () {
+             var result = $('#builder-import_export').queryBuilder('getSQL', 'question_mark');
+
+             if (result.sql.length) {
+                 alert(result.sql + '\n\n' + JSON.stringify(result.params, null, 2));
+             }
+         });
+
+         $('#btn-get-mongo').on('click', function () {
+             var result = $('#builder-import_export').queryBuilder('getMongo');
+
+             if (!$.isEmptyObject(result)) {
+                 alert(JSON.stringify(result, null, 2));
+             }
+         });*/
     }
-
-
-    /* $('#btn-reset').on('click', function () {
-         $('#builder-import_export').queryBuilder('reset');
-     });
-
-     $('#btn-set-sql').on('click', function () {
-         $('#builder-import_export').queryBuilder('setRulesFromSQL', sql_import_export);
-     });
-
-     $('#btn-set-mongo').on('click', function () {
-         $('#builder-import_export').queryBuilder('setRulesFromMongo', mongo_import_export);
-     });
-
-     $('#btn-get-sql').on('click', function () {
-         var result = $('#builder-import_export').queryBuilder('getSQL', 'question_mark');
-
-         if (result.sql.length) {
-             alert(result.sql + '\n\n' + JSON.stringify(result.params, null, 2));
-         }
-     });
-
-     $('#btn-get-mongo').on('click', function () {
-         var result = $('#builder-import_export').queryBuilder('getMongo');
-
-         if (!$.isEmptyObject(result)) {
-             alert(JSON.stringify(result, null, 2));
-         }
-     });*/
 </script>
 <style>
     .query-builder .rules-group-container {

@@ -91,28 +91,34 @@ class ModelModel extends Model
     /**@return ModelFormModel */
     public function getFormDefinition()
     {
-        $formModel = new ModelFormModel();
-        $formModel->setModelClassName(ModelUtil::getShortName($this->model));
-        $formModel->setPluginCode(PluginConnection::getPluginCodeFromClass($this->model));
-        $modelDirPath = 'fields.yaml';
-        $formModel->loadForm($modelDirPath);
-        return $formModel;
+        if (!empty($this->model)) {
+            $formModel = new ModelFormModel();
+            $formModel->setModelClassName(ModelUtil::getShortName($this->model));
+            $formModel->setPluginCode(PluginConnection::getPluginCodeFromClass($this->model));
+            $modelDirPath = 'fields.yaml';
+            $formModel->loadForm($modelDirPath);
+            return $formModel;
+        }
+        return null;
     }
 
     public function getDefinition()
     {
         $formDefinition = $this->getFormDefinition();
-        $newModel = new $this->model;
-        return [
-            'form' => ['controls' => $formDefinition->controls],
-            'model' => $this->model,
-            'associations' => [
-                'belongsTo' => $newModel->belongsTo,
-                'hasMany' => $newModel->hasMany,
-                'hasOne' => $newModel->hasOne,
-                'belongsToMany' => $newModel->belongsToMany
-            ],
-        ];
+        if (!empty($this->model)) {
+            $newModel = new $this->model;
+            return [
+                'form' => ['controls' => $formDefinition->controls],
+                'model' => $this->model,
+                'associations' => [
+                    'belongsTo' => $newModel->belongsTo,
+                    'hasMany' => $newModel->hasMany,
+                    'hasOne' => $newModel->hasOne,
+                    'belongsToMany' => $newModel->belongsToMany
+                ],
+            ];
+        }
+        return null;
     }
 
     public static function getModelAsDropdownOptions()
