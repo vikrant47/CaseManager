@@ -12,6 +12,7 @@ use Demo\Core\Models\FormAction;
 use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\UniversalModel;
+use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
 
 class AbstractPluginController extends Controller
@@ -195,20 +196,44 @@ class AbstractPluginController extends Controller
         }
     }
 
+    public function onReadExtendQuery(&$query)
+    {
+        return $query;
+    }
+
+    public function onCreateModel(&$models)
+    {
+        return $models;
+    }
+
+    public function onUpdateModel(&$model)
+    {
+        return $model;
+    }
+
+    public function onDeleteModel(&$model)
+    {
+        return $model;
+    }
+
     /**
      * Object API Definition start
      */
     public function onRead($id)
     {
         if (is_array($id)) {
-            $models = $this->modelClass::whereIn('id', $id)->get();
+            $query = $this->modelClass::whereIn('id', $id);
+            $this->onReadExtendQuery($query);
+            $models = $query->get();
             if ($models->count() === 0) {
                 $this->setResponse('No record found with ids ' . json_encode($id), 404);
                 return;
             }
             return $models;
         }
-        $model = $this->modelClass::where('id', $id)->first();
+        $query = $this->modelClass::where('id', $id);
+        $this->onReadExtendQuery($query);
+        $model = $query->get();
         if (empty($model)) {
             $this->setResponse('No record found with id ' . $id, 404);
             return;
@@ -219,21 +244,41 @@ class AbstractPluginController extends Controller
     /**
      * Object API Definition start
      */
-    public function onCreate($data)
+    public function onCreate()
     {
-        return $this->modelClass::insert($data);
+        $request = request();
+        $data = $request->request->get('data');
+        $results = [];
+        if (is_array($data) && !empty($data)) {
+            $models = array_map(function ($record) {
+                $model = new $this->modelClass;
+                $model->attributes = $record;
+                return $model;
+            }, $data);
+            $this->onCreateModel($models);
+            foreach ($models as $model) {
+                $model->save();
+            }
+            return $models;
+        } else {
+            $this->setResponse('Invalid payload data, payload must be a non empty array', 400);
+        }
+
     }
 
     /**
      * Object API Definition start
      */
-    public function onUpdate($id, $data)
+    public function onUpdate($id)
     {
+        $request = request();
+        $data = $request->request->get('data');
         $model = $this->modelClass::where('id', $id)->first();
         if (empty($model)) {
             $this->setResponse('No record found with id ' . $id, 404);
             return;
         }
+        $this->onUpdateModel($model);
         foreach ($data as $key => $val) {
             $model->{$key} = $val;
         }
@@ -251,6 +296,7 @@ class AbstractPluginController extends Controller
             $this->setResponse('No record found with id ' . $id, 404);
             return;
         }
+        $this->onDeleteModel($model);
         $model->delete();
         return $model;
     }

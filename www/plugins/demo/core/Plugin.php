@@ -1,5 +1,6 @@
 <?php namespace Demo\Core;
 
+use Demo\Core\EventHandlers\Model\BeforeCreateModels;
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdateAudit;
 use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
 use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
@@ -27,8 +28,10 @@ class Plugin extends PluginBase
             BeforeDeleteCascade::class,
             UniversalWebhookHandler::class,
             RestrictSystemRecordHandler::class,
+            BeforeCreateModels::class,
         ];
     }
+
     public function getPluginMiddleware()
     {
         return [
