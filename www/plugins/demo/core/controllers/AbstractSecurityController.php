@@ -65,10 +65,10 @@ abstract class AbstractSecurityController extends AbstractPluginController
             return $this->forwardToAccessDenied(true);
         }
         if (!$this->userSecurityService->hasAstrixPermission($permission)) {
-            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
-            if ($count === 0) {
-                return $this->forwardToAccessDenied(true);
-            }
+            /*$count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
+            if ($count === 0) {*/
+            return $this->forwardToAccessDenied(true);
+            /*}*/
         }
     }
 
@@ -130,4 +130,26 @@ abstract class AbstractSecurityController extends AbstractPluginController
     {
         $this->userSecurityService->flushCache();
     }
+
+    /**Events to handle security on ajax controller*/
+    public function onReadExtendQuery(&$query)
+    {
+        $this->listExtendQuery($query);
+    }
+
+    public function onCreateModel(&$models)
+    {
+        $this->formBeforeCreate($models);
+    }
+
+    public function onUpdateModel(&$model)
+    {
+        $this->formBeforeUpdate($model);
+    }
+
+    public function onDeleteModel(&$model)
+    {
+        $this->formBeforeDelete($model);
+    }
+
 }
