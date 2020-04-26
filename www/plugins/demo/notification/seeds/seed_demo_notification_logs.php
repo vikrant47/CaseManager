@@ -20,8 +20,8 @@ class SeedDemoNotificationLogs implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "notification_id"=> 2,
-                                                                                        "status"=>"success",
-                                                                                        "delivered"=> 1
+                                                                                        "delivered"=> 1,
+                                                                                        "status"=>"success"
                             ] ,            [
                                                                             "id"=> 2,
                                                                                         "created_at"=>"2019-12-27 16:40:47",
@@ -29,8 +29,8 @@ class SeedDemoNotificationLogs implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "notification_id"=> 2,
-                                                                                        "status"=>"success",
-                                                                                        "delivered"=> 1
+                                                                                        "delivered"=> 1,
+                                                                                        "status"=>"success"
                             ]             ]);
         }
 

@@ -18,11 +18,12 @@ class BuilderTableCreateDemoCoreModels extends Migration
             $table->string('model', 255);
             $table->string('controller', 255);
             $table->integer('plugin_id');
-            $table->boolean('audit');
-            $table->boolean('record_history');
+            $table->boolean('audit')->default(false);
+            $table->boolean('viewable')->default(false);
+            $table->boolean('record_history')->default(false);
             $table->text('audit_columns')->default('*');
             $table->text('description')->default('')->nullable();
-            $table->boolean('attach_audited_by');
+            $table->boolean('attach_audited_by')->default(false);
 
             // Index definitions
             $table->unique('model');

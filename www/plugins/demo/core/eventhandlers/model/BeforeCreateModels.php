@@ -25,10 +25,19 @@ use RainLab\Builder\Classes\MigrationColumnType;
 class BeforeCreateModels
 {
     public $model = ModelModel::class;
-    public $events = ['creating'];
+    public $events = ['creating', 'deleting'];
     public $sort_order = -1000;
 
     public function handler($event, $model)
+    {
+        if ($event === 'creating') {
+            $this->handleCreate($model);
+        } else if ($event === 'deleting') {
+
+        }
+    }
+
+    public function handleCreate($model)
     {
         $policy = new SecurityPolicy();
         $policy->attributes = [
@@ -37,7 +46,10 @@ class BeforeCreateModels
             'plugin_id' => $model->plugin_id,
         ];
         $policy->save();
-        $operations = ['create', 'update', 'delete', 'read'];
+        $operations = Permission::TYPES;
+        if ($model->viewable === true || $model->viewable == '1') {
+            $operations[] = Permission::VIEW;
+        }
         $permissions = [];
         foreach ($operations as $operation) {
             $permission = new Permission();
@@ -60,6 +72,12 @@ class BeforeCreateModels
             ];
             $assoc->save();
         }
+
+    }
+
+    public function handleDelete($model)
+    {
+        Permission::where('model', $model->model)->delete();
     }
 
 }

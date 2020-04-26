@@ -22,7 +22,7 @@ class Permission extends Model
     const CREATE = 'create';
     const VIEW = 'view';
 
-
+    const TYPES = [self::READ, self::WRITE, self::CREATE, self::DELETE];
     /**
      * @var string The database table used by the model.
      */

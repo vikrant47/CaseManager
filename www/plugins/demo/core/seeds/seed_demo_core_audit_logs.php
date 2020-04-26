@@ -21,10 +21,10 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 0,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
                                                                                         "record_id"=> 150,
                                                                                         "previous"=>"{\"id\":150,\"title\":null,\"description\":null,\"created_at\":\"2020-04-12 08:27:24\",\"updated_at\":\"2020-04-12 15:41:19\",\"created_by_id\":1,\"updated_by_id\":1,\"priority_id\":3,\"case_number\":\"1212\",\"case_version\":\"\",\"suspect\":\"\",\"tat_duration\":null,\"comments\":\"\",\"plugin_id\":null,\"assigned_to_id\":1,\"test_columns\":\"\",\"another_field\":null,\"version\":0}",
-                                                                                        "current"=> null,
-                                                                                        "operation"=>"updating"
+                                                                                        "current"=> null
                             ] ,            [
                                                                             "id"=> 5,
                                                                                         "created_at"=>"2020-04-12 16:05:03",
@@ -33,10 +33,10 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 0,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
                                                                                         "record_id"=> 150,
                                                                                         "previous"=>"{\"id\":150,\"title\":null,\"description\":null,\"created_at\":\"2020-04-12 08:27:24\",\"updated_at\":\"2020-04-12 16:03:25\",\"created_by_id\":1,\"updated_by_id\":1,\"priority_id\":3,\"case_number\":\"1214\",\"case_version\":\"\",\"suspect\":\"\",\"tat_duration\":null,\"comments\":\"\",\"plugin_id\":null,\"assigned_to_id\":1,\"test_columns\":\"\",\"another_field\":null,\"version\":1}",
-                                                                                        "current"=> null,
-                                                                                        "operation"=>"updating"
+                                                                                        "current"=> null
                             ] ,            [
                                                                             "id"=> 6,
                                                                                         "created_at"=>"2020-04-12 16:05:19",
@@ -45,10 +45,10 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 1,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
                                                                                         "record_id"=> 150,
                                                                                         "previous"=>"{\"id\":150,\"title\":null,\"description\":null,\"created_at\":\"2020-04-12 08:27:24\",\"updated_at\":\"2020-04-12 16:05:03\",\"created_by_id\":1,\"updated_by_id\":1,\"priority_id\":3,\"case_number\":\"1214\",\"case_version\":\"\",\"suspect\":\"\",\"tat_duration\":null,\"comments\":\"\",\"plugin_id\":null,\"assigned_to_id\":1,\"test_columns\":\"\",\"another_field\":null,\"version\":1}",
-                                                                                        "current"=> null,
-                                                                                        "operation"=>"updating"
+                                                                                        "current"=> null
                             ] ,            [
                                                                             "id"=> 7,
                                                                                         "created_at"=>"2020-04-12 16:05:28",
@@ -57,10 +57,10 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 2,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
                                                                                         "record_id"=> 150,
                                                                                         "previous"=>"{\"id\":150,\"title\":null,\"description\":null,\"created_at\":\"2020-04-12 08:27:24\",\"updated_at\":\"2020-04-12 16:05:19\",\"created_by_id\":1,\"updated_by_id\":1,\"priority_id\":3,\"case_number\":\"1214\",\"case_version\":\"\",\"suspect\":\"test\",\"tat_duration\":null,\"comments\":\"\",\"plugin_id\":null,\"assigned_to_id\":1,\"test_columns\":\"\",\"another_field\":null,\"version\":2}",
-                                                                                        "current"=> null,
-                                                                                        "operation"=>"updating"
+                                                                                        "current"=> null
                             ]             ]);
         }
 

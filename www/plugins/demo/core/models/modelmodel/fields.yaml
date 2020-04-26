@@ -23,21 +23,15 @@ fields:
         label: 'Controller'
         span: auto
         type: text
+    viewable:
+        label: 'Viewable'
+        span: auto
+        type: switch
 
 tabs:
     fields:
         audit:
             label: Audit
-            span: auto
-            type: switch
-            tab: 'Audit Settings'
-        attach_audited_by:
-            label: 'Attach Audited By'
-            span: auto
-            type: switch
-            tab: 'Audit Settings'
-        record_history:
-            label: 'Record History'
             span: auto
             type: switch
             tab: 'Audit Settings'
