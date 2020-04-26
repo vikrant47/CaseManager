@@ -46,7 +46,7 @@ Route::delete('/engine/api/{pluginName}/models/{modelName}/{id}', function ($plu
 Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{pluginCode}/{wildcard}', function (Request $request, $pluginCode, $wildcard) {
     $wildcard = '/' . $wildcard;
     /**@var $currentRoute  Illuminate\Routing\Route */
-    $plugin = \Demo\Core\Models\PluginVersions::where('code',str_replace(' ','.',ucwords(str_replace('-',' ',$pluginCode))))->first();
+    $plugin = \Demo\Core\Models\PluginVersions::where('code',str_replace(' ','.',ucwords(str_replace('.',' ',$pluginCode))))->first();
     if (empty($plugin)) {
         return response(['message' => 'No matching plugin found with code ' . $pluginCode], 404);
     }

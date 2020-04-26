@@ -44,6 +44,20 @@ abstract class AbstractSecurityController extends AbstractPluginController
     /**
      * Before read permission can be evaluated here
      */
+    public function viewExtendQuery($modelClass, $query)
+    {
+        $permission = $this->userSecurityService->getRowLevelPermissions($modelClass, Permission::VIEW);
+        if ($permission->count() === 0) {
+            return $query->where('id', '-1'); // returning empty result
+        }
+        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
+            $query->whereRaw($this->userSecurityService->mergeConditions($permission));
+        }
+    }
+
+    /**
+     * Before read permission can be evaluated here
+     */
     public function listExtendQuery(\October\Rain\Database\Builder $query)
     {
         $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::READ);
@@ -132,22 +146,22 @@ abstract class AbstractSecurityController extends AbstractPluginController
     }
 
     /**Events to handle security on ajax controller*/
-    public function onReadExtendQuery(&$query)
+    public function onReadRecordExtendQuery($query)
     {
         $this->listExtendQuery($query);
     }
 
-    public function onCreateModel(&$models)
+    public function onRecordBeforeCreate($models)
     {
         $this->formBeforeCreate($models);
     }
 
-    public function onUpdateModel(&$model)
+    public function onRecordBeforeUpdate($model)
     {
         $this->formBeforeUpdate($model);
     }
 
-    public function onDeleteModel(&$model)
+    public function onRecordBeforeDelete($model)
     {
         $this->formBeforeDelete($model);
     }

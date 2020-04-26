@@ -30,12 +30,76 @@ Object.assign(EngineUI.prototype, {
             delete action.html_attributes;
             return action;
         });
-    }
+    },
+    request: function (options) {
+        return new Promise(function (resolve, reject) {
+            $.request({
+                url: options.url,
+                data: options.data,
+                method: options.method || 'get',
+                success: function () {
+                    if (typeof options.success === 'function') {
+                        options.success.apply(this, arguments);
+                    }
+                    resolve.apply(this, arguments);
+                }, error: function () {
+                    if (typeof options.error === 'function') {
+                        options.success.apply(this, arguments);
+                    }
+                    reject.apply(this, arguments);
+                }
+            })
+        });
+    },
+    requestControllerAction: function (controller, action, options) {
+        options.url = (controller.startsWith('/backend') ? controller : EngineList.instance.getLocation({
+            controller: controller,
+        })) + '/' + action;
+        return this.request(options);
+    },
+    createRecord: function (controller, record) {
+        if (!Array.isArray(record)) {
+            record = [record];
+        }
+        return this.requestControllerAction(controller, 'onCreateRecord', {
+            data: {
+                data: record,
+            },
+            method: 'post',
+        });
+    },
+    updateRecord: function (controller, id, record) {
+        return this.requestControllerAction(controller, 'onUpdateRecord', {
+            data: {
+                data: record,
+                id: id,
+            },
+            method: 'post',
+        });
+    },
+    deleteRecord: function (controller, id) {
+        return this.requestControllerAction(controller, 'onDeleteRecord', {
+            data: {
+                data: record,
+                id: id,
+            },
+            method: 'post',
+        });
+    },
+    readRecord: function (controller, id) {
+        return this.requestControllerAction(controller, 'onReadRecord', {
+            data: {
+                data: record,
+                id: id,
+            },
+            method: 'post',
+        });
+    },
 });
 
 Object.assign(EngineList.prototype, {
     getLocation: function (model) {
-        return ('/backend/' + model.controller.replace(/\\/g,'/').replace('/Controllers','')).toLocaleLowerCase();
+        return ('/backend/' + model.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
     },
     navigate: function (model, queryParams = {}, view = 'index') {
         window.location.href = this.getLocation(model) + '/' + view + '?' + $.param(queryParams);

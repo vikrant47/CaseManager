@@ -20,6 +20,7 @@ class Permission extends Model
     const WRITE = 'write';
     const DELETE = 'delete';
     const CREATE = 'create';
+    const VIEW = 'view';
 
 
     /**

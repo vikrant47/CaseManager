@@ -15,12 +15,12 @@ fields:
         default: 1
         required: 1
         type: switch
-    model:
+    model_ref:
         label: Model
         showSearch: true
         span: left
         required: 1
-        type: dropdown
+        type: relation
     plugin:
         label: Plugin
         nameFrom: code
