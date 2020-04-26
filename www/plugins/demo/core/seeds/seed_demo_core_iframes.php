@@ -20,12 +20,12 @@ class SeedDemoCoreIframes implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Test",
+                                                                                        "description"=> "",
+                                                                                        "backend_menu"=>"[{\"plugin\":\"10\",\"main_menu\":\"main-menu-item\",\"side_menu\":\"side-menu-item2\"}]",
                                                                                         "slug"=>"test",
                                                                                         "url"=>"https://www.youtube.com/watch?v=cTbIjrF05N0",
                                                                                         "active"=> 1,
-                                                                                        "iframe"=> 1,
-                                                                                        "description"=> "",
-                                                                                        "backend_menu"=>"[{\"plugin\":\"10\",\"main_menu\":\"main-menu-item\",\"side_menu\":\"side-menu-item2\"}]"
+                                                                                        "iframe"=> 1
                             ]             ]);
         }
 

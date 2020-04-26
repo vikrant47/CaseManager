@@ -139,11 +139,16 @@ class AbstractPluginController extends Controller
         return $config->modelRecord;
     }
 
+    public function viewExtendQuery($modelClass, $query)
+    {
+
+    }
+
     public function getListActions()
     {
         $modelClass = $this->modelClass;
         $listConfig = $this->listGetConfig();
-        return ListAction::where([
+        $query = ListAction::where([
             'active' => true,
         ])->where(function ($query) use ($listConfig) {
             $query->where('list', $listConfig->list)
@@ -152,7 +157,9 @@ class AbstractPluginController extends Controller
         })->where(function ($query) use ($modelClass) {
             $query->where('model', $modelClass)
                 ->orWhere('model', UniversalModel::class);
-        })->orderBy('sort_order', 'ASC')->get();
+        })->orderBy('sort_order', 'ASC');
+        $this->viewExtendQuery(ListAction::class, $query);
+        return $query->get();
     }
 
     public function getFormActions($context = 'create')
@@ -160,7 +167,7 @@ class AbstractPluginController extends Controller
         $modelClass = $this->modelClass;
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
-        return FormAction::where([
+        $query = FormAction::where([
             'active' => true
         ])->where(function ($query) use ($formConfig) {
             $query->where('form', $formConfig->form)
@@ -169,7 +176,9 @@ class AbstractPluginController extends Controller
         })->where(function ($query) use ($modelClass) {
             $query->where('model', $modelClass)
                 ->orWhere('model', UniversalModel::class);
-        })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC')->get();
+        })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC');
+        $this->viewExtendQuery(ListAction::class, $query);
+        return $query->get();
     }
 
     public function getControllerInfo()
@@ -196,22 +205,22 @@ class AbstractPluginController extends Controller
         }
     }
 
-    public function onReadExtendQuery(&$query)
+    public function onReadRecordExtendQuery($query)
     {
         return $query;
     }
 
-    public function onCreateModel(&$models)
+    public function onRecordBeforeCreate($models)
     {
         return $models;
     }
 
-    public function onUpdateModel(&$model)
+    public function onRecordBeforeUpdate($model)
     {
         return $model;
     }
 
-    public function onDeleteModel(&$model)
+    public function onRecordBeforeDelete($model)
     {
         return $model;
     }
@@ -219,11 +228,15 @@ class AbstractPluginController extends Controller
     /**
      * Object API Definition start
      */
-    public function onRead($id)
+    public function onReadRecord($id)
     {
+        $request = request();
+        if (empty($id)) {
+            $id = $request->request->get('id');
+        }
         if (is_array($id)) {
             $query = $this->modelClass::whereIn('id', $id);
-            $this->onReadExtendQuery($query);
+            $this->onReadRecordExtendQuery($query);
             $models = $query->get();
             if ($models->count() === 0) {
                 $this->setResponse('No record found with ids ' . json_encode($id), 404);
@@ -232,7 +245,7 @@ class AbstractPluginController extends Controller
             return $models;
         }
         $query = $this->modelClass::where('id', $id);
-        $this->onReadExtendQuery($query);
+        $this->onReadRecordExtendQuery($query);
         $model = $query->get();
         if (empty($model)) {
             $this->setResponse('No record found with id ' . $id, 404);
@@ -244,7 +257,7 @@ class AbstractPluginController extends Controller
     /**
      * Object API Definition start
      */
-    public function onCreate()
+    public function onCreateRecord()
     {
         $request = request();
         $data = $request->request->get('data');
@@ -255,7 +268,7 @@ class AbstractPluginController extends Controller
                 $model->attributes = $record;
                 return $model;
             }, $data);
-            $this->onCreateModel($models);
+            $this->onRecordBeforeCreate($models);
             foreach ($models as $model) {
                 $model->save();
             }
@@ -269,16 +282,19 @@ class AbstractPluginController extends Controller
     /**
      * Object API Definition start
      */
-    public function onUpdate($id)
+    public function onUpdateRecord($id = '')
     {
         $request = request();
+        if (empty($id)) {
+            $id = $request->request->get('id');
+        }
         $data = $request->request->get('data');
         $model = $this->modelClass::where('id', $id)->first();
         if (empty($model)) {
             $this->setResponse('No record found with id ' . $id, 404);
             return;
         }
-        $this->onUpdateModel($model);
+        $this->onRecordBeforeUpdate($model);
         foreach ($data as $key => $val) {
             $model->{$key} = $val;
         }
@@ -289,14 +305,18 @@ class AbstractPluginController extends Controller
     /**
      * Object API Definition start
      */
-    public function onDelete($id)
+    public function onDeleteRecord($id)
     {
+        $request = request();
+        if (empty($id)) {
+            $id = $request->request->get('id');
+        }
         $model = $this->modelClass::where('id', $id)->first();
         if (empty($model)) {
             $this->setResponse('No record found with id ' . $id, 404);
             return;
         }
-        $this->onDeleteModel($model);
+        $this->onRecordBeforeDelete($model);
         $model->delete();
         return $model;
     }

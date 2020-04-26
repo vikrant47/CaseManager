@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoCasemanagerCasePriority extends Migration
+class BuilderTableCreateDemoCasemanagerCasePriorities extends Migration
 {
     public function up()
     {
