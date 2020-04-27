@@ -21,7 +21,7 @@ Object.assign(EngineUI.prototype, {
     },
     toUIAction: function (dbActions, modelRecord) {
         return dbActions.map(function (action) {
-            action.css_class = 'btn btn-primary ' + action.css_class + ' ' + action.icon;
+            action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') + action.css_class + ' ' + action.icon;
             action.handler = Function('return ' + action.script)();
             action.id = 'list-action-' + action.id;
             action.attributes = action.html_attributes;
@@ -136,7 +136,7 @@ Object.assign(EngineFrom.prototype, {
     },
     addFormActions: function (actionRecords, modelRecord) {
         var actions = EngineUI.instance.toUIAction(actionRecords, modelRecord);
-        Engine.instance.addActions($('.engine-form-wrapper .form-buttons .loading-indicator-container'), actions);
+        Engine.instance.addActions($('.engine-form-wrapper .form-buttons .loading-indicator-container .actions'), actions);
     }
 });
 

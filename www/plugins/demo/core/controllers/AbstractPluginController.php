@@ -22,6 +22,7 @@ class AbstractPluginController extends Controller
     static $pluginMiddleware = [];
 
     protected $modelClass;
+    protected $modelRecord;
     /**
      * @var string Layout to use for the view.
      */
@@ -31,7 +32,11 @@ class AbstractPluginController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->modelClass = $this->getConfig()->modelClass;
+        $modelClass = $this->getConfig()->modelClass;
+        if (strpos($modelClass, '\\') === 0) { // some model classes starts with \\
+            $modelClass = substr($modelClass, 1);
+        }
+        $this->modelClass = $modelClass;
         /*$this->layout = plugins_path() . DIRECTORY_SEPARATOR .
             'demo' . DIRECTORY_SEPARATOR .
             'core' . DIRECTORY_SEPARATOR .
@@ -130,13 +135,10 @@ class AbstractPluginController extends Controller
 
     public function getModelRecord()
     {
-        $config = $this->getConfig();
-        if (empty($config->modelRecord)) {
-            $modelClass = $config->modelClass;
-            $config->modelRecord = ModelModel::where('model', $modelClass)->first();
+        if (empty($this->modelRecord)) {
+            $this->modelRecord = ModelModel::where('model', $this->modelClass)->first();
         }
-
-        return $config->modelRecord;
+        return $this->modelRecord;
     }
 
     public function viewExtendQuery($modelClass, $query)

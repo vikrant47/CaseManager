@@ -5,3 +5,7 @@
 .engine-form-wrapper .btn-text a {
     margin-right: 20px;
 }
+
+.form-buttons .loading-indicator-container .actions{
+    display: inline-block;
+}

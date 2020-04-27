@@ -14,6 +14,42 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
     {
             Db::table('demo_core_permission_policy_associations')->insert([
             [
+                                                                            "id"=> 533,
+                                                                                        "created_at"=>"2020-04-27 10:59:16",
+                                                                                        "updated_at"=>"2020-04-27 10:59:16",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 529,
+                                                                                        "policy_id"=> 514
+                            ] ,            [
+                                                                            "id"=> 534,
+                                                                                        "created_at"=>"2020-04-27 10:59:16",
+                                                                                        "updated_at"=>"2020-04-27 10:59:16",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 530,
+                                                                                        "policy_id"=> 514
+                            ] ,            [
+                                                                            "id"=> 535,
+                                                                                        "created_at"=>"2020-04-27 10:59:16",
+                                                                                        "updated_at"=>"2020-04-27 10:59:16",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 531,
+                                                                                        "policy_id"=> 514
+                            ] ,            [
+                                                                            "id"=> 536,
+                                                                                        "created_at"=>"2020-04-27 10:59:17",
+                                                                                        "updated_at"=>"2020-04-27 10:59:17",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "permission_id"=> 532,
+                                                                                        "policy_id"=> 514
+                            ] ,            [
                                                                             "id"=> 16,
                                                                                         "created_at"=>"2020-04-06 07:56:24",
                                                                                         "updated_at"=>"2020-04-06 07:56:24",
