@@ -7,7 +7,8 @@
         $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
         var actions = <?=$this->getFormActions($context)->toJSON()?>;
         var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
-        var formModel = <?=$this->formGetModel()->toJSON()?>;
+        <?php $model = $this->formGetModel()?>
+        var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
         EngineUI.instance.setModelRecord(modelRecord);
         EngineFrom.instance.setFormModel(formModel);

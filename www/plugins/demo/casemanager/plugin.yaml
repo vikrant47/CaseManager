@@ -21,4 +21,7 @@ navigation:
                 label: 'Case Priority'
                 url: demo/casemanager/casepriority
                 icon: icon-flash
-
+            side-menu-item2:
+                label: Projects
+                url: demo/casemanager/projectcontroller
+                icon: icon-briefcase
