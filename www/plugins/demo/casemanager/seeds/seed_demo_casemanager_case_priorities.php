@@ -23,6 +23,16 @@ class SeedDemoCasemanagerCasePriorities implements Seedable
                                                                                         "duration"=> 2155,
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
+                            ] ,            [
+                                                                            "id"=> 3,
+                                                                                        "created_at"=>"2020-04-27 11:12:45",
+                                                                                        "updated_at"=>"2020-04-27 11:12:45",
+                                                                                        "name"=>"High",
+                                                                                        "active"=> 1,
+                                                                                        "description"=> 54,
+                                                                                        "duration"=> 5,
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1
                             ]             ]);
         }
 

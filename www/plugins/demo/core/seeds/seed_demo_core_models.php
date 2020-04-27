@@ -254,22 +254,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "attach_audited_by"=> 1,
                                                                                         "viewable"=> false
                             ] ,            [
-                                                                            "id"=> 11,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Role",
-                                                                                        "model"=>"Demo\Core\Models\Role",
-                                                                                        "controller"=>"Demo\Core\Controllers\RoleController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\" * \"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
-                            ] ,            [
                                                                             "id"=> 12,
                                                                                         "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
@@ -396,6 +380,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
+                                                                                        "viewable"=> false
+                            ] ,            [
+                                                                            "id"=> 508,
+                                                                                        "created_at"=>"2020-04-27 12:16:53",
+                                                                                        "updated_at"=>"2020-04-27 12:16:53",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Role",
+                                                                                        "model"=>"Demo\Core\Models\Role",
+                                                                                        "controller"=>"Demo\Core\Controllers\RoleController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
                                                                                         "viewable"=> false
                             ]             ]);
         }
