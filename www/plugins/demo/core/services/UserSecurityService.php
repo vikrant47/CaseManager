@@ -38,7 +38,7 @@ class UserSecurityService
     public function getRoles()
     {
         $self = $this;
-        return SessionCache::get('USER_ROLES', function () use ($self) {
+        return SessionCache::instance()->get('USER_ROLES', function () use ($self) {
             return Db::table('demo_core_roles')
                 ->join('demo_core_user_role_associations', 'demo_core_user_role_associations.role_id', '=', 'demo_core_roles.id')
                 ->where('demo_core_user_role_associations.user_id', '=', $this->user->id)->get();
@@ -49,7 +49,7 @@ class UserSecurityService
     public function getGroups()
     {
         $self = $this;
-        return SessionCache::get('USER_GROUPS', function () use ($self) {
+        return SessionCache::instance()->get('USER_GROUPS', function () use ($self) {
             return CoreUserGroup::join('users')->where('users.id', '=', $self->user->id)->get();
         });
     }
@@ -66,7 +66,7 @@ class UserSecurityService
     public function getSecurityPolicies()
     {
         $self = $this;
-        return SessionCache::get('USER_SECURITY_POLICIES', function () use ($self) {
+        return SessionCache::instance()->get('USER_SECURITY_POLICIES', function () use ($self) {
             return Db::table('demo_core_security_policies')
                 ->join('demo_core_role_policy_associations', 'demo_core_role_policy_associations.policy_id', '=', 'demo_core_security_policies.id')
                 ->join('demo_core_roles', 'demo_core_roles.id', '=', 'demo_core_role_policy_associations.role_id')
@@ -103,7 +103,7 @@ class UserSecurityService
     public function getPermissions()
     {
         $self = $this;
-        return SessionCache::get('USER_PERMISSIONS', function () use ($self) {
+        return SessionCache::instance()->get('USER_PERMISSIONS', function () use ($self) {
             $permissions = Db::table('demo_core_permissions')->select('demo_core_permissions.*')
                 ->join('demo_core_permission_policy_associations', 'demo_core_permission_policy_associations.permission_id', '=', 'demo_core_permissions.id')
                 ->join('demo_core_security_policies', 'demo_core_security_policies.id', '=', 'demo_core_permission_policy_associations.policy_id')
@@ -167,6 +167,6 @@ class UserSecurityService
 
     public function flushCache()
     {
-        SessionCache::flush();
+        SessionCache::instance()->flush();
     }
 }

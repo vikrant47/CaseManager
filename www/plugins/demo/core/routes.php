@@ -1,9 +1,11 @@
 <?php
 
+use Backend\Classes\AuthManager;
 use Demo\Core\Classes\Beans\ScriptContext;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
-Route::get('/engine/api/{pluginName}/models/{modelName}', function ($pluginName, $modelName) {
+Route::get('/backend/engine/api/{pluginName}/models/{modelName}', function ($pluginName, $modelName) {
     $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
     $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
     $data = $pluginConnection->getModel($modelName)::all();
@@ -11,9 +13,9 @@ Route::get('/engine/api/{pluginName}/models/{modelName}', function ($pluginName,
         return response($data, 404);
     }
     return response($data, 200);
-});
+})->middleware('web');
 
-Route::get('/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
+Route::get('/backend/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
     $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
     $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
     $data = $pluginConnection->getModel($modelName)::find($id);
@@ -21,9 +23,9 @@ Route::get('/engine/api/{pluginName}/models/{modelName}/{id}', function ($plugin
         return response($data, 404);
     }
     return response($data->first(), 200);
-});
+})->middleware('web');
 
-Route::post('/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
+Route::post('/backend/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
     $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
     $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
     $data = $pluginConnection->getModel($modelName)::find($id);
@@ -31,9 +33,9 @@ Route::post('/engine/api/{pluginName}/models/{modelName}/{id}', function ($plugi
         return response($data, 404);
     }
     return response($data->first(), 200);
-});
+})->middleware('web');
 
-Route::delete('/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
+Route::delete('/backend/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
     $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
     $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
     $data = $pluginConnection->getModel($modelName)::find($id);
@@ -41,14 +43,15 @@ Route::delete('/engine/api/{pluginName}/models/{modelName}/{id}', function ($plu
         return response($data, 404);
     }
     return response($data->first(), 200);
-});
+})->middleware('web');
 
 Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{pluginCode}/{wildcard}', function (Request $request, $pluginCode, $wildcard) {
     $wildcard = '/' . $wildcard;
     /**@var $currentRoute  Illuminate\Routing\Route */
-    $plugin = \Demo\Core\Models\PluginVersions::where('code',str_replace(' ','.',ucwords(str_replace('.',' ',$pluginCode))))->first();
+    $code = str_replace(' ','.',ucwords(str_replace('-',' ',$pluginCode)));
+    $plugin = \Demo\Core\Models\PluginVersions::where('code',$code)->first();
     if (empty($plugin)) {
-        return response(['message' => 'No matching plugin found with code ' . $pluginCode], 404);
+        return response(['message' => 'No matching plugin found with code ' . $code], 404);
     }
     $currentRoute = Route::getCurrentRoute();
     $apis = \Demo\Core\Models\InboundApi::where([
@@ -66,4 +69,4 @@ Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{pluginCode}
     }
     return response(['message' => 'No matching path found'], 404);
 
-})->where('wildcard', '.+');;
+})->where('wildcard', '.+')->middleware('web');

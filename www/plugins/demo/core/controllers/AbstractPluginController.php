@@ -5,6 +5,8 @@ namespace Demo\Core\Controllers;
 
 
 use Backend\Classes\Controller;
+use Demo\Core\Classes\Beans\ApplicationCache;
+use Demo\Core\Classes\Beans\SessionCache;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Ifs\IPluginMiddleware;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
@@ -22,6 +24,7 @@ class AbstractPluginController extends Controller
     static $pluginMiddleware = [];
 
     protected $modelClass;
+    protected $modelRecord;
     /**
      * @var string Layout to use for the view.
      */
@@ -31,7 +34,11 @@ class AbstractPluginController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->modelClass = $this->getConfig()->modelClass;
+        $modelClass = $this->getConfig()->modelClass;
+        if (strpos($modelClass, '\\') === 0) { // some model classes starts with \\
+            $modelClass = substr($modelClass, 1);
+        }
+        $this->modelClass = $modelClass;
         /*$this->layout = plugins_path() . DIRECTORY_SEPARATOR .
             'demo' . DIRECTORY_SEPARATOR .
             'core' . DIRECTORY_SEPARATOR .
@@ -130,13 +137,10 @@ class AbstractPluginController extends Controller
 
     public function getModelRecord()
     {
-        $config = $this->getConfig();
-        if (empty($config->modelRecord)) {
-            $modelClass = $config->modelClass;
-            $config->modelRecord = ModelModel::where('model', $modelClass)->first();
+        if (empty($this->modelRecord)) {
+            $this->modelRecord = ModelModel::where('model', $this->modelClass)->first();
         }
-
-        return $config->modelRecord;
+        return $this->modelRecord;
     }
 
     public function viewExtendQuery($modelClass, $query)
@@ -146,20 +150,22 @@ class AbstractPluginController extends Controller
 
     public function getListActions()
     {
-        $modelClass = $this->modelClass;
         $listConfig = $this->listGetConfig();
-        $query = ListAction::where([
-            'active' => true,
-        ])->where(function ($query) use ($listConfig) {
-            $query->where('list', $listConfig->list)
-                ->orWhere('list', null)
-                ->orWhere('list', '');
-        })->where(function ($query) use ($modelClass) {
-            $query->where('model', $modelClass)
-                ->orWhere('model', UniversalModel::class);
-        })->orderBy('sort_order', 'ASC');
-        $this->viewExtendQuery(ListAction::class, $query);
-        return $query->get();
+        $modelClass = $this->modelClass;
+        return ApplicationCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
+            $query = ListAction::where([
+                'active' => true,
+            ])->where(function ($query) use ($listConfig) {
+                $query->where('list', $listConfig->list)
+                    ->orWhere('list', null)
+                    ->orWhere('list', '');
+            })->where(function ($query) use ($modelClass) {
+                $query->where('model', $modelClass)
+                    ->orWhere('model', UniversalModel::class);
+            })->orderBy('sort_order', 'ASC');
+            $this->viewExtendQuery(ListAction::class, $query);
+            return $query->get();
+        });
     }
 
     public function getFormActions($context = 'create')
@@ -167,18 +173,20 @@ class AbstractPluginController extends Controller
         $modelClass = $this->modelClass;
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
-        $query = FormAction::where([
-            'active' => true
-        ])->where(function ($query) use ($formConfig) {
-            $query->where('form', $formConfig->form)
-                ->orWhere('form', null)
-                ->orWhere('form', '');
-        })->where(function ($query) use ($modelClass) {
-            $query->where('model', $modelClass)
-                ->orWhere('model', UniversalModel::class);
-        })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC');
-        $this->viewExtendQuery(ListAction::class, $query);
-        return $query->get();
+        return ApplicationCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {
+            $query = FormAction::where([
+                'active' => true
+            ])->where(function ($query) use ($formConfig) {
+                $query->where('form', $formConfig->form)
+                    ->orWhere('form', null)
+                    ->orWhere('form', '');
+            })->where(function ($query) use ($modelClass) {
+                $query->where('model', $modelClass)
+                    ->orWhere('model', UniversalModel::class);
+            })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC');
+            $this->viewExtendQuery(ListAction::class, $query);
+            return $query->get();
+        });
     }
 
     public function getControllerInfo()

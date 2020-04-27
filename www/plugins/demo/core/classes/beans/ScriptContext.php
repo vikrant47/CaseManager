@@ -27,6 +27,11 @@ class ScriptContext
 
     }
 
+    public function setCurrentUser($user)
+    {
+        BackendAuth::setUser($user);
+    }
+
     public function setAttribute(string $key, $value): self
     {
         $this->attributes[$key] = $value;

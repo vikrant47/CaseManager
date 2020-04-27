@@ -4,12 +4,13 @@
 <div class="engine-form-wrapper">
     <?= $this->makePartial($view, ['contents' => $contents]); ?>
     <script>
+        $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
         var actions = <?=$this->getFormActions($context)->toJSON()?>;
         var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
         var formModel = <?=$this->formGetModel()->toJSON()?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
         EngineUI.instance.setModelRecord(modelRecord);
         EngineFrom.instance.setFormModel(formModel);
-        EngineFrom.instance.addFormActions(actions,modelRecord);
+        EngineFrom.instance.addFormActions(actions, modelRecord);
     </script>
 </div>
