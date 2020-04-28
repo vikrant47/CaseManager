@@ -16,6 +16,7 @@ use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\UniversalModel;
 use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
+use Db;
 
 class AbstractPluginController extends Controller
 {
@@ -152,8 +153,8 @@ class AbstractPluginController extends Controller
     {
         $listConfig = $this->listGetConfig();
         $modelClass = $this->modelClass;
-        return ApplicationCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
-            $query = ListAction::where([
+        return SessionCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
+            $query = Db::table('demo_core_list_actions')->where([
                 'active' => true,
             ])->where(function ($query) use ($listConfig) {
                 $query->where('list', $listConfig->list)
@@ -164,7 +165,8 @@ class AbstractPluginController extends Controller
                     ->orWhere('model', UniversalModel::class);
             })->orderBy('sort_order', 'ASC');
             $this->viewExtendQuery(ListAction::class, $query);
-            return $query->get();
+            $result = $query->get();
+            return $result;
         });
     }
 
@@ -173,8 +175,8 @@ class AbstractPluginController extends Controller
         $modelClass = $this->modelClass;
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
-        return ApplicationCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {
-            $query = FormAction::where([
+        return SessionCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {
+            $query = Db::table('demo_core_form_actions')::where([
                 'active' => true
             ])->where(function ($query) use ($formConfig) {
                 $query->where('form', $formConfig->form)
@@ -185,7 +187,8 @@ class AbstractPluginController extends Controller
                     ->orWhere('model', UniversalModel::class);
             })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC');
             $this->viewExtendQuery(ListAction::class, $query);
-            return $query->get();
+            $result = $query->get();
+            return $result;
         });
     }
 

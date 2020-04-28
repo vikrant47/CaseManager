@@ -49,6 +49,7 @@ tabs:
                 write: Write
                 create: Create
                 delete: Delete
+                view: View
             showSearch: true
             span: auto
             required: 1

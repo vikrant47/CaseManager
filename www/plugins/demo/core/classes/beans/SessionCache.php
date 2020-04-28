@@ -15,5 +15,4 @@ class SessionCache extends AbstractCache
     {
         parent::__construct(Session::class);
     }
-
 }
