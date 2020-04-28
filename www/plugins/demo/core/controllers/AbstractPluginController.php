@@ -152,7 +152,7 @@ class AbstractPluginController extends Controller
     {
         $listConfig = $this->listGetConfig();
         $modelClass = $this->modelClass;
-        return ApplicationCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
+        return SessionCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
             $query = ListAction::where([
                 'active' => true,
             ])->where(function ($query) use ($listConfig) {
@@ -173,7 +173,7 @@ class AbstractPluginController extends Controller
         $modelClass = $this->modelClass;
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
-        return ApplicationCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {
+        return SessionCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {
             $query = FormAction::where([
                 'active' => true
             ])->where(function ($query) use ($formConfig) {
