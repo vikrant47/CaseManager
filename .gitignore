@@ -17,7 +17,6 @@ www/vendor
 www/artisan
 www/install.php
 www/install-master
-www/themes
 www/tests
 www/phpunit.xml
 www/phpcs.xml

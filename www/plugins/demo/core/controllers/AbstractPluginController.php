@@ -149,6 +149,24 @@ class AbstractPluginController extends Controller
 
     }
 
+    /**
+     * This will create a formWidget object of given form which can be rendered inside a partial
+     */
+    protected function createFormWidget($form, $modelRecord, $recordId = 0)
+    {
+        $config = $this->makeConfig($form);
+        $config->alias = 'voucherProduct';
+        $config->arrayName = 'VoucherProduct';
+        if ($recordId) {
+            $config->model = $modelRecord->model::find($recordId);
+        } else {
+            $config->model = new $modelRecord->model;
+        }
+        $widget = $this->makeWidget('Backend\Widgets\Form', $config);
+        $widget->bindToController();
+        return $widget;
+    }
+
     public function getListActions()
     {
         $listConfig = $this->listGetConfig();
