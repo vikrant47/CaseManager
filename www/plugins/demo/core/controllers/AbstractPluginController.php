@@ -176,7 +176,7 @@ class AbstractPluginController extends Controller
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
         return SessionCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {
-            $query = Db::table('demo_core_form_actions')::where([
+            $query = Db::table('demo_core_form_actions')->where([
                 'active' => true
             ])->where(function ($query) use ($formConfig) {
                 $query->where('form', $formConfig->form)
