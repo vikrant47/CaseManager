@@ -39,6 +39,14 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
+    case_version:
+        label: 'Case Version'
+        span: auto
+        type: text
+    tat_duration:
+        label: 'Tat Duration'
+        span: auto
+        type: number
 tabs:
     fields:
         assigned_to:
