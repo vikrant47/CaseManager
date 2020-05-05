@@ -1,0 +1,16 @@
+1.0.1:
+    - Initial Backend Skin
+1.0.2:
+    - Update Event Dispatcher
+1.0.3:
+    - Update PluginEventSubscriber.php
+1.0.4:
+    - Fix modules theme customization
+1.1.0:
+    - Add separation of backendskin and theme
+    - Add new method on defining skin code
+1.1.1:
+    - Update Asset maker to accept multiple file in addCss and addJs
+    - Fix assets that was directly access by Url::asset
+1.1.2:
+    - Use extends for url instead of singleton
