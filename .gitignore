@@ -14,12 +14,9 @@ www/storage/logs
 www/storage/temp
 www/storage/framework
 www/vendor
-www/artisan
 www/install.php
 www/install-master
 www/tests
-www/phpunit.xml
-www/phpcs.xml
 www/.htaccess
 www/ed
 www/.travis.yml
