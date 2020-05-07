@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="<?= App::getLocale() ?>" class="no-js <?= $this->makeLayoutPartial('browser_detector') ?>">
+
+
+<!-- Mirrored from www.nobleui.com/html/template/demo_1/dashboard-one.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 May 2020 05:22:20 GMT -->
+<head>
+    <?= $this->makeLayoutPartial('partials/head') ?>
+</head>
+<body>
+<div class="main-wrapper">
+
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar">
+        <?= $this->makeLayoutPartial('partials/sidebar') ?>
+    </nav>
+    <!-- partial -->
+
+    <div class="page-wrapper">
+
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar">
+            <?= $this->makeLayoutPartial('partials/header') ?>
+        </nav>
+        <!-- partial -->
+
+        <div class="page-content">
+
+            <?= $this->makeLayoutPartial('partials/body') ?>
+
+        </div>
+
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <?= $this->makeLayoutPartial('partials/footer') ?>
+        </footer>
+        <!-- partial -->
+
+    </div>
+</div>
+<?= $this->makeLayoutPartial('partials/foot') ?>
+
+<!-- end custom js for this page -->
+</body>
+
+<!-- Mirrored from www.nobleui.com/html/template/demo_1/dashboard-one.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 May 2020 05:22:42 GMT -->
+</html>    
