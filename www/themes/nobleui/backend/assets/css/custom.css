@@ -40,7 +40,7 @@
 
 
 .custom-switch > span, .custom-switch input:checked ~ span {
-    background-color: #031a61;
+    background-color: rgb(188, 189, 202);
     font-size: 1.175rem;
     font-weight: 400;
 }
@@ -64,6 +64,15 @@
     height: calc(1.5em + 0.75rem + 2px);
 }
 
+.relation-widget {
+    height: calc(2.5em + 0.75rem + 2px);
+}
+
+.custom-checkbox input[type=checkbox]:indeterminate + label:before, .custom-radio input[type=checkbox]:indeterminate + label:before, .custom-checkbox input[type=checkbox]:checked + label:before, .custom-radio input[type=checkbox]:checked + label:before {
+    border-color: #727cf5;
+    background-color: #727cf5;
+}
+
 .custom-checkbox input[type=radio], .custom-radio input[type=radio], .custom-checkbox input[type=checkbox], .custom-radio input[type=checkbox] {
     position: absolute;
     top: 0;
@@ -77,30 +86,35 @@
 }
 
 /**Tabs Css*/
-/*.control-tabs.primary-tabs > ul.nav-tabs:before, .control-tabs.primary-tabs > div > ul.nav-tabs:before, .control-tabs.primary-tabs > div > div > ul.nav-tabs:before {
-    border-bottom: 2px solid #bdc1f5;
+.control-tabs.primary-tabs > ul.nav-tabs:before, .control-tabs.primary-tabs > div > ul.nav-tabs:before, .control-tabs.primary-tabs > div > div > ul.nav-tabs:before {
+    border-bottom: 2px solid #e8ebf1;
 }
 
 .control-tabs.primary-tabs > ul.nav-tabs > li.active a > span.title, .control-tabs.primary-tabs > div > ul.nav-tabs > li.active a > span.title, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li.active a > span.title {
-    border-top-color: #bdc1f5;
+    border-top-color: #e8ebf1;
 }
 
 .control-tabs.primary-tabs > ul.nav-tabs > li.active a > span.title span, .control-tabs.primary-tabs > div > ul.nav-tabs > li.active a > span.title span, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li.active a > span.title span {
-    border-top-color: #bdc1f5;
-}*/
+    border-top-color: #e8ebf1;
+}
 
 .control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:after {
     background: #FFFFFF;
-    /*border-color: #bdc1f5 !important;*/
+    border-color: #e8ebf1 !important;
 }
 
 .control-tabs > ul.nav-tabs > li a > span.title > span, .control-tabs > div > ul.nav-tabs > li a > span.title > span, .control-tabs > div > div > ul.nav-tabs > li a > span.title > span {
-    /*border-top-color: #bdc1f5;*/
+    border-top-color: #e8ebf1;
 }
 
 .control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:after {
     background: #FFFFFF;
-    /*border-color: #bdc1f5 !important;*/
+    border-color: #e8ebf1 !important;
+}
+
+.control-tabs.primary-tabs > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a {
+    font-size: 12px;
+    font-weight: 400;
 }
 
 /***navbar**/
@@ -146,4 +160,9 @@ table.table.data tbody tr td, table.table.data tbody tr th {
 table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-data).selected td {
     background-color: transparent !important;
     color: #666;
+}
+
+.form-control.icon.search {
+    background-position: right -84px;
+    float: right;
 }
