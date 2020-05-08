@@ -1,0 +1,168 @@
+.buy-now-wrapper {
+    display: none;
+}
+
+#resize-flyout {
+    display: none;
+}
+
+.form-group, .form-group.layout-item {
+    padding-bottom: 0px;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-size: 1.3rem;
+}
+
+.help-block {
+    font-size: 11px;
+}
+
+.form-control, select, .email-compose-fields .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
+    border: 1px solid #e8ebf1;
+    font-weight: 400;
+    font-size: 1.375rem;
+}
+
+.form-control:disabled, select:disabled, .email-compose-fields .select2-container--default .select2-selection--multiple:disabled, .select2-container--default .select2-selection--single:disabled, .select2-container--default .select2-selection--single .select2-search__field:disabled, .typeahead:disabled, .tt-query:disabled, .tt-hint:disabled, .form-control[readonly], select[readonly], .email-compose-fields .select2-container--default .select2-selection--multiple[readonly], .select2-container--default .select2-selection--single[readonly], .select2-container--default .select2-selection--single .select2-search__field[readonly], .typeahead[readonly], .tt-query[readonly], .tt-hint[readonly] {
+    background-color: #e9ecef !important;
+    opacity: 1;
+}
+
+.card-body .field-repeater li.field-repeater-item {
+    background: none;
+}
+
+.control-tabs > div.tab-content > div.tab-pane.active.layout-cell {
+    display: block;
+}
+
+
+.custom-switch > span, .custom-switch input:checked ~ span {
+    background-color: rgb(188, 189, 202);
+    font-size: 1.175rem;
+    font-weight: 400;
+}
+
+.custom-switch input:checked ~ span {
+    background-color: #727cf5;
+}
+
+.custom-switch .slide-button {
+    right: 38px;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.custom-switch {
+    width: 58px;
+}
+
+.select2-container--default .select2-selection--single, span.select2.select2-container {
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.relation-widget {
+    height: calc(2.5em + 0.75rem + 2px);
+}
+
+.custom-checkbox input[type=checkbox]:indeterminate + label:before, .custom-radio input[type=checkbox]:indeterminate + label:before, .custom-checkbox input[type=checkbox]:checked + label:before, .custom-radio input[type=checkbox]:checked + label:before {
+    border-color: #727cf5;
+    background-color: #727cf5;
+}
+
+.custom-checkbox input[type=radio], .custom-radio input[type=radio], .custom-checkbox input[type=checkbox], .custom-radio input[type=checkbox] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    margin-top: 0;
+    z-index: 1;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+/**Tabs Css*/
+.control-tabs.primary-tabs > ul.nav-tabs:before, .control-tabs.primary-tabs > div > ul.nav-tabs:before, .control-tabs.primary-tabs > div > div > ul.nav-tabs:before {
+    border-bottom: 2px solid #e8ebf1;
+}
+
+.control-tabs.primary-tabs > ul.nav-tabs > li.active a > span.title, .control-tabs.primary-tabs > div > ul.nav-tabs > li.active a > span.title, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li.active a > span.title {
+    border-top-color: #e8ebf1;
+}
+
+.control-tabs.primary-tabs > ul.nav-tabs > li.active a > span.title span, .control-tabs.primary-tabs > div > ul.nav-tabs > li.active a > span.title span, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li.active a > span.title span {
+    border-top-color: #e8ebf1;
+}
+
+.control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:after {
+    background: #FFFFFF;
+    border-color: #e8ebf1 !important;
+}
+
+.control-tabs > ul.nav-tabs > li a > span.title > span, .control-tabs > div > ul.nav-tabs > li a > span.title > span, .control-tabs > div > div > ul.nav-tabs > li a > span.title > span {
+    border-top-color: #e8ebf1;
+}
+
+.control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:before, .control-tabs.primary-tabs > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > ul.nav-tabs > li a > span.title:after, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a > span.title:after {
+    background: #FFFFFF;
+    border-color: #e8ebf1 !important;
+}
+
+.control-tabs.primary-tabs > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/***navbar**/
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+}
+
+/***list**/
+.control-filter {
+    padding: 0 10px;
+    color: rgba(0, 0, 0, 0.6);
+    background-color: transparent;
+    border-top: none;
+    border-bottom: none;
+}
+
+.list-widget table.table.data thead td, .list-widget table.table.data thead th, .list-widget table.table.data .list-checkbox {
+    border: none;
+}
+
+.list-with-sidebar table.table.data {
+    border: none;
+}
+
+.table td {
+    font-size: 1.175rem;
+}
+
+/**Buttons*/
+.btn, .fc .fc-button, .swal2-modal .swal2-actions button, .wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions .disabled a {
+    font-size: 1.175rem;
+}
+
+table.table.data tbody tr:nth-child(even) td, table.table.data tbody tr:nth-child(even) th {
+    background-color: transparent;
+}
+
+table.table.data tbody tr td, table.table.data tbody tr th {
+    border-top: 1px solid #e8ebf1;
+}
+
+table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-data).selected td {
+    background-color: transparent !important;
+    color: #666;
+}
+
+.form-control.icon.search {
+    background-position: right -84px;
+    float: right;
+}
