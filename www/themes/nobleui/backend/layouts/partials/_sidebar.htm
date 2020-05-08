@@ -13,7 +13,7 @@ $contextSidenav = BackendMenu::getContextSidenavPartial($context->owner, $contex
 ?>
 <div class="sidebar-header">
     <a href="#" class="sidebar-brand">
-        Noble<span>UI</span>
+        <span><?= e(Backend\Models\BrandSetting::get('app_name')) ?></span>
     </a>
     <div class="sidebar-toggler not-active">
         <span></span>

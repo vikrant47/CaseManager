@@ -1,3 +1,11 @@
+<?php
+
+use Backend\Models\BrandSetting;
+use System\Classes\SettingsManager;
+
+$mySettings = System\Classes\SettingsManager::instance()->listItems('mysettings');
+$profileImage = $this->user->getAvatarThumb(40, ['mode' => 'crop', 'extension' => 'png']);
+?>
 <a href="#" class="sidebar-toggler">
     <i data-feather="menu"></i>
 </a>
@@ -13,28 +21,28 @@
         </div>
     </form>
     <ul class="navbar-nav">
-        <li class="nav-item dropdown">
+        <!--<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="flag-icon flag-icon-us mt-1" title="us" id="us"></i> <span
-                    class="font-weight-medium ml-1 mr-1">English</span>
+                        class="font-weight-medium ml-1 mr-1">English</span>
             </a>
             <div class="dropdown-menu" aria-labelledby="languageDropdown">
                 <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-us"
                                                                      title="us" id="us"></i> <span
-                        class="ml-1"> English </span></a>
+                            class="ml-1"> English </span></a>
                 <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-fr"
                                                                      title="fr" id="fr"></i> <span
-                        class="ml-1"> French </span></a>
+                            class="ml-1"> French </span></a>
                 <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-de"
                                                                      title="de" id="de"></i> <span
-                        class="ml-1"> German </span></a>
+                            class="ml-1"> German </span></a>
                 <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-pt"
                                                                      title="pt" id="pt"></i> <span
-                        class="ml-1"> Portuguese </span></a>
+                            class="ml-1"> Portuguese </span></a>
                 <a href="javascript:;" class="dropdown-item py-2"><i class="flag-icon flag-icon-es"
                                                                      title="es" id="es"></i> <span
-                        class="ml-1"> Spanish </span></a>
+                            class="ml-1"> Spanish </span></a>
             </div>
         </li>
         <li class="nav-item dropdown nav-apps">
@@ -209,44 +217,36 @@
                     <a href="javascript:;">View all</a>
                 </div>
             </div>
-        </li>
+        </li>-->
         <li class="nav-item dropdown nav-profile">
             <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="../../assets/images/faces/face1.jpg" alt="profile">
+                <img src="<?= $profileImage ?>" alt="profile">
             </a>
             <div class="dropdown-menu" aria-labelledby="profileDropdown">
                 <div class="dropdown-header d-flex flex-column align-items-center">
                     <div class="figure mb-3">
-                        <img src="../../assets/images/faces/face1.jpg" alt="">
+                        <img src="<?= $profileImage ?>" alt="">
                     </div>
                     <div class="info text-center">
-                        <p class="name font-weight-bold mb-0">Amiah Burton</p>
-                        <p class="email text-muted mb-3">amiahburton@gmail.com</p>
+                        <p class="name font-weight-bold mb-0"><?= $this->user->full_name ?></p>
+                        <p class="email text-muted mb-3"><?= $this->user->email ?></p>
                     </div>
                 </div>
                 <div class="dropdown-body">
                     <ul class="profile-nav p-0 pt-3">
+                        <?php foreach ($mySettings as $category => $items): ?>
+                            <?php foreach ($items as $item): ?>
+                                <li class="nav-item">
+                                    <a href="<?= $item->url ?>" class="nav-link">
+                                        <i data-feather="user"></i>
+                                        <span><?= e(trans($item->label)) ?></span>
+                                    </a>
+                                </li>
+                            <?php endforeach ?>
+                        <?php endforeach ?>
                         <li class="nav-item">
-                            <a href="../../demo_1/pages/general/profile.html" class="nav-link">
-                                <i data-feather="user"></i>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
-                                <i data-feather="edit"></i>
-                                <span>Edit Profile</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
-                                <i data-feather="repeat"></i>
-                                <span>Switch User</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="javascript:;" class="nav-link">
+                            <a href="<?= Backend::url('backend/auth/signout') ?>" class="nav-link">
                                 <i data-feather="log-out"></i>
                                 <span>Log Out</span>
                             </a>
