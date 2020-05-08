@@ -177,15 +177,23 @@ body {
     border-bottom: none;
     margin-bottom: 10px;
 }
-.list-footer{
+
+.control-filter-popover .filter-items {
+    width: 100%;
+}
+
+.list-footer {
     padding: 0px;
 }
+
 .control-list {
     margin-bottom: 0px;
 }
-.control-toolbar{
+
+.control-toolbar {
     padding: 0px 0px 8px 0px;
 }
+
 .list-widget table.table.data thead td, .list-widget table.table.data thead th, .list-widget table.table.data .list-checkbox {
     border: none;
 }
@@ -232,7 +240,21 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     float: right;
 }
 
+/**ACE editor*/
+.ace_editor {
+    position: static !important;
+}
+
+.ace_editor .ace_content {
+    font-size: 12px;
+    /*position: static !important;*/
+}
+
 /***navigation ***/
+.navbar, .sidebar {
+    z-index: 10;
+}
+
 .nav .nav-item .nav-link .link-icon {
     font-size: 1.550rem;
 }
