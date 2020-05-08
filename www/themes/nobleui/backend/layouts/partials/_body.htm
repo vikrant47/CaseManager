@@ -1,3 +1,15 @@
+<?php if ($breadcrumbContent = Block::placeholder('breadcrumb')): ?>
+    <!-- Breadcrumb -->
+    <nav class="page-breadcrumb">
+        <?= $breadcrumbContent ?>
+    </nav>
+    <!-- <nav class="page-breadcrumb">
+         <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a href="#">Forms</a></li>
+             <li class="breadcrumb-item active" aria-current="page">Basic Elements</li>
+         </ol>
+     </nav>-->
+<?php endif ?>
 <div class="row">
     <div class="col-12 col-xl-12 stretch-card">
         <div class="card">
