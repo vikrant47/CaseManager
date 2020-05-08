@@ -1,0 +1,22 @@
+<?php
+$coreBuild = System\Models\Parameter::get('system::core.build', 1);
+
+use System\Models\Parameter; ?>
+<!-- core:js -->
+<!--<script src="<?/*= Backend::skinAsset('assets/vendors/core/core.js')*/?>"></script>-->
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script src="<?= Backend::skinAsset('assets/vendors/chartjs/Chart.min.js')?>"></script>
+<script src="<?= Backend::skinAsset('assets/vendors/jquery.flot/jquery.flot.js')?>"></script>
+<script src="<?= Backend::skinAsset('assets/vendors/jquery.flot/jquery.flot.resize.js')?>"></script>
+<script src="<?= Backend::skinAsset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')?>"></script>
+<script src="<?= Backend::skinAsset('assets/vendors/apexcharts/apexcharts.min.js')?>"></script>
+<script src="<?= Backend::skinAsset('assets/vendors/progressbar.js/progressbar.min.js')?>"></script>
+<!-- end plugin js for this page -->
+<!-- inject:js -->
+<script src="<?= Backend::skinAsset('assets/vendors/feather-icons/feather.min.js')?>"></script>
+<script src="<?= Backend::skinAsset('assets/js/template.js')?>"></script>
+<!-- endinject -->
+<!-- custom js for this page -->
+<script src="<?= Backend::skinAsset('assets/js/dashboard.js')?>"></script>
+<script src="<?= Backend::skinAsset('assets/js/datepicker.js')?>"></script>
