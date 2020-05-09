@@ -9,5 +9,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-   // const scrollbarExample = new PerfectScrollbar('.list-scrollable');
+    $('.list-scrollable >table').wrap('<div class="table-wrapper"></div>');
+    const scrollbarExample = new PerfectScrollbar('.table-wrapper');
 });
