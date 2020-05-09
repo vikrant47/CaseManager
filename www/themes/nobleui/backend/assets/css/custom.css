@@ -6,7 +6,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-.buy-now-wrapper {
+.buy-now-wrapper, .settings-sidebar {
     display: none;
 }
 
@@ -137,6 +137,7 @@ body {
     font-weight: 400;
 }
 
+
 /**Richeditor*/
 .fr-toolbar .fr-command.fr-btn i, .fr-popup .fr-command.fr-btn i, .fr-toolbar .fr-command.fr-btn svg, .fr-popup .fr-command.fr-btn svg {
     font-size: 11px;
@@ -262,4 +263,31 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 /** breadcrumb**/
 .breadcrumb {
     font-size: 1.350rem;
+}
+
+/**SWAL*/
+.sweet-alert {
+    width: 24%;
+}
+
+/**MODAL*/
+.fade:not(.show) {
+    opacity: inherit;
+}
+
+.modal-header {
+    display: flow-root;
+}
+
+.modal-header h4 {
+    float: left;
+}
+
+.modal-header button {
+    float: right;
+}
+
+/**loader**/
+.stripe-loading-indicator .stripe, .stripe-loading-indicator .stripe-loaded {
+    background: #727cf5 !important;
 }
