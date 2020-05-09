@@ -21,7 +21,7 @@ Object.assign(EngineUI.prototype, {
     },
     toUIAction: function (dbActions, modelRecord) {
         return dbActions.map(function (action) {
-            action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') + action.css_class + ' ' + action.icon;
+            action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') +' '+ action.css_class + ' ' + action.icon;
             action.handler = Function('return ' + action.script)();
             action.id = 'list-action-' + action.id;
             action.attributes = typeof action.html_attributes === 'string' ? JSON.parse(action.html_attributes) : action.html_attributes;
