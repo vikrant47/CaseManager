@@ -1,0 +1,10 @@
+name: NavigationController
+form: $/demo/core/models/navigation/fields.yaml
+modelClass: Demo\Core\Models\Navigation
+defaultRedirect: demo/core/navigationcontroller
+create:
+    redirect: 'demo/core/navigationcontroller/update/:id'
+    redirectClose: demo/core/navigationcontroller
+update:
+    redirect: demo/core/navigationcontroller
+    redirectClose: demo/core/navigationcontroller

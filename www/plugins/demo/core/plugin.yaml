@@ -21,6 +21,10 @@ navigation:
                 icon: icon-table
                 permissions:
                     - 'demo.core::models.model.row.read.*'
+            side-menu-item14:
+                label: Navigations
+                url: demo/core/navigationcontroller
+                icon: icon-location-arrow
             side-menu-item11:
                 label: 'Model Association'
                 url: demo/core/modelassociationcontroller

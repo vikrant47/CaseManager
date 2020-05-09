@@ -1,0 +1,4 @@
+title: NavigationController
+modelClass: Demo\Core\Models\Navigation
+toolbar:
+    buttons: reorder_toolbar
