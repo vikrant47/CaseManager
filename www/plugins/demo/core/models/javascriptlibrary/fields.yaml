@@ -21,29 +21,17 @@ fields:
         type: relation
 tabs:
     fields:
-        css_files:
-            label: 'Css Files'
-            prompt: 'Add new item'
-            span: auto
-            type: repeater
-            tab: Resources
-            form:
-                fields:
-                    css_file:
-                        label: 'Css File'
-                        mode: file
-                        span: full
-                        type: mediafinder
         javascript_files:
             label: 'Javascript Files'
             prompt: 'Add new item'
             span: auto
-            type: repeater
+            type: fileupload
+            mode: file
             tab: Resources
-            form:
-                fields:
-                    javascript_file:
-                        label: 'Javascript File'
-                        mode: file
-                        span: full
-                        type: mediafinder
+        css_files:
+            label: 'Css Files'
+            prompt: 'Add new item'
+            span: auto
+            type: fileupload
+            mode: file
+            tab: Resources

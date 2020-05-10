@@ -9,6 +9,7 @@ use Demo\Core\Classes\Beans\ApplicationCache;
 use Demo\Core\Classes\Beans\SessionCache;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Ifs\IPluginMiddleware;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Core\Models\FormAction;
 use Demo\Core\Models\ListAction;
@@ -171,12 +172,17 @@ class AbstractPluginController extends Controller
 
     public function getNavigations()
     {
-        return SessionCache::instance()->get('NAVIGATION', function () {
+        /*return SessionCache::instance()->get('NAVIGATION', function () {*/
             $query = Navigation::where([
                 'active' => true,
             ])->orderBy('sort_order', 'ASC');
             $this->viewExtendQuery(Navigation::class, $query);
-            $navigations = $query->get();
+            $navigations = $query->get()->map(function ($navigation) {
+                return ModelUtil::toPojo($navigation, ['model_ref'], [
+                    'generated_url' => Navigation::getUrl($navigation),
+                    'children' => null,
+                ]);
+            });
             $parentRefs = [];
             foreach ($navigations as $navigation) {
                 $parentRefs[$navigation->id] = $navigation;
@@ -193,7 +199,7 @@ class AbstractPluginController extends Controller
             return $navigations->filter(function ($navigation) {
                 return empty($navigation->parent_id);
             });
-        });
+      /*  });*/
     }
 
     public function getListActions()

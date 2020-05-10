@@ -1,9 +1,12 @@
 <?php
+
+use \Demo\Core\Models\Navigation;
+
 $id = $folder->name . '-' . $folder->id;
 if ($folder->type === 'link') { ?>
     <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
     '' ?>">
-        <a href="<?= $folder->getUrl() ?>"
+        <a href="<?= $folder->generated_url ?>"
            class="nav-link"><?= e(trans($folder->label)) ?>
             <!--<i class="link-icon <?= $folder->icon ?>"></i>-->
         </a>
@@ -11,7 +14,7 @@ if ($folder->type === 'link') { ?>
 
 <?php } else {
     ?>
-    <li class="nav-item <?= $folder->isActiveNavigation() ? 'active' : '' ?>">
+    <li class="nav-item <?= Navigation::isActiveNavigation($folder) ? 'active' : '' ?>">
         <a class="nav-link" data-toggle="collapse" href="#<?= $id ?>" role="button"
            aria-expanded="false"
            aria-controls="emails">
@@ -31,7 +34,7 @@ if ($folder->type === 'link') { ?>
                             ?>
                             <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
                             '' ?>">
-                                <a href="<?= $sideItem->getUrl() ?>"
+                                <a href="<?= $sideItem->generated_url ?>"
                                    class="nav-link"><?= e(trans($sideItem->label)) ?>
                                     <!--<i class="link-icon <?= $sideItem->icon ?>"></i>-->
                                 </a>

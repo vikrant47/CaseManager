@@ -1,0 +1,10 @@
+name: NavigationRoleAssociationController
+form: $/demo/core/models/navigationroleassociation/fields.yaml
+modelClass: Demo\Core\Models\NavigationRoleAssociation
+defaultRedirect: demo/core/navigationroleassociationcontroller
+create:
+    redirect: 'demo/core/navigationroleassociationcontroller/update/:id'
+    redirectClose: demo/core/navigationroleassociationcontroller
+update:
+    redirect: demo/core/navigationroleassociationcontroller
+    redirectClose: demo/core/navigationroleassociationcontroller

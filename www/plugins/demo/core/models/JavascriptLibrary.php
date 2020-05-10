@@ -1,7 +1,9 @@
 <?php namespace Demo\Core\Models;
 
 use Backend\Classes\Controller;
+use Backend\Facades\Backend;
 use Demo\Core\Models\PluginVersions;
+use Illuminate\Support\Facades\Storage;
 use Model;
 use System\Classes\MediaLibrary;
 
@@ -26,6 +28,11 @@ class JavascriptLibrary extends Model
 
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id']
+    ];
+
+    public $attachMany = [
+        'css_files' => 'System\Models\File',
+        'javascript_files' => 'System\Models\File'
     ];
 
     /* public $attachOne = [
@@ -57,16 +64,16 @@ class JavascriptLibrary extends Model
 
     public function getJsFiles()
     {
-        return array_map(function ($file) {
-            return MediaLibrary::url($file['javascript_file']);
-        }, $this->javascript_files);
+        return  $this->javascript_files->map(function ($file) {
+            return $file->path;
+        });
     }
 
     public function getCssFiles()
     {
-        return array_map(function ($file) {
-            return MediaLibrary::url($file['css_file']);
-        }, $this->css_files);
+        return  $this->css_files->map(function ($file) {
+            return $file->path;
+        });
     }
 
     public function addAssets(Controller $controller)
