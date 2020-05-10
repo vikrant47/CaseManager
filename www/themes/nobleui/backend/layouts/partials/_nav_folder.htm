@@ -1,0 +1,47 @@
+<?php
+$id = $folder->name . '-' . $folder->id;
+if ($folder->type === 'link') { ?>
+    <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
+    '' ?>">
+        <a href="<?= $folder->getUrl() ?>"
+           class="nav-link"><?= e(trans($folder->label)) ?>
+            <!--<i class="link-icon <?= $folder->icon ?>"></i>-->
+        </a>
+    </li>
+
+<?php } else {
+    ?>
+    <li class="nav-item <?= $folder->isActiveNavigation() ? 'active' : '' ?>">
+        <a class="nav-link" data-toggle="collapse" href="#<?= $id ?>" role="button"
+           aria-expanded="false"
+           aria-controls="emails">
+            <i class="link-icon <?= $folder->icon ?>"></i>
+            <span class="link-title"><?= e(trans($folder->label)) ?></span>
+            <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse" id="<?= $id ?>">
+            <ul class="nav sub-menu">
+                <?php
+                $sideMenuItems = $folder->children;
+                if (!empty($sideMenuItems)) {
+                    foreach ($sideMenuItems as $sideItem) {
+                        if ($sideItem->type === 'folder') {
+                            $this->makeLayoutPartial('partials/nav_folder', ['folder' => $sideItem]);
+                        } else {
+                            ?>
+                            <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
+                            '' ?>">
+                                <a href="<?= $sideItem->getUrl() ?>"
+                                   class="nav-link"><?= e(trans($sideItem->label)) ?>
+                                    <!--<i class="link-icon <?= $sideItem->icon ?>"></i>-->
+                                </a>
+                            </li>
+                        <?php }
+                    }
+                } ?>
+            </ul>
+        </div>
+    </li>
+
+    <?php
+} ?>

@@ -13,7 +13,9 @@ use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Core\Models\FormAction;
 use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
+use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
+use Illuminate\Support\Collection;
 use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
 use Db;
@@ -165,6 +167,33 @@ class AbstractPluginController extends Controller
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
         return $widget;
+    }
+
+    public function getNavigations()
+    {
+        return SessionCache::instance()->get('NAVIGATION', function () {
+            $query = Navigation::where([
+                'active' => true,
+            ])->orderBy('sort_order', 'ASC');
+            $this->viewExtendQuery(Navigation::class, $query);
+            $navigations = $query->get();
+            $parentRefs = [];
+            foreach ($navigations as $navigation) {
+                $parentRefs[$navigation->id] = $navigation;
+            }
+            foreach ($navigations as $navigation) {
+                if (!empty($navigation->parent_id) && array_key_exists($navigation->parent_id, $parentRefs)) {
+                    $parent = $parentRefs[$navigation->parent_id];
+                    if (empty($parent->children)) {
+                        $parent->children = new Collection();
+                    }
+                    $parent->children->push($navigation);
+                }
+            }
+            return $navigations->filter(function ($navigation) {
+                return empty($navigation->parent_id);
+            });
+        });
     }
 
     public function getListActions()

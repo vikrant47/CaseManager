@@ -1,0 +1,41 @@
+columns:
+    id:
+        label: id
+        type: number
+    label:
+        label: label
+        type: text
+    type:
+        label: type
+        type: text
+    active:
+        label: active
+        type: text
+    code:
+        label: code
+        type: text
+    plugin_id:
+        label: plugin_id
+        type: number
+    parent_id:
+        label: parent_id
+        type: number
+    sort_order:
+        label: sort_order
+        type: text
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    created_by_id:
+        label: created_by_id
+        type: number
+    updated_by_id:
+        label: updated_by_id
+        type: number
+    version:
+        label: version
+        type: number
+

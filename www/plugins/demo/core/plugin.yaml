@@ -21,6 +21,10 @@ navigation:
                 icon: icon-table
                 permissions:
                     - 'demo.core::models.model.row.read.*'
+            side-menu-item14:
+                label: Navigations
+                url: demo/core/navigationcontroller
+                icon: icon-location-arrow
             side-menu-item11:
                 label: 'Model Association'
                 url: demo/core/modelassociationcontroller
@@ -113,6 +117,10 @@ navigation:
                 icon: icon-user-plus
                 attributes:
                     - 'style="display:none;"'
+            side-menu-item3:
+                label: 'Navigation Role Associations'
+                url: demo/core/navigationroleassociationcontroller
+                icon: icon-arrows
 permissions:
     'demo.core::models.model.row.read':
         tab: 'Read Permission'

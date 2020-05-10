@@ -8,7 +8,8 @@ $mySettings = System\Classes\SettingsManager::instance()->listItems('mysettings'
 $navbarMode = Backend\Models\BrandSetting::get('menu_mode', 'inline');
 
 $context = BackendMenu::getContext();
-$contextSidenav = BackendMenu::getContextSidenavPartial($context->owner, $context->mainMenuCode);
+$navigations = $this->getNavigations();
+
 
 ?>
 <div class="sidebar-header">
@@ -23,39 +24,24 @@ $contextSidenav = BackendMenu::getContextSidenavPartial($context->owner, $contex
 </div>
 <div class="sidebar-body">
     <ul class="nav">
-        <li class="nav-item nav-category">Main</li>
         <?php
         $counter = 0;
-        foreach (BackendMenu::listMainMenuItems() as $name=>$item) {
-            $sideMenuItems = BackendMenu::listSideMenuItems($item->owner, $item->code);
-            $isActive = BackendMenu::isMainMenuItemActive($item);
-            $mainMenuId = 'main-menu-item-' . $item->code . '-' . $counter++;
-            ?>
-            <li class="nav-item <?= $isActive ? 'active' : '' ?>">
-                <a class="nav-link" data-toggle="collapse" href="#<?= $mainMenuId ?>" role="button"
-                   aria-expanded="false"
-                   aria-controls="emails">
-                    <i class="link-icon <?= $item->icon ?>"></i>
-                    <span class="link-title"><?= e(trans($item->label)) ?></span>
-                    <i class="link-arrow" data-feather="chevron-down"></i>
-                </a>
-                <div class="collapse" id="<?= $mainMenuId ?>">
-                    <ul class="nav sub-menu">
-                        <?php
-                        if ($sideMenuItems) {
-                            foreach ($sideMenuItems as $sideItem) {
-                                ?>
-                                <li class="nav-item <?= BackendMenu::isSideMenuItemActive($item) ? 'active' : '' ?>">
-                                    <a href="<?= $sideItem->url ?>"
-                                       class="nav-link"><?= e(trans($sideItem->label)) ?>
-                                        <!--<i class="link-icon <?= $sideItem->icon ?>"></i>-->
-                                    </a>
-                                </li>
-                            <?php }
-                        } ?>
-                    </ul>
-                </div>
-            </li>
-        <?php } ?>
+        foreach ($navigations as $navigation) {
+            $isActive = false;
+            $mainMenuId = $navigation->name . '-' . $navigation->id;
+            if ($navigation->type === 'seperator') {
+                ?>
+                <li class="nav-item nav-category"><?= $navigation->label ?></li>
+                <?php
+                $folders = $navigation->children;
+                if (!empty($folders)) {
+                    foreach ($folders as $folder) {
+                        print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $folder]);
+                    }
+                }
+            } else {
+                print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $navigation]);
+            }
+        } ?>
     </ul>
 </div>

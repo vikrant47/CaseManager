@@ -39,7 +39,7 @@ class UserSecurityService
     {
         $self = $this;
         return SessionCache::instance()->get('USER_ROLES', function () use ($self) {
-            return Db::table('demo_core_roles')
+            return Db::table('demo_core_roles')->select('demo_core_roles.*')
                 ->join('demo_core_user_role_associations', 'demo_core_user_role_associations.role_id', '=', 'demo_core_roles.id')
                 ->where('demo_core_user_role_associations.user_id', '=', $this->user->id)->get();
         });
@@ -67,7 +67,7 @@ class UserSecurityService
     {
         $self = $this;
         return SessionCache::instance()->get('USER_SECURITY_POLICIES', function () use ($self) {
-            return Db::table('demo_core_security_policies')
+            return Db::table('demo_core_security_policies')->select('demo_core_security_policies.*')
                 ->join('demo_core_role_policy_associations', 'demo_core_role_policy_associations.policy_id', '=', 'demo_core_security_policies.id')
                 ->join('demo_core_roles', 'demo_core_roles.id', '=', 'demo_core_role_policy_associations.role_id')
                 ->join('demo_core_user_role_associations', 'demo_core_user_role_associations.role_id', '=', 'demo_core_roles.id')
@@ -82,7 +82,7 @@ class UserSecurityService
 
     public function getPermissionsByRole(Role $role)
     {
-        return Db::table('demo_core_permissions')
+        return Db::table('demo_core_permissions')->select('demo_core_permissions.*')
             ->join('demo_core_permission_policy_associations', 'demo_core_permission_policy_associations.permission_id', '=', 'demo_core_permissions.id')
             ->join('demo_core_security_policies', 'demo_core_security_policies.id', '=', 'demo_core_permission_policy_associations.policy_id')
             ->join('demo_core_role_policy_associations', 'demo_core_role_policy_associations.policy_id', '=', 'demo_core_security_policies.id')
@@ -130,6 +130,15 @@ class UserSecurityService
         return $this->getPermissions()->filter(function ($permission) use ($modelClass, $operation) {
             return $permission->model === $modelClass && empty($permission->columns) && $permission->operation === $operation;
         });
+    }
+
+    public function applyNavigationPermission($navigationQuery)
+    {
+        return $navigationQuery->select('demo_core_navigations.*')
+            ->join('demo_core_nav_role_associations', 'demo_core_nav_role_associations.navigation_id', '=', 'demo_core_navigations.id')
+            ->whereIn('demo_core_nav_role_associations.role_id', $this->getRoles()->map(function ($role) {
+                return $role->id;
+            }));
     }
 
     /**

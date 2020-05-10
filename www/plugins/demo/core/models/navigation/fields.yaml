@@ -1,0 +1,147 @@
+fields:
+    label:
+        label: Label
+        span: auto
+        required: 1
+        type: text
+    name:
+        label: Name
+        span: auto
+        required: 1
+        preset:
+            field: label
+            type: slug
+        type: text
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    active:
+        label: Active
+        span: auto
+        default: 1
+        required: 1
+        type: switch
+    icon:
+        label: Icon
+        span: auto
+        required: 1
+        type: dropdown
+        tab: Config
+    type:
+        label: Type
+        span: auto
+        required: 1
+        type: dropdown
+        tab: Config
+        options:
+            seperator: Seperator
+            folder: Folder
+            list: List
+            form: Form
+            url: URL
+    parent:
+        label: Parent
+        nameFrom: label
+        span: auto
+        type: relation
+        emptyOption: 'Please Select'
+    plugin:
+        label: Plugin
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+    sort_order:
+        label: 'Sort Order'
+        span: auto
+        required: 1
+        type: number
+        default: 0
+        tab: Config
+tabs:
+    fields:
+        roles:
+            label: Roles
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Roles
+        model_ref:
+            label: Model
+            nameFrom: name
+            descriptionFrom: description
+            emptyOption: '- Select Model -'
+            span: auto
+            required: 1
+            type: relation
+            tab: Config
+            dependsOn:
+                - type
+            trigger:
+                action: show
+                field: type
+                condition: 'value[list] || value[form]'
+        list:
+            label: List
+            emptyOption: '- Select List -'
+            showSearch: true
+            span: auto
+            dependsOn:
+                - model_ref
+                - type
+            trigger:
+                action: show
+                field: type
+                condition: 'value[list]'
+            type: dropdown
+            tab: Config
+        form:
+            label: Form
+            showSearch: true
+            span: auto
+            dependsOn:
+                - model_ref
+                - type
+            type: dropdown
+            emptyOption: '- Select Form -'
+            tab: Config
+            trigger:
+                action: show
+                field: type
+                condition: 'value[form]'
+        record_id:
+            label: 'Record ID'
+            showSearch: true
+            span: auto
+            dependsOn:
+                - model_ref
+                - type
+            type: number
+            tab: Config
+            trigger:
+                action: show
+                field: type
+                condition: 'value[form]'
+        url:
+            label: URL
+            showSearch: true
+            span: auto
+            dependsOn:
+                - type
+            type: text
+            tab: Config
+            trigger:
+                action: show
+                field: type
+                condition: 'value[url]'
+

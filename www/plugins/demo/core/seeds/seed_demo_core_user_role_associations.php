@@ -32,19 +32,19 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
                             ] ,            [
-                                                                            "id"=> 11,
-                                                                                        "created_at"=>"2020-04-06 08:56:07",
-                                                                                        "updated_at"=>"2020-04-06 08:56:07",
-                                                                                        "user_id"=> 2,
+                                                                            "id"=> 12,
+                                                                                        "created_at"=>"2020-04-06 14:03:21",
+                                                                                        "updated_at"=>"2020-04-06 14:03:21",
+                                                                                        "user_id"=> 6,
                                                                                         "role_id"=> 2,
                                                                                         "plugin_id"=> 10,
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
                             ] ,            [
-                                                                            "id"=> 12,
-                                                                                        "created_at"=>"2020-04-06 14:03:21",
-                                                                                        "updated_at"=>"2020-04-06 14:03:21",
-                                                                                        "user_id"=> 6,
+                                                                            "id"=> 3,
+                                                                                        "created_at"=>"2020-05-10 06:10:59",
+                                                                                        "updated_at"=>"2020-05-10 06:10:59",
+                                                                                        "user_id"=> 2,
                                                                                         "role_id"=> 2,
                                                                                         "plugin_id"=> 10,
                                                                                         "created_by_id"=> 1,

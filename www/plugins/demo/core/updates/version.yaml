@@ -57,3 +57,9 @@
 1.0.20:
     - 'Created table demo_core_libraries'
     - builder_table_create_demo_core_libraries.php
+1.0.21:
+    - 'Created table demo_core_navigations'
+    - builder_table_create_demo_core_navigations.php
+1.0.22:
+    - 'Created table demo_core_nav_role_associations'
+    - builder_table_create_demo_core_nav_role_associations.php

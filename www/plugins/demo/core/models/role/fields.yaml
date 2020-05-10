@@ -27,6 +27,19 @@ fields:
         required: 1
 tabs:
     fields:
+        navigations:
+            label: Navigations
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Associations
         policies:
             label: Policies
             mode: relation
@@ -39,4 +52,4 @@ tabs:
                 - update
                 - preview
             type: taglist
-            tab: Policies
+            tab: Associations

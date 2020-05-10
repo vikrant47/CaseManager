@@ -44,9 +44,10 @@ tabs:
             span: auto
             type: relation
             tab: Roles
+            context:
+                - update
         groups:
             context:
-                - create
                 - update
             label: 'backend::lang.user.groups'
             commentAbove: 'backend::lang.user.groups_comment'
