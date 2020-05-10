@@ -1,6 +1,8 @@
 <?php namespace Demo\Core\Models;
 
+use Backend\Facades\Backend;
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Model;
 use October\Rain\Exception\ApplicationException;
 use RainLab\Builder\Classes\IconList;
@@ -29,6 +31,14 @@ class Navigation extends Model
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
+    ];
+    public $belongsToMany = [
+        'roles' => [
+            Role::class,
+            'table' => 'demo_core_nav_role_associations',
+            'key' => 'navigation_id',
+            'otherKey' => 'role_id'
+        ],
     ];
 
     public function getIconOptions()
@@ -70,5 +80,39 @@ class Navigation extends Model
         if ($result['cyclic'] === true) {
             throw new ApplicationException('Circular dependancy ' . $result['cyclic']);
         }
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->plugin_id);
     }
+
+    public function getUrl()
+    {
+        if ($this->type !== 'folder' && $this->type !== 'seperator') {
+            /*try {*/
+            if ($this->type === 'url') {
+                return $this->url;
+            }
+            $model = $this->model_ref;
+            $index = Backend::url(str_replace('\\', '/', strtolower(str_replace('\\Controllers', '', $model->controller))));
+            if ($this->type === 'list') {
+                return $index;
+            }
+            if ($this->type === 'form') {
+                if (empty($this->record_id)) {
+                    return $index . '/update' . $this->record_id;
+                } else {
+                    return $index . '/create';
+                }
+            }
+            /*} catch (\Exception $e) {
+                throw $e;
+            }*/
+        }
+        return Backend::url('');
+    }
+
+    public function isActiveNavigation()
+    {
+        return false;
+    }
+
+
 }

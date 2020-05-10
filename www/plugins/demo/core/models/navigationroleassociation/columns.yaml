@@ -1,0 +1,19 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    role_id:
+        label: role_id
+        type: number
+    navigation_id:
+        label: permission_id
+        type: number
+    plugin_id:
+        label: plugin_id
+        type: number

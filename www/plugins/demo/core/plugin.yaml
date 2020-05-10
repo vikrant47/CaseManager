@@ -117,6 +117,10 @@ navigation:
                 icon: icon-user-plus
                 attributes:
                     - 'style="display:none;"'
+            side-menu-item3:
+                label: 'Navigation Role Associations'
+                url: demo/core/navigationroleassociationcontroller
+                icon: icon-arrows
 permissions:
     'demo.core::models.model.row.read':
         tab: 'Read Permission'

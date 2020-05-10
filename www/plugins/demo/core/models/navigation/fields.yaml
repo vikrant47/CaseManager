@@ -36,6 +36,7 @@ fields:
         type: dropdown
         tab: Config
         options:
+            seperator: Seperator
             folder: Folder
             list: List
             form: Form
@@ -62,6 +63,19 @@ fields:
         tab: Config
 tabs:
     fields:
+        roles:
+            label: Roles
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Roles
         model_ref:
             label: Model
             nameFrom: name
@@ -130,3 +144,4 @@ tabs:
                 action: show
                 field: type
                 condition: 'value[url]'
+

@@ -7,6 +7,7 @@ namespace Demo\Core\Controllers;
 use Backend\Behaviors\ListController;
 use Backend\Classes\Controller;
 use BackendAuth;
+use Demo\Core\Models\Navigation;
 use Demo\Core\Models\Permission;
 use Demo\Core\Services\SecurityService;
 use Demo\Core\Services\UserSecurityService;
@@ -46,12 +47,16 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function viewExtendQuery($modelClass, $query)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($modelClass, Permission::VIEW);
-        if ($permission->count() === 0) {
-            return $query->where('id', '-1'); // returning empty result
-        }
-        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
-            $query->whereRaw($this->userSecurityService->mergeConditions($permission));
+        if ($modelClass === Navigation::class) {
+            $this->userSecurityService->applyNavigationPermission($query);
+        } else {
+            $permission = $this->userSecurityService->getRowLevelPermissions($modelClass, Permission::VIEW);
+            if ($permission->count() === 0) {
+                return $query->where('id', '-1'); // returning empty result
+            }
+            if (!$this->userSecurityService->hasAstrixPermission($permission)) {
+                $query->whereRaw($this->userSecurityService->mergeConditions($permission));
+            }
         }
     }
 
