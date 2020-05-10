@@ -3,11 +3,11 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoCoreLibraries extends Migration
+class BuilderTableCreateDemoCoreNavRoleAssociations extends Migration
 {
     public function up()
     {
-        Schema::create('demo_core_libraries', function($table)
+        Schema::create('demo_core_nav_role_associations', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
@@ -15,17 +15,15 @@ class BuilderTableCreateDemoCoreLibraries extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->text('css_files');
-            $table->text('javascript_files');
+            $table->integer('version')->nullable();
+            $table->integer('navigation_id');
+            $table->integer('role_id');
             $table->integer('plugin_id');
-            $table->string('name');
-            $table->text('description');
-            $table->text('website');
         });
     }
     
     public function down()
     {
-        Schema::dropIfExists('demo_core_libraries');
+        Schema::dropIfExists('demo_core_nav_role_associations');
     }
 }

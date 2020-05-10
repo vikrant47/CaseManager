@@ -41,7 +41,7 @@ class DashboardController extends AbstractSecurityController
 
     public function onSaveData($slug)
     {
-        $dashboard = Dashboard::where('slug', $slug)->first();
+        $dashboard = Dashboard::where('code', $slug)->first();
         if (empty($dashboard)) {
             $this->setStatusCode(404);
             return [];
@@ -96,9 +96,9 @@ class DashboardController extends AbstractSecurityController
         return ['dashboard' => $dashboard->getOriginal()];
     }
 
-    public function renderDashboard($slug)
+    public function renderDashboard($code)
     {
-        $dashboard = Dashboard::where('slug', $slug)->where('active', 1)->first();
+        $dashboard = Dashboard::where('code', $code)->where('active', 1)->first();
         if (empty($dashboard)) {
             $this->setStatusCode(404);
             return '';

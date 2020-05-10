@@ -20,7 +20,7 @@ columns:
     description:
         label: description
         type: text
-    slug:
+    code:
         label: slug
         type: text
     active:

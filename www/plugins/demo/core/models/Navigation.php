@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Models;
 
 use Backend\Facades\Backend;
+use Demo\Core\Classes\Helpers\ControllerHelper;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Model;
@@ -41,8 +42,11 @@ class Navigation extends Model
         ],
     ];
 
-    public function getIconOptions()
+    public function getIconOptions($model)
     {
+        if (strpos(request()->getRequestUri(), 'audit-form-view') > 0) {
+            return ModelUtil::getIconListWitoutIconClass();
+        }
         return IconList::getList();
     }
 
@@ -83,33 +87,37 @@ class Navigation extends Model
         ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->plugin_id);
     }
 
-    public function getUrl()
+    public static function getUrl($navigation)
     {
-        if ($this->type !== 'folder' && $this->type !== 'seperator') {
+
+        $generatedUrl = '';//$navigation->generated_url;
+        if ($navigation->type !== 'folder' && $navigation->type !== 'seperator') {
             /*try {*/
-            if ($this->type === 'url') {
-                return $this->url;
+            if ($navigation->type === 'url') {
+                $generatedUrl = $navigation->url;
             }
-            $model = $this->model_ref;
+            $model = $navigation->model_ref;
             $index = Backend::url(str_replace('\\', '/', strtolower(str_replace('\\Controllers', '', $model->controller))));
-            if ($this->type === 'list') {
-                return $index;
+            if ($navigation->type === 'list') {
+                $generatedUrl = $index;
             }
-            if ($this->type === 'form') {
-                if (empty($this->record_id)) {
-                    return $index . '/update' . $this->record_id;
+            if ($navigation->type === 'form') {
+                if (empty($navigation->record_id)) {
+                    $generatedUrl = $index . '/update' . $navigation->record_id;
                 } else {
-                    return $index . '/create';
+                    $generatedUrl = $index . '/create';
                 }
             }
             /*} catch (\Exception $e) {
                 throw $e;
             }*/
+        } else {
+            $generatedUrl = Backend::url($navigation->name);
         }
-        return Backend::url('');
+        return $generatedUrl;
     }
 
-    public function isActiveNavigation()
+    public static function isActiveNavigation()
     {
         return false;
     }

@@ -3,8 +3,8 @@ fields:
         label: Name
         span: auto
         type: text
-    slug:
-        label: Slug
+    code:
+        label: Code
         span: auto
         preset:
             field: name
@@ -42,8 +42,8 @@ tabs:
             tab: Configuration
             form:
                 fields:
-                    report:
-                        label: Report
+                    widget:
+                        label: Widget
                         nameFrom: name
                         descriptionFrom: description
                         span: full

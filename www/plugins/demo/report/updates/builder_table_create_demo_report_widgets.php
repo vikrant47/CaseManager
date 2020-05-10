@@ -16,7 +16,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('name');
-            $table->string('slug');
+            $table->string('code');
             $table->string('description');
             $table->text('template');
             $table->text('data');

@@ -4,8 +4,8 @@ fields:
         span: auto
         required: 1
         type: text
-    slug:
-        label: Slug
+    code:
+        label: Code
         size: ''
         span: auto
         type: text

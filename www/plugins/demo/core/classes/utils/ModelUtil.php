@@ -5,6 +5,7 @@ use Demo\Core\Services\SecurityService;
 use October\Rain\Database\Collection;
 use October\Rain\Database\Relations\BelongsToMany;
 use BackendAuth;
+use RainLab\Builder\Classes\IconList;
 
 class ModelUtil
 {
@@ -53,5 +54,32 @@ class ModelUtil
     {
         $classPaths = str_split($class, '\\');
         return $classPaths[0] . '.' . $classPaths[1];
+    }
+
+    public static function toPojo($model, $childModelProps = [], $additionalProps = [])
+    {
+        $pojo = new \stdClass();
+        foreach ($model->attributes as $key => $attribute) {
+            $pojo->{$key} = $attribute;
+        }
+        foreach ($childModelProps as $childModel) {
+            if (!empty($model->{$childModel})) {
+                $pojo->{$childModel} = ModelUtil::toPojo($model->{$childModel});
+            }
+        }
+        foreach ($additionalProps as $key => $additionalProp) {
+            $pojo->{$key} = $additionalProp;
+        }
+        return $pojo;
+    }
+
+    public static function getIconListWitoutIconClass()
+    {
+        $icons = [];
+        $list = IconList::getList();
+        foreach ($list as $icon => $display) {
+            $icons[$icon] = $display[0];
+        }
+        return $icons;
     }
 }

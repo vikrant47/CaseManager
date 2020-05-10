@@ -22,7 +22,7 @@ class IframeController extends AbstractSecurityController
 
     public function renderIframe($slug)
     {
-        $iframe = Iframe::where('slug', $slug)->first();
+        $iframe = Iframe::where('code', $slug)->first();
         if (empty($iframe)) {
             $this->setStatusCode( 404);
             return '';
