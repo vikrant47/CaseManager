@@ -20,7 +20,7 @@ class SeedDemoReportWidgets implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Queue Iteam Bar Chart",
-                                                                                        "slug"=>"queue-iteam-bar-chart",
+                                                                                        "code"=>"queue-iteam-bar-chart",
                                                                                         "description"=> "",
                                                                                         "template"=> "",
                                                                                         "data"=>"select name, count(*) as value\r\nfrom (select queue.name, item.id as item_id\r\nfrom demo_workflow_queue_items item,\r\ndemo_workflow_queues queue\r\nwhere queue.id = item.queue_id) as queue_data\r\ngroup by name",

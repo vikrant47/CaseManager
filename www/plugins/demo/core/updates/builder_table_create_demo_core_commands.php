@@ -17,7 +17,7 @@ class BuilderTableCreateDemoCoreCommands extends Migration
             $table->integer('created_by_id');
             $table->string('name');
             $table->string('description');
-            $table->string('slug');
+            $table->string('code');
             $table->smallInteger('active')->default(1);
             $table->text('arguments');
             $table->text('parameters');

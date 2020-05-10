@@ -18,7 +18,7 @@ class BuilderTableCreateDemoCoreIframes extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('backend_menu');
-            $table->string('slug');
+            $table->string('code');
             $table->text('url');
             $table->smallInteger('active')->default(1);
             $table->smallInteger('iframe')->default(1);

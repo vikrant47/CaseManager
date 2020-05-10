@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Models;
 
 use Backend\Facades\Backend;
+use Demo\Core\Classes\Helpers\ControllerHelper;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Model;
@@ -41,8 +42,11 @@ class Navigation extends Model
         ],
     ];
 
-    public function getIconOptions()
+    public function getIconOptions($model)
     {
+        if (strpos(request()->getRequestUri(), 'audit-form-view') > 0) {
+            return ModelUtil::getIconListWitoutIconClass();
+        }
         return IconList::getList();
     }
 

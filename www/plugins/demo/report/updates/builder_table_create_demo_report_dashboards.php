@@ -16,10 +16,12 @@ class BuilderTableCreateDemoReportDashboards extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->smallInteger('active');
             $table->text('config_widgets');
             $table->smallInteger('public');
+            $table->string('code');
+            $table->integer('plugin_id');
         });
     }
     
