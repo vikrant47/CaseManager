@@ -7,7 +7,7 @@ class BuilderTableCreateDemoCoreNavRoleAssociations extends Migration
 {
     public function up()
     {
-        Schema::create('demo_core_nav_role_associations', function($table)
+        Schema::create('demo_core_view_role_associations', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
@@ -24,6 +24,6 @@ class BuilderTableCreateDemoCoreNavRoleAssociations extends Migration
     
     public function down()
     {
-        Schema::dropIfExists('demo_core_nav_role_associations');
+        Schema::dropIfExists('demo_core_view_role_associations');
     }
 }

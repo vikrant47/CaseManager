@@ -12,7 +12,7 @@ class SeedDemoCoreNavRoleAssociations implements Seedable
     /**This will be executed to install seeds*/
     public function install()
     {
-            Db::table('demo_core_nav_role_associations')->insert([
+            Db::table('demo_core_view_role_associations')->insert([
             [
                                                                             "id"=> 1,
                                                                                         "created_at"=>"2020-05-10 05:38:18",
@@ -519,6 +519,6 @@ class SeedDemoCoreNavRoleAssociations implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_nav_role_associations')->where('plugin_id', 10)->delete();
+                    Db::table('demo_core_view_role_associations')->where('plugin_id', 10)->delete();
             }
 }

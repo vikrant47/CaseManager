@@ -47,7 +47,7 @@ class Role extends Model
         ],
         'navigations' => [
             Navigation::class,
-            'table' => 'demo_core_nav_role_associations',
+            'table' => 'demo_core_view_role_associations',
             'key' => 'role_id',
             'otherKey' => 'navigation_id'
         ],

@@ -1,4 +1,4 @@
-title: NavigationRoleAssociationController
-modelClass: Demo\Core\Models\NavigationRoleAssociation
+title: ViewRoleAssociationController
+modelClass: Demo\Core\Models\ViewRoleAssociation
 toolbar:
     buttons: reorder_toolbar

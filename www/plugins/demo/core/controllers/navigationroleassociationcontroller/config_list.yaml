@@ -1,6 +1,6 @@
-list: $/demo/core/models/navigationroleassociation/columns.yaml
-modelClass: Demo\Core\Models\NavigationRoleAssociation
-title: NavigationRoleAssociationController
+list: $/demo/core/models/viewroleassociation/columns.yaml
+modelClass: Demo\Core\Models\ViewRoleAssociation
+title: ViewRoleAssociationController
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true
@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'demo/core/navigationroleassociationcontroller/update/:id'
+recordUrl: 'demo/core/viewroleassociationcontroller/update/:id'

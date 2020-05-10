@@ -135,8 +135,8 @@ class UserSecurityService
     public function applyNavigationPermission($navigationQuery)
     {
         return $navigationQuery->select('demo_core_navigations.*')
-            ->join('demo_core_nav_role_associations', 'demo_core_nav_role_associations.navigation_id', '=', 'demo_core_navigations.id')
-            ->whereIn('demo_core_nav_role_associations.role_id', $this->getRoles()->map(function ($role) {
+            ->join('demo_core_view_role_associations', 'demo_core_view_role_associations.navigation_id', '=', 'demo_core_navigations.id')
+            ->whereIn('demo_core_view_role_associations.role_id', $this->getRoles()->map(function ($role) {
                 return $role->id;
             }));
     }

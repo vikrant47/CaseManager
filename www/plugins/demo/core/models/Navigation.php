@@ -36,7 +36,7 @@ class Navigation extends Model
     public $belongsToMany = [
         'roles' => [
             Role::class,
-            'table' => 'demo_core_nav_role_associations',
+            'table' => 'demo_core_view_role_associations',
             'key' => 'navigation_id',
             'otherKey' => 'role_id'
         ],
