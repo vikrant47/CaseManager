@@ -176,7 +176,7 @@ class AbstractPluginController extends Controller
         $query = Navigation::where([
             'active' => true,
         ])->orderBy('sort_order', 'ASC');
-        $this->viewExtendQuery(Navigation::class, $query);
+        //$this->viewExtendQuery(Navigation::class, $query);
         $navigations = $query->get()->map(function ($navigation) {
             return ModelUtil::toPojo($navigation, ['model_ref'], [
                 'generated_url' => Navigation::getUrl($navigation),
