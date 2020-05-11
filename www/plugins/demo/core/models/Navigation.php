@@ -33,14 +33,14 @@ class Navigation extends Model
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
-    public $morphedToMany = [
+    public $morphToMany = [
         'roles' => [
-            Navigation::class,
+            Role::class,
             'name' => 'viewable',
             'table' => 'demo_core_view_role_associations',
             'key' => 'record_id',
             'otherKey' => 'role_id',
-            'parentKey' => 'model',
+            'morphTypeKey' => 'model',
         ]
     ];
 

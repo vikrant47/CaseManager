@@ -21,6 +21,7 @@ use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
 use Db;
 
+
 class AbstractPluginController extends Controller
 {
     use \Backend\Traits\SessionMaker;
@@ -145,6 +146,12 @@ class AbstractPluginController extends Controller
             $this->modelRecord = ModelModel::where('model', $this->modelClass)->first();
         }
         return $this->modelRecord;
+    }
+
+    public function onIndex()
+    {
+        $list = $this->makeLists();
+        return $this->listRender();
     }
 
     public function viewExtendQuery($modelClass, $query)

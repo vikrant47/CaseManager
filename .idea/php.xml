@@ -106,6 +106,8 @@
       <path value="$PROJECT_DIR$/www/vendor/dompdf/dompdf" />
       <path value="$PROJECT_DIR$/www/vendor/phenx/php-font-lib" />
       <path value="$PROJECT_DIR$/www/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/www/vendor/bvanhoekelen/performance" />
+      <path value="$PROJECT_DIR$/www/vendor/bvanhoekelen/terminal-style" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
