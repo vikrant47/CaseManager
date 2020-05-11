@@ -16,7 +16,7 @@ class SeedDemoReportWidgets implements Seedable
             [
                                                                             "id"=> 1,
                                                                                         "created_at"=>"2019-12-01 07:42:56",
-                                                                                        "updated_at"=>"2019-12-08 08:02:10",
+                                                                                        "updated_at"=>"2020-05-10 09:16:29",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Queue Iteam Bar Chart",
