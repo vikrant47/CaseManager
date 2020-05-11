@@ -10,6 +10,7 @@ use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\StringUtil;
 use BackendAuth;
 use Demo\Core\Models\CoreUserGroup;
+use Demo\Core\Models\Navigation;
 use Demo\Core\Models\Role;
 use Db;
 use October\Rain\Support\Collection;
@@ -135,8 +136,9 @@ class UserSecurityService
     public function applyNavigationPermission($navigationQuery)
     {
         return $navigationQuery->select('demo_core_navigations.*')
-            ->join('demo_core_nav_role_associations', 'demo_core_nav_role_associations.navigation_id', '=', 'demo_core_navigations.id')
-            ->whereIn('demo_core_nav_role_associations.role_id', $this->getRoles()->map(function ($role) {
+            ->join('demo_core_view_role_associations', 'demo_core_view_role_associations.record_id', '=', 'demo_core_navigations.id')
+            ->where('demo_core_view_role_associations.model', '=', Navigation::class)
+            ->whereIn('demo_core_view_role_associations.role_id', $this->getRoles()->map(function ($role) {
                 return $role->id;
             }));
     }

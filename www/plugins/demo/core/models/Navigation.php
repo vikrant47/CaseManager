@@ -33,13 +33,15 @@ class Navigation extends Model
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
-    public $belongsToMany = [
+    public $morphedToMany = [
         'roles' => [
-            Role::class,
-            'table' => 'demo_core_nav_role_associations',
-            'key' => 'navigation_id',
-            'otherKey' => 'role_id'
-        ],
+            Navigation::class,
+            'name' => 'viewable',
+            'table' => 'demo_core_view_role_associations',
+            'key' => 'record_id',
+            'otherKey' => 'role_id',
+            'parentKey' => 'model',
+        ]
     ];
 
     public function getIconOptions($model)

@@ -1,10 +1,10 @@
-name: NavigationRoleAssociationController
-form: $/demo/core/models/navigationroleassociation/fields.yaml
-modelClass: Demo\Core\Models\NavigationRoleAssociation
-defaultRedirect: demo/core/navigationroleassociationcontroller
+name: ViewRoleAssociationController
+form: $/demo/core/models/viewroleassociation/fields.yaml
+modelClass: Demo\Core\Models\ViewRoleAssociation
+defaultRedirect: demo/core/viewroleassociationcontroller
 create:
-    redirect: 'demo/core/navigationroleassociationcontroller/update/:id'
-    redirectClose: demo/core/navigationroleassociationcontroller
+    redirect: 'demo/core/viewroleassociationcontroller/update/:id'
+    redirectClose: demo/core/viewroleassociationcontroller
 update:
-    redirect: demo/core/navigationroleassociationcontroller
-    redirectClose: demo/core/navigationroleassociationcontroller
+    redirect: demo/core/viewroleassociationcontroller
+    redirectClose: demo/core/viewroleassociationcontroller

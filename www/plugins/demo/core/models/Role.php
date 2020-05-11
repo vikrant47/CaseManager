@@ -45,19 +45,27 @@ class Role extends Model
             'key' => 'role_id',
             'otherKey' => 'user_id'
         ],
+    ];
+    public $morphedByMany = [
         'navigations' => [
             Navigation::class,
-            'table' => 'demo_core_nav_role_associations',
+            'name' => 'viewable',
+            'table' => 'demo_core_view_role_associations',
             'key' => 'role_id',
-            'otherKey' => 'navigation_id'
-        ],
+            'otherKey' => 'record_id',
+            'morphTypeKey' => 'model',
+        ]
     ];
+
+    /* public $morphToMany = [
+         'navigations' => [Navigation::class, 'name' => 'model']
+     ];*/
 
     public $attachAuditedBy = true;
 
     public function beforeSave()
     {
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(),$this->policies,$this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(), $this->policies, $this->plugin_id);
         ModelUtil::fillDefaultColumnsInBelongsToMany($this->navigations(), $this->navigations, $this->plugin_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
     }

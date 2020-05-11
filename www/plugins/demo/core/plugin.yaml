@@ -119,7 +119,7 @@ navigation:
                     - 'style="display:none;"'
             side-menu-item3:
                 label: 'Navigation Role Associations'
-                url: demo/core/navigationroleassociationcontroller
+                url: demo/core/viewroleassociationcontroller
                 icon: icon-arrows
 permissions:
     'demo.core::models.model.row.read':

@@ -61,6 +61,30 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "record_id"=> 150,
                                                                                         "previous"=>"{\"id\":150,\"title\":null,\"description\":null,\"created_at\":\"2020-04-12 08:27:24\",\"updated_at\":\"2020-04-12 16:05:19\",\"created_by_id\":1,\"updated_by_id\":1,\"priority_id\":3,\"case_number\":\"1214\",\"case_version\":\"\",\"suspect\":\"test\",\"tat_duration\":null,\"comments\":\"\",\"plugin_id\":null,\"assigned_to_id\":1,\"test_columns\":\"\",\"another_field\":null,\"version\":2}",
                                                                                         "current"=> null
+                            ] ,            [
+                                                                            "id"=> 1,
+                                                                                        "created_at"=>"2020-05-10 10:40:42",
+                                                                                        "updated_at"=>"2020-05-10 10:40:42",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "operation"=>"updating",
+                                                                                        "record_id"=> 52,
+                                                                                        "previous"=>"{\"id\":52,\"created_at\":\"2020-05-10 10:28:19\",\"updated_at\":\"2020-05-10 10:28:19\",\"created_by_id\":1,\"updated_by_id\":1,\"version\":null,\"label\":\"Dashboard\",\"type\":\"list\",\"active\":true,\"name\":\"dashboard\",\"description\":\"\",\"url\":\"\",\"model\":\"Demo\\Report\\Models\\Dashboard\",\"list\":\"\$\/demo\/report\/models\/dashboard\/columns.yaml\",\"form\":\"\",\"record_id\":null,\"plugin_id\":3,\"parent_id\":26,\"sort_order\":2,\"icon\":\"oc-icon-adjust\"}",
+                                                                                        "current"=> null
+                            ] ,            [
+                                                                            "id"=> 2,
+                                                                                        "created_at"=>"2020-05-10 14:43:32",
+                                                                                        "updated_at"=>"2020-05-10 14:43:32",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 1,
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "operation"=>"updating",
+                                                                                        "record_id"=> 52,
+                                                                                        "previous"=>"{\"id\":52,\"created_at\":\"2020-05-10 10:28:19\",\"updated_at\":\"2020-05-10 10:40:42\",\"created_by_id\":1,\"updated_by_id\":1,\"version\":1,\"label\":\"Dashboard2\",\"type\":\"list\",\"active\":true,\"name\":\"dashboard\",\"description\":\"\",\"url\":\"\",\"model\":\"Demo\\Report\\Models\\Dashboard\",\"list\":\"\$\/demo\/report\/models\/dashboard\/columns.yaml\",\"form\":\"\",\"record_id\":null,\"plugin_id\":3,\"parent_id\":26,\"sort_order\":2,\"icon\":\"oc-icon-adjust\"}",
+                                                                                        "current"=> null
                             ]             ]);
         }
 

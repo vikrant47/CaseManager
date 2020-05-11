@@ -47,6 +47,7 @@ class SeedRunner extends Command
         try {
             $plugins = [];
             $plugin = $this->argument('plugin');
+            $clean = $this->options('clean');
             if (!empty($plugin) && $plugin !== 'all' && $plugin !== 'a') {
                 $plugins[] = $plugin;
             } else {
@@ -66,7 +67,7 @@ class SeedRunner extends Command
                     }
                     $this->info('***************** Dumping seeds for plugin ' . $plugin . ' ******************');
                     $this->info('path = ' . $path);
-                    $this->runDump($plugin, $path);
+                    $this->runDump($plugin, $path, $clean);
                 } else {
                     $this->info('***************** Collecting seeds for plugin ' . $plugin . ' ******************');
                     $seedFiles = $this->getSeedsFiles($seedPath);
@@ -110,7 +111,8 @@ class SeedRunner extends Command
     protected function getOptions()
     {
         return [
-            ['debug', null, InputOption::VALUE_OPTIONAL, 'Print debug logs on console']
+            ['debug', null, InputOption::VALUE_OPTIONAL, 'Print debug logs on console'],
+            ['clean', null, InputOption::VALUE_OPTIONAL, 'Clean the seed directory'],
         ];
     }
 
@@ -223,7 +225,7 @@ class SeedRunner extends Command
         }, $collection);
     }
 
-    public function runDump($identifier, $path)
+    public function runDump($identifier, $path, $cleanDir = false)
     {
         $corePluginConnection = PluginConnection::getConnection('Demo.Core');
         $plugin = PluginVersions::where('code', $identifier)->first();
@@ -239,6 +241,10 @@ class SeedRunner extends Command
                                 where table_name iLike '" . $tableNamespace . "%' and table_name not in (:pluggableTables)",
             ['pluggableTables' => join("','", $pluggableTables)]);
         $pluginTables = $this->collectionToArray($pluginTables, 'table_name');
+        if ($cleanDir) {
+            $this->info('Cleaning directory  ' . $path);
+            File::deleteDirectory($path);
+        }
         $this->dumpSeed(array_merge($pluggableTables, $pluginTables), $plugin, $corePluginConnection->getTemplate('seed.file.twig'), $path);
     }
 

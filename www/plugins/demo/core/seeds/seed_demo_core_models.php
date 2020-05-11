@@ -494,22 +494,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "attach_audited_by"=> false,
                                                                                         "viewable"=> 1
                             ] ,            [
-                                                                            "id"=> 509,
-                                                                                        "created_at"=>"2020-05-09 11:25:29",
-                                                                                        "updated_at"=>"2020-05-09 11:27:51",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Navigation",
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "controller"=>"Demo\Core\Controllers\NavigationController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=> 0,
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
                                                                             "id"=> 516,
                                                                                         "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
@@ -554,6 +538,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false
+                            ] ,            [
+                                                                            "id"=> 509,
+                                                                                        "created_at"=>"2020-05-09 11:25:29",
+                                                                                        "updated_at"=>"2020-05-10 16:00:23",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Navigation",
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "controller"=>"Demo\Core\Controllers\NavigationController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\"*\"]",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
                                                                                         "viewable"=> false

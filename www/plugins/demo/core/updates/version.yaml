@@ -61,5 +61,5 @@
     - 'Created table demo_core_navigations'
     - builder_table_create_demo_core_navigations.php
 1.0.22:
-    - 'Created table demo_core_nav_role_associations'
-    - builder_table_create_demo_core_nav_role_associations.php
+    - 'Created table demo_core_view_role_associations'
+    - builder_table_create_demo_core_view_role_associations.php

@@ -6,7 +6,7 @@ use Model;
 /**
  * Model
  */
-class NavigationRoleAssociation extends Model
+class ViewRoleAssociation extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     
@@ -14,7 +14,7 @@ class NavigationRoleAssociation extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_core_nav_role_associations';
+    public $table = 'demo_core_view_role_associations';
 
     /**
      * @var array Validation rules
