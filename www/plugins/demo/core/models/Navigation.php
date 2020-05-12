@@ -4,6 +4,7 @@ use Backend\Facades\Backend;
 use Demo\Core\Classes\Helpers\ControllerHelper;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
+use Demo\Core\Controllers\NavigationController;
 use Model;
 use October\Rain\Exception\ApplicationException;
 use RainLab\Builder\Classes\IconList;
@@ -96,10 +97,10 @@ class Navigation extends Model
         if ($navigation->type !== 'folder' && $navigation->type !== 'seperator') {
             /*try {*/
             if ($navigation->type === 'url') {
-                $generatedUrl = $navigation->url;
+                $generatedUrl = ControllerHelper::generateUrl(NavigationController::class) . '/embed/' . $navigation->id;
             }
             $model = $navigation->model_ref;
-            $index = Backend::url(str_replace('\\', '/', strtolower(str_replace('\\Controllers', '', $model->controller))));
+            $index = ControllerHelper::generateUrl($model->controller);
             if ($navigation->type === 'list') {
                 $generatedUrl = $index;
             }

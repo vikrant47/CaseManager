@@ -1,0 +1,24 @@
+<style>
+    .embed-frame {
+        display: block; /* iframes are inline by default */
+        background: #000;
+        border: none; /* Reset default border */
+        height: 100vh; /* Viewport-relative units */
+        width: 100vw;
+        position: relative;
+    }
+</style>
+<script>
+    var $iframe = $('<iframe class="embed-frame"/>').css({
+        display: 'block', /* iframes are inline by default */
+        background: '#000',
+        border: 'none', /* Reset default border */
+        height: '90vh', /* Viewport-relative units */
+        width: '100%',
+    }).attr('frameborder', '0').attr('height', '100%').attr('src', '<?= $navigation->url ?>');
+
+    $('.page-content').empty().css({
+        padding: '0px 0px 0px 0px',
+    }).append($iframe);
+
+</script>
