@@ -22,11 +22,18 @@ class NavigationController extends AbstractSecurityController
     {
         $navigation = Navigation::where('id', '=', $id)->first();
         if (empty($navigation)) {
-            $this->setResponse('Unable to find navigation with id ' . $id, 404);
-            return;
+            return $this->setResponse('Unable to find navigation with id ' . $id, 404);
         }
+        $navitaions = $this->getNavigations();
+        /* if ($navitaions->contains(function ($navigation) use ($id) {
+             return $navigation->id == $id;
+         })) {*/
         return $this->makePartial('embed', [
             'navigation' => $navigation
         ]);
+        /*} else {
+                return $this->forwardToAccessDenied();
+            }*/
+
     }
 }

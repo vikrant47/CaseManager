@@ -19,7 +19,7 @@ use View;
 
 abstract class AbstractSecurityController extends AbstractPluginController
 {
-    private $userSecurityService;
+    protected $userSecurityService;
     public $requiredPermissions = [];
 
     /**
@@ -30,6 +30,12 @@ abstract class AbstractSecurityController extends AbstractPluginController
         parent::__construct();
         $this->userSecurityService = UserSecurityService::getInstance();
         // $this->requiredPermissions[] = $this->userSecuriyService->getReadPermission($this->getModelClass());
+    }
+
+    /**Overriding default run method to inject code*/
+    public function run($action = null, $params = [])
+    {
+        return parent::run($action, $params);
     }
 
     public function forwardToAccessDenied($throwError = false)
