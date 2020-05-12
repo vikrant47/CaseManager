@@ -148,10 +148,16 @@ class AbstractPluginController extends Controller
         return $this->modelRecord;
     }
 
-    public function onIndex()
+    public function onListView()
     {
         $list = $this->makeLists();
         return $this->listRender();
+    }
+
+    public function onFormView($recordId = null, $context = 'create')
+    {
+        $formWidget =  $this->create();
+        return $this->formRender();
     }
 
     public function viewExtendQuery($modelClass, $query)
@@ -162,15 +168,15 @@ class AbstractPluginController extends Controller
     /**
      * This will create a formWidget object of given form which can be rendered inside a partial
      */
-    protected function createFormWidget($form, $modelRecord, $recordId = 0)
+    protected function createFormWidget($form, $modelClass, $recordId = 0)
     {
         $config = $this->makeConfig($form);
         $config->alias = 'voucherProduct';
         $config->arrayName = 'VoucherProduct';
         if ($recordId) {
-            $config->model = $modelRecord->model::find($recordId);
+            $config->model = $modelClass::find($recordId);
         } else {
-            $config->model = new $modelRecord->model;
+            $config->model = new $modelClass;
         }
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
