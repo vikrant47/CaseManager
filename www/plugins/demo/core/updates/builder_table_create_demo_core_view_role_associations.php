@@ -17,7 +17,7 @@ class BuilderTableCreateDemoCoreNavRoleAssociations extends Migration
             $table->integer('updated_by_id');
             $table->integer('version')->nullable();
             $table->integer('record_id');
-            $table->string('record_id');
+            $table->string('model');
             $table->integer('role_id');
             $table->integer('plugin_id');
         });
