@@ -2,11 +2,12 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Models\Navigation;
 
 class NavigationController extends AbstractSecurityController
 {
-    public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
-    
+    public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
+
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
     public $reorderConfig = 'config_reorder.yaml';
@@ -15,5 +16,17 @@ class NavigationController extends AbstractSecurityController
     {
         parent::__construct();
         BackendMenu::setContext('Demo.Core', 'main-menu-item', 'side-menu-item14');
+    }
+
+    public function embed($id)
+    {
+        $navigation = Navigation::where('id', '=', $id)->first();
+        if (empty($navigation)) {
+            $this->setResponse('Unable to find navigation with id ' . $id, 404);
+            return;
+        }
+        return $this->makePartial('embed', [
+            'navigation' => $navigation
+        ]);
     }
 }

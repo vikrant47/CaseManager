@@ -5,6 +5,8 @@ namespace Demo\Core\Classes\Helpers;
 
 
 use Backend\Classes\BackendController;
+use Backend\Facades\Backend;
+use Demo\Core\Controllers\NavigationController;
 
 class ControllerHelper
 {
@@ -24,5 +26,10 @@ class ControllerHelper
     public static function getBackendController()
     {
         return request()->route()->controller;
+    }
+
+    public static function generateUrl($controllerType)
+    {
+        return $index = Backend::url(str_replace('\\', '/', strtolower(str_replace('\\Controllers', '', $controllerType))));
     }
 }
