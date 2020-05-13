@@ -10,8 +10,8 @@
         <?php $model = $this->formGetModel()?>
         var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
-        EngineUI.instance.setModelRecord(modelRecord);
-        EngineFrom.instance.setFormModel(formModel);
-        EngineFrom.instance.addFormActions(actions, modelRecord);
+        Engine.instance.ui.setModel(modelRecord);
+        var form = Engine.instance.formService.getCurrentForm();
+        form.addActions(actions);
     </script>
 </div>
