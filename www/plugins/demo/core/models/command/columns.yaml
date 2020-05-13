@@ -21,7 +21,7 @@ columns:
         label: description
         type: text
     code:
-        label: slug
+        label: Code
         type: text
     active:
         label: active

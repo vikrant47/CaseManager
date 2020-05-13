@@ -6,7 +6,7 @@
 <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
 <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <?php if ($preview === true) { ?>
-    <a href="../render-dashboard/<?= $dashboard->slug ?>" style="margin: 0;auto;">View</a>
+    <a href="../render/<?= $dashboard->id ?>" style="margin: 0;auto;">View</a>
 <?php } ?>
 <div id="dashboard-container-<?= $dashboard->id ?>" style="height: 100%;width: 100%;" class="dashboard-container">
     <div class="grid-stack">
@@ -21,7 +21,7 @@
                     $widget = \Demo\Report\Models\Widget::where('id', $config['widget'])->first();
                     $widgetController->addAssets($this, $widget);
                     ?>
-                    <?= $widgetController->renderWidget($widget) ?>
+                    <?= $widgetController->render($widget) ?>
                 </div>
             </div>
 

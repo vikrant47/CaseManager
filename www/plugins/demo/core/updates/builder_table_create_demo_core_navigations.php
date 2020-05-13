@@ -27,6 +27,8 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->string('list')->nullable();
             $table->string('form')->nullable();
             $table->integer('record_id')->nullable();
+            $table->integer('dashboard_id')->nullable();
+            $table->integer('widget_id')->nullable();
             $table->integer('plugin_id');
             $table->integer('parent_id')->nullable();
             $table->smallInteger('sort_order');

@@ -40,6 +40,8 @@ fields:
             folder: Folder
             list: List
             form: Form
+            dashboard: Dashboard
+            widget: Widget
             url: URL
     parent:
         label: Parent
@@ -145,3 +147,33 @@ tabs:
                 field: type
                 condition: 'value[url]'
 
+        dashboard:
+            label: Dashboard
+            nameFrom: name
+            descriptionFrom: description
+            emptyOption: '- Select Dashboard -'
+            span: auto
+            required: 1
+            type: relation
+            tab: Config
+            dependsOn:
+                - type
+            trigger:
+                action: show
+                field: type
+                condition: 'value[dashboard]'
+        widget:
+            label: Widget
+            nameFrom: name
+            descriptionFrom: description
+            emptyOption: '- Select Widget -'
+            span: auto
+            required: 1
+            type: relation
+            tab: Config
+            dependsOn:
+                - type
+            trigger:
+                action: show
+                field: type
+                condition: 'value[widget]'

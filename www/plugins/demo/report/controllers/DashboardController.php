@@ -96,13 +96,15 @@ class DashboardController extends AbstractSecurityController
         return ['dashboard' => $dashboard->getOriginal()];
     }
 
-    public function renderDashboard($code)
+    public function render($id)
     {
-        $dashboard = Dashboard::where('code', $code)->where('active', 1)->first();
+        $dashboard = Dashboard::where('id', $id)->where('active', 1)->first();
         if (empty($dashboard)) {
             $this->setStatusCode(404);
             return '';
         }
-        return $this->makePartial('dashboard_renderer', ['dashboard' => $dashboard, 'preview' => false]);
+        return $this->makePartial('dashboard_renderer', [
+            'dashboard' => $dashboard, 'preview' => false
+        ]);
     }
 }

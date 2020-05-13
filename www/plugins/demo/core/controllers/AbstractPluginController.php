@@ -12,6 +12,7 @@ use Demo\Core\Classes\Ifs\IPluginMiddleware;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Core\Models\FormAction;
+use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
@@ -54,6 +55,16 @@ class AbstractPluginController extends Controller
     public function getModelClass()
     {
         return $this->modelClass;
+    }
+
+    /**this will inject given library in page**/
+    public function addLibrary($code)
+    {
+        $library = JavascriptLibrary::where('code', $code)->first();
+        if (empty($library)) {
+            throw new \Exception('No library found with given code' . $code);
+        }
+        $library->addAssets($this);
     }
 
     /**Overriding default run method to inject code*/
@@ -156,7 +167,7 @@ class AbstractPluginController extends Controller
 
     public function onFormView($recordId = null, $context = 'create')
     {
-        $formWidget =  $this->create();
+        $formWidget = $this->create();
         return $this->formRender();
     }
 

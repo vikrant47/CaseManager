@@ -83,7 +83,7 @@ Object.assign(Dashboard.prototype, {
         var gridStack = this.getGridStack();
         var $template = $('<div class="widget-template"><button type="button" class="close widget-control close-widget" >×</button></div>');
         $template.request('onPreview', {
-            url: '/backend/demo/report/widgetcontroller/render-widget/' + widget.id,
+            url: '/backend/demo/report/widgetcontroller/render/' + widget.id,
             data: Object.assign({dashboard: true}, widget),
             update: {widget_renderer: '#widget-template'}
         });
