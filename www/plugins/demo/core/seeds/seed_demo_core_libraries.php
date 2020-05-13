@@ -16,13 +16,14 @@ class SeedDemoCoreLibraries implements Seedable
             [
                                                                             "id"=> 1,
                                                                                         "created_at"=>"2020-05-10 07:34:36",
-                                                                                        "updated_at"=>"2020-05-10 07:34:36",
+                                                                                        "updated_at"=>"2020-05-13 04:03:38",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
                                                                                         "name"=>"EchartJS",
                                                                                         "description"=> "",
-                                                                                        "website"=>"https://echarts.apache.org/en/index.html"
+                                                                                        "website"=>"https://echarts.apache.org/en/index.html",
+                                                                                        "code"=>"echart-js"
                             ]             ]);
         }
 
