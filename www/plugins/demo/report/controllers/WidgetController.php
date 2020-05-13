@@ -56,7 +56,7 @@ class WidgetController extends AbstractSecurityController
         }
     }
 
-    public function renderWidget($id)
+    public function render($id)
     {
         if ($id instanceof Widget) {
             $widget = $id;

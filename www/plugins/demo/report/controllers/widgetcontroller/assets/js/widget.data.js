@@ -150,7 +150,7 @@ Object.assign(Widget.prototype, {
     loadData: function (callabck) {
         var _this = this;
         $.request('onData', {
-            url: '/backend/demo/report/widgetcontroller/render-widget/' + this.model.slug,
+            url: '/backend/demo/report/widgetcontroller/render/' + this.model.slug,
             data: {id: this.model.id},
             success: function (data) {
                 var result = JSON.parse(data.result);

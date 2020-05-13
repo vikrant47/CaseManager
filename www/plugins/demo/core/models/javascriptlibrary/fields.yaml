@@ -3,6 +3,13 @@ fields:
         label: Name
         span: auto
         type: text
+    code:
+        label: Code
+        span: auto
+        type: text
+        preset:
+            field: name
+            type: slug
     description:
         label: Description
         size: ''

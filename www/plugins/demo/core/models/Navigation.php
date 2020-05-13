@@ -5,6 +5,10 @@ use Demo\Core\Classes\Helpers\ControllerHelper;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Controllers\NavigationController;
+use Demo\Report\Controllers\DashboardController;
+use Demo\Report\Controllers\WidgetController;
+use Demo\Report\Models\Dashboard;
+use Demo\Report\Models\Widget;
 use Model;
 use October\Rain\Exception\ApplicationException;
 use RainLab\Builder\Classes\IconList;
@@ -32,6 +36,8 @@ class Navigation extends Model
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
         'parent' => [Navigation::class, 'key' => 'parent_id'],
+        'dashboard' => [Dashboard::class, 'key' => 'dashboard_id'],
+        'widget' => [Widget::class, 'key' => 'widget_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
     public $morphToMany = [
@@ -94,26 +100,31 @@ class Navigation extends Model
     {
 
         $generatedUrl = '';//$navigation->generated_url;
-        if ($navigation->type !== 'folder' && $navigation->type !== 'seperator') {
+        if ($navigation->type === 'url') {
+            $generatedUrl = ControllerHelper::generateUrl(NavigationController::class) . '/embed/' . $navigation->id;
+        } else if ($navigation->type === 'dashboard') {
+            $index = ControllerHelper::generateUrl(DashboardController::class);
+            $generatedUrl = $index . '/render/' . $navigation->dashboard_id;
+        } else if ($navigation->type === 'widget') {
+            $index = ControllerHelper::generateUrl(WidgetController::class);
+            $generatedUrl = $index . '/render/' . $navigation->widget_id;
+        } else if ($navigation->type === 'list') {
             /*try {*/
-            if ($navigation->type === 'url') {
-                $generatedUrl = ControllerHelper::generateUrl(NavigationController::class) . '/embed/' . $navigation->id;
-            }
+
             $model = $navigation->model_ref;
             $index = ControllerHelper::generateUrl($model->controller);
-            if ($navigation->type === 'list') {
-                $generatedUrl = $index;
-            }
-            if ($navigation->type === 'form') {
-                if (empty($navigation->record_id)) {
-                    $generatedUrl = $index . '/update' . $navigation->record_id;
-                } else {
-                    $generatedUrl = $index . '/create';
-                }
-            }
+            $generatedUrl = $index;
             /*} catch (\Exception $e) {
                 throw $e;
             }*/
+        } else if ($navigation->type === 'form') {
+            $model = $navigation->model_ref;
+            $index = ControllerHelper::generateUrl($model->controller);
+            if (empty($navigation->record_id)) {
+                $generatedUrl = $index . '/update' . $navigation->record_id;
+            } else {
+                $generatedUrl = $index . '/create';
+            }
         } else {
             $generatedUrl = Backend::url($navigation->name);
         }

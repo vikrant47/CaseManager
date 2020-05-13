@@ -19,6 +19,7 @@ class BuilderTableCreateDemoCoreLibraries extends Migration
             $table->text('javascript_files');
             $table->integer('plugin_id');
             $table->string('name');
+            $table->string('code');
             $table->text('description');
             $table->text('website');
         });
