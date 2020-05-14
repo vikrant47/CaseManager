@@ -1,5 +1,6 @@
 <?php namespace Demo\Core;
 
+use Demo\Core\EventHandlers\Migrations\BeforeCreateMigrations;
 use Demo\Core\EventHandlers\Model\BeforeCreateModels;
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdateAudit;
 use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
@@ -22,6 +23,7 @@ class Plugin extends PluginBase
     public function getEventHandlers()
     {
         return [
+            BeforeCreateMigrations::class,
             BeforeCreateOrUpdateAudit::class,
             BeforeUpdateWorkflowItemState::class,
             BeforeCreateOrUpdateCustomField::class,

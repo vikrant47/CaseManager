@@ -5,6 +5,7 @@ namespace Demo\Core\Services;
 
 
 use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Enums\HandlerType;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\EventHandler;
 use Demo\Core\Plugin;
@@ -12,6 +13,7 @@ use October\Rain\Exception\ApplicationException;
 use October\Rain\Support\ServiceProvider;
 use System\Classes\PluginManager;
 use Event;
+use DB;
 
 class EventHandlerServiceProvider extends ServiceProvider
 {
@@ -22,7 +24,8 @@ class EventHandlerServiceProvider extends ServiceProvider
         'created' => 'Created', 'updated' => 'Updated', 'deleted' => 'Deleted',
     ];
     public $handlerRegistered = false;
-    public $events = [
+    public $QUERY_EVENT_HANDLER = ['execute' => []];
+    public $MODEL_EVENT_HANDLER = [
         'creating' => [],
         'updating' => [],
         'deleting' => [],
@@ -40,10 +43,10 @@ class EventHandlerServiceProvider extends ServiceProvider
         parent::__construct($app);
     }
 
-    public function executeEvents($eventName, $model)
+    public function executeSystemEvents($handlerType, $eventName, $model)
     {
         $this->logger->debug(get_class($model) . ' ' . $eventName . ' triggered, Executing handlers ');
-        $handlers = $this->events[$eventName];
+        $handlers = $this->{$handlerType}[$eventName];
         $this->logger->debug(get_class($model) . ' ' . $eventName . ' filesystem handler loaded ' . count($handlers));
         foreach ($handlers as $handler) {
             $this->logger->debug(get_class($model) . ' ' . $eventName . ' Executing ' . get_class($handler));
@@ -52,6 +55,10 @@ class EventHandlerServiceProvider extends ServiceProvider
                 $handler->handler($eventName, $model);
             }
         }
+    }
+
+    public function executeDbEvents($handlerType, $eventName, $model)
+    {
         $dbHandlers = $this->loadFromDatabase($eventName, get_class($model));
         $this->logger->debug(get_class($model) . ' ' . $eventName . ' database handler loaded ' . $dbHandlers->count());
         // throw new ApplicationException($dbHandlers->count());
@@ -61,25 +68,39 @@ class EventHandlerServiceProvider extends ServiceProvider
         }
     }
 
+    public function executeEvents($handlerType, $eventName, $model)
+    {
+        $this->executeSystemEvents($handlerType, $eventName, $model);
+        $this->executeDbEvents($handlerType, $eventName, $model);
+    }
+
+    public function executeQueryEvent()
+    {
+
+    }
+
     public function registerHandlers()
     {
         Event::listen('eloquent.creating: *', function ($model) {
-            $this->executeEvents('creating', $model);
+            $this->executeEvents(HandlerType::MODEL_EVENT_HANDLER, 'creating', $model);
         });
         Event::listen('eloquent.updating: *', function ($model) {
-            $this->executeEvents('updating', $model);
+            $this->executeEvents(HandlerType::MODEL_EVENT_HANDLER, 'updating', $model);
         });
         Event::listen('eloquent.deleting: *', function ($model) {
-            $this->executeEvents('deleting', $model);
+            $this->executeEvents(HandlerType::MODEL_EVENT_HANDLER, 'deleting', $model);
         });
         Event::listen('eloquent.created: *', function ($model) {
-            $this->executeEvents('created', $model);
+            $this->executeEvents(HandlerType::MODEL_EVENT_HANDLER, 'created', $model);
         });
         Event::listen('eloquent.updated: *', function ($model) {
-            $this->executeEvents('updated', $model);
+            $this->executeEvents(HandlerType::MODEL_EVENT_HANDLER, 'updated', $model);
         });
         Event::listen('eloquent.deleted: *', function ($model) {
-            $this->executeEvents('deleted', $model);
+            $this->executeEvents(HandlerType::MODEL_EVENT_HANDLER, 'deleted', $model);
+        });
+        DB::listen(function ($query) {
+            $this->executeSystemEvents(HandlerType::QUERY_EVENT_HANDLER, 'execute', $query);
         });
     }
 
@@ -90,16 +111,19 @@ class EventHandlerServiceProvider extends ServiceProvider
                 $eventHandlers = $plugin->getEventHandlers();
                 foreach ($eventHandlers as $eventHandler) {
                     $instance = new $eventHandler();
+                    if (empty($instance->handlerType)) {
+                        $instance->handlerType = HandlerType::MODEL_EVENT_HANDLER;
+                    }
                     foreach ($instance->events as $eventName) {
-                        array_push($this->events[$eventName], $instance);
+                        array_push($this->{$instance->handlerType}[$eventName], $instance);
                     }
                 }
             }
         }
-        $events = array_keys($this->events);
+        $events = array_keys($this->MODEL_EVENT_HANDLER);
 
         foreach ($events as $eventName) {
-            usort($this->events[$eventName], function ($a, $b) {
+            usort($this->MODEL_EVENT_HANDLER[$eventName], function ($a, $b) {
                 return $a->sort_order - $b->sort_order;
             });
         }

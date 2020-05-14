@@ -13,6 +13,8 @@ www/storage/cms
 www/storage/logs
 www/storage/temp
 www/storage/framework
+!www/vendor/october/rain/src/Database/Relations/MorphToMany.php
+!www/vendor/october/rain/src/Database/Concerns/HasRelationships.php
 www/vendor
 www/install.php
 www/install-master
@@ -22,6 +24,4 @@ www/ed
 www/.travis.yml
 www/phpunit.phar
 www/.editorconfig
-!www/vendor/october/rain/src/Database/Relations/MorphToMany.php
-!www/vendor/october/rain/src/Database/Concerns/HasRelationships.php
 
