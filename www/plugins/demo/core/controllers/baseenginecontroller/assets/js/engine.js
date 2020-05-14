@@ -273,6 +273,9 @@ Object.assign(Engine.prototype, {
             }
         });
         return qbFields;
+    },
+    export: function (module, namespace) {
+        this[namespace] = module;
     }
 });
 window.Engine = Engine;

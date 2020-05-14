@@ -19,6 +19,7 @@ class BuilderTableCreateDemoCoreAuditLogs extends Migration
             $table->string('model');
             $table->string('operation');
             $table->integer('record_id');
+            $table->integer('record_id');
             $table->text('previous');
             $table->text('current')->nullable();
         });

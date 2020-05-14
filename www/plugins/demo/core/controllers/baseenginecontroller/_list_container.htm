@@ -11,8 +11,9 @@
                     var actions = <?=$this->getListActions()->toJSON()?>;
                     var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
                     var controller = <?=json_encode($this->getControllerInfo())?>;
-                    EngineUI.instance.setModelRecord(modelRecord);
-                    EngineList.instance.addListActions(actions, modelRecord);
+                    Engine.instance.ui.setModel(modelRecord);
+                    var list = Engine.instance.listService.getCurrentList();
+                    list.addActions(actions);
                 </script>
             </div>
         </div>

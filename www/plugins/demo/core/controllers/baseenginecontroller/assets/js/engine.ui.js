@@ -1,11 +1,28 @@
 var EngineUI = function () {
-    this.currentModelRecord = null;
+    this.currentModel = null;
 };
-var EngineList = function () {
+var EngineFormService = function () {
 
 };
-var EngineFrom = function () {
-    this.formModel = null;
+var EngineListService = function () {
+    this.currentList = null;
+};
+var EngineList = function (model, el) {
+    this.model = model;
+    if (!el) {
+        el = '.control-list';
+    }
+    this.$el = $(el).eq(0);
+    this.$el.data('engineList', this);
+};
+var EngineFrom = function (model, el) {
+    this.model = model;
+    this.formData = null;
+    if (!el) {
+        el = '[data-control="formwidget"]';
+    }
+    this.$el = $(el).eq(0);
+    this.$el.data('engineForm', this);
 };
 
 
@@ -13,19 +30,19 @@ Object.assign(EngineUI.prototype, {
     navigate: function (model, type) {
 
     },
-    getModelRecord: function () {
-        return this.currentModelRecord;
+    getModel: function () {
+        return this.currentModel;
     },
-    setModelRecord: function (modelRecord) {
-        this.currentModelRecord = modelRecord;
+    setModel: function (model) {
+        this.currentModel = model;
     },
-    toUIAction: function (dbActions, modelRecord) {
+    toUIAction: function (dbActions, model) {
         return dbActions.map(function (action) {
-            action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') +' '+ action.css_class + ' ' + action.icon;
+            action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') + ' ' + action.css_class + ' ' + action.icon;
             action.handler = Function('return ' + action.script)();
             action.id = 'list-action-' + action.id;
             action.attributes = typeof action.html_attributes === 'string' ? JSON.parse(action.html_attributes) : action.html_attributes;
-            action.modelRecord = modelRecord;
+            action.model = model;
             delete action.icon;
             delete action.html_attributes;
             return action;
@@ -96,33 +113,66 @@ Object.assign(EngineUI.prototype, {
         });
     },
 });
-
+Object.assign(EngineListService.prototype, {
+    getCurrentList: function () {
+        if (!this.currentList) {
+            this.currentList = new EngineList(Engine.instance.ui.getModel());
+        }
+        return this.currentList;
+    }
+});
+Object.assign(EngineFormService.prototype, {
+    getCurrentForm: function () {
+        if (!this.currentForm) {
+            this.currentForm = new EngineFrom(Engine.instance.ui.getModel());
+        }
+        return this.currentForm;
+    }
+});
 Object.assign(EngineList.prototype, {
-    getLocation: function (model) {
-        return ('/backend/' + model.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
+    getContainer() {
+        return this.$el;
     },
-    navigate: function (model, queryParams = {}, view = 'index') {
-        window.location.href = this.getLocation(model) + '/' + view + '?' + $.param(queryParams);
+    getActionContainer: function () {
+        return $('.engine-list-toolbar .toolbar-item').children().eq(0);
     },
-    addListActions: function (actionRecords, modelRecord) {
-        var actions = EngineUI.instance.toUIAction(actionRecords, modelRecord);
-        Engine.instance.addActions($('.engine-list-toolbar .toolbar-item').children().eq(0), actions);
+    getLocation: function () {
+        return ('/backend/' + this.model.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
+    },
+    navigate: function (queryParams = {}, view = 'index') {
+        window.location.href = this.getLocation(this.model) + '/' + view + '?' + $.param(queryParams);
+    },
+    addActions: function (actionRecords) {
+        var actions = Engine.instance.ui.toUIAction(actionRecords, this.model);
+        Engine.instance.addActions(this.getActionContainer(), actions);
     },
     getSelectedRecordIds: function () {
         return $('.control-list').listWidget('getChecked');
+    },
+    getOctoberListWidget: function () {
+        return $('.control-list').listWidget();
     }
 });
 
 Object.assign(EngineFrom.prototype, {
 
-    getFormModel: function () {
-        return this.formModel;
+    isNew: function () {
+
+    },
+    getActionContainer: function () {
+        return $('.engine-form-wrapper .form-buttons .loading-indicator-container .actions');
+    },
+    getOctoberFormWidget: function () {
+        return this.$el.data('formWidget');
+    },
+    getFormData: function () {
+        return this.formData;
     },
     setFormModel: function (formModel) {
         this.formModel = formModel;
     },
-    getLocation: function (model, recordId, view = 'update', params = {}) {
-        var formUrl = EngineList.instance.getLocation(model);
+    getLocation: function (recordId, view = 'update', params = {}) {
+        var formUrl = new EngineList(this.model).getLocation();
         if (typeof recordId === 'undefined') {
             formUrl = formUrl + '/create';
         } else {
@@ -130,25 +180,17 @@ Object.assign(EngineFrom.prototype, {
         }
         return formUrl;
     },
-    navigate(model, recordId, view = 'update') {
-        var formUrl = this.getLocation(model, recordId, view);
+    navigate(recordId, view = 'update') {
+        var formUrl = this.getLocation(this.model, recordId, view);
         window.location.href = formUrl;
     },
-    addFormActions: function (actionRecords, modelRecord) {
-        var actions = EngineUI.instance.toUIAction(actionRecords, modelRecord);
-        Engine.instance.addActions($('.engine-form-wrapper .form-buttons .loading-indicator-container .actions'), actions);
+    addActions: function (actionRecords) {
+        var actions = Engine.instance.ui.toUIAction(actionRecords, this.model);
+        Engine.instance.addActions(this.getActionContainer(), actions);
     }
 });
 
-EngineList.instance = new EngineList();
-window.EngineList = EngineList;
 
-EngineFrom.instance = new EngineFrom();
-window.EngineFrom = EngineFrom;
-
-EngineUI.instance = new EngineUI();
-window.EngineUI = EngineUI;
-
-Engine.instance.ui = EngineUI.instance;
-Engine.instance.form = EngineFrom.instance;
-Engine.instance.list = EngineList.instance;
+Engine.instance.export(new EngineFormService(), 'formService');
+Engine.instance.export(new EngineListService(), 'listService');
+Engine.instance.export(new EngineUI(), 'ui');
