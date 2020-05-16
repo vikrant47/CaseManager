@@ -23,7 +23,7 @@ class Plugin extends PluginBase
     public function getEventHandlers()
     {
         return [
-            BeforeCreateMigrations::class,
+            /*BeforeCreateMigrations::class,*/
             BeforeCreateOrUpdateAudit::class,
             BeforeUpdateWorkflowItemState::class,
             BeforeCreateOrUpdateCustomField::class,

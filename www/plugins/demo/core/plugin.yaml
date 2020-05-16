@@ -73,6 +73,10 @@ navigation:
                 label: 'Audit Logs'
                 url: demo/core/auditlogcontroller
                 icon: icon-file-archive-o
+            side-menu-item15:
+                label: 'UI Pages'
+                url: demo/core/uipagecontroller
+                icon: icon-codepen
     main-menu-item2:
         label: Security
         url: demo/core/usercontroller
