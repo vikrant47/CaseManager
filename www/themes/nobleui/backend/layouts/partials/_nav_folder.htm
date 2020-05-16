@@ -7,8 +7,9 @@ if ($folder->type === 'link') { ?>
     <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
     '' ?>">
         <a href="<?= $folder->generated_url ?>"
-           class="nav-link"><?= e(trans($folder->label)) ?>
-            <!--<i class="link-icon <?= $folder->icon ?>"></i>-->
+           class="nav-link">
+            <span class="link-title"> <?= e(trans($folder->label)) ?></span>
+            <i class="link-icon <?= $folder->icon ?>"></i>
         </a>
     </li>
 
@@ -23,20 +24,20 @@ if ($folder->type === 'link') { ?>
             <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
         <div class="collapse" id="<?= $id ?>">
-            <ul class="nav sub-menu">
+            <ul class="nav sub-menu nested">
                 <?php
                 $sideMenuItems = $folder->children;
                 if (!empty($sideMenuItems)) {
                     foreach ($sideMenuItems as $sideItem) {
                         if ($sideItem->type === 'folder') {
-                            $this->makeLayoutPartial('partials/nav_folder', ['folder' => $sideItem]);
+                            print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $sideItem]);
                         } else {
                             ?>
                             <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
                             '' ?>">
                                 <a href="<?= $sideItem->generated_url ?>"
-                                   class="nav-link"><?= e(trans($sideItem->label)) ?>
-                                    <!--<i class="link-icon <?= $sideItem->icon ?>"></i>-->
+                                   class="nav-link"><span class="link-title"> <?= e(trans($sideItem->label)) ?></span>
+                                    <i class="link-icon <?= $sideItem->icon ?>"></i>
                                 </a>
                             </li>
                         <?php }
