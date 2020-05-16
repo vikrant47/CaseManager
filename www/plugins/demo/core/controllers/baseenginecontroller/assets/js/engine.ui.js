@@ -139,8 +139,8 @@ Object.assign(EngineList.prototype, {
     getLocation: function () {
         return ('/backend/' + this.model.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
     },
-    navigate: function (queryParams = {}, view = 'index') {
-        window.location.href = this.getLocation(this.model) + '/' + view + '?' + $.param(queryParams);
+    navigate: function (view = 'index', queryParams = {}) {
+        window.location.href = this.getLocation(this.model) + '/' + view + (Object.keys(queryParams).length > 0 ? '?' + $.param(queryParams) : '');
     },
     addActions: function (actionRecords) {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.model);
@@ -171,17 +171,17 @@ Object.assign(EngineFrom.prototype, {
     setFormModel: function (formModel) {
         this.formModel = formModel;
     },
-    getLocation: function (recordId, view = 'update', params = {}) {
+    getLocation: function (view = 'create', recordId, params = {}) {
         var formUrl = new EngineList(this.model).getLocation();
         if (typeof recordId === 'undefined') {
-            formUrl = formUrl + '/create';
+            formUrl = formUrl + '/' + view + '?' + $.param(params);
         } else {
             formUrl = formUrl + '/' + view + '/' + recordId + '?' + $.param(params);
         }
         return formUrl;
     },
-    navigate(recordId, view = 'update') {
-        var formUrl = this.getLocation(this.model, recordId, view);
+    navigate(view = 'create', recordId = undefined) {
+        var formUrl = this.getLocation(this.model, view, recordId);
         window.location.href = formUrl;
     },
     addActions: function (actionRecords) {

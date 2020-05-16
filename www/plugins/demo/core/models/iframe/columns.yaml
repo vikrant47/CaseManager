@@ -15,9 +15,11 @@ columns:
         label: updated_by_id
         type: number
     name:
+        searchable: true
         label: name
         type: text
     code:
+        searchable: true
         label: slug
         type: text
     url:

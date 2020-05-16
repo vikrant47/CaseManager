@@ -15,11 +15,13 @@ columns:
         label: updated_by_id
         type: number
     name:
+        searchable: true
         label: name
         type: text
     label:
         label: label
         type: text
+        searchable: true
     active:
         label: active
         type: text

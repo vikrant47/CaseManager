@@ -12,6 +12,7 @@ columns:
         label: active
         type: number
     name:
+        searchable: true
         label: name
         type: text
     description:

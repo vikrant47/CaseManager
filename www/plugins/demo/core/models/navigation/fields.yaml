@@ -42,6 +42,7 @@ fields:
             form: Form
             dashboard: Dashboard
             widget: Widget
+            uipage: UI Page
             url: URL
     parent:
         label: Parent
@@ -177,3 +178,18 @@ tabs:
                 action: show
                 field: type
                 condition: 'value[widget]'
+        uipage:
+            label: UI Page
+            nameFrom: name
+            descriptionFrom: description
+            emptyOption: '- Select Page -'
+            span: auto
+            required: 1
+            type: relation
+            tab: Config
+            dependsOn:
+                - type
+            trigger:
+                action: show
+                field: type
+                condition: 'value[uipage]'

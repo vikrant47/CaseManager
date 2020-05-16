@@ -1,0 +1,16 @@
+<?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
+<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
+<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
+<?php
+$randomId = substr(md5(mt_rand()), 0, 7);
+?>
+<?php if ($preview === true) { ?>
+    <a class="preview-link" href="../render/<?= $page->id ?>" style="margin: 0;auto;">View</a>
+<?php } ?>
+<div id="page-container-<?= $page->id ?>" style="height: 100vh;width: 100%;" class="page-container">
+    <?= $page->templateInstance->render([
+        'page' => $page,
+        'controller' => $this,
+    ]) ?>
+</div>
+<style>

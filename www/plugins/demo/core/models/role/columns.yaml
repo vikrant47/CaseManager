@@ -4,10 +4,12 @@
 
 columns:
     name:
+        searchable: true
         label: backend::lang.user.role.name_field
         searchable: true
 
     code:
+        searchable: true
         label: backend::lang.user.role.code_field
         searchable: true
 

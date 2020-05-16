@@ -1,0 +1,10 @@
+name: UiPageController
+form: $/demo/core/models/uipage/fields.yaml
+modelClass: Demo\Core\Models\UiPage
+defaultRedirect: demo/core/uipagecontroller
+create:
+    redirect: 'demo/core/uipagecontroller/update/:id'
+    redirectClose: demo/core/uipagecontroller
+update:
+    redirect: demo/core/uipagecontroller
+    redirectClose: demo/core/uipagecontroller

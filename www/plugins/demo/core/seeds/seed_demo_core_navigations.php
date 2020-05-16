@@ -35,7 +35,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 2,
                                                                                         "icon"=>"icon-puzzle-piece",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 2,
                                                                                         "created_at"=>"2020-05-09 11:48:03",
@@ -58,30 +59,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"oc-icon-table",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 4,
-                                                                                        "created_at"=> null,
-                                                                                        "updated_at"=> null,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"Navigations",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"navigations",
-                                                                                        "description"=> null,
-                                                                                        "url"=> null,
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "list"=>"\$/demo/core/models/navigation/columns.yaml",
-                                                                                        "form"=> null,
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 1,
-                                                                                        "sort_order"=> 1,
-                                                                                        "icon"=>"icon-location-arrow",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 10,
                                                                                         "created_at"=> null,
@@ -104,30 +83,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 7,
                                                                                         "icon"=>"icon-terminal",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 11,
-                                                                                        "created_at"=> null,
-                                                                                        "updated_at"=> null,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"Iframe",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"iframe",
-                                                                                        "description"=> null,
-                                                                                        "url"=> null,
-                                                                                        "model"=>"Demo\Core\Models\Iframe",
-                                                                                        "list"=>"\$/demo/core/models/iframe/columns.yaml",
-                                                                                        "form"=> null,
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 1,
-                                                                                        "sort_order"=> 8,
-                                                                                        "icon"=>"icon-external-link",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 12,
                                                                                         "created_at"=> null,
@@ -150,7 +107,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 9,
                                                                                         "icon"=>"icon-chain",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 18,
                                                                                         "created_at"=> null,
@@ -173,7 +131,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"icon-user",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 19,
                                                                                         "created_at"=> null,
@@ -196,7 +155,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "icon"=>"icon-suitcase",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 21,
                                                                                         "created_at"=> null,
@@ -219,7 +179,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 3,
                                                                                         "icon"=>"icon-key",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 28,
                                                                                         "created_at"=> null,
@@ -242,7 +203,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "icon"=>"icon-comment",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 31,
                                                                                         "created_at"=>"2020-05-09 15:11:36",
@@ -265,7 +227,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 4,
                                                                                         "icon"=>"oc-icon-book",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 32,
                                                                                         "created_at"=> null,
@@ -288,7 +251,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"icon-tachometer",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 33,
                                                                                         "created_at"=> null,
@@ -311,7 +275,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "icon"=>"icon-codepen",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 35,
                                                                                         "created_at"=> null,
@@ -334,30 +299,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"icon-recycle",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 40,
-                                                                                        "created_at"=> null,
-                                                                                        "updated_at"=> null,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"Queues",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"queues",
-                                                                                        "description"=> null,
-                                                                                        "url"=> null,
-                                                                                        "model"=>"Demo\Workflow\Models\Queue",
-                                                                                        "list"=>"\$/demo/workflow/models/queue/columns.yaml",
-                                                                                        "form"=> null,
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 34,
-                                                                                        "sort_order"=> 5,
-                                                                                        "icon"=>"icon-stack-overflow",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 46,
                                                                                         "created_at"=> null,
@@ -380,30 +323,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "icon"=>"icon-flash",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 34,
-                                                                                        "created_at"=>"2020-05-09 15:13:06",
-                                                                                        "updated_at"=>"2020-05-09 15:30:59",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"Workflow",
-                                                                                        "type"=>"folder",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"workflow",
-                                                                                        "description"=> "",
-                                                                                        "url"=> "",
-                                                                                        "model"=> null,
-                                                                                        "list"=> "",
-                                                                                        "form"=> "",
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 44,
-                                                                                        "sort_order"=> 5,
-                                                                                        "icon"=>"oc-icon-recycle",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 26,
                                                                                         "created_at"=>"2020-05-09 15:09:59",
@@ -426,7 +347,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 3,
                                                                                         "icon"=>"oc-icon-envelope",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 17,
                                                                                         "created_at"=>"2020-05-09 15:07:01",
@@ -449,7 +371,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 2,
                                                                                         "icon"=>"oc-icon-lock",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 1,
                                                                                         "created_at"=>"2020-05-09 11:33:08",
@@ -472,7 +395,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "icon"=>"oc-icon-gears",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 43,
                                                                                         "created_at"=> null,
@@ -495,7 +419,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 8,
                                                                                         "icon"=>"icon-code",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 24,
                                                                                         "created_at"=> null,
@@ -518,7 +443,56 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 6,
                                                                                         "icon"=>"icon-dot-circle-o",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 11,
+                                                                                        "created_at"=> null,
+                                                                                        "updated_at"=>"2020-05-16 06:05:13",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"Iframe",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"iframe",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Core\Models\Iframe",
+                                                                                        "list"=>"\$/demo/core/models/iframe/columns.yaml",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 55,
+                                                                                        "sort_order"=> 8,
+                                                                                        "icon"=>"oc-icon-adjust",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 4,
+                                                                                        "created_at"=> null,
+                                                                                        "updated_at"=>"2020-05-16 06:05:32",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"Navigations",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"navigations",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "list"=>"\$/demo/core/models/navigation/columns.yaml",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 55,
+                                                                                        "sort_order"=> 1,
+                                                                                        "icon"=>"oc-icon-adjust",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 47,
                                                                                         "created_at"=> null,
@@ -541,7 +515,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 2,
                                                                                         "icon"=>"icon-briefcase",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 48,
                                                                                         "created_at"=>"2020-05-09 15:23:48",
@@ -564,7 +539,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "icon"=>"oc-icon-desktop",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 49,
                                                                                         "created_at"=>"2020-05-09 15:26:31",
@@ -587,7 +563,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 2,
                                                                                         "icon"=>"oc-icon-mail-forward",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 51,
                                                                                         "created_at"=>"2020-05-09 15:28:15",
@@ -610,7 +587,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 5,
                                                                                         "icon"=>"oc-icon-user-secret",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 44,
                                                                                         "created_at"=>"2020-05-09 15:16:49",
@@ -633,30 +611,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 6,
                                                                                         "icon"=>"oc-icon-institution",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 15,
-                                                                                        "created_at"=> null,
-                                                                                        "updated_at"=> null,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"List Actions",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"list_actions",
-                                                                                        "description"=> null,
-                                                                                        "url"=> null,
-                                                                                        "model"=>"Demo\Core\Models\ListAction",
-                                                                                        "list"=>"\$/demo/core/models/listaction/columns.yaml",
-                                                                                        "form"=> null,
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 1,
-                                                                                        "sort_order"=> 12,
-                                                                                        "icon"=>"icon-rocket",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 16,
                                                                                         "created_at"=> null,
@@ -679,7 +635,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 13,
                                                                                         "icon"=>"icon-file-archive-o",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 8,
                                                                                         "created_at"=> null,
@@ -702,7 +659,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 5,
                                                                                         "icon"=>"icon-code",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 38,
                                                                                         "created_at"=> null,
@@ -725,7 +683,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 3,
                                                                                         "icon"=>"icon-dot-circle-o",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 37,
                                                                                         "created_at"=> null,
@@ -748,7 +707,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 2,
                                                                                         "icon"=>"icon-long-arrow-right",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 30,
                                                                                         "created_at"=> null,
@@ -771,30 +731,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 3,
                                                                                         "icon"=>"icon-file",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 14,
-                                                                                        "created_at"=> null,
-                                                                                        "updated_at"=> null,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"Form Actions",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"form_actions",
-                                                                                        "description"=> null,
-                                                                                        "url"=> null,
-                                                                                        "model"=>"Demo\Core\Models\FormAction",
-                                                                                        "list"=>"\$/demo/core/models/formaction/columns.yaml",
-                                                                                        "form"=> null,
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 1,
-                                                                                        "sort_order"=> 11,
-                                                                                        "icon"=>"icon-hand-o-up",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 25,
                                                                                         "created_at"=> null,
@@ -817,7 +755,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 7,
                                                                                         "icon"=>"icon-user-plus",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 45,
                                                                                         "created_at"=> null,
@@ -840,7 +779,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"icon-book",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 42,
                                                                                         "created_at"=> null,
@@ -863,30 +803,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 7,
                                                                                         "icon"=>"icon-share-alt",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 7,
-                                                                                        "created_at"=> null,
-                                                                                        "updated_at"=> null,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"Form Fields",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"form_fields",
-                                                                                        "description"=> null,
-                                                                                        "url"=> null,
-                                                                                        "model"=>"Demo\Core\Models\FormField",
-                                                                                        "list"=>"\$/demo/core/models/formfield/columns.yaml",
-                                                                                        "form"=> null,
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 1,
-                                                                                        "sort_order"=> 4,
-                                                                                        "icon"=>"icon-magic",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 23,
                                                                                         "created_at"=> null,
@@ -909,7 +827,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 5,
                                                                                         "icon"=>"icon-sitemap",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 20,
                                                                                         "created_at"=> null,
@@ -932,7 +851,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 2,
                                                                                         "icon"=>"icon-circle-o-notch",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 27,
                                                                                         "created_at"=> null,
@@ -955,7 +875,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"icon-signal",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 39,
                                                                                         "created_at"=> null,
@@ -978,7 +899,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 4,
                                                                                         "icon"=>"icon-sitemap",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 29,
                                                                                         "created_at"=> null,
@@ -1001,7 +923,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 2,
                                                                                         "icon"=>"icon-users",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 9,
                                                                                         "created_at"=> null,
@@ -1024,7 +947,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 6,
                                                                                         "icon"=>"icon-space-shuttle",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 41,
                                                                                         "created_at"=> null,
@@ -1047,30 +971,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 6,
                                                                                         "icon"=>"icon-stack-exchange",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
-                            ] ,            [
-                                                                            "id"=> 13,
-                                                                                        "created_at"=> null,
-                                                                                        "updated_at"=> null,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"Libraries",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"libraries",
-                                                                                        "description"=> null,
-                                                                                        "url"=> null,
-                                                                                        "model"=>"Demo\Core\Models\JavascriptLibrary",
-                                                                                        "list"=>"\$/demo/core/models/javascriptlibrary/columns.yaml",
-                                                                                        "form"=> null,
-                                                                                        "record_id"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "parent_id"=> 1,
-                                                                                        "sort_order"=> 10,
-                                                                                        "icon"=>"icon-files-o",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 22,
                                                                                         "created_at"=> null,
@@ -1093,7 +995,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 4,
                                                                                         "icon"=>"icon-users",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 36,
                                                                                         "created_at"=> null,
@@ -1116,7 +1019,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "icon"=>"icon-tag",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 6,
                                                                                         "created_at"=> null,
@@ -1139,7 +1043,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 3,
                                                                                         "icon"=>"icon-th-list",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 50,
                                                                                         "created_at"=>"2020-05-09 15:27:27",
@@ -1162,7 +1067,152 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 3,
                                                                                         "icon"=>"oc-icon-bolt",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 55,
+                                                                                        "created_at"=>"2020-05-16 06:02:40",
+                                                                                        "updated_at"=>"2020-05-16 06:02:40",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"User Interface",
+                                                                                        "type"=>"folder",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"user-interface",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=> null,
+                                                                                        "list"=> "",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 48,
+                                                                                        "sort_order"=> 2,
+                                                                                        "icon"=>"oc-icon-desktop",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 15,
+                                                                                        "created_at"=> null,
+                                                                                        "updated_at"=>"2020-05-16 06:04:57",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"List Actions",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"list_actions",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Core\Models\ListAction",
+                                                                                        "list"=>"\$/demo/core/models/listaction/columns.yaml",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 55,
+                                                                                        "sort_order"=> 12,
+                                                                                        "icon"=>"oc-icon-adjust",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 14,
+                                                                                        "created_at"=> null,
+                                                                                        "updated_at"=>"2020-05-16 06:05:03",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"Form Actions",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"form_actions",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Core\Models\FormAction",
+                                                                                        "list"=>"\$/demo/core/models/formaction/columns.yaml",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 55,
+                                                                                        "sort_order"=> 11,
+                                                                                        "icon"=>"oc-icon-adjust",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 13,
+                                                                                        "created_at"=> null,
+                                                                                        "updated_at"=>"2020-05-16 06:05:07",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"Libraries",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"libraries",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Core\Models\JavascriptLibrary",
+                                                                                        "list"=>"\$/demo/core/models/javascriptlibrary/columns.yaml",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 55,
+                                                                                        "sort_order"=> 10,
+                                                                                        "icon"=>"oc-icon-adjust",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 7,
+                                                                                        "created_at"=> null,
+                                                                                        "updated_at"=>"2020-05-16 06:05:20",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"Form Fields",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"form_fields",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Core\Models\FormField",
+                                                                                        "list"=>"\$/demo/core/models/formfield/columns.yaml",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 55,
+                                                                                        "sort_order"=> 4,
+                                                                                        "icon"=>"oc-icon-adjust",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 56,
+                                                                                        "created_at"=>"2020-05-16 06:47:21",
+                                                                                        "updated_at"=>"2020-05-16 06:47:21",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"Page -Hello World",
+                                                                                        "type"=>"uipage",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"page-hello-world",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=> null,
+                                                                                        "list"=> "",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "parent_id"=> 55,
+                                                                                        "sort_order"=> 15,
+                                                                                        "icon"=>"oc-icon-child",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> 2
                             ]             ]);
         }
 

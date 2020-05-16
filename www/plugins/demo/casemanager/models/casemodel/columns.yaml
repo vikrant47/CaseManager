@@ -5,6 +5,7 @@ columns:
     title:
         label: title
         type: text
+        searchable: true
     description:
         label: description
         type: text

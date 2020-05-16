@@ -21,6 +21,7 @@ columns:
         label: script
         type: text
     name:
+        searchable: true
         label: name
         type: text
     description:

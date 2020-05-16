@@ -99,9 +99,9 @@ class EventHandlerServiceProvider extends ServiceProvider
         Event::listen('eloquent.deleted: *', function ($model) {
             $this->executeEvents(HandlerType::MODEL_EVENT_HANDLER, 'deleted', $model);
         });
-        DB::listen(function ($query) {
+        /*DB::listen(function ($query) {
             $this->executeSystemEvents(HandlerType::QUERY_EVENT_HANDLER, 'execute', $query);
-        });
+        });*/
     }
 
     public function loadFromFileSystem()

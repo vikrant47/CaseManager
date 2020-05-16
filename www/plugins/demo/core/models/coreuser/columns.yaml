@@ -5,16 +5,19 @@
 columns:
 
     first_name:
+        searchable: true
         label: backend::lang.user.first_name
         searchable: true
         invisible: true
 
     last_name:
+        searchable: true
         label: backend::lang.user.last_name
         searchable: true
         invisible: true
 
     full_name:
+        searchable: true
         label: backend::lang.user.full_name
         select: concat(first_name, ' ', last_name)
         searchable: true

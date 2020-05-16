@@ -196,7 +196,7 @@ class AbstractPluginController extends Controller
 
     public function getNavigations()
     {
-        return SessionCache::instance()->get('NAVIGATION', function () {
+        // return SessionCache::instance()->get('NAVIGATION', function () {
             $query = Navigation::where([
                 'active' => true,
             ])->orderBy('sort_order', 'ASC');
@@ -223,7 +223,7 @@ class AbstractPluginController extends Controller
             return $navigations->filter(function ($navigation) {
                 return empty($navigation->parent_id);
             });
-        });
+        // });
     }
 
     public function getListActions()

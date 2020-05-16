@@ -17,6 +17,7 @@ columns:
     label:
         label: label
         type: text
+        searchable: true
     field_id:
         label: field_id
         type: number

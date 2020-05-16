@@ -39,7 +39,72 @@ tabs:
                 - update
                 - preview
             type: taglist
-            tab: Associations
+            tab: UI Accociations
+        uipages:
+            label: UI Pages
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: UI Accociations
+        list_actions:
+            label: List Actions
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: UI Accociations
+        form_actions:
+            label: Form Actions
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: UI Accociations
+        widgets:
+            label: Widgets
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: UI Accociations
+        dashboards:
+            label: Dashboards
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: UI Accociations
         policies:
             label: Policies
             mode: relation
@@ -52,4 +117,4 @@ tabs:
                 - update
                 - preview
             type: taglist
-            tab: Associations
+            tab: Record Associations

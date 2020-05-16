@@ -24,6 +24,7 @@ columns:
         type: text
         searchable: true
     name:
+        searchable: true
         label: name
         type: text
         searchable: true

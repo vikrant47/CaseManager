@@ -25,6 +25,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->text('url')->nullable();
             $table->string('model')->nullable();
             $table->string('list')->nullable();
+            $table->integer('uipage_id')->nullable();
             $table->string('form')->nullable();
             $table->integer('record_id')->nullable();
             $table->integer('dashboard_id')->nullable();

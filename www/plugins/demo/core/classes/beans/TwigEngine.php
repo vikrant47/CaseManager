@@ -17,7 +17,7 @@ class TwigEngine extends Twig
     public function compile($template): self
     {
         if (empty($template)) {
-            throw new \Exception('Provided template is emmpty');
+            throw new \Exception('Provided template is empty');
         }
         /**@var $twig \Twig\Environment */
         $twig = App::make('twig.environment');

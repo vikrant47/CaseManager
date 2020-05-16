@@ -1,0 +1,4 @@
+title: UiPageController
+modelClass: Demo\Core\Models\UiPage
+toolbar:
+    buttons: reorder_toolbar

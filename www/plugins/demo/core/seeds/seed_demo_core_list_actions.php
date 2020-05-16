@@ -14,24 +14,6 @@ class SeedDemoCoreListActions implements Seedable
     {
             Db::table('demo_core_list_actions')->insert([
             [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2020-04-27 09:24:16",
-                                                                                        "updated_at"=>"2020-04-27 09:27:18",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"create",
-                                                                                        "label"=>"Create",
-                                                                                        "list"=> "",
-                                                                                        "model"=>"Demo\Core\Models\UniversalModel",
-                                                                                        "active"=> 1,
-                                                                                        "description"=> "",
-                                                                                        "icon"=>"oc-icon-plus",
-                                                                                        "css_class"=> "",
-                                                                                        "sort_order"=> -3,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "script"=>"function(event,engine){\r\n    engine.list.navigate(engine.ui.getModelRecord(),{},'create');\r\n}",
-                                                                                        "html_attributes"=>"[]"
-                            ] ,            [
                                                                             "id"=> 5,
                                                                                         "created_at"=>"2020-04-27 09:24:16",
                                                                                         "updated_at"=>"2020-04-27 09:27:18",
@@ -85,6 +67,24 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "plugin_id"=> 10,
                                                                                         "script"=>"function(event,engine){\r\n    var selected = engine.list.getSelectedRecordIds();\r\n    if(selected.length === 0 || selected.length > 1){\r\n        \$.oc.flashMsg({\r\n            'text': 'Please select only a single record ro view.',\r\n            'class': 'error',\r\n            'interval': 5\r\n        });\r\n        return;\r\n    }\r\n    engine.form.navigate(engine.ui.getModelRecord(),selected[0],'audit-form-view');\r\n}",
                                                                                         "html_attributes"=>"[{\"name\":\"disabled\",\"value\":\"disabled\"},{\"name\":\"data-trigger-action\",\"value\":\"enable\"},{\"name\":\"data-trigger\",\"value\":\".control-list input[type=checkbox]\"},{\"name\":\"data-trigger-condition\",\"value\":\"checked\"}]"
+                            ] ,            [
+                                                                            "id"=> 1,
+                                                                                        "created_at"=>"2020-04-27 09:24:16",
+                                                                                        "updated_at"=>"2020-05-16 05:53:59",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"create",
+                                                                                        "label"=>"Create",
+                                                                                        "list"=> "",
+                                                                                        "model"=>"Demo\Core\Models\UniversalModel",
+                                                                                        "active"=> 1,
+                                                                                        "description"=> "",
+                                                                                        "icon"=>"oc-icon-plus",
+                                                                                        "css_class"=> "",
+                                                                                        "sort_order"=> -3,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "script"=>"function(event,engine){\r\n    engine.listService.getCurrentList().navigate('create');\r\n}",
+                                                                                        "html_attributes"=>"[]"
                             ]             ]);
         }
 

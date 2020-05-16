@@ -5,14 +5,12 @@ columns:
     label:
         label: label
         type: text
+        searchable: true
     type:
         label: type
         type: text
     active:
         label: active
-        type: text
-    code:
-        label: code
         type: text
     plugin_id:
         label: plugin_id
