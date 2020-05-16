@@ -15,6 +15,7 @@ columns:
         label: updated_by_id
         type: number
     name:
+        searchable: true
         label: name
         type: text
     active:

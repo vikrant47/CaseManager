@@ -3,9 +3,11 @@ columns:
         label: id
         type: number
     code:
+        searchable: true
         label: code
         type: text
     name:
+        searchable: true
         label: name
         type: text
     active:

@@ -27,6 +27,7 @@ columns:
         label: plugin_id
         type: number
     name:
+        searchable: true
         label: name
         type: text
     active:

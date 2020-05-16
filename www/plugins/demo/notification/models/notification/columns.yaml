@@ -36,6 +36,7 @@ columns:
         label: channel_id
         type: number
     name:
+        searchable: true
         label: name
         type: text
     description:

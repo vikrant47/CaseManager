@@ -15,12 +15,14 @@ columns:
         label: created_by_id
         type: number
     name:
+        searchable: true
         label: name
         type: text
     description:
         label: description
         type: text
     code:
+        searchable: true
         label: Code
         type: text
     active:

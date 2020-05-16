@@ -9,6 +9,7 @@ columns:
         label: updated_at
         type: datetime
     name:
+        searchable: true
         label: name
         type: text
     description:

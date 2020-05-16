@@ -20,6 +20,7 @@ columns:
         label: event
         type: text
     name:
+        searchable: true
         label: name
         type: text
     description:

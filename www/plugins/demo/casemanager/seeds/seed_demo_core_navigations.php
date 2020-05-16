@@ -35,7 +35,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 4,
                                                                                         "icon"=>"oc-icon-dashboard",
                                                                                         "dashboard_id"=> 1,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 53,
                                                                                         "created_at"=>"2020-05-13 04:37:14",
@@ -58,7 +59,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "icon"=>"oc-icon-book",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> 1
+                                                                                        "widget_id"=> 1,
+                                                                                        "uipage_id"=> null
                             ] ,            [
                                                                             "id"=> 52,
                                                                                         "created_at"=>"2020-05-10 10:28:19",
@@ -81,7 +83,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 5,
                                                                                         "icon"=>"oc-icon-adjust",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ]             ]);
         }
 
