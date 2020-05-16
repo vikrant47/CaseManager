@@ -25,9 +25,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "plugin_id"=> 11,
                                                                                         "model"=>"Demo\Core\Models\Navigation"
                             ] ,            [
-                                                                            "id"=> 203,
-                                                                                        "created_at"=>"2020-05-16 07:46:22",
-                                                                                        "updated_at"=>"2020-05-16 07:46:22",
+                                                                            "id"=> 207,
+                                                                                        "created_at"=>"2020-05-16 14:24:22",
+                                                                                        "updated_at"=>"2020-05-16 14:24:22",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> null,

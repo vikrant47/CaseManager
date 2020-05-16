@@ -81,7 +81,8 @@ body {
 }
 
 .custom-switch input:checked ~ span {
-    background-color: #727cf5;
+   /* background-color: #727cf5;*/
+    background: #678a74d9;
 }
 
 .custom-switch .slide-button {
@@ -233,7 +234,7 @@ body {
 }
 
 .table td {
-    font-size: 1.175rem;
+    font-size: 1.275rem;
 }
 
 table.table.data tbody td, table.table.data tbody th {
@@ -287,6 +288,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     padding: 0px 0 0px 0;
 }
 
+.sidebar .sidebar-header .sidebar-toggler span {
+    background: #fff;
+}
+
 .sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm {
     background: #3a3f51;
     color: #a6a8b1;
@@ -311,8 +316,8 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     width: 1px;
     height: 100%;
     content: "";
-    background-color: gray;
-    border-bottom: 1px solid gray;
+    background-color: #a6a8b1;
+    border-bottom: 1px solid #a6a8b1;
 }
 
 .sidebar .sidebar-body .nav.sub-menu {
@@ -334,7 +339,6 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 .sidebar .sidebar-body .nav .nav-item:hover .nav-link,
 .sidebar .sidebar-body .nav .nav-item .nav-link,
 .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link,
-.sidebar .sidebar-body .nav.sub-menu .nav-item:hover .nav-link,
 .sidebar .sidebar-body .nav.sub-menu .nav-item:hover .nav-link {
     margin-left: 0;
     color: #a6a8b1;
@@ -342,6 +346,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     font-size: 14px;
     height: 35px;
 }
+
 
 .sidebar .sidebar-body .nav .nav-item .nav-link[aria-expanded="true"] {
     color: #fff;
@@ -359,11 +364,14 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     color: #a6a8b1;
     padding: 15px 20px;
     font-size: 14px;
+    border: .001rem solid #2e3344;
 }
 
 
 .sidebar .sidebar-body .nav .nav-item.active > .nav-link,
-.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover {
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover,
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover .link-icon,
+.sidebar .sidebar-body .nav .nav-item.active > .nav-link .link-icon {
     color: #fff;
     background-color: #2e3344;
 }
@@ -373,7 +381,8 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     display: none;
 }
 
-.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link.active {
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link.active,
+.sidebar .sidebar-body .nav.sub-menu .nav-item > .nav-link.active .link-icon {
     color: #fff;
     background-color: #2e3344;
 }
@@ -414,7 +423,18 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     background: #727cf5 !important;
 }
 
-/**Buttons*/
-/*.btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover {
-    background: #3a3f51;
-}*/
+/** Buttons **/
+.btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover {
+    background: #678a74d9;
+    border-color: #678a74d9;
+}
+
+.btn-primary:hover, .swal2-modal .swal2-actions button.swal2-confirm:hover, .wizard > .actions a:hover {
+    background-color: #4f6356d9;
+    border-color: #4f6356d9;
+}
+
+.btn-primary.disabled, .swal2-modal .swal2-actions button.disabled.swal2-confirm, .wizard > .actions a.disabled, .btn-primary:disabled, .swal2-modal .swal2-actions button.swal2-confirm:disabled, .wizard > .actions a:disabled {
+    background: #a6a8b1;
+    border-color: #a6a8b1;
+}
