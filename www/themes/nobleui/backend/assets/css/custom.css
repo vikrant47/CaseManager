@@ -269,8 +269,108 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     z-index: 10;
 }
 
+
 .nav .nav-item .nav-link .link-icon {
     font-size: 1.550rem;
+}
+
+.sidebar .sidebar-body .nav {
+    padding: 25px 0 50px 0;
+}
+
+.sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm {
+    background: #3a3f51;
+    color: #a6a8b1;
+}
+
+.navbar .search-form .input-group .input-group-prepend .input-group-text {
+    background: #3a3f51;
+    color: #a6a8b1;
+}
+
+.sidebar .sidebar-header {
+    background: #3a3f51;
+    color: #fff;
+    border-bottom: 1px solid #9e9fa247;
+    border-right: 1px solid #9e9fa247;
+}
+
+.sidebar .sidebar-body .nav.sub-menu:before {
+    position: absolute;
+    left: 9px;
+    display: block;
+    width: 1px;
+    height: 100%;
+    content: "";
+    background-color: gray;
+    border-bottom: 1px solid gray;
+}
+
+.sidebar .sidebar-body .nav.sub-menu {
+    padding: 0 0 0 1rem;
+}
+
+.sidebar .sidebar-body .nav .nav-item:hover .nav-link .link-icon {
+    color: #a6a8b1;
+}
+
+.sidebar .sidebar-body .nav .nav-item .nav-link:hover .link-icon {
+    color: #fff;
+}
+
+.sidebar .sidebar-header .sidebar-brand span {
+    color: #fff;
+}
+
+.sidebar .sidebar-body .nav .nav-item:hover .nav-link,
+.sidebar .sidebar-body .nav .nav-item .nav-link,
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link,
+.sidebar .sidebar-body .nav.sub-menu .nav-item:hover .nav-link,
+.sidebar .sidebar-body .nav.sub-menu .nav-item:hover .nav-link {
+    margin-left: 0;
+    color: #a6a8b1;
+    padding: 10px 20px;
+    font-size: 14px;
+    height: 35px;
+}
+
+.sidebar .sidebar-body .nav .nav-item .nav-link[aria-expanded="true"] {
+    color: #fff;
+}
+
+.sidebar .sidebar-body .nav .nav-item:hover .nav-link:hover,
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover,
+.sidebar .sidebar-body .nav .nav-item .nav-link:hover {
+    margin-left: 0;
+    color: #fff;
+    background-color: #2e3344;
+}
+
+.sidebar .sidebar-body .nav .nav-item .nav-link, .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link {
+    color: #a6a8b1;
+    padding: 15px 20px;
+    font-size: 14px;
+}
+
+
+.sidebar .sidebar-body .nav .nav-item.active > .nav-link,
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover {
+    color: #fff;
+    background-color: #2e3344;
+}
+
+
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link::before {
+    display: none;
+}
+
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link.active {
+    color: #fff;
+    background-color: #2e3344;
+}
+
+.sidebar .sidebar-body .nav .nav-item.active .nav-link .link-icon {
+    color: #a6a8b1;
 }
 
 /** breadcrumb**/
@@ -304,3 +404,8 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 .stripe-loading-indicator .stripe, .stripe-loading-indicator .stripe-loaded {
     background: #727cf5 !important;
 }
+
+/**Buttons*/
+/*.btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover {
+    background: #3a3f51;
+}*/
