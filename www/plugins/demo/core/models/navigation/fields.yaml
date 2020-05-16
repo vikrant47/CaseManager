@@ -36,7 +36,7 @@ fields:
         type: dropdown
         tab: Config
         options:
-            seperator: Seperator
+            #seperator: Seperator
             folder: Folder
             list: List
             form: Form
