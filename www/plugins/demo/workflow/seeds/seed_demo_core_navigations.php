@@ -40,7 +40,7 @@ class SeedDemoCoreNavigations implements Seedable
                             ] ,            [
                                                                             "id"=> 34,
                                                                                         "created_at"=>"2020-05-09 15:13:06",
-                                                                                        "updated_at"=>"2020-05-16 07:46:22",
+                                                                                        "updated_at"=>"2020-05-16 14:24:22",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> null,
@@ -55,7 +55,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "form"=> "",
                                                                                         "record_id"=> null,
                                                                                         "plugin_id"=> 11,
-                                                                                        "parent_id"=> 50,
+                                                                                        "parent_id"=> null,
                                                                                         "sort_order"=> 5,
                                                                                         "icon"=>"oc-icon-recycle",
                                                                                         "dashboard_id"=> null,

@@ -16,7 +16,7 @@ class SeedDemoCoreUiPages implements Seedable
             [
                                                                             "id"=> 2,
                                                                                         "created_at"=>"2020-05-16 06:00:56",
-                                                                                        "updated_at"=>"2020-05-16 06:01:16",
+                                                                                        "updated_at"=>"2020-05-16 15:13:38",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> null,

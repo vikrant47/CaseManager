@@ -64,7 +64,7 @@ class SeedDemoCoreNavigations implements Seedable
                             ] ,            [
                                                                             "id"=> 52,
                                                                                         "created_at"=>"2020-05-10 10:28:19",
-                                                                                        "updated_at"=>"2020-05-13 05:02:57",
+                                                                                        "updated_at"=>"2020-05-16 14:59:12",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 2,

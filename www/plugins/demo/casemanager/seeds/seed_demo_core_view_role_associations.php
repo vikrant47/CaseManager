@@ -57,6 +57,17 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "role_id"=> 2,
                                                                                         "plugin_id"=> 6,
                                                                                         "model"=>"Demo\Core\Models\Navigation"
+                            ] ,            [
+                                                                            "id"=> 209,
+                                                                                        "created_at"=>"2020-05-16 14:59:12",
+                                                                                        "updated_at"=>"2020-05-16 14:59:12",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "record_id"=> 52,
+                                                                                        "role_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "model"=>"Demo\Core\Models\Navigation"
                             ]             ]);
         }
 
