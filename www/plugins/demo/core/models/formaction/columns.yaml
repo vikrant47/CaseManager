@@ -21,6 +21,7 @@ columns:
     label:
         label: label
         type: text
+        searchable: true
     active:
         label: active
         type: text
