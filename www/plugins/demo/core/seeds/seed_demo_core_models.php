@@ -557,6 +557,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
                                                                                         "viewable"=> false
+                            ] ,            [
+                                                                            "id"=> 519,
+                                                                                        "created_at"=>"2020-05-16 05:56:51",
+                                                                                        "updated_at"=>"2020-05-16 05:56:51",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"UI Page",
+                                                                                        "model"=>"Demo\Core\Models\UiPage",
+                                                                                        "controller"=>"Demo\Core\Controllers\UiPageController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false
                             ]             ]);
         }
 
