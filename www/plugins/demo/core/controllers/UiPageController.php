@@ -2,8 +2,12 @@
 
 use Backend\Classes\Controller;
 use BackendMenu;
+use Demo\Core\Classes\Beans\ApplicationCache;
+use Demo\Core\Classes\Beans\SessionCache;
+use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Models\UiPage;
 use Demo\Report\Models\Widget;
+use Db;
 
 class UiPageController extends AbstractSecurityController
 {
@@ -36,12 +40,21 @@ class UiPageController extends AbstractSecurityController
         if ($id instanceof UiPage) {
             $page = $id;
         } else {
-            $page = UiPage::where('id', $id)->first();
+            $page = ApplicationCache::instance()->get('UI_PAGE_' . $id, function () use ($id) {
+                $pageRecord = Db::table('demo_core_ui_pages')->where('id', $id)->first();
+                $twigEngine = new TwigEngine();
+                $pageRecord->templateInstance = $twigEngine->compile($pageRecord->template);
+                return $pageRecord;
+            });
         }
         if (empty($page)) {
             $this->setStatusCode(404);
             return '';
         }
-        return $this->makePartial('page_renderer', ['page' => $page, 'preview' => false]);
+
+        return $this->makePartial('page_renderer', [
+            'preview' => false,
+            'page' => $page,
+        ]);
     }
 }

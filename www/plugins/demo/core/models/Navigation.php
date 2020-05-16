@@ -5,6 +5,7 @@ use Demo\Core\Classes\Helpers\ControllerHelper;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Controllers\NavigationController;
+use Demo\Core\Controllers\UiPageController;
 use Demo\Report\Controllers\DashboardController;
 use Demo\Report\Controllers\WidgetController;
 use Demo\Report\Models\Dashboard;
@@ -38,6 +39,7 @@ class Navigation extends Model
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'dashboard' => [Dashboard::class, 'key' => 'dashboard_id'],
         'widget' => [Widget::class, 'key' => 'widget_id'],
+        'uipage' => [UiPage::class, 'key' => 'uipage_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
     public $morphToMany = [
@@ -108,6 +110,9 @@ class Navigation extends Model
         } else if ($navigation->type === 'widget') {
             $index = ControllerHelper::generateUrl(WidgetController::class);
             $generatedUrl = $index . '/render/' . $navigation->widget_id;
+        } else if ($navigation->type === 'uipage') {
+            $index = ControllerHelper::generateUrl(UiPageController::class);
+            $generatedUrl = $index . '/render/' . $navigation->uipage_id;
         } else if ($navigation->type === 'list') {
             /*try {*/
 

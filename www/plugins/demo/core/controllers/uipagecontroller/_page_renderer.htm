@@ -8,6 +8,9 @@ $randomId = substr(md5(mt_rand()), 0, 7);
     <a class="preview-link" href="../render/<?= $page->id ?>" style="margin: 0;auto;">View</a>
 <?php } ?>
 <div id="page-container-<?= $page->id ?>" style="height: 100vh;width: 100%;" class="page-container">
-    <?= $page->renderTemplate($this) ?>
+    <?= $page->templateInstance->render([
+        'page' => $page,
+        'controller' => $this,
+    ]) ?>
 </div>
 <style>

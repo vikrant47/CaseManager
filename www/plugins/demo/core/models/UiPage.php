@@ -14,7 +14,7 @@ class UiPage extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_core_ui_page';
+    public $table = 'demo_core_ui_pages';
 
     /**
      * @var array Validation rules
@@ -28,16 +28,4 @@ class UiPage extends Model
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
     ];
-
-    public function renderTemplate($controller)
-    {
-        if (empty($this->template)) {
-            return '';
-        }
-        $twigEngine = new TwigEngine();
-        return $twigEngine->compile($this->template)->render([
-            'model' => $this,
-            'controller' => $controller
-        ]);
-    }
 }

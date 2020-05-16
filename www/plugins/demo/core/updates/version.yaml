@@ -64,5 +64,5 @@
     - 'Created table demo_core_view_role_associations'
     - builder_table_create_demo_core_view_role_associations.php
 1.0.23:
-    - 'Created table demo_core_ui_page'
-    - builder_table_create_demo_core_ui_page.php
+    - 'Created table demo_core_ui_pages'
+    - builder_table_create_demo_core_ui_pages.php
