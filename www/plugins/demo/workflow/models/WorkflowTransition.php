@@ -2,6 +2,7 @@
 
 use Model;
 use Backend\Models\User;
+
 /**
  * Model
  */
@@ -30,4 +31,6 @@ class WorkflowTransition extends Model
         'to_state' => [WorkflowState::class, 'key' => 'to_state_id'],
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
     ];
+
+    public $jsonable = ['data'];
 }

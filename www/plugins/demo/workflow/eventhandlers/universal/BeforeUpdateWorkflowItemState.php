@@ -20,7 +20,7 @@ class BeforeUpdateWorkflowItemState
     /**
      * Find all queues based on Model and evaluate them one by one
      * If a queue qualifies than break the loop.
-     * Only one queue is alloed to push an item
+     * Only one queue is allowed to push an item
      */
     public function handler($event, $model)
     {
@@ -30,7 +30,8 @@ class BeforeUpdateWorkflowItemState
             $transition->from_state_id = $original['current_state_id'];
             $transition->to_state_id = $model->current_state_id;
             $transition->workflow_item_id = $model->id;
-            PluginConnection::getCurrentLogger();
+            $data = request()->attributes->get('WORKFLOW_ITEM_DATA_' . $model->id);
+            $transition->data = $data;
             $transition->save();
         }
     }
