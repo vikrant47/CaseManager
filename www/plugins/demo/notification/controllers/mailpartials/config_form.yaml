@@ -1,0 +1,16 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+name: system::lang.mail_templates.partial
+form: $/demo/notification/models/mailpartial/fields.yaml
+modelClass: Demo\Notification\Models\MailPartial
+defaultRedirect: /demo/notification/mailtemplates/index/partials
+
+create:
+    redirect: /demo/notification/mailpartials/update/:id
+    redirectClose: /demo/notification/mailtemplates/index/partials
+
+update:
+    redirect: /demo/notification/mailtemplates/index/partials
+    redirectClose: /demo/notification/mailtemplates/index/partials

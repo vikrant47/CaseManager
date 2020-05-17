@@ -1,0 +1,16 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+name: system::lang.mail_templates.template
+form: $/demo/notification/models/mailtemplate/fields.yaml
+modelClass: Demo\Notification\Models\MailTemplate
+defaultRedirect: /demo/notification/mailtemplates
+
+create:
+    redirect: /demo/notification/mailtemplates/update/:id
+    redirectClose: /demo/notification/mailtemplates
+
+update:
+    redirect: /demo/notification/mailtemplates
+    redirectClose: /demo/notification/mailtemplates

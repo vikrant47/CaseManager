@@ -21,7 +21,7 @@ body {
 }
 
 .page-breadcrumb {
-    padding-top: 10px;
+    padding: 10px 10px 0px 3px;
 }
 
 .buy-now-wrapper, .settings-sidebar {
@@ -81,7 +81,7 @@ body {
 }
 
 .custom-switch input:checked ~ span {
-   /* background-color: #727cf5;*/
+    /* background-color: #727cf5;*/
     background: #678a74d9;
 }
 
@@ -423,13 +423,23 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     background: #727cf5 !important;
 }
 
+.loading-indicator-container {
+    min-height: 30px;
+}
+
+.field-repeater .field-repeater-add-item > a{
+    padding: 10px 15px;
+}
+
 /** Buttons **/
-.btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover {
+.btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover,
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
     background: #678a74d9;
     border-color: #678a74d9;
 }
 
-.btn-primary:hover, .swal2-modal .swal2-actions button.swal2-confirm:hover, .wizard > .actions a:hover {
+.btn-primary:hover, .swal2-modal .swal2-actions button.swal2-confirm:hover, .wizard > .actions a:hover, .btn-primary:focus, .swal2-modal .swal2-actions button.swal2-confirm:focus, .wizard > .actions a:focus, .btn-primary.focus, .swal2-modal .swal2-actions button.focus.swal2-confirm, .wizard > .actions a.focus,
+.btn-primary:not(:disabled):not(.disabled):active, .swal2-modal .swal2-actions button.swal2-confirm:not(:disabled):not(.disabled):active, .wizard > .actions a:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .swal2-modal .swal2-actions button.swal2-confirm:not(:disabled):not(.disabled).active, .wizard > .actions a:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle, .swal2-modal .swal2-actions .show > button.dropdown-toggle.swal2-confirm, .wizard > .actions .show > a.dropdown-toggle {
     background-color: #4f6356d9;
     border-color: #4f6356d9;
 }
@@ -438,3 +448,4 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     background: #a6a8b1;
     border-color: #a6a8b1;
 }
+

@@ -37,6 +37,30 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
                                                                                         "uipage_id"=> null
+                            ] ,            [
+                                                                            "id"=> 58,
+                                                                                        "created_at"=>"2020-05-17 06:17:22",
+                                                                                        "updated_at"=>"2020-05-17 06:17:22",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"Templates",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"templates",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Notification\Models\MailTemplate",
+                                                                                        "list"=>"\$/demo/notification/models/mailtemplate/columns.yaml",
+                                                                                        "form"=> "",
+                                                                                        "record_id"=> null,
+                                                                                        "plugin_id"=> 3,
+                                                                                        "parent_id"=> 26,
+                                                                                        "sort_order"=> 4,
+                                                                                        "icon"=>"oc-icon-file-code-o",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null
                             ]             ]);
         }
 
