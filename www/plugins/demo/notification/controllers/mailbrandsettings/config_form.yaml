@@ -1,0 +1,15 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: system::lang.mail_brand.menu_label
+
+# Fields are defined by extension
+form: $/demo/notification/models/mailbrandsetting/fields.yaml
+
+# Model Class name
+modelClass: Demo\Notification\Models\MailBrandSetting
+
+# Default redirect location
+defaultRedirect: system/themes

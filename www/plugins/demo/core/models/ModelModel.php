@@ -49,7 +49,7 @@ class ModelModel extends Model
         $model = new $this->model();
         $schema = DatabaseTableModel::getSchema();
         if (property_exists($model, 'table')) {
-            $table = $schema->getTable($model->table);
+            $table = $schema->getTable($model->getTable());
         }
         return $table;
     }
