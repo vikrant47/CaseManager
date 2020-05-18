@@ -23,7 +23,7 @@ class ModelUtil
         return empty($model->id);
     }
 
-    public static function fillDefaultColumnsInBelongsToMany(BelongsToMany $association, Collection $data, $pluginId = 10)
+    public static function fillDefaultColumnsInBelongsToMany(BelongsToMany $association, Collection $data, $pluginId = 10, $otherColumns = [])
     {
         if (empty($pluginId)) {
             $pluginId = 10;
@@ -36,6 +36,7 @@ class ModelUtil
             'created_by_id' => $user->id,
             'updated_by_id' => $user->id,
         ];
+        $pivotValues = array_merge($pivotValues, $otherColumns);
         $associationSync = [];
         foreach ($data as $record) {
             $associationSync[$record->id] = $pivotValues;

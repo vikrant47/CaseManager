@@ -91,7 +91,11 @@ Object.assign(Engine.prototype, {
     },
     evalFunction: function (fun, scope, args) {
         scope = scope || this;
-        return Function(fun).apply(scope, args);
+        let keys = Object.keys(args);
+        return (Function('return function(' + keys.join(',') + '){\n' +
+            fun + '\n}')()).apply(scope, keys.map(function (key) {
+            return args[key];
+        }));
     },
     onDocumentReady: function () {
         var _this = this;
@@ -115,6 +119,7 @@ Object.assign(Engine.prototype, {
         $('[data-show],[data-disable],[data-hide]').each(function () {
             var $this = $(this);
             var data = $this.data();
+            data.engine = _this;
             for (var dataActionKey in dataActionConfig) {
                 if (data[dataActionKey]) {
                     this.data = data;

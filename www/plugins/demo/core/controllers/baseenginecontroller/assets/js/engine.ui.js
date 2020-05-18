@@ -9,6 +9,7 @@ var EngineListService = function () {
 };
 var EngineList = function (model, el) {
     this.model = model;
+    this.pagination = {};
     if (!el) {
         el = '.control-list';
     }
@@ -151,6 +152,15 @@ Object.assign(EngineList.prototype, {
     },
     getOctoberListWidget: function () {
         return $('.control-list').listWidget();
+    },
+    getTotalRecord: function () {
+        return this.pagination.total;
+    },
+    setPagination: function (pagination) {
+        this.pagination = pagination;
+    },
+    getPagination: function () {
+        return this.pagination;
     }
 });
 

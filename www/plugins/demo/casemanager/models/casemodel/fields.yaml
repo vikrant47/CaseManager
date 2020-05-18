@@ -1,7 +1,7 @@
 fields:
     workflow:
         span: full
-        path: $/demo/workflow/controllers/workflow/_entity_flow.htm
+        path: $/demo/workflow/controllers/workflowcontroller/_entity_flow.htm
         type: partial
     case_number:
         label: 'Case Number'
@@ -9,11 +9,6 @@ fields:
         required: 1
         type: text
         comment: 'Enter Case Number'
-    version:
-        label: Version
-        span: auto
-        type: text
-        comment: 'Enter Version'
     suspect:
         label: Suspect
         span: auto

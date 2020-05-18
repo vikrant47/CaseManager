@@ -29,7 +29,7 @@ trait WorkflowControllerTrait
             throw new ApplicationException('Unable to submit. No active workflow found');
         } else {
             /**@var $workflowItem WorkflowItem */
-            $workflowItem->makeTransition($model);
+            $workflowItem->makeTransition();
         }
         Flash::success('Pushed Successfully!');
         return $this->makeRedirect('-close');
@@ -38,10 +38,17 @@ trait WorkflowControllerTrait
     public function onPickItemFromQueue()
     {
         $queueId = Request::input('queueId');
+        if (empty($queueId)) {
+            $this->setStatusCode(400);
+            Flash::error('Please select a queue to pick a case');
+            return;
+        }
         /**@var $queue Queue */
         $queue = Queue::find($queueId);
         if (empty($queue)) {
+            $this->setStatusCode(400);
             Flash::success('Unable to find queue with given id');
+            return ;
         }
         $queue->popAndAssign();
         Flash::success('A item has been assigned');

@@ -17,10 +17,14 @@ use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
+use File;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
 use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
 use Db;
+use Response;
+use View;
 
 
 class AbstractPluginController extends Controller
@@ -80,6 +84,21 @@ class AbstractPluginController extends Controller
             $mw->after(request(), $result);
         }
         return $result;
+    }
+
+    public function index()
+    {
+        $listView = Request::input('list');
+        if (!empty($listView)) {
+            $path = $this->getConfigPath($listView);
+            if (!File::isFile($path)) {
+                $this->setStatusCode(403);
+                $this->setResponse(Response::make(View::make('backend::404'), 404));
+                return '';
+            }
+            $this->asExtension('ListController')->setConfig($listView, ['modelConfig', 'list']);
+        }
+        return parent::index();
     }
 
     /**@return IPluginMiddleware[] */
@@ -197,32 +216,32 @@ class AbstractPluginController extends Controller
     public function getNavigations()
     {
         // return SessionCache::instance()->get('NAVIGATION', function () {
-            $query = Navigation::where([
-                'active' => true,
-            ])->orderBy('sort_order', 'ASC');
-            $this->viewExtendQuery(Navigation::class, $query);
-            $navigations = $query->get()->map(function ($navigation) {
-                return ModelUtil::toPojo($navigation, ['model_ref'], [
-                    'generated_url' => Navigation::getUrl($navigation),
-                    'children' => null,
-                ]);
-            });
-            $parentRefs = [];
-            foreach ($navigations as $navigation) {
-                $parentRefs[$navigation->id] = $navigation;
-            }
-            foreach ($navigations as $navigation) {
-                if (!empty($navigation->parent_id) && array_key_exists($navigation->parent_id, $parentRefs)) {
-                    $parent = $parentRefs[$navigation->parent_id];
-                    if (empty($parent->children)) {
-                        $parent->children = new Collection();
-                    }
-                    $parent->children->push($navigation);
+        $query = Navigation::where([
+            'active' => true,
+        ])->orderBy('sort_order', 'ASC');
+        $this->viewExtendQuery(Navigation::class, $query);
+        $navigations = $query->get()->map(function ($navigation) {
+            return ModelUtil::toPojo($navigation, ['model_ref'], [
+                'generated_url' => Navigation::getUrl($navigation),
+                'children' => null,
+            ]);
+        });
+        $parentRefs = [];
+        foreach ($navigations as $navigation) {
+            $parentRefs[$navigation->id] = $navigation;
+        }
+        foreach ($navigations as $navigation) {
+            if (!empty($navigation->parent_id) && array_key_exists($navigation->parent_id, $parentRefs)) {
+                $parent = $parentRefs[$navigation->parent_id];
+                if (empty($parent->children)) {
+                    $parent->children = new Collection();
                 }
+                $parent->children->push($navigation);
             }
-            return $navigations->filter(function ($navigation) {
-                return empty($navigation->parent_id);
-            });
+        }
+        return $navigations->filter(function ($navigation) {
+            return empty($navigation->parent_id);
+        });
         // });
     }
 
@@ -230,21 +249,21 @@ class AbstractPluginController extends Controller
     {
         $listConfig = $this->listGetConfig();
         $modelClass = $this->modelClass;
-        return SessionCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
-            $query = Db::table('demo_core_list_actions')->where([
-                'active' => true,
-            ])->where(function ($query) use ($listConfig) {
-                $query->where('list', $listConfig->list)
-                    ->orWhere('list', null)
-                    ->orWhere('list', '');
-            })->where(function ($query) use ($modelClass) {
-                $query->where('model', $modelClass)
-                    ->orWhere('model', UniversalModel::class);
-            })->orderBy('sort_order', 'ASC');
-            $this->viewExtendQuery(ListAction::class, $query);
-            $result = $query->get();
-            return $result;
-        });
+        // return SessionCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
+        $query = Db::table('demo_core_list_actions')->where([
+            'active' => true,
+        ])->where(function ($query) use ($listConfig) {
+            $query->where('list', $listConfig->list)
+                ->orWhere('list', null)
+                ->orWhere('list', '');
+        })->where(function ($query) use ($modelClass) {
+            $query->where('model', $modelClass)
+                ->orWhere('model', UniversalModel::class);
+        })->orderBy('sort_order', 'ASC');
+        // $this->viewExtendQuery(ListAction::class, $query);
+        $result = $query->get();
+        return $result;
+        // });
     }
 
     public function getFormActions($context = 'create')

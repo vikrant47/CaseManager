@@ -6,6 +6,7 @@ namespace Demo\Core\Models;
 
 use Backend\Models\User;
 use Backend\Models\UserGroup;
+use Demo\Core\Classes\Utils\ModelUtil;
 
 class CoreUserGroup extends UserGroup
 {
@@ -18,6 +19,5 @@ class CoreUserGroup extends UserGroup
         'users_count' => [User::class, 'table' => 'backend_users_groups', 'count' => true, 'otherKey' => 'user_id',
             'key' => 'user_group_id']
     ];
-
 
 }
