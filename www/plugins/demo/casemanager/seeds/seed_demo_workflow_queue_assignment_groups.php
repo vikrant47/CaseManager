@@ -54,14 +54,14 @@ class SeedDemoWorkflowQueueAssignmentGroups implements Seedable
                                                                                         "sort_order"=> 4,
                                                                                         "plugin_id"=> 6
                             ] ,            [
-                                                                            "id"=> 7,
-                                                                                        "created_at"=>"2019-12-01 07:42:56",
-                                                                                        "updated_at"=>"2019-12-08 08:02:10",
+                                                                            "id"=> 2,
+                                                                                        "created_at"=>"2020-05-17 15:06:26",
+                                                                                        "updated_at"=>"2020-05-17 15:06:26",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "group_id"=> 6,
+                                                                                        "group_id"=> 3,
                                                                                         "queue_id"=> 3,
-                                                                                        "sort_order"=> 5,
+                                                                                        "sort_order"=> 100,
                                                                                         "plugin_id"=> 6
                             ]             ]);
         }

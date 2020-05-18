@@ -85,6 +85,18 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "record_id"=> 52,
                                                                                         "previous"=>"{\"id\":52,\"created_at\":\"2020-05-10 10:28:19\",\"updated_at\":\"2020-05-10 10:40:42\",\"created_by_id\":1,\"updated_by_id\":1,\"version\":1,\"label\":\"Dashboard2\",\"type\":\"list\",\"active\":true,\"name\":\"dashboard\",\"description\":\"\",\"url\":\"\",\"model\":\"Demo\\Report\\Models\\Dashboard\",\"list\":\"\$\/demo\/report\/models\/dashboard\/columns.yaml\",\"form\":\"\",\"record_id\":null,\"plugin_id\":3,\"parent_id\":26,\"sort_order\":2,\"icon\":\"oc-icon-adjust\"}",
                                                                                         "current"=> null
+                            ] ,            [
+                                                                            "id"=> 3,
+                                                                                        "created_at"=>"2020-05-17 15:21:30",
+                                                                                        "updated_at"=>"2020-05-17 15:21:30",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "record_id"=> 23,
+                                                                                        "previous"=>"{\"id\":23,\"title\":null,\"description\":null,\"created_at\":\"2020-05-17 15:20:54\",\"updated_at\":\"2020-05-17 15:20:54\",\"created_by_id\":1,\"updated_by_id\":1,\"assigned_to_id\":null,\"priority_id\":1,\"case_number\":\"2222\",\"case_version\":\"545454\",\"version\":0,\"suspect\":\"wweewe\",\"tat_duration\":5454545,\"comments\":\"\"}",
+                                                                                        "current"=> null
                             ]             ]);
         }
 
