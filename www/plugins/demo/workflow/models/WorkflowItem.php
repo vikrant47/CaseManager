@@ -50,7 +50,7 @@ class WorkflowItem extends Model
      * Step 9. Update current state in current QueueEntity record
      * Step 10. Update current QueueEntity record
      */
-    public function makeTransition()
+    public function makeTransition($next_state = null, $data = [])
     {
         if ($this->workflow->active === 0) {
             throw new ApplicationException('Unable to execute an inactive workflow.');
@@ -62,7 +62,13 @@ class WorkflowItem extends Model
         if ($this->assigned_to->id !== $currentUser->id) {
             throw new ApplicationException('Unable to execute workflow. You are not assigned');
         }
-        $next_state = $this->workflow->getNextState($this->current_state);
+        if (empty($next_state)) {
+            $next_state = $this->workflow->getNextState($this->current_state);
+        } else {
+            if ($this->workflow->containsState($next_state) === false) {
+                throw new ApplicationException('TransitionError : Given state ' . $next_state->name . ' doesn\'t belong to ' . $this->workflow->name . ' workflow');
+            }
+        }
         if ($next_state === null) {
             throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next state not found for ' . $this->current_state);
         }
@@ -79,6 +85,7 @@ class WorkflowItem extends Model
         */
         $this->current_state = $next_state;
         $this->assigned_to = null;
+        request()->attributes->add(['WORKFLOW_ITEM_DATA_' . $this->id => $data]);
         $this->update();
     }
 

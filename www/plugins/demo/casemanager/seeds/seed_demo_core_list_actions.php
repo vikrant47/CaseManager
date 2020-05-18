@@ -31,6 +31,24 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "script"=> "",
                                                                                         "html_attributes"=>"[]"
+                            ] ,            [
+                                                                            "id"=> 6,
+                                                                                        "created_at"=>"2020-05-17 09:24:19",
+                                                                                        "updated_at"=>"2020-05-17 12:58:46",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"pick-case",
+                                                                                        "label"=>"Pick Case",
+                                                                                        "list"=>"\$/demo/casemanager/models/casemodel/columns.yaml",
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "active"=> 1,
+                                                                                        "description"=> "",
+                                                                                        "icon"=>"oc-icon-anchor",
+                                                                                        "css_class"=> "",
+                                                                                        "sort_order"=> 4,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "script"=>"function(){\r\n    \$.request('onPickItemFromQueue', {\r\n        data: {queueId: \$('#queueDropdown').val()}\r\n    });\r\n}",
+                                                                                        "html_attributes"=>"[{\"name\":\"data-show\",\"value\":\"return engine.listService.getCurrentList().getTotalRecord()\"}]"
                             ]             ]);
         }
 

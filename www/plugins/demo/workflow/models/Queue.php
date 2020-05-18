@@ -20,7 +20,6 @@ use October\Rain\Exception\ApplicationException;
 class Queue extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use \Demo\Core\Classes\Traits\ModelTrait;
     const ADD_NEW_POLICY = 'addNew';
     const OVERRIDE_POLICY = 'override';
     const REJECT_POLICY = 'reject';
@@ -62,6 +61,7 @@ class Queue extends Model
      */
     public function __construct()
     {
+        parent::__construct();
         $this->logger = PluginConnection::getCurrentLogger();
     }
 
@@ -75,11 +75,21 @@ class Queue extends Model
         return EventHandlerServiceProvider::$MODEL_EVENTS_OPTIONS;
     }
 
+    public function beforeSave()
+    {
+        ModelUtil::fillDefaultColumnsInBelongsToMany(
+            $this->assignment_groups(),
+            $this->assignment_groups,
+            $this->plugin_id,
+            ['sort_order' => 100]
+        );
+    }
+
     /***Scope query definition start*/
 
     public static function getQueuesForUser(User $user)
     {
-        return DB::select('SELECT queue.* from demo_workflow_queues queue'
+        return DB::select('SELECT queue.id, queue.name from demo_workflow_queues queue'
             . ' join demo_workflow_queue_assignment_groups ag '
             . ' on ag.queue_id = queue.id '
             . ' join backend_user_groups grp on grp.id = ag.group_id'
@@ -220,11 +230,11 @@ class Queue extends Model
      */
     public function isUserInAssignmentGroups(User $user)
     {
-        return \Backend\Models\UserGroup::with(['users' => function ($query) use ($user) {
-                $query->where('id', $user->id);
-            }])->whereIn('id', $this->assignment_groups->map(function ($group) {
-                return $group->id;
-            })->toArray())->count() > 0;
+        return Db::table('backend_users_groups')
+                ->where('user_id', $user->id)
+                ->whereIn('user_group_id', $this->assignment_groups->map(function ($group) {
+                    return $group->id;
+                }))->count() > 0;
     }
     /*public static function listenEntityEvents($eventName, $model)
     {

@@ -6,15 +6,7 @@
         <div class="engine-list-toolbar">
             <?= $toolbar->render() ?>
             <div class="engine-actions">
-                <script>
-                    $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
-                    var actions = <?=$this->getListActions()->toJSON()?>;
-                    var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
-                    var controller = <?=json_encode($this->getControllerInfo())?>;
-                    Engine.instance.ui.setModel(modelRecord);
-                    var list = Engine.instance.listService.getCurrentList();
-                    list.addActions(actions);
-                </script>
+
             </div>
         </div>
     <?php endif ?>
@@ -34,4 +26,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
+        var actions = <?=$this->getListActions()->toJSON()?>;
+        var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
+        var controller = <?=json_encode($this->getControllerInfo())?>;
+        Engine.instance.ui.setModel(modelRecord);
+        var list = Engine.instance.listService.getCurrentList();
+        list.setPagination(<?= json_encode([
+                'from' => $list->vars['pageFrom'],
+                'to' => $list->vars['pageTo'],
+                'total' => $list->vars['recordTotal']
+            ])
+            ?>);
+        list.addActions(actions);
+    </script>
 </div>

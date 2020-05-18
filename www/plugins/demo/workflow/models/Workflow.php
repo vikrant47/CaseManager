@@ -72,16 +72,30 @@ class Workflow extends Model
 
     public function getNextStateId(WorkflowState $current_state)
     {
-        $current_stateId = $current_state;
-        if ($current_state instanceof WorkflowState) {
-            $current_stateId = $current_state->id;
-        }
+        $current_stateId = $current_state->id;
         foreach ($this->definition as $entry) {
             if ($entry['from_state'] == $current_stateId) {
                 return $entry['to_state'];
             }
         }
         return null;
+    }
+
+    /**
+     * Check if workflow model have the given state
+     * @param $state WorkflowState - WorkflowState object
+     * @return boolean - true if state exists in workflow otherwise false
+     */
+    public function containsState(WorkflowState $state)
+    {
+
+        $stateId = $state->id;
+        foreach ($this->definition as $entry) {
+            if ($entry['from_state'] == $stateId || $entry['to_state'] == $stateId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getCurrentQueueId($current_state)

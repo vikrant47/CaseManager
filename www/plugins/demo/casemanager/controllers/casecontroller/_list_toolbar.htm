@@ -33,19 +33,19 @@
                     <option value="<?= $queue->id ?>"><?= $queue->name ?></option>
                 <?php } ?>
             </select>
-            <button
+            <!--<button
                     type="button"
                     class="btn btn-default"
                     id="casePicker">
                 Pick Case
-            </button>
+            </button>-->
         <?php }
         ?>
 </div>
 <script>
-    $('#casePicker').click(function () {
+  /*  $('#casePicker').click(function () {
         $.request('onPickItemFromQueue', {
             data: {queueId: $('#queueDropdown').val()}
         });
-    });
+    });*/
 </script>

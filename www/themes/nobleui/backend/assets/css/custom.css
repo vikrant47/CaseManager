@@ -418,6 +418,11 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     float: right;
 }
 
+/**Flash Messages**/
+.flash-message {
+    top: 10px;
+}
+
 /**loader**/
 .stripe-loading-indicator .stripe, .stripe-loading-indicator .stripe-loaded {
     background: #727cf5 !important;
@@ -427,7 +432,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     min-height: 30px;
 }
 
-.field-repeater .field-repeater-add-item > a{
+.field-repeater .field-repeater-add-item > a {
     padding: 10px 15px;
 }
 

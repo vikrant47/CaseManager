@@ -22,3 +22,17 @@ fields:
         label: backend::lang.user.group.description_field
         type: textarea
         size: tiny
+tabs:
+    fields:
+        users:
+            context:
+                - update
+            label: Users
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: email
+            useKey: false
+            type: taglist
+            tab: Associations
+            span: auto
