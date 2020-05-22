@@ -7,6 +7,7 @@ use System\Classes\PluginBase;
 use System\Classes\PluginManager;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Illuminate\Support\Str;
 
 /**
  * This will allow user to connect to another plugin from one plugin
@@ -79,11 +80,39 @@ class PluginConnection
     }
 
     /**
+     * This will return the list of all the views for a given controller
+     * @param $view string - Type  of view can be 'views'
+     * @return array of views
+     */
+    public static function getControllerConfigAlias(string $view, string $controllerClass, $controllerName = null, $extension = '.htm')
+    {
+        if (empty($controllerName)) {
+            $controllerName = substr($controllerClass, strripos($controllerClass, '\\') + 1);
+        }
+        $views = [];
+        $controllerDirPath = base_path() . '/plugins/' . strtolower($controllerClass);
+        if (file_exists($controllerDirPath)) {
+            $formFiles = scandir($controllerDirPath);
+            foreach ($formFiles as $file) {
+                if (Str::endsWith($file, $view)) {
+                    $subDir = scandir($controllerDirPath . DIRECTORY_SEPARATOR . $file);
+                    foreach ($subDir as $dir) {
+                        if ($dir !== '.' && $dir !== '..')
+                            $views[$dir] = $dir;
+                    }
+                    break;
+                }
+            }
+        }
+        return $views;
+    }
+
+    /**
      * This will return the list of all the views for a given model
      * @param $view string - Type  of view can be 'forms' or 'lists'
      * @return array of views
      */
-    public static function getViewAlias(string $view, string $modelClass, $modelName = null)
+    public static function getViewAlias(string $view, string $modelClass, $modelName = null, $extension = '.yaml')
     {
         if (empty($modelName)) {
             $modelName = substr($modelClass, strripos($modelClass, '\\') + 1);
@@ -94,7 +123,7 @@ class PluginConnection
             $formFiles = scandir($modelDirPath);
             foreach ($formFiles as $file) {
                 if (strpos($file, $view) > -1) {
-                    $views['$/' . str_replace('\\', '/', strtolower($modelClass)) . '/' . $file] = str_replace('.yaml', '', $file) . ' - ' . $modelName . '';
+                    $views['$/' . str_replace('\\', '/', strtolower($modelClass)) . '/' . $file] = str_replace($extension, '', $file) . ' - ' . $modelName . '';
                 }
             }
         }
@@ -125,6 +154,13 @@ class PluginConnection
     public static function getListsAlias($modelClass, $modelName = null)
     {
         return self::getViewAlias('columns', $modelClass, $modelName);
+    }
+
+    public static function getControllerViewsAlias($controllerClass, $modelName = null)
+    {
+        $views = self::getControllerConfigAlias('views', $controllerClass, $modelName);
+        $views[''] = 'Default';
+        return $views;
     }
 
     public static function getAllListsAlias()

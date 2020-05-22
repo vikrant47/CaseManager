@@ -36,9 +36,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "model"=>"Demo\Core\Models\Navigation"
                             ] ,            [
-                                                                            "id"=> 284,
-                                                                                        "created_at"=>"2020-05-18 04:35:09",
-                                                                                        "updated_at"=>"2020-05-18 04:35:09",
+                                                                            "id"=> 286,
+                                                                                        "created_at"=>"2020-05-22 14:31:59",
+                                                                                        "updated_at"=>"2020-05-22 14:31:59",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> null,
@@ -47,9 +47,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "model"=>"Demo\Core\Models\Navigation"
                             ] ,            [
-                                                                            "id"=> 285,
-                                                                                        "created_at"=>"2020-05-18 04:35:09",
-                                                                                        "updated_at"=>"2020-05-18 04:35:09",
+                                                                            "id"=> 287,
+                                                                                        "created_at"=>"2020-05-22 14:31:59",
+                                                                                        "updated_at"=>"2020-05-22 14:31:59",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> null,

@@ -23,4 +23,28 @@ class StringUtil
             return error_log('Error: Value for parameter $number is out of range');
         }
     }
+
+    /**
+     * Function to check string starting
+     * with given substring
+     */
+    function startsWith($string, $startString)
+    {
+        $len = strlen($startString);
+        return (substr($string, 0, $len) === $startString);
+    }
+
+    /**
+     * Function to check string ends
+     * with given substring
+     */
+    function endsWith($string, $endString)
+    {
+        $len = strlen($endString);
+        if ($len == 0) {
+            return true;
+        }
+        return (substr($string, -$len) === $endString);
+    }
+
 }

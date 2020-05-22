@@ -4,12 +4,15 @@
 namespace Demo\Core\Controllers;
 
 
+use Backend\Behaviors\ListController;
 use Backend\Classes\Controller;
 use Demo\Core\Classes\Beans\ApplicationCache;
 use Demo\Core\Classes\Beans\SessionCache;
+use Demo\Core\Classes\Errors\ListConfigNotFoundException;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Ifs\IPluginMiddleware;
 use Demo\Core\Classes\Utils\ModelUtil;
+use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Core\Models\FormAction;
 use Demo\Core\Models\JavascriptLibrary;
@@ -86,20 +89,115 @@ class AbstractPluginController extends Controller
         return $result;
     }
 
+    /**This will make list config*/
+    protected function makeListConfig($path = null, $definition = null)
+    {
+        $listController = $this->asExtension('ListController');
+        $ListConfig = ReflectionUtil::getPropertyValue(ListController::class, 'listConfig', $listController);
+        $listController = $this->asExtension('ListController');
+        $requiredConfig = ReflectionUtil::getPropertyValue(ListController::class, 'requiredConfig', $listController);
+        $listDefinitions = ReflectionUtil::getPropertyValue(ListController::class, 'listDefinitions', $listController);
+        if (empty($path)) {
+            $path = $listDefinitions[$definition];
+        }
+        return $ListConfig[$definition] = $this->makeConfig($path, $requiredConfig);
+    }
+
+    public function getRequestedView()
+    {
+        return Request::input('view');
+    }
+
+    public function isViewDefinitionExists($view)
+    {
+        $controllerDirPath = base_path() . '/plugins/' . strtolower(get_class($this));
+        return !empty($view) && File::isDirectory($this->getViewRootDir($view));
+    }
+
+    public function getViewRootDir($view)
+    {
+        $controllerDirPath = base_path() . '/plugins/' . strtolower(get_class($this));
+        return $controllerDirPath . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $view;
+    }
+
+    /**
+     * Returns the configuration used by this behavior.
+     * Override ListController listGetConfig to render different list views
+     * @return \Backend\Classes\WidgetBase
+     */
+    public function listGetConfig($definition = null)
+    {
+        $view = $this->getRequestedView();
+        $listController = $this->asExtension('ListController');
+        $ListConfig = ReflectionUtil::getPropertyValue(ListController::class, 'listConfig', $listController);
+        if (!$definition) {
+            $definition = ReflectionUtil::getPropertyValue(ListController::class, 'primaryDefinition', $listController);
+        }
+        if (!empty($view)) {
+            $configPath = $this->getConfigPath('views' . DIRECTORY_SEPARATOR . $view . DIRECTORY_SEPARATOR . 'config_list.yaml');
+            if (File::isFile($configPath)) {
+                $config = $ListConfig[$definition] = $this->makeListConfig($configPath, $definition);
+            } else {
+                throw new ListConfigNotFoundException('No config found for view ' . $view);
+            }
+        } else {
+            if (!$config = array_get($ListConfig, $definition)) {
+                $config = $ListConfig[$definition] = $this->makeListConfig(null, $definition);
+            }
+        }
+        return $config;
+    }
+
+    /*protected function loadView($type)
+    {
+        $view = Request::input('view');
+        if (!empty($view)) {
+            $config = $this->getConfigPath($view . DIRECTORY_SEPARATOR . 'config_' . $type . '.yaml');
+            // $formConfig = $this->getConfigPath($view . DIRECTORY_SEPARATOR . 'config_form.yaml');
+            if (File::isFile($config)) {
+                if ($type === 'list') {
+                    $this->asExtension('ListController')->setConfig($config, ['modelClass', $type]);
+                    $config = $this->getConfigPath($view . DIRECTORY_SEPARATOR . 'config_' . $type . '.yaml');
+                    $this->asExtension('ReorderController')->setConfig($view . DIRECTORY_SEPARATOR . 'config_reorder.yaml', ['modelClass']);
+                }
+            } else {
+                return false;
+            }
+//
+//            if (File::isFile($formConfig)) {
+//                $this->asExtension('FormController')->setConfig($listConfig, ['modelConfig', 'form']);
+//            }
+        }
+        return true;
+    }
+
+    public function update($id)
+    {
+        $this->loadView('form');
+        return parent::update($id);
+    }
+
+    public function create($id = null)
+    {
+        $this->loadView('form');
+        return parent::create($id);
+    }
+
+    public function preview($id = null)
+    {
+        $this->loadView('form');
+        return parent::preview($id);
+    }
+
     public function index()
     {
-        $listView = Request::input('list');
-        if (!empty($listView)) {
-            $path = $this->getConfigPath($listView);
-            if (!File::isFile($path)) {
-                $this->setStatusCode(403);
-                $this->setResponse(Response::make(View::make('backend::404'), 404));
-                return '';
-            }
-            $this->asExtension('ListController')->setConfig($listView, ['modelConfig', 'list']);
+
+        if (!$this->loadView('list')) {
+            $this->setResponse(Response::make(View::make('backend::404'), 404));
+            return '';
         }
         return parent::index();
-    }
+    }*/
 
     /**@return IPluginMiddleware[] */
     public function getPluginMiddleware()
@@ -139,7 +237,12 @@ class AbstractPluginController extends Controller
      */
     public function makeView($view)
     {
-        $viewPath = $this->getViewPath(strtolower($view) . '.htm');
+        $requestedView = $this->getRequestedView();
+        if (!empty($requestedView) && $this->isViewDefinitionExists($requestedView)) {
+            $viewPath = $this->getViewRootDir($requestedView) . DIRECTORY_SEPARATOR . strtolower($view) . '.htm';
+        } else {
+            $viewPath = $this->getViewPath(strtolower($view) . '.htm');
+        }
         $contents = $this->makeFileContents($viewPath);
         if ($view === 'create' || $view === 'update' || $view === 'preview') {
             $basePath = $this->getBaseEnginePartial();
