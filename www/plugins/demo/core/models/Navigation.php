@@ -69,6 +69,14 @@ class Navigation extends Model
         return PluginConnection::getAllListsAlias();
     }
 
+    public function getViewOptions($value, $data)
+    {
+        if (isset($data->model)) {
+            return PluginConnection::getControllerViewsAlias($data->model_ref->controller);
+        }
+        return [];
+    }
+
     public function getFormOptions($value, $data)
     {
         if (isset($data->model)) {
@@ -118,7 +126,11 @@ class Navigation extends Model
 
             $model = $navigation->model_ref;
             $index = ControllerHelper::generateUrl($model->controller);
-            $generatedUrl = $index;
+            if (!empty($navigation->view) && $navigation->view !== 'default') {
+                $generatedUrl = $index . '?view=' . $navigation->view;
+            } else {
+                $generatedUrl = $index;
+            }
             /*} catch (\Exception $e) {
                 throw $e;
             }*/
@@ -129,6 +141,9 @@ class Navigation extends Model
                 $generatedUrl = $index . '/update' . $navigation->record_id;
             } else {
                 $generatedUrl = $index . '/create';
+            }
+            if (!empty($navigation->view) && $navigation->view !== 'default') {
+                $generatedUrl = $generatedUrl . '?view=' . $navigation->view;
             }
         } else {
             $generatedUrl = Backend::url($navigation->name);

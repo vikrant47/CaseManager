@@ -6,6 +6,7 @@ namespace Demo\Core\Classes\Helpers;
 
 use Backend\Classes\BackendController;
 use Backend\Facades\Backend;
+use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Controllers\NavigationController;
 
 class ControllerHelper
@@ -18,9 +19,7 @@ class ControllerHelper
     public static function getCurrentController()
     {
         $backendController = ControllerHelper::getBackendController();
-        $r = new \ReflectionProperty(BackendController::class, 'requestedController');
-        $r->setAccessible(true);
-        return $r->getValue($backendController);
+        return ReflectionUtil::getPropertyValue(BackendController::class, 'requestedController', $backendController);
     }
 
     public static function getBackendController()

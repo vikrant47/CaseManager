@@ -94,9 +94,9 @@ tabs:
                 action: show
                 field: type
                 condition: 'value[list] || value[form]'
-        list:
-            label: List
-            emptyOption: '- Select List -'
+        view:
+            label: View
+            emptyOption: '- Select View -'
             showSearch: true
             span: auto
             dependsOn:
@@ -105,23 +105,9 @@ tabs:
             trigger:
                 action: show
                 field: type
-                condition: 'value[list]'
+                condition: 'value[list] || value[form]'
             type: dropdown
             tab: Config
-        form:
-            label: Form
-            showSearch: true
-            span: auto
-            dependsOn:
-                - model_ref
-                - type
-            type: dropdown
-            emptyOption: '- Select Form -'
-            tab: Config
-            trigger:
-                action: show
-                field: type
-                condition: 'value[form]'
         record_id:
             label: 'Record ID'
             showSearch: true
