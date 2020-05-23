@@ -6,6 +6,7 @@ use Demo\Core\Controllers\AbstractSecurityController;
 use Demo\Workflow\Classes\Traits\WorkflowControllerTrait;
 use Demo\Casemanager\Models\CaseModel;
 use Demo\Workflow\Models\WorkflowItem;
+use Illuminate\Support\Facades\Request;
 use Model;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Support\Facades\Flash;
@@ -37,6 +38,17 @@ class CaseController extends AbstractSecurityController
             Flash::success('Case pushed successfully');
         } else {
             Flash::error('Unable to push case as it\'s not assigned to you !');
+        }
+    }
+
+    /**
+     * Before read permission can be evaluated here
+     */
+    public function listExtendQuery(\October\Rain\Database\Builder $query)
+    {
+        $list = Request::input('list');
+        if ($list === 'topCases') {
+
         }
     }
 
