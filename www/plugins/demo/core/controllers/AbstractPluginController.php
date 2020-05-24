@@ -4,11 +4,13 @@
 namespace Demo\Core\Controllers;
 
 
+use Backend\Behaviors\FormController;
 use Backend\Behaviors\ListController;
 use Backend\Classes\Controller;
 use Demo\Core\Classes\Beans\ApplicationCache;
 use Demo\Core\Classes\Beans\SessionCache;
 use Demo\Core\Classes\Errors\ListConfigNotFoundException;
+use Demo\Core\Classes\Helpers\FormBuilder;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Ifs\IPluginMiddleware;
 use Demo\Core\Classes\Utils\ModelUtil;
@@ -281,16 +283,37 @@ class AbstractPluginController extends Controller
         return $this->modelRecord;
     }
 
-    public function onListView()
+    public function onListRender()
     {
         $list = $this->makeLists();
         return $this->listRender();
     }
 
-    public function onFormView($recordId = null, $context = 'create')
+    public function onFormRender($recordId = null, $context = 'create')
     {
         $formWidget = $this->create();
         return $this->formRender();
+    }
+
+    public function onBuildForm()
+    {
+        $request = request();
+        $wrap = $request->get('wrap', 'false');
+        $context = $request->get('context', 'create');
+        $recordId = $request->get('recordId');
+        $formConfig = $request->get('config', []);
+        $formBuilder = new FormBuilder($this);
+        if ($wrap === 'true') {
+            $formWidget = $formBuilder->buildFormWidget($formConfig, $recordId, $context);
+            $formController = $this->asExtension('FormController');
+            ReflectionUtil::setPropertyValue(FormController::class, $formController, 'formWidget', $formWidget);
+            $viewPath = $this->getViewPath(strtolower($context) . '.htm');
+            $contents = $this->makeFileContents($viewPath);
+            $viewContents = $this->makeViewContent($contents);
+            return $viewContents;
+        } else {
+            return $formBuilder->formRender($formConfig, $recordId, $context);
+        }
     }
 
     public function viewExtendQuery($modelClass, $query)

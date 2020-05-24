@@ -1,13 +1,13 @@
-var EngineUI = function () {
+window.EngineUI = function () {
     this.currentModel = null;
 };
-var EngineFormService = function () {
+window.EngineFormService = function () {
 
 };
-var EngineListService = function () {
+window.EngineListService = function () {
     this.currentList = null;
 };
-var EngineList = function (model, el) {
+window.EngineList = function (model, el) {
     this.model = model;
     this.pagination = {};
     if (!el) {
@@ -16,16 +16,19 @@ var EngineList = function (model, el) {
     this.$el = $(el).eq(0);
     this.$el.data('engineList', this);
 };
-var EngineFrom = function (model, el) {
-    this.model = model;
-    this.formData = null;
+window.EngineForm = function (config) {
+    this.config = config
+};
+EngineForm.getInstance = function (model, el) {
+    const form = new EngineForm();
+    form.model = model;
+    form.formData = null;
     if (!el) {
         el = '[data-control="formwidget"]';
     }
-    this.$el = $(el).eq(0);
-    this.$el.data('engineForm', this);
+    form.$el = $(el).eq(0);
+    form.$el.data('engineForm', this);
 };
-
 
 Object.assign(EngineUI.prototype, {
     navigate: function (model, type) {
@@ -36,6 +39,35 @@ Object.assign(EngineUI.prototype, {
     },
     setModel: function (model) {
         this.currentModel = model;
+    },
+    showPopup: function (options) {
+        const $popup = $.popup(options);
+        const popup = $popup.data('oc.popup');
+        const $dialog = popup.$dialog;
+        if ($dialog.find('.modal-body').length === 0) {
+            popup.$body = $('<div class="modal-content"></div>').append(
+                $dialog.find('.modal-content')
+                    .addClass('modal-body')
+                    .removeClass('modal-content')).appendTo($dialog);
+        }
+        const $body = popup.$body;
+        if ($dialog.find('.modal-header').length === 0) {
+            $body.prepend(
+                '<div class="modal-header">\n' +
+                '    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '</div>')
+        }
+        if (options.title) {
+            $body.find('.modal-header').append('<h4 class="modal-title">' + options.title + '</h4>');
+        }
+        if (options.actions) {
+            Engine.instance.addActions($('<div class="modal-footer"></div>').appendTo($body), options.actions, popup);
+        }
+        if (options.form) {
+            popup.form = options.form;
+            options.form.$el = $body;
+        }
+
     },
     toUIAction: function (dbActions, model) {
         return dbActions.map(function (action) {
@@ -49,13 +81,14 @@ Object.assign(EngineUI.prototype, {
             return action;
         });
     },
-    request: function (options) {
+    request: function (handler, options) {
+        if (typeof handler !== 'string') {
+            options = handler;
+        }
+        var setting = Object.assign({}, options);
         return new Promise(function (resolve, reject) {
-            $.request({
-                url: options.url,
-                data: options.data,
-                method: options.method || 'get',
-                success: function () {
+            Object.assign(setting, {
+                beforeUpdate: function () {
                     if (typeof options.success === 'function') {
                         options.success.apply(this, arguments);
                     }
@@ -66,14 +99,19 @@ Object.assign(EngineUI.prototype, {
                     }
                     reject.apply(this, arguments);
                 }
-            })
+            });
+            if (typeof handler === 'string') {
+                $.request(handler, setting);
+            } else {
+                $.request(setting);
+            }
         });
     },
-    requestControllerAction: function (controller, action, options) {
+    requestControllerAction: function (controller, handler, options) {
         options.url = (controller.startsWith('/backend') ? controller : EngineList.instance.getLocation({
             controller: controller,
-        })) + '/' + action;
-        return this.request(options);
+        }));
+        return this.request(handler, options);
     },
     createRecord: function (controller, record) {
         if (!Array.isArray(record)) {
@@ -125,7 +163,7 @@ Object.assign(EngineListService.prototype, {
 Object.assign(EngineFormService.prototype, {
     getCurrentForm: function () {
         if (!this.currentForm) {
-            this.currentForm = new EngineFrom(Engine.instance.ui.getModel());
+            this.currentForm = EngineForm.getInstance(Engine.instance.ui.getModel());
         }
         return this.currentForm;
     }
@@ -164,8 +202,48 @@ Object.assign(EngineList.prototype, {
     }
 });
 
-Object.assign(EngineFrom.prototype, {
-
+Object.assign(EngineForm.prototype, {
+    setConfig: function (config) {
+        this.config = config;
+    },
+    addFields: function (fields, showInTab = false) {
+        let container;
+        if (showInTab) {
+            if (this.config.tabs) {
+                this.config.tabs = {};
+            }
+            container = this.config.tabs;
+        } else {
+            if (!this.config.fields) {
+                this.config.fields = {};
+            }
+            container = this.config.fields;
+        }
+        Object.assign(container, fields);
+    },
+    build: function (url, wrap = false) {
+        const _this = this;
+        this.contentPromise = Engine.instance.ui.request('onBuildForm', {
+            url: url,
+            wrap: wrap,
+            data: {config: this.config}
+        });
+        return this;
+    },
+    render: function (selector) {
+        this.contentPromise.then(function (content) {
+            $(selector).append(content);
+        });
+    },
+    showInPopup: function (options = {}) {
+        const _this = this;
+        this.contentPromise.then(function (content) {
+            Engine.instance.ui.showPopup(Object.assign(options, {
+                content: content.result,
+                form: this,
+            }));
+        });
+    },
     isNew: function () {
 
     },

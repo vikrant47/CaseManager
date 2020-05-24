@@ -57,6 +57,11 @@ class ModelUtil
         return $classPaths[0] . '.' . $classPaths[1];
     }
 
+    public static function toStdClassObject($array)
+    {
+        return (object)$array;
+    }
+
     public static function toPojo($model, $childModelProps = [], $additionalProps = [])
     {
         $pojo = new \stdClass();
