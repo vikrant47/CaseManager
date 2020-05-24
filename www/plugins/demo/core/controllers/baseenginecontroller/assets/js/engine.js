@@ -282,6 +282,32 @@ Object.assign(Engine.prototype, {
     },
     export: function (module, namespace) {
         this[namespace] = module;
+    },
+    define: function (options) {
+        const settings = Object.assign({
+            constructor: function () {
+
+            },
+            static: [],
+        }, options);
+        const cls = function () {
+            if (settings.extends) {
+                settings.extends.apply(this, arguments);
+            }
+            settings.constructor.apply(this, arguments);
+        };
+        for (let i in settings.static) {
+            cls[i] = settings.static[i];
+        }
+        if (settings.extends) {
+            cls.prototype = Object.create(settings.extends.prototype);
+        }
+        Object.assign(cls.prototype, settings);
+        return cls;
+    },
+    extend: function (child, parent) {
+        child.prototype = Object.create(parent.prototype, child.prototype);
+        return child;
     }
 });
 window.Engine = Engine;

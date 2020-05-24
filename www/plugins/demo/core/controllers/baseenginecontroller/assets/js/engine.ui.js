@@ -1,36 +1,26 @@
-window.EngineUI = function () {
-    this.currentModel = null;
-};
-window.EngineFormService = function () {
-
-};
-window.EngineListService = function () {
-    this.currentList = null;
-};
-window.EngineList = function (model, el) {
-    this.model = model;
-    this.pagination = {};
-    if (!el) {
-        el = '.control-list';
+var EngineEvent = Engine.instance.define({
+    constructor: function () {
+        this.events = {};
+    }, emit: function (eventName, args) {
+        const _this = this;
+        if (this.events[eventName]) {
+            this.events[eventName].forEach(function (callbaack) {
+                callbaack.apply(_this, args);
+            });
+        }
+        return this;
+    }, on: function (eventName, callback) {
+        if (!this.events[eventName]) {
+            this.events[eventName] = [];
+        }
+        this.events[eventName].push(callback);
+        return this;
     }
-    this.$el = $(el).eq(0);
-    this.$el.data('engineList', this);
-};
-window.EngineForm = function (config) {
-    this.config = config
-};
-EngineForm.getInstance = function (model, el) {
-    const form = new EngineForm();
-    form.model = model;
-    form.formData = null;
-    if (!el) {
-        el = '[data-control="formwidget"]';
-    }
-    form.$el = $(el).eq(0);
-    form.$el.data('engineForm', this);
-};
-
-Object.assign(EngineUI.prototype, {
+});
+var EngineUI = Engine.instance.define({
+    constructor: function () {
+        this.currentModel = null;
+    },
     navigate: function (model, type) {
 
     },
@@ -150,17 +140,12 @@ Object.assign(EngineUI.prototype, {
             },
             method: 'post',
         });
-    },
-});
-Object.assign(EngineListService.prototype, {
-    getCurrentList: function () {
-        if (!this.currentList) {
-            this.currentList = new EngineList(Engine.instance.ui.getModel());
-        }
-        return this.currentList;
     }
 });
-Object.assign(EngineFormService.prototype, {
+var EngineFormService = Engine.instance.define({
+    constructor: function () {
+
+    },
     getCurrentForm: function () {
         if (!this.currentForm) {
             this.currentForm = EngineForm.getInstance(Engine.instance.ui.getModel());
@@ -168,7 +153,35 @@ Object.assign(EngineFormService.prototype, {
         return this.currentForm;
     }
 });
-Object.assign(EngineList.prototype, {
+var EngineListService = Engine.instance.define({
+    constructor: function () {
+        this.currentList = null;
+    },
+    getCurrentList: function () {
+        if (!this.currentList) {
+            this.currentList = new EngineList(Engine.instance.ui.getModel());
+        }
+        return this.currentList;
+    }
+});
+var EngineList = Engine.instance.define({
+    constructor: function (model, el) {
+        this.model = model;
+        this.pagination = {};
+        if (!el) {
+            el = '.control-list';
+        }
+        this.$el = $(el).eq(0);
+        this.$el.data('engineList', this);
+    },
+    static: {
+        getCurrentList: function () {
+            if (!this.currentList) {
+                this.currentList = new EngineList(Engine.instance.ui.getModel());
+            }
+            return this.currentList;
+        }
+    },
     getContainer() {
         return this.$el;
     },
@@ -201,8 +214,29 @@ Object.assign(EngineList.prototype, {
         return this.pagination;
     }
 });
-
-Object.assign(EngineForm.prototype, {
+var EngineForm = Engine.instance.define({
+    static: {
+        getInstance: function (model, el) {
+            const form = new EngineForm();
+            form.model = model;
+            form.formData = null;
+            if (!el) {
+                el = '[data-control="formwidget"]';
+            }
+            form.$el = $(el).eq(0);
+            form.$el.data('engineForm', this);
+        },
+        getCurrentForm: function () {
+            if (!this.currentForm) {
+                this.currentForm = EngineForm.getInstance(Engine.instance.ui.getModel());
+            }
+            return this.currentForm;
+        }
+    },
+    extends: EngineEvent,
+    constructor: function (config) {
+        this.config = config
+    },
     setConfig: function (config) {
         this.config = config;
     },
@@ -231,17 +265,22 @@ Object.assign(EngineForm.prototype, {
         return this;
     },
     render: function (selector) {
+        const _this = this;
         this.contentPromise.then(function (content) {
+            _this.emit('beforeRender', [content]);
             $(selector).append(content);
+            _this.emit('render', [content]);
         });
     },
     showInPopup: function (options = {}) {
         const _this = this;
         this.contentPromise.then(function (content) {
+            _this.emit('beforeRender', [content]);
             Engine.instance.ui.showPopup(Object.assign(options, {
                 content: content.result,
                 form: this,
             }));
+            _this.emit('render', [content]);
         });
     },
     isNew: function () {
