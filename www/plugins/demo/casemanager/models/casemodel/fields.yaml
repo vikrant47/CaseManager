@@ -20,7 +20,9 @@ fields:
         descriptionFrom: description
         span: auto
         required: 1
-        type: relation
+        type: recordfinder
+        list: $/demo/casemanager/models/casepriority/columns.yaml
+        prompt: Click the %s button to find a user
         comment: 'Select Priority'
     comments:
         label: Comments
