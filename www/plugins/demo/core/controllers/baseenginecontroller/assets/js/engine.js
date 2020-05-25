@@ -42,8 +42,7 @@ Engine.QUERY_BUILDER_TYPE_MAPPINGS = {
 };
 Engine.defaultActionOption = {
     button: {
-        template: '<button class="action action-button"><i></i><span></span> </button>',
-        element: {text: 'span', icon: 'i'},
+        template: '<button class="action action-button"></button>',
         icon: 'icon-link',
         event: 'click',
         css_class: '',

@@ -59,13 +59,13 @@ var EngineUI = Engine.instance.define({
         }
 
     },
-    toUIAction: function (dbActions, model) {
+    toUIAction: function (dbActions, modelRecord) {
         return dbActions.map(function (action) {
             action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') + ' ' + action.css_class + ' ' + action.icon;
             action.handler = Function('return ' + action.script)();
             action.id = 'list-action-' + action.id;
             action.attributes = typeof action.html_attributes === 'string' ? JSON.parse(action.html_attributes) : action.html_attributes;
-            action.model = model;
+            action.modelRecord = modelRecord;
             delete action.icon;
             delete action.html_attributes;
             return action;
@@ -145,12 +145,6 @@ var EngineUI = Engine.instance.define({
 var EngineFormService = Engine.instance.define({
     constructor: function () {
 
-    },
-    getCurrentForm: function () {
-        if (!this.currentForm) {
-            this.currentForm = EngineForm.getInstance(Engine.instance.ui.getModel());
-        }
-        return this.currentForm;
     }
 });
 var EngineListService = Engine.instance.define({
@@ -165,8 +159,8 @@ var EngineListService = Engine.instance.define({
     }
 });
 var EngineList = Engine.instance.define({
-    constructor: function (model, el) {
-        this.model = model;
+    constructor: function (el, modelRecord) {
+        this.modelRecord = modelRecord;
         this.pagination = {};
         if (!el) {
             el = '.control-list';
@@ -174,10 +168,25 @@ var EngineList = Engine.instance.define({
         this.$el = $(el).eq(0);
         this.$el.data('engineList', this);
     },
+    bind: function ($el, modelRecord) {
+        this.modelRecord = modelRecord;
+        this.pagination = {};
+        this.$el = $el;
+        this.$el.data('engineList', this);
+    },
     static: {
+        getInstance: function (el, modelRecord) {
+            const $el = $(el).eq(0);
+            if ($el.data('engineList')) {
+                return $el.data('engineList');
+            }
+            const list = new EngineList();
+            list.bind($el, modelRecord);
+            return list;
+        },
         getCurrentList: function () {
             if (!this.currentList) {
-                this.currentList = new EngineList(Engine.instance.ui.getModel());
+                this.currentList = EngineList.getInstance($('.engine-list-wrapper').eq(0), Engine.instance.ui.getModel());
             }
             return this.currentList;
         }
@@ -186,7 +195,7 @@ var EngineList = Engine.instance.define({
         return this.$el;
     },
     getActionContainer: function () {
-        return $('.engine-list-toolbar .toolbar-item').children().eq(0);
+        return this.$el.find('.engine-list-toolbar .toolbar-item').children().eq(0);
     },
     getLocation: function () {
         return ('/backend/' + this.model.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
@@ -195,7 +204,7 @@ var EngineList = Engine.instance.define({
         window.location.href = this.getLocation(this.model) + '/' + view + (Object.keys(queryParams).length > 0 ? '?' + $.param(queryParams) : '');
     },
     addActions: function (actionRecords) {
-        var actions = Engine.instance.ui.toUIAction(actionRecords, this.model);
+        var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord);
         Engine.instance.addActions(this.getActionContainer(), actions);
     },
     getSelectedRecordIds: function () {
@@ -216,19 +225,17 @@ var EngineList = Engine.instance.define({
 });
 var EngineForm = Engine.instance.define({
     static: {
-        getInstance: function (model, el) {
-            const form = new EngineForm();
-            form.model = model;
-            form.formData = null;
-            if (!el) {
-                el = '[data-control="formwidget"]';
+        getInstance: function (el, modelRecord) {
+            const $el = $(el).eq(0);
+            if ($el.data('engineForm')) {
+                return $el.data('engineForm');
+            } else {
+                return new EngineForm().bind($el, modelRecord);
             }
-            form.$el = $(el).eq(0);
-            form.$el.data('engineForm', this);
         },
         getCurrentForm: function () {
             if (!this.currentForm) {
-                this.currentForm = EngineForm.getInstance(Engine.instance.ui.getModel());
+                this.currentForm = EngineForm.getInstance($('.engine-form-wrapper').get(0), Engine.instance.ui.getModel());
             }
             return this.currentForm;
         }
@@ -236,6 +243,25 @@ var EngineForm = Engine.instance.define({
     extends: EngineEvent,
     constructor: function (config) {
         this.config = config
+    },
+    bind: function ($el, modelRecord) {
+        this.modelRecord = modelRecord;
+        if (this.modelRecord) {
+            if (typeof modelRecord === 'string') {
+                this.modelRecord = {model: modelRecord};
+            }
+            this.model = this.modelRecord.model;
+        }
+        this.formData = null;
+        this.$el = $el;
+        this.$el.data('engineForm', this);
+        return this;
+    },
+    getValue: function (field) {
+        return this.getField(field).val()
+    },
+    getField: function (field) {
+        return this.$el.find('[name$="[' + field + ']"]')
     },
     setConfig: function (config) {
         this.config = config;
@@ -278,7 +304,7 @@ var EngineForm = Engine.instance.define({
             _this.emit('beforeRender', [content]);
             Engine.instance.ui.showPopup(Object.assign(options, {
                 content: content.result,
-                form: this,
+                form: _this,
             }));
             _this.emit('render', [content]);
         });
@@ -287,7 +313,7 @@ var EngineForm = Engine.instance.define({
 
     },
     getActionContainer: function () {
-        return $('.engine-form-wrapper .form-buttons .loading-indicator-container .actions');
+        return this.$el.find('.form-buttons .loading-indicator-container .actions');
     },
     getOctoberFormWidget: function () {
         return this.$el.data('formWidget');
@@ -312,7 +338,7 @@ var EngineForm = Engine.instance.define({
         window.location.href = formUrl;
     },
     addActions: function (actionRecords) {
-        var actions = Engine.instance.ui.toUIAction(actionRecords, this.model);
+        var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord);
         Engine.instance.addActions(this.getActionContainer(), actions);
     }
 });
