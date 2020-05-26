@@ -32,7 +32,7 @@
         var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
         Engine.instance.ui.setModel(modelRecord);
-        var list = Engine.instance.listService.getCurrentList();
+        var list = EngineList.getCurrentList();
         list.setPagination(<?= json_encode([
                 'from' => $list->vars['pageFrom'],
                 'to' => $list->vars['pageTo'],

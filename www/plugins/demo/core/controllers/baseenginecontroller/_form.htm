@@ -11,7 +11,7 @@
         var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
         Engine.instance.ui.setModel(modelRecord);
-        var form = Engine.instance.formService.getCurrentForm();
+        var form = EngineForm.getCurrentForm();
         form.addActions(actions);
     </script>
 </div>

@@ -302,6 +302,10 @@ class AbstractPluginController extends Controller
         $context = $request->get('context', 'create');
         $recordId = $request->get('recordId');
         $formConfig = $request->get('config', []);
+        if (empty($formConfig)) {
+            $this->asExtension('FormController')->{$context}($recordId, $context);
+            return $this->asExtension('FormController')->formRender([]);
+        }
         $formBuilder = new FormBuilder($this);
         if ($wrap === 'true') {
             $formWidget = $formBuilder->buildFormWidget($formConfig, $recordId, $context);

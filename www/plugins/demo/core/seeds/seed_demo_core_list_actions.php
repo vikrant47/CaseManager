@@ -70,7 +70,7 @@ class SeedDemoCoreListActions implements Seedable
                             ] ,            [
                                                                             "id"=> 1,
                                                                                         "created_at"=>"2020-04-27 09:24:16",
-                                                                                        "updated_at"=>"2020-05-16 05:53:59",
+                                                                                        "updated_at"=>"2020-05-26 12:43:46",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"create",
@@ -83,7 +83,7 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> -3,
                                                                                         "plugin_id"=> 10,
-                                                                                        "script"=>"function(event,engine){\r\n    engine.listService.getCurrentList().navigate('create');\r\n}",
+                                                                                        "script"=>"function(event,engine){\r\n    EngineList.getCurrentList().navigate('create');\r\n}",
                                                                                         "html_attributes"=>"[]"
                             ]             ]);
         }
