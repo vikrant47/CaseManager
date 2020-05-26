@@ -402,6 +402,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 /**MODAL*/
+
 .fade:not(.show) {
     opacity: inherit;
 }
@@ -416,6 +417,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 
 .modal-header button {
     float: right;
+}
+
+.modal-content {
+    overflow: auto;
 }
 
 /**Flash Messages**/
@@ -454,3 +459,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     border-color: #a6a8b1;
 }
 
+/***October cms widget css*/
+.recordfinder-list .list-scrollable-container > .list-scrollable {
+    overflow: inherit;
+}
+.recordfinder-list {
+    overflow: scroll;
+}

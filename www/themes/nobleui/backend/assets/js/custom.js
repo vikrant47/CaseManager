@@ -19,4 +19,15 @@ $(document).ready(function () {
             minScrollbarLength: 20
         });
     }
+    $(document).on('show.oc.popup', function (event, target, $modal) {
+        var $content = $modal.find('.modal-body');
+        if ($modal.find('.recordfinder-list').length > 0) {
+            $content = $modal.find('.recordfinder-list');
+        }
+        const scrollbarExample = new PerfectScrollbar($content.get(0), {
+            wheelSpeed: 2,
+            wheelPropagation: true,
+            minScrollbarLength: 20
+        });
+    });
 });

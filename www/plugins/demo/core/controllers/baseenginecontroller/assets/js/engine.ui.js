@@ -33,6 +33,7 @@ var EngineUI = Engine.instance.define({
     showPopup: function (options) {
         const $popup = $.popup(options);
         const popup = $popup.data('oc.popup');
+        const $container = popup.$container;
         const $dialog = popup.$dialog;
         if ($dialog.find('.modal-body').length === 0) {
             popup.$body = $('<div class="modal-content"></div>').append(
@@ -46,6 +47,13 @@ var EngineUI = Engine.instance.define({
                 '<div class="modal-header">\n' +
                 '    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
                 '</div>')
+        }
+        if (options.size) {
+            if (!isNaN(options.size)) {
+                $dialog.width(options.size).css('max-width', options.size);
+            } else {
+                $dialog.addClass('modal-' + options.size).addClass(options.size);
+            }
         }
         if (options.title) {
             $body.find('.modal-header').append('<h4 class="modal-title">' + options.title + '</h4>');
@@ -198,10 +206,10 @@ var EngineList = Engine.instance.define({
         return this.$el.find('.engine-list-toolbar .toolbar-item').children().eq(0);
     },
     getLocation: function () {
-        return ('/backend/' + this.model.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
+        return ('/backend/' + this.modelRecord.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
     },
     navigate: function (view = 'index', queryParams = {}) {
-        window.location.href = this.getLocation(this.model) + '/' + view + (Object.keys(queryParams).length > 0 ? '?' + $.param(queryParams) : '');
+        window.location.href = this.getLocation() + '/' + view + (Object.keys(queryParams).length > 0 ? '?' + $.param(queryParams) : '');
     },
     addActions: function (actionRecords) {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord);
