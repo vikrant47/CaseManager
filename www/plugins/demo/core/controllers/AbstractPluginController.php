@@ -49,11 +49,13 @@ class AbstractPluginController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $modelClass = $this->getConfig()->modelClass;
-        if (strpos($modelClass, '\\') === 0) { // some model classes starts with \\
-            $modelClass = substr($modelClass, 1);
+        if (method_exists($this, 'getConfig')) {
+            $modelClass = $this->getConfig()->modelClass;
+            if (strpos($modelClass, '\\') === 0) { // some model classes starts with \\
+                $modelClass = substr($modelClass, 1);
+            }
+            $this->modelClass = $modelClass;
         }
-        $this->modelClass = $modelClass;
         /*$this->layout = plugins_path() . DIRECTORY_SEPARATOR .
             'demo' . DIRECTORY_SEPARATOR .
             'core' . DIRECTORY_SEPARATOR .
