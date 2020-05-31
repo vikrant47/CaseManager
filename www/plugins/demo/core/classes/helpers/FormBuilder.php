@@ -118,7 +118,9 @@ class FormBuilder
     public function buildFormWidget($formConfig, $recordId = null, $context = null)
     {
         $this->controller->pageTitle = $this->controller->pageTitle ?: Lang::get('backend::lang.form.create_title');
-        if (!empty($recordId)) {
+        if (is_object($recordId)) {
+            $model = $recordId;
+        } else if (!empty($recordId)) {
             $model = $this->controller->formFindModelObject($recordId);
         } else {
             $model = $this->controller->formCreateModelObject();

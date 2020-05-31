@@ -12,7 +12,7 @@ use Event;
 use Backend\Models\User;
 use October\Rain\Auth\Models\Group;
 use October\Rain\Exception\ApplicationException;
-
+use Backend\Facades\BackendAuth;
 
 /**
  * Model
@@ -85,18 +85,32 @@ class Queue extends Model
         );
     }
 
-    /***Scope query definition start*/
+    /***Scope query definition start
+     * @param $user
+     * @return Collection<Queue>
+     */
 
-    public static function getQueuesForUser(User $user)
+    public static function getQueuesForUser($user)
     {
-        return DB::select('SELECT queue.id, queue.name from demo_workflow_queues queue'
-            . ' join demo_workflow_queue_assignment_groups ag '
-            . ' on ag.queue_id = queue.id '
-            . ' join backend_user_groups grp on grp.id = ag.group_id'
-            . ' join backend_users_groups usergroup on usergroup.user_group_id = grp.id '
-            . ' join backend_users usr on usr.id = usergroup.user_id '
-            . ' where queue.active = 1 and usr.id = ? '
-            . ' order by queue.name ', [$user->id]);
+        return DB::table('demo_workflow_queues')->select(['demo_workflow_queues.id', 'demo_workflow_queues.name'])
+            ->join('demo_workflow_queue_assignment_groups', 'demo_workflow_queue_assignment_groups.id', '=', 'demo_workflow_queues.id')
+            ->join('backend_user_groups', 'backend_user_groups.id', '=', 'demo_workflow_queue_assignment_groups.group_id')
+            ->join('backend_users_groups', 'backend_users_groups.user_group_id', '=', 'backend_user_groups.id')
+            ->join('backend_users', 'backend_users.id', '=', 'backend_users_groups.user_id')
+            ->where('backend_users_groups.user_id', '=', true)
+            ->where('demo_workflow_queues.active', '=', $user->id)
+            ->orderBy('demo_workflow_queues.name', 'ASC')->get();
+    }
+
+    /**
+     * Return list of queues valid for current user
+     * @return Collection<Queue>
+     */
+    public static function getQueuesForCurrentUser()
+    {
+        $currentUser = BackendAuth::getUser();
+        $queues = Queue::getQueuesForUser($currentUser);
+        return $queues;
     }
 
     /**
@@ -222,6 +236,9 @@ class Queue extends Model
     public function popAndAssign()
     {
         $queueItem = $this->popItem();
+        if (empty($queueItem)) {
+            throw new ApplicationException('No item left to assign');
+        }
         return $this->assignItem($queueItem, $queueItem->getModel());
     }
 

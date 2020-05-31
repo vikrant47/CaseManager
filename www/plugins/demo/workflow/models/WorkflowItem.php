@@ -1,6 +1,7 @@
 <?php namespace Demo\Workflow\Models;
 
 use Demo\Workflow\Controllers\WorkflowTransitions;
+use Illuminate\Support\Collection;
 use Model;
 use Backend\Models\User;
 use BackendAuth;
@@ -36,6 +37,18 @@ class WorkflowItem extends Model
     ];
     public $attachAuditedBy = true;
 
+    public function makeForwardTransition($data = [])
+    {
+        $next_state = $this->workflow->getNextState($this->current_state);
+        return $this->makeTransition($next_state, $data);
+    }
+
+    public function makeBackwordTransition($data = [])
+    {
+        $previous_state = $this->workflow->getPreviousState($this->current_state);
+        return $this->makeTransition($previous_state, $data);
+    }
+
     /**
      * Make a transition from current state to new state
      * Steps -
@@ -49,8 +62,11 @@ class WorkflowItem extends Model
      * Step 8. Set assigned user to null in current QueueEntity record because it must be assigned using queue
      * Step 9. Update current state in current QueueEntity record
      * Step 10. Update current QueueEntity record
+     * @param null $next_state
+     * @param array $data
+     * @throws ApplicationException
      */
-    public function makeTransition($next_state = null, $data = [])
+    public function makeTransition($next_state, $data = [])
     {
         if ($this->workflow->active === 0) {
             throw new ApplicationException('Unable to execute an inactive workflow.');
@@ -63,14 +79,10 @@ class WorkflowItem extends Model
             throw new ApplicationException('Unable to execute workflow. You are not assigned');
         }
         if (empty($next_state)) {
-            $next_state = $this->workflow->getNextState($this->current_state);
-        } else {
-            if ($this->workflow->containsState($next_state) === false) {
-                throw new ApplicationException('TransitionError : Given state ' . $next_state->name . ' doesn\'t belong to ' . $this->workflow->name . ' workflow');
-            }
-        }
-        if ($next_state === null) {
             throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next state not found for ' . $this->current_state);
+        }
+        if ($this->workflow->containsState($next_state) === false) {
+            throw new ApplicationException('TransitionError : Given state ' . $next_state->name . ' doesn\'t belong to ' . $this->workflow->name . ' workflow');
         }
         /*$next_queue = $this->workflow->getCurrentQueue($this->current_state);
         if ($next_queue === null) {

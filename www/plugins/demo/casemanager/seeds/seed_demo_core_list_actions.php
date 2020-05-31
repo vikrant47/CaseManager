@@ -16,14 +16,14 @@ class SeedDemoCoreListActions implements Seedable
             [
                                                                             "id"=> 2,
                                                                                         "created_at"=>"2020-04-11 14:12:05",
-                                                                                        "updated_at"=>"2020-04-12 08:36:42",
+                                                                                        "updated_at"=>"2020-05-31 13:24:08",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"test",
                                                                                         "label"=>"test2",
                                                                                         "list"=>"\$/demo/casemanager/models/casemodel/columns.yaml",
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
-                                                                                        "active"=> 1,
+                                                                                        "active"=> false,
                                                                                         "description"=> "",
                                                                                         "icon"=>"oc-icon-adjust",
                                                                                         "css_class"=> "",
@@ -34,7 +34,7 @@ class SeedDemoCoreListActions implements Seedable
                             ] ,            [
                                                                             "id"=> 6,
                                                                                         "created_at"=>"2020-05-17 09:24:19",
-                                                                                        "updated_at"=>"2020-05-17 12:58:46",
+                                                                                        "updated_at"=>"2020-05-31 13:16:29",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"pick-case",
@@ -47,8 +47,8 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> 4,
                                                                                         "plugin_id"=> 6,
-                                                                                        "script"=>"function(){\r\n    \$.request('onPickItemFromQueue', {\r\n        data: {queueId: \$('#queueDropdown').val()}\r\n    });\r\n}",
-                                                                                        "html_attributes"=>"[{\"name\":\"data-show\",\"value\":\"return engine.listService.getCurrentList().getTotalRecord()\"}]"
+                                                                                        "script"=>"function () {\r\n    \$.oc.stripeLoadIndicator.show();\r\n    \$.request('onGetCurrentUserQueues', {\r\n        url: '/backend/demo/workflow/QueueController',\r\n        success: function (response) {\r\n            if(response.length===0){\r\n                \$.oc.flashMsg({\r\n                    'text': 'You are not assigned in any queue.',\r\n                    'class': 'info',\r\n                    'interval': 5\r\n                });\r\n                \$.oc.stripeLoadIndicator.hide();\r\n                return;\r\n            }\r\n            var options = {};\r\n            for(var i=0;i<response.length;i++){\r\n                options[response[i].id] = response[i].name;\r\n            }\r\n            var form = new EngineForm({\r\n                fields: {\r\n                    queue: {\r\n                        type: 'dropdown',\r\n                        label: 'Queue',\r\n                        span: 'full',\r\n                        emptyOption:'-- select an option --',\r\n                        showSearch: true,\r\n                        options: options,\r\n                    },\r\n                }\r\n            }).build().on('render',function(){\r\n                \$.oc.stripeLoadIndicator.hide();\r\n            });\r\n            form.showInPopup({\r\n                size: 'sm',\r\n                title: 'Select a Queue',\r\n                actions: [{\r\n                    name: 'queue-selection',\r\n                    label: 'Select',\r\n                    active: true,\r\n                    icon: '',\r\n                    css_class: 'btn btn-primary',\r\n                    handler: function () {\r\n                        \$.request('onPickItemFromQueue', {\r\n                            url: '/backend/demo/workflow/QueueController',\r\n                            loading: \$.oc.stripeLoadIndicator,\r\n                            data: {\r\n                                queueId: form.getValue('queue')\r\n                            }\r\n                        });\r\n                    }\r\n                }]\r\n            });\r\n        },\r\n    });\r\n}",
+                                                                                        "html_attributes"=>"[{\"name\":\"data-trigger-action\",\"value\":\"disable\"},{\"name\":\"data-trigger\",\"value\":\".control-list input[type=checkbox]\"},{\"name\":\"data-trigger-condition\",\"value\":\"checked\"}]"
                             ]             ]);
         }
 

@@ -1,6 +1,7 @@
 <?php namespace Demo\Casemanager\Controllers;
 
 use Backend\Classes\Controller;
+use Backend\Facades\BackendAuth;
 use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
 use Demo\Workflow\Classes\Traits\WorkflowControllerTrait;
@@ -34,7 +35,25 @@ class CaseController extends AbstractSecurityController
             if (empty($workflowItem)) {
                 throw new ApplicationException('No active workflow item found for case ', $id);
             }
-            $workflowItem->makeTransition();
+            $workflowItem->makeForwardTransition();
+            Flash::success('Case pushed successfully');
+        } else {
+            Flash::error('Unable to push case as it\'s not assigned to you !');
+        }
+    }
+
+    public function onRevertCase($id)
+    {
+        $remark = $id = $request->request->get('remark');
+        $model = $this->formFindModelObject($id);
+        if ($model->assigned_to_id === $this->user->id) {
+            $workflowItem = WorkflowItem::where(['model' => get_class($model), 'record_id' => $id])->first();
+            if (empty($workflowItem)) {
+                throw new ApplicationException('No active workflow item found for case ', $id);
+            }
+            $workflowItem->makeBackwordTransition([
+                'remark' => $remark
+            ]);
             Flash::success('Case pushed successfully');
         } else {
             Flash::error('Unable to push case as it\'s not assigned to you !');
@@ -44,11 +63,19 @@ class CaseController extends AbstractSecurityController
     /**
      * Before read permission can be evaluated here
      */
-    public function listExtendQuery(\October\Rain\Database\Builder $query)
+    public function listExtendQuery($query)
     {
         $list = Request::input('list');
-        if ($list === 'topCases') {
-
+        if ($list === 'myCases') {
+            $user = BackendAuth::getUser();
+            $query->where('assigned_to_id', $user->id);
+        } else if (empty($list) || $list === 'allCases') {
+            /*$queueIds = [];
+            $queueId = Request::input('queueId');
+            if (!empty($queueId)) {
+                $queueIds = [$queueId];
+            }
+            $query->where('assigned_to_id', null);//->join('demo_workflow_item','demo_workflow_item.');*/
         }
     }
 

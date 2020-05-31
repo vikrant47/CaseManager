@@ -26,10 +26,14 @@
             </div>
         </div>
     </div>
+    <?php
+    $listActions = $this->getListActions();
+    $modelRecord = $this->getModelRecord();
+    ?>
     <script>
         $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
-        var actions = <?=$this->getListActions()->toJSON()?>;
-        var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
+        var actions = <?=$listActions ? $listActions->toJSON() : '[]'?>;
+        var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
         Engine.instance.ui.setModel(modelRecord);
         var list = EngineList.getCurrentList();

@@ -45,6 +45,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
                                                                                         "viewable"=> false
+                            ] ,            [
+                                                                            "id"=> 527,
+                                                                                        "created_at"=>"2020-05-29 08:12:47",
+                                                                                        "updated_at"=>"2020-05-29 08:12:47",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Service Channel",
+                                                                                        "model"=>"Demo\Workflow\Models\ServiceChannel",
+                                                                                        "controller"=>"Demo\Workflow\Controllers\ServiceChannelController",
+                                                                                        "plugin_id"=> 14,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false
                             ]             ]);
         }
 
