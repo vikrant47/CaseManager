@@ -23,29 +23,29 @@
             <?= e(trans('backend::lang.list.delete_selected')) ?>
         </button>
     <?php }
-        $queues = $this->getQueuesForCurrentUser();
-        if (count($queues) > 0) {
-            ?>
-            <select id="queueDropdown" class="form-control custom-select select2-hidden-accessible">
-                <?php
-                foreach ($queues as $queue) {
-                    ?>
-                    <option value="<?= $queue->id ?>"><?= $queue->name ?></option>
-                <?php } ?>
-            </select>
-            <!--<button
-                    type="button"
-                    class="btn btn-default"
-                    id="casePicker">
-                Pick Case
-            </button>-->
-        <?php }
-        ?>
+    /*$queues = $this->getQueuesForCurrentUser();
+    if (count($queues) > 0) {
+        */?><!--
+        <select id="queueDropdown" class="form-control custom-select select2-hidden-accessible">
+            <?php
+/*            foreach ($queues as $queue) {
+                */?>
+                <option value="<?/*= $queue->id */?>"><?/*= $queue->name */?></option>
+            <?php /*} */?>
+        </select>
+        <button
+                type="button"
+                class="btn btn-default"
+                id="casePicker">
+            Pick Case
+        </button>
+    --><?php /*}*/
+    ?>
 </div>
 <script>
-  /*  $('#casePicker').click(function () {
-        $.request('onPickItemFromQueue', {
-            data: {queueId: $('#queueDropdown').val()}
-        });
-    });*/
+    /*  $('#casePicker').click(function () {
+          $.request('onPickItemFromQueue', {
+              data: {queueId: $('#queueDropdown').val()}
+          });
+      });*/
 </script>

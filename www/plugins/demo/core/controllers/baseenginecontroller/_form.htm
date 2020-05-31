@@ -1,12 +1,16 @@
 <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
 <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
 <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
+<?php
+$formActions = $this->getFormActions($context);
+$modelRecord = $this->getModelRecord();
+?>
 <div class="engine-form-wrapper">
     <?= $this->makePartial($view, ['contents' => $contents]); ?>
     <script>
         $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
-        var actions = <?=$this->getFormActions($context)->toJSON()?>;
-        var modelRecord = <?=$this->getModelRecord()->toJSON()?>;
+        var actions = <?=$formActions ? $formActions->toJSON() : '[]'?>;
+        var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
         <?php $model = $this->formGetModel()?>
         var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;

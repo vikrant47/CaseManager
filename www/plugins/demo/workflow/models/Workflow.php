@@ -70,6 +70,17 @@ class Workflow extends Model
         $workflowItem->save();
     }
 
+    public function getPreviousStateId(WorkflowState $current_state)
+    {
+        $current_stateId = $current_state->id;
+        foreach ($this->definition as $entry) {
+            if ($entry['to_state'] == $current_stateId) {
+                return $entry['form_state'];
+            }
+        }
+        return null;
+    }
+
     public function getNextStateId(WorkflowState $current_state)
     {
         $current_stateId = $current_state->id;
@@ -120,6 +131,11 @@ class Workflow extends Model
     public function getNextState(WorkflowState $current_state)
     {
         return WorkflowState::find($this->getNextStateId($current_state));
+    }
+
+    public function getPreviousState(WorkflowState $current_state)
+    {
+        return WorkflowState::find($this->getPreviousStateId($current_state));
     }
 
     public function getCurrentQueue(WorkflowState $current_state)

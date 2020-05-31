@@ -24,16 +24,6 @@ class SeedDemoWorkflowQueueAssignmentGroups implements Seedable
                                                                                         "sort_order"=> 1,
                                                                                         "plugin_id"=> 6
                             ] ,            [
-                                                                            "id"=> 8,
-                                                                                        "created_at"=>"2019-12-01 07:42:56",
-                                                                                        "updated_at"=>"2019-12-08 08:02:10",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "group_id"=> 5,
-                                                                                        "queue_id"=> 2,
-                                                                                        "sort_order"=> 2,
-                                                                                        "plugin_id"=> 6
-                            ] ,            [
                                                                             "id"=> 3,
                                                                                         "created_at"=>"2019-12-01 07:42:56",
                                                                                         "updated_at"=>"2019-12-08 08:02:10",
@@ -61,6 +51,16 @@ class SeedDemoWorkflowQueueAssignmentGroups implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "group_id"=> 3,
                                                                                         "queue_id"=> 3,
+                                                                                        "sort_order"=> 100,
+                                                                                        "plugin_id"=> 6
+                            ] ,            [
+                                                                            "id"=> 5,
+                                                                                        "created_at"=>"2020-05-31 12:54:22",
+                                                                                        "updated_at"=>"2020-05-31 12:54:22",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "group_id"=> 1,
+                                                                                        "queue_id"=> 2,
                                                                                         "sort_order"=> 100,
                                                                                         "plugin_id"=> 6
                             ]             ]);

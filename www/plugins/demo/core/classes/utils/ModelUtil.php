@@ -88,4 +88,29 @@ class ModelUtil
         }
         return $icons;
     }
+
+    /**
+     * This will sort the given tree based to the given sort field
+     * @param $rootNodes
+     * @param string $sortField
+     * @param string $childrenField
+     * @param string $parentIdField
+     * @return \Illuminate\Support\Collection|\October\Rain\Support\Collection
+     */
+    public static function sortForest($rootNodes, $sortField = 'sort_order', $childrenField = 'children', $parentIdField = 'parent_id')
+    {
+        if (is_array($rootNodes)) {
+            $rootNodes = collect($rootNodes); //converting to collection
+        }
+        $rootNodes = $rootNodes->sortBy($sortField);
+        foreach ($rootNodes as $rootNode) {
+            if (!empty($rootNode->{$childrenField})) {
+                /**@var $children \Illuminate\Support\Collection* */
+                $children = $rootNode->{$childrenField};
+                $children = self::sortForest($children, $sortField, $childrenField, $parentIdField);
+                $rootNode->{$childrenField} = $children;
+            }
+        }
+        return $rootNodes;
+    }
 }

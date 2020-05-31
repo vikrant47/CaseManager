@@ -131,6 +131,14 @@ class Navigation extends Model
             } else {
                 $generatedUrl = $index;
             }
+            if (!empty($navigation->url)) {
+                if (strpos($generatedUrl, '?')) {
+                    $generatedUrl = $generatedUrl . '&' . $navigation->url;
+                } else {
+                    $generatedUrl = $generatedUrl . '?' . $navigation->url;
+                }
+
+            }
             /*} catch (\Exception $e) {
                 throw $e;
             }*/
@@ -144,6 +152,13 @@ class Navigation extends Model
             }
             if (!empty($navigation->view) && $navigation->view !== 'default') {
                 $generatedUrl = $generatedUrl . '?view=' . $navigation->view;
+            }
+            if (!empty($navigation->url)) {
+                if (strpos($generatedUrl, '?')) {
+                    $generatedUrl = $generatedUrl . '&' . $navigation->url;
+                } else {
+                    $generatedUrl = $generatedUrl . '?' . $navigation->url;
+                }
             }
         } else {
             $generatedUrl = Backend::url($navigation->name);

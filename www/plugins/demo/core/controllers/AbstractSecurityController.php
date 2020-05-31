@@ -19,6 +19,7 @@ use View;
 
 abstract class AbstractSecurityController extends AbstractPluginController
 {
+    const ACCESS_DENIED = 403;
     protected $userSecurityService;
     public $requiredPermissions = [];
 
@@ -46,6 +47,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
         if ($throwError) {
             throw new ApplicationException('Unauthorized Access');
         }
+        return self::ACCESS_DENIED;
     }
 
     /**
@@ -69,7 +71,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
     /**
      * Before read permission can be evaluated here
      */
-    public function listExtendQuery(\October\Rain\Database\Builder $query)
+    public function listExtendQuery($query)
     {
         $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::READ);
         if ($permission->count() === 0) {

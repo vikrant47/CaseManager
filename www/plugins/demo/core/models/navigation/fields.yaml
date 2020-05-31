@@ -66,19 +66,6 @@ fields:
         tab: Config
 tabs:
     fields:
-        roles:
-            label: Roles
-            mode: relation
-            separator: comma
-            customTags: true
-            nameFrom: name
-            useKey: false
-            span: auto
-            context:
-                - update
-                - preview
-            type: taglist
-            tab: Roles
         model_ref:
             label: Model
             nameFrom: name
@@ -132,7 +119,7 @@ tabs:
             trigger:
                 action: show
                 field: type
-                condition: 'value[url]'
+                condition: 'value[url] || value[list] || value[form]'
 
         dashboard:
             label: Dashboard
@@ -179,3 +166,16 @@ tabs:
                 action: show
                 field: type
                 condition: 'value[uipage]'
+        roles:
+            label: Roles
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Roles

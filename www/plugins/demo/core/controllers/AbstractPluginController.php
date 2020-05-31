@@ -49,7 +49,7 @@ class AbstractPluginController extends Controller
     public function __construct()
     {
         parent::__construct();
-        if (method_exists($this, 'getConfig')) {
+        if ($this->listConfig || $this->formConfig) {
             $modelClass = $this->getConfig()->modelClass;
             if (strpos($modelClass, '\\') === 0) { // some model classes starts with \\
                 $modelClass = substr($modelClass, 1);
@@ -297,13 +297,8 @@ class AbstractPluginController extends Controller
         return $this->formRender();
     }
 
-    public function onBuildForm()
+    public function buildForm($formConfig, $context = 'create', $recordId = null, $wrap = 'false')
     {
-        $request = request();
-        $wrap = $request->get('wrap', 'false');
-        $context = $request->get('context', 'create');
-        $recordId = $request->get('recordId');
-        $formConfig = $request->get('config', []);
         if (empty($formConfig)) {
             $this->asExtension('FormController')->{$context}($recordId, $context);
             return $this->asExtension('FormController')->formRender([]);
@@ -320,6 +315,16 @@ class AbstractPluginController extends Controller
         } else {
             return $formBuilder->formRender($formConfig, $recordId, $context);
         }
+    }
+
+    public function onBuildForm()
+    {
+        $request = request();
+        $wrap = $request->get('wrap', 'false');
+        $context = $request->get('context', 'create');
+        $recordId = $request->get('recordId');
+        $formConfig = $request->get('config', []);
+        return $this->buildForm($formConfig, $context, $recordId, $wrap);
     }
 
     public function viewExtendQuery($modelClass, $query)
@@ -371,9 +376,10 @@ class AbstractPluginController extends Controller
                 $parent->children->push($navigation);
             }
         }
-        return $navigations->filter(function ($navigation) {
+        $parents = $navigations->filter(function ($navigation) {
             return empty($navigation->parent_id);
         });
+        return ModelUtil::sortForest($parents);
         // });
     }
 
@@ -403,7 +409,7 @@ class AbstractPluginController extends Controller
         $modelClass = $this->modelClass;
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
-        return SessionCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {
+        /*return SessionCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {*/
             $query = Db::table('demo_core_form_actions')->where([
                 'active' => true
             ])->where(function ($query) use ($formConfig) {
@@ -417,7 +423,7 @@ class AbstractPluginController extends Controller
             $this->viewExtendQuery(ListAction::class, $query);
             $result = $query->get();
             return $result;
-        });
+        /*});*/
     }
 
     public function getControllerInfo()

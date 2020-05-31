@@ -14,6 +14,17 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
     {
             Db::table('demo_core_view_role_associations')->insert([
             [
+                                                                            "id"=> 293,
+                                                                                        "created_at"=>"2020-05-29 07:56:04",
+                                                                                        "updated_at"=>"2020-05-29 07:56:04",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "record_id"=> 48,
+                                                                                        "role_id"=> 1,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "model"=>"Demo\Core\Models\Navigation"
+                            ] ,            [
                                                                             "id"=> 210,
                                                                                         "created_at"=>"2020-05-17 06:26:58",
                                                                                         "updated_at"=>"2020-05-17 06:26:58",
@@ -575,28 +586,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Core\Models\Navigation"
                             ] ,            [
-                                                                            "id"=> 262,
-                                                                                        "created_at"=>"2020-05-17 06:26:58",
-                                                                                        "updated_at"=>"2020-05-17 06:26:58",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "record_id"=> 48,
-                                                                                        "role_id"=> 1,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\Navigation"
-                            ] ,            [
-                                                                            "id"=> 263,
-                                                                                        "created_at"=>"2020-05-17 06:26:58",
-                                                                                        "updated_at"=>"2020-05-17 06:26:58",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "record_id"=> 51,
-                                                                                        "role_id"=> 1,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\Navigation"
-                            ] ,            [
                                                                             "id"=> 264,
                                                                                         "created_at"=>"2020-05-17 06:26:58",
                                                                                         "updated_at"=>"2020-05-17 06:26:58",
@@ -794,6 +783,28 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "role_id"=> 1,
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Report\Models\Dashboard"
+                            ] ,            [
+                                                                            "id"=> 294,
+                                                                                        "created_at"=>"2020-05-31 11:54:28",
+                                                                                        "updated_at"=>"2020-05-31 11:54:28",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "record_id"=> 51,
+                                                                                        "role_id"=> 2,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "model"=>"Demo\Core\Models\Navigation"
+                            ] ,            [
+                                                                            "id"=> 295,
+                                                                                        "created_at"=>"2020-05-31 11:54:28",
+                                                                                        "updated_at"=>"2020-05-31 11:54:28",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "record_id"=> 51,
+                                                                                        "role_id"=> 1,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "model"=>"Demo\Core\Models\Navigation"
                             ]             ]);
         }
 
