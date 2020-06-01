@@ -17,7 +17,7 @@ class BuilderTableCreateDemoCoreWebhooks extends Migration
             $table->integer('updated_by_id');
             $table->string('name');
             $table->text('description');
-            $table->smallInteger('active');
+            $table->boolean('active');
             $table->text('url');
             $table->string('method');
             $table->text('request_headers')->nullable();

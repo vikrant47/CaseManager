@@ -20,8 +20,8 @@ class BuilderTableCreateDemoCoreIframes extends Migration
             $table->text('backend_menu');
             $table->string('code');
             $table->text('url');
-            $table->smallInteger('active')->default(1);
-            $table->smallInteger('iframe')->default(1);
+            $table->boolean('active')->default(1);
+            $table->boolean('iframe')->default(1);
 
         });
     }

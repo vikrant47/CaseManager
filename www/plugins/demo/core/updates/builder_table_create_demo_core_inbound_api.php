@@ -20,7 +20,7 @@ class BuilderTableCreateDemoCoreInboundApi extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('url');
-            $table->smallInteger('active')->default(1);
+            $table->boolean('active')->default(1);
         });
     }
 

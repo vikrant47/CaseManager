@@ -329,6 +329,9 @@ var EngineForm = Engine.instance.define({
     getFormData: function () {
         return this.formData;
     },
+    getFormModel: function () {
+        return this.formModel;
+    },
     setFormModel: function (formModel) {
         this.formModel = formModel;
     },

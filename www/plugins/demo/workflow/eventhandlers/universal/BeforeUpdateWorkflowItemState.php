@@ -31,7 +31,9 @@ class BeforeUpdateWorkflowItemState
             $transition->to_state_id = $model->current_state_id;
             $transition->workflow_item_id = $model->id;
             $data = request()->attributes->get('WORKFLOW_ITEM_DATA_' . $model->id);
+            $backward_direction = request()->attributes->get('backwardDirection');
             $transition->data = $data;
+            $transition->backward_direction = $backward_direction === true;
             $transition->save();
         }
     }
