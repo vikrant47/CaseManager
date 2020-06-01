@@ -7,8 +7,7 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
 {
     public function up()
     {
-        Schema::create('demo_workflow_workflow_transitions', function($table)
-        {
+        Schema::create('demo_workflow_workflow_transitions', function ($table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->timestamp('created_at')->nullable();
@@ -16,6 +15,7 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->integer('assigned_to_id');
+            $table->boolean('backward_direction')->default(false);
             $table->integer('workflow_item_id');
             $table->integer('from_state_id');
             $table->integer('to_state_id');
@@ -23,7 +23,7 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
             $table->integer('plugin_id');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_workflow_workflow_transitions');

@@ -20,8 +20,8 @@ class BuilderTableCreateDemoCoreCustomFields extends Migration
             $table->string('type');
             $table->string('model');
             $table->integer('length')->nullable();
-            $table->smallInteger('unsigned')->nullable();
-            $table->smallInteger('allow_null');
+            $table->boolean('unsigned')->nullable();
+            $table->boolean('allow_null');
             $table->text('default');
             $table->integer('plugin_id');
 

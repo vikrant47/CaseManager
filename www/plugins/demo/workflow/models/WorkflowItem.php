@@ -43,10 +43,13 @@ class WorkflowItem extends Model
         return $this->makeTransition($next_state, $data);
     }
 
-    public function makeBackwordTransition($data = [])
+    public function makeBackwardTransition($data = [])
     {
         $previous_state = $this->workflow->getPreviousState($this->current_state);
-        return $this->makeTransition($previous_state, $data);
+        if (empty($previous_state)) {
+            throw new ApplicationException('No previous state found for revert');
+        }
+        return $this->makeTransition($previous_state, $data, true);
     }
 
     /**
@@ -63,10 +66,11 @@ class WorkflowItem extends Model
      * Step 9. Update current state in current QueueEntity record
      * Step 10. Update current QueueEntity record
      * @param null $next_state
+     * @param bool $backwardDirection
      * @param array $data
      * @throws ApplicationException
      */
-    public function makeTransition($next_state, $data = [])
+    public function makeTransition($next_state, $data = [], $backwardDirection = false)
     {
         if ($this->workflow->active === 0) {
             throw new ApplicationException('Unable to execute an inactive workflow.');
@@ -97,7 +101,10 @@ class WorkflowItem extends Model
         */
         $this->current_state = $next_state;
         $this->assigned_to = null;
-        request()->attributes->add(['WORKFLOW_ITEM_DATA_' . $this->id => $data]);
+        request()->attributes->add([
+            'WORKFLOW_ITEM_DATA_' . $this->id => $data,
+            'backwardDirection' => $backwardDirection,
+        ]);
         $this->update();
     }
 

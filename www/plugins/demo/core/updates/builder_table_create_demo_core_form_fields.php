@@ -21,8 +21,8 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
             $table->integer('plugin_id');
             $table->text('controls');
             $table->text('description')->nullable();
-            $table->smallInteger('active');
-            $table->smallInteger('virtual');
+            $table->boolean('active');
+            $table->boolean('virtual');
 
             $table->unique('form', 'field_id');
         });

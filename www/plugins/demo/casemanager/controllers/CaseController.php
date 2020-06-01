@@ -44,14 +44,15 @@ class CaseController extends AbstractSecurityController
 
     public function onRevertCase($id)
     {
-        $remark = $id = $request->request->get('remark');
+        $remark = request()->request->get('remark');
         $model = $this->formFindModelObject($id);
         if ($model->assigned_to_id === $this->user->id) {
+            /**@var $workflowItem WorkflowItem */
             $workflowItem = WorkflowItem::where(['model' => get_class($model), 'record_id' => $id])->first();
             if (empty($workflowItem)) {
                 throw new ApplicationException('No active workflow item found for case ', $id);
             }
-            $workflowItem->makeBackwordTransition([
+            $workflowItem->makeBackwardTransition([
                 'remark' => $remark
             ]);
             Flash::success('Case pushed successfully');

@@ -32,7 +32,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->integer('widget_id')->nullable();
             $table->integer('plugin_id');
             $table->integer('parent_id')->nullable();
-            $table->smallInteger('sort_order');
+            $table->integer('sort_order');
         });
     }
     
