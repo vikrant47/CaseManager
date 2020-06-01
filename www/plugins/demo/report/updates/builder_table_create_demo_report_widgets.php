@@ -21,7 +21,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->text('template');
             $table->text('data');
             $table->text('script');
-            $table->smallInteger('public');
+            $table->boolean('public');
             $table->integer('library_id');
             $table->integer('plugin_id');
             $table->integer('active');

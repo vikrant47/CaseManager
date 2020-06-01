@@ -97,8 +97,8 @@ class Queue extends Model
             ->join('backend_user_groups', 'backend_user_groups.id', '=', 'demo_workflow_queue_assignment_groups.group_id')
             ->join('backend_users_groups', 'backend_users_groups.user_group_id', '=', 'backend_user_groups.id')
             ->join('backend_users', 'backend_users.id', '=', 'backend_users_groups.user_id')
-            ->where('backend_users_groups.user_id', '=', true)
-            ->where('demo_workflow_queues.active', '=', $user->id)
+            ->where('backend_users_groups.user_id', '=', $user->id)
+            ->where('demo_workflow_queues.active', '=', true)
             ->orderBy('demo_workflow_queues.name', 'ASC')->get();
     }
 
@@ -146,6 +146,7 @@ class Queue extends Model
                 $queueItem->queue = $this;
                 $queueItem->record_id = $model->id;
                 $queueItem->model = $modelClass;
+                $queueItem->plugin_id = $model->plugin_id || 0;
                 $queueItem->save();
             }
         } else {

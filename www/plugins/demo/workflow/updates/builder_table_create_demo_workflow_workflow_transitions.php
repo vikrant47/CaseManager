@@ -14,7 +14,6 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('assigned_to_id');
             $table->boolean('backward_direction')->default(false);
             $table->integer('workflow_item_id');
             $table->integer('from_state_id');

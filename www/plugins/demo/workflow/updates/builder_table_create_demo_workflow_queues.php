@@ -14,8 +14,8 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->string('name', 255);
             $table->text('description');
             $table->text('script');
-            $table->smallInteger('active')->default(1);
-            $table->smallInteger('virtual')->default(1);
+            $table->boolean('active')->default(true);
+            $table->boolean('virtual')->default(true);
             $table->string('queue_order', 255);
             $table->integer('sort_order');
             $table->text('input_condition');

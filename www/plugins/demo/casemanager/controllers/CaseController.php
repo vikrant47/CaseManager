@@ -57,7 +57,7 @@ class CaseController extends AbstractSecurityController
             ]);
             Flash::success('Case pushed successfully');
         } else {
-            Flash::error('Unable to push case as it\'s not assigned to you !');
+            Flash::error('Unable to revert case as it\'s not assigned to you !');
         }
     }
 
@@ -67,7 +67,7 @@ class CaseController extends AbstractSecurityController
     public function listExtendQuery($query)
     {
         $list = Request::input('list');
-        if ($list === 'myCases') {
+        if ($list === 'mycases') {
             $user = BackendAuth::getUser();
             $query->where('assigned_to_id', $user->id);
         } else if (empty($list) || $list === 'allCases') {
