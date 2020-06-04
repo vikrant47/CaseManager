@@ -4,7 +4,7 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
 
-class QueueItem extends AbstractSecurityController
+class QueueItemController extends AbstractSecurityController
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
     

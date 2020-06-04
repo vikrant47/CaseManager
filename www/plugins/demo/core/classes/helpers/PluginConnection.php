@@ -307,10 +307,15 @@ class PluginConnection
         return PluginConnection::getConnection($identifier);
     }
 
-    public static function getCurrentLogger()
+    public static function getCurrentPluginIdentifier()
     {
         $request = request();
-        $identifier = $request->request->get('CURRENT_PLUGIN');
+        return $identifier = $request->request->get('CURRENT_PLUGIN');
+    }
+
+    public static function getCurrentLogger()
+    {
+        $identifier = self::getCurrentPluginIdentifier();
         if (empty($identifier)) {
             $identifier = 'demo.core';
         }

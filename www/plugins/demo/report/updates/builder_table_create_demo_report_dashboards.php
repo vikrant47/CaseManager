@@ -17,9 +17,9 @@ class BuilderTableCreateDemoReportDashboards extends Migration
             $table->integer('updated_by_id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->smallInteger('active');
+            $table->boolean('active');
             $table->text('config_widgets');
-            $table->smallInteger('public');
+            $table->boolean('public');
             $table->string('code');
             $table->integer('plugin_id');
         });

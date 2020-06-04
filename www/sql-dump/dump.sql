@@ -1851,7 +1851,7 @@ ALTER SEQUENCE demo_workflow_queue_assignment_groups_id_seq OWNED BY demo_workfl
 CREATE TABLE demo_workflow_queue_items (
     id integer NOT NULL,
     queue_id integer NOT NULL,
-    assigned_to_id integer NOT NULL,
+    assigned_to_id integer,
     record_id integer NOT NULL,
     model character varying(255) NOT NULL,
     created_at timestamp(0) without time zone,
@@ -1975,8 +1975,6 @@ CREATE TABLE demo_workflow_queues (
     name character varying(255) NOT NULL,
     description text NOT NULL,
     script text NOT NULL,
-    active smallint DEFAULT '1'::smallint NOT NULL,
-    virtual smallint DEFAULT '1'::smallint NOT NULL,
     queue_order character varying(255) NOT NULL,
     sort_order integer NOT NULL,
     input_condition text NOT NULL,
@@ -1989,7 +1987,9 @@ CREATE TABLE demo_workflow_queues (
     plugin_id integer NOT NULL,
     service_channel_id integer NOT NULL,
     pop_criteria_id integer NOT NULL,
-    routing_rule_id integer NOT NULL
+    routing_rule_id integer NOT NULL,
+    virtual boolean DEFAULT false NOT NULL,
+    active boolean DEFAULT true
 );
 
 
@@ -2157,12 +2157,13 @@ CREATE TABLE demo_workflow_workflow_transitions (
     updated_at timestamp(0) without time zone,
     created_by_id integer NOT NULL,
     updated_by_id integer NOT NULL,
-    assigned_to_id integer NOT NULL,
     workflow_item_id integer NOT NULL,
     from_state_id integer NOT NULL,
     to_state_id integer NOT NULL,
     data text,
-    plugin_id integer NOT NULL
+    plugin_id integer NOT NULL,
+    column_12 integer,
+    backward_direction boolean DEFAULT false
 );
 
 
@@ -2607,7 +2608,9 @@ CREATE TABLE system_parameters (
     namespace character varying(100) NOT NULL,
     "group" character varying(50) NOT NULL,
     item character varying(150) NOT NULL,
-    value text
+    value text,
+    data_type character varying(255) DEFAULT 'text'::character varying NOT NULL,
+    description text
 );
 
 
@@ -3324,6 +3327,9 @@ COPY backend_access_log (id, user_id, ip_address, created_at, updated_at) FROM s
 34	1	::1	2020-05-16 15:08:46	2020-05-16 15:08:46
 35	1	::1	2020-05-17 06:03:28	2020-05-17 06:03:28
 36	1	::1	2020-05-17 06:17:39	2020-05-17 06:17:39
+37	1	::1	2020-05-26 14:44:49	2020-05-26 14:44:49
+38	1	::1	2020-05-29 08:15:23	2020-05-29 08:15:23
+39	2	::1	2020-06-01 13:49:31	2020-06-01 13:49:31
 \.
 
 
@@ -3331,7 +3337,7 @@ COPY backend_access_log (id, user_id, ip_address, created_at, updated_at) FROM s
 -- Name: backend_access_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('backend_access_log_id_seq', 36, true);
+SELECT pg_catalog.setval('backend_access_log_id_seq', 39, true);
 
 
 --
@@ -3409,8 +3415,8 @@ SELECT pg_catalog.setval('backend_user_throttle_id_seq', 2, true);
 --
 
 COPY backend_users (id, first_name, last_name, login, email, password, activation_code, persist_code, reset_password_code, permissions, is_activated, role_id, activated_at, last_login, created_at, updated_at, deleted_at, is_superuser) FROM stdin;
-2	Suraj	Baliyan	suraj	suraj.baliyan4@gmail.com	$2y$10$sZj8Bfs9CVKMvkVrsWjvhuh02DhE/cxn38DU9KttZTvnD1d5EGXE2	\N	$2y$10$Af.BtOXNQ.GCQzfYKWqhGOGOc6MkOoZVFFNdXkO67hyLVnOPwabV6	\N	\N	f	5	\N	2020-05-11 05:23:46	2020-05-10 06:08:53	2020-05-11 05:23:46	\N	f
-1	Admin	Person	admin	admin@domain.tld	$2y$10$gs9tcpJn5uAmNOzaS4DvZO4l5qrF4zyzATp5AKiT3mKjFt3mnY/KS	\N	$2y$10$uuw0mDxXBbwYuZ5VYdtbR.YgoT.UGNUmFa5A8/9FUbrKA0xKrF2Hy	\N		t	2	\N	2020-05-17 06:17:39	2020-04-26 05:34:31	2020-05-17 06:17:39	\N	t
+1	Admin	Person	admin	admin@domain.tld	$2y$10$gs9tcpJn5uAmNOzaS4DvZO4l5qrF4zyzATp5AKiT3mKjFt3mnY/KS	\N	$2y$10$bkCxjSW/8EI2MYyzvyb0A.E9BgSVMZBSgvaZEDyZptHZwrhtSQnn.	\N		t	2	\N	2020-05-29 08:15:22	2020-04-26 05:34:31	2020-05-29 08:15:22	\N	t
+2	Suraj	Baliyan	suraj	suraj.baliyan4@gmail.com	$2y$10$sZj8Bfs9CVKMvkVrsWjvhuh02DhE/cxn38DU9KttZTvnD1d5EGXE2	\N	$2y$10$Af.BtOXNQ.GCQzfYKWqhGOGOc6MkOoZVFFNdXkO67hyLVnOPwabV6	\N	\N	f	5	\N	2020-06-01 13:49:30	2020-05-10 06:08:53	2020-06-01 13:49:30	\N	f
 \.
 
 
@@ -3527,7 +3533,7 @@ SELECT pg_catalog.setval('demo_casemanager_case_priorities_id_seq', 3, true);
 --
 
 COPY demo_casemanager_cases (id, title, description, created_at, updated_at, created_by_id, updated_by_id, assigned_to_id, priority_id, case_number, case_version, version, suspect, tat_duration, comments) FROM stdin;
-23	\N	\N	2020-05-17 15:20:54	2020-05-17 15:21:30	1	1	1	1	2222	545454	1	wweewe	5454545	
+23	\N	\N	2020-05-17 15:20:54	2020-06-01 13:38:59	1	1	\N	1	2222	545454	2	wweewe	5454545	
 \.
 
 
@@ -3565,6 +3571,7 @@ COPY demo_core_audit_logs (id, created_at, updated_at, created_by_id, updated_by
 1	2020-05-10 10:40:42	2020-05-10 10:40:42	1	1	0	Demo\\Core\\Models\\Navigation	updating	52	{"id":52,"created_at":"2020-05-10 10:28:19","updated_at":"2020-05-10 10:28:19","created_by_id":1,"updated_by_id":1,"version":null,"label":"Dashboard","type":"list","active":true,"name":"dashboard","description":"","url":"","model":"Demo\\\\Report\\\\Models\\\\Dashboard","list":"$\\/demo\\/report\\/models\\/dashboard\\/columns.yaml","form":"","record_id":null,"plugin_id":3,"parent_id":26,"sort_order":2,"icon":"oc-icon-adjust"}	\N
 2	2020-05-10 14:43:32	2020-05-10 14:43:32	1	1	1	Demo\\Core\\Models\\Navigation	updating	52	{"id":52,"created_at":"2020-05-10 10:28:19","updated_at":"2020-05-10 10:40:42","created_by_id":1,"updated_by_id":1,"version":1,"label":"Dashboard2","type":"list","active":true,"name":"dashboard","description":"","url":"","model":"Demo\\\\Report\\\\Models\\\\Dashboard","list":"$\\/demo\\/report\\/models\\/dashboard\\/columns.yaml","form":"","record_id":null,"plugin_id":3,"parent_id":26,"sort_order":2,"icon":"oc-icon-adjust"}	\N
 3	2020-05-17 15:21:30	2020-05-17 15:21:30	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	23	{"id":23,"title":null,"description":null,"created_at":"2020-05-17 15:20:54","updated_at":"2020-05-17 15:20:54","created_by_id":1,"updated_by_id":1,"assigned_to_id":null,"priority_id":1,"case_number":"2222","case_version":"545454","version":0,"suspect":"wweewe","tat_duration":5454545,"comments":""}	\N
+10	2020-06-01 13:38:59	2020-06-01 13:38:59	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	23	{"case_number":"2222","case_version":"545454","description":null,"priority_id":1,"suspect":"wweewe","tat_duration":5454545,"title":null}	\N
 \.
 
 
@@ -3572,7 +3579,7 @@ COPY demo_core_audit_logs (id, created_at, updated_at, created_by_id, updated_by
 -- Name: demo_core_audit_logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_core_audit_logs_id_seq', 3, true);
+SELECT pg_catalog.setval('demo_core_audit_logs_id_seq', 10, true);
 
 
 --
@@ -3632,6 +3639,8 @@ COPY demo_core_form_actions (id, created_at, updated_at, created_by_id, updated_
 10	2020-04-26 15:37:16	2020-04-27 11:09:54	1	1	create	Create		Demo\\Core\\Models\\UniversalModel	t		oc-icon-adjust		-2	10	function(){}	["create"]	[{"name":"data-request","value":"onSave"},{"name":"data-hotkey","value":"ctrl+s, cmd+s"},{"name":"data-load-indicator","value":"Saving..."}]
 3	2020-05-13 04:12:13	2020-05-13 04:12:13	1	1	widget-preview	Preview	$/demo/report/models/widget/fields.yaml	Demo\\Report\\Models\\Widget	t		oc-icon-photo		3	14	function(){\r\n}	["update"]	[{"name":"data-toggle","value":"model"},{"name":"href","value":"#previewModal"},{"name":"data-size","value":"large"},{"name":"data-request","value":"onPreview"},{"name":"data-load-indicator","value":"Loading"},{"name":"data-request-update","value":"widget_renderer: '#previewModal .modal-body'"},{"name":"data-hotkey","value":"ctrl+p, cmd+p"}]
 4	2020-05-13 04:12:13	2020-05-13 04:14:14	1	1	dashboard-preview	Preview	$/demo/report/models/dashboard/fields.yaml	Demo\\Report\\Models\\Dashboard	t		oc-icon-photo		3	14	function(){\r\n}	["update"]	[{"name":"data-toggle","value":"model"},{"name":"href","value":"#previewModal"},{"name":"data-size","value":"large"},{"name":"data-request","value":"onPreview"},{"name":"data-load-indicator","value":"Loading"},{"name":"data-request-update","value":"widget_renderer: '#previewModal .modal-body'"},{"name":"data-hotkey","value":"ctrl+p, cmd+p"}]
+5	2020-05-31 14:09:07	2020-05-31 14:14:42	1	1	push-case	Push		Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-arrow-circle-up	btn-secondary	4	6	function(){\r\n}	["update"]	[{"name":"data-request","value":"onPushCase"},{"name":"data-request-flash","value":""},{"name":"data-request-success","value":"$(this).hide()"},{"name":"data-load-indicator","value":"Pushing"},{"name":"data-request-confirm","value":"Are you sure?"}]
+11	2020-05-31 14:09:07	2020-06-01 04:18:53	1	1	rever-case	Revert		Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-undo	btn-default	5	6	function () {\r\n    var form = new EngineForm({\r\n        fields: {\r\n            remark: {\r\n                type: 'richeditor',\r\n                label: 'Enter you remark',\r\n                span: 'full',\r\n            },\r\n        }\r\n    }).build();\r\n    form.showInPopup({\r\n        size: 'md',\r\n        title: 'Are you sure?',\r\n        actions: [{\r\n            name: 'revert-case',\r\n            label: 'Revert',\r\n            active: true,\r\n            icon: '',\r\n            css_class: 'btn btn-primary',\r\n            handler: function () {\r\n                $.request('onRevertCase', {\r\n                    url: EngineForm.getCurrentForm().$el.find('form').prop('action'),\r\n                    loading: $.oc.stripeLoadIndicator,\r\n                    data: {\r\n                        remark: form.getValue('remark')\r\n                    }\r\n                });\r\n            }\r\n        }]\r\n    });\r\n}	["update"]	[]
 \.
 
 
@@ -3639,7 +3648,7 @@ COPY demo_core_form_actions (id, created_at, updated_at, created_by_id, updated_
 -- Name: demo_core_form_actions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_core_form_actions_id_seq', 4, true);
+SELECT pg_catalog.setval('demo_core_form_actions_id_seq', 5, true);
 
 
 --
@@ -3710,12 +3719,12 @@ SELECT pg_catalog.setval('demo_core_libraries_id_seq', 1, true);
 --
 
 COPY demo_core_list_actions (id, created_at, updated_at, created_by_id, updated_by_id, name, label, list, model, active, description, icon, css_class, sort_order, plugin_id, script, html_attributes) FROM stdin;
-2	2020-04-11 14:12:05	2020-04-12 08:36:42	1	1	test	test2	$/demo/casemanager/models/casemodel/columns.yaml	Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-adjust		0	6		[]
-5	2020-04-27 09:24:16	2020-04-27 09:27:18	1	1	reorder	Reorder		Demo\\Core\\Models\\UniversalModel	t		oc-icon-list		-2	10	function(event,engine){\r\n    engine.list.navigate(engine.ui.getModelRecord(),{},'reorder');\r\n}	[]
 4	2020-04-27 09:24:16	2020-04-27 10:43:43	1	1	delete	Delete		Demo\\Core\\Models\\UniversalModel	t		oc-icon-trash-o	control-disabled	-1	10	function(){\r\n    $(this).data('request-data', {\r\n        checked: $('.control-list').listWidget('getChecked')\r\n    })\r\n}	[{"name":"data-request","value":"onDelete"},{"name":"data-request-confirm","value":"Delete the selected records?"},{"name":"data-request-success","value":"$(this).prop('disabled', true)"},{"name":"data-trigger-action","value":"enable"},{"name":"data-trigger","value":".control-list input[type=checkbox]"},{"name":"data-stripe-load-indicator","value":""},{"name":"disabled","value":"disabled"},{"name":"data-trigger-condition","value":"checked"}]
 3	2020-04-19 05:47:48	2020-04-27 10:44:08	1	1	view	View	$/demo/core/models/auditlog/columns.yaml	Demo\\Core\\Models\\AuditLog	t		oc-icon-eye	btn-default	0	10	function(event,engine){\r\n    var selected = engine.list.getSelectedRecordIds();\r\n    if(selected.length === 0 || selected.length > 1){\r\n        $.oc.flashMsg({\r\n            'text': 'Please select only a single record ro view.',\r\n            'class': 'error',\r\n            'interval': 5\r\n        });\r\n        return;\r\n    }\r\n    engine.form.navigate(engine.ui.getModelRecord(),selected[0],'audit-form-view');\r\n}	[{"name":"disabled","value":"disabled"},{"name":"data-trigger-action","value":"enable"},{"name":"data-trigger","value":".control-list input[type=checkbox]"},{"name":"data-trigger-condition","value":"checked"}]
-1	2020-04-27 09:24:16	2020-05-16 05:53:59	1	1	create	Create		Demo\\Core\\Models\\UniversalModel	t		oc-icon-plus		-3	10	function(event,engine){\r\n    engine.listService.getCurrentList().navigate('create');\r\n}	[]
-6	2020-05-17 09:24:19	2020-05-17 12:58:46	1	1	pick-case	Pick Case	$/demo/casemanager/models/casemodel/columns.yaml	Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-anchor		4	6	function(){\r\n    $.request('onPickItemFromQueue', {\r\n        data: {queueId: $('#queueDropdown').val()}\r\n    });\r\n}	[{"name":"data-show","value":"return engine.listService.getCurrentList().getTotalRecord()"}]
+5	2020-04-27 09:24:16	2020-05-31 13:23:42	1	1	reorder	Reorder		Demo\\Core\\Models\\UniversalModel	f		oc-icon-list		-2	10	function(event,engine){\r\n    engine.list.navigate(engine.ui.getModelRecord(),{},'reorder');\r\n}	[]
+2	2020-04-11 14:12:05	2020-05-31 13:24:08	1	1	test	test2	$/demo/casemanager/models/casemodel/columns.yaml	Demo\\Casemanager\\Models\\CaseModel	f		oc-icon-adjust		0	6		[]
+1	2020-04-27 09:24:16	2020-05-26 12:43:46	1	1	create	Create		Demo\\Core\\Models\\UniversalModel	t		oc-icon-plus		-3	10	function(event,engine){\r\n    EngineList.getCurrentList().navigate('create');\r\n}	[]
+6	2020-05-17 09:24:19	2020-06-01 04:24:34	1	1	pick-case	Pick Case	$/demo/casemanager/models/casemodel/columns.yaml	Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-anchor		4	6	function () {\r\n    $.oc.stripeLoadIndicator.show();\r\n    $.request('onGetCurrentUserQueues', {\r\n        url: '/backend/demo/workflow/queuecontroller',\r\n        success: function (response) {\r\n            if(response.length===0){\r\n                $.oc.flashMsg({\r\n                    'text': 'You are not assigned in any queue.',\r\n                    'class': 'info',\r\n                    'interval': 5\r\n                });\r\n                $.oc.stripeLoadIndicator.hide();\r\n                return;\r\n            }\r\n            var options = {};\r\n            for(var i=0;i<response.length;i++){\r\n                options[response[i].id] = response[i].name;\r\n            }\r\n            var form = new EngineForm({\r\n                fields: {\r\n                    queue: {\r\n                        type: 'dropdown',\r\n                        label: 'Queue',\r\n                        span: 'full',\r\n                        emptyOption:'-- select an option --',\r\n                        showSearch: true,\r\n                        options: options,\r\n                    },\r\n                }\r\n            }).build().on('render',function(){\r\n                $.oc.stripeLoadIndicator.hide();\r\n            });\r\n            form.showInPopup({\r\n                size: 'sm',\r\n                title: 'Select a Queue',\r\n                actions: [{\r\n                    name: 'queue-selection',\r\n                    label: 'Select',\r\n                    active: true,\r\n                    icon: '',\r\n                    css_class: 'btn btn-primary',\r\n                    handler: function () {\r\n                        $.request('onPickItemFromQueue', {\r\n                            url: '/backend/demo/workflow/QueueController',\r\n                            loading: $.oc.stripeLoadIndicator,\r\n                            data: {\r\n                                queueId: form.getValue('queue')\r\n                            }\r\n                        });\r\n                    }\r\n                }]\r\n            });\r\n        },\r\n    });\r\n}	[{"name":"data-trigger-action","value":"disable"},{"name":"data-trigger","value":".control-list input[type=checkbox]"},{"name":"data-trigger-condition","value":"checked"}]
 \.
 
 
@@ -3761,7 +3770,6 @@ SELECT pg_catalog.setval('demo_core_model_associations_id_seq', 1, false);
 --
 
 COPY demo_core_models (id, created_at, updated_at, created_by_id, updated_by_id, name, model, controller, plugin_id, audit, record_history, audit_columns, description, attach_audited_by, viewable) FROM stdin;
-41	2019-12-20 14:15:39	2020-04-12 15:57:19	1	1	Case Model	Demo\\Casemanager\\Models\\CaseModel	Demo\\Casemanager\\Controllers\\CaseController	6	t	f	["*"]		t	f
 501	2020-04-26 07:09:40	2020-04-26 07:09:40	1	1	List Action	Demo\\Core\\Models\\ListAction	Demo\\Core\\Controllers\\ListActionController	10	f	f	0		f	t
 89	2020-04-18 15:35:39	2020-04-18 15:35:39	1	1	Audit Log	Demo\\Core\\Models\\AuditLog	Demo\\Core\\Controllers\\AuditLogController	10	f	f	0		f	f
 88	2020-04-18 14:53:04	2020-04-18 15:36:42	1	1	Model Model	Demo\\Core\\Models\\ModelModel	Demo\\Core\\Controllers\\ModelController	10	f	f	0		f	f
@@ -3804,16 +3812,18 @@ COPY demo_core_models (id, created_at, updated_at, created_by_id, updated_by_id,
 16	2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	User	Demo\\Core\\Models\\CoreUser	Demo\\Core\\Controllers\\UserController	10	f	f	[" * "]	\N	t	f
 17	2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	User	Demo\\Core\\Models\\CoreUserGroup	Demo\\Core\\Controllers\\UserGroupController	10	f	f	[" * "]	\N	t	f
 502	2020-04-26 07:16:16	2020-04-26 07:16:16	1	1	Form Action	Demo\\Core\\Models\\FormAction	Demo\\Core\\Controllers\\FormActionController	10	f	f	0		f	t
+41	2019-12-20 14:15:39	2020-06-01 13:38:12	1	1	Case Model	Demo\\Casemanager\\Models\\CaseModel	Demo\\Casemanager\\Controllers\\CaseController	6	t	f	["case_number","case_version","description","priority_id","suspect","tat_duration","title"]		t	f
 505	2020-04-27 11:51:21	2020-04-27 11:55:17	1	1	Project	Demo\\Casemanager\\Models\\Project	Demo\\Casemanager\\Controllers\\ProjectController	6	f	f	0		f	f
 523	2020-05-17 05:53:01	2020-05-17 05:53:01	1	1	Mail Templates	Demo\\Notification\\Models\\MailTemplate	Demo\\Notification\\Controllers\\MailTemplates	3	f	f	0		f	f
-516	2020-05-10 04:11:48	2020-05-10 04:11:48	1	1	service_channel	Demo\\Workflow\\Models\\ServiceChannel	Demo\\Workflow\\Controllers\\ServiceChannelController	10	f	f	*		f	f
 517	2020-05-10 04:11:48	2020-05-10 04:11:48	1	1	groups	Demo\\Core\\Models\\UserGroup	Demo\\Core\\Controllers\\UserGroupController	10	f	f	*		f	f
 518	2020-05-10 05:15:28	2020-05-10 05:15:28	1	1	Navigation Role Association	Demo\\Core\\Models\\NavigationRoleAssociation	Demo\\Core\\Controllers\\NavigationRoleAssociationController	10	f	f	0		f	f
+524	2020-05-26 14:00:24	2020-05-26 14:00:24	1	1	Setting	System\\Models\\Parameter	Demo\\Core\\Controllers\\SettingController	10	f	f	0		f	f
 509	2020-05-09 11:25:29	2020-05-10 16:00:23	1	1	Navigation	Demo\\Core\\Models\\Navigation	Demo\\Core\\Controllers\\NavigationController	10	f	f	["*"]		f	f
 519	2020-05-16 05:56:51	2020-05-16 05:56:51	1	1	UI Page	Demo\\Core\\Models\\UiPage	Demo\\Core\\Controllers\\UiPageController	10	f	f	0		f	f
 520	2020-05-17 05:46:59	2020-05-17 05:46:59	1	1	Mail Brand Setting	Demo\\Notification\\Models\\MailBrandSetting	Demo\\Notification\\Controllers\\MailBrandSetting	3	f	f	0		f	f
 521	2020-05-17 05:47:53	2020-05-17 05:47:53	1	1	Mail Layouts	Demo\\Notification\\Models\\MailLayout	Demo\\Notification\\Controllers\\MailLayouts	3	f	f	0		f	f
 522	2020-05-17 05:52:11	2020-05-17 05:52:11	1	1	Mail Partial	Demo\\Notification\\Models\\MailPartial	Demo\\Notification\\Controllers\\MailPartials	3	f	f	0		f	f
+527	2020-05-29 08:12:47	2020-05-29 08:12:47	1	1	Service Channel	Demo\\Workflow\\Models\\ServiceChannel	Demo\\Workflow\\Controllers\\ServiceChannelController	14	f	f	0		f	f
 \.
 
 
@@ -3821,14 +3831,14 @@ COPY demo_core_models (id, created_at, updated_at, created_by_id, updated_by_id,
 -- Name: demo_core_models_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_core_models_id_seq', 523, true);
+SELECT pg_catalog.setval('demo_core_models_id_seq', 527, true);
 
 
 --
 -- Name: demo_core_nav_role_associations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_core_nav_role_associations_id_seq', 291, true);
+SELECT pg_catalog.setval('demo_core_nav_role_associations_id_seq', 307, true);
 
 
 --
@@ -3887,13 +3897,13 @@ COPY demo_core_navigations (id, created_at, updated_at, created_by_id, updated_b
 50	2020-05-09 15:27:27	2020-05-16 14:23:48	1	1	\N	Main	folder	f	main			\N	\N		\N	10	\N	3	oc-icon-bolt	\N	\N	\N
 7	\N	2020-05-16 06:05:20	1	1	\N	Form Fields	list	t	form_fields			Demo\\Core\\Models\\FormField	\N		\N	10	55	4	oc-icon-adjust	\N	\N	\N
 56	2020-05-16 06:47:21	2020-05-16 06:47:21	1	1	\N	Page -Hello World	uipage	t	page-hello-world			\N	\N		\N	10	55	15	oc-icon-child	\N	\N	2
-48	2020-05-09 15:23:48	2020-05-09 15:23:48	1	1	\N	System	folder	t	system			\N	\N		\N	10	\N	1	oc-icon-desktop	\N	\N	\N
-51	2020-05-09 15:28:15	2020-05-09 15:28:15	1	1	\N	Workspace	folder	t	workspace			\N	\N		\N	10	\N	5	oc-icon-user-secret	\N	\N	\N
 57	2020-05-16 14:51:56	2020-05-16 14:51:56	1	1	\N	Pages	list	t	pages			Demo\\Core\\Models\\UiPage	\N		\N	10	55	5	oc-icon-codepen	\N	\N	\N
 52	2020-05-10 10:28:19	2020-05-16 14:59:12	1	1	2	Youtube	url	t	youtube		https://www.youtube.com/embed/RBumgq5yVrA	Demo\\Report\\Models\\Dashboard	\N		\N	6	44	5	oc-icon-adjust	\N	\N	\N
 58	2020-05-17 06:17:22	2020-05-17 06:17:22	1	1	\N	Templates	list	t	templates			Demo\\Notification\\Models\\MailTemplate	\N		\N	3	26	4	oc-icon-file-code-o	\N	\N	\N
-45	\N	2020-05-18 04:31:45	1	1	\N	Pick Cases	list	t	pick-cases			Demo\\Casemanager\\Models\\CaseModel	\N		\N	6	44	0	oc-icon-ambulance	\N	\N	\N
-59	2020-05-18 04:33:41	2020-05-23 05:32:57	1	1	\N	My Cases	list	t	my-cases			Demo\\Casemanager\\Models\\CaseModel	mycases		\N	6	44	0	oc-icon-briefcase	\N	\N	\N
+48	2020-05-09 15:23:48	2020-05-29 07:56:04	1	1	\N	System	folder	t	system			\N			\N	10	\N	1	oc-icon-desktop	\N	\N	\N
+51	2020-05-09 15:28:15	2020-05-31 11:54:29	1	1	\N	Workspace	folder	t	workspace			\N			\N	10	\N	10	oc-icon-user-secret	\N	\N	\N
+45	\N	2020-05-31 13:33:07	1	1	\N	All Cases	list	t	all-cases			Demo\\Casemanager\\Models\\CaseModel			\N	6	44	0	oc-icon-ambulance	\N	\N	\N
+59	2020-05-18 04:33:41	2020-05-31 13:39:19	1	1	\N	My Cases	list	t	my-cases		list=mycases	Demo\\Casemanager\\Models\\CaseModel			\N	6	44	0	oc-icon-briefcase	\N	\N	\N
 \.
 
 
@@ -3969,6 +3979,14 @@ COPY demo_core_permission_policy_associations (id, created_at, updated_at, creat
 578	2020-05-17 05:53:01	2020-05-17 05:53:01	1	1	3	574	525
 579	2020-05-17 05:53:01	2020-05-17 05:53:01	1	1	3	575	525
 580	2020-05-17 05:53:01	2020-05-17 05:53:01	1	1	3	576	525
+581	2020-05-26 14:00:23	2020-05-26 14:00:23	1	1	10	577	526
+582	2020-05-26 14:00:24	2020-05-26 14:00:24	1	1	10	578	526
+583	2020-05-26 14:00:24	2020-05-26 14:00:24	1	1	10	579	526
+584	2020-05-26 14:00:24	2020-05-26 14:00:24	1	1	10	580	526
+593	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	14	589	529
+594	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	14	590	529
+595	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	14	591	529
+596	2020-05-29 08:12:47	2020-05-29 08:12:47	1	1	14	592	529
 \.
 
 
@@ -3976,7 +3994,7 @@ COPY demo_core_permission_policy_associations (id, created_at, updated_at, creat
 -- Name: demo_core_permission_policy_associations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_core_permission_policy_associations_id_seq', 580, true);
+SELECT pg_catalog.setval('demo_core_permission_policy_associations_id_seq', 596, true);
 
 
 --
@@ -4141,6 +4159,9 @@ COPY demo_core_permissions (id, created_at, updated_at, created_by_id, updated_b
 574	2020-05-17 05:53:01	2020-05-17 05:53:01	1	1	3	Demo\\Notification\\Models\\MailTemplate	write	\N	\N	demo.notification::models.mailtemplate.row.write	t	Mail Templates write Permission	This is the system generated permission for Mail Templates write	t	t
 575	2020-05-17 05:53:01	2020-05-17 05:53:01	1	1	3	Demo\\Notification\\Models\\MailTemplate	create	\N	\N	demo.notification::models.mailtemplate.row.create	t	Mail Templates create Permission	This is the system generated permission for Mail Templates create	t	t
 576	2020-05-17 05:53:01	2020-05-17 05:53:01	1	1	3	Demo\\Notification\\Models\\MailTemplate	delete	\N	\N	demo.notification::models.mailtemplate.row.delete	t	Mail Templates delete Permission	This is the system generated permission for Mail Templates delete	t	t
+577	2020-05-26 14:00:23	2020-05-26 14:00:23	1	1	10	System\\Models\\Parameter	read	\N	\N	system.models::parameter.row.read	t	Setting read Permission	This is the system generated permission for Setting read	t	t
+578	2020-05-26 14:00:24	2020-05-26 14:00:24	1	1	10	System\\Models\\Parameter	write	\N	\N	system.models::parameter.row.write	t	Setting write Permission	This is the system generated permission for Setting write	t	t
+579	2020-05-26 14:00:24	2020-05-26 14:00:24	1	1	10	System\\Models\\Parameter	create	\N	\N	system.models::parameter.row.create	t	Setting create Permission	This is the system generated permission for Setting create	t	t
 545	2020-04-27 12:16:52	2020-04-27 12:16:52	1	1	10	Demo\\Core\\Models\\Role	read	\N	\N	demo.core::models.role.row.read	t	Role read Permission	This is the system generated permission for Role read	t	t
 546	2020-04-27 12:16:53	2020-04-27 12:16:53	1	1	10	Demo\\Core\\Models\\Role	write	\N	\N	demo.core::models.role.row.write	t	Role write Permission	This is the system generated permission for Role write	t	t
 547	2020-04-27 12:16:53	2020-04-27 12:16:53	1	1	10	Demo\\Core\\Models\\Role	create	\N	\N	demo.core::models.role.row.create	t	Role create Permission	This is the system generated permission for Role create	t	t
@@ -4162,6 +4183,11 @@ COPY demo_core_permissions (id, created_at, updated_at, created_by_id, updated_b
 570	2020-05-17 05:52:10	2020-05-17 05:52:10	1	1	3	Demo\\Notification\\Models\\MailPartial	write	\N	\N	demo.notification::models.mailpartial.row.write	t	Mail Partial write Permission	This is the system generated permission for Mail Partial write	t	t
 571	2020-05-17 05:52:11	2020-05-17 05:52:11	1	1	3	Demo\\Notification\\Models\\MailPartial	create	\N	\N	demo.notification::models.mailpartial.row.create	t	Mail Partial create Permission	This is the system generated permission for Mail Partial create	t	t
 572	2020-05-17 05:52:11	2020-05-17 05:52:11	1	1	3	Demo\\Notification\\Models\\MailPartial	delete	\N	\N	demo.notification::models.mailpartial.row.delete	t	Mail Partial delete Permission	This is the system generated permission for Mail Partial delete	t	t
+580	2020-05-26 14:00:24	2020-05-26 14:00:24	1	1	10	System\\Models\\Parameter	delete	\N	\N	system.models::parameter.row.delete	t	Setting delete Permission	This is the system generated permission for Setting delete	t	t
+589	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	14	Demo\\Workflow\\Models\\ServiceChannel	read	\N	\N	demo.workflow::models.servicechannel.row.read	t	Service Channel read Permission	This is the system generated permission for Service Channel read	t	t
+590	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	14	Demo\\Workflow\\Models\\ServiceChannel	write	\N	\N	demo.workflow::models.servicechannel.row.write	t	Service Channel write Permission	This is the system generated permission for Service Channel write	t	t
+591	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	14	Demo\\Workflow\\Models\\ServiceChannel	create	\N	\N	demo.workflow::models.servicechannel.row.create	t	Service Channel create Permission	This is the system generated permission for Service Channel create	t	t
+592	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	14	Demo\\Workflow\\Models\\ServiceChannel	delete	\N	\N	demo.workflow::models.servicechannel.row.delete	t	Service Channel delete Permission	This is the system generated permission for Service Channel delete	t	t
 \.
 
 
@@ -4169,7 +4195,7 @@ COPY demo_core_permissions (id, created_at, updated_at, created_by_id, updated_b
 -- Name: demo_core_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_core_permissions_id_seq', 576, true);
+SELECT pg_catalog.setval('demo_core_permissions_id_seq', 592, true);
 
 
 --
@@ -4284,6 +4310,7 @@ COPY demo_core_security_policies (id, created_at, updated_at, created_by_id, upd
 520	2020-05-10 05:15:28	2020-05-10 05:15:28	1	1	Navigation Role Association Policy	Autogenerated policy for Navigation Role Association	10
 522	2020-05-17 05:46:59	2020-05-17 05:46:59	1	1	Mail Brand Setting Policy	Autogenerated policy for Mail Brand Setting	3
 524	2020-05-17 05:52:10	2020-05-17 05:52:10	1	1	Mail Partial Policy	Autogenerated policy for Mail Partial	3
+529	2020-05-29 08:12:46	2020-05-29 08:12:46	1	1	Service Channel Policy	Autogenerated policy for Service Channel	14
 507	2020-04-26 07:09:39	2020-04-26 07:09:39	1	1	List Action Policy	Autogenerated policy for List Action	2
 512	2020-04-26 07:16:15	2020-04-26 07:16:15	1	1	Form Action Policy	Autogenerated policy for Form Action	2
 515	2020-04-27 11:51:21	2020-04-27 11:51:21	1	1	Project Policy	Autogenerated policy for Project	6
@@ -4291,6 +4318,7 @@ COPY demo_core_security_policies (id, created_at, updated_at, created_by_id, upd
 521	2020-05-16 05:56:50	2020-05-16 05:56:50	1	1	UI Page Policy	Autogenerated policy for UI Page	10
 523	2020-05-17 05:47:52	2020-05-17 05:47:52	1	1	Mail Layouts Policy	Autogenerated policy for Mail Layouts	3
 525	2020-05-17 05:53:00	2020-05-17 05:53:00	1	1	Mail Templates Policy	Autogenerated policy for Mail Templates	3
+526	2020-05-26 14:00:23	2020-05-26 14:00:23	1	1	Setting Policy	Autogenerated policy for Setting	10
 \.
 
 
@@ -4298,7 +4326,7 @@ COPY demo_core_security_policies (id, created_at, updated_at, created_by_id, upd
 -- Name: demo_core_security_policies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_core_security_policies_id_seq', 525, true);
+SELECT pg_catalog.setval('demo_core_security_policies_id_seq', 529, true);
 
 
 --
@@ -4341,10 +4369,10 @@ SELECT pg_catalog.setval('demo_core_user_role_associations_id_seq', 3, true);
 --
 
 COPY demo_core_view_role_associations (id, created_at, updated_at, created_by_id, updated_by_id, version, record_id, role_id, plugin_id, model) FROM stdin;
-282	2020-05-18 04:31:45	2020-05-18 04:31:45	1	1	\N	45	2	6	Demo\\Core\\Models\\Navigation
-283	2020-05-18 04:31:45	2020-05-18 04:31:45	1	1	\N	45	1	6	Demo\\Core\\Models\\Navigation
+293	2020-05-29 07:56:04	2020-05-29 07:56:04	1	1	\N	48	1	10	Demo\\Core\\Models\\Navigation
+298	2020-05-31 13:33:07	2020-05-31 13:33:07	1	1	\N	45	2	6	Demo\\Core\\Models\\Navigation
+299	2020-05-31 13:33:07	2020-05-31 13:33:07	1	1	\N	45	1	6	Demo\\Core\\Models\\Navigation
 55	2020-05-10 06:31:16	2020-05-10 06:31:16	1	1	\N	46	2	6	Demo\\Core\\Models\\Navigation
-56	2020-05-10 06:31:16	2020-05-10 06:31:16	1	1	\N	51	2	6	Demo\\Core\\Models\\Navigation
 57	2020-05-10 06:31:16	2020-05-10 06:31:16	1	1	\N	44	2	6	Demo\\Core\\Models\\Navigation
 210	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	5	1	10	Demo\\Core\\Models\\Navigation
 211	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	2	1	10	Demo\\Core\\Models\\Navigation
@@ -4397,8 +4425,6 @@ COPY demo_core_view_role_associations (id, created_at, updated_at, created_by_id
 259	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	50	1	10	Demo\\Core\\Models\\Navigation
 260	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	7	1	10	Demo\\Core\\Models\\Navigation
 261	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	56	1	10	Demo\\Core\\Models\\Navigation
-262	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	48	1	10	Demo\\Core\\Models\\Navigation
-263	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	51	1	10	Demo\\Core\\Models\\Navigation
 264	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	57	1	10	Demo\\Core\\Models\\Navigation
 265	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	52	1	10	Demo\\Core\\Models\\Navigation
 266	2020-05-17 06:26:58	2020-05-17 06:26:58	1	1	\N	58	1	10	Demo\\Core\\Models\\Navigation
@@ -4417,8 +4443,10 @@ COPY demo_core_view_role_associations (id, created_at, updated_at, created_by_id
 279	2020-05-17 06:26:59	2020-05-17 06:26:59	1	1	\N	4	1	10	Demo\\Core\\Models\\FormAction
 280	2020-05-17 06:26:59	2020-05-17 06:26:59	1	1	\N	1	1	10	Demo\\Report\\Models\\Widget
 281	2020-05-17 06:26:59	2020-05-17 06:26:59	1	1	\N	1	1	10	Demo\\Report\\Models\\Dashboard
-290	2020-05-23 05:32:57	2020-05-23 05:32:57	1	1	\N	59	2	6	Demo\\Core\\Models\\Navigation
-291	2020-05-23 05:32:57	2020-05-23 05:32:57	1	1	\N	59	1	6	Demo\\Core\\Models\\Navigation
+294	2020-05-31 11:54:28	2020-05-31 11:54:28	1	1	\N	51	2	10	Demo\\Core\\Models\\Navigation
+295	2020-05-31 11:54:28	2020-05-31 11:54:28	1	1	\N	51	1	10	Demo\\Core\\Models\\Navigation
+306	2020-05-31 13:39:19	2020-05-31 13:39:19	1	1	\N	59	2	6	Demo\\Core\\Models\\Navigation
+307	2020-05-31 13:39:19	2020-05-31 13:39:19	1	1	\N	59	1	6	Demo\\Core\\Models\\Navigation
 \.
 
 
@@ -4539,10 +4567,10 @@ SELECT pg_catalog.setval('demo_report_widgets_id_seq', 1, false);
 
 COPY demo_workflow_queue_assignment_groups (id, created_at, updated_at, created_by_id, updated_by_id, group_id, queue_id, sort_order, plugin_id) FROM stdin;
 4	2019-12-01 07:42:56	2019-12-08 08:02:10	1	1	3	20	1	6
-8	2019-12-01 07:42:56	2019-12-08 08:02:10	1	1	5	2	2	6
 3	2019-12-01 07:42:56	2019-12-08 08:02:10	1	1	4	21	3	6
 6	2019-12-01 07:42:56	2019-12-08 08:02:10	1	1	4	1	4	6
 2	2020-05-17 15:06:26	2020-05-17 15:06:26	1	1	3	3	100	6
+5	2020-05-31 12:54:22	2020-05-31 12:54:22	1	1	1	2	100	6
 \.
 
 
@@ -4550,7 +4578,7 @@ COPY demo_workflow_queue_assignment_groups (id, created_at, updated_at, created_
 -- Name: demo_workflow_queue_assignment_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_workflow_queue_assignment_groups_id_seq', 3, true);
+SELECT pg_catalog.setval('demo_workflow_queue_assignment_groups_id_seq', 6, true);
 
 
 --
@@ -4558,6 +4586,7 @@ SELECT pg_catalog.setval('demo_workflow_queue_assignment_groups_id_seq', 3, true
 --
 
 COPY demo_workflow_queue_items (id, queue_id, assigned_to_id, record_id, model, created_at, updated_at, poped_at, created_by_id, updated_by_id, plugin_id) FROM stdin;
+19	1	\N	1	Demo\\Workflow\\Models\\WorkflowItem	2020-06-01 13:36:46	2020-06-01 13:36:46	\N	1	1	0
 \.
 
 
@@ -4565,7 +4594,7 @@ COPY demo_workflow_queue_items (id, queue_id, assigned_to_id, record_id, model, 
 -- Name: demo_workflow_queue_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_workflow_queue_items_id_seq', 14, true);
+SELECT pg_catalog.setval('demo_workflow_queue_items_id_seq', 19, true);
 
 
 --
@@ -4604,11 +4633,11 @@ SELECT pg_catalog.setval('demo_workflow_queue_routing_rules_id_seq', 1, false);
 -- Data for Name: demo_workflow_queues; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY demo_workflow_queues (id, name, description, script, active, virtual, queue_order, sort_order, input_condition, model, redundancy_policy, created_at, updated_at, created_by_id, updated_by_id, plugin_id, service_channel_id, pop_criteria_id, routing_rule_id) FROM stdin;
-1	Quality Queue	All case in this queue will be assigned to a Quality		1	0	simple_queue	-900	if($context->event==='updating'){\r\n    if($context->model->isDirty('current_state_id')){\r\n        return $context->model->current_state->code === 'quality';\r\n    }\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-04-06 06:40:54	1	1	6	1	3	3
-20	Doctor Queue	All case in this queue will be assigned to a doctor		1	0	simple_queue	-900	if($context->event==='updating'){\r\nif($context->model->isDirty('current_state_id')){\r\nreturn $context->model->current_state->code === 'doctor';\r\n}\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-04-04 13:26:49	1	1	6	1	3	3
-2	Admin Queue	All case in this queue will be assigned to a Admin		0	0	simple_queue	-900	if($context->event==='updating'){\r\nif($context->model->isDirty('current_state_id')){\r\nreturn $context->model->current_state->code === 'admin';\r\n}\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-04-04 13:27:00	1	1	6	1	3	3
-3	Check IN - Case Workflow Assignment Queue1	This queue will assign the case to current user who created the case	$workflowEntity = new Demo\\Casemanager\\Models\\WorkflowEntityl();\r\n$workflowEntity->workflow = Demo\\Casemanager\\Models\\Workflow::where('code','case-workflow')->get()->first();\r\n$workflowEntity->entity_id = $item->id;\r\n$workflowEntity->entity_type = get_class($item);\r\n// throw new \\Error(json_encode($workflowEntity->workflow->definition,true));\r\n$from_state = new Demo\\Casemanager\\Models\\WorkflowState();\r\n$from_state->id  = $workflowEntity->workflow->definition[0]['from_state'];\r\n$workflowEntity->current_state = $from_state;\r\n$workflowEntity->assigned_to = $this->getCurrentUser();\r\n$workflowEntity->save();	1	1	stack	-1	return $context->event==='creating';		addNew	2019-10-06 10:07:03	2020-05-17 14:58:26	1	1	6	1	3	3
+COPY demo_workflow_queues (id, name, description, script, queue_order, sort_order, input_condition, model, redundancy_policy, created_at, updated_at, created_by_id, updated_by_id, plugin_id, service_channel_id, pop_criteria_id, routing_rule_id, virtual, active) FROM stdin;
+1	Quality Queue	All case in this queue will be assigned to a Quality		simple_queue	-900	if($context->event==='updating'){\r\n    if($context->model->isDirty('current_state_id')){\r\n        return $context->model->current_state->code === 'quality';\r\n    }\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-04-06 06:40:54	1	1	6	1	3	3	f	t
+20	Doctor Queue	All case in this queue will be assigned to a doctor		simple_queue	-900	if($context->event==='updating'){\r\nif($context->model->isDirty('current_state_id')){\r\nreturn $context->model->current_state->code === 'doctor';\r\n}\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-04-04 13:26:49	1	1	6	1	3	3	f	t
+3	Check IN - Case Workflow Assignment Queue1	This queue will assign the case to current user who created the case	$workflowEntity = new Demo\\Casemanager\\Models\\WorkflowEntityl();\r\n$workflowEntity->workflow = Demo\\Casemanager\\Models\\Workflow::where('code','case-workflow')->get()->first();\r\n$workflowEntity->entity_id = $item->id;\r\n$workflowEntity->entity_type = get_class($item);\r\n// throw new \\Error(json_encode($workflowEntity->workflow->definition,true));\r\n$from_state = new Demo\\Casemanager\\Models\\WorkflowState();\r\n$from_state->id  = $workflowEntity->workflow->definition[0]['from_state'];\r\n$workflowEntity->current_state = $from_state;\r\n$workflowEntity->assigned_to = $this->getCurrentUser();\r\n$workflowEntity->save();	stack	-1	return $context->event==='creating';		addNew	2019-10-06 10:07:03	2020-05-17 14:58:26	1	1	6	1	3	3	f	t
+2	Admin Queue	All case in this queue will be assigned to a Admin		simple_queue	-900	if($context->event==='updating'){\r\nif($context->model->isDirty('current_state_id')){\r\nreturn $context->model->current_state->code === 'admin';\r\n}\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-05-31 12:54:23	1	1	6	1	3	3	f	t
 \.
 
 
@@ -4640,7 +4669,7 @@ SELECT pg_catalog.setval('demo_workflow_service_channels_id_seq', 1, false);
 --
 
 COPY demo_workflow_workflow_items (id, workflow_id, created_by_id, updated_by_id, model, record_id, created_at, updated_at, assigned_at, current_state_id, assigned_to_id, finished_at, plugin_id) FROM stdin;
-1	1	1	1	Demo\\Casemanager\\Models\\CaseModel	23	2020-05-17 15:21:30	2020-05-17 15:21:30	\N	3	1	\N	\N
+1	1	1	1	Demo\\Casemanager\\Models\\CaseModel	23	2020-05-17 15:21:30	2020-06-01 13:38:59	\N	4	\N	\N	\N
 \.
 
 
@@ -4675,7 +4704,7 @@ SELECT pg_catalog.setval('demo_workflow_workflow_states_id_seq', 1, true);
 -- Data for Name: demo_workflow_workflow_transitions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY demo_workflow_workflow_transitions (id, created_at, updated_at, created_by_id, updated_by_id, assigned_to_id, workflow_item_id, from_state_id, to_state_id, data, plugin_id) FROM stdin;
+COPY demo_workflow_workflow_transitions (id, created_at, updated_at, created_by_id, updated_by_id, workflow_item_id, from_state_id, to_state_id, data, plugin_id, column_12, backward_direction) FROM stdin;
 \.
 
 
@@ -4683,7 +4712,7 @@ COPY demo_workflow_workflow_transitions (id, created_at, updated_at, created_by_
 -- Name: demo_workflow_workflow_transitions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('demo_workflow_workflow_transitions_id_seq', 1, false);
+SELECT pg_catalog.setval('demo_workflow_workflow_transitions_id_seq', 1, true);
 
 
 --
@@ -4906,11 +4935,11 @@ SELECT pg_catalog.setval('system_mail_templates_id_seq', 2, true);
 -- Data for Name: system_parameters; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY system_parameters (id, namespace, "group", item, value) FROM stdin;
-4	system	core	build	465
-2	system	update	retry	1589781813
-1	system	update	count	0
-3	cyd293.backendskin	skin	active	"nobleui"
+COPY system_parameters (id, namespace, "group", item, value, data_type, description) FROM stdin;
+4	system	core	build	465	text	\N
+2	system	update	retry	1590588577	text	\N
+1	system	update	count	0	text	\N
+3	cyd293.backendskin	skin	active	"nobleui"	text	\N
 \.
 
 

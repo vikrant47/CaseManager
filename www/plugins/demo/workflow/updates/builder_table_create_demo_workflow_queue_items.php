@@ -12,7 +12,7 @@ class BuilderTableCreateDemoWorkflowQueueItems extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->integer('queue_id');
-            $table->integer('assigned_to_id');
+            $table->integer('assigned_to_id')->nullable();
             $table->integer('record_id');
             $table->string('model', 255);
             $table->timestamp('created_at')->nullable();
