@@ -22,7 +22,7 @@ class ModelModel extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_models';
-
+    public $incrementing = false;
     /**
      * @var array Validation rules
      */
@@ -30,6 +30,7 @@ class ModelModel extends Model
         'name' => 'required',
         'model' => 'required',
     ];
+
     public $jsonable = ['audit_columns'];
     public $attachAuditedBy = true;
     public $belongsTo = [
@@ -39,6 +40,7 @@ class ModelModel extends Model
     /**
      * Return the model table instance
      * @return Table
+     * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function getModelTable()
     {

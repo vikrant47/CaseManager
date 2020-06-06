@@ -10,7 +10,7 @@ class BuilderTableCreateDemoCasemanagerCasePriorities extends Migration
         Schema::create('demo_casemanager_case_priorities', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->string('name');

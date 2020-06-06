@@ -24,6 +24,7 @@ class NotificationSubscriber extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_notification_subscribers';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

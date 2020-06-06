@@ -14,8 +14,7 @@ class SeedDemoCoreIframes implements Seedable
     {
             Db::table('demo_core_iframes')->insert([
             [
-                                                                            "id"=> 3,
-                                                                                        "created_at"=>"2019-11-24 15:42:32",
+                                                                            "created_at"=>"2019-11-24 15:42:32",
                                                                                         "updated_at"=>"2020-03-16 05:09:54",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -25,7 +24,8 @@ class SeedDemoCoreIframes implements Seedable
                                                                                         "slug"=>"test",
                                                                                         "url"=>"https://www.youtube.com/watch?v=cTbIjrF05N0",
                                                                                         "active"=> 1,
-                                                                                        "iframe"=> 1
+                                                                                        "iframe"=> 1,
+                                                                                        "id"=>"41386ff9-ff61-4941-aa20-65314812fad3"
                             ]             ]);
         }
 

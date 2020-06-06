@@ -14,8 +14,7 @@ class SeedDemoCoreListActions implements Seedable
     {
             Db::table('demo_core_list_actions')->insert([
             [
-                                                                            "id"=> 4,
-                                                                                        "created_at"=>"2020-04-27 09:24:16",
+                                                                            "created_at"=>"2020-04-27 09:24:16",
                                                                                         "updated_at"=>"2020-04-27 10:43:43",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -30,10 +29,10 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "sort_order"=> -1,
                                                                                         "plugin_id"=> 10,
                                                                                         "script"=>"function(){\r\n    \$(this).data('request-data', {\r\n        checked: \$('.control-list').listWidget('getChecked')\r\n    })\r\n}",
-                                                                                        "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onDelete\"},{\"name\":\"data-request-confirm\",\"value\":\"Delete the selected records?\"},{\"name\":\"data-request-success\",\"value\":\"\$(this).prop('disabled', true)\"},{\"name\":\"data-trigger-action\",\"value\":\"enable\"},{\"name\":\"data-trigger\",\"value\":\".control-list input[type=checkbox]\"},{\"name\":\"data-stripe-load-indicator\",\"value\":\"\"},{\"name\":\"disabled\",\"value\":\"disabled\"},{\"name\":\"data-trigger-condition\",\"value\":\"checked\"}]"
+                                                                                        "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onDelete\"},{\"name\":\"data-request-confirm\",\"value\":\"Delete the selected records?\"},{\"name\":\"data-request-success\",\"value\":\"\$(this).prop('disabled', true)\"},{\"name\":\"data-trigger-action\",\"value\":\"enable\"},{\"name\":\"data-trigger\",\"value\":\".control-list input[type=checkbox]\"},{\"name\":\"data-stripe-load-indicator\",\"value\":\"\"},{\"name\":\"disabled\",\"value\":\"disabled\"},{\"name\":\"data-trigger-condition\",\"value\":\"checked\"}]",
+                                                                                        "id"=>"362fa0f2-16ac-4d0d-b11b-79d954c87bd1"
                             ] ,            [
-                                                                            "id"=> 3,
-                                                                                        "created_at"=>"2020-04-19 05:47:48",
+                                                                            "created_at"=>"2020-04-19 05:47:48",
                                                                                         "updated_at"=>"2020-04-27 10:44:08",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -48,10 +47,10 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "plugin_id"=> 10,
                                                                                         "script"=>"function(event,engine){\r\n    var selected = engine.list.getSelectedRecordIds();\r\n    if(selected.length === 0 || selected.length > 1){\r\n        \$.oc.flashMsg({\r\n            'text': 'Please select only a single record ro view.',\r\n            'class': 'error',\r\n            'interval': 5\r\n        });\r\n        return;\r\n    }\r\n    engine.form.navigate(engine.ui.getModelRecord(),selected[0],'audit-form-view');\r\n}",
-                                                                                        "html_attributes"=>"[{\"name\":\"disabled\",\"value\":\"disabled\"},{\"name\":\"data-trigger-action\",\"value\":\"enable\"},{\"name\":\"data-trigger\",\"value\":\".control-list input[type=checkbox]\"},{\"name\":\"data-trigger-condition\",\"value\":\"checked\"}]"
+                                                                                        "html_attributes"=>"[{\"name\":\"disabled\",\"value\":\"disabled\"},{\"name\":\"data-trigger-action\",\"value\":\"enable\"},{\"name\":\"data-trigger\",\"value\":\".control-list input[type=checkbox]\"},{\"name\":\"data-trigger-condition\",\"value\":\"checked\"}]",
+                                                                                        "id"=>"8f870606-9895-47d9-aa57-0c7e9cf99880"
                             ] ,            [
-                                                                            "id"=> 5,
-                                                                                        "created_at"=>"2020-04-27 09:24:16",
+                                                                            "created_at"=>"2020-04-27 09:24:16",
                                                                                         "updated_at"=>"2020-05-31 13:23:42",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -66,10 +65,10 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "sort_order"=> -2,
                                                                                         "plugin_id"=> 10,
                                                                                         "script"=>"function(event,engine){\r\n    engine.list.navigate(engine.ui.getModelRecord(),{},'reorder');\r\n}",
-                                                                                        "html_attributes"=>"[]"
+                                                                                        "html_attributes"=>"[]",
+                                                                                        "id"=>"72d7f744-e5d4-4f88-8b2f-e16b4132ab42"
                             ] ,            [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2020-04-27 09:24:16",
+                                                                            "created_at"=>"2020-04-27 09:24:16",
                                                                                         "updated_at"=>"2020-05-26 12:43:46",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -84,7 +83,8 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "sort_order"=> -3,
                                                                                         "plugin_id"=> 10,
                                                                                         "script"=>"function(event,engine){\r\n    EngineList.getCurrentList().navigate('create');\r\n}",
-                                                                                        "html_attributes"=>"[]"
+                                                                                        "html_attributes"=>"[]",
+                                                                                        "id"=>"7fc66991-e2ac-4d1f-9aec-282d485287eb"
                             ]             ]);
         }
 

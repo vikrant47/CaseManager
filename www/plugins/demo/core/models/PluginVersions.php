@@ -15,6 +15,7 @@ class PluginVersions extends Model
      * @var string The database table used by the model.
      */
     public $table = 'system_plugin_versions';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

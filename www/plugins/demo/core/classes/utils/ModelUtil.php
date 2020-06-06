@@ -6,6 +6,7 @@ use October\Rain\Database\Collection;
 use October\Rain\Database\Relations\BelongsToMany;
 use BackendAuth;
 use RainLab\Builder\Classes\IconList;
+use Webpatser\Uuid\Uuid;
 
 class ModelUtil
 {
@@ -23,26 +24,44 @@ class ModelUtil
         return empty($model->id);
     }
 
-    public static function fillDefaultColumnsInBelongsToMany(BelongsToMany $association, Collection $data, $pluginId = 10, $otherColumns = [])
+    public static function fillDefaultColumnsInBelongsToMany(
+        BelongsToMany $association,
+        Collection &$data,
+        $pluginId = 10,
+        $otherColumns = []
+    )
     {
+        if (empty($data)) {
+            return;
+        }
         if (empty($pluginId)) {
             $pluginId = 10;
         }
         $user = BackendAuth::getUser();
         $pivotValues = [
+            // 'id' => (string)Uuid::generate(),
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime(),
             'plugin_id' => $pluginId,
             'created_by_id' => $user->id,
             'updated_by_id' => $user->id,
         ];
-        $pivotValues = array_merge($pivotValues, $otherColumns);
         $associationSync = [];
         foreach ($data as $record) {
-            $associationSync[$record->id] = $pivotValues;
+            $pivotValues = [
+                'id' => (string)Uuid::generate(),
+                'created_at' => new \DateTime(),
+                'updated_at' => new \DateTime(),
+                'plugin_id' => $pluginId,
+                'created_by_id' => $user->id,
+                'updated_by_id' => $user->id,
+            ];
+            $pivotValues = array_merge($pivotValues, $otherColumns);
             $association->detach($record->id);
             $association->attach($record->id, $pivotValues);
+
         }
+        $association->syncWithoutDetaching($associationSync);
     }
 
     public static function getShortName($class)

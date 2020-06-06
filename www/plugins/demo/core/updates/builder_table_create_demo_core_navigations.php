@@ -10,7 +10,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
         Schema::create('demo_core_navigations', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
@@ -25,13 +25,13 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->text('url')->nullable();
             $table->string('model')->nullable();
             $table->string('view')->nullable();
-            $table->integer('uipage_id')->nullable();
+            $table->uuid('uipage_id')->nullable();
             $table->string('form')->nullable();
-            $table->integer('record_id')->nullable();
-            $table->integer('dashboard_id')->nullable();
-            $table->integer('widget_id')->nullable();
+            $table->uuid('record_id')->nullable();
+            $table->uuid('dashboard_id')->nullable();
+            $table->uuid('widget_id')->nullable();
             $table->integer('plugin_id');
-            $table->integer('parent_id')->nullable();
+            $table->uuid('parent_id')->nullable();
             $table->integer('sort_order');
         });
     }

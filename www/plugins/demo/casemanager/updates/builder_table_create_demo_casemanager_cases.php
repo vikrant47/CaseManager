@@ -18,7 +18,7 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->integer('created_by_id')->nullable();
             $table->integer('updated_by_id')->nullable();
             $table->integer('assigned_to_id')->nullable();
-            $table->integer('priority_id')->nullable();
+            $table->uuid('priority_id')->nullable();
             $table->string('case_number', 255);
             $table->string('case_version', 255);
             $table->integer('version');

@@ -10,7 +10,7 @@ class BuilderTableCreateDemoCoreAuditLogs extends Migration
         Schema::create('demo_core_audit_logs', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
@@ -18,8 +18,8 @@ class BuilderTableCreateDemoCoreAuditLogs extends Migration
             $table->integer('version');
             $table->string('model');
             $table->string('operation');
-            $table->integer('record_id');
-            $table->integer('record_id');
+            $table->uuid('record_id');
+            $table->uuid('record_id');
             $table->text('previous');
             $table->text('current')->nullable();
         });

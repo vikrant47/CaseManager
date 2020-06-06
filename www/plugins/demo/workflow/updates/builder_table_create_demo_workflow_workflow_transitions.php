@@ -9,15 +9,15 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
     {
         Schema::create('demo_workflow_workflow_transitions', function ($table) {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->boolean('backward_direction')->default(false);
-            $table->integer('workflow_item_id');
-            $table->integer('from_state_id');
-            $table->integer('to_state_id');
+            $table->uuid('workflow_item_id');
+            $table->uuid('from_state_id');
+            $table->uuid('to_state_id');
             $table->text('data')->nullable();
             $table->integer('plugin_id');
         });

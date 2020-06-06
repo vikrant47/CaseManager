@@ -14,8 +14,7 @@ class SeedDemoCoreNavigations implements Seedable
     {
             Db::table('demo_core_navigations')->insert([
             [
-                                                                            "id"=> 26,
-                                                                                        "created_at"=>"2020-05-09 15:09:59",
+                                                                            "created_at"=>"2020-05-09 15:09:59",
                                                                                         "updated_at"=>"2020-05-16 14:23:03",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -29,17 +28,17 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "model"=> null,
                                                                                         "view"=> null,
                                                                                         "form"=> "",
-                                                                                        "record_id"=> null,
                                                                                         "plugin_id"=> 3,
-                                                                                        "parent_id"=> null,
                                                                                         "sort_order"=> 3,
                                                                                         "icon"=>"oc-icon-envelope",
+                                                                                        "id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
+                                                                                        "record_id"=> null,
+                                                                                        "parent_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
                                                                                         "uipage_id"=> null
                             ] ,            [
-                                                                            "id"=> 58,
-                                                                                        "created_at"=>"2020-05-17 06:17:22",
+                                                                            "created_at"=>"2020-05-17 06:17:22",
                                                                                         "updated_at"=>"2020-05-17 06:17:22",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -53,11 +52,12 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "model"=>"Demo\Notification\Models\MailTemplate",
                                                                                         "view"=> null,
                                                                                         "form"=> "",
-                                                                                        "record_id"=> null,
                                                                                         "plugin_id"=> 3,
-                                                                                        "parent_id"=> 26,
                                                                                         "sort_order"=> 4,
                                                                                         "icon"=>"oc-icon-file-code-o",
+                                                                                        "id"=>"9ab44ba4-d108-437f-8025-b999fcffa10c",
+                                                                                        "record_id"=> null,
+                                                                                        "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
                                                                                         "uipage_id"=> null

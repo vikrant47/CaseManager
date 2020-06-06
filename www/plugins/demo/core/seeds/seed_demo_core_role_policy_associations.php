@@ -14,68 +14,68 @@ class SeedDemoCoreRolePolicyAssociations implements Seedable
     {
             Db::table('demo_core_role_policy_associations')->insert([
             [
-                                                                            "id"=> 3,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
-                                                                                        "role_id"=> 3,
-                                                                                        "policy_id"=> 61
+                                                                                        "id"=>"c589883b-ddd1-42fb-96bd-d01b0551406a",
+                                                                                        "role_id"=> null,
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
-                                                                            "id"=> 4,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
-                                                                                        "role_id"=> 3,
-                                                                                        "policy_id"=> 61
+                                                                                        "id"=>"bf7e8285-aace-49d5-992d-85173cd18ec9",
+                                                                                        "role_id"=> null,
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
-                                                                            "id"=> 5,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
-                                                                                        "role_id"=> 3,
-                                                                                        "policy_id"=> 61
+                                                                                        "id"=>"57b141c4-24d9-4c1b-97cf-3ce2b8b67ae0",
+                                                                                        "role_id"=> null,
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
-                                                                            "id"=> 6,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
-                                                                                        "role_id"=> 3,
-                                                                                        "policy_id"=> 61
+                                                                                        "id"=>"8741b6f3-36ff-4f60-806c-02c386b71212",
+                                                                                        "role_id"=> null,
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
-                                                                            "id"=> 7,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
-                                                                                        "role_id"=> 3,
-                                                                                        "policy_id"=> 61
+                                                                                        "id"=>"54000956-8149-40de-ae79-cf72694bc9ed",
+                                                                                        "role_id"=> null,
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
-                                                                            "id"=> 8,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
-                                                                                        "role_id"=> 3,
-                                                                                        "policy_id"=> 61
+                                                                                        "id"=>"936a330d-e838-40f7-a24a-b494582a5060",
+                                                                                        "role_id"=> null,
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
-                                                                            "id"=> 9,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 10,
-                                                                                        "role_id"=> 3,
-                                                                                        "policy_id"=> 61
+                                                                                        "id"=>"59988daf-d35f-4b82-873f-10858ee03e7e",
+                                                                                        "role_id"=> null,
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ]             ]);
         }
 

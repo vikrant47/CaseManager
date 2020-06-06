@@ -14,8 +14,7 @@ class SeedDemoCoreLibraries implements Seedable
     {
             Db::table('demo_core_libraries')->insert([
             [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2020-05-10 07:34:36",
+                                                                            "created_at"=>"2020-05-10 07:34:36",
                                                                                         "updated_at"=>"2020-05-13 04:03:38",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -23,7 +22,8 @@ class SeedDemoCoreLibraries implements Seedable
                                                                                         "name"=>"EchartJS",
                                                                                         "description"=> "",
                                                                                         "website"=>"https://echarts.apache.org/en/index.html",
-                                                                                        "code"=>"echart-js"
+                                                                                        "code"=>"echart-js",
+                                                                                        "id"=>"a65cda17-3942-4dac-995b-fd66fe412d1a"
                             ]             ]);
         }
 

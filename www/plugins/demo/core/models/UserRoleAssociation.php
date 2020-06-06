@@ -16,6 +16,7 @@ class UserRoleAssociation extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_user_role_associations';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

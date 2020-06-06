@@ -14,8 +14,7 @@ class SeedDemoNotificationChannels implements Seedable
     {
             Db::table('demo_notification_channels')->insert([
             [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2019-12-25 14:14:11",
+                                                                            "created_at"=>"2019-12-25 14:14:11",
                                                                                         "updated_at"=>"2019-12-27 15:16:37",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -24,7 +23,8 @@ class SeedDemoNotificationChannels implements Seedable
                                                                                         "active"=> 1,
                                                                                         "plugin_id"=> 10,
                                                                                         "name"=>"Queued Email Channel",
-                                                                                        "description"=>"Email Notification channel"
+                                                                                        "description"=>"Email Notification channel",
+                                                                                        "id"=>"24647a4c-dbcf-44b0-9704-cc4d5760d6b2"
                             ]             ]);
         }
 

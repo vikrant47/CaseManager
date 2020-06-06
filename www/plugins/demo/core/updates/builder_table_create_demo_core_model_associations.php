@@ -9,7 +9,7 @@ class BuilderTableCreateDemoCoreModelAssociations extends Migration
     {
         Schema::create('demo_core_model_associations', function ($table) {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');

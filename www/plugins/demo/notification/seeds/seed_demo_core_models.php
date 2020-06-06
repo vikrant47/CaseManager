@@ -14,8 +14,7 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
-                                                                            "id"=> 523,
-                                                                                        "created_at"=>"2020-05-17 05:53:01",
+                                                                            "created_at"=>"2020-05-17 05:53:01",
                                                                                         "updated_at"=>"2020-05-17 05:53:01",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -28,10 +27,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"0e210d37-73e2-49b9-b80a-9e3ebd8b1998"
                             ] ,            [
-                                                                            "id"=> 520,
-                                                                                        "created_at"=>"2020-05-17 05:46:59",
+                                                                            "created_at"=>"2020-05-17 05:46:59",
                                                                                         "updated_at"=>"2020-05-17 05:46:59",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -44,10 +43,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"497b52bf-f370-4ef4-92de-5b6802d7f7c9"
                             ] ,            [
-                                                                            "id"=> 521,
-                                                                                        "created_at"=>"2020-05-17 05:47:53",
+                                                                            "created_at"=>"2020-05-17 05:47:53",
                                                                                         "updated_at"=>"2020-05-17 05:47:53",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -60,10 +59,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"d4b21a16-1e18-42f4-8efc-36fde559c739"
                             ] ,            [
-                                                                            "id"=> 522,
-                                                                                        "created_at"=>"2020-05-17 05:52:11",
+                                                                            "created_at"=>"2020-05-17 05:52:11",
                                                                                         "updated_at"=>"2020-05-17 05:52:11",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -76,7 +75,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"f8506ae5-277a-4a14-8d91-8412d9d27650"
                             ]             ]);
         }
 

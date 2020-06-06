@@ -10,7 +10,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
         Schema::create('demo_report_widgets', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
@@ -22,7 +22,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->text('data');
             $table->text('script');
             $table->boolean('public');
-            $table->integer('library_id');
+            $table->uuid('library_id');
             $table->integer('plugin_id');
             $table->integer('active');
         });

@@ -14,8 +14,7 @@ class SeedDemoWorkflowWorkflowStates implements Seedable
     {
             Db::table('demo_workflow_workflow_states')->insert([
             [
-                                                                            "id"=> 3,
-                                                                                        "created_at"=>"2019-10-12 10:40:02",
+                                                                            "created_at"=>"2019-10-12 10:40:02",
                                                                                         "updated_at"=>"2019-10-12 10:40:02",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -23,10 +22,10 @@ class SeedDemoWorkflowWorkflowStates implements Seedable
                                                                                         "description"=> "",
                                                                                         "active"=> 1,
                                                                                         "code"=>"start",
-                                                                                        "plugin_id"=> 10
+                                                                                        "plugin_id"=> 10,
+                                                                                        "id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b"
                             ] ,            [
-                                                                            "id"=> 6,
-                                                                                        "created_at"=>"2019-10-12 10:41:30",
+                                                                            "created_at"=>"2019-10-12 10:41:30",
                                                                                         "updated_at"=>"2019-10-12 10:41:56",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -34,7 +33,8 @@ class SeedDemoWorkflowWorkflowStates implements Seedable
                                                                                         "description"=> "",
                                                                                         "active"=> 1,
                                                                                         "code"=>"finish",
-                                                                                        "plugin_id"=> 10
+                                                                                        "plugin_id"=> 10,
+                                                                                        "id"=>"8c7e9158-b65c-437a-a5d9-4b975f7b6f51"
                             ]             ]);
         }
 

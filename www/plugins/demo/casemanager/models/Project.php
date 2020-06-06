@@ -16,6 +16,7 @@ class Project extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_casemanager_projects';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

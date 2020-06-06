@@ -10,14 +10,14 @@ class BuilderTableCreateDemoCoreRolePolicyAssociations extends Migration
         Schema::create('demo_core_role_policy_associations', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->integer('plugin_id');
-            $table->integer('role_id');
-            $table->integer('policy_id');
+            $table->uuid('role_id');
+            $table->uuid('policy_id');
         });
     }
     

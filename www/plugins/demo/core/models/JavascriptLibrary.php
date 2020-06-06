@@ -19,6 +19,7 @@ class JavascriptLibrary extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_libraries';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

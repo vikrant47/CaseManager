@@ -15,6 +15,7 @@ class ViewRoleAssociation extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_view_role_associations';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

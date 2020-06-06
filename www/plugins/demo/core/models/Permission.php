@@ -27,6 +27,7 @@ class Permission extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_permissions';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

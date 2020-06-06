@@ -15,6 +15,7 @@ class WorkflowTransition extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_workflow_transitions';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

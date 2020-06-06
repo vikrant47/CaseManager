@@ -14,8 +14,7 @@ class SeedDemoCoreFormActions implements Seedable
     {
             Db::table('demo_core_form_actions')->insert([
             [
-                                                                            "id"=> 8,
-                                                                                        "created_at"=>"2020-04-12 08:37:37",
+                                                                            "created_at"=>"2020-04-12 08:37:37",
                                                                                         "updated_at"=>"2020-04-19 04:40:45",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -31,10 +30,10 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "script"=>"function(){\r\n        alert('Alert from action');\r\n        return false;\r\n}",
                                                                                         "context"=>"[\"create\",\"update\"]",
-                                                                                        "html_attributes"=>"[]"
+                                                                                        "html_attributes"=>"[]",
+                                                                                        "id"=>"801aec17-c33e-4dd1-9a97-560e2534cf3c"
                             ] ,            [
-                                                                            "id"=> 5,
-                                                                                        "created_at"=>"2020-05-31 14:09:07",
+                                                                            "created_at"=>"2020-05-31 14:09:07",
                                                                                         "updated_at"=>"2020-05-31 14:14:42",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -50,11 +49,11 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "plugin_id"=> 6,
                                                                                         "script"=>"function(){\r\n}",
                                                                                         "context"=>"[\"update\"]",
-                                                                                        "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onPushCase\"},{\"name\":\"data-request-flash\",\"value\":\"\"},{\"name\":\"data-request-success\",\"value\":\"\$(this).hide()\"},{\"name\":\"data-load-indicator\",\"value\":\"Pushing\"},{\"name\":\"data-request-confirm\",\"value\":\"Are you sure?\"}]"
+                                                                                        "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onPushCase\"},{\"name\":\"data-request-flash\",\"value\":\"\"},{\"name\":\"data-request-success\",\"value\":\"\$(this).hide()\"},{\"name\":\"data-load-indicator\",\"value\":\"Pushing\"},{\"name\":\"data-request-confirm\",\"value\":\"Are you sure?\"}]",
+                                                                                        "id"=>"fa00326d-63d6-4d51-84ee-9567cd8bf986"
                             ] ,            [
-                                                                            "id"=> 11,
-                                                                                        "created_at"=>"2020-05-31 14:09:07",
-                                                                                        "updated_at"=>"2020-05-31 14:26:32",
+                                                                            "created_at"=>"2020-05-31 14:09:07",
+                                                                                        "updated_at"=>"2020-06-01 04:18:53",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"rever-case",
@@ -67,9 +66,10 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "css_class"=>"btn-default",
                                                                                         "sort_order"=> 5,
                                                                                         "plugin_id"=> 6,
-                                                                                        "script"=>"function () {\r\n    var form = new EngineForm({\r\n        fields: {\r\n            remark: {\r\n                type: 'richeditor',\r\n                label: 'Enter you remark',\r\n                span: 'full',\r\n            },\r\n        }\r\n    }).build();\r\n    form.showInPopup({\r\n        size: 'md',\r\n        title: 'Are you sure?',\r\n        actions: [{\r\n            name: 'revert-case',\r\n            label: 'Revert',\r\n            active: true,\r\n            icon: '',\r\n            css_class: 'btn btn-primary',\r\n            handler: function () {\r\n                \$.request('onRevertCase', {\r\n                    url: '/backend/demo/casemanager/CaseController/'+EngineForm.getCurrentForm().getValue('id'),\r\n                    loading: \$.oc.stripeLoadIndicator,\r\n                    data: {\r\n                        remark: form.getValue('remark')\r\n                    }\r\n                });\r\n            }\r\n        }]\r\n    });\r\n}",
+                                                                                        "script"=>"function () {\r\n    var form = new EngineForm({\r\n        fields: {\r\n            remark: {\r\n                type: 'richeditor',\r\n                label: 'Enter you remark',\r\n                span: 'full',\r\n            },\r\n        }\r\n    }).build();\r\n    form.showInPopup({\r\n        size: 'md',\r\n        title: 'Are you sure?',\r\n        actions: [{\r\n            name: 'revert-case',\r\n            label: 'Revert',\r\n            active: true,\r\n            icon: '',\r\n            css_class: 'btn btn-primary',\r\n            handler: function () {\r\n                \$.request('onRevertCase', {\r\n                    url: EngineForm.getCurrentForm().\$el.find('form').prop('action'),\r\n                    loading: \$.oc.stripeLoadIndicator,\r\n                    data: {\r\n                        remark: form.getValue('remark')\r\n                    }\r\n                });\r\n            }\r\n        }]\r\n    });\r\n}",
                                                                                         "context"=>"[\"update\"]",
-                                                                                        "html_attributes"=>"[]"
+                                                                                        "html_attributes"=>"[]",
+                                                                                        "id"=>"27909423-8ed9-4465-801c-c0f081f286fc"
                             ]             ]);
         }
 

@@ -10,7 +10,7 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
         Schema::create('demo_workflow_queues', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->string('name', 255);
             $table->text('description');
             $table->text('script');
@@ -26,9 +26,9 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->integer('plugin_id');
-            $table->integer('service_channel_id');
-            $table->integer('pop_criteria_id');
-            $table->integer('routing_rule_id');
+            $table->uuid('service_channel_id');
+            $table->uuid('pop_criteria_id');
+            $table->uuid('routing_rule_id');
         });
     }
     
