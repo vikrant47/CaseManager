@@ -14,8 +14,7 @@ class SeedDemoWorkflowWorkflows implements Seedable
     {
             Db::table('demo_workflow_workflows')->insert([
             [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2019-10-08 08:17:55",
+                                                                            "created_at"=>"2019-10-08 08:17:55",
                                                                                         "updated_at"=>"2020-05-09 06:43:30",
                                                                                         "active"=> 1,
                                                                                         "name"=>"Case Workflow",
@@ -28,7 +27,8 @@ class SeedDemoWorkflowWorkflows implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "input_condition"=>"return true;",
-                                                                                        "event"=>"created"
+                                                                                        "event"=>"created",
+                                                                                        "id"=>"dd25a3b6-0e8b-4af7-b50d-d9030068b84a"
                             ]             ]);
         }
 

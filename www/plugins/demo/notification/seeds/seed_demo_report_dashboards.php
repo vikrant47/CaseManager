@@ -14,8 +14,7 @@ class SeedDemoReportDashboards implements Seedable
     {
             Db::table('demo_report_dashboards')->insert([
             [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2020-05-10 09:22:09",
+                                                                            "created_at"=>"2020-05-10 09:22:09",
                                                                                         "updated_at"=>"2020-05-10 15:54:50",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -25,7 +24,8 @@ class SeedDemoReportDashboards implements Seedable
                                                                                         "config_widgets"=>"[{\"x\":\"0\",\"y\":\"0\",\"width\":\"6\",\"height\":\"8\",\"widget\":\"1\"},{\"x\":\"6\",\"y\":\"0\",\"width\":\"6\",\"height\":\"8\",\"widget\":\"1\"}]",
                                                                                         "public"=> 0,
                                                                                         "code"=>"default-dashboard",
-                                                                                        "plugin_id"=> 3
+                                                                                        "plugin_id"=> 3,
+                                                                                        "id"=>"cc326831-e515-44a8-8eb8-b23b8fa8fdaa"
                             ]             ]);
         }
 

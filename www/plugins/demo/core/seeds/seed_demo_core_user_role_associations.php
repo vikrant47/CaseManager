@@ -14,41 +14,41 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
     {
             Db::table('demo_core_user_role_associations')->insert([
             [
-                                                                            "id"=> 1,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "user_id"=> 1,
-                                                                                        "role_id"=> 1,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1
-                            ] ,            [
-                                                                            "id"=> 8,
-                                                                                        "created_at"=>"2020-04-06 08:54:23",
-                                                                                        "updated_at"=>"2020-04-06 08:54:23",
-                                                                                        "user_id"=> 3,
-                                                                                        "role_id"=> 2,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1
-                            ] ,            [
-                                                                            "id"=> 12,
-                                                                                        "created_at"=>"2020-04-06 14:03:21",
+                                                                            "created_at"=>"2020-04-06 14:03:21",
                                                                                         "updated_at"=>"2020-04-06 14:03:21",
                                                                                         "user_id"=> 6,
-                                                                                        "role_id"=> 2,
                                                                                         "plugin_id"=> 10,
                                                                                         "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "id"=>"f314578a-4686-46d0-acb5-2b6c096cc687",
+                                                                                        "role_id"=>"f314578a-4686-46d0-acb5-2b6c096cc687"
                             ] ,            [
-                                                                            "id"=> 3,
-                                                                                        "created_at"=>"2020-05-10 06:10:59",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "user_id"=> 1,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "id"=>"980dc6d1-033c-4dae-a7ef-4522e6c976a7",
+                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
+                            ] ,            [
+                                                                            "created_at"=>"2020-04-06 08:54:23",
+                                                                                        "updated_at"=>"2020-04-06 08:54:23",
+                                                                                        "user_id"=> 3,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "id"=>"d9f9f39e-1a2d-4eb9-9619-0fc673ca4c14",
+                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 06:10:59",
                                                                                         "updated_at"=>"2020-05-10 06:10:59",
                                                                                         "user_id"=> 2,
-                                                                                        "role_id"=> 2,
                                                                                         "plugin_id"=> 10,
                                                                                         "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "id"=>"1cced673-fc72-4053-83e7-68f9dcbd880e",
+                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
                             ]             ]);
         }
 

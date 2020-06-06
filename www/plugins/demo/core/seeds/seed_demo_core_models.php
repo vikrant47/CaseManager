@@ -14,8 +14,7 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
-                                                                            "id"=> 501,
-                                                                                        "created_at"=>"2020-04-26 07:09:40",
+                                                                            "created_at"=>"2020-04-26 07:09:40",
                                                                                         "updated_at"=>"2020-04-26 07:09:40",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -28,10 +27,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> 1
+                                                                                        "viewable"=> 1,
+                                                                                        "id"=>"58500474-fd4d-4bda-a1c4-892f5301e008"
                             ] ,            [
-                                                                            "id"=> 89,
-                                                                                        "created_at"=>"2020-04-18 15:35:39",
+                                                                            "created_at"=>"2020-04-18 15:35:39",
                                                                                         "updated_at"=>"2020-04-18 15:35:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -44,10 +43,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"0d43527c-ba2f-47a8-8b0d-a78eaa2c630d"
                             ] ,            [
-                                                                            "id"=> 88,
-                                                                                        "created_at"=>"2020-04-18 14:53:04",
+                                                                            "created_at"=>"2020-04-18 14:53:04",
                                                                                         "updated_at"=>"2020-04-18 15:36:42",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -60,10 +59,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"42f978b1-8e9d-41c5-ba7a-da69c1af7819"
                             ] ,            [
-                                                                            "id"=> 87,
-                                                                                        "created_at"=>"2020-04-13 14:06:29",
+                                                                            "created_at"=>"2020-04-13 14:06:29",
                                                                                         "updated_at"=>"2020-04-13 14:06:29",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -76,10 +75,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"e6ce6d2e-148d-466d-9799-508739a32095"
                             ] ,            [
-                                                                            "id"=> 20,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -92,10 +91,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"4bd73094-51ff-47f0-92d8-d31549fd3e78"
                             ] ,            [
-                                                                            "id"=> 2,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -108,10 +107,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"2550e0aa-637c-418f-a1b8-e5d9c972e68b"
                             ] ,            [
-                                                                            "id"=> 3,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -124,10 +123,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"0e20e8d5-0f54-4352-8fdc-8ee48fd6d005"
                             ] ,            [
-                                                                            "id"=> 4,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -140,10 +139,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"62203afe-185b-40c3-b0fd-d263f1341e0e"
                             ] ,            [
-                                                                            "id"=> 5,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -156,10 +155,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"f9386c03-0314-4fc1-b2db-15dc43e917cf"
                             ] ,            [
-                                                                            "id"=> 6,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -172,10 +171,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"887d85ea-3f6e-4a62-9f5d-b5a138962b68"
                             ] ,            [
-                                                                            "id"=> 7,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -188,10 +187,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"79751975-864a-4015-b180-e706acb78593"
                             ] ,            [
-                                                                            "id"=> 8,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -204,10 +203,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"de7379fc-82da-4a93-b43f-7cf367df891b"
                             ] ,            [
-                                                                            "id"=> 9,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -220,10 +219,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"b1345d69-71f1-4490-8c4a-2141394018f9"
                             ] ,            [
-                                                                            "id"=> 10,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -236,10 +235,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"1ee08836-c156-48db-a72f-586b89af118f"
                             ] ,            [
-                                                                            "id"=> 12,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -252,10 +251,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"6a3300da-7e73-4d8a-a6ee-c3a4e542a796"
                             ] ,            [
-                                                                            "id"=> 13,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -268,10 +267,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"cd1515c3-05e0-48c5-a8fa-bed69abf1c99"
                             ] ,            [
-                                                                            "id"=> 14,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -284,10 +283,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"f1336bfe-b511-4604-80d4-863856a19988"
                             ] ,            [
-                                                                            "id"=> 15,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -300,10 +299,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"359d2111-d338-42bc-a3b3-8251ed0dce3b"
                             ] ,            [
-                                                                            "id"=> 18,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -316,10 +315,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"d393c0d0-86c2-4f9c-9cf7-1b58baac86f0"
                             ] ,            [
-                                                                            "id"=> 19,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                            "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -332,170 +331,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"ce1f8927-fa3f-4705-b10d-3fafead0e583"
                             ] ,            [
-                                                                            "id"=> 508,
-                                                                                        "created_at"=>"2020-04-27 12:16:53",
-                                                                                        "updated_at"=>"2020-05-08 08:13:16",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Role",
-                                                                                        "model"=>"Demo\Core\Models\Role",
-                                                                                        "controller"=>"Demo\Core\Controllers\RoleController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=> 0,
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 510,
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
-                                                                                        "updated_at"=>"2020-05-10 04:11:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"users",
-                                                                                        "model"=>"Demo\Core\Models\User",
-                                                                                        "controller"=>"Demo\Core\Controllers\UserController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"*",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 511,
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
-                                                                                        "updated_at"=>"2020-05-10 04:11:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"case_priority",
-                                                                                        "model"=>"Demo\Casemanager\Models\Casepriority",
-                                                                                        "controller"=>"Demo\Casemanager\Controllers\CasepriorityController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"*",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 512,
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
-                                                                                        "updated_at"=>"2020-05-10 04:11:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"workflow_transitions",
-                                                                                        "model"=>"Demo\Workflow\Models\WorkflowTransitions",
-                                                                                        "controller"=>"Demo\Workflow\Controllers\WorkflowTransitionsController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"*",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 513,
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
-                                                                                        "updated_at"=>"2020-05-10 04:11:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"logs",
-                                                                                        "model"=>"Demo\Notification\Models\NotificationLog",
-                                                                                        "controller"=>"Demo\Notification\Controllers\NotificationLogController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"*",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 514,
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
-                                                                                        "updated_at"=>"2020-05-10 04:11:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"user_role_associations",
-                                                                                        "model"=>"Demo\Core\Models\UserRoleAssociation",
-                                                                                        "controller"=>"Demo\Core\Controllers\UserRoleAssociationController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"*",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 515,
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
-                                                                                        "updated_at"=>"2020-05-10 04:11:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"routing_rules",
-                                                                                        "model"=>"Demo\Workflow\Models\QueueRoutingrule",
-                                                                                        "controller"=>"Demo\Workflow\Controllers\QueueRoutingruleController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"*",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 16,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"User",
-                                                                                        "model"=>"Demo\Core\Models\CoreUser",
-                                                                                        "controller"=>"Demo\Core\Controllers\UserController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\" * \"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 17,
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"User",
-                                                                                        "model"=>"Demo\Core\Models\CoreUserGroup",
-                                                                                        "controller"=>"Demo\Core\Controllers\UserGroupController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\" * \"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false
-                            ] ,            [
-                                                                            "id"=> 502,
-                                                                                        "created_at"=>"2020-04-26 07:16:16",
-                                                                                        "updated_at"=>"2020-04-26 07:16:16",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Form Action",
-                                                                                        "model"=>"Demo\Core\Models\FormAction",
-                                                                                        "controller"=>"Demo\Core\Controllers\FormActionController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=> 0,
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> 1
-                            ] ,            [
-                                                                            "id"=> 517,
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
+                                                                            "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -508,10 +347,170 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"12ff4f7c-17b1-4510-8fb9-00d93fa1128a"
                             ] ,            [
-                                                                            "id"=> 518,
-                                                                                        "created_at"=>"2020-05-10 05:15:28",
+                                                                            "created_at"=>"2020-04-27 12:16:53",
+                                                                                        "updated_at"=>"2020-05-08 08:13:16",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Role",
+                                                                                        "model"=>"Demo\Core\Models\Role",
+                                                                                        "controller"=>"Demo\Core\Controllers\RoleController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"d1dfa6e2-65e9-49de-839d-f2a65c9c19d2"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                                        "updated_at"=>"2020-05-10 04:11:48",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"users",
+                                                                                        "model"=>"Demo\Core\Models\User",
+                                                                                        "controller"=>"Demo\Core\Controllers\UserController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"*",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"9d9f08c6-32a3-48ce-b172-9bbffb81b4ad"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                                        "updated_at"=>"2020-05-10 04:11:48",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"case_priority",
+                                                                                        "model"=>"Demo\Casemanager\Models\Casepriority",
+                                                                                        "controller"=>"Demo\Casemanager\Controllers\CasepriorityController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"*",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"94cb17a6-aa2d-4bc4-b603-612e09f39a2f"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                                        "updated_at"=>"2020-05-10 04:11:48",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"workflow_transitions",
+                                                                                        "model"=>"Demo\Workflow\Models\WorkflowTransitions",
+                                                                                        "controller"=>"Demo\Workflow\Controllers\WorkflowTransitionsController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"*",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"9ad92a08-cf91-47e5-bc59-263614415960"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                                        "updated_at"=>"2020-05-10 04:11:48",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"logs",
+                                                                                        "model"=>"Demo\Notification\Models\NotificationLog",
+                                                                                        "controller"=>"Demo\Notification\Controllers\NotificationLogController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"*",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"7ccd8ade-691b-47f4-8999-54a616098cf8"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                                        "updated_at"=>"2020-05-10 04:11:48",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"user_role_associations",
+                                                                                        "model"=>"Demo\Core\Models\UserRoleAssociation",
+                                                                                        "controller"=>"Demo\Core\Controllers\UserRoleAssociationController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"*",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"7ae49b89-62ed-4026-8136-d649a7428d8c"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                                        "updated_at"=>"2020-05-10 04:11:48",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"routing_rules",
+                                                                                        "model"=>"Demo\Workflow\Models\QueueRoutingrule",
+                                                                                        "controller"=>"Demo\Workflow\Controllers\QueueRoutingruleController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"*",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"51789f2c-c05b-4813-8adb-d98fff1e5d80"
+                            ] ,            [
+                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"User",
+                                                                                        "model"=>"Demo\Core\Models\CoreUser",
+                                                                                        "controller"=>"Demo\Core\Controllers\UserController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\" * \"]",
+                                                                                        "description"=> null,
+                                                                                        "attach_audited_by"=> 1,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"bc6274fa-a406-4410-8749-de61e8cd7ab5"
+                            ] ,            [
+                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"User",
+                                                                                        "model"=>"Demo\Core\Models\CoreUserGroup",
+                                                                                        "controller"=>"Demo\Core\Controllers\UserGroupController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\" * \"]",
+                                                                                        "description"=> null,
+                                                                                        "attach_audited_by"=> 1,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"8eb30d4a-48bd-4ca7-b848-d9245be0d63d"
+                            ] ,            [
+                                                                            "created_at"=>"2020-04-26 07:16:16",
+                                                                                        "updated_at"=>"2020-04-26 07:16:16",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Form Action",
+                                                                                        "model"=>"Demo\Core\Models\FormAction",
+                                                                                        "controller"=>"Demo\Core\Controllers\FormActionController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false,
+                                                                                        "viewable"=> 1,
+                                                                                        "id"=>"a24b1957-9aa4-462c-a5b0-e3fa356a25c1"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-10 05:15:28",
                                                                                         "updated_at"=>"2020-05-10 05:15:28",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -524,10 +523,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"eff49bc7-518a-4b08-94ec-265d854e1f1a"
                             ] ,            [
-                                                                            "id"=> 524,
-                                                                                        "created_at"=>"2020-05-26 14:00:24",
+                                                                            "created_at"=>"2020-05-26 14:00:24",
                                                                                         "updated_at"=>"2020-05-26 14:00:24",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -540,10 +539,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"9acbce33-243a-4362-a3f6-bf3eaf45fa3e"
                             ] ,            [
-                                                                            "id"=> 509,
-                                                                                        "created_at"=>"2020-05-09 11:25:29",
+                                                                            "created_at"=>"2020-05-09 11:25:29",
                                                                                         "updated_at"=>"2020-05-10 16:00:23",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -556,10 +555,10 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"90ba5e4a-f8c9-4cbd-a475-c2d7a6b534cd"
                             ] ,            [
-                                                                            "id"=> 519,
-                                                                                        "created_at"=>"2020-05-16 05:56:51",
+                                                                            "created_at"=>"2020-05-16 05:56:51",
                                                                                         "updated_at"=>"2020-05-16 05:56:51",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -572,7 +571,8 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false,
-                                                                                        "viewable"=> false
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"5994e845-740a-431b-8adb-7def380ebbc2"
                             ]             ]);
         }
 
