@@ -10,14 +10,14 @@ class BuilderTableCreateDemoCorePermissionPolicyAssociations extends Migration
         Schema::create('demo_core_permission_policy_associations', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->integer('plugin_id');
-            $table->integer('permission_id');
-            $table->integer('policy_id');
+            $table->uuid('permission_id');
+            $table->uuid('policy_id');
         });
     }
     

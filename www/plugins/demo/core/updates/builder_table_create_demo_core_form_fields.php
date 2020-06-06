@@ -10,13 +10,13 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
         Schema::create('demo_core_form_fields', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('label');
-            $table->integer('field_id')->nullable();
+            $table->uuid('field_id')->nullable();
             $table->string('form');
             $table->integer('plugin_id');
             $table->text('controls');

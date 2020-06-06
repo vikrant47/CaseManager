@@ -10,10 +10,10 @@ class BuilderTableCreateDemoWorkflowQueueItems extends Migration
         Schema::create('demo_workflow_queue_items', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
-            $table->integer('queue_id');
+            $table->uuid('id')->primary();
+            $table->uuid('queue_id');
             $table->integer('assigned_to_id')->nullable();
-            $table->integer('record_id');
+            $table->uuid('record_id');
             $table->string('model', 255);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

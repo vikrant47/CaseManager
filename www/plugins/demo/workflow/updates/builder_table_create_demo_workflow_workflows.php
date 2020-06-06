@@ -9,7 +9,7 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
     {
         Schema::create('demo_workflow_workflows', function ($table) {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('active')->default(1);

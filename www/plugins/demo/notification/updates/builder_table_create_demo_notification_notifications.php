@@ -10,7 +10,7 @@ class BuilderTableCreateDemoNotificationNotifications extends Migration
         Schema::create('demo_notification_notifications', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id')->unsigned();
+            $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
@@ -23,8 +23,8 @@ class BuilderTableCreateDemoNotificationNotifications extends Migration
             $table->integer('plugin_id');
             $table->boolean('active');
             $table->boolean('enable_logging')->default(false);
-            $table->integer('template_id');
-            $table->integer('channel_id');
+            $table->uuid('template_id');
+            $table->uuid('channel_id');
         });
     }
     
