@@ -46,6 +46,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "viewable"=> false,
                                                                                         "id"=>"0d43527c-ba2f-47a8-8b0d-a78eaa2c630d"
                             ] ,            [
+                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2020-06-06 13:53:37",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Inbound Api",
+                                                                                        "model"=>"Demo\Core\Models\InboundApi",
+                                                                                        "controller"=>"Demo\Core\Controllers\InboundApiController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> 1,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"f9386c03-0314-4fc1-b2db-15dc43e917cf"
+                            ] ,            [
                                                                             "created_at"=>"2020-04-18 14:53:04",
                                                                                         "updated_at"=>"2020-04-18 15:36:42",
                                                                                         "created_by_id"=> 1,
@@ -141,22 +157,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "attach_audited_by"=> 1,
                                                                                         "viewable"=> false,
                                                                                         "id"=>"62203afe-185b-40c3-b0fd-d263f1341e0e"
-                            ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Inbound Api",
-                                                                                        "model"=>"Demo\Core\Models\InboundApi",
-                                                                                        "controller"=>"Demo\Core\Controllers\InboundApiController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\" * \"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"f9386c03-0314-4fc1-b2db-15dc43e917cf"
                             ] ,            [
                                                                             "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
