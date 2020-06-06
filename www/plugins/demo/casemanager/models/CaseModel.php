@@ -16,6 +16,7 @@ class CaseModel extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_casemanager_cases';
+public $incrementing = false;
 
     public $belongsTo = [
         'assigned_to' => [User::class, 'key' => 'assigned_to_id'],

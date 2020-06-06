@@ -17,6 +17,7 @@ class FormField extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_form_fields';
+public $incrementing = false;
 
 
     /**

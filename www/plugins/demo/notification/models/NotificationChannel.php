@@ -19,6 +19,7 @@ class NotificationChannel extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_notification_channels';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

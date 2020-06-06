@@ -26,6 +26,7 @@ class Widget extends Model implements FromCollection
      * @var string The database table used by the model.
      */
     public $table = 'demo_report_widgets';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

@@ -16,6 +16,7 @@ class ServiceChannel extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_service_channels';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

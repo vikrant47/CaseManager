@@ -14,6 +14,7 @@ class CasePriority extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_casemanager_case_priorities';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

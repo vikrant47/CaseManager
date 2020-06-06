@@ -16,6 +16,7 @@ class Dashboard extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_report_dashboards';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

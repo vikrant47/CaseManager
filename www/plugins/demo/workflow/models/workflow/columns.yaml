@@ -1,7 +1,7 @@
 columns:
     id:
         label: id
-        type: number
+        type: string
     created_at:
         label: created_at
         type: datetime

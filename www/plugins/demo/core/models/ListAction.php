@@ -16,6 +16,7 @@ class ListAction extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_list_actions';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

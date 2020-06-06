@@ -15,6 +15,7 @@ class NotificationLog extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_notification_logs';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

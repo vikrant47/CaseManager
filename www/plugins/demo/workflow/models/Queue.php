@@ -30,6 +30,7 @@ class Queue extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_queues';
+public $incrementing = false;
 
     public $belongsTo = [
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],

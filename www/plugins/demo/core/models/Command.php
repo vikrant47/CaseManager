@@ -16,6 +16,7 @@ class Command extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_commands';
+public $incrementing = false;
 
     /**
      * @var array Validation rules

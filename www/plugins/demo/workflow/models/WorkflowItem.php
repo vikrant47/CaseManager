@@ -20,6 +20,7 @@ class WorkflowItem extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_workflow_items';
+public $incrementing = false;
 
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],

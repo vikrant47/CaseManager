@@ -9,6 +9,7 @@ use Demo\Core\Models\ModelModel;
 use Demo\Workflow\Models\WorkflowItem;
 use Demo\Workflow\Models\WorkflowTransition;
 use System\Models\EventLog;
+use Webpatser\Uuid\Uuid;
 
 class BeforeCreateOrUpdateAudit
 {
@@ -21,7 +22,6 @@ class BeforeCreateOrUpdateAudit
     public function handler($event, $model)
     {
         $modelClass = get_class($model);
-        $attachAuditedBy = $model->attachAuditedBy;
         if (!in_array($modelClass, $this->ignoreModels)) {
             $modelModel = ModelModel::where('model', get_class($model))->first();
             if (!empty($modelModel)) {
@@ -31,12 +31,17 @@ class BeforeCreateOrUpdateAudit
                 }
             }
         }
+        $attachAuditedBy = $model->attachAuditedBy;
         if ($attachAuditedBy) {
             $user = BackendAuth::getUser();
             if ($event === 'creating') {
                 $model->created_by_id = $user->id;
             }
             $model->updated_by_id = $user->id;
+        }
+        $incrementing = $model->incrementing;
+        if ($incrementing === false && $event === 'creating') {
+            $model->id = (string) Uuid::generate();
         }
     }
 
