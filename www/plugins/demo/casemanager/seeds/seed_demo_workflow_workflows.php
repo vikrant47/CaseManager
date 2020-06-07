@@ -15,12 +15,12 @@ class SeedDemoWorkflowWorkflows implements Seedable
             Db::table('demo_workflow_workflows')->insert([
             [
                                                                             "created_at"=>"2019-10-08 08:17:55",
-                                                                                        "updated_at"=>"2020-06-06 14:01:42",
+                                                                                        "updated_at"=>"2020-06-07 06:50:20",
                                                                                         "active"=> 1,
                                                                                         "name"=>"Case Workflow",
                                                                                         "code"=>"case-workflow",
                                                                                         "description"=>"Case Workflow sdsdsd",
-                                                                                        "definition"=>"[{\"from_state\":\"09dfd34e-0db5-49f3-96b2-23831d811a0b\",\"to_state\":\"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de\"},{\"from_state\":\"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de\",\"to_state\":\"c5a45023-2d2a-48ca-94b1-3097c0af7d05\"},{\"from_state\":\"c5a45023-2d2a-48ca-94b1-3097c0af7d05\",\"to_state\":\"bfc699c2-db96-4358-85e3-9956a4c815a4\"},{\"from_state\":\"bfc699c2-db96-4358-85e3-9956a4c815a4\",\"to_state\":\"8c7e9158-b65c-437a-a5d9-4b975f7b6f51\"}]",
+                                                                                        "definition"=>"[{\"from_state\":\"09dfd34e-0db5-49f3-96b2-23831d811a0b\",\"to_state\":\"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de\"},{\"from_state\":\"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de\",\"to_state\":\"c5a45023-2d2a-48ca-94b1-3097c0af7d05\"},{\"from_state\":\"c5a45023-2d2a-48ca-94b1-3097c0af7d05\",\"to_state\":\"8c7e9158-b65c-437a-a5d9-4b975f7b6f51\"}]",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 6,

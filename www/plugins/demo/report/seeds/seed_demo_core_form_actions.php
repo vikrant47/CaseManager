@@ -15,26 +15,7 @@ class SeedDemoCoreFormActions implements Seedable
             Db::table('demo_core_form_actions')->insert([
             [
                                                                             "created_at"=>"2020-05-13 04:12:13",
-                                                                                        "updated_at"=>"2020-05-13 04:12:13",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"widget-preview",
-                                                                                        "label"=>"Preview",
-                                                                                        "form"=>"\$/demo/report/models/widget/fields.yaml",
-                                                                                        "model"=>"Demo\Report\Models\Widget",
-                                                                                        "active"=> 1,
-                                                                                        "description"=> "",
-                                                                                        "icon"=>"oc-icon-photo",
-                                                                                        "css_class"=> "",
-                                                                                        "sort_order"=> 3,
-                                                                                        "plugin_id"=> 14,
-                                                                                        "script"=>"function(){\r\n}",
-                                                                                        "context"=>"[\"update\"]",
-                                                                                        "html_attributes"=>"[{\"name\":\"data-toggle\",\"value\":\"model\"},{\"name\":\"href\",\"value\":\"#previewModal\"},{\"name\":\"data-size\",\"value\":\"large\"},{\"name\":\"data-request\",\"value\":\"onPreview\"},{\"name\":\"data-load-indicator\",\"value\":\"Loading\"},{\"name\":\"data-request-update\",\"value\":\"widget_renderer: '#previewModal .modal-body'\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+p, cmd+p\"}]",
-                                                                                        "id"=>"eaa211e4-d899-413b-b6ef-64339b3b3626"
-                            ] ,            [
-                                                                            "created_at"=>"2020-05-13 04:12:13",
-                                                                                        "updated_at"=>"2020-05-13 04:14:14",
+                                                                                        "updated_at"=>"2020-06-07 05:47:03",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"dashboard-preview",
@@ -51,6 +32,25 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-toggle\",\"value\":\"model\"},{\"name\":\"href\",\"value\":\"#previewModal\"},{\"name\":\"data-size\",\"value\":\"large\"},{\"name\":\"data-request\",\"value\":\"onPreview\"},{\"name\":\"data-load-indicator\",\"value\":\"Loading\"},{\"name\":\"data-request-update\",\"value\":\"widget_renderer: '#previewModal .modal-body'\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+p, cmd+p\"}]",
                                                                                         "id"=>"c916ac69-bfd1-4ccc-8b75-2d8160831de6"
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-13 04:12:13",
+                                                                                        "updated_at"=>"2020-06-07 05:47:21",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"widget-preview",
+                                                                                        "label"=>"Preview",
+                                                                                        "form"=>"\$/demo/report/models/widget/fields.yaml",
+                                                                                        "model"=>"Demo\Report\Models\Widget",
+                                                                                        "active"=> 1,
+                                                                                        "description"=> "",
+                                                                                        "icon"=>"oc-icon-photo",
+                                                                                        "css_class"=> "",
+                                                                                        "sort_order"=> 3,
+                                                                                        "plugin_id"=> 14,
+                                                                                        "script"=>"function(){\r\n}",
+                                                                                        "context"=>"[\"update\"]",
+                                                                                        "html_attributes"=>"[{\"name\":\"data-toggle\",\"value\":\"model\"},{\"name\":\"href\",\"value\":\"#previewModal\"},{\"name\":\"data-size\",\"value\":\"large\"},{\"name\":\"data-request\",\"value\":\"onPreview\"},{\"name\":\"data-load-indicator\",\"value\":\"Loading\"},{\"name\":\"data-request-update\",\"value\":\"widget_renderer: '#previewModal .modal-body'\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+p, cmd+p\"}]",
+                                                                                        "id"=>"eaa211e4-d899-413b-b6ef-64339b3b3626"
                             ]             ]);
         }
 

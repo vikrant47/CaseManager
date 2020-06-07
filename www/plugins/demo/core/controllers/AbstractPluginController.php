@@ -389,16 +389,16 @@ class AbstractPluginController extends Controller
         $modelClass = $this->modelClass;
         // return SessionCache::instance()->get($modelClass . '-ListActions-' . $listConfig->list, function () use ($listConfig, $modelClass) {
         $query = Db::table('demo_core_list_actions')->where([
-            'active' => true,
+            'demo_core_list_actions.active' => true,
         ])->where(function ($query) use ($listConfig) {
-            $query->where('list', $listConfig->list)
-                ->orWhere('list', null)
-                ->orWhere('list', '');
+            $query->where('demo_core_list_actions.list', $listConfig->list)
+                ->orWhere('demo_core_list_actions.list', null)
+                ->orWhere('demo_core_list_actions.list', '');
         })->where(function ($query) use ($modelClass) {
-            $query->where('model', $modelClass)
-                ->orWhere('model', UniversalModel::class);
-        })->orderBy('sort_order', 'ASC');
-        // $this->viewExtendQuery(ListAction::class, $query);
+            $query->where('demo_core_list_actions.model', $modelClass)
+                ->orWhere('demo_core_list_actions.model', UniversalModel::class);
+        })->orderBy('demo_core_list_actions.sort_order', 'ASC');
+        $this->viewExtendQuery(ListAction::class, $query);
         $result = $query->get();
         return $result;
         // });
@@ -410,19 +410,19 @@ class AbstractPluginController extends Controller
         $formController = $this->extensionData['extensions']['Backend\Behaviors\FormController'];
         $formConfig = $formController->getConfig();
         /*return SessionCache::instance()->get($modelClass . '-FormActions-' . $formConfig->form, function () use ($formConfig, $modelClass, $context) {*/
-            $query = Db::table('demo_core_form_actions')->where([
-                'active' => true
-            ])->where(function ($query) use ($formConfig) {
-                $query->where('form', $formConfig->form)
-                    ->orWhere('form', null)
-                    ->orWhere('form', '');
-            })->where(function ($query) use ($modelClass) {
-                $query->where('model', $modelClass)
-                    ->orWhere('model', UniversalModel::class);
-            })->where('context', 'iLike', '%' . $context . '%')->orderBy('sort_order', 'ASC');
-            $this->viewExtendQuery(ListAction::class, $query);
-            $result = $query->get();
-            return $result;
+        $query = Db::table('demo_core_form_actions')->where([
+            'demo_core_form_actions.active' => true
+        ])->where(function ($query) use ($formConfig) {
+            $query->where('demo_core_form_actions.form', $formConfig->form)
+                ->orWhere('demo_core_form_actions.form', null)
+                ->orWhere('demo_core_form_actions.form', '');
+        })->where(function ($query) use ($modelClass) {
+            $query->where('demo_core_form_actions.model', $modelClass)
+                ->orWhere('demo_core_form_actions.model', UniversalModel::class);
+        })->where('demo_core_form_actions.context', 'iLike', '%' . $context . '%')->orderBy('demo_core_form_actions.sort_order', 'ASC');
+        $this->viewExtendQuery(FormAction::class, $query);
+        $result = $query->get();
+        return $result;
         /*});*/
     }
 

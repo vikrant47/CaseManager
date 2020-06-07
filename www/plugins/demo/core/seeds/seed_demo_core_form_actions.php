@@ -15,7 +15,7 @@ class SeedDemoCoreFormActions implements Seedable
             Db::table('demo_core_form_actions')->insert([
             [
                                                                             "created_at"=>"2020-04-13 14:34:58",
-                                                                                        "updated_at"=>"2020-04-19 05:48:48",
+                                                                                        "updated_at"=>"2020-06-07 05:47:29",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"view-history",
@@ -33,8 +33,27 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "html_attributes"=>"[{\"name\":\"data-show\",\"value\":\"return this.data.action.modelRecord.audit===true;\"}]",
                                                                                         "id"=>"54e73d14-1a67-4327-91a7-3e5b1aa49a90"
                             ] ,            [
+                                                                            "created_at"=>"2020-04-26 15:37:16",
+                                                                                        "updated_at"=>"2020-06-07 05:47:44",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"create",
+                                                                                        "label"=>"Create",
+                                                                                        "form"=> "",
+                                                                                        "model"=>"Demo\Core\Models\UniversalModel",
+                                                                                        "active"=> 1,
+                                                                                        "description"=> "",
+                                                                                        "icon"=>"oc-icon-adjust",
+                                                                                        "css_class"=> "",
+                                                                                        "sort_order"=> -2,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "script"=>"function(){}",
+                                                                                        "context"=>"[\"create\"]",
+                                                                                        "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+s, cmd+s\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"}]",
+                                                                                        "id"=>"0625b4f7-ab22-48ba-9eb2-e748cad64eab"
+                            ] ,            [
                                                                             "created_at"=>"2020-04-26 15:38:44",
-                                                                                        "updated_at"=>"2020-04-27 09:13:03",
+                                                                                        "updated_at"=>"2020-06-07 05:46:42",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"save-close",
@@ -53,7 +72,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "id"=>"74aa9c40-9618-4fc2-890f-35d98a81b875"
                             ] ,            [
                                                                             "created_at"=>"2020-04-26 15:37:16",
-                                                                                        "updated_at"=>"2020-04-27 11:09:54",
+                                                                                        "updated_at"=>"2020-06-07 05:46:52",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"save",
@@ -70,25 +89,6 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+s, cmd+s\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"},{\"name\":\"data-request-data\",\"value\":\"redirect:0\"}]",
                                                                                         "id"=>"60f9be27-c475-462f-a146-40588aa0bc91"
-                            ] ,            [
-                                                                            "created_at"=>"2020-04-26 15:37:16",
-                                                                                        "updated_at"=>"2020-04-27 11:09:54",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"create",
-                                                                                        "label"=>"Create",
-                                                                                        "form"=> "",
-                                                                                        "model"=>"Demo\Core\Models\UniversalModel",
-                                                                                        "active"=> 1,
-                                                                                        "description"=> "",
-                                                                                        "icon"=>"oc-icon-adjust",
-                                                                                        "css_class"=> "",
-                                                                                        "sort_order"=> -2,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "script"=>"function(){}",
-                                                                                        "context"=>"[\"create\"]",
-                                                                                        "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+s, cmd+s\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"}]",
-                                                                                        "id"=>"0625b4f7-ab22-48ba-9eb2-e748cad64eab"
                             ]             ]);
         }
 

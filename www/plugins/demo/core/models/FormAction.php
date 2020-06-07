@@ -1,7 +1,9 @@
 <?php namespace Demo\Core\Models;
 
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Model;
+use October\Rain\Exception\ApplicationException;
 use RainLab\Builder\Classes\IconList;
 
 /**
@@ -16,7 +18,7 @@ class FormAction extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_form_actions';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
@@ -31,6 +33,16 @@ public $incrementing = false;
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
+    public $morphToMany = [
+        'roles' => [
+            Role::class,
+            'name' => 'viewable',
+            'table' => 'demo_core_view_role_associations',
+            'key' => 'record_id',
+            'otherKey' => 'role_id',
+            'morphTypeKey' => 'model',
+        ]
+    ];
 
     public function getIconOptions()
     {
@@ -43,6 +55,11 @@ public $incrementing = false;
             return PluginConnection::getFormsAlias($data->model);
         }
         return PluginConnection::getAllFormsAlias();
+    }
+
+    public function beforeSave()
+    {
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->plugin_id);
     }
 
 }

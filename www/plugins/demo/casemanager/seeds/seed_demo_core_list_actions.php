@@ -33,7 +33,7 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "id"=>"d6d84ed8-7b59-4538-b9f5-f69f24489aef"
                             ] ,            [
                                                                             "created_at"=>"2020-05-17 09:24:19",
-                                                                                        "updated_at"=>"2020-06-01 04:24:34",
+                                                                                        "updated_at"=>"2020-06-07 05:44:45",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"pick-case",

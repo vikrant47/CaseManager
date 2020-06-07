@@ -1,4 +1,4 @@
-list: $/demo/workflow/models/workflowitemcontroller/columns.yaml
+list: $/demo/workflow/models/workflowitem/columns.yaml
 modelClass: Demo\Workflow\Models\WorkflowItem
 title: WorkflowEntities
 noRecordsMessage: 'backend::lang.list.no_records'
