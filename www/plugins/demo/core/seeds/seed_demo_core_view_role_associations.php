@@ -32,17 +32,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "version"=> null,
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "id"=>"840f7700-a7f9-11ea-91db-f12d6da3f0b5",
-                                                                                        "record_id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-06 13:27:49",
-                                                                                        "updated_at"=>"2020-06-06 13:27:49",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
                                                                                         "id"=>"84113c20-a7f9-11ea-899f-e92a613db19b",
                                                                                         "record_id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
@@ -626,31 +615,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "version"=> null,
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Core\Models\FormAction",
-                                                                                        "id"=>"43a5fd10-a882-11ea-9b64-bdd5dc569444",
-                                                                                        "record_id"=>"74aa9c40-9618-4fc2-890f-35d98a81b875",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-07 05:46:42",
-                                                                                        "updated_at"=>"2020-06-07 05:46:42",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\FormAction",
                                                                                         "id"=>"43a7c120-a882-11ea-b37f-43811c4770f0",
                                                                                         "record_id"=>"74aa9c40-9618-4fc2-890f-35d98a81b875",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-07 05:46:52",
-                                                                                        "updated_at"=>"2020-06-07 05:46:52",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\FormAction",
-                                                                                        "id"=>"49e8b070-a882-11ea-bb5d-6d3f45ddc75c",
-                                                                                        "record_id"=>"60f9be27-c475-462f-a146-40588aa0bc91",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
                             ] ,            [
                                                                             "created_at"=>"2020-06-07 05:46:52",
                                                                                         "updated_at"=>"2020-06-07 05:46:52",
@@ -670,31 +637,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "version"=> null,
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Core\Models\FormAction",
-                                                                                        "id"=>"5ff1f9c0-a882-11ea-84dd-bb441794d3ac",
-                                                                                        "record_id"=>"54e73d14-1a67-4327-91a7-3e5b1aa49a90",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-07 05:47:29",
-                                                                                        "updated_at"=>"2020-06-07 05:47:29",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\FormAction",
                                                                                         "id"=>"5ff3aab0-a882-11ea-a240-0d081a2656ed",
                                                                                         "record_id"=>"54e73d14-1a67-4327-91a7-3e5b1aa49a90",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-07 05:47:44",
-                                                                                        "updated_at"=>"2020-06-07 05:47:44",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\FormAction",
-                                                                                        "id"=>"6898d480-a882-11ea-8b9d-d5dcc857213f",
-                                                                                        "record_id"=>"0625b4f7-ab22-48ba-9eb2-e748cad64eab",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
                             ] ,            [
                                                                             "created_at"=>"2020-06-07 05:47:44",
                                                                                         "updated_at"=>"2020-06-07 05:47:44",
@@ -714,17 +659,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "version"=> null,
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "id"=>"f87a0140-a884-11ea-b44a-ad3b9d86ae51",
-                                                                                        "record_id"=>"d965a574-969f-40cf-a735-524cdacfe676",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-07 06:06:04",
-                                                                                        "updated_at"=>"2020-06-07 06:06:04",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
                                                                                         "id"=>"f87bf680-a884-11ea-8e9f-05c2f8d3edeb",
                                                                                         "record_id"=>"d965a574-969f-40cf-a735-524cdacfe676",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
@@ -736,31 +670,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "version"=> null,
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "id"=>"128147e0-a885-11ea-b0ca-ebbfed1c927d",
-                                                                                        "record_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-07 06:06:48",
-                                                                                        "updated_at"=>"2020-06-07 06:06:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
                                                                                         "id"=>"1282e410-a885-11ea-a0af-2bbbd51b06d7",
                                                                                         "record_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-07 06:06:56",
-                                                                                        "updated_at"=>"2020-06-07 06:06:56",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "id"=>"176c8a80-a885-11ea-b244-c7bc77b30ba4",
-                                                                                        "record_id"=>"7ffd7ee5-deb5-41af-876f-6bac700a35be",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
                             ] ,            [
                                                                             "created_at"=>"2020-06-07 06:06:56",
                                                                                         "updated_at"=>"2020-06-07 06:06:56",
