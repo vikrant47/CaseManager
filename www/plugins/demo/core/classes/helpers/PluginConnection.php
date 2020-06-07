@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Classes\Helpers;
 
 use Demo\Core\Classes\Utils\StringUtil;
+use Demo\Core\Models\PluginVersions;
 use File;
 use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginBase;
@@ -300,7 +301,7 @@ class PluginConnection
     public static function getCurrentConnection()
     {
         $request = request();
-        $identifier = $request->request->get('CURRENT_PLUGIN');
+        $identifier = $request->attributes->get('CURRENT_PLUGIN');
         if (empty($identifier)) {
             return null;
         }
@@ -310,7 +311,25 @@ class PluginConnection
     public static function getCurrentPluginIdentifier()
     {
         $request = request();
-        return $identifier = $request->request->get('CURRENT_PLUGIN');
+        return $identifier = $request->attributes->get('CURRENT_PLUGIN');
+    }
+
+    /**@return PluginVersions */
+    public static function getCurrentPlugin()
+    {
+        $request = request();
+        $currentPlugin = $request->attributes->get('CURRENT_PLUGIN_INSTANCE');
+        $currentPluginCode = PluginConnection::getCurrentPluginIdentifier();
+        if (empty($currentPlugin)) {
+            $currentPlugin = PluginVersions::where(['code' => $currentPluginCode])->first();
+            if (empty($currentPlugin)) {
+                $currentPlugin = new PluginVersions();
+                $currentPlugin->id = 10;
+                $currentPlugin->code = $currentPluginCode;
+            }
+            $request->attributes->set('CURRENT_PLUGIN_INSTANCE', $currentPlugin);
+        }
+        return $currentPlugin;
     }
 
     public static function getCurrentLogger()

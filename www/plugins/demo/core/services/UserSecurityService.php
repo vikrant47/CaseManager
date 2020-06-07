@@ -40,9 +40,11 @@ class UserSecurityService
     {
         $self = $this;
         return SessionCache::instance()->get('USER_ROLES', function () use ($self) {
-            return Db::table('demo_core_roles')->select('demo_core_roles.*')
+            $roles = Db::table('demo_core_roles')->select('demo_core_roles.*')
                 ->join('demo_core_user_role_associations', 'demo_core_user_role_associations.role_id', '=', 'demo_core_roles.id')
                 ->where('demo_core_user_role_associations.user_id', '=', $this->user->id)->get();
+            $roles->push(Role::where('code', Role::EVERYONE)->first());
+            return $roles;
         });
     }
 
@@ -133,11 +135,15 @@ class UserSecurityService
         });
     }
 
-    public function applyNavigationPermission($navigationQuery)
+    public function applyViewableModelPermission($viewableModelQuery, $modelClass)
     {
-        return $navigationQuery->select('demo_core_navigations.*')
-            ->join('demo_core_view_role_associations', 'demo_core_view_role_associations.record_id', '=', 'demo_core_navigations.id')
-            ->where('demo_core_view_role_associations.model', '=', Navigation::class)
+        $model = new $modelClass;
+        if ($this->hasRole(Role::ADMIN)) {
+            return $viewableModelQuery;
+        }
+        return $viewableModelQuery->select($model->table . '.*')
+            ->join('demo_core_view_role_associations', 'demo_core_view_role_associations.record_id', '=', $model->table . '.id')
+            ->where('demo_core_view_role_associations.model', '=', $modelClass)
             ->whereIn('demo_core_view_role_associations.role_id', $this->getRoles()->map(function ($role) {
                 return $role->id;
             }));

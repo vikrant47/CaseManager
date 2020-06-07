@@ -18,7 +18,7 @@ class CorePluginMiddlerware implements IPluginMiddleware
         if (starts_with($url, '/backend')) {
             $urlSections = explode('/', $url);
             if (count($urlSections) > 3) {
-                $request->request->set('CURRENT_PLUGIN', $urlSections[2] . '.' . $urlSections[3]);
+                $request->attributes->set('CURRENT_PLUGIN', $urlSections[2] . '.' . $urlSections[3]);
             }
         }
     }

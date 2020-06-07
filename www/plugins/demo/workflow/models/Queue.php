@@ -30,7 +30,7 @@ class Queue extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_queues';
-public $incrementing = false;
+    public $incrementing = false;
 
     public $belongsTo = [
         'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
@@ -94,7 +94,7 @@ public $incrementing = false;
     public static function getQueuesForUser($user)
     {
         return DB::table('demo_workflow_queues')->select(['demo_workflow_queues.id', 'demo_workflow_queues.name'])
-            ->join('demo_workflow_queue_assignment_groups', 'demo_workflow_queue_assignment_groups.id', '=', 'demo_workflow_queues.id')
+            ->join('demo_workflow_queue_assignment_groups', 'demo_workflow_queue_assignment_groups.queue_id', '=', 'demo_workflow_queues.id')
             ->join('backend_user_groups', 'backend_user_groups.id', '=', 'demo_workflow_queue_assignment_groups.group_id')
             ->join('backend_users_groups', 'backend_users_groups.user_group_id', '=', 'backend_user_groups.id')
             ->join('backend_users', 'backend_users.id', '=', 'backend_users_groups.user_id')
@@ -122,11 +122,6 @@ public $incrementing = false;
     {
         $modelClass = get_class($model);
         $this->logger->info('Pushing item to queue [' . $this->name . ']' . ModelUtil::toString($model));
-        if ($this->virtual == 1) {
-            $this->logger->info('Queue is virtual do assigning item');
-            $this->assignItem(null, $model); // if its a virtual queue than immediately call assign item
-            return;
-        }
         if ($this->service_channel->model === $modelClass) {
             $queueItem = QueueItem::where(['record_id' => $model->id, 'model' => $modelClass, 'poped_at' => null])->first();
             $insert = true;
@@ -149,6 +144,11 @@ public $incrementing = false;
                 $queueItem->model = $modelClass;
                 $queueItem->plugin_id = $model->plugin_id || 0;
                 $queueItem->save();
+            }
+            if ($this->virtual == 1) {
+                $this->logger->info('Queue is virtual do assigning item');
+                $this->popItem($queueItem);
+                $this->assignItem($queueItem, $model); // if its a virtual queue than immediately call assign item
             }
         } else {
             throw new ApplicationException('Unsupported element type .Unable to push element in queue');
@@ -193,33 +193,36 @@ public $incrementing = false;
      * Step 5. If element not exists than call pop method again and return
      * Step 6. Delete that element from queue
      * Step 7. Return that element
+     * @param QueueItem $item if not given then pooped form queue based on criteria otherwise used the given item
+     * @return |null
+     * @throws ApplicationException
      */
-    public function popItem()
+    public function popItem($item = null)
     {
-        $this->logger->debug('Poping an item for assignment using ' . ModelUtil::toString($this->pop_criteria, 'name'));
-
-        if ($this->virtual) {
-            return null;
+        if (!empty($item) && !empty($item->poped_at)) {
+            throw new ApplicationException('Item already popped ,cannot pop again' . $item->id);
+        } else {
+            $this->logger->debug('Pooping an item for assignment using ' . ModelUtil::toString($this->pop_criteria, 'name'));
+            $context = new ScriptContext();
+            $query = DB::table('demo_workflow_queue_items')->select('demo_workflow_queue_items.*');
+            $qyery = $context->execute($this->pop_criteria->script, ['queue' => $this, 'query' => $query]);
+            if (!($qyery instanceof \October\Rain\Database\QueryBuilder)) {
+                throw new ApplicationException('Pop criteria should return a QueryBuilder instance');
+            }
+            $item = $qyery->where('queue_id', $this->id)->first();
         }
-        $context = new ScriptContext();
-        $query = DB::table('demo_workflow_queue_items')->select('demo_workflow_queue_items.*');
-        $qyery = $context->execute($this->pop_criteria->script, ['queue' => $this, 'query' => $query]);
-        if (!($qyery instanceof \October\Rain\Database\QueryBuilder)) {
-            throw new ApplicationException('Pop criteria should return a QueryBuilder instance');
-        }
-        $elem = $qyery->where('queue_id', $this->id)->first();
         if (
-            empty($elem)
-            || empty($elem->id)
-            || $elem->queue_id !== $this->id
+            empty($item)
+            || empty($item->id)
+            || $item->queue_id !== $this->id
         ) {
             $this->logger->debug('No item found for assignement');
             return null;
         } else {
-            $queueItem = DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->lockForUpdate()->first();
+            $queueItem = DB::table('demo_workflow_queue_items')->where('id', '=', $item->id)->lockForUpdate()->first();
             if (!empty($queueItem) && !empty($queueItem->model) && !empty($queueItem->record_id)) {
-                DB::table('demo_workflow_queue_items')->where('id', '=', $elem->id)->update(['poped_at' => new \DateTime()]);
-                return $elem->model::find($elem->record_id);
+                DB::table('demo_workflow_queue_items')->where('id', '=', $item->id)->update(['poped_at' => new \DateTime()]);
+                return $item->model::find($item->record_id);
             } else {
                 return $this->popItem();
             }

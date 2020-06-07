@@ -1,5 +1,5 @@
 name: WorkflowEntities
-form: $/demo/workflow/models/workflowitemcontroller/fields.yaml
+form: $/demo/workflow/models/workflowitem/fields.yaml
 modelClass: Demo\Workflow\Models\WorkflowItem
 defaultRedirect: demo/workflow/workflowitemcontroller
 create:

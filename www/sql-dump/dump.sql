@@ -2197,6 +2197,9 @@ COPY backend_access_log (id, user_id, ip_address, created_at, updated_at) FROM s
 38	1	::1	2020-05-29 08:15:23	2020-05-29 08:15:23
 39	2	::1	2020-06-01 13:49:31	2020-06-01 13:49:31
 40	1	::1	2020-06-06 06:51:40	2020-06-06 06:51:40
+41	2	::1	2020-06-07 04:48:26	2020-06-07 04:48:26
+42	2	::1	2020-06-07 05:36:42	2020-06-07 05:36:42
+43	2	::1	2020-06-07 05:38:44	2020-06-07 05:38:44
 \.
 
 
@@ -2204,7 +2207,7 @@ COPY backend_access_log (id, user_id, ip_address, created_at, updated_at) FROM s
 -- Name: backend_access_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('backend_access_log_id_seq', 40, true);
+SELECT pg_catalog.setval('backend_access_log_id_seq', 43, true);
 
 
 --
@@ -2282,8 +2285,8 @@ SELECT pg_catalog.setval('backend_user_throttle_id_seq', 2, true);
 --
 
 COPY backend_users (id, first_name, last_name, login, email, password, activation_code, persist_code, reset_password_code, permissions, is_activated, role_id, activated_at, last_login, created_at, updated_at, deleted_at, is_superuser) FROM stdin;
-2	Suraj	Baliyan	suraj	suraj.baliyan4@gmail.com	$2y$10$sZj8Bfs9CVKMvkVrsWjvhuh02DhE/cxn38DU9KttZTvnD1d5EGXE2	\N	$2y$10$Af.BtOXNQ.GCQzfYKWqhGOGOc6MkOoZVFFNdXkO67hyLVnOPwabV6	\N	\N	f	5	\N	2020-06-01 13:49:30	2020-05-10 06:08:53	2020-06-01 13:49:30	\N	f
 1	Admin	Person	admin	admin@domain.tld	$2y$10$gs9tcpJn5uAmNOzaS4DvZO4l5qrF4zyzATp5AKiT3mKjFt3mnY/KS	\N	$2y$10$T64pYp0VQkjhe6Q4AwExC.NdnLA2vf0oT0TvbgzlBY5aMVxli9nRK	\N		t	2	\N	2020-06-06 06:51:39	2020-04-26 05:34:31	2020-06-06 06:51:39	\N	t
+2	Suraj	Baliyan	suraj	suraj.baliyan4@gmail.com	$2y$10$sZj8Bfs9CVKMvkVrsWjvhuh02DhE/cxn38DU9KttZTvnD1d5EGXE2	\N	$2y$10$DkEYtnayrRp6Z0ZMUmJP7.Ye7uTAjObd9oUdJEMecOQSkw8Ua9g36	\N	\N	f	5	\N	2020-06-07 05:38:44	2020-05-10 06:08:53	2020-06-07 05:38:44	\N	f
 \.
 
 
@@ -2295,6 +2298,7 @@ COPY backend_users_groups (user_id, user_group_id) FROM stdin;
 1	1
 2	3
 1	3
+2	2
 \.
 
 
@@ -2409,6 +2413,24 @@ COPY demo_casemanager_projects (created_at, updated_at, created_by_id, updated_b
 --
 
 COPY demo_core_audit_logs (created_at, updated_at, created_by_id, updated_by_id, version, model, operation, previous, current, id, record_id) FROM stdin;
+2020-06-07 04:14:13	2020-06-07 04:14:13	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5545465","case_version":"6465465","description":null,"priority_id":null,"suspect":"654654654","tat_duration":645645,"title":null}	\N	58143ad0-a875-11ea-937f-c3f3c256f915	520eafe0-a875-11ea-b038-8d334863e71c
+2020-06-07 04:19:19	2020-06-07 04:19:19	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5545465","case_version":"6465465","description":null,"priority_id":null,"suspect":"654654654","tat_duration":645645,"title":null}	\N	0ea48ed0-a876-11ea-92ad-451b73041c6c	520eafe0-a875-11ea-b038-8d334863e71c
+2020-06-07 04:30:58	2020-06-07 04:30:58	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"54654","case_version":"64654","description":null,"priority_id":null,"suspect":"64654654","tat_duration":64,"title":null}	\N	af101e90-a877-11ea-891f-dfa9a35d0cc4	ac2abd90-a877-11ea-991a-7d6401d5f988
+2020-06-07 04:44:29	2020-06-07 04:44:29	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"54545","case_version":"5454","description":null,"priority_id":null,"suspect":"54545","tat_duration":55454,"title":null}	\N	92e97360-a879-11ea-8e67-4ffe8779330e	88b29cb0-a879-11ea-a404-97454a3d8370
+2020-06-07 04:44:37	2020-06-07 04:44:37	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"54545","case_version":"5454","description":null,"priority_id":null,"suspect":"54545","tat_duration":55454,"title":null}	\N	97bbd980-a879-11ea-81a3-7126d9b80152	88b29cb0-a879-11ea-a404-97454a3d8370
+2020-06-07 06:08:56	2020-06-07 06:08:56	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5654564","case_version":"654654","description":null,"priority_id":null,"suspect":"6465465","tat_duration":6465456,"title":null}	\N	5ed07680-a885-11ea-bfcd-1db1a7da4e7f	5e9999d0-a885-11ea-b80c-31b147e327cd
+2020-06-07 06:24:43	2020-06-07 06:24:43	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5654564","case_version":"654654","description":null,"priority_id":null,"suspect":"6465465","tat_duration":6465456,"title":null}	\N	8f814b60-a887-11ea-a59d-6913f0738228	5e9999d0-a885-11ea-b80c-31b147e327cd
+2020-06-07 06:26:40	2020-06-07 06:26:40	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5456465","case_version":"564654","description":null,"priority_id":null,"suspect":"64654","tat_duration":564654,"title":null}	\N	d93bb460-a887-11ea-a76e-6b81b90cf0ec	d29a9b00-a887-11ea-81b6-cf53d393a93f
+2020-06-07 06:26:50	2020-06-07 06:26:50	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5456465","case_version":"564654","description":null,"priority_id":null,"suspect":"64654","tat_duration":564654,"title":null}	\N	ded22a90-a887-11ea-991d-6929f34a07c1	d29a9b00-a887-11ea-81b6-cf53d393a93f
+2020-06-07 06:27:16	2020-06-07 06:27:16	2	2	2	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5456465","case_version":"564654","description":null,"priority_id":null,"suspect":"64654","tat_duration":564654,"title":null}	\N	ee812430-a887-11ea-aad3-d96d99f9a6fb	d29a9b00-a887-11ea-81b6-cf53d393a93f
+2020-06-07 06:27:51	2020-06-07 06:27:51	2	2	3	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5456465","case_version":"564654","description":null,"priority_id":null,"suspect":"64654","tat_duration":564654,"title":null}	\N	034565f0-a888-11ea-ae5a-93be2771f544	d29a9b00-a887-11ea-81b6-cf53d393a93f
+2020-06-07 06:28:20	2020-06-07 06:28:20	2	2	4	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5456465","case_version":"564654","description":null,"priority_id":null,"suspect":"64654","tat_duration":564654,"title":null}	\N	14fd4020-a888-11ea-bd18-2d58f60bf3fb	d29a9b00-a887-11ea-81b6-cf53d393a93f
+2020-06-07 06:28:35	2020-06-07 06:28:35	2	2	5	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"5456465","case_version":"564654","description":null,"priority_id":null,"suspect":"64654","tat_duration":564654,"title":null}	\N	1de57080-a888-11ea-bc9b-292a87d0c437	d29a9b00-a887-11ea-81b6-cf53d393a93f
+2020-06-07 06:51:16	2020-06-07 06:51:16	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	48d221c0-a88b-11ea-8547-4304304ab4ed	48824180-a88b-11ea-817a-4d17562fdc2d
+2020-06-07 06:52:46	2020-06-07 06:52:46	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	7e53a500-a88b-11ea-bae9-f1a279c4af0b	48824180-a88b-11ea-817a-4d17562fdc2d
+2020-06-07 06:55:05	2020-06-07 06:55:05	2	2	2	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	d11dc480-a88b-11ea-9714-53644c272001	48824180-a88b-11ea-817a-4d17562fdc2d
+2020-06-07 06:56:02	2020-06-07 06:56:02	2	2	3	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	f32e4200-a88b-11ea-a982-531072a88246	48824180-a88b-11ea-817a-4d17562fdc2d
+2020-06-07 06:56:49	2020-06-07 06:56:49	2	2	4	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	0f0b42e0-a88c-11ea-b829-093f819d053d	48824180-a88b-11ea-817a-4d17562fdc2d
 \.
 
 
@@ -2441,15 +2463,15 @@ COPY demo_core_event_handlers (created_at, updated_at, created_by_id, updated_by
 --
 
 COPY demo_core_form_actions (created_at, updated_at, created_by_id, updated_by_id, name, label, form, model, active, description, icon, css_class, sort_order, plugin_id, script, context, html_attributes, id) FROM stdin;
+2020-04-13 14:34:58	2020-06-07 05:47:29	1	1	view-history	View History		Demo\\Core\\Models\\UniversalModel	t		oc-icon-history		0	10	function(event,engine,action,$element){\r\n    var location = engine.list.navigate({\r\n            controller:'demo/core/auditlogcontroller'\r\n        },{\r\n        filter:{\r\n            record_id:engine.form.getFormModel().id\r\n        }\r\n    });\r\n    console.log(location);\r\n}	["update","preview"]	[{"name":"data-show","value":"return this.data.action.modelRecord.audit===true;"}]	54e73d14-1a67-4327-91a7-3e5b1aa49a90
+2020-04-26 15:37:16	2020-06-07 05:47:44	1	1	create	Create		Demo\\Core\\Models\\UniversalModel	t		oc-icon-adjust		-2	10	function(){}	["create"]	[{"name":"data-request","value":"onSave"},{"name":"data-hotkey","value":"ctrl+s, cmd+s"},{"name":"data-load-indicator","value":"Saving..."}]	0625b4f7-ab22-48ba-9eb2-e748cad64eab
 2020-04-12 08:37:37	2020-04-19 04:40:45	1	1	test	Test	$/demo/casemanager/models/casemodel/fields.yaml	Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-adjust		0	6	function(){\r\n        alert('Alert from action');\r\n        return false;\r\n}	["create","update"]	[]	801aec17-c33e-4dd1-9a97-560e2534cf3c
-2020-04-13 14:34:58	2020-04-19 05:48:48	1	1	view-history	View History		Demo\\Core\\Models\\UniversalModel	t		oc-icon-history		0	10	function(event,engine,action,$element){\r\n    var location = engine.list.navigate({\r\n            controller:'demo/core/auditlogcontroller'\r\n        },{\r\n        filter:{\r\n            record_id:engine.form.getFormModel().id\r\n        }\r\n    });\r\n    console.log(location);\r\n}	["update","preview"]	[{"name":"data-show","value":"return this.data.action.modelRecord.audit===true;"}]	54e73d14-1a67-4327-91a7-3e5b1aa49a90
-2020-04-26 15:38:44	2020-04-27 09:13:03	1	1	save-close	Save & Close		Demo\\Core\\Models\\UniversalModel	t		oc-icon-save		-1	10		["create","update"]	[{"name":"data-request","value":"onSave"},{"name":"data-hotkey","value":"ctrl+enter, cmd+enter"},{"name":"data-load-indicator","value":"Saving..."},{"name":"data-request-data","value":"close:1"}]	74aa9c40-9618-4fc2-890f-35d98a81b875
-2020-04-26 15:37:16	2020-04-27 11:09:54	1	1	save	Save		Demo\\Core\\Models\\UniversalModel	t		oc-icon-adjust		-2	10	function(){}	["update"]	[{"name":"data-request","value":"onSave"},{"name":"data-hotkey","value":"ctrl+s, cmd+s"},{"name":"data-load-indicator","value":"Saving..."},{"name":"data-request-data","value":"redirect:0"}]	60f9be27-c475-462f-a146-40588aa0bc91
-2020-04-26 15:37:16	2020-04-27 11:09:54	1	1	create	Create		Demo\\Core\\Models\\UniversalModel	t		oc-icon-adjust		-2	10	function(){}	["create"]	[{"name":"data-request","value":"onSave"},{"name":"data-hotkey","value":"ctrl+s, cmd+s"},{"name":"data-load-indicator","value":"Saving..."}]	0625b4f7-ab22-48ba-9eb2-e748cad64eab
-2020-05-13 04:12:13	2020-05-13 04:12:13	1	1	widget-preview	Preview	$/demo/report/models/widget/fields.yaml	Demo\\Report\\Models\\Widget	t		oc-icon-photo		3	14	function(){\r\n}	["update"]	[{"name":"data-toggle","value":"model"},{"name":"href","value":"#previewModal"},{"name":"data-size","value":"large"},{"name":"data-request","value":"onPreview"},{"name":"data-load-indicator","value":"Loading"},{"name":"data-request-update","value":"widget_renderer: '#previewModal .modal-body'"},{"name":"data-hotkey","value":"ctrl+p, cmd+p"}]	eaa211e4-d899-413b-b6ef-64339b3b3626
-2020-05-13 04:12:13	2020-05-13 04:14:14	1	1	dashboard-preview	Preview	$/demo/report/models/dashboard/fields.yaml	Demo\\Report\\Models\\Dashboard	t		oc-icon-photo		3	14	function(){\r\n}	["update"]	[{"name":"data-toggle","value":"model"},{"name":"href","value":"#previewModal"},{"name":"data-size","value":"large"},{"name":"data-request","value":"onPreview"},{"name":"data-load-indicator","value":"Loading"},{"name":"data-request-update","value":"widget_renderer: '#previewModal .modal-body'"},{"name":"data-hotkey","value":"ctrl+p, cmd+p"}]	c916ac69-bfd1-4ccc-8b75-2d8160831de6
-2020-05-31 14:09:07	2020-05-31 14:14:42	1	1	push-case	Push		Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-arrow-circle-up	btn-secondary	4	6	function(){\r\n}	["update"]	[{"name":"data-request","value":"onPushCase"},{"name":"data-request-flash","value":""},{"name":"data-request-success","value":"$(this).hide()"},{"name":"data-load-indicator","value":"Pushing"},{"name":"data-request-confirm","value":"Are you sure?"}]	fa00326d-63d6-4d51-84ee-9567cd8bf986
-2020-05-31 14:09:07	2020-06-01 04:18:53	1	1	rever-case	Revert		Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-undo	btn-default	5	6	function () {\r\n    var form = new EngineForm({\r\n        fields: {\r\n            remark: {\r\n                type: 'richeditor',\r\n                label: 'Enter you remark',\r\n                span: 'full',\r\n            },\r\n        }\r\n    }).build();\r\n    form.showInPopup({\r\n        size: 'md',\r\n        title: 'Are you sure?',\r\n        actions: [{\r\n            name: 'revert-case',\r\n            label: 'Revert',\r\n            active: true,\r\n            icon: '',\r\n            css_class: 'btn btn-primary',\r\n            handler: function () {\r\n                $.request('onRevertCase', {\r\n                    url: EngineForm.getCurrentForm().$el.find('form').prop('action'),\r\n                    loading: $.oc.stripeLoadIndicator,\r\n                    data: {\r\n                        remark: form.getValue('remark')\r\n                    }\r\n                });\r\n            }\r\n        }]\r\n    });\r\n}	["update"]	[]	27909423-8ed9-4465-801c-c0f081f286fc
+2020-05-31 14:09:07	2020-06-07 05:31:43	1	1	push-case	Push		Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-arrow-circle-up	btn-secondary	4	6	function(){\r\n}	["update"]	[{"name":"data-request","value":"onPushCase"},{"name":"data-request-flash","value":""},{"name":"data-request-success","value":"$(this).hide()"},{"name":"data-load-indicator","value":"Pushing"},{"name":"data-request-confirm","value":"Are you sure?"},{"name":"data-show","value":"return action.form.getFormModel().assigned_to_id === me.id"}]	fa00326d-63d6-4d51-84ee-9567cd8bf986
+2020-04-26 15:38:44	2020-06-07 05:46:42	1	1	save-close	Save & Close		Demo\\Core\\Models\\UniversalModel	t		oc-icon-save		-1	10		["create","update"]	[{"name":"data-request","value":"onSave"},{"name":"data-hotkey","value":"ctrl+enter, cmd+enter"},{"name":"data-load-indicator","value":"Saving..."},{"name":"data-request-data","value":"close:1"}]	74aa9c40-9618-4fc2-890f-35d98a81b875
+2020-04-26 15:37:16	2020-06-07 05:46:52	1	1	save	Save		Demo\\Core\\Models\\UniversalModel	t		oc-icon-adjust		-2	10	function(){}	["update"]	[{"name":"data-request","value":"onSave"},{"name":"data-hotkey","value":"ctrl+s, cmd+s"},{"name":"data-load-indicator","value":"Saving..."},{"name":"data-request-data","value":"redirect:0"}]	60f9be27-c475-462f-a146-40588aa0bc91
+2020-05-13 04:12:13	2020-06-07 05:47:03	1	1	dashboard-preview	Preview	$/demo/report/models/dashboard/fields.yaml	Demo\\Report\\Models\\Dashboard	t		oc-icon-photo		3	14	function(){\r\n}	["update"]	[{"name":"data-toggle","value":"model"},{"name":"href","value":"#previewModal"},{"name":"data-size","value":"large"},{"name":"data-request","value":"onPreview"},{"name":"data-load-indicator","value":"Loading"},{"name":"data-request-update","value":"widget_renderer: '#previewModal .modal-body'"},{"name":"data-hotkey","value":"ctrl+p, cmd+p"}]	c916ac69-bfd1-4ccc-8b75-2d8160831de6
+2020-05-13 04:12:13	2020-06-07 05:47:21	1	1	widget-preview	Preview	$/demo/report/models/widget/fields.yaml	Demo\\Report\\Models\\Widget	t		oc-icon-photo		3	14	function(){\r\n}	["update"]	[{"name":"data-toggle","value":"model"},{"name":"href","value":"#previewModal"},{"name":"data-size","value":"large"},{"name":"data-request","value":"onPreview"},{"name":"data-load-indicator","value":"Loading"},{"name":"data-request-update","value":"widget_renderer: '#previewModal .modal-body'"},{"name":"data-hotkey","value":"ctrl+p, cmd+p"}]	eaa211e4-d899-413b-b6ef-64339b3b3626
+2020-05-31 14:09:07	2020-06-07 05:32:17	1	1	rever-case	Revert		Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-undo	btn-default	5	6	function () {\r\n    var form = new EngineForm({\r\n        fields: {\r\n            remark: {\r\n                type: 'richeditor',\r\n                label: 'Enter you remark',\r\n                span: 'full',\r\n            },\r\n        }\r\n    }).build();\r\n    form.showInPopup({\r\n        size: 'md',\r\n        title: 'Are you sure?',\r\n        actions: [{\r\n            name: 'revert-case',\r\n            label: 'Revert',\r\n            active: true,\r\n            icon: '',\r\n            css_class: 'btn btn-primary',\r\n            handler: function () {\r\n                $.request('onRevertCase', {\r\n                    url: EngineForm.getCurrentForm().$el.find('form').prop('action'),\r\n                    loading: $.oc.stripeLoadIndicator,\r\n                    data: {\r\n                        remark: form.getValue('remark')\r\n                    }\r\n                });\r\n            }\r\n        }]\r\n    });\r\n}	["update"]	[{"name":"data-show","value":"return action.form.getFormModel().assigned_to_id === me.id"}]	27909423-8ed9-4465-801c-c0f081f286fc
 \.
 
 
@@ -2498,7 +2520,7 @@ COPY demo_core_list_actions (created_at, updated_at, created_by_id, updated_by_i
 2020-04-27 09:24:16	2020-05-31 13:23:42	1	1	reorder	Reorder		Demo\\Core\\Models\\UniversalModel	f		oc-icon-list		-2	10	function(event,engine){\r\n    engine.list.navigate(engine.ui.getModelRecord(),{},'reorder');\r\n}	[]	72d7f744-e5d4-4f88-8b2f-e16b4132ab42
 2020-04-11 14:12:05	2020-05-31 13:24:08	1	1	test	test2	$/demo/casemanager/models/casemodel/columns.yaml	Demo\\Casemanager\\Models\\CaseModel	f		oc-icon-adjust		0	6		[]	d6d84ed8-7b59-4538-b9f5-f69f24489aef
 2020-04-27 09:24:16	2020-05-26 12:43:46	1	1	create	Create		Demo\\Core\\Models\\UniversalModel	t		oc-icon-plus		-3	10	function(event,engine){\r\n    EngineList.getCurrentList().navigate('create');\r\n}	[]	7fc66991-e2ac-4d1f-9aec-282d485287eb
-2020-05-17 09:24:19	2020-06-01 04:24:34	1	1	pick-case	Pick Case	$/demo/casemanager/models/casemodel/columns.yaml	Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-anchor		4	6	function () {\r\n    $.oc.stripeLoadIndicator.show();\r\n    $.request('onGetCurrentUserQueues', {\r\n        url: '/backend/demo/workflow/queuecontroller',\r\n        success: function (response) {\r\n            if(response.length===0){\r\n                $.oc.flashMsg({\r\n                    'text': 'You are not assigned in any queue.',\r\n                    'class': 'info',\r\n                    'interval': 5\r\n                });\r\n                $.oc.stripeLoadIndicator.hide();\r\n                return;\r\n            }\r\n            var options = {};\r\n            for(var i=0;i<response.length;i++){\r\n                options[response[i].id] = response[i].name;\r\n            }\r\n            var form = new EngineForm({\r\n                fields: {\r\n                    queue: {\r\n                        type: 'dropdown',\r\n                        label: 'Queue',\r\n                        span: 'full',\r\n                        emptyOption:'-- select an option --',\r\n                        showSearch: true,\r\n                        options: options,\r\n                    },\r\n                }\r\n            }).build().on('render',function(){\r\n                $.oc.stripeLoadIndicator.hide();\r\n            });\r\n            form.showInPopup({\r\n                size: 'sm',\r\n                title: 'Select a Queue',\r\n                actions: [{\r\n                    name: 'queue-selection',\r\n                    label: 'Select',\r\n                    active: true,\r\n                    icon: '',\r\n                    css_class: 'btn btn-primary',\r\n                    handler: function () {\r\n                        $.request('onPickItemFromQueue', {\r\n                            url: '/backend/demo/workflow/QueueController',\r\n                            loading: $.oc.stripeLoadIndicator,\r\n                            data: {\r\n                                queueId: form.getValue('queue')\r\n                            }\r\n                        });\r\n                    }\r\n                }]\r\n            });\r\n        },\r\n    });\r\n}	[{"name":"data-trigger-action","value":"disable"},{"name":"data-trigger","value":".control-list input[type=checkbox]"},{"name":"data-trigger-condition","value":"checked"}]	4f95d22e-7293-4495-81f8-ee194bac2c8b
+2020-05-17 09:24:19	2020-06-07 05:44:45	1	1	pick-case	Pick Case	$/demo/casemanager/models/casemodel/columns.yaml	Demo\\Casemanager\\Models\\CaseModel	t		oc-icon-anchor		4	6	function () {\r\n    $.oc.stripeLoadIndicator.show();\r\n    $.request('onGetCurrentUserQueues', {\r\n        url: '/backend/demo/workflow/queuecontroller',\r\n        success: function (response) {\r\n            if(response.length===0){\r\n                $.oc.flashMsg({\r\n                    'text': 'You are not assigned in any queue.',\r\n                    'class': 'info',\r\n                    'interval': 5\r\n                });\r\n                $.oc.stripeLoadIndicator.hide();\r\n                return;\r\n            }\r\n            var options = {};\r\n            for(var i=0;i<response.length;i++){\r\n                options[response[i].id] = response[i].name;\r\n            }\r\n            var form = new EngineForm({\r\n                fields: {\r\n                    queue: {\r\n                        type: 'dropdown',\r\n                        label: 'Queue',\r\n                        span: 'full',\r\n                        emptyOption:'-- select an option --',\r\n                        showSearch: true,\r\n                        options: options,\r\n                    },\r\n                }\r\n            }).build().on('render',function(){\r\n                $.oc.stripeLoadIndicator.hide();\r\n            });\r\n            form.showInPopup({\r\n                size: 'sm',\r\n                title: 'Select a Queue',\r\n                actions: [{\r\n                    name: 'queue-selection',\r\n                    label: 'Select',\r\n                    active: true,\r\n                    icon: '',\r\n                    css_class: 'btn btn-primary',\r\n                    handler: function () {\r\n                        $.request('onPickItemFromQueue', {\r\n                            url: '/backend/demo/workflow/QueueController',\r\n                            loading: $.oc.stripeLoadIndicator,\r\n                            data: {\r\n                                queueId: form.getValue('queue')\r\n                            }\r\n                        });\r\n                    }\r\n                }]\r\n            });\r\n        },\r\n    });\r\n}	[{"name":"data-trigger-action","value":"disable"},{"name":"data-trigger","value":".control-list input[type=checkbox]"},{"name":"data-trigger-condition","value":"checked"}]	4f95d22e-7293-4495-81f8-ee194bac2c8b
 \.
 
 
@@ -2532,13 +2554,13 @@ COPY demo_core_model_associations (created_at, updated_at, created_by_id, update
 COPY demo_core_models (created_at, updated_at, created_by_id, updated_by_id, name, model, controller, plugin_id, audit, record_history, audit_columns, description, attach_audited_by, viewable, id) FROM stdin;
 2020-04-26 07:09:40	2020-04-26 07:09:40	1	1	List Action	Demo\\Core\\Models\\ListAction	Demo\\Core\\Controllers\\ListActionController	10	f	f	0		f	t	58500474-fd4d-4bda-a1c4-892f5301e008
 2020-04-18 15:35:39	2020-04-18 15:35:39	1	1	Audit Log	Demo\\Core\\Models\\AuditLog	Demo\\Core\\Controllers\\AuditLogController	10	f	f	0		f	f	0d43527c-ba2f-47a8-8b0d-a78eaa2c630d
+2019-12-20 14:15:39	2020-06-06 13:53:37	1	1	Inbound Api	Demo\\Core\\Models\\InboundApi	Demo\\Core\\Controllers\\InboundApiController	10	f	f	0		t	f	f9386c03-0314-4fc1-b2db-15dc43e917cf
 2020-04-18 14:53:04	2020-04-18 15:36:42	1	1	Model Model	Demo\\Core\\Models\\ModelModel	Demo\\Core\\Controllers\\ModelController	10	f	f	0		f	f	42f978b1-8e9d-41c5-ba7a-da69c1af7819
 2020-04-13 14:06:29	2020-04-13 14:06:29	1	1	Universal	Demo\\Core\\Models\\UniversalModel	Demo\\Core\\Controllers\\UniversalController	10	f	f	0		f	f	e6ce6d2e-148d-466d-9799-508739a32095
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Notification Subscriber	Demo\\Notification\\Models\\NotificationSubscriber	Demo\\Notification\\Controllers\\NotificationSubscriberController	10	f	f	[" * "]	\N	t	f	4bd73094-51ff-47f0-92d8-d31549fd3e78
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Custom Field	Demo\\Core\\Models\\CustomField	Demo\\Core\\Controllers\\CustomFieldController	10	f	f	[" * "]	\N	t	f	2550e0aa-637c-418f-a1b8-e5d9c972e68b
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Form Field	Demo\\Core\\Models\\FormField	Demo\\Core\\Controllers\\FormFieldController	10	f	f	[" * "]	\N	t	f	0e20e8d5-0f54-4352-8fdc-8ee48fd6d005
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Event Handler	Demo\\Core\\Models\\EventHandler	Demo\\Core\\Controllers\\EventHandlerController	10	f	f	[" * "]	\N	t	f	62203afe-185b-40c3-b0fd-d263f1341e0e
-2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Inbound Api	Demo\\Core\\Models\\InboundApi	Demo\\Core\\Controllers\\InboundApiController	10	f	f	[" * "]	\N	t	f	f9386c03-0314-4fc1-b2db-15dc43e917cf
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Command	Demo\\Core\\Models\\Command	Demo\\Core\\Controllers\\CommandController	10	f	f	[" * "]	\N	t	f	887d85ea-3f6e-4a62-9f5d-b5a138962b68
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Iframe	Demo\\Core\\Models\\Iframe	Demo\\Core\\Controllers\\IframeController	10	f	f	[" * "]	\N	t	f	79751975-864a-4015-b180-e706acb78593
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Javascript Library	Demo\\Core\\Models\\JavascriptLibrary	Demo\\Core\\Controllers\\JavascriptLibraryController	10	f	f	[" * "]	\N	t	f	de7379fc-82da-4a93-b43f-7cf367df891b
@@ -2592,6 +2614,7 @@ COPY demo_core_models (created_at, updated_at, created_by_id, updated_by_id, nam
 --
 
 COPY demo_core_navigations (created_at, updated_at, created_by_id, updated_by_id, version, label, type, active, name, description, url, model, view, form, plugin_id, sort_order, icon, id, record_id, parent_id, dashboard_id, widget_id, uipage_id) FROM stdin;
+\N	2020-06-07 06:06:04	1	1	\N	Case Priority	list	t	case_priority			Demo\\Casemanager\\Models\\Casepriority		\N	10	1	oc-icon-adjust	d965a574-969f-40cf-a735-524cdacfe676	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
 \N	\N	1	1	\N	Model Association	list	t	model_association	\N	\N	Demo\\Core\\Models\\ModelAssociation	\N	\N	10	2	icon-puzzle-piece	05e13a5f-d931-4328-84ed-100acf537174	\N	c1021025-5a8e-4344-af1e-178dd1d1d29e	\N	\N	\N
 2020-05-09 11:48:03	2020-05-09 11:48:03	1	1	\N	Models	list	t	models			Demo\\Core\\Models\\ModelModel	\N		10	0	oc-icon-table	6dfa72ba-9fe1-4d81-aed2-dc945f0ef502	\N	c1021025-5a8e-4344-af1e-178dd1d1d29e	\N	\N	\N
 \N	\N	1	1	\N	Commands	list	t	commands	\N	\N	Demo\\Core\\Models\\Command	\N	\N	10	7	icon-terminal	85546192-4e1a-4dea-95fe-b8ebcc758b0d	\N	c1021025-5a8e-4344-af1e-178dd1d1d29e	\N	\N	\N
@@ -2604,7 +2627,6 @@ COPY demo_core_navigations (created_at, updated_at, created_by_id, updated_by_id
 \N	\N	1	1	\N	Dashboards	list	t	dashboards	\N	\N	Demo\\Report\\Models\\Dashboard	\N	\N	10	0	icon-tachometer	1b4aebe2-66f2-4984-a3d0-f69c3cfb90fc	\N	139f4d70-98d4-492d-84ab-99eabb2e2865	\N	\N	\N
 \N	\N	1	1	\N	Widgets	list	t	widgets	\N	\N	Demo\\Report\\Models\\Widget	\N	\N	10	1	icon-codepen	0ca975a1-b152-4289-a5aa-2d4b2453a95a	\N	139f4d70-98d4-492d-84ab-99eabb2e2865	\N	\N	\N
 \N	\N	1	1	\N	Workflows	list	t	workflows	\N	\N	Demo\\Workflow\\Models\\Workflow	\N	\N	10	0	icon-recycle	84398af6-6036-43ed-b987-8f11ffb7057e	\N	492e6fda-26f4-4115-aff6-b771a7220e46	\N	\N	\N
-\N	\N	1	1	\N	Case Priority	list	t	case_priority	\N	\N	Demo\\Casemanager\\Models\\Casepriority	\N	\N	10	1	icon-flash	d965a574-969f-40cf-a735-524cdacfe676	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
 2020-05-09 15:07:01	2020-05-09 15:32:22	1	1	\N	Security	folder	t	security			\N	\N		10	2	oc-icon-lock	ede0b65d-15ca-43a2-ab83-11643c154327	\N	03b0b444-c20a-4480-8549-67bab2b176f3	\N	\N	\N
 2020-05-09 11:33:08	2020-05-09 15:32:33	1	1	\N	Engine	folder	t	engine			\N	\N		10	1	oc-icon-gears	c1021025-5a8e-4344-af1e-178dd1d1d29e	\N	03b0b444-c20a-4480-8549-67bab2b176f3	\N	\N	\N
 \N	\N	1	1	\N	Pop Criteria	list	t	pop_criteria	\N	\N	Demo\\Workflow\\Models\\QueuePopCriteria	\N	\N	10	8	icon-code	2b9c5851-39a1-4c32-9bb9-b51958fdeee8	\N	492e6fda-26f4-4115-aff6-b771a7220e46	\N	\N	\N
@@ -2621,10 +2643,6 @@ COPY demo_core_navigations (created_at, updated_at, created_by_id, updated_by_id
 2020-05-10 10:28:19	2020-05-16 14:59:12	1	1	2	Youtube	url	t	youtube		https://www.youtube.com/embed/RBumgq5yVrA	Demo\\Report\\Models\\Dashboard	\N		6	5	oc-icon-adjust	ed44650b-b008-456c-85de-adc1270cfbed	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
 2020-05-17 06:17:22	2020-05-17 06:17:22	1	1	\N	Templates	list	t	templates			Demo\\Notification\\Models\\MailTemplate	\N		3	4	oc-icon-file-code-o	9ab44ba4-d108-437f-8025-b999fcffa10c	\N	43098bfd-5bf8-4979-a9b4-1fb837f327f3	\N	\N	\N
 2020-05-09 15:23:48	2020-05-29 07:56:04	1	1	\N	System	folder	t	system			\N			10	1	oc-icon-desktop	03b0b444-c20a-4480-8549-67bab2b176f3	\N	\N	\N	\N	\N
-2020-05-09 15:28:15	2020-05-31 11:54:29	1	1	\N	Workspace	folder	t	workspace			\N			10	10	oc-icon-user-secret	7ffd7ee5-deb5-41af-876f-6bac700a35be	\N	\N	\N	\N	\N
-\N	2020-05-31 13:33:07	1	1	\N	All Cases	list	t	all-cases			Demo\\Casemanager\\Models\\CaseModel			6	0	oc-icon-ambulance	01f868fa-2ac6-42c1-b5e0-030df343dd31	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
-2020-05-18 04:33:41	2020-05-31 13:39:19	1	1	\N	My Cases	list	t	my-cases		list=mycases	Demo\\Casemanager\\Models\\CaseModel			6	0	oc-icon-briefcase	c3984be1-820c-4cc8-a675-742815313468	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
-2020-05-09 15:16:49	2020-05-09 15:30:47	1	1	\N	Case Management	folder	t	case-management			\N	\N		10	6	oc-icon-institution	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	7ffd7ee5-deb5-41af-876f-6bac700a35be	\N	\N	\N
 \N	\N	1	1	\N	Audit Logs	list	t	audit_logs	\N	\N	Demo\\Core\\Models\\AuditLog	\N	\N	10	13	icon-file-archive-o	fcfcb7de-516c-415a-8ddd-3b7392c3c37f	\N	c1021025-5a8e-4344-af1e-178dd1d1d29e	\N	\N	\N
 \N	\N	1	1	\N	Event Handler	list	t	event_handler	\N	\N	Demo\\Core\\Models\\EventHandler	\N	\N	10	5	icon-code	3004557a-c1b4-41c6-b4e3-3d0a4de1a52a	\N	c1021025-5a8e-4344-af1e-178dd1d1d29e	\N	\N	\N
 \N	\N	1	1	\N	Workflow Transitions	list	t	workflow_transitions	\N	\N	Demo\\Workflow\\Models\\WorkflowTransitions	\N	\N	10	2	icon-long-arrow-right	47fe334b-d0da-4d4f-b9a7-9b9a6e59b1b2	\N	492e6fda-26f4-4115-aff6-b771a7220e46	\N	\N	\N
@@ -2634,6 +2652,10 @@ COPY demo_core_navigations (created_at, updated_at, created_by_id, updated_by_id
 \N	\N	1	1	\N	Policy Permissions	list	t	policy_permissions	\N	\N	Demo\\Core\\Models\\SecurityPolicy	\N	\N	10	5	icon-sitemap	530b5272-a8a3-43cd-af15-8ea6a8a7c822	\N	ede0b65d-15ca-43a2-ab83-11643c154327	\N	\N	\N
 \N	2020-06-06 13:24:10	1	1	\N	Projects	list	t	projects			Demo\\Casemanager\\Models\\Project		\N	10	2	oc-icon-adjust	016140c0-a7f9-11ea-a09c-77440aa34325	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
 \N	2020-06-06 13:27:49	1	1	\N	Workflow States	list	t	workflow_states			Demo\\Workflow\\Models\\WorkflowState		\N	10	3	oc-icon-adjust	fdf384c5-bdb6-4294-81a4-af302b12b332	\N	492e6fda-26f4-4115-aff6-b771a7220e46	\N	\N	\N
+2020-05-18 04:33:41	2020-06-07 06:06:12	1	1	\N	My Cases	list	t	my-cases		list=mycases	Demo\\Casemanager\\Models\\CaseModel			6	0	oc-icon-briefcase	c3984be1-820c-4cc8-a675-742815313468	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
+\N	2020-06-07 06:06:40	1	1	\N	All Cases	list	t	all-cases			Demo\\Casemanager\\Models\\CaseModel			6	0	oc-icon-ambulance	01f868fa-2ac6-42c1-b5e0-030df343dd31	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
+2020-05-09 15:16:49	2020-06-07 06:06:48	1	1	\N	Case Management	folder	t	case-management			\N			10	6	oc-icon-institution	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	7ffd7ee5-deb5-41af-876f-6bac700a35be	\N	\N	\N
+2020-05-09 15:28:15	2020-06-07 06:06:56	1	1	\N	Workspace	folder	t	workspace			\N			10	10	oc-icon-user-secret	7ffd7ee5-deb5-41af-876f-6bac700a35be	\N	\N	\N	\N	\N
 \N	\N	1	1	\N	Policies	list	t	policies	\N	\N	Demo\\Core\\Models\\SecurityPolicy	\N	\N	10	2	icon-circle-o-notch	6adbdf35-29f5-468f-8d0d-4e3003f298d0	\N	ede0b65d-15ca-43a2-ab83-11643c154327	\N	\N	\N
 \N	\N	1	1	\N	Channels	list	t	channels	\N	\N	Demo\\Notification\\Models\\NotificationChannel	\N	\N	10	0	icon-signal	211608c8-5b81-47bf-8757-8c39889924b7	\N	43098bfd-5bf8-4979-a9b4-1fb837f327f3	\N	\N	\N
 \N	\N	1	1	\N	Service Channel	list	t	service_channel	\N	\N	Demo\\Workflow\\Models\\ServiceChannel	\N	\N	10	4	icon-sitemap	1f280b8a-9dbd-4b58-a295-59c0740b315d	\N	492e6fda-26f4-4115-aff6-b771a7220e46	\N	\N	\N
@@ -2645,11 +2667,11 @@ COPY demo_core_navigations (created_at, updated_at, created_by_id, updated_by_id
 \N	\N	1	1	\N	Fields	list	t	fields	\N	\N	Demo\\Core\\Models\\CustomField	\N	\N	10	3	icon-th-list	e149e54e-ddcb-4b1b-b80b-2c37755ad953	\N	c1021025-5a8e-4344-af1e-178dd1d1d29e	\N	\N	\N
 2020-05-13 04:38:17	2020-05-13 04:38:31	1	1	\N	Dashboard	dashboard	t	dashboard			\N	\N		6	4	oc-icon-dashboard	81d30c41-fd09-4757-a6f9-e92463faf8bc	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
 2020-05-09 15:26:31	2020-05-16 14:23:26	1	1	\N	Messaging	folder	f	messaging			\N	\N		10	2	oc-icon-mail-forward	88a02697-074c-4dfc-9e7c-5dd964901e21	\N	\N	\N	\N	\N
-2020-05-13 04:37:14	2020-05-13 04:39:02	1	1	\N	Case Report	widget	t	case-report			\N	\N		6	0	oc-icon-book	6f85afbb-3858-4387-b4ce-9f70cf19ed20	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
 2020-05-16 06:02:40	2020-05-16 06:02:40	1	1	\N	User Interface	folder	t	user-interface			\N	\N		10	2	oc-icon-desktop	529c983e-43eb-4c04-b89f-24ac65ab4356	\N	03b0b444-c20a-4480-8549-67bab2b176f3	\N	\N	\N
 \N	2020-05-16 06:04:57	1	1	\N	List Actions	list	t	list_actions			Demo\\Core\\Models\\ListAction	\N		10	12	oc-icon-adjust	dcbc468c-12c8-4f92-b57c-6f05d092b1c1	\N	529c983e-43eb-4c04-b89f-24ac65ab4356	\N	\N	\N
 \N	2020-05-16 06:05:03	1	1	\N	Form Actions	list	t	form_actions			Demo\\Core\\Models\\FormAction	\N		10	11	oc-icon-adjust	7b2d4011-b582-457e-8549-637b0a61f93b	\N	529c983e-43eb-4c04-b89f-24ac65ab4356	\N	\N	\N
 \N	2020-05-16 06:05:07	1	1	\N	Libraries	list	t	libraries			Demo\\Core\\Models\\JavascriptLibrary	\N		10	10	oc-icon-adjust	485ac274-9ef0-45fa-87f7-1e77a8f6b234	\N	529c983e-43eb-4c04-b89f-24ac65ab4356	\N	\N	\N
+2020-05-13 04:37:14	2020-06-07 06:06:24	1	1	\N	Case Report	widget	t	case-report			\N			6	0	oc-icon-book	6f85afbb-3858-4387-b4ce-9f70cf19ed20	\N	3280cd3c-8a95-4683-b661-7846bc9fdf03	\N	\N	\N
 \.
 
 
@@ -2951,6 +2973,7 @@ COPY demo_core_role_policy_associations (created_at, updated_at, created_by_id, 
 COPY demo_core_roles (created_at, updated_at, created_by_id, updated_by_id, name, code, description, plugin_id, id) FROM stdin;
 2020-04-04 14:10:36	2020-04-06 07:16:12	1	1	Agent	agent	test	6	e751a812-4da9-4726-b375-8495ac2d3354
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Administrator	admin	Admin of the platform	10	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2019-12-20 14:15:39	2019-12-20 14:15:39	1	1	Everyone	everyone	Every user of the platform	10	90bafbbe-fbfd-42ed-9e51-5434f2733247
 \.
 
 
@@ -3075,7 +3098,6 @@ COPY demo_core_view_role_associations (created_at, updated_at, created_by_id, up
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	d099c08b-eb22-4597-b5a4-a201fef47fbe	1b4aebe2-66f2-4984-a3d0-f69c3cfb90fc	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	aaf431a5-f15e-46a4-b883-5e1a809bc97a	0ca975a1-b152-4289-a5aa-2d4b2453a95a	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	1c2b1e6c-b6a1-4ece-8b98-28468283321d	84398af6-6036-43ed-b987-8f11ffb7057e	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	d18e4938-2094-49d4-9f8c-3b0d57d44045	d965a574-969f-40cf-a735-524cdacfe676	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	9ed611c9-ba14-4b01-994f-66e9d760ea61	ede0b65d-15ca-43a2-ab83-11643c154327	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	37a22aa8-7ed0-4c30-be15-331d8e5def45	c1021025-5a8e-4344-af1e-178dd1d1d29e	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	0e10cbd5-0b66-489a-9a94-121acdcc0750	2b9c5851-39a1-4c32-9bb9-b51958fdeee8	ab9cbba3-c481-4f23-85c7-37b9d8b52357
@@ -3092,10 +3114,6 @@ COPY demo_core_view_role_associations (created_at, updated_at, created_by_id, up
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	245d6dc5-f335-473b-92c6-f68488f90ee4	ed44650b-b008-456c-85de-adc1270cfbed	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	d0aece34-75dd-4f61-95f4-40e509e31567	9ab44ba4-d108-437f-8025-b999fcffa10c	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	e0f00062-a811-43b8-b897-f75985b8e3c7	03b0b444-c20a-4480-8549-67bab2b176f3	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	a7f23a09-6ae6-449f-8ad1-65d00ba9f68b	7ffd7ee5-deb5-41af-876f-6bac700a35be	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	739986bb-0938-4313-adc1-168b112fde93	01f868fa-2ac6-42c1-b5e0-030df343dd31	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	972c91ec-9db7-4ab8-8e2c-259bd5cfd554	c3984be1-820c-4cc8-a675-742815313468	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	6d27b9fa-9b6b-49de-8a47-1bc94cec0df5	3280cd3c-8a95-4683-b661-7846bc9fdf03	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	66f947d2-84d3-4b07-8abc-d1c4021e8fe9	fcfcb7de-516c-415a-8ddd-3b7392c3c37f	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	c37c67dd-d031-431d-aba4-b099338159eb	3004557a-c1b4-41c6-b4e3-3d0a4de1a52a	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	e4adfd7f-8b06-459d-afaa-cfef3616e9b4	47fe334b-d0da-4d4f-b9a7-9b9a6e59b1b2	ab9cbba3-c481-4f23-85c7-37b9d8b52357
@@ -3116,11 +3134,40 @@ COPY demo_core_view_role_associations (created_at, updated_at, created_by_id, up
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	7d9e42d9-4bf9-449c-baa3-3c968bdec7f2	e149e54e-ddcb-4b1b-b80b-2c37755ad953	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	b340d103-2905-4e9c-9941-c0d58a27a945	81d30c41-fd09-4757-a6f9-e92463faf8bc	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	fd3ef5d7-c43d-425b-a972-524261d5fb15	88a02697-074c-4dfc-9e7c-5dd964901e21	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	b2353b36-4aa7-44d1-8794-ccb438090a36	6f85afbb-3858-4387-b4ce-9f70cf19ed20	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	68ee34e0-1633-4ec0-bae4-fa91e2ba93bd	529c983e-43eb-4c04-b89f-24ac65ab4356	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	7960ed15-c913-4ab5-95c8-2fd4a1e5b92f	dcbc468c-12c8-4f92-b57c-6f05d092b1c1	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	c77efeb8-f4c7-4874-9eb3-e52947a9227c	7b2d4011-b582-457e-8549-637b0a61f93b	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	f6c3eff9-4708-4b6d-9199-72e79f41626e	485ac274-9ef0-45fa-87f7-1e77a8f6b234	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:31:43	2020-06-07 05:31:43	1	1	\N	6	Demo\\Core\\Models\\FormAction	2c0ee560-a880-11ea-abb7-e54d3556257c	fa00326d-63d6-4d51-84ee-9567cd8bf986	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:31:43	2020-06-07 05:31:43	1	1	\N	6	Demo\\Core\\Models\\FormAction	2c134a90-a880-11ea-9a91-a559200a3700	fa00326d-63d6-4d51-84ee-9567cd8bf986	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:32:17	2020-06-07 05:32:17	1	1	\N	6	Demo\\Core\\Models\\FormAction	400d3670-a880-11ea-9614-fdd407903e9c	27909423-8ed9-4465-801c-c0f081f286fc	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:32:17	2020-06-07 05:32:17	1	1	\N	6	Demo\\Core\\Models\\FormAction	400eff70-a880-11ea-87e8-0992d922c70c	27909423-8ed9-4465-801c-c0f081f286fc	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:44:45	2020-06-07 05:44:45	1	1	\N	6	Demo\\Core\\Models\\ListAction	fe0316f0-a881-11ea-9296-91b45c3109d9	4f95d22e-7293-4495-81f8-ee194bac2c8b	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:44:45	2020-06-07 05:44:45	1	1	\N	6	Demo\\Core\\Models\\ListAction	fe04f2c0-a881-11ea-92bc-e5a4865dc722	4f95d22e-7293-4495-81f8-ee194bac2c8b	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:46:42	2020-06-07 05:46:42	1	1	\N	10	Demo\\Core\\Models\\FormAction	43a5fd10-a882-11ea-9b64-bdd5dc569444	74aa9c40-9618-4fc2-890f-35d98a81b875	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:46:42	2020-06-07 05:46:42	1	1	\N	10	Demo\\Core\\Models\\FormAction	43a7c120-a882-11ea-b37f-43811c4770f0	74aa9c40-9618-4fc2-890f-35d98a81b875	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:46:52	2020-06-07 05:46:52	1	1	\N	10	Demo\\Core\\Models\\FormAction	49e8b070-a882-11ea-bb5d-6d3f45ddc75c	60f9be27-c475-462f-a146-40588aa0bc91	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:46:52	2020-06-07 05:46:52	1	1	\N	10	Demo\\Core\\Models\\FormAction	49eab3e0-a882-11ea-a26e-4b4234bfd17c	60f9be27-c475-462f-a146-40588aa0bc91	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:47:03	2020-06-07 05:47:03	1	1	\N	14	Demo\\Core\\Models\\FormAction	506a5bc0-a882-11ea-86b9-dd55420d1298	c916ac69-bfd1-4ccc-8b75-2d8160831de6	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:47:03	2020-06-07 05:47:03	1	1	\N	14	Demo\\Core\\Models\\FormAction	506c3d70-a882-11ea-a94a-b316dfaafe43	c916ac69-bfd1-4ccc-8b75-2d8160831de6	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:47:21	2020-06-07 05:47:21	1	1	\N	14	Demo\\Core\\Models\\FormAction	5add8150-a882-11ea-a214-73757c3c5a35	eaa211e4-d899-413b-b6ef-64339b3b3626	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:47:21	2020-06-07 05:47:21	1	1	\N	14	Demo\\Core\\Models\\FormAction	5adf4740-a882-11ea-b2e7-97310c06d0e6	eaa211e4-d899-413b-b6ef-64339b3b3626	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:47:29	2020-06-07 05:47:29	1	1	\N	10	Demo\\Core\\Models\\FormAction	5ff1f9c0-a882-11ea-84dd-bb441794d3ac	54e73d14-1a67-4327-91a7-3e5b1aa49a90	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:47:29	2020-06-07 05:47:29	1	1	\N	10	Demo\\Core\\Models\\FormAction	5ff3aab0-a882-11ea-a240-0d081a2656ed	54e73d14-1a67-4327-91a7-3e5b1aa49a90	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 05:47:44	2020-06-07 05:47:44	1	1	\N	10	Demo\\Core\\Models\\FormAction	6898d480-a882-11ea-8b9d-d5dcc857213f	0625b4f7-ab22-48ba-9eb2-e748cad64eab	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 05:47:44	2020-06-07 05:47:44	1	1	\N	10	Demo\\Core\\Models\\FormAction	689aa660-a882-11ea-bcc1-49757e88087e	0625b4f7-ab22-48ba-9eb2-e748cad64eab	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 06:06:04	2020-06-07 06:06:04	1	1	\N	10	Demo\\Core\\Models\\Navigation	f87a0140-a884-11ea-b44a-ad3b9d86ae51	d965a574-969f-40cf-a735-524cdacfe676	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 06:06:04	2020-06-07 06:06:04	1	1	\N	10	Demo\\Core\\Models\\Navigation	f87bf680-a884-11ea-8e9f-05c2f8d3edeb	d965a574-969f-40cf-a735-524cdacfe676	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 06:06:12	2020-06-07 06:06:12	1	1	\N	6	Demo\\Core\\Models\\Navigation	fcea6880-a884-11ea-9ed7-d70509c75c76	c3984be1-820c-4cc8-a675-742815313468	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 06:06:12	2020-06-07 06:06:12	1	1	\N	6	Demo\\Core\\Models\\Navigation	fcebe540-a884-11ea-b4fd-6bd235501abb	c3984be1-820c-4cc8-a675-742815313468	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 06:06:24	2020-06-07 06:06:24	1	1	\N	6	Demo\\Core\\Models\\Navigation	0462a1c0-a885-11ea-9fb3-c5c359171e61	6f85afbb-3858-4387-b4ce-9f70cf19ed20	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 06:06:24	2020-06-07 06:06:24	1	1	\N	6	Demo\\Core\\Models\\Navigation	04643150-a885-11ea-a5c1-d17f28825d99	6f85afbb-3858-4387-b4ce-9f70cf19ed20	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 06:06:40	2020-06-07 06:06:40	1	1	\N	6	Demo\\Core\\Models\\Navigation	0dcb1220-a885-11ea-a77e-4990311612d4	01f868fa-2ac6-42c1-b5e0-030df343dd31	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 06:06:40	2020-06-07 06:06:40	1	1	\N	6	Demo\\Core\\Models\\Navigation	0dcdefa0-a885-11ea-af05-49a1b65feffa	01f868fa-2ac6-42c1-b5e0-030df343dd31	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 06:06:48	2020-06-07 06:06:48	1	1	\N	10	Demo\\Core\\Models\\Navigation	128147e0-a885-11ea-b0ca-ebbfed1c927d	3280cd3c-8a95-4683-b661-7846bc9fdf03	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 06:06:48	2020-06-07 06:06:48	1	1	\N	10	Demo\\Core\\Models\\Navigation	1282e410-a885-11ea-a0af-2bbbd51b06d7	3280cd3c-8a95-4683-b661-7846bc9fdf03	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 06:06:56	2020-06-07 06:06:56	1	1	\N	10	Demo\\Core\\Models\\Navigation	176c8a80-a885-11ea-b244-c7bc77b30ba4	7ffd7ee5-deb5-41af-876f-6bac700a35be	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 06:06:56	2020-06-07 06:06:56	1	1	\N	10	Demo\\Core\\Models\\Navigation	176e3870-a885-11ea-881d-cb2385427568	7ffd7ee5-deb5-41af-876f-6bac700a35be	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 \.
 
 
@@ -3193,9 +3240,9 @@ COPY demo_report_widgets (created_at, updated_at, created_by_id, updated_by_id, 
 COPY demo_workflow_queue_assignment_groups (created_at, updated_at, created_by_id, updated_by_id, group_id, sort_order, plugin_id, id, queue_id) FROM stdin;
 2019-12-01 07:42:56	2019-12-08 08:02:10	1	1	3	1	6	52d49b7f-25d9-4b8b-b2a1-9000cf786a75	85cd4fd8-16a9-482a-b47f-ff7bae2b79d3
 2019-12-01 07:42:56	2019-12-08 08:02:10	1	1	4	3	6	49b78145-0bc7-4f10-82ff-c3be8b87867d	\N
-2019-12-01 07:42:56	2019-12-08 08:02:10	1	1	4	4	6	8a6a52cf-cb9f-4ecd-8964-bff818d21980	c83b37aa-0fd9-4987-bff7-1a604da1ffde
-2020-05-17 15:06:26	2020-05-17 15:06:26	1	1	3	100	6	1809df30-cab4-47f0-a4e2-7f4c686016d5	b875f437-6cb0-4fe6-8cdf-a7ab3b92a369
 2020-05-31 12:54:22	2020-05-31 12:54:22	1	1	1	100	6	98ea3b1f-954d-4199-9dc7-74516bad65ee	6d9b966c-96ae-4377-88bb-bd68c64ae5bd
+2020-06-07 04:13:30	2020-06-07 04:13:30	1	1	3	100	6	3e9183c0-a875-11ea-9502-05990bea0014	b875f437-6cb0-4fe6-8cdf-a7ab3b92a369
+2020-06-07 05:48:38	2020-06-07 05:48:38	1	1	2	100	6	88bf4020-a882-11ea-a4b6-d99aa93534a8	c83b37aa-0fd9-4987-bff7-1a604da1ffde
 \.
 
 
@@ -3230,9 +3277,9 @@ COPY demo_workflow_queue_routing_rules (created_at, updated_at, created_by_id, u
 --
 
 COPY demo_workflow_queues (name, description, script, queue_order, sort_order, input_condition, model, redundancy_policy, created_at, updated_at, created_by_id, updated_by_id, plugin_id, virtual, active, id, service_channel_id, pop_criteria_id, routing_rule_id) FROM stdin;
-Quality Queue	All case in this queue will be assigned to a Quality		simple_queue	-900	if($context->event==='updating'){\r\n    if($context->model->isDirty('current_state_id')){\r\n        return $context->model->current_state->code === 'quality';\r\n    }\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-04-06 06:40:54	1	1	6	f	t	c83b37aa-0fd9-4987-bff7-1a604da1ffde	6aec2f36-3de0-4131-b326-de418cb8549a	b9aadb51-d325-48d2-a903-c2e12fbbad34	0e0ccad0-13fe-447e-a476-966159910a54
 Doctor Queue	All case in this queue will be assigned to a doctor		simple_queue	-900	if($context->event==='updating'){\r\nif($context->model->isDirty('current_state_id')){\r\nreturn $context->model->current_state->code === 'doctor';\r\n}\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-04-04 13:26:49	1	1	6	f	t	85cd4fd8-16a9-482a-b47f-ff7bae2b79d3	6aec2f36-3de0-4131-b326-de418cb8549a	b9aadb51-d325-48d2-a903-c2e12fbbad34	0e0ccad0-13fe-447e-a476-966159910a54
-Check IN - Case Workflow Assignment Queue1	This queue will assign the case to current user who created the case	$workflowEntity = new Demo\\Casemanager\\Models\\WorkflowEntityl();\r\n$workflowEntity->workflow = Demo\\Casemanager\\Models\\Workflow::where('code','case-workflow')->get()->first();\r\n$workflowEntity->entity_id = $item->id;\r\n$workflowEntity->entity_type = get_class($item);\r\n// throw new \\Error(json_encode($workflowEntity->workflow->definition,true));\r\n$from_state = new Demo\\Casemanager\\Models\\WorkflowState();\r\n$from_state->id  = $workflowEntity->workflow->definition[0]['from_state'];\r\n$workflowEntity->current_state = $from_state;\r\n$workflowEntity->assigned_to = $this->getCurrentUser();\r\n$workflowEntity->save();	stack	-1	return $context->event==='creating';		addNew	2019-10-06 10:07:03	2020-05-17 14:58:26	1	1	6	f	t	b875f437-6cb0-4fe6-8cdf-a7ab3b92a369	6aec2f36-3de0-4131-b326-de418cb8549a	b9aadb51-d325-48d2-a903-c2e12fbbad34	0e0ccad0-13fe-447e-a476-966159910a54
+Check IN - Case Workflow Assignment Queue1	This queue will assign the case to current user who created the case	$workflowEntity = new Demo\\Casemanager\\Models\\WorkflowEntityl();\r\n$workflowEntity->workflow = Demo\\Casemanager\\Models\\Workflow::where('code','case-workflow')->get()->first();\r\n$workflowEntity->entity_id = $item->id;\r\n$workflowEntity->entity_type = get_class($item);\r\n// throw new \\Error(json_encode($workflowEntity->workflow->definition,true));\r\n$from_state = new Demo\\Casemanager\\Models\\WorkflowState();\r\n$from_state->id  = $workflowEntity->workflow->definition[0]['from_state'];\r\n$workflowEntity->current_state = $from_state;\r\n$workflowEntity->assigned_to = $this->getCurrentUser();\r\n$workflowEntity->save();	stack	-1	return $context->event==='creating';		addNew	2019-10-06 10:07:03	2020-06-07 04:13:30	1	1	6	t	t	b875f437-6cb0-4fe6-8cdf-a7ab3b92a369	6aec2f36-3de0-4131-b326-de418cb8549a	b9aadb51-d325-48d2-a903-c2e12fbbad34	0e0ccad0-13fe-447e-a476-966159910a54
+Quality Queue	All case in this queue will be assigned to a Quality		simple_queue	-900	if($context->event==='updating'){\r\n    if($context->model->isDirty('current_state_id')){\r\n        return $context->model->current_state->code === 'quality';\r\n    }\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-06-07 05:48:38	1	1	6	f	t	c83b37aa-0fd9-4987-bff7-1a604da1ffde	6aec2f36-3de0-4131-b326-de418cb8549a	b9aadb51-d325-48d2-a903-c2e12fbbad34	0e0ccad0-13fe-447e-a476-966159910a54
 Admin Queue	All case in this queue will be assigned to a Admin		simple_queue	-900	if($context->event==='updating'){\r\nif($context->model->isDirty('current_state_id')){\r\nreturn $context->model->current_state->code === 'admin';\r\n}\r\n}\r\nreturn false;		override	2019-10-13 03:46:56	2020-05-31 12:54:23	1	1	6	f	t	6d9b966c-96ae-4377-88bb-bd68c64ae5bd	6aec2f36-3de0-4131-b326-de418cb8549a	b9aadb51-d325-48d2-a903-c2e12fbbad34	0e0ccad0-13fe-447e-a476-966159910a54
 \.
 
@@ -3272,6 +3319,13 @@ COPY demo_workflow_workflow_states (created_at, updated_at, created_by_id, updat
 --
 
 COPY demo_workflow_workflow_transitions (created_at, updated_at, created_by_id, updated_by_id, data, plugin_id, column_12, backward_direction, id, workflow_item_id, from_state_id, to_state_id) FROM stdin;
+2020-06-07 04:44:51	2020-06-07 04:44:51	1	1	[]	10	\N	f	9fe89eb0-a879-11ea-b469-d71f540b14f4	92bf27c0-a879-11ea-962d-0566fd1e639d	09dfd34e-0db5-49f3-96b2-23831d811a0b	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de
+2020-06-07 06:24:47	2020-06-07 06:24:47	1	1	[]	10	\N	f	95767220-a887-11ea-a56c-814cd3580c8a	5ea7cb80-a885-11ea-a545-edfd74facbf1	09dfd34e-0db5-49f3-96b2-23831d811a0b	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de
+2020-06-07 06:26:50	2020-06-07 06:26:50	1	1	[]	10	\N	f	deef5430-a887-11ea-a291-43a32169ba8d	d2a8cc00-a887-11ea-b2e9-9f07e3360ea6	09dfd34e-0db5-49f3-96b2-23831d811a0b	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de
+2020-06-07 06:27:51	2020-06-07 06:27:51	2	2	[]	10	\N	f	0361f110-a888-11ea-8998-835e84f75d8d	d2a8cc00-a887-11ea-b2e9-9f07e3360ea6	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de	c5a45023-2d2a-48ca-94b1-3097c0af7d05
+2020-06-07 06:28:36	2020-06-07 06:28:36	2	2	[]	10	\N	f	1e038630-a888-11ea-b665-b77a92b641bb	d2a8cc00-a887-11ea-b2e9-9f07e3360ea6	c5a45023-2d2a-48ca-94b1-3097c0af7d05	bfc699c2-db96-4358-85e3-9956a4c815a4
+2020-06-07 06:52:46	2020-06-07 06:52:46	1	1	[]	10	\N	f	7e7a94a0-a88b-11ea-b6b3-1346cc4c0e34	4895ad20-a88b-11ea-857c-df4c041a8840	09dfd34e-0db5-49f3-96b2-23831d811a0b	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de
+2020-06-07 06:56:02	2020-06-07 06:56:02	2	2	[]	10	\N	f	f35613b0-a88b-11ea-a5ad-83279e990b95	4895ad20-a88b-11ea-857c-df4c041a8840	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de	c5a45023-2d2a-48ca-94b1-3097c0af7d05
 \.
 
 
@@ -3280,7 +3334,7 @@ COPY demo_workflow_workflow_transitions (created_at, updated_at, created_by_id, 
 --
 
 COPY demo_workflow_workflows (created_at, updated_at, active, name, code, description, definition, created_by_id, updated_by_id, plugin_id, sort_order, model, input_condition, event, id) FROM stdin;
-2019-10-08 08:17:55	2020-05-09 06:43:30	1	Case Workflow	case-workflow	Case Workflow sdsdsd	[{"from_state":"3","to_state":"4"},{"from_state":"4","to_state":"5"},{"from_state":"5","to_state":"1"},{"from_state":"1","to_state":"6"}]	1	1	6	0	Demo\\Casemanager\\Models\\CaseModel	return true;	created	dd25a3b6-0e8b-4af7-b50d-d9030068b84a
+2019-10-08 08:17:55	2020-06-07 06:50:20	1	Case Workflow	case-workflow	Case Workflow sdsdsd	[{"from_state":"09dfd34e-0db5-49f3-96b2-23831d811a0b","to_state":"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de"},{"from_state":"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de","to_state":"c5a45023-2d2a-48ca-94b1-3097c0af7d05"},{"from_state":"c5a45023-2d2a-48ca-94b1-3097c0af7d05","to_state":"8c7e9158-b65c-437a-a5d9-4b975f7b6f51"}]	1	1	6	0	Demo\\Casemanager\\Models\\CaseModel	return true;	created	dd25a3b6-0e8b-4af7-b50d-d9030068b84a
 \.
 
 

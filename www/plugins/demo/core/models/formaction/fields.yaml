@@ -104,3 +104,16 @@ tabs:
             span: auto
             type: checkboxlist
             tab: Config
+        roles:
+            label: Roles
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Roles

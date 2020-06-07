@@ -2,6 +2,7 @@
 
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
+use Demo\Core\Models\PluginVersions;
 use Demo\Core\Services\EventHandlerServiceProvider;
 use Leafo\ScssPhp\Node\Number;
 use Model;
@@ -20,7 +21,7 @@ class Workflow extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_workflows';
-public $incrementing = false;
+    public $incrementing = false;
 
     protected $jsonable = ['definition'];
 
@@ -68,6 +69,7 @@ public $incrementing = false;
         $from_state = new WorkflowState();
         $from_state->id = $this->definition[0]['from_state'];
         $workflowItem->current_state = $from_state;
+        $workflowItem->plugin_id = PluginConnection::getCurrentPlugin()->id;
         $workflowItem->save();
     }
 

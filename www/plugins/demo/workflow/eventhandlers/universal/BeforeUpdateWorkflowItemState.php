@@ -34,6 +34,7 @@ class BeforeUpdateWorkflowItemState
             $backward_direction = request()->attributes->get('backwardDirection');
             $transition->data = $data;
             $transition->backward_direction = $backward_direction === true;
+            $transition->plugin_id = $model->plugin_id;
             $transition->save();
         }
     }

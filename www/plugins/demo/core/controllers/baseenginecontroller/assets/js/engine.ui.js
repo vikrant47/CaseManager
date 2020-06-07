@@ -67,13 +67,14 @@ var EngineUI = Engine.instance.define({
         }
 
     },
-    toUIAction: function (dbActions, modelRecord) {
+    toUIAction: function (dbActions, modelRecord, props = {}) {
         return dbActions.map(function (action) {
             action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') + ' ' + action.css_class + ' ' + action.icon;
             action.handler = Function('return ' + action.script)();
             action.id = 'list-action-' + action.id;
             action.attributes = typeof action.html_attributes === 'string' ? JSON.parse(action.html_attributes) : action.html_attributes;
             action.modelRecord = modelRecord;
+            Object.assign(action, props);
             delete action.icon;
             delete action.html_attributes;
             return action;
@@ -212,7 +213,7 @@ var EngineList = Engine.instance.define({
         window.location.href = this.getLocation() + '/' + view + (Object.keys(queryParams).length > 0 ? '?' + $.param(queryParams) : '');
     },
     addActions: function (actionRecords) {
-        var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord);
+        var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {list: this});
         Engine.instance.addActions(this.getActionContainer(), actions);
     },
     getSelectedRecordIds: function () {
@@ -349,7 +350,7 @@ var EngineForm = Engine.instance.define({
         window.location.href = formUrl;
     },
     addActions: function (actionRecords) {
-        var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord);
+        var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {form: this});
         Engine.instance.addActions(this.getActionContainer(), actions);
     }
 });

@@ -92,3 +92,16 @@ tabs:
                         label: Value
                         span: auto
                         type: text
+        roles:
+            label: Roles
+            mode: relation
+            separator: comma
+            customTags: true
+            nameFrom: name
+            useKey: false
+            span: auto
+            context:
+                - update
+                - preview
+            type: taglist
+            tab: Roles
