@@ -67,6 +67,15 @@ class SeedDemoCoreRolePolicyAssociations implements Seedable
                                                                                         "id"=>"ce4aee41-e636-46f3-9e13-de033bc34636",
                                                                                         "role_id"=>"ce4aee41-e636-46f3-9e13-de033bc34636",
                                                                                         "policy_id"=>"f7d2748b-a40e-44cc-bbc3-ef17bbd82077"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-07 13:24:04",
+                                                                                        "updated_at"=>"2020-06-07 13:24:04",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "id"=>"2886d3a0-a8c2-11ea-b798-3f0420e8d7f3",
+                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
+                                                                                        "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ]             ]);
         }
 
