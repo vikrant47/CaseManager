@@ -43,7 +43,7 @@ class UserSecurityService
             $roles = Db::table('demo_core_roles')->select('demo_core_roles.*')
                 ->join('demo_core_user_role_associations', 'demo_core_user_role_associations.role_id', '=', 'demo_core_roles.id')
                 ->where('demo_core_user_role_associations.user_id', '=', $this->user->id)->get();
-            $roles->push(Role::where('code', Role::EVERYONE)->first());
+            $roles->push(Db::table('demo_core_roles')->where('code', Role::EVERYONE)->first());
             return $roles;
         });
     }
