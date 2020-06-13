@@ -427,6 +427,12 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     overflow: auto;
 }
 
+.popup-loading-indicator {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
 /**Flash Messages**/
 .flash-message {
     top: 10px;

@@ -55,8 +55,8 @@ var EngineUI = Engine.instance.define({
         let promise;
         if (link.type === 'list') {
             promise = EngineList.open(link.url);
-        } else if (link.type === 'form') {
-            promise = EngineForm.open(link.url);
+        } else {
+            window.location.href = url;
         }
         if (promise) {
             promise.then(function () {
@@ -73,7 +73,8 @@ var EngineUI = Engine.instance.define({
         this.currentModel = model;
     },
     showPopup: function (options) {
-        const $popup = $.popup(options);
+        const setting = Object.assign({}, options);
+        const $popup = $.popup(setting);
         const popup = $popup.data('oc.popup');
         const $container = popup.$container;
         const $dialog = popup.$dialog;
@@ -90,23 +91,24 @@ var EngineUI = Engine.instance.define({
                 '    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
                 '</div>')
         }
-        if (options.size) {
-            if (!isNaN(options.size)) {
-                $dialog.width(options.size).css('max-width', options.size);
+        if (setting.size) {
+            if (!isNaN(setting.size)) {
+                $dialog.width(setting.size).css('max-width', setting.size);
             } else {
-                $dialog.addClass('modal-' + options.size).addClass(options.size);
+                $dialog.addClass('modal-' + setting.size).addClass(setting.size);
             }
         }
-        if (options.title) {
-            $body.find('.modal-header').append('<h4 class="modal-title">' + options.title + '</h4>');
+        if (setting.title) {
+            $body.find('.modal-header').append('<h4 class="modal-title">' + setting.title + '</h4>');
         }
-        if (options.actions) {
-            Engine.instance.addActions($('<div class="modal-footer"></div>').appendTo($body), options.actions, popup);
+        if (setting.actions) {
+            Engine.instance.addActions($('<div class="modal-footer"></div>').appendTo($body), setting.actions, popup);
         }
-        if (options.form) {
-            popup.form = options.form;
+        if (setting.form) {
+            popup.form = setting.form;
             options.form.$el = $body;
         }
+        return popup;
 
     },
     toUIAction: function (dbActions, modelRecord, props = {}) {
@@ -127,26 +129,37 @@ var EngineUI = Engine.instance.define({
             options = handler;
         }
         var setting = Object.assign({}, options);
+        if (setting.showLoading) {
+            setting.popup = Engine.instance.ui.showPopup();
+        }
         delete setting.success;
         delete setting.error;
+        const $reqElem = $('<div/>');
         return new Promise(function (resolve, reject) {
-            Object.assign(setting, {
-                beforeUpdate: function () {
-                    if (typeof options.success === 'function') {
-                        options.success.apply(this, arguments);
-                    }
-                    resolve.apply(this, arguments);
-                }, error: function () {
-                    if (typeof options.error === 'function') {
-                        options.success.apply(this, arguments);
-                    }
-                    reject.apply(this, arguments);
+            $reqElem.on('ajaxSuccess', function (e, context, data, textStatus, jqXHR) {
+                if (typeof options.success === 'function') {
+                    options.success.apply(this, [data, jqXHR, textStatus, context]);
                 }
+                if (setting.popup) {
+                    setting.popup.hideLoading();
+                    setting.popup.dispose();
+                }
+                resolve.apply(this, [data, jqXHR, textStatus, context]);
+            });
+            $reqElem.on('ajaxError', function (e, context, errorMsg, textStatus, jqXHR) {
+                if (typeof options.error === 'function') {
+                    options.error.apply(this, [errorMsg, jqXHR, textStatus, context]);
+                }
+                if (setting.popup) {
+                    setting.popup.hideLoading();
+                    setting.popup.dispose();
+                }
+                reject.apply(this, [errorMsg, jqXHR, textStatus, context]);
             });
             if (typeof handler === 'string') {
-                $.request(handler, setting);
+                $reqElem.request(handler, setting);
             } else {
-                $.request(setting);
+                $reqElem.request(setting);
             }
         });
     },
@@ -253,6 +266,7 @@ var EngineList = Engine.instance.define({
         open: function (controller) {
             return Engine.instance.ui.request('onListRender', {
                 url: controller,
+                showLoading: true,
                 success: function (data) {
                     $('#content-body').html(data.result);
                     $('[data-control="rowlink"]').rowLink();
