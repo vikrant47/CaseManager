@@ -505,7 +505,9 @@ CREATE TABLE demo_casemanager_cases (
     tat_duration bigint NOT NULL,
     comments text NOT NULL,
     id uuid NOT NULL,
-    priority_id uuid
+    priority_id uuid,
+    workflow_state_id uuid,
+    queue_id uuid
 );
 
 
@@ -1383,7 +1385,8 @@ CREATE TABLE demo_workflow_workflows (
     model character varying(255) NOT NULL,
     input_condition text NOT NULL,
     event character varying(191),
-    id uuid NOT NULL
+    id uuid NOT NULL,
+    model_state_field character varying(255) DEFAULT 'workflow_state_id'::character varying
 );
 
 
@@ -2200,6 +2203,7 @@ COPY backend_access_log (id, user_id, ip_address, created_at, updated_at) FROM s
 41	2	::1	2020-06-07 04:48:26	2020-06-07 04:48:26
 42	2	::1	2020-06-07 05:36:42	2020-06-07 05:36:42
 43	2	::1	2020-06-07 05:38:44	2020-06-07 05:38:44
+44	1	::1	2020-06-07 13:16:52	2020-06-07 13:16:52
 \.
 
 
@@ -2207,7 +2211,7 @@ COPY backend_access_log (id, user_id, ip_address, created_at, updated_at) FROM s
 -- Name: backend_access_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('backend_access_log_id_seq', 43, true);
+SELECT pg_catalog.setval('backend_access_log_id_seq', 44, true);
 
 
 --
@@ -2285,8 +2289,8 @@ SELECT pg_catalog.setval('backend_user_throttle_id_seq', 2, true);
 --
 
 COPY backend_users (id, first_name, last_name, login, email, password, activation_code, persist_code, reset_password_code, permissions, is_activated, role_id, activated_at, last_login, created_at, updated_at, deleted_at, is_superuser) FROM stdin;
-1	Admin	Person	admin	admin@domain.tld	$2y$10$gs9tcpJn5uAmNOzaS4DvZO4l5qrF4zyzATp5AKiT3mKjFt3mnY/KS	\N	$2y$10$T64pYp0VQkjhe6Q4AwExC.NdnLA2vf0oT0TvbgzlBY5aMVxli9nRK	\N		t	2	\N	2020-06-06 06:51:39	2020-04-26 05:34:31	2020-06-06 06:51:39	\N	t
 2	Suraj	Baliyan	suraj	suraj.baliyan4@gmail.com	$2y$10$sZj8Bfs9CVKMvkVrsWjvhuh02DhE/cxn38DU9KttZTvnD1d5EGXE2	\N	$2y$10$DkEYtnayrRp6Z0ZMUmJP7.Ye7uTAjObd9oUdJEMecOQSkw8Ua9g36	\N	\N	f	5	\N	2020-06-07 05:38:44	2020-05-10 06:08:53	2020-06-07 05:38:44	\N	f
+1	Admin	Person	admin	admin@domain.tld	$2y$10$gs9tcpJn5uAmNOzaS4DvZO4l5qrF4zyzATp5AKiT3mKjFt3mnY/KS	\N	$2y$10$MdXs7G.yjPA0scoeUDVUPuv8d/wndCasVxRwVTrPz3edqlmmYVTHS	\N		t	2	\N	2020-06-07 13:16:51	2020-04-26 05:34:31	2020-06-07 13:16:51	\N	t
 \.
 
 
@@ -2396,7 +2400,7 @@ COPY demo_casemanager_case_priorities (created_at, updated_at, name, active, des
 -- Data for Name: demo_casemanager_cases; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY demo_casemanager_cases (title, description, created_at, updated_at, created_by_id, updated_by_id, assigned_to_id, case_number, case_version, version, suspect, tat_duration, comments, id, priority_id) FROM stdin;
+COPY demo_casemanager_cases (title, description, created_at, updated_at, created_by_id, updated_by_id, assigned_to_id, case_number, case_version, version, suspect, tat_duration, comments, id, priority_id, workflow_state_id, queue_id) FROM stdin;
 \.
 
 
@@ -2431,6 +2435,11 @@ COPY demo_core_audit_logs (created_at, updated_at, created_by_id, updated_by_id,
 2020-06-07 06:55:05	2020-06-07 06:55:05	2	2	2	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	d11dc480-a88b-11ea-9714-53644c272001	48824180-a88b-11ea-817a-4d17562fdc2d
 2020-06-07 06:56:02	2020-06-07 06:56:02	2	2	3	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	f32e4200-a88b-11ea-a982-531072a88246	48824180-a88b-11ea-817a-4d17562fdc2d
 2020-06-07 06:56:49	2020-06-07 06:56:49	2	2	4	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"87897897","case_version":"45","description":null,"priority_id":null,"suspect":"test","tat_duration":87987987,"title":null}	\N	0f0b42e0-a88c-11ea-b829-093f819d053d	48824180-a88b-11ea-817a-4d17562fdc2d
+2020-06-13 05:58:08	2020-06-13 05:58:08	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"54545","case_version":"54545","description":null,"priority_id":null,"suspect":"545454","tat_duration":54545,"title":null}	\N	db0035d0-ad3a-11ea-8f70-47f2d7d521c1	da839640-ad3a-11ea-8219-415e71b1df69
+2020-06-13 06:13:13	2020-06-13 06:13:13	1	1	0	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"4545","case_version":"5454","description":null,"priority_id":null,"suspect":"45454","tat_duration":5454,"title":null}	\N	f6620d60-ad3c-11ea-bbd9-a561d0fc31ef	f627cb90-ad3c-11ea-8e90-c13740dd6e15
+2020-06-13 06:16:09	2020-06-13 06:16:09	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"4545","case_version":"5454","description":null,"priority_id":null,"suspect":"45454","tat_duration":5454,"title":null}	\N	5f5a8180-ad3d-11ea-9426-23641faf80d6	f627cb90-ad3c-11ea-8e90-c13740dd6e15
+2020-06-13 06:18:16	2020-06-13 06:18:16	1	1	1	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"54545","case_version":"54545","description":null,"priority_id":null,"suspect":"545454","tat_duration":54545,"title":null}	\N	ab65cea0-ad3d-11ea-8706-e3195c1b5af8	da839640-ad3a-11ea-8219-415e71b1df69
+2020-06-13 06:18:17	2020-06-13 06:18:17	1	1	2	Demo\\Casemanager\\Models\\CaseModel	updating	{"case_number":"54545","case_version":"54545","description":null,"priority_id":null,"suspect":"545454","tat_duration":54545,"title":null}	\N	ab8f9330-ad3d-11ea-ae32-6fe326c3e435	da839640-ad3a-11ea-8219-415e71b1df69
 \.
 
 
@@ -2963,6 +2972,7 @@ COPY demo_core_role_policy_associations (created_at, updated_at, created_by_id, 
 2020-05-10 06:31:16	2020-05-10 06:31:16	1	1	6	6f6e4767-ac24-49b9-870d-8cc526e3e3f5	6f6e4767-ac24-49b9-870d-8cc526e3e3f5	0dcd7801-d4ae-439d-907d-950b72a9f24d
 2020-05-10 06:31:16	2020-05-10 06:31:16	1	1	6	8b88a7e5-de52-4ac9-be78-ac6bdf05ae1a	8b88a7e5-de52-4ac9-be78-ac6bdf05ae1a	22ba842b-7972-4ccd-825b-c9659d4e7465
 2020-05-10 06:31:16	2020-05-10 06:31:16	1	1	6	ce4aee41-e636-46f3-9e13-de033bc34636	ce4aee41-e636-46f3-9e13-de033bc34636	f7d2748b-a40e-44cc-bbc3-ef17bbd82077
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	6	2886d3a0-a8c2-11ea-b798-3f0420e8d7f3	e751a812-4da9-4726-b375-8495ac2d3354	694b6dcf-0017-4013-bc71-c7d71dae6a3a
 \.
 
 
@@ -3073,7 +3083,7 @@ COPY demo_core_user_role_associations (created_at, updated_at, user_id, plugin_i
 2020-04-06 14:03:21	2020-04-06 14:03:21	6	10	1	1	f314578a-4686-46d0-acb5-2b6c096cc687	f314578a-4686-46d0-acb5-2b6c096cc687
 2019-12-20 14:15:39	2019-12-20 14:15:39	1	10	1	1	980dc6d1-033c-4dae-a7ef-4522e6c976a7	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-04-06 08:54:23	2020-04-06 08:54:23	3	10	1	1	d9f9f39e-1a2d-4eb9-9619-0fc673ca4c14	e751a812-4da9-4726-b375-8495ac2d3354
-2020-05-10 06:10:59	2020-05-10 06:10:59	2	10	1	1	1cced673-fc72-4053-83e7-68f9dcbd880e	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-13 12:12:52	2020-06-13 12:12:52	2	10	1	1	34d630d0-ad6f-11ea-8a1e-7b7a03481ce4	e751a812-4da9-4726-b375-8495ac2d3354
 \.
 
 
@@ -3084,7 +3094,6 @@ COPY demo_core_user_role_associations (created_at, updated_at, user_id, plugin_i
 COPY demo_core_view_role_associations (created_at, updated_at, created_by_id, updated_by_id, version, plugin_id, model, id, record_id, role_id) FROM stdin;
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	015d16e0-a7f9-11ea-b64b-57ce9dae3cd2	ff393331-f802-4f3c-98f9-93a5c070102f	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 \N	\N	\N	\N	\N	\N	Demo\\Core\\Models\\Navigation	4177227d-38be-470d-9ca1-3591d8f603b5	016140c0-a7f9-11ea-a09c-77440aa34325	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-06 13:27:49	2020-06-06 13:27:49	1	1	\N	10	Demo\\Core\\Models\\Navigation	840f7700-a7f9-11ea-91db-f12d6da3f0b5	fdf384c5-bdb6-4294-81a4-af302b12b332	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-06 13:27:49	2020-06-06 13:27:49	1	1	\N	10	Demo\\Core\\Models\\Navigation	84113c20-a7f9-11ea-899f-e92a613db19b	fdf384c5-bdb6-4294-81a4-af302b12b332	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	7d1832a7-efbf-4316-88c1-e06fbddb1d5a	05e13a5f-d931-4328-84ed-100acf537174	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	d870ffa2-bb86-433a-a0ea-137e60f428f7	6dfa72ba-9fe1-4d81-aed2-dc945f0ef502	ab9cbba3-c481-4f23-85c7-37b9d8b52357
@@ -3138,36 +3147,37 @@ COPY demo_core_view_role_associations (created_at, updated_at, created_by_id, up
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	7960ed15-c913-4ab5-95c8-2fd4a1e5b92f	dcbc468c-12c8-4f92-b57c-6f05d092b1c1	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	c77efeb8-f4c7-4874-9eb3-e52947a9227c	7b2d4011-b582-457e-8549-637b0a61f93b	ab9cbba3-c481-4f23-85c7-37b9d8b52357
 2020-06-06 13:24:09	2020-06-06 13:24:09	1	1	\N	10	Demo\\Core\\Models\\Navigation	f6c3eff9-4708-4b6d-9199-72e79f41626e	485ac274-9ef0-45fa-87f7-1e77a8f6b234	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:31:43	2020-06-07 05:31:43	1	1	\N	6	Demo\\Core\\Models\\FormAction	2c0ee560-a880-11ea-abb7-e54d3556257c	fa00326d-63d6-4d51-84ee-9567cd8bf986	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:31:43	2020-06-07 05:31:43	1	1	\N	6	Demo\\Core\\Models\\FormAction	2c134a90-a880-11ea-9a91-a559200a3700	fa00326d-63d6-4d51-84ee-9567cd8bf986	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:32:17	2020-06-07 05:32:17	1	1	\N	6	Demo\\Core\\Models\\FormAction	400d3670-a880-11ea-9614-fdd407903e9c	27909423-8ed9-4465-801c-c0f081f286fc	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:32:17	2020-06-07 05:32:17	1	1	\N	6	Demo\\Core\\Models\\FormAction	400eff70-a880-11ea-87e8-0992d922c70c	27909423-8ed9-4465-801c-c0f081f286fc	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:44:45	2020-06-07 05:44:45	1	1	\N	6	Demo\\Core\\Models\\ListAction	fe0316f0-a881-11ea-9296-91b45c3109d9	4f95d22e-7293-4495-81f8-ee194bac2c8b	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:44:45	2020-06-07 05:44:45	1	1	\N	6	Demo\\Core\\Models\\ListAction	fe04f2c0-a881-11ea-92bc-e5a4865dc722	4f95d22e-7293-4495-81f8-ee194bac2c8b	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:46:42	2020-06-07 05:46:42	1	1	\N	10	Demo\\Core\\Models\\FormAction	43a5fd10-a882-11ea-9b64-bdd5dc569444	74aa9c40-9618-4fc2-890f-35d98a81b875	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:46:42	2020-06-07 05:46:42	1	1	\N	10	Demo\\Core\\Models\\FormAction	43a7c120-a882-11ea-b37f-43811c4770f0	74aa9c40-9618-4fc2-890f-35d98a81b875	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:46:52	2020-06-07 05:46:52	1	1	\N	10	Demo\\Core\\Models\\FormAction	49e8b070-a882-11ea-bb5d-6d3f45ddc75c	60f9be27-c475-462f-a146-40588aa0bc91	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:46:52	2020-06-07 05:46:52	1	1	\N	10	Demo\\Core\\Models\\FormAction	49eab3e0-a882-11ea-a26e-4b4234bfd17c	60f9be27-c475-462f-a146-40588aa0bc91	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:47:03	2020-06-07 05:47:03	1	1	\N	14	Demo\\Core\\Models\\FormAction	506a5bc0-a882-11ea-86b9-dd55420d1298	c916ac69-bfd1-4ccc-8b75-2d8160831de6	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:47:03	2020-06-07 05:47:03	1	1	\N	14	Demo\\Core\\Models\\FormAction	506c3d70-a882-11ea-a94a-b316dfaafe43	c916ac69-bfd1-4ccc-8b75-2d8160831de6	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:47:21	2020-06-07 05:47:21	1	1	\N	14	Demo\\Core\\Models\\FormAction	5add8150-a882-11ea-a214-73757c3c5a35	eaa211e4-d899-413b-b6ef-64339b3b3626	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:47:21	2020-06-07 05:47:21	1	1	\N	14	Demo\\Core\\Models\\FormAction	5adf4740-a882-11ea-b2e7-97310c06d0e6	eaa211e4-d899-413b-b6ef-64339b3b3626	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:47:29	2020-06-07 05:47:29	1	1	\N	10	Demo\\Core\\Models\\FormAction	5ff1f9c0-a882-11ea-84dd-bb441794d3ac	54e73d14-1a67-4327-91a7-3e5b1aa49a90	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:47:29	2020-06-07 05:47:29	1	1	\N	10	Demo\\Core\\Models\\FormAction	5ff3aab0-a882-11ea-a240-0d081a2656ed	54e73d14-1a67-4327-91a7-3e5b1aa49a90	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 05:47:44	2020-06-07 05:47:44	1	1	\N	10	Demo\\Core\\Models\\FormAction	6898d480-a882-11ea-8b9d-d5dcc857213f	0625b4f7-ab22-48ba-9eb2-e748cad64eab	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 05:47:44	2020-06-07 05:47:44	1	1	\N	10	Demo\\Core\\Models\\FormAction	689aa660-a882-11ea-bcc1-49757e88087e	0625b4f7-ab22-48ba-9eb2-e748cad64eab	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 06:06:04	2020-06-07 06:06:04	1	1	\N	10	Demo\\Core\\Models\\Navigation	f87a0140-a884-11ea-b44a-ad3b9d86ae51	d965a574-969f-40cf-a735-524cdacfe676	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 06:06:04	2020-06-07 06:06:04	1	1	\N	10	Demo\\Core\\Models\\Navigation	f87bf680-a884-11ea-8e9f-05c2f8d3edeb	d965a574-969f-40cf-a735-524cdacfe676	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 06:06:12	2020-06-07 06:06:12	1	1	\N	6	Demo\\Core\\Models\\Navigation	fcea6880-a884-11ea-9ed7-d70509c75c76	c3984be1-820c-4cc8-a675-742815313468	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 06:06:12	2020-06-07 06:06:12	1	1	\N	6	Demo\\Core\\Models\\Navigation	fcebe540-a884-11ea-b4fd-6bd235501abb	c3984be1-820c-4cc8-a675-742815313468	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 06:06:24	2020-06-07 06:06:24	1	1	\N	6	Demo\\Core\\Models\\Navigation	0462a1c0-a885-11ea-9fb3-c5c359171e61	6f85afbb-3858-4387-b4ce-9f70cf19ed20	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 06:06:24	2020-06-07 06:06:24	1	1	\N	6	Demo\\Core\\Models\\Navigation	04643150-a885-11ea-a5c1-d17f28825d99	6f85afbb-3858-4387-b4ce-9f70cf19ed20	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 06:06:40	2020-06-07 06:06:40	1	1	\N	6	Demo\\Core\\Models\\Navigation	0dcb1220-a885-11ea-a77e-4990311612d4	01f868fa-2ac6-42c1-b5e0-030df343dd31	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 06:06:40	2020-06-07 06:06:40	1	1	\N	6	Demo\\Core\\Models\\Navigation	0dcdefa0-a885-11ea-af05-49a1b65feffa	01f868fa-2ac6-42c1-b5e0-030df343dd31	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 06:06:48	2020-06-07 06:06:48	1	1	\N	10	Demo\\Core\\Models\\Navigation	128147e0-a885-11ea-b0ca-ebbfed1c927d	3280cd3c-8a95-4683-b661-7846bc9fdf03	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 06:06:48	2020-06-07 06:06:48	1	1	\N	10	Demo\\Core\\Models\\Navigation	1282e410-a885-11ea-a0af-2bbbd51b06d7	3280cd3c-8a95-4683-b661-7846bc9fdf03	ab9cbba3-c481-4f23-85c7-37b9d8b52357
-2020-06-07 06:06:56	2020-06-07 06:06:56	1	1	\N	10	Demo\\Core\\Models\\Navigation	176c8a80-a885-11ea-b244-c7bc77b30ba4	7ffd7ee5-deb5-41af-876f-6bac700a35be	e751a812-4da9-4726-b375-8495ac2d3354
 2020-06-07 06:06:56	2020-06-07 06:06:56	1	1	\N	10	Demo\\Core\\Models\\Navigation	176e3870-a885-11ea-881d-cb2385427568	7ffd7ee5-deb5-41af-876f-6bac700a35be	ab9cbba3-c481-4f23-85c7-37b9d8b52357
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\Navigation	2891b220-a8c2-11ea-b9aa-95484a1a69c2	d965a574-969f-40cf-a735-524cdacfe676	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\Navigation	28934c50-a8c2-11ea-bc4e-dfb02a9f9d8b	fdf384c5-bdb6-4294-81a4-af302b12b332	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\Navigation	289485d0-a8c2-11ea-b2eb-8908a7c2000f	c3984be1-820c-4cc8-a675-742815313468	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\Navigation	2895f770-a8c2-11ea-a4e9-dda1052b7670	01f868fa-2ac6-42c1-b5e0-030df343dd31	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\Navigation	28976b30-a8c2-11ea-a065-9fef9822f404	3280cd3c-8a95-4683-b661-7846bc9fdf03	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\Navigation	2898a5c0-a8c2-11ea-8eec-05d3ddb23398	7ffd7ee5-deb5-41af-876f-6bac700a35be	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\Navigation	2899fcf0-a8c2-11ea-ac44-eb0732708da4	6f85afbb-3858-4387-b4ce-9f70cf19ed20	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\ListAction	289d3500-a8c2-11ea-b993-2f53f4cfe455	4f95d22e-7293-4495-81f8-ee194bac2c8b	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	289f7120-a8c2-11ea-b4f8-7bd2972e4bf9	54e73d14-1a67-4327-91a7-3e5b1aa49a90	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	28a0a8b0-a8c2-11ea-a2e3-23f3e5ce7dc6	0625b4f7-ab22-48ba-9eb2-e748cad64eab	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	28a21f10-a8c2-11ea-8e6d-050b8c2db76b	fa00326d-63d6-4d51-84ee-9567cd8bf986	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	28a35720-a8c2-11ea-b027-8f2b7e0eef92	74aa9c40-9618-4fc2-890f-35d98a81b875	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	28a4e7c0-a8c2-11ea-aeee-9785aed28735	60f9be27-c475-462f-a146-40588aa0bc91	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	28a62f10-a8c2-11ea-8840-f5dfc0972067	c916ac69-bfd1-4ccc-8b75-2d8160831de6	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	28a784a0-a8c2-11ea-99a6-6de2ee7c06c6	eaa211e4-d899-413b-b6ef-64339b3b3626	e751a812-4da9-4726-b375-8495ac2d3354
+2020-06-07 13:24:04	2020-06-07 13:24:04	1	1	\N	6	Demo\\Core\\Models\\FormAction	28a8b9e0-a8c2-11ea-8b45-4f0352468a84	27909423-8ed9-4465-801c-c0f081f286fc	e751a812-4da9-4726-b375-8495ac2d3354
 \.
 
 
@@ -3326,6 +3336,8 @@ COPY demo_workflow_workflow_transitions (created_at, updated_at, created_by_id, 
 2020-06-07 06:28:36	2020-06-07 06:28:36	2	2	[]	10	\N	f	1e038630-a888-11ea-b665-b77a92b641bb	d2a8cc00-a887-11ea-b2e9-9f07e3360ea6	c5a45023-2d2a-48ca-94b1-3097c0af7d05	bfc699c2-db96-4358-85e3-9956a4c815a4
 2020-06-07 06:52:46	2020-06-07 06:52:46	1	1	[]	10	\N	f	7e7a94a0-a88b-11ea-b6b3-1346cc4c0e34	4895ad20-a88b-11ea-857c-df4c041a8840	09dfd34e-0db5-49f3-96b2-23831d811a0b	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de
 2020-06-07 06:56:02	2020-06-07 06:56:02	2	2	[]	10	\N	f	f35613b0-a88b-11ea-a5ad-83279e990b95	4895ad20-a88b-11ea-857c-df4c041a8840	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de	c5a45023-2d2a-48ca-94b1-3097c0af7d05
+2020-06-13 06:16:09	2020-06-13 06:16:09	1	1	[]	10	\N	f	5f76eba0-ad3d-11ea-b1ac-2946acd1317a	f635dfd0-ad3c-11ea-b201-316250d74eca	09dfd34e-0db5-49f3-96b2-23831d811a0b	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de
+2020-06-13 06:18:17	2020-06-13 06:18:17	1	1	[]	10	\N	f	aba8a170-ad3d-11ea-9e94-436b2c1287d7	da9b8f40-ad3a-11ea-a16c-5b7377310006	09dfd34e-0db5-49f3-96b2-23831d811a0b	16d9ddab-a130-4bbd-8d5c-b3e82fbf00de
 \.
 
 
@@ -3333,8 +3345,8 @@ COPY demo_workflow_workflow_transitions (created_at, updated_at, created_by_id, 
 -- Data for Name: demo_workflow_workflows; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY demo_workflow_workflows (created_at, updated_at, active, name, code, description, definition, created_by_id, updated_by_id, plugin_id, sort_order, model, input_condition, event, id) FROM stdin;
-2019-10-08 08:17:55	2020-06-07 06:50:20	1	Case Workflow	case-workflow	Case Workflow sdsdsd	[{"from_state":"09dfd34e-0db5-49f3-96b2-23831d811a0b","to_state":"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de"},{"from_state":"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de","to_state":"c5a45023-2d2a-48ca-94b1-3097c0af7d05"},{"from_state":"c5a45023-2d2a-48ca-94b1-3097c0af7d05","to_state":"8c7e9158-b65c-437a-a5d9-4b975f7b6f51"}]	1	1	6	0	Demo\\Casemanager\\Models\\CaseModel	return true;	created	dd25a3b6-0e8b-4af7-b50d-d9030068b84a
+COPY demo_workflow_workflows (created_at, updated_at, active, name, code, description, definition, created_by_id, updated_by_id, plugin_id, sort_order, model, input_condition, event, id, model_state_field) FROM stdin;
+2019-10-08 08:17:55	2020-06-07 06:50:20	1	Case Workflow	case-workflow	Case Workflow sdsdsd	[{"from_state":"09dfd34e-0db5-49f3-96b2-23831d811a0b","to_state":"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de"},{"from_state":"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de","to_state":"c5a45023-2d2a-48ca-94b1-3097c0af7d05"},{"from_state":"c5a45023-2d2a-48ca-94b1-3097c0af7d05","to_state":"8c7e9158-b65c-437a-a5d9-4b975f7b6f51"}]	1	1	6	0	Demo\\Casemanager\\Models\\CaseModel	return true;	created	dd25a3b6-0e8b-4af7-b50d-d9030068b84a	workflow_state_id
 \.
 
 
