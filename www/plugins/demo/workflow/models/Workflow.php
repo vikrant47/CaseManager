@@ -8,6 +8,7 @@ use Leafo\ScssPhp\Node\Number;
 use Model;
 use October\Rain\Exception\ApplicationException;
 use Backend\Models\User;
+use Schema;
 
 /**
  * Model
@@ -53,6 +54,19 @@ class Workflow extends Model
     public function getItemTypeOptions()
     {
         return PluginConnection::getAllModelAlias();
+    }
+
+    public function getModelStateFieldOptions()
+    {
+        $options = [];
+        if (!empty($this->model)) {
+            $modelRef = new $this->model();
+            $columns = Schema::getColumnListing($modelRef->table);
+            foreach ($columns as $column) {
+                $options[$column] = $column;
+            }
+        }
+        return $options;
     }
 
     /**

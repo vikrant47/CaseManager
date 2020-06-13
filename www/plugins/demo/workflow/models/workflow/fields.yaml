@@ -59,6 +59,14 @@ tabs:
             span: auto
             type: dropdown
             tab: 'Auto Initialization Options'
+        model_state_field:
+            label: State Field
+            span: auto
+            type: dropdown
+            showSearch: true
+            dependsOn: 'model_ref'
+            default: 'workflow_state_id'
+            tab: 'Auto Initialization Options'
         input_condition:
             label: 'Input Condition'
             size: large

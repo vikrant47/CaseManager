@@ -229,6 +229,66 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "current"=> null,
                                                                                         "id"=>"0f0b42e0-a88c-11ea-b829-093f819d053d",
                                                                                         "record_id"=>"48824180-a88b-11ea-817a-4d17562fdc2d"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-13 05:58:08",
+                                                                                        "updated_at"=>"2020-06-13 05:58:08",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "previous"=>"{\"case_number\":\"54545\",\"case_version\":\"54545\",\"description\":null,\"priority_id\":null,\"suspect\":\"545454\",\"tat_duration\":54545,\"title\":null}",
+                                                                                        "current"=> null,
+                                                                                        "id"=>"db0035d0-ad3a-11ea-8f70-47f2d7d521c1",
+                                                                                        "record_id"=>"da839640-ad3a-11ea-8219-415e71b1df69"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-13 06:13:13",
+                                                                                        "updated_at"=>"2020-06-13 06:13:13",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "previous"=>"{\"case_number\":\"4545\",\"case_version\":\"5454\",\"description\":null,\"priority_id\":null,\"suspect\":\"45454\",\"tat_duration\":5454,\"title\":null}",
+                                                                                        "current"=> null,
+                                                                                        "id"=>"f6620d60-ad3c-11ea-bbd9-a561d0fc31ef",
+                                                                                        "record_id"=>"f627cb90-ad3c-11ea-8e90-c13740dd6e15"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-13 06:16:09",
+                                                                                        "updated_at"=>"2020-06-13 06:16:09",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 1,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "previous"=>"{\"case_number\":\"4545\",\"case_version\":\"5454\",\"description\":null,\"priority_id\":null,\"suspect\":\"45454\",\"tat_duration\":5454,\"title\":null}",
+                                                                                        "current"=> null,
+                                                                                        "id"=>"5f5a8180-ad3d-11ea-9426-23641faf80d6",
+                                                                                        "record_id"=>"f627cb90-ad3c-11ea-8e90-c13740dd6e15"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-13 06:18:16",
+                                                                                        "updated_at"=>"2020-06-13 06:18:16",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 1,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "previous"=>"{\"case_number\":\"54545\",\"case_version\":\"54545\",\"description\":null,\"priority_id\":null,\"suspect\":\"545454\",\"tat_duration\":54545,\"title\":null}",
+                                                                                        "current"=> null,
+                                                                                        "id"=>"ab65cea0-ad3d-11ea-8706-e3195c1b5af8",
+                                                                                        "record_id"=>"da839640-ad3a-11ea-8219-415e71b1df69"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-13 06:18:17",
+                                                                                        "updated_at"=>"2020-06-13 06:18:17",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 2,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "previous"=>"{\"case_number\":\"54545\",\"case_version\":\"54545\",\"description\":null,\"priority_id\":null,\"suspect\":\"545454\",\"tat_duration\":54545,\"title\":null}",
+                                                                                        "current"=> null,
+                                                                                        "id"=>"ab8f9330-ad3d-11ea-ae32-6fe326c3e435",
+                                                                                        "record_id"=>"da839640-ad3a-11ea-8219-415e71b1df69"
                             ]             ]);
         }
 

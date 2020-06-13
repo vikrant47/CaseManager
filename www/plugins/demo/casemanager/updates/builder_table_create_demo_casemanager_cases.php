@@ -10,7 +10,7 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
         Schema::create('demo_casemanager_cases', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->uuid('id');
             $table->string('title', 255)->nullable();
             $table->text('description')->nullable();
             $table->timestamp('created_at')->nullable();
@@ -25,6 +25,8 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->string('suspect', 255);
             $table->bigInteger('tat_duration');
             $table->text('comments', 255);
+            $table->uuid('workflow_state_id')->nullable();
+            $table->uuid('queue_id')->nullable();
         });
     }
     

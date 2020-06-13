@@ -1,12 +1,13 @@
 <?php
 
-namespace Demo\Casemanager\EventHandlers\WorkflowItem;
+namespace Demo\Casemanager\EventHandlers\QueueItem;
 
 
 use Demo\Casemanager\Models\CaseModel;
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
+use Demo\Workflow\Models\QueueItem;
 use Demo\Workflow\Models\Workflow;
 use Demo\Workflow\Models\WorkflowItem;
 use Demo\Workflow\Models\WorkflowTransition;
@@ -14,24 +15,23 @@ use Log;
 use October\Rain\Exception\ApplicationException;
 use System\Models\EventLog;
 
-class BeforeUpdateAutoAssignCaseToUser
+class BeforeCreateQueueItemAssignQueueToCase
 {
-    public $model = WorkflowItem::class;
-    public $events = ['updating', 'creating'];
+    public $model = QueueItem::class;
+    public $events = ['creating'];
     public $sort_order = 999;
 
     /**
-     * Check if the workflow item is being assigned to a user
-     * Assign the corresponding case to the same user
+     * Assign the current queue inside casemanager case table
      */
     public function handler($event, $model)
     {
         $logger = PluginConnection::getCurrentLogger();
-        if ($model->model === CaseModel::class) {
-            if ($model->isDirty('assigned_to_id') || $model->isDirty('current_state_id')) {
-                $entity = CaseModel::find($model->record_id);
-                $entity->assigned_to_id = $model->assigned_to_id;
-                $entity->workflow_state_id = $model->current_state_id; // TODO: fetch workflow_state_id field from workflow model_state_field
+        if ($model->model === WorkflowItem::class) {
+            $workflowItem = WorkflowItem::where(['id' => $model->record_id, 'model' => CaseModel::class])->first();
+            if (!empty($workflowItem)) {
+                $entity = CaseModel::find($workflowItem->record_id);
+                $entity->queue_id = $model->queue_id;
                 if ($entity->exists) {
                     $entity->save();
                 }

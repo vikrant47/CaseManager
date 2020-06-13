@@ -1,5 +1,6 @@
 <?php namespace Demo\Casemanager;
 
+use Demo\Casemanager\EventHandlers\QueueItem\BeforeCreateQueueItemAssignQueueToCase;
 use Demo\Casemanager\EventHandlers\WorkflowItem\BeforeUpdateAutoAssignCaseToUser;
 use Demo\Casemanager\Models\QueueItem;
 use Demo\Casemanager\Models\Queue;
@@ -12,7 +13,8 @@ class Plugin extends PluginBase
     public function getEventHandlers()
     {
         return [
-            BeforeUpdateAutoAssignCaseToUser::class
+            BeforeUpdateAutoAssignCaseToUser::class,
+            BeforeCreateQueueItemAssignQueueToCase::class,
         ];
     }
 
