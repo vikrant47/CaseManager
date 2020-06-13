@@ -4,7 +4,9 @@
 namespace Demo\Core\Classes\Helpers;
 
 
+use Backend\Behaviors\FormController;
 use Demo\Core\Classes\Utils\ModelUtil;
+use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Controllers\AbstractPluginController;
 use Exception;
 use Lang;
@@ -141,6 +143,7 @@ class FormBuilder
      *
      * @param array $options Render options
      * @return string Rendered HTML for the form.
+     * @throws ApplicationException
      * @see \Backend\Widgets\Form
      */
     public function formRender($formConfig, $recordId = null, $context = null, $options = [])
@@ -151,5 +154,16 @@ class FormBuilder
         }
 
         return $formWidget->render($options);
+    }
+
+    public static function wrapFormWidget($controller, $formWidget = null, $context = 'create')
+    {
+        $formController = $controller->asExtension('FormController');
+        if (!empty($formWidget)) {
+            ReflectionUtil::setPropertyValue(FormController::class, $formController, 'formWidget', $formWidget);
+        }
+        $viewPath = $controller->getViewPath(strtolower($context) . '.htm');
+        $contents = $controller->makeFileContents($viewPath);
+        return $contents;
     }
 }

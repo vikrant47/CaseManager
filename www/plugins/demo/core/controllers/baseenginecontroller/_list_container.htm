@@ -31,19 +31,21 @@
     $modelRecord = $this->getModelRecord();
     ?>
     <script>
-        window.me = {id:<?=$this->user->id?>};
-        $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
-        var actions = <?=$listActions ? $listActions->toJSON() : '[]'?>;
-        var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
-        var controller = <?=json_encode($this->getControllerInfo())?>;
-        Engine.instance.ui.setModel(modelRecord);
-        var list = EngineList.getCurrentList();
-        list.setPagination(<?= json_encode([
-                'from' => $list->vars['pageFrom'],
-                'to' => $list->vars['pageTo'],
-                'total' => $list->vars['recordTotal']
-            ])
-            ?>);
-        list.addActions(actions);
+        $(document).ready(function() {
+            window.me = {id:<?=$this->user->id?>};
+            $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
+            var actions = <?=$listActions ? $listActions->toJSON() : '[]'?>;
+            var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
+            var controller = <?=json_encode($this->getControllerInfo())?>;
+            Engine.instance.ui.setModel(modelRecord);
+            var list = EngineList.getCurrentList();
+            list.setPagination(<?= json_encode([
+                    'from' => $list->vars['pageFrom'],
+                    'to' => $list->vars['pageTo'],
+                    'total' => $list->vars['recordTotal']
+                ])
+                ?>);
+            list.addActions(actions);
+        });
     </script>
 </div>
