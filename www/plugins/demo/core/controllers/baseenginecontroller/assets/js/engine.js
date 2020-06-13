@@ -291,7 +291,12 @@ Object.assign(Engine.prototype, {
         }, options);
         const cls = function () {
             if (settings.extends) {
-                settings.extends.apply(this, arguments);
+                const parent = new settings.extends();
+                for (const i in parent) {
+                    if (typeof i !== 'function') {
+                        this[i] = parent[i];
+                    }
+                }
             }
             settings.constructor.apply(this, arguments);
         };

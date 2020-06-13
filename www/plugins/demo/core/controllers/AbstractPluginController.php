@@ -293,9 +293,17 @@ class AbstractPluginController extends Controller
 
     public function onFormRender($recordId = null, $context = 'create')
     {
-        $formWidget = $this->create();
-        return $this->formRender();
+        $modelClass = $this->getModelClass();
+        if (empty($recordId)) {
+            $model = new $modelClass();
+        } else {
+            $model = $modelClass::find($recordId);
+        }
+        $formController = $this->asExtension('FormController');
+        $formController->initForm($model, $context);
+        return FormBuilder::wrapFormWidget($this, null, $context);
     }
+
 
     public function buildForm($formConfig, $context = 'create', $recordId = null, $wrap = 'false')
     {
@@ -306,12 +314,7 @@ class AbstractPluginController extends Controller
         $formBuilder = new FormBuilder($this);
         if ($wrap === 'true') {
             $formWidget = $formBuilder->buildFormWidget($formConfig, $recordId, $context);
-            $formController = $this->asExtension('FormController');
-            ReflectionUtil::setPropertyValue(FormController::class, $formController, 'formWidget', $formWidget);
-            $viewPath = $this->getViewPath(strtolower($context) . '.htm');
-            $contents = $this->makeFileContents($viewPath);
-            $viewContents = $this->makeViewContent($contents);
-            return $viewContents;
+            return FormBuilder::wrapFormWidget($this, $formWidget, $context);
         } else {
             return $formBuilder->formRender($formConfig, $recordId, $context);
         }

@@ -218,6 +218,10 @@ body {
     padding: 0px 0px 8px 0px;
 }
 
+.toolbar-item .loading-indicator-container {
+    float: right;
+}
+
 .list-widget table.table.data thead td, .list-widget table.table.data thead th, .list-widget table.table.data .list-checkbox {
     border: none;
 }
@@ -463,6 +467,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 .recordfinder-list .list-scrollable-container > .list-scrollable {
     overflow: inherit;
 }
+
 .recordfinder-list {
     overflow: scroll;
 }

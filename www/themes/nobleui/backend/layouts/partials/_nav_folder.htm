@@ -3,11 +3,13 @@
 use \Demo\Core\Models\Navigation;
 
 $id = $folder->name . '-' . $folder->id;
-if ($folder->type === 'link') { ?>
+if ($folder->type !== 'folder') { ?>
     <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
     '' ?>">
         <a href="<?= $folder->generated_url ?>"
-           class="nav-link">
+           class="nav-link nav-type-link"
+           data-type="<?= $folder->type ?>"
+        >
             <span class="link-title"> <?= e(trans($folder->label)) ?></span>
             <i class="link-icon <?= $folder->icon ?>"></i>
         </a>
@@ -16,9 +18,11 @@ if ($folder->type === 'link') { ?>
 <?php } else {
     ?>
     <li class="nav-item <?= Navigation::isActiveNavigation($folder) ? 'active' : '' ?>">
-        <a class="nav-link" data-toggle="collapse" href="#<?= $id ?>" role="button"
+        <a class="nav-link nav-type-folder" data-toggle="collapse" href="#<?= $id ?>" role="button"
            aria-expanded="false"
-           aria-controls="emails">
+           aria-controls="emails"
+           data-type="<?= $folder->type ?>"
+        >
             <i class="link-icon <?= $folder->icon ?>"></i>
             <span class="link-title"><?= e(trans($folder->label)) ?></span>
             <i class="link-arrow" data-feather="chevron-down"></i>
@@ -36,7 +40,11 @@ if ($folder->type === 'link') { ?>
                             <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
                             '' ?>">
                                 <a href="<?= $sideItem->generated_url ?>"
-                                   class="nav-link"><span class="link-title"> <?= e(trans($sideItem->label)) ?></span>
+                                   class="nav-link nav-type-link"
+                                   data-type="<?= $sideItem->type ?>"
+                                >
+                                    <span
+                                            class="link-title"> <?= e(trans($sideItem->label)) ?></span>
                                     <i class="link-icon <?= $sideItem->icon ?>"></i>
                                 </a>
                             </li>

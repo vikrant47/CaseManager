@@ -1,7 +1,8 @@
-var EngineEvent = Engine.instance.define({
+var EngineObservable = Engine.instance.define({
     constructor: function () {
         this.events = {};
-    }, emit: function (eventName, args) {
+    },
+    emit: function (eventName, args) {
         const _this = this;
         if (this.events[eventName]) {
             this.events[eventName].forEach(function (callbaack) {
@@ -9,7 +10,8 @@ var EngineEvent = Engine.instance.define({
             });
         }
         return this;
-    }, on: function (eventName, callback) {
+    },
+    on: function (eventName, callback) {
         if (!this.events[eventName]) {
             this.events[eventName] = [];
         }
@@ -20,9 +22,49 @@ var EngineEvent = Engine.instance.define({
 var EngineUI = Engine.instance.define({
     constructor: function () {
         this.currentModel = null;
+        this.registerPopStateListener();
     },
-    navigate: function (model, type) {
-
+    registerPopStateListener: function () {
+        const _this = this;
+        window.addEventListener('popstate', function (e) {
+            if (e.state) {
+                _this.navigate(e.state.href, true);
+            }
+        });
+    },
+    getUrlInfo: function (url) {
+        let type = 'list';
+        const queryParamIndex = url.indexOf('?');
+        if (queryParamIndex > 0) {
+            url = url.substring(0, queryParamIndex - 1);
+        }
+        const urlSplit = url.split('/').reverse();
+        if (urlSplit[0] === 'create' || urlSplit[1] === 'update' || urlSplit[1] === 'preview') {
+            type = 'form';
+        } else if (url.indexOf('navigationcontroller/embed') > 0) {
+            type = 'embed';
+        } else if (url.indexOf('/report/dashboardcontroller/render') > 0) {
+            type = 'dashboard';
+        } else if (url.indexOf('/report/widgetcontroller/render') > 0) {
+            type = 'widget';
+        }
+        return {url: url, type: type};
+    },
+    navigate: function (url, skipPushState) {
+        const link = this.getUrlInfo(url);
+        let promise;
+        if (link.type === 'list') {
+            promise = EngineList.open(link.url);
+        } else if (link.type === 'form') {
+            promise = EngineForm.open(link.url);
+        }
+        if (promise) {
+            promise.then(function () {
+                if (!skipPushState) {
+                    window.history.pushState({href: link.url}, '', link.url);
+                }
+            });
+        }
     },
     getModel: function () {
         return this.currentModel;
@@ -85,6 +127,8 @@ var EngineUI = Engine.instance.define({
             options = handler;
         }
         var setting = Object.assign({}, options);
+        delete setting.success;
+        delete setting.error;
         return new Promise(function (resolve, reject) {
             Object.assign(setting, {
                 beforeUpdate: function () {
@@ -158,13 +202,7 @@ var EngineFormService = Engine.instance.define({
 });
 var EngineListService = Engine.instance.define({
     constructor: function () {
-        this.currentList = null;
-    },
-    getCurrentList: function () {
-        if (!this.currentList) {
-            this.currentList = new EngineList(Engine.instance.ui.getModel());
-        }
-        return this.currentList;
+
     }
 });
 var EngineList = Engine.instance.define({
@@ -172,18 +210,28 @@ var EngineList = Engine.instance.define({
         this.modelRecord = modelRecord;
         this.pagination = {};
         if (!el) {
-            el = '.control-list';
+            el = EngineList.el;
         }
         this.$el = $(el).eq(0);
         this.$el.data('engineList', this);
+        this.emit('init');
+        $(document).trigger('engine.list.init', [this]);
+    },
+    bindModel: function (modelRecord) {
+        this.modelRecord = modelRecord;
+        $(document).trigger('engine.list.bindModel', [this]);
     },
     bind: function ($el, modelRecord) {
-        this.modelRecord = modelRecord;
+        this.bindModel(modelRecord);
         this.pagination = {};
         this.$el = $el;
         this.$el.data('engineList', this);
+        this.emit('bind');
+        $(document).trigger('engine.list.bind', [this]);
     },
+    extends: EngineObservable,
     static: {
+        el: '.engine-list-wrapper',
         getInstance: function (el, modelRecord) {
             const $el = $(el).eq(0);
             if ($el.data('engineList')) {
@@ -194,11 +242,25 @@ var EngineList = Engine.instance.define({
             return list;
         },
         getCurrentList: function () {
-            if (!this.currentList) {
-                this.currentList = EngineList.getInstance($('.engine-list-wrapper').eq(0), Engine.instance.ui.getModel());
+            var $list = $(EngineList.el).eq(0);
+            var list = $list.data('engineList');
+            if (!list) {
+                list = new EngineList($list.get(0), Engine.instance.ui.getModel());
             }
-            return this.currentList;
-        }
+            list.bind($list, Engine.instance.ui.getModel());
+            return list;
+        },
+        open: function (controller) {
+            return Engine.instance.ui.request('onListRender', {
+                url: controller,
+                success: function (data) {
+                    $('#content-body').html(data.result);
+                    $('[data-control="rowlink"]').rowLink();
+                    $('[data-control="listwidget"]').listWidget();
+                    const list = EngineList.getCurrentList();
+                }
+            });
+        },
     },
     getContainer() {
         return this.$el;
@@ -249,7 +311,7 @@ var EngineForm = Engine.instance.define({
             return this.currentForm;
         }
     },
-    extends: EngineEvent,
+    extends: EngineObservable,
     constructor: function (config) {
         this.config = config
     },
