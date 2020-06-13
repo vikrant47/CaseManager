@@ -9,15 +9,22 @@ scopes:
     conditions: case_number iLike '%:filtered%'
     type: text
 
-  case_version:
-    label: Version
-    conditions: version iLike '%:filtered%'
-    type: text
-
   priority:
     label: Priority
     modelClass: Demo\CaseManager\Models\CasePriority
     conditions: priority_id in (:filtered)
+    nameFrom: name
+
+  queue:
+    label: Queue
+    modelClass: Demo\Workflow\Models\Queue
+    conditions: queue_id in (:filtered)
+    nameFrom: name
+
+  state:
+    label: State
+    modelClass: Demo\Workflow\Models\WorkflowState
+    conditions: workflow_state_id in (:filtered)
     nameFrom: name
 
   created_at:

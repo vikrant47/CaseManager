@@ -46,6 +46,18 @@ fields:
         type: number
 tabs:
     fields:
+        workflow_state:
+            label: State
+            span: auto
+            readOnly: 1
+            type: relation
+            tab: System
+        queue:
+            label: Queue
+            span: auto
+            readOnly: 1
+            type: relation
+            tab: System
         assigned_to:
             label: 'Assigned To'
             nameFrom: login
@@ -60,3 +72,4 @@ tabs:
             readOnly: 1
             type: number
             tab: System
+

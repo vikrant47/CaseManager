@@ -1,22 +1,33 @@
 columns:
     id:
-        label: id
-        type: number
-    title:
-        label: title
+        label: Id
+        type: text
+    case_number:
+        label: 'Case Number'
         type: text
         searchable: true
-    description:
-        label: description
+    suspect:
+        label: Suspect
+        type: text
+        searchable: true
+    tat_duration:
+        label: Tat
+        type: text
+        searchable: true
+    queue[name]:
+        label: Queue
+        type: text
+    workflow_state[name]:
+        label: State
         type: text
     created_at:
-        label: created_at
+        label: Created At
         type: datetime
     updated_at:
-        label: updated_at
+        label: Updated At
         type: datetime
     created_by[first_name]:
-        label: created_by
+        label: Created By
         type: number
     updated_by[first_name]:
         label: updated_by

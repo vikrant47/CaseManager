@@ -24,6 +24,7 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
             $table->string('model',255);
             $table->text('input_condition');
             $table->string('event')->nullable();
+            $table->string('model_state_field')->default('workflow_state_id');
         });
     }
 
