@@ -104,6 +104,32 @@ class SeedDemoWorkflowWorkflowTransitions implements Seedable
                                                                                         "workflow_item_id"=>"4895ad20-a88b-11ea-857c-df4c041a8840",
                                                                                         "from_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
                                                                                         "to_state_id"=>"c5a45023-2d2a-48ca-94b1-3097c0af7d05"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-13 06:16:09",
+                                                                                        "updated_at"=>"2020-06-13 06:16:09",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "data"=>"[]",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "column_12"=> null,
+                                                                                        "backward_direction"=> false,
+                                                                                        "id"=>"5f76eba0-ad3d-11ea-b1ac-2946acd1317a",
+                                                                                        "workflow_item_id"=>"f635dfd0-ad3c-11ea-b201-316250d74eca",
+                                                                                        "from_state_id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b",
+                                                                                        "to_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-13 06:18:17",
+                                                                                        "updated_at"=>"2020-06-13 06:18:17",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "data"=>"[]",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "column_12"=> null,
+                                                                                        "backward_direction"=> false,
+                                                                                        "id"=>"aba8a170-ad3d-11ea-9e94-436b2c1287d7",
+                                                                                        "workflow_item_id"=>"da9b8f40-ad3a-11ea-a16c-5b7377310006",
+                                                                                        "from_state_id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b",
+                                                                                        "to_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de"
                             ]             ]);
         }
 

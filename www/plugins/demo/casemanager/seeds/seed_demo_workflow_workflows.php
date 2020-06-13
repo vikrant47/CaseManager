@@ -28,7 +28,8 @@ class SeedDemoWorkflowWorkflows implements Seedable
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "input_condition"=>"return true;",
                                                                                         "event"=>"created",
-                                                                                        "id"=>"dd25a3b6-0e8b-4af7-b50d-d9030068b84a"
+                                                                                        "id"=>"dd25a3b6-0e8b-4af7-b50d-d9030068b84a",
+                                                                                        "model_state_field"=>"workflow_state_id"
                             ]             ]);
         }
 
