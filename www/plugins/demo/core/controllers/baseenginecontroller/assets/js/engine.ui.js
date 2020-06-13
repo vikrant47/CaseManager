@@ -128,31 +128,35 @@ var EngineUI = Engine.instance.define({
         if (typeof handler !== 'string') {
             options = handler;
         }
-        var setting = Object.assign({}, options);
-        if (setting.showLoading) {
-            setting.popup = Engine.instance.ui.showPopup();
-        }
+        const setting = Object.assign({loadingContainer: false}, options);
         delete setting.success;
         delete setting.error;
         const $reqElem = $('<div/>');
+        if (setting.loadingContainer) {
+            setting.$loading = $(setting.loadingContainer).LoadingOverlay("show", {
+                fontawesome: true,
+                size: 25,
+                minSize: 20,
+                maxSize: 30,
+                background: 'rgba(0, 0, 0, 0.2)',
+                fontawesomeAutoResize: false,
+            });
+        }
         return new Promise(function (resolve, reject) {
             $reqElem.on('ajaxSuccess', function (e, context, data, textStatus, jqXHR) {
                 if (typeof options.success === 'function') {
                     options.success.apply(this, [data, jqXHR, textStatus, context]);
                 }
-                if (setting.popup) {
-                    setting.popup.hideLoading();
-                    setting.popup.dispose();
-                }
                 resolve.apply(this, [data, jqXHR, textStatus, context]);
+            });
+            $reqElem.on('ajaxComplete', function (e, context, errorMsg, textStatus, jqXHR) {
+                if (setting.$loading) {
+                    setting.$loading.LoadingOverlay("hide", true);
+                }
             });
             $reqElem.on('ajaxError', function (e, context, errorMsg, textStatus, jqXHR) {
                 if (typeof options.error === 'function') {
                     options.error.apply(this, [errorMsg, jqXHR, textStatus, context]);
-                }
-                if (setting.popup) {
-                    setting.popup.hideLoading();
-                    setting.popup.dispose();
                 }
                 reject.apply(this, [errorMsg, jqXHR, textStatus, context]);
             });
@@ -266,7 +270,7 @@ var EngineList = Engine.instance.define({
         open: function (controller) {
             return Engine.instance.ui.request('onListRender', {
                 url: controller,
-                showLoading: true,
+                loadingContainer: '.page-content',
                 success: function (data) {
                     $('#content-body').html(data.result);
                     $('[data-control="rowlink"]').rowLink();

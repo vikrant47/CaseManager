@@ -238,7 +238,7 @@ body {
 }
 
 .table td {
-    font-size: 1.275rem;
+    font-size: 1.2rem;
 }
 
 table.table.data tbody td, table.table.data tbody th {
@@ -296,9 +296,15 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     background: #fff;
 }
 
-.sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm {
+.sidebar-search {
+    padding: 7px 5px 5px 15px;
+}
+
+.sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm, input#nav-search-box {
     background: #3a3f51;
     color: #a6a8b1;
+    border: 0px;
+    font-size: 15px;
 }
 
 .navbar .search-form .input-group .input-group-prepend .input-group-text {
@@ -439,6 +445,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 /**loader**/
+/*
 .stripe-loading-indicator .stripe, .stripe-loading-indicator .stripe-loaded {
     background: #727cf5 !important;
 }
@@ -446,6 +453,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 .loading-indicator-container {
     min-height: 30px;
 }
+*/
 
 .field-repeater .field-repeater-add-item > a {
     padding: 10px 15px;

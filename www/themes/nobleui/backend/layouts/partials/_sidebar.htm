@@ -22,10 +22,13 @@ $navigations = $this->getNavigations();
         <span></span>
     </div>
 </div>
-<div class="sidebar-header">
-    <input id="nav-search-box" type="text" style="width: 100%;color: black;" placeholder="Search Navigation"/>
-</div>
+
 <div class="sidebar-body">
+    <div class="sidebar-search">
+        <div class="input-group">
+            <input id="nav-search-box" type="text" class="form-control" id="navbarForm" placeholder="Search Navigation">
+        </div>
+    </div>
     <ul class="nav">
         <?php
         $counter = 0;
