@@ -43,22 +43,24 @@ $(document).ready(function () {
             }
         }
     });
-    $(document).on('click', '.nav-type-link,.rowlink td, .engine-form-wrapper .form-buttons a', function () {
-        let $link = $(this);
-        if ($(this).is('td')) {
-            $link = $(this).parent().find('a').filter(function () {
-                return !$(this).closest('td').hasClass('nolink') && !$(this).hasClass('nolink')
-            }).first();
-        }
-        if ($link.length) {
-            const href = $link.prop('href');
-            if (window.location.href !== href) {
-                const navigated = Engine.instance.ui.navigate(href);
-                navigated.catch(function () {
-                    // window.location.href = href;
-                })
+    $(document).on('click',
+        '.nav-type-link,.rowlink td, .engine-form-wrapper .form-buttons a,.breadcrumb-item a',
+        function () {
+            let $link = $(this);
+            if ($(this).is('td')) {
+                $link = $(this).parent().find('a').filter(function () {
+                    return !$(this).closest('td').hasClass('nolink') && !$(this).hasClass('nolink')
+                }).first();
             }
-            return false;
-        }
-    });
+            if ($link.length) {
+                const href = $link.prop('href');
+                if (window.location.href !== href) {
+                    const navigated = Engine.instance.ui.navigate(href);
+                    navigated.catch(function () {
+                        // window.location.href = href;
+                    })
+                }
+                return false;
+            }
+        });
 });
