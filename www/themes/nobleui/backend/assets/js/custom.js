@@ -6,6 +6,7 @@ $(document).ready(function () {
         $parent.siblings().removeClass('active');
         $parent.addClass('active');
     });
+    $('[data-control="rowlink"] .rowlink td').off('click')
 });
 
 $(document).ready(function () {
@@ -34,11 +35,21 @@ $(document).ready(function () {
             }
         }
     });
-    $(document).on('click', '.nav-type-link', function () {
-        if ($(this).data('type') === 'list') {
-            const href = $(this).prop('href');
-            if (window.location.href !== href)
-                Engine.instance.ui.navigate(href);
+    $(document).on('click', '.nav-type-link,.rowlink td', function () {
+        let $link = $(this);
+        if ($(this).is('td')) {
+            $link = $(this).find('a').filter(function () {
+                return !$(this).closest('td').hasClass('noclick') && !$(this).hasClass('noclick')
+            }).first();
+        }
+        if ($link.length) {
+            const href = $link.prop('href');
+            if (window.location.href !== href) {
+                const navigated = Engine.instance.ui.navigate(href);
+                navigated.catch(function () {
+                    // window.location.href = href;
+                })
+            }
             return false;
         }
     });
