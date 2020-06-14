@@ -36,33 +36,33 @@ var EngineUI = Engine.instance.define({
         let urlInfo = {url: url, type: 'list'};
         const queryParamIndex = url.indexOf('?');
         if (queryParamIndex > 0) {
-            url = url.substring(0, queryParamIndex - 1);
+            url = url.substring(0, queryParamIndex);
         }
         const urlSplit = url.split('/').reverse();
         if (urlSplit[0] === 'create' || urlSplit[1] === 'update' || urlSplit[1] === 'preview') {
-            urlInfo = {
+            Object.assign(urlInfo, {
                 type: 'form',
                 context: urlSplit[0] === 'create' ? urlSplit[0] : urlSplit[1],
                 recordId: urlSplit[0] === 'create' ? null : urlSplit[0]
-            };
+            });
         } else if (url.indexOf('navigationcontroller/embed') > 0) {
-            urlInfo = {
+            Object.assign(urlInfo, {
                 type: 'embed',
                 recordId: urlSplit[0]
-            };
+            });
 
         } else if (url.indexOf('/report/dashboardcontroller/render') > 0) {
-            urlInfo = {
+            Object.assign(urlInfo, {
                 type: 'dashboard',
                 recordId: urlSplit[0]
-            };
+            });
         } else if (url.indexOf('/report/widgetcontroller/render') > 0) {
-            urlInfo = {
+            Object.assign(urlInfo, {
                 type: 'widget',
                 recordId: urlSplit[0]
-            };
+            });
         }
-        return Object.assign(urlInfo, {url: url});
+        return urlInfo;
     },
     navigate: function (url, skipPushState) {
         const link = this.getUrlInfo(url);
