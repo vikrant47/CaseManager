@@ -238,9 +238,10 @@ class AbstractPluginController extends Controller
      * Loads a view with the name specified. Applies layout if its name is provided by the parent object.
      * The view file must be situated in the views directory, and has the extension "htm".
      * @param string $view Specifies the view name, without extension. Eg: "index".
+     * @param bool $bodyOnly Only make body section of layout
      * @return string
      */
-    public function makeView($view)
+    public function makeView($view, $bodyOnly = false)
     {
 
         $ajaxCall = Request::input('ajax');
@@ -259,7 +260,7 @@ class AbstractPluginController extends Controller
                 'context' => $view,
             ]);
         }
-        if ($ajaxCall === 'true') {
+        if ($ajaxCall === 'true' || $bodyOnly) {
             $viewContents = $this->makeViewContent($contents, PluginConnection::getThemeBodyPartial());
         } else {
             $viewContents = $this->makeViewContent($contents);
@@ -300,6 +301,12 @@ class AbstractPluginController extends Controller
 
     public function onFormRender($recordId = null, $context = 'create')
     {
+        if (!empty(Request::input('context'))) {
+            $context = Request::input('context');
+        }
+        if (!empty(Request::input('$recordId'))) {
+            $recordId = Request::input('$recordId');
+        }
         $modelClass = $this->getModelClass();
         if (empty($recordId)) {
             $model = new $modelClass();
