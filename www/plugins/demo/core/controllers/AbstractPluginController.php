@@ -128,6 +128,7 @@ class AbstractPluginController extends Controller
      * Returns the configuration used by this behavior.
      * Override ListController listGetConfig to render different list views
      * @return \Backend\Classes\WidgetBase
+     * @throws ListConfigNotFoundException
      */
     public function listGetConfig($definition = null)
     {
@@ -241,6 +242,8 @@ class AbstractPluginController extends Controller
      */
     public function makeView($view)
     {
+
+        $ajaxCall = Request::input('ajax');
         $requestedView = $this->getRequestedView();
         if (!empty($requestedView) && $this->isViewDefinitionExists($requestedView)) {
             $viewPath = $this->getViewRootDir($requestedView) . DIRECTORY_SEPARATOR . strtolower($view) . '.htm';
@@ -256,7 +259,11 @@ class AbstractPluginController extends Controller
                 'context' => $view,
             ]);
         }
-        $viewContents = $this->makeViewContent($contents);
+        if ($ajaxCall === 'true') {
+            $viewContents = $this->makeViewContent($contents, PluginConnection::getThemeBodyPartial());
+        } else {
+            $viewContents = $this->makeViewContent($contents);
+        }
         return $viewContents;
     }
 

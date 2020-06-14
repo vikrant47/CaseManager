@@ -413,4 +413,14 @@ class PluginConnection
         $pluginPos = StringUtil::strposX($classPrefix, '.', 2);
         return substr($classPrefix, 0, $pluginPos);
     }
+
+    public static function getThemeBodyPartial()
+    {
+        return base_path() . DIRECTORY_SEPARATOR . 'themes'
+            . DIRECTORY_SEPARATOR . 'nobleui'
+            . DIRECTORY_SEPARATOR . 'backend'
+            . DIRECTORY_SEPARATOR . 'layouts'
+            . DIRECTORY_SEPARATOR . 'partials'
+            . DIRECTORY_SEPARATOR . '_body';
+    }
 }

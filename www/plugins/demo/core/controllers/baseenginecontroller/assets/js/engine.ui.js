@@ -55,8 +55,10 @@ var EngineUI = Engine.instance.define({
         let promise;
         if (link.type === 'list') {
             promise = EngineList.open(link.url);
+        } else if (link.type === 'form') {
+            promise = EngineForm.open(link.url);
         } else {
-            window.location.href = url;
+            promise = this.open(url);
         }
         if (promise) {
             promise.then(function () {
@@ -65,6 +67,18 @@ var EngineUI = Engine.instance.define({
                 }
             });
         }
+        return promise;
+    },
+    open: function (url) {
+        return Engine.instance.ui.request({
+            url: url,
+            $ajax: true,
+            data: {ajax: true},
+            loadingContainer: '.page-content',
+            success: function (data) {
+                $('#page-content').html(data.result);
+            }
+        });
     },
     getModel: function () {
         return this.currentModel;
@@ -128,9 +142,7 @@ var EngineUI = Engine.instance.define({
         if (typeof handler !== 'string') {
             options = handler;
         }
-        const setting = Object.assign({loadingContainer: false}, options);
-        delete setting.success;
-        delete setting.error;
+        const setting = Object.assign({loadingContainer: false, $ajax: false}, options);
         const $reqElem = $('<div/>');
         if (setting.loadingContainer) {
             setting.$loading = $(setting.loadingContainer).LoadingOverlay("show", {
@@ -147,7 +159,7 @@ var EngineUI = Engine.instance.define({
                 if (typeof options.success === 'function') {
                     options.success.apply(this, [data, jqXHR, textStatus, context]);
                 }
-                resolve.apply(this, [data, jqXHR, textStatus, context]);
+                resolve(data, jqXHR, textStatus, context);
             });
             $reqElem.on('ajaxComplete', function (e, context, errorMsg, textStatus, jqXHR) {
                 if (setting.$loading) {
@@ -158,12 +170,29 @@ var EngineUI = Engine.instance.define({
                 if (typeof options.error === 'function') {
                     options.error.apply(this, [errorMsg, jqXHR, textStatus, context]);
                 }
-                reject.apply(this, [errorMsg, jqXHR, textStatus, context]);
+                reject(this, [errorMsg, jqXHR, textStatus, context]);
             });
-            if (typeof handler === 'string') {
-                $reqElem.request(handler, setting);
+            delete setting.success;
+            delete setting.error;
+            if (setting.$ajax === true) {
+                Object.assign(setting, {
+                    success: function (response, jqXHR) {
+                        $reqElem.trigger('ajaxSuccess', ['', response, jqXHR]);
+                    },
+                    error: function (error) {
+                        $reqElem.trigger('ajaxError', ['', error]);
+                    },
+                    complete: function (jqXHR) {
+                        $reqElem.trigger('ajaxComplete', [jqXHR]);
+                    }
+                });
+                $.ajax(setting);
             } else {
-                $reqElem.request(setting);
+                if (typeof handler === 'string') {
+                    $reqElem.request(handler, setting);
+                } else {
+                    $reqElem.request(setting);
+                }
             }
         });
     },
@@ -275,6 +304,7 @@ var EngineList = Engine.instance.define({
                     $('#content-body').html(data.result);
                     $('[data-control="rowlink"]').rowLink();
                     $('[data-control="listwidget"]').listWidget();
+                    $('[data-control="rowlink"] .rowlink td').off('click')
                     const list = EngineList.getCurrentList();
                 }
             });
@@ -327,7 +357,24 @@ var EngineForm = Engine.instance.define({
                 this.currentForm = EngineForm.getInstance($('.engine-form-wrapper').get(0), Engine.instance.ui.getModel());
             }
             return this.currentForm;
-        }
+        },
+        open: function (controller, context, recordId) {
+            if (context) {
+                controller = controller + '/';
+                if (recordId) {
+                    controller = controller + '/' + recordId;
+                }
+            }
+            return Engine.instance.ui.request('onFormRender', {
+                url: controller,
+                data: {ajax: true},
+                loadingContainer: '.page-content',
+                success: function (data) {
+                    $('#page-content').html(data.result);
+                    const form = EngineForm.getCurrentForm();
+                }
+            });
+        },
     },
     extends: EngineObservable,
     constructor: function (config) {

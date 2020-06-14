@@ -164,6 +164,7 @@ class FormBuilder
         }
         $viewPath = $controller->getViewPath(strtolower($context) . '.htm');
         $contents = $controller->makeFileContents($viewPath);
-        return $contents;
+        $viewContents = $controller->makeViewContent($contents, PluginConnection::getThemeBodyPartial());
+        return $viewContents;
     }
 }
