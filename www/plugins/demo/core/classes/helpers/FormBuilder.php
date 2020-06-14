@@ -162,9 +162,9 @@ class FormBuilder
         if (!empty($formWidget)) {
             ReflectionUtil::setPropertyValue(FormController::class, $formController, 'formWidget', $formWidget);
         }
-        $viewPath = $controller->getViewPath(strtolower($context) . '.htm');
-        $contents = $controller->makeFileContents($viewPath);
-        $viewContents = $controller->makeViewContent($contents, PluginConnection::getThemeBodyPartial());
-        return $viewContents;
+        // $viewPath = $controller->getViewPath(strtolower($context) . '.htm');
+        $contents = $controller->makeView($context, true);
+        // $viewContents = $controller->makeViewContent($contents, PluginConnection::getThemeBodyPartial());
+        return $contents;
     }
 }
