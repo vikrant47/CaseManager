@@ -296,7 +296,15 @@ class AbstractPluginController extends Controller
     public function onListRender()
     {
         $list = $this->makeLists();
-        return $this->listRender();
+        return $this->makeView('index', true);
+    }
+
+    public function onRender($id)
+    {
+        if (method_exists($this, 'render')) {
+            return $this->render($id);
+        }
+        return null;
     }
 
     public function onFormRender($recordId = null, $context = 'create')

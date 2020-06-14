@@ -71,8 +71,10 @@ var EngineUI = Engine.instance.define({
             promise = EngineList.open(link.url);
         } else if (link.type === 'form') {
             promise = EngineForm.open(link.url, link.context, link.recordId);
+        } else if (link.type === 'widget' || link.type === 'dashboard' || link.type === 'embed') {
+            promise = this.openRenderableUrl(link.url);
         } else {
-            promise = this.open(url);
+            promise = this.open(link.url);
         }
         if (promise) {
             promise.then(function () {
@@ -84,11 +86,18 @@ var EngineUI = Engine.instance.define({
         }
         return promise;
     },
+    openRenderableUrl: function (url) {
+        return Engine.instance.ui.request('onRender', {
+            url: url,
+            loadingContainer: '.page-content',
+            success: function (data) {
+                $('#page-content').html(data.result);
+            }
+        });
+    },
     open: function (url) {
         return Engine.instance.ui.request({
             url: url,
-            $ajax: true,
-            data: {ajax: true},
             loadingContainer: '.page-content',
             success: function (data) {
                 $('#page-content').html(data.result);
@@ -319,7 +328,7 @@ var EngineList = Engine.instance.define({
                 url: controller,
                 loadingContainer: '.page-content',
                 success: function (data) {
-                    $('#content-body').html(data.result);
+                    $('#page-content').html(data.result);
                     $('[data-control="rowlink"]').rowLink();
                     $('[data-control="listwidget"]').listWidget();
                     const list = EngineList.getCurrentList();
