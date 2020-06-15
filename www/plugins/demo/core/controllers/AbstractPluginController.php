@@ -304,6 +304,9 @@ class AbstractPluginController extends Controller
         if (method_exists($this, 'render')) {
             return $this->render($id);
         }
+        if (method_exists($this, 'embed')) {
+            return $this->embed($id);
+        }
         return null;
     }
 
