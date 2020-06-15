@@ -1,16 +1,22 @@
 /**breadcrumb fix**/
 $(document).ready(function () {
     $(document).on('engine.form.open', function () {
-        $('.page-breadcrumb ul').addClass('breadcrumb').find('>li').addClass('breadcrumb-item');
-        $('.control-tabs .nav-tabs a').click(function () {
-            const $parent = $(this).parent();
-            $parent.siblings().removeClass('active');
-            $parent.addClass('active');
-        });
+        setTimeout(function () {
+            $('.page-breadcrumb ul').addClass('breadcrumb').find('>li').addClass('breadcrumb-item');
+            $('.control-tabs .nav-tabs a').click(function () {
+                const $parent = $(this).parent();
+                $parent.siblings().removeClass('active');
+                $parent.addClass('active');
+            });
+            $('[data-trigger]').triggerOn();
+        }, 500);
     }).trigger('engine.form.open');
     $(document).on('engine.list.open', function () {
-        $('[data-control="rowlink"] .rowlink td').off('click');
-        $('.page-breadcrumb').hide();
+        setTimeout(function () {
+            $('[data-control="rowlink"] .rowlink td').off('click');
+            $('.page-breadcrumb').hide();
+            $('[data-trigger]').triggerOn();
+        }, 500);
     }).trigger('engine.list.open');
     $(document).on('engine.ui.navigate', function () {
         $('.main-wrapper').scrollTop(0).data('perfectScroller').update()
@@ -48,9 +54,13 @@ $(document).ready(function () {
         function () {
             let $link = $(this);
             if ($(this).is('td')) {
-                $link = $(this).parent().find('a').filter(function () {
-                    return !$(this).closest('td').hasClass('nolink') && !$(this).hasClass('nolink')
-                }).first();
+                if ($(this).hasClass('nolink')) {
+                    $link = [];
+                } else {
+                    $link = $(this).parent().find('a').filter(function () {
+                        return !$(this).closest('td').hasClass('nolink') && !$(this).hasClass('nolink')
+                    }).first();
+                }
             }
             if ($link.length) {
                 const href = $link.prop('href');

@@ -297,11 +297,12 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 .sidebar-search {
-    padding: 7px 5px 5px 15px;
+    padding: 7px 5px 0px 14px;
+    background-color: #3a3f51;
 }
 
 .sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm, input#nav-search-box {
-    background: #3a3f51;
+    background-color: #3a3f51;
     color: #a6a8b1;
     border: 0px;
     font-size: 15px;
