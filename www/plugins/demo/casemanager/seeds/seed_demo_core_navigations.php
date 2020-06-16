@@ -111,7 +111,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "uipage_id"=> null
                             ] ,            [
                                                                             "created_at"=>"2020-05-13 04:37:14",
-                                                                                        "updated_at"=>"2020-06-07 06:06:24",
+                                                                                        "updated_at"=>"2020-06-14 06:00:06",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> null,
@@ -131,7 +131,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "dashboard_id"=> null,
-                                                                                        "widget_id"=> null,
+                                                                                        "widget_id"=>"84383d11-89c6-4dac-906c-bb2b08923b53",
                                                                                         "uipage_id"=> null
                             ]             ]);
         }

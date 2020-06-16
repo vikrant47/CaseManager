@@ -62,6 +62,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "viewable"=> false,
                                                                                         "id"=>"f9386c03-0314-4fc1-b2db-15dc43e917cf"
                             ] ,            [
+                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2020-06-14 07:08:21",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Model Association",
+                                                                                        "model"=>"Demo\Core\Models\ModelAssociation",
+                                                                                        "controller"=>"Demo\Core\Controllers\ModelAssociationController",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "audit"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> 1,
+                                                                                        "viewable"=> false,
+                                                                                        "id"=>"1ee08836-c156-48db-a72f-586b89af118f"
+                            ] ,            [
                                                                             "created_at"=>"2020-04-18 14:53:04",
                                                                                         "updated_at"=>"2020-04-18 15:36:42",
                                                                                         "created_by_id"=> 1,
@@ -221,22 +237,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "attach_audited_by"=> 1,
                                                                                         "viewable"=> false,
                                                                                         "id"=>"b1345d69-71f1-4490-8c4a-2141394018f9"
-                            ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Model Association",
-                                                                                        "model"=>"Demo\Core\Models\ModelAssociation",
-                                                                                        "controller"=>"Demo\Core\Controllers\AssociationController",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "audit"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\" * \"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"1ee08836-c156-48db-a72f-586b89af118f"
                             ] ,            [
                                                                             "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
