@@ -1,0 +1,34 @@
+
+<?= (isset($fieldOptions[$field->value])) ? e(trans($fieldOptions[$field->value])) : '' ?>
+<select class="form-control s2" id="selectType">
+    <option value="days" selected="selected">Days</option>
+    <option value="weeks">Weeks</option>
+    <option value="months">Months</option>
+    <option value="years">Years</option>
+    <option value="hours">Hours</option>
+    <!--<option value="sec">Seconds</option>-->
+</select>
+<input id="tatTypeId" name="_tatSelectedType" type="hidden" value="<?= $this->selectedValue ?>">
+<input class="form-control"
+       type="text" name="<?= $field->getName() ?>"
+<?= $field->getAttributes() ?>
+<?= $field->placeholder ? 'data-placeholder="'.e(trans($field->placeholder)).'"' : '' ?>
+value="<?= $field->value ?>" >
+
+<script>
+    $(document).on('render', function () {
+        $(".s2").select2({
+            tags: true,
+        });
+    })
+    $('#selectType').select2().on('change', function() {
+        //console.log($('#tatTypeId').val());
+        //$("#selectType").select2().select2('val',$('#tatTypeId').val());
+        $('#tatTypeId').val($(this).val());
+    })
+    $('#tatTypeId').on('change', function() {debugger
+        console.log($(this).val());
+        $("#selectType").val($(this).val());
+        $("#selectType").trigger('change');
+    }).trigger('change');
+</script>
