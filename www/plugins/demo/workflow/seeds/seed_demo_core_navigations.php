@@ -54,7 +54,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "form"=> "",
                                                                                         "plugin_id"=> 11,
                                                                                         "sort_order"=> 5,
-                                                                                        "icon"=>"oc-icon-recycle",
+                                                                                        "icon"=>"oc-icon-folder",
                                                                                         "id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "record_id"=> null,
                                                                                         "parent_id"=> null,

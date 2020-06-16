@@ -41,13 +41,13 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "id"=>"d9f9f39e-1a2d-4eb9-9619-0fc673ca4c14",
                                                                                         "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 06:10:59",
-                                                                                        "updated_at"=>"2020-05-10 06:10:59",
+                                                                            "created_at"=>"2020-06-13 12:12:52",
+                                                                                        "updated_at"=>"2020-06-13 12:12:52",
                                                                                         "user_id"=> 2,
                                                                                         "plugin_id"=> 10,
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "id"=>"1cced673-fc72-4053-83e7-68f9dcbd880e",
+                                                                                        "id"=>"34d630d0-ad6f-11ea-8a1e-7b7a03481ce4",
                                                                                         "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354"
                             ]             ]);
         }
