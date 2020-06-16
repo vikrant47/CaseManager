@@ -43,7 +43,7 @@ fields:
     tat_duration:
         label: 'Tat Duration'
         span: auto
-        type: number
+        type: durationwidget
 tabs:
     fields:
         workflow_state:
