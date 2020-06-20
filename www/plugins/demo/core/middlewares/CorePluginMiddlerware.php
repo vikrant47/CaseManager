@@ -43,15 +43,16 @@ class CorePluginMiddlerware implements IPluginMiddleware
             $replace = array(
                 '/<!--[^\[](.*?)[^\]]-->/s' => '',
                 "/<\?php/"                  => '<?php ',
-                "/\n([\S])/"                => '$1',
-                "/\r/"                      => '',
-                "/\n/"                      => '',
+                "/\\n([\S])/"                => '$1',
+                "/\\r/"                      => '',
+                "/\\n/"                      => '',
+                "/\\r\\n/"                      => '',
                 "/\t/"                      => '',
                 "/ +/"                      => ' ',
             );
         }
         $buffer = preg_replace(array_keys($replace), array_values($replace), $buffer);
-        $response->setContent($buffer);
+        // $response->setContent($buffer);
         ini_set('zlib.output_compression', 'On'); // If you like to enable GZip, too!
         return $response;
     }

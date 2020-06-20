@@ -21,7 +21,7 @@ class SeedDemoReportDashboards implements Seedable
                                                                                         "name"=>"Default Deshboard",
                                                                                         "description"=> "",
                                                                                         "active"=> 1,
-                                                                                        "config_widgets"=>"[{\"widget\":\"84383d11-89c6-4dac-906c-bb2b08923b53\",\"x\":0,\"y\":0,\"width\":6,\"height\":8},{\"widget\":\"84383d11-89c6-4dac-906c-bb2b08923b53\",\"x\":6,\"y\":0,\"width\":6,\"height\":8}]",
+                                                                                        "widgets_config"=>"[{\"widget\":\"84383d11-89c6-4dac-906c-bb2b08923b53\",\"x\":0,\"y\":0,\"width\":6,\"height\":8},{\"widget\":\"84383d11-89c6-4dac-906c-bb2b08923b53\",\"x\":6,\"y\":0,\"width\":6,\"height\":8}]",
                                                                                         "public"=> 0,
                                                                                         "code"=>"default-dashboard",
                                                                                         "plugin_id"=> 3,
