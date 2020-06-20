@@ -6,6 +6,7 @@ use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
 use Demo\Report\Models\Dashboard;
 use Demo\Report\Models\Widget;
+use Illuminate\Support\Collection;
 use Input;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Support\Facades\Flash;
@@ -26,6 +27,26 @@ class DashboardController extends AbstractSecurityController
         BackendMenu::setContext('Demo.Report', 'main-menu-item', 'side-menu-item2');
     }
 
+    /**
+     * @return Collection<Widget>
+     * @var Dashboard $dashboard
+     */
+    public function getWidgets($dashboard)
+    {
+        $config = $dashboard->widgets_config;
+        $widgets = Widget::whereIn('id', array_map(function ($widgetConfig) {
+            return $widgetConfig['widget'];
+        }, $config))->get();
+        $widgets->map(function ($widget) use ($config) {
+            foreach ($config as $widgetConfig) {
+                if ($widgetConfig['widget'] === $widget->id) {
+                    $widget->config = $widgetConfig;
+                }
+            }
+        });
+        return $widgets;
+    }
+
     public function onData($id)
     {
         // $id = Input::get('id');
@@ -39,14 +60,14 @@ class DashboardController extends AbstractSecurityController
         return json_encode($dashboardJson);
     }
 
-    public function onSaveData($slug)
+    public function onSaveData($id)
     {
-        $dashboard = Dashboard::where('code', $slug)->first();
+        $dashboard = Dashboard::where('id', $id)->first();
         if (empty($dashboard)) {
             $this->setStatusCode(404);
-            return [];
+            Flash::error('Unable to find given dashboard !');
         }
-        $dashboard->config_widgets = Input('config_widgets');
+        $dashboard->widgets_config = Input('widgets_config');
         $dashboard->save();
         Flash::success('Dashboard Updated !');
 
@@ -96,6 +117,19 @@ class DashboardController extends AbstractSecurityController
         return ['dashboard' => $dashboard->getOriginal()];
     }
 
+    public function design($id)
+    {
+        $dashboard = Dashboard::where('id', $id)->where('active', 1)->first();
+        if (empty($dashboard)) {
+            $this->setStatusCode(404);
+            return '';
+        }
+        return $this->makePartial('dashboard_renderer', [
+            'dashboard' => $dashboard,
+            'context' => 'preview'
+        ]);
+    }
+
     public function render($id)
     {
         $dashboard = Dashboard::where('id', $id)->where('active', 1)->first();
@@ -104,7 +138,8 @@ class DashboardController extends AbstractSecurityController
             return '';
         }
         return $this->makePartial('dashboard_renderer', [
-            'dashboard' => $dashboard, 'preview' => false
+            'dashboard' => $dashboard,
+            'context' => 'render'
         ]);
     }
 }
