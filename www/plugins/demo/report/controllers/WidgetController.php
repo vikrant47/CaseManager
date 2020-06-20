@@ -51,8 +51,10 @@ class WidgetController extends AbstractSecurityController
 
     public function addAssets($controller, Widget $widget)
     {
-        if (!empty($widget->library)) {
-            $widget->library->addAssets($controller);
+        if (!empty($widget->libraries)) {
+            foreach ($widget->libraries as $library) {
+                $library->addAssets($controller);
+            }
         }
     }
 

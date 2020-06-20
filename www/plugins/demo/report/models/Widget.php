@@ -2,6 +2,7 @@
 
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Beans\TwigEngine;
+use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\PluginVersions;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -26,7 +27,7 @@ class Widget extends Model implements FromCollection
      * @var string The database table used by the model.
      */
     public $table = 'demo_report_widgets';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
@@ -39,7 +40,14 @@ public $incrementing = false;
 
     public $belongsTo = [
         'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
-        'library' => [JavascriptLibrary::class, 'key' => 'library_id'],
+    ];
+    public $belongsToMany = [
+        'libraries' => [
+            JavascriptLibrary::class,
+            'table' => 'demo_report_widget_library_associations',
+            'key' => 'widget_id',
+            'otherKey' => 'library_id'
+        ],
     ];
 
     public function isSqlScript($script)
@@ -96,5 +104,10 @@ public $incrementing = false;
             $data = new Collection($data);
         }
         return $data;
+    }
+
+    public function beforeSave()
+    {
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->libraries(), $this->libraries, $this->plugin_id);
     }
 }

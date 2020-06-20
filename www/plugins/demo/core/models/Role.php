@@ -21,7 +21,7 @@ class Role extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_roles';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules

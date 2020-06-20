@@ -19,6 +19,7 @@ use System\Classes\PluginBase;
 use BackendAuth;
 use Event;
 use App;
+use DB;
 
 class Plugin extends PluginBase
 {
@@ -75,6 +76,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         trace_sql();
+        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('jsonb', 'text');
         Plugin::registerServiceProviders();
         DefaultDesignProvider::listenWidgetEvents();
     }

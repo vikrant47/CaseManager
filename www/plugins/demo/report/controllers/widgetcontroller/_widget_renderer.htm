@@ -4,12 +4,9 @@
 <?php
 $randomId = substr(md5(mt_rand()), 0, 7);
 ?>
-<?php foreach ($widget->library->getCssFiles() as $file) {
-    $this->addCss($file);
-} ?>
-<?php foreach ($widget->library->getJsFiles() as $file) {
-    $this->addJs($file);
-} ?>
+<?php
+$this->addAssets($this, $widget);
+?>
 <?php $this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js') ?>
 <?php if ($preview === true) { ?>
     <a class="preview-link" href="../render/<?= $widget->id ?>" style="margin: 0;auto;">View</a>

@@ -28,8 +28,8 @@ fields:
         type: relation
 tabs:
     fields:
-        library:
-            label: Library
+        libraries:
+            label: Libraries
             nameFrom: name
             descriptionFrom: description
             span: auto

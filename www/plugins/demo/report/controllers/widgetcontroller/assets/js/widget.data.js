@@ -106,9 +106,15 @@ Object.assign(Widget.prototype, {
         this.setFooterActions(Store.cloneArray(options.footer.actions));
         this.setTitle(options.header.title);
         this.setDescription(options.header.description);
+        if (!this.isInsideDashboard()) {
+            this.$container.find('.widget-body').css('height', '70vh');
+        }
     },
     getDashboard: function () {
         return this.$container.parents('.dashboard-container').eq(0).data('dashboard');
+    },
+    isInsideDashboard: function () {
+        return typeof this.getDashboard() !== 'undefined';
     },
     getCanvas: function () {
         var $elem = this.$body;
