@@ -86,7 +86,7 @@ Widget.defaultOptions = {
             icon: 'icon-trash',
             css_class: 'delete-widget',
             active: function () {
-                return this.scope.getDashboard().context === 'preview';
+                return this.scope.getDashboard() && this.scope.getDashboard().context === 'preview';
             },
             handler: function (event, widget) {
                 widget.getDashboard().removeWidget(widget);
