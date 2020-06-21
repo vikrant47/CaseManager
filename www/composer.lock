@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d6c0eca12b3340c684e0c07b88514fd",
+    "content-hash": "d494ff1e93c2c5a779604bafbcd8e721",
     "packages": [
         {
             "name": "bvanhoekelen/performance",
@@ -5680,6 +5680,62 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2019-10-24T08:53:34+00:00"
+        },
+        {
+            "name": "timgws/query-builder-parser",
+            "version": "1.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/timgws/QueryBuilderParser.git",
+                "reference": "0274481d9cd6fe9cfe69c4c8cb73f1faa24666fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/timgws/QueryBuilderParser/zipball/0274481d9cd6fe9cfe69c4c8cb73f1faa24666fe",
+                "reference": "0274481d9cd6fe9cfe69c4c8cb73f1faa24666fe",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^6.0||4.1 - 6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.2.3|^0.9.4",
+                "phpunit/phpunit": "^8.3|^7.0"
+            },
+            "suggest": {
+                "jenssegers/mongodb": "Use QueryBuilderParser with MongoDB"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "timgws\\": "src/QueryBuilderParser/",
+                    "timgws\\test\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tim Groeneveld",
+                    "email": "tim@timg.ws",
+                    "homepage": "http://timg.ws"
+                }
+            ],
+            "description": "Build complex Eloquent & QueryBuilder queries automatically when using jQuery-QueryBuilder",
+            "homepage": "http://github.com/timgws/QueryBuilderParser",
+            "keywords": [
+                "ajax",
+                "eloquent",
+                "jquery",
+                "laravel",
+                "mongodb",
+                "parser",
+                "query builder",
+                "sql"
+            ],
+            "time": "2019-11-28T01:58:54+00:00"
         },
         {
             "name": "twig/twig",

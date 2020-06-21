@@ -538,17 +538,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "version"=> null,
                                                                                         "plugin_id"=> 10,
                                                                                         "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "id"=>"b340d103-2905-4e9c-9941-c0d58a27a945",
-                                                                                        "record_id"=>"81d30c41-fd09-4757-a6f9-e92463faf8bc",
-                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
-                            ] ,            [
-                                                                            "created_at"=>"2020-06-06 13:24:09",
-                                                                                        "updated_at"=>"2020-06-06 13:24:09",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "plugin_id"=> 10,
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
                                                                                         "id"=>"fd3ef5d7-c43d-425b-a972-524261d5fb15",
                                                                                         "record_id"=>"88a02697-074c-4dfc-9e7c-5dd964901e21",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"

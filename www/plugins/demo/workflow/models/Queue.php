@@ -93,7 +93,7 @@ class Queue extends Model
 
     public static function getQueuesForUser($user)
     {
-        return DB::table('demo_workflow_queues')->select(['demo_workflow_queues.id', 'demo_workflow_queues.name'])
+        $queues = DB::table('demo_workflow_queues')->select(['demo_workflow_queues.id', 'demo_workflow_queues.name'])
             ->join('demo_workflow_queue_assignment_groups', 'demo_workflow_queue_assignment_groups.queue_id', '=', 'demo_workflow_queues.id')
             ->join('backend_user_groups', 'backend_user_groups.id', '=', 'demo_workflow_queue_assignment_groups.group_id')
             ->join('backend_users_groups', 'backend_users_groups.user_group_id', '=', 'backend_user_groups.id')
@@ -101,6 +101,22 @@ class Queue extends Model
             ->where('backend_users_groups.user_id', '=', $user->id)
             ->where('demo_workflow_queues.active', '=', true)
             ->orderBy('demo_workflow_queues.name', 'ASC')->get();
+        $items = DB::table('demo_workflow_queue_items')->select('queue_id', DB::raw('count(*) as total'))
+            ->whereIn('queue_id', $queues->map(function ($queue) {
+                return $queue->id;
+            }))
+            ->groupBy('queue_id')
+            ->get();
+        foreach ($queues as $queue) {
+            $queue->total = 0;
+            foreach ($items as $item) {
+                if ($queue->id === $item->queue_id) {
+                    $queue->total = $item->total;
+                    break;
+                }
+            }
+        }
+        return $queues;
     }
 
     /**

@@ -24,6 +24,17 @@ class SeedDemoCoreLibraries implements Seedable
                                                                                         "website"=>"https://echarts.apache.org/en/index.html",
                                                                                         "code"=>"echart-js",
                                                                                         "id"=>"a65cda17-3942-4dac-995b-fd66fe412d1a"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-21 04:12:40",
+                                                                                        "updated_at"=>"2020-06-21 04:13:52",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "plugin_id"=> 10,
+                                                                                        "name"=>"Ag Grid Community Edition",
+                                                                                        "description"=>"<p>ag-Grid is the industry standard for JavaScript Enterprise Applications. Developers using ag-Grid are building applications that would not be possible if ag-Grid did not exist.</p>",
+                                                                                        "website"=>"https://www.ag-grid.com/javascript-grid/",
+                                                                                        "code"=>"ag-grid",
+                                                                                        "id"=>"72d4e2a0-b375-11ea-a676-43d852c02135"
                             ]             ]);
         }
 

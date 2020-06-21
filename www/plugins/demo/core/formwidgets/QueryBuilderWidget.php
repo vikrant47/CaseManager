@@ -70,6 +70,7 @@ class QueryBuilderWidget extends FormWidgetBase
         $this->vars['id'] = $this->getId();
         $this->vars['name'] = $this->getFieldName();
         $this->vars['value'] = $this->getLoadValue();
+        $this->vars['model'] = $this->model;
     }
 
     public function widgetDetails()

@@ -7,6 +7,7 @@ www/bootstrap
 www/install_files
 www/modules
 !www/storage/app/media/system/plugins
+!www/storage/app/uploads/public
 www/storage/app/uploads
 www/storage/app/*
 www/storage/cms
