@@ -15,13 +15,13 @@ class SeedDemoReportDashboards implements Seedable
             Db::table('demo_report_dashboards')->insert([
             [
                                                                             "created_at"=>"2020-05-10 09:22:09",
-                                                                                        "updated_at"=>"2020-06-20 09:12:22",
+                                                                                        "updated_at"=>"2020-06-21 17:14:54",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Default Deshboard",
                                                                                         "description"=>"<p>This is a dummy dashboard</p>",
                                                                                         "active"=> 1,
-                                                                                        "widgets_config"=>"[{\"x\": \"0\", \"y\": \"0\", \"width\": \"6\", \"height\": \"5\", \"widget\": \"84383d11-89c6-4dac-906c-bb2b08923b53\"}, {\"x\": \"0\", \"y\": \"5\", \"width\": \"6\", \"height\": \"5\", \"widget\": \"84383d11-89c6-4dac-906c-bb2b08923b53\"}]",
+                                                                                        "widgets_config"=>"[{\"x\": \"0\", \"y\": \"0\", \"width\": \"3\", \"height\": \"4\", \"widget\": \"84383d11-89c6-4dac-906c-bb2b08923b53\"}, {\"x\": \"3\", \"y\": \"0\", \"width\": \"9\", \"height\": \"4\", \"widget\": \"8be0d030-b3d3-11ea-90ed-bfdae0c12a09\"}]",
                                                                                         "public"=> 0,
                                                                                         "code"=>"default-dashboard",
                                                                                         "plugin_id"=> 3,
