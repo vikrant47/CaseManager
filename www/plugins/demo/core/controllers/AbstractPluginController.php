@@ -593,4 +593,25 @@ class AbstractPluginController extends Controller
         $model->delete();
         return $model;
     }
+
+    public function onFindMatching($value)
+    {
+        if (count($value) > 2) { // type atleast 2 chars
+            $displayField = Request::input('displayField') || 'name';
+            $idField = Request::input('idField') || 'id';
+            $relatedField = Request::input('relatedField');
+            $modelClass = Request::input('modelClass');
+            if (empty($modelClass)) {
+                $modelClass = $this->getModelClass();
+            }
+            if (!empty($relatedField)) {
+                $model = new $modelClass();
+                $relation = $model->{$relatedField}();
+                $modelClass = $relation->targetModel;
+            }
+            return Db::table($modelClass->table)->select([$idField, $displayField])
+                ->where($displayField, 'iLike', '%' . $value . '%')->get();
+        }
+        return [];
+    }
 }

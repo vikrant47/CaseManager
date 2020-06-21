@@ -5,11 +5,13 @@ use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\PluginVersions;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Model;
 use Db;
-use October\Rain\Support\Collection;
 
 /**
  * Model
@@ -56,17 +58,25 @@ class Widget extends Model implements FromCollection
         return strtolower($startWord) === 'select';
     }
 
-    public function loadData()
+    public function loadData($page = 1, $perPage = 20)
     {
-        if (empty($this->loadedData)) {
-            $dataScript = $this->data;
-            if ($this->isSqlScript($dataScript)) {
-                return Db::select(Db::raw($dataScript));
-            }
-            $context = new ScriptContext();
-            $this->loadedData = $context->execute($dataScript);
+        $dataScript = $this->data;
+        if ($this->isSqlScript($dataScript)) {
+            $dataScript = TwigEngine::eval($dataScript, [
+                'offset' => ($page - 1) * $perPage,
+                'limit' => $page * $perPage - 1,
+            ]);
+            $data = Db::select(Db::raw($dataScript));
+            $paginator = new Paginator(Collection::make($data), $perPage, $page);
+            return $paginator;
         }
-        return $this->loadedData;
+        $context = new ScriptContext();
+        $context->setAttribute('page', $page);
+        $data = $context->execute($dataScript);
+        if ($data instanceof QueryBuilder) {
+            return $data->paginate($page);
+        }
+        return $data;
     }
 
     public function loadTemplate()

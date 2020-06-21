@@ -255,6 +255,17 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "id"=>"4ba0eda0-ae04-11ea-a21d-ed3a60d00a8e",
                                                                                         "record_id"=>"6f85afbb-3858-4387-b4ce-9f70cf19ed20",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
+                            ] ,            [
+                                                                            "created_at"=>"2020-06-20 06:33:22",
+                                                                                        "updated_at"=>"2020-06-20 06:33:22",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "plugin_id"=> 6,
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "id"=>"f05e64c0-b2bf-11ea-872f-f77d0bd20adc",
+                                                                                        "record_id"=>"81d30c41-fd09-4757-a6f9-e92463faf8bc",
+                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357"
                             ]             ]);
         }
 

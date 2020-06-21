@@ -104,11 +104,14 @@ class ModelModel extends Model
         return null;
     }
 
-    public function getDefinition()
+    public function getDefinition($model = null)
     {
         $formDefinition = $this->getFormDefinition();
         if (!empty($this->model)) {
-            $newModel = new $this->model;
+            $newModel = $model;
+            if (empty($newModel)) {
+                $newModel = new $this->model;
+            }
             return [
                 'form' => ['controls' => $formDefinition->controls],
                 'model' => $this->model,

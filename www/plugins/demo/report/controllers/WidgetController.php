@@ -21,7 +21,7 @@ class WidgetController extends AbstractSecurityController
         BackendMenu::setContext('Demo.Report', 'main-menu-item', 'side-menu-item');
     }
 
-    public function onData($id)
+    public function onEvalWidget($id)
     {
         $id = Input::get('id');
         $widget = Widget::where('id', $id)->first();
@@ -29,7 +29,14 @@ class WidgetController extends AbstractSecurityController
             $this->setStatusCode(404);
             return [];
         }
-        return json_encode($widget->evaluate());
+        return ['result' => $widget->evaluate()];
+    }
+
+    public function onData($id)
+    {
+        $page = Input::get('id');
+        $widget = Widget::where('id', $id)->first();
+        return ['result' => $widget->loadData($page)];
     }
 
     public function onPreview($id)

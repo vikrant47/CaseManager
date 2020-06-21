@@ -24,7 +24,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->boolean('public');
             $table->uuid('library_id');
             $table->integer('plugin_id');
-            $table->integer('active');
+            $table->boolean('active')->default(true);
         });
     }
     

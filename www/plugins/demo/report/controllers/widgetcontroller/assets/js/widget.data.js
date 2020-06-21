@@ -165,13 +165,16 @@ Object.assign(Widget.prototype, {
     },
     loadData: function (callabck) {
         var _this = this;
-        $.request('onData', {
-            url: '/backend/demo/report/widgetcontroller/render/' + this.model.slug,
+        $.request('onEvalWidget', {
+            url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
             data: {id: this.model.id},
             success: function (data) {
-                var result = JSON.parse(data.result);
+                var result = data.result;
+                if (typeof result === 'string') {
+                    result = JSON.parse(result);
+                }
                 Object.assign(_this.model, result);
-                _this.data = new Store(_this.model.data);
+                _this.store = new Store(_this.model.data);
                 callabck(_this);
             }
         })
@@ -202,7 +205,13 @@ Object.assign(Widget.prototype, {
 });
 
 var Store = function (data) {
-    this.data = data;
+    if (typeof data.current_page !== 'undefined' && typeof data.per_page !== 'undefed' && typeof data.data !== 'undefined') {
+        this.data = data.data;
+        this.paginator = data;
+    } else {
+        this.data = data;
+    }
+
 };
 Store.cloneArray = function (array) {
     return array.map(function (element) {

@@ -15,13 +15,13 @@ class SeedDemoReportDashboards implements Seedable
             Db::table('demo_report_dashboards')->insert([
             [
                                                                             "created_at"=>"2020-05-10 09:22:09",
-                                                                                        "updated_at"=>"2020-06-14 06:57:11",
+                                                                                        "updated_at"=>"2020-06-20 09:12:22",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Default Deshboard",
-                                                                                        "description"=> "",
+                                                                                        "description"=>"<p>This is a dummy dashboard</p>",
                                                                                         "active"=> 1,
-                                                                                        "widgets_config"=>"[{\"widget\":\"84383d11-89c6-4dac-906c-bb2b08923b53\",\"x\":0,\"y\":0,\"width\":6,\"height\":8},{\"widget\":\"84383d11-89c6-4dac-906c-bb2b08923b53\",\"x\":6,\"y\":0,\"width\":6,\"height\":8}]",
+                                                                                        "widgets_config"=>"[{\"x\": \"0\", \"y\": \"0\", \"width\": \"6\", \"height\": \"5\", \"widget\": \"84383d11-89c6-4dac-906c-bb2b08923b53\"}, {\"x\": \"0\", \"y\": \"5\", \"width\": \"6\", \"height\": \"5\", \"widget\": \"84383d11-89c6-4dac-906c-bb2b08923b53\"}]",
                                                                                         "public"=> 0,
                                                                                         "code"=>"default-dashboard",
                                                                                         "plugin_id"=> 3,
