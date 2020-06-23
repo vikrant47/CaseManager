@@ -16,23 +16,25 @@ $this->addAssets($this, $widget);
             aria-hidden="true">×
     </button>
 <?php } ?>
-<div id="widget-container-<?= $randomId ?>" style="height: 100%;width: 100%;" class="widget-container card"
+<div id="widget-container-<?= $randomId ?>" style="height: 100%;width: 100%;" class="widget-container grid-margin stretch-card"
      data-widget-id="<?= $widget->id ?>">
-    <div class="card-body">
-        <div class="widget-header d-flex justify-content-between align-items-baseline mb-2">
-            <h6 class="widget-title card-title mb-0"></h6>
-            <div class="widget-toolbar">
-                <div class="user-toolbar"></div>
-                <div class="default-toolbar"></div>
+    <div class="card">
+        <div class="card-body">
+            <div class="widget-header d-flex justify-content-between align-items-baseline mb-2">
+                <h6 class="widget-title card-title mb-0"></h6>
+                <div class="widget-toolbar">
+                    <div class="user-toolbar"></div>
+                    <div class="default-toolbar"></div>
+                </div>
+                <div class="text-muted mb-4 widget-description">
+
+                </div>
             </div>
-            <div class="text-muted mb-4 widget-description">
+            <div class="widget-body" style="width: 100%; height: 100%;">
 
             </div>
+            <div class="widget-footer"></div>
         </div>
-        <div class="widget-body" style="width: 100%; height: 100%;">
-
-        </div>
-        <div class="widget-footer"></div>
     </div>
 </div>
 <style>
@@ -86,6 +88,6 @@ $this->addAssets($this, $widget);
          }*/
 </style>
 <script>
-    var widget = new Widget('<?=$widget->id?>', '<?=$randomId?>');
+    var widget = new engine.report.Widget('<?=$widget->id?>', '<?=$randomId?>');
     widget.fetchAndRender();
 </script>

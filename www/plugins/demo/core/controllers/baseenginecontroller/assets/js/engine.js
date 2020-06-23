@@ -51,6 +51,17 @@ Engine.defaultActionOption = {
 
         }
     },
+    input: {
+        template: '<input class="action action-input"><i></i></input>',
+        icon: 'icon-link',
+        event: 'change',
+        events: {},
+        css_class: '',
+        attributes: [],
+        handler: function () {
+
+        }
+    },
     dropdown: {
         template: '<div class="dropdown action action-list">   <a href="#" data-toggle="dropdown" class="dropdown-title"></a>' +
             '<ul class="dropdown-menu" role="menu" data-dropdown-title="Add something large"></ul>' +
@@ -214,7 +225,7 @@ Object.assign(Engine.prototype, {
         if (!scope) {
             scope = this;
         }
-        actions.forEach(function (action) {
+        return actions.map(function (action) {
             action.scope = scope;
             if (typeof action.active === 'function') {
                 action.active = action.active.call(action, $element, scope);
@@ -229,10 +240,22 @@ Object.assign(Engine.prototype, {
                     }
                     $textElement.text(action.label);
                 }
-                $template.addClass(action.css_class).on(action.event, function (event) {
+                $template.addClass(action.css_class);
+                var $target = $template;
+                if (action.target) {
+                    $target = $template.find(action.target);
+                }
+                $target.on(action.event, function (event) {
                     event.preventDefault();
                     action.handler.apply(this, [event, scope, action, $element]);
                 });
+                if (action.events) {
+                    for (var eventName in action.events) {
+                        $target.on(eventName, function (event) {
+                            action.events[eventName].apply(this, [event, scope, action, $element]);
+                        });
+                    }
+                }
                 if (action.icon) {
                     var $icon = $template.find('i');
                     if (action.element && action.element.icon) {
@@ -253,7 +276,9 @@ Object.assign(Engine.prototype, {
                     }
                     _this.addActions($appendTo, action.actions, scope);
                 }
+                return $template;
             }
+            return null;
         });
     },
     // definition form field manipulation
@@ -282,7 +307,12 @@ Object.assign(Engine.prototype, {
     export: function (module, namespace) {
         this[namespace] = module;
     },
-    define: function (options) {
+    define: function (name, options) {
+        if (typeof options === 'undefined') {
+            options = name;
+        } else {
+            options.name = name;
+        }
         const settings = Object.assign({
             constructor: function () {
 
@@ -307,6 +337,21 @@ Object.assign(Engine.prototype, {
             cls.prototype = Object.create(settings.extends.prototype);
         }
         Object.assign(cls.prototype, settings);
+        if (settings.name) {
+            let parentPackage = window;
+            const namespace = settings.name.split('.');
+            const name = namespace[namespace.length - 1];
+            cls.constructor.name = name;
+            Object.defineProperty(cls, 'name', {value: name});
+            namespace.splice(-1, 1);
+            for (const package of namespace) {
+                if (!parentPackage[package]) {
+                    parentPackage[package] = {};
+                }
+                parentPackage = parentPackage[package];
+            }
+            parentPackage[name] = cls;
+        }
         return cls;
     },
     extend: function (child, parent) {
