@@ -1,20 +1,48 @@
 
 <?= (isset($fieldOptions[$field->value])) ? e(trans($fieldOptions[$field->value])) : '' ?>
-<select class="form-control s2" id="selectType">
-    <option value="days" selected="selected">Days</option>
-    <option value="weeks">Weeks</option>
-    <option value="months">Months</option>
-    <option value="years">Years</option>
-    <option value="hours">Hours</option>
-    <!--<option value="sec">Seconds</option>-->
-</select>
-<input id="tatTypeId" name="_tatSelectedType" type="hidden" value="<?= $this->selectedValue ?>">
-<input class="form-control"
-       type="text" name="<?= $field->getName() ?>"
-<?= $field->getAttributes() ?>
-<?= $field->placeholder ? 'data-placeholder="'.e(trans($field->placeholder)).'"' : '' ?>
-value="<?= $field->value ?>" >
-
+<div class="row">
+    <div class="col-lg-2">
+        <input class="form-control"
+               type="text" name="<?= $field->getName() ?>"
+        <?= $field->getAttributes() ?>
+        <?= $field->placeholder ? 'data-placeholder="'.e(trans($field->placeholder)).'"' : '' ?>
+        value="<?= $field->value ?>" >
+    </div>
+    <div class="col-lg-2">
+        <select class="form-control s2" id="selectType">
+            <option value="days" selected="selected">Days</option>
+            <option value="weeks">Weeks</option>
+            <option value="months">Months</option>
+            <option value="years">Years</option>
+            <option value="hours">Hours</option>
+            <option value="min">Minutes</option>
+            <option value="sec">Seconds</option>
+        </select>
+        <input id="tatTypeId" name="_tatSelectedType" type="hidden" value="<?= $this->selectedValue ?>">
+    </div>
+   <!-- <div class="col-lg-2">
+        <input class="form-control"
+               type="text" name="<?= $field->getName() ?>"
+        <?= $field->getAttributes() ?>
+        <?= $field->placeholder ? 'data-placeholder="'.e(trans($field->placeholder)).'"' : '' ?>
+        value="<?= $field->value ?>" >
+    </div>
+    <div class="col-lg-2">
+        <select class="form-control s2" id="selectSubType">
+            <option value="days" selected="selected">Days</option>
+            <option value="weeks">Weeks</option>
+            <option value="months">Months</option>
+            <option value="years">Years</option>
+            <option value="hours">Hours</option>
+            <option value="min">Minutes</option>
+            <option value="sec">Seconds</option>
+        </select>
+        <input id="tatSubTypeId" name="_tatSubSelectedType" type="hidden" value="<?= $this->selectedValue ?>">
+    </div>-->
+    <div class="col-lg-4">
+        <label>End Date : <?= $this->taskEndTime ?></label>
+    </div>
+</div>
 <script>
     $(document).on('render', function () {
         $(".s2").select2({
@@ -22,13 +50,17 @@ value="<?= $field->value ?>" >
         });
     })
     $('#selectType').select2().on('change', function() {
-        //console.log($('#tatTypeId').val());
-        //$("#selectType").select2().select2('val',$('#tatTypeId').val());
         $('#tatTypeId').val($(this).val());
     })
-    $('#tatTypeId').on('change', function() {debugger
-        console.log($(this).val());
+    $('#tatTypeId').on('change', function() {
         $("#selectType").val($(this).val());
         $("#selectType").trigger('change');
+    }).trigger('change');
+    $('#selectSubType').select2().on('change', function() {
+        $('#tatSubTypeId').val($(this).val());
+    })
+    $('#tatSubTypeId').on('change', function() {
+        $("#selectSubType").val($(this).val());
+        $("#selectSubType").trigger('change');
     }).trigger('change');
 </script>
