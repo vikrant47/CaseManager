@@ -33,5 +33,5 @@ public $incrementing = false;
         'widget' => [Widget::class]
     ];
 
-    public $jsonable = ['config_widgets'];
+    public $jsonable = ['widgets_config'];
 }

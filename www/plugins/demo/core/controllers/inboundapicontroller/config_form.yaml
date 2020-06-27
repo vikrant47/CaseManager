@@ -1,0 +1,10 @@
+name: InboundApi
+form: $/demo/core/models/inboundapi/fields.yaml
+modelClass: Demo\Core\Models\InboundApi
+defaultRedirect: demo/core/inboundapicontroller
+create:
+    redirect: 'demo/core/inboundapicontroller/update/:id'
+    redirectClose: demo/core/inboundapicontroller
+update:
+    redirect: demo/core/inboundapicontroller
+    redirectClose: demo/core/inboundapicontroller

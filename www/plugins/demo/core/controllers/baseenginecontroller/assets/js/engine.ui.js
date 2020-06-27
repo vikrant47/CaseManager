@@ -437,6 +437,12 @@ var EngineForm = Engine.instance.define({
     setConfig: function (config) {
         this.config = config;
     },
+    getField: function (fieldName) {
+        var fields = Engine.instance.getFields(this.config);
+        for (var fieldName in fields) {
+            return fields[fieldName];
+        }
+    },
     addFields: function (fields, showInTab = false) {
         let container;
         if (showInTab) {

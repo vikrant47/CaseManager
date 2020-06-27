@@ -1,8 +1,9 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
-var Dashboard = function (id) {
+var Dashboard = function (id, context) {
     this.id = id;
+    this.context = context;
     this.$el = $('#dashboard-container-' + this.id);
     this.$el.data('dashboard', this);
     this.registerEvents();
@@ -124,7 +125,7 @@ Object.assign(Dashboard.prototype, {
             // confirm: 'Are you sure?',
             data: {
                 id: this.id,
-                config_widgets: data,
+                widgets_config: data,
             },
             flash: 1,
         })

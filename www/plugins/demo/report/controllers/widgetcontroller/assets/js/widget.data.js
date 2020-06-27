@@ -19,12 +19,15 @@ Widget.defaultOptions = {
         title: function () {
             return this.model.name;
         },
+        description: function () {
+            return this.model.description;
+        },
         actions: [],
         defaultActions: [{
             label: '',
             icon: 'icon-minus',
             active: function () {
-                return this.scope.getDashboard();
+                return false;// return this.scope.getDashboard();
             },
             css_class: 'widget-control minimize-widget',
             handler: function (event, widget) {
@@ -43,7 +46,7 @@ Widget.defaultOptions = {
             }
         }, {
             label: '',
-            icon: 'icon-wrench',
+            icon: 'icon-gear',
             css_class: 'setting-widget',
             active: true,
             type: 'dropdown',
@@ -81,9 +84,9 @@ Widget.defaultOptions = {
         }, {
             label: '',
             icon: 'icon-trash',
-            css_class: 'close-widget',
+            css_class: 'delete-widget',
             active: function () {
-                return this.scope.getDashboard();
+                return this.scope.getDashboard() && this.scope.getDashboard().context === 'preview';
             },
             handler: function (event, widget) {
                 widget.getDashboard().removeWidget(widget);
@@ -98,13 +101,20 @@ Widget.defaultOptions = {
 Object.assign(Widget.prototype, {
     init: function (option) {
         options = Object.assign(Widget.defaultOptions, option);
-        this.setDefaultHeaderActions(options.header.defaultActions);
-        this.setHeaderActions(options.header.actions);
-        this.setFooterActions(options.footer.actions);
+        this.setDefaultHeaderActions(Store.cloneArray(options.header.defaultActions));
+        this.setHeaderActions(Store.cloneArray(options.header.actions));
+        this.setFooterActions(Store.cloneArray(options.footer.actions));
         this.setTitle(options.header.title);
+        this.setDescription(options.header.description);
+        if (!this.isInsideDashboard()) {
+            this.$container.find('.widget-body').css('height', '70vh');
+        }
     },
     getDashboard: function () {
         return this.$container.parents('.dashboard-container').eq(0).data('dashboard');
+    },
+    isInsideDashboard: function () {
+        return typeof this.getDashboard() !== 'undefined';
     },
     getCanvas: function () {
         var $elem = this.$body;
@@ -133,7 +143,13 @@ Object.assign(Widget.prototype, {
         if (typeof title === 'function') {
             title = title.apply(this);
         }
-        this.$header.find('h3').text(title);
+        this.$header.find('.widget-title').text(title);
+    },
+    setDescription: function (description) {
+        if (typeof description === 'function') {
+            description = description.apply(this);
+        }
+        this.$header.find('.widget-description').text(description);
     },
     setDefaultHeaderActions: function (actions) {
         var $toolbar = this.$header.find('.default-toolbar');
@@ -149,13 +165,16 @@ Object.assign(Widget.prototype, {
     },
     loadData: function (callabck) {
         var _this = this;
-        $.request('onData', {
-            url: '/backend/demo/report/widgetcontroller/render/' + this.model.slug,
+        $.request('onEvalWidget', {
+            url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
             data: {id: this.model.id},
             success: function (data) {
-                var result = JSON.parse(data.result);
+                var result = data.result;
+                if (typeof result === 'string') {
+                    result = JSON.parse(result);
+                }
                 Object.assign(_this.model, result);
-                _this.data = new Store(_this.model.data);
+                _this.store = new Store(_this.model.data);
                 callabck(_this);
             }
         })
@@ -177,7 +196,8 @@ Object.assign(Widget.prototype, {
     },
     onResize: function (callback) {
         this.events['resize'].push(callback);
-    }, resize: function () {
+    },
+    resize: function () {
         for (var i = 0; i < this.events['resize'].length; i++) {
             this.events['resize'][i].call(this);
         }
@@ -185,7 +205,18 @@ Object.assign(Widget.prototype, {
 });
 
 var Store = function (data) {
-    this.data = data;
+    if (typeof data.current_page !== 'undefined' && typeof data.per_page !== 'undefed' && typeof data.data !== 'undefined') {
+        this.data = data.data;
+        this.paginator = data;
+    } else {
+        this.data = data;
+    }
+
+};
+Store.cloneArray = function (array) {
+    return array.map(function (element) {
+        return typeof element === 'object' ? Object.assign({}, element) : element;
+    });
 };
 Object.assign(Store.prototype, {
     getKeys: function () {

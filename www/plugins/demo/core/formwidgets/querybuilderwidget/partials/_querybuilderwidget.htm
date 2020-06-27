@@ -13,18 +13,6 @@ if ($fetchModelFromField === false) {
     var sql_import_export = $('<div/>').html('<?=e($value)?>').html().trim();
     var definition = <?=json_encode($modelInstance->getDefinition())?>;
     if(definition) {
-        var mongo_import_export = {
-            "$and": [{
-                "price": {"$lt": 10.25}
-            }, {
-                "$or": [{
-                    "category": 2
-                }, {
-                    "category": 1
-                }]
-            }]
-        };
-        console.log(definition);
         var $queryBuilder = $('#<?=$id?>');
         if ($queryBuilder.queryBuilder && $queryBuilder.queryBuilder.destroy) {
             $queryBuilder.queryBuilder.destroy();

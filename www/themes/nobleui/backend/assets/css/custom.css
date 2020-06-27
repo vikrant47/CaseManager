@@ -14,10 +14,7 @@ body {
     left: 0px;
     overflow: scroll;
 }
-.main-wrapper .page-wrapper{
-    width: calc(100% - 225px);
-    margin-left: 225px;
-}
+
 .main-wrapper .page-wrapper .page-content {
     flex-grow: 1;
     padding: 5px;
@@ -282,16 +279,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 /***navigation ***/
-.navbar{
-    width: calc(100% - 225px);
-    left: 225px;
-}
 .navbar, .sidebar {
     z-index: 10;
 }
-.sidebar {
-    width: 225px;
-}
+
 
 .nav .nav-item .nav-link .link-icon {
     font-size: 1.550rem;
@@ -471,6 +462,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 /** Buttons **/
+a.manage-widgets, .action a {
+    color: #3a3f51;
+}
+
 .btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover,
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background: #678a74d9;
