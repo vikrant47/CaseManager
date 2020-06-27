@@ -1,5 +1,7 @@
 <?php namespace Demo\Report\Models;
 
+use Demo\Core\Classes\Beans\EvalArray;
+use Demo\Core\Classes\Beans\EvalSql;
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\ModelUtil;
@@ -58,23 +60,23 @@ class Widget extends Model implements FromCollection
         return strtolower($startWord) === 'select';
     }
 
-    public function loadData($page = 1, $perPage = 20)
+    public function loadData($pagination = true, $page = 1, $perPage = 20)
     {
         $dataScript = $this->data;
         if ($this->isSqlScript($dataScript)) {
-            $dataScript = TwigEngine::eval($dataScript, [
-                'offset' => ($page - 1) * $perPage,
-                'limit' => $page * $perPage - 1,
-            ]);
-            $data = Db::select(Db::raw($dataScript));
-            $paginator = new Paginator(Collection::make($data), $perPage, $page);
-            return $paginator;
+            $evalSql = new EvalSql($dataScript, $pagination);
+            return $evalSql->eval(['widget' => $this], $page, $perPage);
         }
         $context = new ScriptContext();
         $context->setAttribute('page', $page);
         $data = $context->execute($dataScript);
         if ($data instanceof QueryBuilder) {
-            return $data->paginate($page);
+            if ($pagination) {
+                $data = $data->paginate($page);
+            }
+            $data = $data->get();
+        } else if ($data instanceof EvalSql) {
+            $data = $data->eval(['widget' => $this], $page, $perPage);
         }
         return $data;
     }

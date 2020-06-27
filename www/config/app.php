@@ -136,6 +136,7 @@ return [
         // 'Illuminate\Html\HtmlServiceProvider', // Example
 
         'System\ServiceProvider',
+        'SwooleTW\Http\LaravelServiceProvider'
     ]),
 
     /*
