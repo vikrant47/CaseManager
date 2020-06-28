@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost:8080/case-manager/install-master/',
+    'url' => 'http://localhost:8002',
 
     /*
     |--------------------------------------------------------------------------
