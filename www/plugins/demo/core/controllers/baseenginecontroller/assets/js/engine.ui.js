@@ -1,4 +1,4 @@
-var EngineObservable = Engine.instance.define({
+var EngineObservable = Engine.instance.define('engine.EngineObservable', {
     constructor: function () {
         this.events = {};
     },
@@ -19,7 +19,7 @@ var EngineObservable = Engine.instance.define({
         return this;
     }
 });
-var EngineUI = Engine.instance.define({
+var EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     constructor: function () {
         this.currentModel = null;
         this.registerPopStateListener();
@@ -265,7 +265,7 @@ var EngineUI = Engine.instance.define({
         });
     }
 });
-var EngineFormService = Engine.instance.define({
+var EngineFormService = Engine.instance.define('engine.ui.FormService', {
     constructor: function () {
 
     }
@@ -275,7 +275,7 @@ var EngineListService = Engine.instance.define({
 
     }
 });
-var EngineList = Engine.instance.define({
+var EngineList = Engine.instance.define('engine.ui.EngineList', {
     constructor: function (el, modelRecord) {
         this.modelRecord = modelRecord;
         this.pagination = {};
@@ -369,7 +369,7 @@ var EngineList = Engine.instance.define({
         return this.pagination;
     }
 });
-var EngineForm = Engine.instance.define({
+var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     static: {
         el: '.engine-form-wrapper',
         getInstance: function (el, modelRecord) {

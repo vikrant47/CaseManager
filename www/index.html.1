@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>October CMS - Demonstration</title>
+        <meta name="description" content="">
+        <meta name="title" content="">
+        <meta name="author" content="OctoberCMS">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="generator" content="OctoberCMS">
+        <link rel="icon" type="image/png" href="http://localhost:8002/themes/demo/assets/images/october.png">
+        <link href="http://localhost:8002/themes/demo/assets/css/vendor.css" rel="stylesheet">
+        <link href="http://localhost:8002/themes/demo/assets/css/theme.css" rel="stylesheet">
+            </head>
+    <body>
+
+        <!-- Header -->
+        <header id="layout-header">
+            <!-- Nav -->
+<nav id="layout-nav" class="navbar navbar-inverse navbar-fixed-top navbar-autohide" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://localhost:8002">October Demo</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <li class="separator hidden-xs"></li>
+                <li class="active"><a href="http://localhost:8002">Basic concepts</a></li>
+                <li class=""><a href="http://localhost:8002/demo/ajax">AJAX framework</a></li>
+                <li class=""><a href="http://localhost:8002/demo/plugins">Plugin components</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>        </header>
+
+        <!-- Content -->
+        <section id="layout-content">
+            <div class="jumbotron">
+    <div class="container">
+        <h1>The demo</h1>
+<p>This is the <a href="http://octobercms.com">October CMS</a> demo theme that explores the core features. You will find files used by this theme in the <strong>themes/demo</strong> directory of your installation.</p>    </div>
+</div>
+
+<div class="container">
+
+    <div class="page-header">
+        <h2>Overview <small>Basic concepts</small></h2>
+    </div>
+    <p>
+        This page demonstrates the basic CMS features.
+        Usually each page built with October is a combination of a layout, page, partials and content blocks,
+        although in simple cases you can just use a page without anything else.
+    </p>
+
+    <!-- Layouts -->
+    <h3>Layouts</h3>
+    <p class="lead">
+        <i class="icon-th-large"></i> &nbsp; Layouts define the page scaffold.
+    </p>
+    <p>
+        The layout file <code>layouts/default.htm</code> defines the page scaffold &mdash;
+        everything that repeats on each page, such as the HTML, HEAD and BODY tags, StyleSheet and JavaScript references.
+    </p>
+    <p>The page menu and footer in the Demo theme are defined in the layout as well.</p>
+
+    <hr />
+
+    <!-- Pages -->
+    <h3>Pages</h3>
+    <p class="lead">
+        <i class="icon-copy"></i> &nbsp; Pages hold the content for each URL.
+    </p>
+    <p>
+        The page file <code>pages/home.htm</code> defines the page URL (<code>/</code> for this page) and the page content.
+        Pages are rendered inside layouts with this function that should be called in the layout code:
+    </p>
+    <pre>{% page %}</pre>
+    <p>Using a layout for pages is optional &mdash; you can define everything right in the page file.</p>
+
+    <hr />
+
+    <!-- Partials -->
+    <h3>Partials</h3>
+    <p class="lead">
+        <i class="icon-tags"></i> &nbsp; Partials contain reusable chunks of HTML markup.
+    </p>
+    <p>
+        Partials are chunks of HTML defined in separate files that can be included anywhere.
+        Partials are rendered with:
+    </p>
+    <pre>{% partial "partial-name" %}</pre>
+    <p>You may place partials inside folders too. In this example we placed the footer content to the <code>partials/site/footer.htm</code> partial.</p>
+    <pre>{% partial "site/footer" %}</pre>
+    <p>Partials can be used inside pages, layouts or other partials.</p>
+
+    <hr />
+
+    <!-- Content blocks -->
+    <h3>Content blocks</h3>
+    <p class="lead">
+        <i class="icon-font"></i> &nbsp; Content blocks are text or HTML blocks that can be edited separately from the page or layout.
+    </p>
+    <p>
+        The introductory text used on this page is defined in the <code>content/welcome.htm</code> file.
+        Content blocks are defined and rendered with:
+        <pre>{% content "content-name.htm" %}</pre>
+    </p>
+
+    <hr />
+
+    <!-- Placeholders -->
+    <h3>Placeholders</h3>
+    <p class="lead">
+        <i class="icon-bookmark"></i> &nbsp; Placeholders allow pages to inject content to a layout.
+    </p>
+    <p>
+        The common use is injecting page-specific links to StyleSheet or JavaScript files to the HEAD tag defined in the layout.
+        Placeholders are defined in the layout file and they have names so that they can be referred in the page.
+        Example:
+    </p>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Layout file:</p>
+            <pre>&lt;head&gt;
+    ...
+    {% placeholder head %}
+&lt;/head&gt;</pre>
+        </div>
+        <div class="col-md-6">
+            <p>Page file:</p>
+            <pre>{% put head %}
+    &lt;link href=&quot;css/theme.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;script src=&quot;js/script.js&quot;&gt;&lt;/script&gt;
+{% endput %}</pre>
+        </div>
+    </div>
+
+    <hr />
+
+    <!-- Assets -->
+    <h3>Assets</h3>
+    <p class="lead">
+        <i class="icon-picture"></i> &nbsp; Assets are resource files like images and stylesheets.
+    </p>
+    <p>This theme stores its asset files (JavaScript, StyleSheet, images, fonts, etc) in the <code>themes/demo/assets</code> directory. This theme is also packaged with these useful 3rd party tools:</p>
+    <ul class="list-inline">
+        <li><a target="_blank" href="http://getbootstrap.com/">Twitter Bootstrap</a></li>
+        <li><a target="_blank" href="http://fontawesome.io/3.2.1/">Font Awesome</a></li>
+        <li><a target="_blank" href="http://www.google.com/fonts/specimen/Lato">Lato webfont</a></li>
+    </ul>
+    <p>You might prefer to remove them for your website implementation.</p>
+
+    <br />
+
+    <div class="text-center">
+        <p><a href="http://localhost:8002/demo/ajax" class="btn btn-lg btn-default">Continue to AJAX framework</a></p>
+    </div>
+
+</div>        </section>
+
+        <!-- Footer -->
+        <footer id="layout-footer">
+            <div id="footer">
+    <div class="container">
+        <hr />
+        <p class="muted credit">&copy; 2013 - 2020 Alexey Bobkov &amp; Samuel Georges.</p>
+    </div>
+</div>        </footer>
+
+        <!-- Scripts -->
+        <script src="http://localhost:8002/themes/demo/assets/vendor/jquery.js"></script>
+        <script src="http://localhost:8002/themes/demo/assets/vendor/bootstrap.js"></script>
+        <script src="http://localhost:8002/themes/demo/assets/javascript/app.js"></script>
+        <script src="/modules/system/assets/js/framework.js"></script>
+<script src="/modules/system/assets/js/framework.extras.js"></script>
+<link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework.extras.css">
+        
+    </body>
+</html>

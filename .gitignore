@@ -14,9 +14,8 @@ www/storage/cms
 www/storage/logs
 www/storage/temp
 www/storage/framework
-!www/vendor/october/rain/src/Database/Relations/MorphToMany.php
-!www/vendor/october/rain/src/Database/Concerns/HasRelationships.php
-www/vendor
+www/vendor/*
+!www/vendor/october
 www/install.php
 www/install-master
 www/tests

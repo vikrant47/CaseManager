@@ -53,11 +53,23 @@ class ScriptContext
         return PluginConnection::getConnection($code);
     }
 
+    public function evalSql($sql, $pagination = true, $page = 1, $perPage = 20)
+    {
+        $evalSql = new EvalSql($sql, $pagination);
+        return $evalSql->eval(['widget' => $this], $page, $perPage);
+    }
+
     public function buildContext($attributes)
     {
-        $this->attributes = $this->attributes + $attributes;
+        $this->attributes = $this->attributes + $attributes + [
+                'EvalArray' => EvalArray::class,
+                'EvalSql' => EvalSql::class,
+                'Db' => Db::class,
+                'DB' => Db::class,
+            ];
+        class_alias(Db::class, 'DB');
         $this->currentUser = BackendAuth::getUser();
-        $this->exception = new EmptyClass();
+        $this->exception = new \stdClass();
         $this->request = request();
         foreach ($this->attributes as $key => $value) {
             ${$key} = $value;
@@ -89,7 +101,3 @@ class ScriptContext
 
 }
 
-class EmptyClass
-{
-
-}
