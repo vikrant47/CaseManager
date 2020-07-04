@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/bvanhoekelen/performance" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/bvanhoekelen/terminal-style" />
+      <excludeFolder url="file://$MODULE_DIR$/www/vendor/swooletw/laravel-swoole" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/timgws/query-builder-parser" />
       <excludeFolder url="file://$MODULE_DIR$/www/vendor/webpatser/laravel-uuid" />
     </content>

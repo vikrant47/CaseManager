@@ -6,6 +6,7 @@ use BackendAuth;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\AuditLog;
 use Demo\Core\Models\ModelModel;
+use Demo\Core\Services\SwooleServiceProvider;
 use Demo\Workflow\Models\WorkflowItem;
 use Demo\Workflow\Models\WorkflowTransition;
 use System\Models\EventLog;
@@ -21,6 +22,7 @@ class BeforeCreateOrUpdateAudit
 
     public function handler($event, $model)
     {
+        SwooleServiceProvider::getLogger()->debug('BeforeCreateOrUpdateAudit handler');
         $modelClass = get_class($model);
         if (!in_array($modelClass, $this->ignoreModels)) {
             $modelModel = ModelModel::where('model', get_class($model))->first();

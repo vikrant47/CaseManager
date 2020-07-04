@@ -1,10 +1,10 @@
+<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
+<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <?php $this->addCss('/plugins/demo/report/controllers/dashboardcontroller/assets/css/gridstack.min.css') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/dashboardcontroller/assets/js/gridstack.all.js') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/dashboardcontroller/assets/js/dashboard.data.js') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js') ?>
 <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <?php if (empty($context) || $context === 'preview') { ?>
     <!--<a href="../render/<?/*= $dashboard->id */?>" style="margin: 0;auto;">View</a>-->
 <?php } ?>
@@ -90,13 +90,10 @@
         z-index: 9999;
     }
 
-    /*.grid-stack > .grid-stack-item > .grid-stack-item-content {
-        overflow: hidden;
+    .grid-stack > .grid-stack-item > .grid-stack-item-content {
         background-color: white;
-        padding: 10px 10px 10px 10px;
-        box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
-        margin: 5px 5px 5px 5px;
-    }*/
+        box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
+    }
     .grid-stack > .grid-stack-item > .grid-stack-item-content {
         overflow: hidden;
     }

@@ -57,6 +57,10 @@ body {
     opacity: 1;
 }
 
+.card .card-body {
+    padding: 2.5rem 2.5rem 1.5rem 1.5rem;
+}
+
 .card-body .field-repeater li.field-repeater-item {
     background: none;
 }
@@ -490,4 +494,9 @@ a.manage-widgets, .action a {
 
 .recordfinder-list {
     overflow: scroll;
+}
+
+/**Dropdown*/
+.dropdown-menu {
+    font-size: 1rem;
 }

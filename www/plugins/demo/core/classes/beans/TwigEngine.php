@@ -14,7 +14,13 @@ class TwigEngine extends Twig
     private $template;
     private $context = [];
 
-    public function compile($template): self
+    /**
+     * @param $template
+     * @return TwigEngine
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function compile($template)
     {
         if (empty($template)) {
             throw new \Exception('Provided template is empty');

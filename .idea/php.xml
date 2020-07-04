@@ -110,6 +110,7 @@
       <path value="$PROJECT_DIR$/www/vendor/bvanhoekelen/terminal-style" />
       <path value="$PROJECT_DIR$/www/vendor/webpatser/laravel-uuid" />
       <path value="$PROJECT_DIR$/www/vendor/timgws/query-builder-parser" />
+      <path value="$PROJECT_DIR$/www/vendor/swooletw/laravel-swoole" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />

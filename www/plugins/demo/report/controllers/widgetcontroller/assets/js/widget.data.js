@@ -1,28 +1,14 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
-
-var Widget = function (id, containerId) {
-    this.id = id;
-    this.option = {};
-    this.containerId = containerId || id;
-    this.model = {id: id};
-    this.$container = $('#widget-container-' + this.containerId);
-    this.$header = this.$container.find('.widget-header');
-    this.$body = this.$container.find('.widget-body');
-    this.$footer = this.$container.find('.widget-footer');
-    this.$container.data('widget', this);
-    this.events = {resize: []};
-};
-Widget.defaultOptions = {
-    header: {
-        title: function () {
-            return this.model.name;
-        },
-        description: function () {
-            return this.model.description;
-        },
-        actions: [],
+var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
+    static: {
+        defaultTemplate: '<h6 class="widget-title card-title mb-0"></h6>\n' +
+            '<div class="widget-toolbar">\n' +
+            '    <div class="user-toolbar"></div>\n' +
+            '    <div class="default-toolbar"></div>\n' +
+            '</div>\n' +
+            '<div class="text-muted mb-4 widget-description"></div>',
         defaultActions: [{
             label: '',
             icon: 'icon-minus',
@@ -86,32 +72,87 @@ Widget.defaultOptions = {
             icon: 'icon-trash',
             css_class: 'delete-widget',
             active: function () {
-                return this.scope.getDashboard() && this.scope.getDashboard().context === 'preview';
+                return this.scope.widget.getDashboard() && this.scope.widget.getDashboard().context === 'preview';
             },
             handler: function (event, widget) {
                 widget.getDashboard().removeWidget(widget);
             }
         }],
-    }, footer: {
-        title: '',
-        actions: []
     },
-};
+    constructor: function (widget, template) {
+        if (!template) {
+            template = this.static.defaultTemplate;
+        }
+        this.widget = widget;
+        this.$el = widget.$el.find('.widget-header');
+        this.template = template;
+        this.$template = $(this.template);
+    },
+    init: function () {
 
-Object.assign(Widget.prototype, {
-    init: function (option) {
-        options = Object.assign(Widget.defaultOptions, option);
-        this.setDefaultHeaderActions(Store.cloneArray(options.header.defaultActions));
-        this.setHeaderActions(Store.cloneArray(options.header.actions));
-        this.setFooterActions(Store.cloneArray(options.footer.actions));
-        this.setTitle(options.header.title);
-        this.setDescription(options.header.description);
-        if (!this.isInsideDashboard()) {
-            this.$container.find('.widget-body').css('height', '70vh');
+    },
+    render: function () {
+        this.$template.appendTo(this.$el.empty());
+        this.setTitle(widget.model.name);
+        this.setDescription(widget.model.description);
+        this.setDefaultActions()
+    },
+    setTitle: function (title) {
+        if (typeof title === 'function') {
+            title = title.apply(this);
+        }
+        this.$el.find('.widget-title').text(title);
+    },
+    setDescription: function (description) {
+        if (typeof description === 'function') {
+            description = description.apply(this);
+        }
+        this.$el.find('.widget-description').text(description);
+    },
+    setDefaultActions: function () {
+        var $toolbar = this.$el.find('.default-toolbar');
+        Engine.instance.addActions($toolbar, engine.data.Store.cloneArray(this.static.defaultActions), this);
+    },
+    addtActions: function (actions) {
+        var $toolbar = this.$el.find('.user-toolbar');
+        return Engine.instance.addActions($toolbar, actions, this);
+    }
+});
+
+Engine.instance.define('engine.report.Widget', {
+    constructor: function (id, containerId) {
+        this.id = id;
+        this.option = {};
+        this.containerId = containerId || id;
+        this.model = {id: id};
+        this.$el = $('#widget-container-' + this.containerId);
+        this.$body = this.$el.find('.widget-body');
+        this.$footer = this.$el.find('.widget-footer');
+        this.$el.data('widget', this);
+        this.events = {resize: []};
+    },
+    static: {
+        defaultOptions: {
+            footer: {
+                title: '',
+                actions: []
+            },
         }
     },
+    init: function (option) {
+        options = Object.assign(this.static.defaultOptions, option);
+        if (!this.isInsideDashboard()) {
+            this.$el.find('.widget-body').css('height', '70vh');
+        }
+        this.setHeader(new WidgetHeader(this));
+        this.setFooterActions(engine.data.Store.cloneArray(options.footer.actions));
+    },
+    setHeader: function (header) {
+        this.header = header;
+        this.header.init();
+    },
     getDashboard: function () {
-        return this.$container.parents('.dashboard-container').eq(0).data('dashboard');
+        return this.$el.parents('.dashboard-container').eq(0).data('dashboard');
     },
     isInsideDashboard: function () {
         return typeof this.getDashboard() !== 'undefined';
@@ -125,7 +166,7 @@ Object.assign(Widget.prototype, {
         return $canvas.get(0);
     },
     getContainer: function () {
-        return this.$container.get(0);
+        return this.$el.get(0);
     },
     getHeader: function () {
         return this.$header.get(0);
@@ -139,28 +180,8 @@ Object.assign(Widget.prototype, {
     setOption: function (option) {
         this.option = option;
     },
-    setTitle: function (title) {
-        if (typeof title === 'function') {
-            title = title.apply(this);
-        }
-        this.$header.find('.widget-title').text(title);
-    },
-    setDescription: function (description) {
-        if (typeof description === 'function') {
-            description = description.apply(this);
-        }
-        this.$header.find('.widget-description').text(description);
-    },
-    setDefaultHeaderActions: function (actions) {
-        var $toolbar = this.$header.find('.default-toolbar');
-        Engine.instance.addActions($toolbar, actions, this);
-    },
-    setHeaderActions: function (actions) {
-        var $toolbar = this.$header.find('.user-toolbar');
-        Engine.instance.addActions($toolbar, actions, this);
-    },
     setFooterActions: function (actions) {
-        var $toolbar = this.$header.find('.widget-toolbar');
+        var $toolbar = this.$footer.find('.widget-toolbar');
         Engine.instance.addActions($toolbar, actions, this);
     },
     loadData: function (callabck) {
@@ -181,6 +202,7 @@ Object.assign(Widget.prototype, {
     },
     render: function (widget) {
         this.init(this.option);
+        this.header.render();
         $(this.getBody()).append(widget.model.template);
         var script = this.looseParseJSON(widget.model.script);
         script.call(this);
@@ -203,22 +225,22 @@ Object.assign(Widget.prototype, {
         }
     }
 });
-
-var Store = function (data) {
-    if (typeof data.current_page !== 'undefined' && typeof data.per_page !== 'undefed' && typeof data.data !== 'undefined') {
-        this.data = data.data;
-        this.paginator = data;
-    } else {
-        this.data = data;
-    }
-
-};
-Store.cloneArray = function (array) {
-    return array.map(function (element) {
-        return typeof element === 'object' ? Object.assign({}, element) : element;
-    });
-};
-Object.assign(Store.prototype, {
+var Store = Engine.instance.define('engine.data.Store', {
+    static: {
+        cloneArray: function (array) {
+            return array.map(function (element) {
+                return typeof element === 'object' ? Object.assign({}, element) : element;
+            });
+        }
+    },
+    constructor: function (data) {
+        if (typeof data.current_page !== 'undefined' && typeof data.per_page !== 'undefed' && typeof data.data !== 'undefined') {
+            this.data = data.data;
+            this.paginator = data;
+        } else {
+            this.data = data;
+        }
+    },
     getKeys: function () {
         var keyData = this.data;
         if (jQuery.isArray(keyData)) {
@@ -257,5 +279,4 @@ Object.assign(Store.prototype, {
         return this.data;
     }
 });
-window.Widget = Widget;
 

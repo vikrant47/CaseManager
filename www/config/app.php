@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost:8080/case-manager/install-master/',
+    'url' => 'http://localhost:8002',
 
     /*
     |--------------------------------------------------------------------------
@@ -136,6 +136,7 @@ return [
         // 'Illuminate\Html\HtmlServiceProvider', // Example
 
         'System\ServiceProvider',
+        'SwooleTW\Http\LaravelServiceProvider'
     ]),
 
     /*

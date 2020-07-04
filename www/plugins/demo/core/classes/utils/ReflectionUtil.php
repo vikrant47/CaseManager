@@ -22,4 +22,12 @@ class ReflectionUtil
         $r->setAccessible(true);
         $r->setValue($instance, $value);
     }
+
+
+    public static function invoke($class, $instance, $method, $parameters = [])
+    {
+        $r = new \ReflectionMethod($class, $method);
+        $r->setAccessible(true);
+        $r->invoke($instance, $parameters);
+    }
 }
