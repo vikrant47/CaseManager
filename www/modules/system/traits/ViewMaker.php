@@ -1,7 +1,5 @@
 <?php namespace System\Traits;
 
-use Demo\Core\Classes\Helpers\PluginConnection;
-use Demo\Core\Services\SwooleServiceProvider;
 use File;
 use Lang;
 use Block;
@@ -79,15 +77,12 @@ trait ViewMaker
      */
     public function makePartial($partial, $params = [], $throwException = true)
     {
-        SwooleServiceProvider::getLogger()->debug('makePartial ' . $partial);
         $notRealPath = realpath($partial) === false || is_dir($partial) === true;
         if (!File::isPathSymbol($partial) && $notRealPath) {
             $folder = strpos($partial, '/') !== false ? dirname($partial) . '/' : '';
             $partial = $folder . '_' . strtolower(basename($partial)) . '.htm';
         }
-        SwooleServiceProvider::getLogger()->debug('partial after prepend folder ' . $partial);
         $partialPath = $this->getViewPath($partial);
-        SwooleServiceProvider::getLogger()->debug('$partialPath ' . $partialPath);
         if (!File::exists($partialPath)) {
             if ($throwException) {
                 throw new SystemException(Lang::get('backend::lang.partial.not_found_name', ['name' => $partialPath]));
@@ -184,17 +179,14 @@ trait ViewMaker
      */
     public function getViewPath($fileName, $viewPath = null)
     {
-        SwooleServiceProvider::getLogger()->debug('getViewPath ' . $fileName);
         if (!isset($this->viewPath)) {
             $this->viewPath = $this->guessViewPath();
         }
-        SwooleServiceProvider::getLogger()->debug('guessed view path  ' . json_encode($this->viewPath ));
         if (!$viewPath) {
             $viewPath = $this->viewPath;
         }
 
         $fileName = File::symbolizePath($fileName);
-        SwooleServiceProvider::getLogger()->debug('symbolizePath  ' . $fileName );
         if (File::isLocalPath($fileName) ||
             (!Config::get('cms.restrictBaseDir', true) && realpath($fileName) !== false)
         ) {
@@ -204,7 +196,6 @@ trait ViewMaker
         if (!is_array($viewPath)) {
             $viewPath = [$viewPath];
         }
-        SwooleServiceProvider::getLogger()->debug('iterating view path  ' . json_encode($viewPath) );
         foreach ($viewPath as $path) {
             $_fileName = File::symbolizePath($path) . '/' . $fileName;
             if (File::isFile($_fileName)) {

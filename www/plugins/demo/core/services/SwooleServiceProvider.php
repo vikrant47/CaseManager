@@ -4,11 +4,13 @@
 namespace Demo\Core\Services;
 
 
+use DB;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Classes\Utils\ReflectionUtil;
 use Illuminate\Http\Request;
 use Monolog\Logger;
+use October\Rain\Events\Dispatcher;
 use October\Rain\Foundation\Providers\ExecutionContextProvider;
 use October\Rain\Router\RoutingServiceProvider;
 use October\Rain\Router\UrlGenerator;
@@ -27,6 +29,7 @@ class SwooleServiceProvider extends ServiceProvider
         $this->routingServiceProvider = new RoutingServiceProvider($app);
         $this->logger = self::getLogger();
         $this->backendServiceProvider = new  \Backend\ServiceProvider($app);
+        $this->backendServiceProvider = new  \System\ServiceProvider($app);
     }
 
 
@@ -38,16 +41,13 @@ class SwooleServiceProvider extends ServiceProvider
 
     public function register()
     {
+        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('jsonb', 'text');
         $this->registerUrlGenerator();
         $this->initBackend();
-        $this->backendServiceProvider->register();
-        /*ReflectionUtil::invoke(RoutingServiceProvider::class, $this->routingServiceProvider, 'registerRouter');
-        ReflectionUtil::invoke(RoutingServiceProvider::class, $this->routingServiceProvider, 'registerRedirector');
-        ReflectionUtil::invoke(RoutingServiceProvider::class, $this->routingServiceProvider, 'registerPsrRequest');
-        ReflectionUtil::invoke(RoutingServiceProvider::class, $this->routingServiceProvider, 'registerPsrResponse');
-        ReflectionUtil::invoke(RoutingServiceProvider::class, $this->routingServiceProvider, 'registerResponseFactory');
-        ReflectionUtil::invoke(RoutingServiceProvider::class, $this->routingServiceProvider, 'registerControllerDispatcher');
-        */
+        $events = $this->app['events'];
+        $this->logger->debug('App object in request level hash '.spl_object_hash($this->app));
+        $this->logger->debug('Event object in request level hash '.spl_object_hash($events));
+        $this->logger->debug('Listeners' . json_encode(ReflectionUtil::getPropertyValue(Dispatcher::class,'listeners',$events)));
     }
 
     /**

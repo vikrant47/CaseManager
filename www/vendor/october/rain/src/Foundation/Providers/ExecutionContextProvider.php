@@ -1,5 +1,6 @@
 <?php namespace October\Rain\Foundation\Providers;
 
+use Demo\Core\Services\SwooleServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class ExecutionContextProvider extends ServiceProvider
@@ -16,11 +17,11 @@ class ExecutionContextProvider extends ServiceProvider
             $requestPath = $this->normalizeUrl($app['request']->path());
 
             $backendUri = $this->normalizeUrl($app['config']->get('cms.backendUri', 'backend'));
-
+            // SwooleServiceProvider::getLogger()->debug('request path = ' . $requestPath);
+            return 'back-end';
             if (starts_with($requestPath, $backendUri)) {
                 return 'back-end';
-            }
-            else {
+            } else {
                 return 'front-end';
             }
         });
@@ -35,7 +36,7 @@ class ExecutionContextProvider extends ServiceProvider
     protected function normalizeUrl($url)
     {
         if (substr($url, 0, 1) != '/') {
-            $url = '/'.$url;
+            $url = '/' . $url;
         }
 
         if (!strlen($url)) {
