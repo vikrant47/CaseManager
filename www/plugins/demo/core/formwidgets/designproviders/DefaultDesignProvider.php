@@ -2,6 +2,7 @@
 
 namespace Demo\Core\FormWidgets\DesignProviders;
 
+use Demo\Core\FormWidgets\DurationWidget;
 use Demo\Core\FormWidgets\QueryBuilderWidget;
 use Event;
 use File;
@@ -58,6 +59,15 @@ class DefaultDesignProvider extends ControlDesignTimeProviderBase
                 ControlLibrary::GROUP_WIDGETS,
                 'icon-eyedropper',
                 $controlLibrary->getStandardProperties([], QueryBuilderWidget::getProperties()),
+                DefaultDesignProvider::class
+            );
+            $controlLibrary->registerControl(
+                'durationwidget',
+                'Duration Builder',
+                'Widget to create duration',
+                ControlLibrary::GROUP_WIDGETS,
+                'icon-eyedropper',
+                $controlLibrary->getStandardProperties([],DurationWidget::getProperties() ),
                 DefaultDesignProvider::class
             );
         });

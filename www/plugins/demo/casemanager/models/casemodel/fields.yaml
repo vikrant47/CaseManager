@@ -22,7 +22,7 @@ fields:
         required: 1
         type: recordfinder
         list: $/demo/casemanager/models/casepriority/columns.yaml
-        prompt: Click the %s button to find a user
+        prompt: 'Click the %s button to find a user'
         comment: 'Select Priority'
     comments:
         label: Comments
@@ -43,6 +43,11 @@ fields:
     tat_duration:
         label: 'Tat Duration'
         span: auto
+        placeholder: ''
+        default: ''
+        cssClass: ''
+        disabled: 0
+        readOnly: 0
         type: durationwidget
 tabs:
     fields:
@@ -72,4 +77,3 @@ tabs:
             readOnly: 1
             type: number
             tab: System
-

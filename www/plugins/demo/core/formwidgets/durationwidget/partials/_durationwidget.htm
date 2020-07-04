@@ -1,66 +1,159 @@
+<?php if ($this->previewMode): ?>
+<div class="form-control"><?= Backend::dateTime($value, [
+        'format' => $format,
+    'formatAlias' => $formatAlias,
+    'defaultValue' => $value
+    ]) ?>
+</div>
+<?php else: ?>
 
-<?= (isset($fieldOptions[$field->value])) ? e(trans($fieldOptions[$field->value])) : '' ?>
+<div
+        id="<?= $this->getId() ?>"
+        class="field-datepicker"
+        data-control="datepicker"
+<?php if ($formatMoment): ?>data-format="<?= $formatMoment ?>"<?php endif ?>
+<?php if ($minDate): ?>data-min-date="<?= $minDate ?>"<?php endif ?>
+<?php if ($maxDate): ?>data-max-date="<?= $maxDate ?>"<?php endif ?>
+data-mode="<?= $mode ?>"
+<?php if ($yearRange): ?>data-year-range="<?= $yearRange ?>"<?php endif ?>
+<?php if ($firstDay): ?>data-first-day="<?= $firstDay ?>"<?php endif ?>
+data-show-week-number="<?= $showWeekNumber ?>"
+<?php if ($ignoreTimezone): ?>data-ignore-timezone<?php endif ?>
+>
+
+<?php if ($mode == 'date'): ?>
+<?= $this->makePartial('picker_date') ?>
+<?php elseif ($mode == 'datetime'): ?>
 <div class="row">
-    <div class="col-lg-2">
-        <input class="form-control"
-               type="text" name="<?= $field->getName() ?>"
-        <?= $field->getAttributes() ?>
-        <?= $field->placeholder ? 'data-placeholder="'.e(trans($field->placeholder)).'"' : '' ?>
-        value="<?= $field->value ?>" >
+    <div class="col-md-3">
+        <?= $this->makePartial('picker_date') ?>
     </div>
-    <div class="col-lg-2">
-        <select class="form-control s2" id="selectType">
-            <option value="days" selected="selected">Days</option>
-            <option value="weeks">Weeks</option>
-            <option value="months">Months</option>
-            <option value="years">Years</option>
-            <option value="hours">Hours</option>
-            <option value="min">Minutes</option>
-            <option value="sec">Seconds</option>
-        </select>
-        <input id="tatTypeId" name="_tatSelectedType" type="hidden" value="<?= $this->selectedValue ?>">
+    <div class="col-md-2">
+        <?= $this->makePartial('picker_time') ?>
     </div>
-   <!-- <div class="col-lg-2">
-        <input class="form-control"
-               type="text" name="<?= $field->getName() ?>"
-        <?= $field->getAttributes() ?>
-        <?= $field->placeholder ? 'data-placeholder="'.e(trans($field->placeholder)).'"' : '' ?>
-        value="<?= $field->value ?>" >
-    </div>
-    <div class="col-lg-2">
-        <select class="form-control s2" id="selectSubType">
-            <option value="days" selected="selected">Days</option>
-            <option value="weeks">Weeks</option>
-            <option value="months">Months</option>
-            <option value="years">Years</option>
-            <option value="hours">Hours</option>
-            <option value="min">Minutes</option>
-            <option value="sec">Seconds</option>
-        </select>
-        <input id="tatSubTypeId" name="_tatSubSelectedType" type="hidden" value="<?= $this->selectedValue ?>">
-    </div>-->
-    <div class="col-lg-4">
-        <label>End Date : <?= $this->taskEndTime ?></label>
+    <div class="col-md-7">
+
+        <div id="clockdiv">
+            <div>
+                <span class="days"></span>
+                <div class="smalltext">Days</div>
+            </div>
+            <div>
+                <span class="hours"></span>
+                <div class="smalltext">Hours</div>
+            </div>
+            <div>
+                <span class="minutes"></span>
+                <div class="smalltext">Minutes</div>
+            </div>
+            <div>
+                <span class="seconds"></span>
+                <div class="smalltext">Seconds</div>
+            </div>
+        </div>
     </div>
 </div>
+<?php elseif ($mode == 'time'): ?>
+<?= $this->makePartial('picker_time') ?>
+<?php endif ?>
+
+<!-- Data locker -->
+<input
+        type="hidden"
+        name="<?= $field->getName() ?>"
+        id="<?= $field->getId() ?>"
+        value="<?= e($value) ?>"
+        data-datetime-value
+/>
+
+
+</div>
+
+<?php endif ?>
 <script>
-    $(document).on('render', function () {
-        $(".s2").select2({
-            tags: true,
-        });
-    })
-    $('#selectType').select2().on('change', function() {
-        $('#tatTypeId').val($(this).val());
-    })
-    $('#tatTypeId').on('change', function() {
-        $("#selectType").val($(this).val());
-        $("#selectType").trigger('change');
-    }).trigger('change');
-    $('#selectSubType').select2().on('change', function() {
-        $('#tatSubTypeId').val($(this).val());
-    })
-    $('#tatSubTypeId').on('change', function() {
-        $("#selectSubType").val($(this).val());
-        $("#selectSubType").trigger('change');
-    }).trigger('change');
+function getTimeRemaining(endtime) {
+        const total = Date.parse(endtime) - Date.parse(new Date());
+        const seconds = Math.floor((total / 1000) % 60);
+        const minutes = Math.floor((total / 1000 / 60) % 60);
+        const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+        return {
+            total,
+            days,
+            hours,
+            minutes,
+            seconds
+        };
+    }
+
+function initializeClock(id, endtime) {
+    const clock = document.getElementById(id);
+    const daysSpan = clock.querySelector('.days');
+    const hoursSpan = clock.querySelector('.hours');
+    const minutesSpan = clock.querySelector('.minutes');
+    const secondsSpan = clock.querySelector('.seconds');
+
+    function updateClock() {
+        const t = getTimeRemaining(endtime);
+
+        daysSpan.innerHTML = t.days;
+        hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+        if (t.total <= 0) {
+            clearInterval(timeinterval);
+        }
+    }
+
+    updateClock();
+    const timeinterval = setInterval(updateClock, 1000);
+}
+
+const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+initializeClock('clockdiv', "<?= e($value) ?>");
 </script>
+<style>
+    /* body{
+         text-align: center;
+         background: #00ECB9;
+         font-family: sans-serif;
+         font-weight: 100;
+     }*/
+
+    h1 {
+        color: #396;
+        font-weight: 100;
+        font-size: 40px;
+        margin: 40px 0px 20px;
+    }
+
+    #clockdiv {
+        font-family: sans-serif;
+        color: #fff;
+        display: inline-block;
+        font-weight: 100;
+        text-align: center;
+        font-size: 13px;
+    }
+
+    #clockdiv > div {
+        padding: 10px;
+        border-radius: 3px;
+        background: #00BF96;
+        display: inline-block;
+    }
+
+    #clockdiv div > span {
+        padding: 15px;
+        border-radius: 3px;
+        background: #00816A;
+        display: inline-block;
+    }
+
+    .smalltext {
+        padding-top: 5px;
+        font-size: 16px;
+    }
+</style>
