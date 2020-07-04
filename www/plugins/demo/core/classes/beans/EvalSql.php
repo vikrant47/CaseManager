@@ -6,6 +6,7 @@ namespace Demo\Core\Classes\Beans;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Db;
 
 class EvalSql
 {

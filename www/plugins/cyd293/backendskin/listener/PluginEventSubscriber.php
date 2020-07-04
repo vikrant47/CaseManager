@@ -10,6 +10,9 @@ namespace Cyd293\BackendSkin\Listener;
 
 use Backend\Classes\NavigationManager;
 use Backend\Classes\Skin as AbstractSkin;
+use Demo\Core\Classes\Utils\ReflectionUtil;
+use Demo\Core\Services\SwooleServiceProvider;
+use October\Rain\Events\Dispatcher;
 use October\Rain\Parse\Yaml;
 
 /**
@@ -23,10 +26,12 @@ class PluginEventSubscriber
         \Backend\Classes\Controller $controller,
         $action,
         array $params = []
-    ) {
+    )
+    {
         $origViewPath = $controller->guessViewPath();
         $newViewPath = str_replace(base_path(), '', $origViewPath);
         $newViewPath = $this->getActiveSkin()->skinPath . '/views/' . $newViewPath;
+        SwooleServiceProvider::getLogger()->debug('Theme:: Setting new view path ,original = ' . $origViewPath . ' new  = ' . $newViewPath);
         $controller->addViewPath([$newViewPath]);
     }
 
@@ -51,8 +56,11 @@ class PluginEventSubscriber
 
     public function subscribe($events)
     {
+        SwooleServiceProvider::getLogger()->debug('Event object app level hash '.spl_object_hash($events));
+        SwooleServiceProvider::getLogger()->debug('Event object app level hash '.spl_object_hash($events));
         $events->listen('backend.page.beforeDisplay', [$this, 'onPageBeforeDisplay']);
         $events->listen('backend.menu.extendItems', [$this, 'onExtendMenu']);
+        SwooleServiceProvider::getLogger()->debug('Theme Listeners ' . json_encode(ReflectionUtil::getPropertyValue(Dispatcher::class,'listeners',$events)));
     }
 
     /**

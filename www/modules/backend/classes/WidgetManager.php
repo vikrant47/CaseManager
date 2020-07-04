@@ -137,7 +137,7 @@ class WidgetManager
      */
     public function resolveFormWidget($name)
     {
-        SwooleServiceProvider::getLogger()->debug('resolveFormWidget ' . $name);
+
         if ($this->formWidgets === null) {
             $this->listFormWidgets();
         }

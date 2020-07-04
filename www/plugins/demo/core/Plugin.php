@@ -13,6 +13,7 @@ use Demo\Core\FormWidgets\RelatedList;
 use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
 use Demo\Core\FormWidgets\SearchableRelatedList;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
+use Demo\Core\Services\SwooleServiceProvider;
 use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
 use RainLab\Builder\Classes\ControlLibrary;
 use System\Classes\PluginBase;
@@ -75,6 +76,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        SwooleServiceProvider::getLogger()->debug('plugin booted');
         trace_sql();
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('jsonb', 'text');
         Plugin::registerServiceProviders();

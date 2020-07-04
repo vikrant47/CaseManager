@@ -1,8 +1,6 @@
 <?php namespace Backend\Behaviors;
 
 use Db;
-use Demo\Core\Classes\Utils\ReflectionUtil;
-use Demo\Core\Services\SwooleServiceProvider;
 use Str;
 use Lang;
 use Flash;
@@ -175,9 +173,6 @@ class FormController extends ControllerBehavior
         });
 
         $this->formWidget->bindToController();
-        SwooleServiceProvider::getLogger()->debug('$this->formWidget-> bindToController' . json_encode(
-                ReflectionUtil::getPropertyValue(Backend\Widgets\Form::class, 'allFields', $this->formWidget)
-            ));
         /*
          * Detected Relation controller behavior
          */

@@ -47,7 +47,8 @@
         "bvanhoekelen/performance": "^2.5",
         "webpatser/laravel-uuid": "^3.0",
         "timgws/query-builder-parser": "^1.5",
-        "swooletw/laravel-swoole": "^2.0"
+        "swooletw/laravel-swoole": "^2.0",
+        "open-smf/connection-pool": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.7",

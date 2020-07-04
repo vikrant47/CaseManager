@@ -807,7 +807,7 @@ class Form extends WidgetBase
         /*
          * Simple field type
          */
-        SwooleServiceProvider::getLogger()->debug('Form::is_string($config)'.json_encode($config));
+
         if (is_string($config)) {
             if ($this->isFormWidget($config) !== false) {
                 $field->displayAs('widget', ['widget' => $config]);
@@ -831,7 +831,7 @@ class Form extends WidgetBase
             /*
              * Widget with configuration
              */
-            SwooleServiceProvider::getLogger()->debug('Form::isFormWidget($fieldType)'.$fieldType);
+
             if ($this->isFormWidget($fieldType) !== false) {
                 $config['widget'] = $fieldType;
                 $fieldType = 'widget';
@@ -896,7 +896,7 @@ class Form extends WidgetBase
      */
     protected function isFormWidget($fieldType)
     {
-        SwooleServiceProvider::getLogger()->debug('isFormWidget ' . $fieldType);
+
         if ($fieldType === null) {
             return false;
         }
@@ -906,11 +906,11 @@ class Form extends WidgetBase
         }
 
         $widgetClass = $this->widgetManager->resolveFormWidget($fieldType);
-        SwooleServiceProvider::getLogger()->debug('$widgetClass ' . $widgetClass);
+
         if (!class_exists($widgetClass)) {
             return false;
         }
-        SwooleServiceProvider::getLogger()->debug('is_subclass_of($widgetClass, \'Backend\Classes\FormWidgetBase\') ' . is_subclass_of($widgetClass, 'Backend\Classes\FormWidgetBase'));
+
         if (is_subclass_of($widgetClass, 'Backend\Classes\FormWidgetBase')) {
             return true;
         }

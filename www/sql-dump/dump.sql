@@ -2241,13 +2241,24 @@ INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at)
 INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (42, 2, '::1', '2020-06-07 05:36:42', '2020-06-07 05:36:42');
 INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (43, 2, '::1', '2020-06-07 05:38:44', '2020-06-07 05:38:44');
 INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (44, 1, '::1', '2020-06-07 13:16:52', '2020-06-07 13:16:52');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (45, 1, '::1', '2020-06-27 16:50:05', '2020-06-27 16:50:05');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (46, 1, '::1', '2020-06-27 16:51:15', '2020-06-27 16:51:15');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (47, 1, '::1', '2020-06-28 04:40:19', '2020-06-28 04:40:19');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (48, 1, '::1', '2020-06-28 09:07:50', '2020-06-28 09:07:50');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (49, 1, '::1', '2020-06-28 12:06:59', '2020-06-28 12:06:59');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (50, 1, '::1', '2020-06-28 14:07:21', '2020-06-28 14:07:21');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (51, 1, '::1', '2020-06-28 14:21:02', '2020-06-28 14:21:02');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (52, 1, '::1', '2020-06-28 15:06:53', '2020-06-28 15:06:53');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (53, 1, '::1', '2020-06-28 15:08:51', '2020-06-28 15:08:51');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (54, 1, '::1', '2020-06-28 15:21:21', '2020-06-28 15:21:21');
+INSERT INTO backend_access_log (id, user_id, ip_address, created_at, updated_at) VALUES (55, 1, '::1', '2020-06-28 15:25:00', '2020-06-28 15:25:00');
 
 
 --
 -- Name: backend_access_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('backend_access_log_id_seq', 44, true);
+SELECT pg_catalog.setval('backend_access_log_id_seq', 55, true);
 
 
 --
@@ -2316,8 +2327,8 @@ SELECT pg_catalog.setval('backend_user_throttle_id_seq', 2, true);
 -- Data for Name: backend_users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO backend_users (id, first_name, last_name, login, email, password, activation_code, persist_code, reset_password_code, permissions, is_activated, role_id, activated_at, last_login, created_at, updated_at, deleted_at, is_superuser) VALUES (1, 'Admin', 'Person', 'admin', 'admin@domain.tld', '$2y$10$gs9tcpJn5uAmNOzaS4DvZO4l5qrF4zyzATp5AKiT3mKjFt3mnY/KS', NULL, '$2y$10$W1IQxBeJiDaB7v9Uwx52y.eRYhZevNZnhPpRT/yNPRHrT.Aqa5SSC', NULL, '', true, 2, NULL, '2020-06-28 15:24:59', '2020-04-26 05:34:31', '2020-06-28 15:24:59', NULL, true);
 INSERT INTO backend_users (id, first_name, last_name, login, email, password, activation_code, persist_code, reset_password_code, permissions, is_activated, role_id, activated_at, last_login, created_at, updated_at, deleted_at, is_superuser) VALUES (2, 'Suraj', 'Baliyan', 'suraj', 'suraj.baliyan4@gmail.com', '$2y$10$sZj8Bfs9CVKMvkVrsWjvhuh02DhE/cxn38DU9KttZTvnD1d5EGXE2', NULL, '$2y$10$DkEYtnayrRp6Z0ZMUmJP7.Ye7uTAjObd9oUdJEMecOQSkw8Ua9g36', NULL, NULL, false, 5, NULL, '2020-06-07 05:38:44', '2020-05-10 06:08:53', '2020-06-07 05:38:44', NULL, false);
-INSERT INTO backend_users (id, first_name, last_name, login, email, password, activation_code, persist_code, reset_password_code, permissions, is_activated, role_id, activated_at, last_login, created_at, updated_at, deleted_at, is_superuser) VALUES (1, 'Admin', 'Person', 'admin', 'admin@domain.tld', '$2y$10$gs9tcpJn5uAmNOzaS4DvZO4l5qrF4zyzATp5AKiT3mKjFt3mnY/KS', NULL, '$2y$10$MdXs7G.yjPA0scoeUDVUPuv8d/wndCasVxRwVTrPz3edqlmmYVTHS', NULL, '', true, 2, NULL, '2020-06-07 13:16:51', '2020-04-26 05:34:31', '2020-06-07 13:16:51', NULL, true);
 
 
 --
@@ -3951,8 +3962,9 @@ SELECT pg_catalog.setval('system_mail_templates_id_seq', 2, true);
 --
 
 INSERT INTO system_parameters (id, namespace, "group", item, value, data_type, description) VALUES (4, 'system', 'core', 'build', '465', 'text', NULL);
-INSERT INTO system_parameters (id, namespace, "group", item, value, data_type, description) VALUES (1, 'system', 'update', 'count', '1', 'text', NULL);
 INSERT INTO system_parameters (id, namespace, "group", item, value, data_type, description) VALUES (2, 'system', 'update', 'retry', '1592755368', 'text', NULL);
+INSERT INTO system_parameters (id, namespace, "group", item, value, data_type, description) VALUES (1, 'system', 'update', 'count', '0', 'text', NULL);
+INSERT INTO system_parameters (id, namespace, "group", item, value, data_type, description) VALUES (5, 'cms', 'theme', 'active', '"adminlte"', 'text', NULL);
 INSERT INTO system_parameters (id, namespace, "group", item, value, data_type, description) VALUES (3, 'cyd293.backendskin', 'skin', 'active', '"nobleui"', 'text', NULL);
 
 
@@ -3960,7 +3972,7 @@ INSERT INTO system_parameters (id, namespace, "group", item, value, data_type, d
 -- Name: system_parameters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('system_parameters_id_seq', 4, true);
+SELECT pg_catalog.setval('system_parameters_id_seq', 5, true);
 
 
 --

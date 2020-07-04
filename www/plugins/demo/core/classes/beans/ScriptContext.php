@@ -67,7 +67,6 @@ class ScriptContext
                 'Db' => Db::class,
                 'DB' => Db::class,
             ];
-        class_alias(Db::class, 'DB');
         $this->currentUser = BackendAuth::getUser();
         $this->exception = new \stdClass();
         $this->request = request();
