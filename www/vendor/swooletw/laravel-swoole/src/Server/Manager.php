@@ -108,7 +108,7 @@ class Manager
         $port = $this->container['config']->get('swoole_http.server.port');
 
         $this->server = new Server($host, $port);
-        SwooleServiceProvider::getLogger()->debug('Event object in on create server hash '.spl_object_hash($this->container['events']));
+        // SwooleServiceProvider::getLogger()->debug('Event object in on create server hash '.spl_object_hash($this->container['events']));
     }
 
     /**
@@ -176,7 +176,7 @@ class Manager
     public function onRequest($swooleRequest, $swooleResponse)
     {
         $this->container['events']->fire('http.onRequest');
-        SwooleServiceProvider::getLogger()->debug('Event object in on request hash '.spl_object_hash($this->container['events']));
+        // SwooleServiceProvider::getLogger()->debug('Event object in on request hash '.spl_object_hash($this->container['events']));
         // Reset user-customized providers
         $this->getApplication()->resetProviders();
 

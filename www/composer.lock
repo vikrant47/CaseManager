@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "08e664d03ef606af32a7725049f05040",
+    "content-hash": "2350aee029f673e9a59a7a5e33aa7020",
     "packages": [
         {
             "name": "bvanhoekelen/performance",
@@ -2540,6 +2540,56 @@
                 "system"
             ],
             "time": "2019-09-10T07:55:40+00:00"
+        },
+        {
+            "name": "open-smf/connection-pool",
+            "version": "v1.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/open-smf/connection-pool.git",
+                "reference": "f9289cb5ee61d3e901bc74ab745e5b2162461a1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/open-smf/connection-pool/zipball/f9289cb5ee61d3e901bc74ab745e5b2162461a1e",
+                "reference": "f9289cb5ee61d3e901bc74ab745e5b2162461a1e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-swoole": ">=4.2.9",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "swoole/ide-helper": "@dev"
+            },
+            "suggest": {
+                "ext-redis": "A PHP extension for Redis."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Smf\\ConnectionPool\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Xie Biao",
+                    "email": "hhxsv5@sina.com"
+                }
+            ],
+            "description": "A common connection pool based on Swoole is usually used as the database connection pool.",
+            "homepage": "https://github.com/open-smf/connection-pool",
+            "keywords": [
+                "connection-pool",
+                "database-connection-pool",
+                "swoole"
+            ],
+            "time": "2020-05-29T05:20:59+00:00"
         },
         {
             "name": "opis/closure",
@@ -6331,5 +6381,6 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.0"
-    }
+    },
+    "plugin-api-version": "1.1.0"
 }
