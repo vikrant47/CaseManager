@@ -16,6 +16,7 @@ use October\Rain\Router\RoutingServiceProvider;
 use October\Rain\Router\UrlGenerator;
 use October\Rain\Support\ServiceProvider;
 use App;
+use October\Rain\Support\Facades\Flash;
 
 class SwooleServiceProvider extends ServiceProvider
 {
@@ -46,15 +47,18 @@ class SwooleServiceProvider extends ServiceProvider
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('jsonb', 'text');
     }
 
+    public function resetFlash()
+    {
+        // Flash::purge();
+        Flash::forget();
+    }
+
     public function register()
     {
         $this->resetDbConnection();
+        $this->resetFlash();
         $this->registerUrlGenerator();
         $this->initBackend();
-        $events = $this->app['events'];
-        $this->logger->debug('App object in request level hash ' . spl_object_hash($this->app));
-        $this->logger->debug('Event object in request level hash ' . spl_object_hash($events));
-        $this->logger->debug('Listeners' . json_encode(ReflectionUtil::getPropertyValue(Dispatcher::class, 'listeners', $events)));
     }
 
     /**
