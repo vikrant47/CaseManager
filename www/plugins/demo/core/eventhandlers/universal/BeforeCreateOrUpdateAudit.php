@@ -22,7 +22,6 @@ class BeforeCreateOrUpdateAudit
 
     public function handler($event, $model)
     {
-        SwooleServiceProvider::getLogger()->debug('BeforeCreateOrUpdateAudit handler');
         $modelClass = get_class($model);
         if (!in_array($modelClass, $this->ignoreModels)) {
             $modelModel = ModelModel::where('model', get_class($model))->first();

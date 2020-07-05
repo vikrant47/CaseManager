@@ -19,9 +19,10 @@ class Plugin extends PluginBase
     public function boot()
     {
         $events = $this->app->get('events');
-        SwooleServiceProvider::getLogger()->debug('Theme plugin booted');
+        /*SwooleServiceProvider::getLogger()->debug('Theme plugin booted');
         SwooleServiceProvider::getLogger()->debug('App object in plugin level hash '.spl_object_hash($this->app));
         SwooleServiceProvider::getLogger()->debug('Event object in plugin level hash '.spl_object_hash($events));
+        */
         Config::set('cms.backendSkin', BackendSkin::class);
         Event::subscribe(new PluginEventSubscriber());
         WidgetBase::extendableExtendCallback(function (WidgetBase $widget) {

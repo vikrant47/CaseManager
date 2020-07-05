@@ -39,15 +39,22 @@ class SwooleServiceProvider extends ServiceProvider
         return PluginConnection::getLogger('laravel.swoole');
     }
 
+    public function resetDbConnection()
+    {
+        DB::purge();
+        DB::reconnect();
+        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('jsonb', 'text');
+    }
+
     public function register()
     {
-        DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('jsonb', 'text');
+        $this->resetDbConnection();
         $this->registerUrlGenerator();
         $this->initBackend();
         $events = $this->app['events'];
-        $this->logger->debug('App object in request level hash '.spl_object_hash($this->app));
-        $this->logger->debug('Event object in request level hash '.spl_object_hash($events));
-        $this->logger->debug('Listeners' . json_encode(ReflectionUtil::getPropertyValue(Dispatcher::class,'listeners',$events)));
+        $this->logger->debug('App object in request level hash ' . spl_object_hash($this->app));
+        $this->logger->debug('Event object in request level hash ' . spl_object_hash($events));
+        $this->logger->debug('Listeners' . json_encode(ReflectionUtil::getPropertyValue(Dispatcher::class, 'listeners', $events)));
     }
 
     /**
