@@ -142,9 +142,8 @@ var EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         if (setting.actions) {
             Engine.instance.addActions($('<div class="modal-footer"></div>').appendTo($body), setting.actions, popup);
         }
-        if (setting.form) {
-            popup.form = setting.form;
-            options.form.$el = $body;
+        if (setting.target) {
+            popup.target = setting.target;
         }
         return popup;
 
@@ -156,11 +155,21 @@ var EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             action.id = 'list-action-' + action.id;
             action.attributes = typeof action.html_attributes === 'string' ? JSON.parse(action.html_attributes) : action.html_attributes;
             action.modelRecord = modelRecord;
+            action.tooltip = action.description;
             Object.assign(action, props);
-            delete action.icon;
+            action.icon = false;
             delete action.html_attributes;
             return action;
         });
+    },
+    getOrigin: function () {
+        return window.location.origin;
+    },
+    getBaseUrl: function () {
+        return window.location.origin + '/backend';
+    },
+    getCurrentControllerUrl: function () {
+        return this.getBaseUrl() + '/' + this.currentModel.controller.replace(/\\/g, '/').replace('/Controllers', '').toLocaleLowerCase();
     },
     request: function (handler, options) {
         if (typeof handler !== 'string') {
@@ -479,10 +488,12 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         const _this = this;
         this.contentPromise.then(function (content) {
             _this.emit('beforeRender', [content]);
-            Engine.instance.ui.showPopup(Object.assign(options, {
+            const popup = Engine.instance.ui.showPopup(Object.assign(options, {
                 content: content.result,
-                form: _this,
+                target: _this,
             }));
+            _this.popup = popup;
+            _this.$el = popup.$body;
             _this.emit('render', [content]);
         });
     },

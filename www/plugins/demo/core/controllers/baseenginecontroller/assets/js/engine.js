@@ -262,6 +262,15 @@ Object.assign(Engine.prototype, {
                         $icon = $template.find(action.element.icon);
                     }
                     $icon.addClass(action.icon);
+                } else {
+                    $template.find('i').remove();
+                }
+                if (action.tooltip) {
+                    if(action.tooltip.indexOf('<') >=0){
+                        action.tooltip = $(action.tooltip).text();
+                    }
+                    $template.prop('title',action.tooltip );
+                    $template.attr('data-toggle', 'tooltip');
                 }
                 if (action.attributes) {
                     action.attributes.forEach(function (attr) {

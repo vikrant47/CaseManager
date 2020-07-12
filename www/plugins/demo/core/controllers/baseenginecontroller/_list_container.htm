@@ -1,6 +1,16 @@
-<?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
+<?php
+$listActions = $this->getListActions();
+$modelRecord = $this->getModelRecord();
+?>
+<script>
+    $(document).ready(function () {
+        window.me = {id:<?=$this->user->id?>};
+        $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
+        var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
+        var controller = <?=json_encode($this->getControllerInfo())?>;
+        Engine.instance.ui.setModel(modelRecord);
+    });
+</script>
 <div class="engine-list-wrapper">
     <?php if ($toolbar): ?>
         <div class="engine-list-toolbar">
@@ -26,26 +36,17 @@
             </div>
         </div>
     </div>
-    <?php
-    $listActions = $this->getListActions();
-    $modelRecord = $this->getModelRecord();
-    ?>
-    <script>
-        $(document).ready(function() {
-            window.me = {id:<?=$this->user->id?>};
-            $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
-            var actions = <?=$listActions ? $listActions->toJSON() : '[]'?>;
-            var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
-            var controller = <?=json_encode($this->getControllerInfo())?>;
-            Engine.instance.ui.setModel(modelRecord);
-            var list = EngineList.getCurrentList();
-            list.setPagination(<?= json_encode([
-                    'from' => $list->vars['pageFrom'],
-                    'to' => $list->vars['pageTo'],
-                    'total' => $list->vars['recordTotal']
-                ])
-                ?>);
-            list.addActions(actions);
-        });
-    </script>
 </div>
+<script>
+    $(document).ready(function () {
+        var list = EngineList.getCurrentList();
+        var actions = <?=$listActions ? $listActions->toJSON() : '[]'?>;
+        list.addActions(actions);
+        list.setPagination(<?= json_encode([
+                'from' => $list->vars['pageFrom'],
+                'to' => $list->vars['pageTo'],
+                'total' => $list->vars['recordTotal']
+            ])
+            ?>);
+    });
+</script>
