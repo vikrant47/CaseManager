@@ -172,6 +172,11 @@ body {
 }
 
 /**Query Builder*/
+.query-builder .rules-group-container {
+    background: none;
+    border: 1px solid #eee;
+}
+
 .rules-group-container {
     width: 100%;
 }
@@ -193,6 +198,11 @@ body {
 }
 
 /***list**/
+.list-header {
+    background-color: transparent;
+    padding: 0 0 0 0;
+}
+
 .table-wrapper {
     position: relative;
 }
@@ -466,6 +476,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 /** Buttons **/
+.tooltip {
+    font-size: 1.3rem;
+}
+
 a.manage-widgets, .action a {
     color: #3a3f51;
 }
@@ -500,3 +514,4 @@ a.manage-widgets, .action a {
 .dropdown-menu {
     font-size: 1rem;
 }
+

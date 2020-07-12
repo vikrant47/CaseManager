@@ -89,9 +89,6 @@ class QueryBuilderWidget extends FormWidgetBase
     public function loadAssets()
     {
         parent::loadAssets();
-        $this->addJs('js/query-builder.standalone.min.js');
-        $this->addJs('js/sql-parser.js');
-        $this->addCss('css/query-builder.default.min.css');
     }
 
     public function render()

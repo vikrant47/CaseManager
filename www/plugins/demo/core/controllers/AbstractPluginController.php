@@ -501,6 +501,17 @@ class AbstractPluginController extends Controller
     /**
      * Object API Definition start
      */
+    public function onGetModelDefinition()
+    {
+        $model = Request::input('model');
+        if (empty($model)) {
+            $model = $this->modelClass;
+        }
+        $modelRecord = new ModelModel();
+        $modelRecord->model = $model;
+        return ['definition' => $modelRecord->getDefinition()];
+    }
+
     public function onReadRecord($id)
     {
         $request = request();

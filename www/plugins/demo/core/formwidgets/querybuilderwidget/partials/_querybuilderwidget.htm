@@ -7,13 +7,32 @@ if ($fetchModelFromField === false) {
 }
 
 ?>
+<style>
+    .query-builder .has-error {
+        background-color: #f7f6f6;
+        border-color: #f3a5a5;
+    }
+
+    .query-builder .rules-group-container {
+        border: 1px solid #e0dddd;
+        background: rgb(255, 255, 255);
+    }
+</style>
 <input id="<?= $id ?>-input" name="<?= $name ?>" type="hidden" value="<?= $value ?>"/>
 <div id="<?= $id ?>"></div>
 <script>
-    var sql_import_export = $('<div/>').html('<?=e($value)?>').html().trim();
-    var definition = <?=json_encode($modelInstance->getDefinition())?>;
-    if(definition) {
-        var $queryBuilder = $('#<?=$id?>');
+    $(document).ready(function () {
+        const sql_import_export = $('<div/>').html('<?= e($value) ?>').html().trim();
+        const filter = new engine.Filter('#<?= $id ?>', '#<?= $id ?>', sql_import_export);
+        filter.setModel('<?= str_replace('\\','\\\\',$modelType)?>');
+        filter.build();
+    });
+</script>
+<!-- <script>
+    var sql_import_export = $('<div/>').html('<?= e($value) ?>').html().trim();
+    var definition = <?= json_encode($modelInstance->getDefinition()) ?>;
+    if (definition) {
+        var $queryBuilder = $('#<?= $id ?>');
         if ($queryBuilder.queryBuilder && $queryBuilder.queryBuilder.destroy) {
             $queryBuilder.queryBuilder.destroy();
         }
@@ -70,13 +89,14 @@ if ($fetchModelFromField === false) {
             }
         }]*/
         });
-        $queryBuilder.on('rulesChanged.queryBuilder', function (e, level) {
+        const qb = $queryBuilder.querybuilder;
+            qb.on('rulesChanged', function (e, level) {
             try {
                 var sql = $(this).queryBuilder('getSQL') || {};
                 if (!sql.sql) {
                     // TODO : prevent form to be submitted
                 }
-                $('#<?=$id?>-input').val(sql.sql);
+                $('#<?= $id ?>-input').val(sql.sql);
             } catch (e) {
                 console.error(e);
             }
@@ -84,6 +104,11 @@ if ($fetchModelFromField === false) {
         if (sql_import_export.trim().length > 0) {
             $queryBuilder.queryBuilder('setRulesFromSQL', sql_import_export);
         }
+        qb.on('afterAddRule', function (rule) {
+            if (rule.$el.is('select') && !rule.$el.data('select2')) {
+                rule.$el.select2();
+            }
+        });
 
 
         /* $('#btn-reset').on('click', function () {
@@ -114,9 +139,4 @@ if ($fetchModelFromField === false) {
              }
          });*/
     }
-</script>
-<style>
-    .query-builder .rules-group-container {
-        background: rgb(249, 249, 249);
-    }
-</style>
+</script> -->
