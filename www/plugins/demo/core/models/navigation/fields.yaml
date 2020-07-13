@@ -81,6 +81,20 @@ tabs:
                 action: show
                 field: type
                 condition: 'value[list] || value[form]'
+        list:
+            label: List
+            emptyOption: '- Select List -'
+            showSearch: true
+            span: auto
+            dependsOn:
+                - model_ref
+                - type
+            trigger:
+                action: show
+                field: type
+                condition: 'value[list]'
+            type: dropdown
+            tab: Config
         view:
             label: View
             emptyOption: '- Select View -'

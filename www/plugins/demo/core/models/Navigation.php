@@ -26,7 +26,7 @@ class Navigation extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_navigations';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
@@ -131,6 +131,14 @@ public $incrementing = false;
                 $generatedUrl = $index . '?view=' . $navigation->view;
             } else {
                 $generatedUrl = $index;
+            }
+            if (!empty($navigation->list) && $navigation->list !== 'default') {
+                $list = $navigation->list;
+                $index = strripos($list, '/');
+                if ($index) {
+                    $list = str_replace('.yaml', '', substr($list, $index + 1));
+                }
+                $navigation->url = 'list=' . $list . (!empty($navigation->url) ? '&' . $navigation->url : '');
             }
             if (!empty($navigation->url)) {
                 if (strpos($generatedUrl, '?')) {

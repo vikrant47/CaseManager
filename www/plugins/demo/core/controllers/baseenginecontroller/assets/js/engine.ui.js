@@ -352,6 +352,12 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
     getActionContainer: function () {
         return this.$el.find('.engine-list-toolbar .toolbar-item').children().eq(0);
     },
+    getToolbar: function () {
+        if (this.$el.find('.toolbar-item .toolbar').length === 0) {
+            this.$el.find('.toolbar-item').eq(1).append($('<div class="toolbar"></div>'));
+        }
+        return this.$el.find('.toolbar-item .toolbar');
+    },
     getLocation: function () {
         return ('/backend/' + this.modelRecord.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
     },
@@ -360,7 +366,13 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
     },
     addActions: function (actionRecords) {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {list: this});
-        Engine.instance.addActions(this.getActionContainer(), actions);
+        Engine.instance.addActions(this.getActionContainer(), actions.filter(function (action) {
+            return !action.toolbar;
+        }));
+        // toolbar actions
+        Engine.instance.addActions(this.getToolbar(), actions.filter(function (action) {
+            return action.toolbar;
+        }), this, true);
     },
     getSelectedRecordIds: function () {
         return $('.control-list').listWidget('getChecked');

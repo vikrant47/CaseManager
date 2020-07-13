@@ -9,6 +9,7 @@ use Backend\Behaviors\ListController;
 use Backend\Classes\Controller;
 use Demo\Core\Classes\Beans\ApplicationCache;
 use Demo\Core\Classes\Beans\SessionCache;
+use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Errors\ListConfigNotFoundException;
 use Demo\Core\Classes\Helpers\FormBuilder;
 use Demo\Core\Classes\Helpers\PluginConnection;
@@ -22,6 +23,7 @@ use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
+use Demo\Core\Services\FilterService;
 use File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
@@ -29,6 +31,7 @@ use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
 use Db;
 use Response;
+use timgws\QueryBuilderParser;
 use View;
 
 
@@ -93,6 +96,36 @@ class AbstractPluginController extends Controller
         return $result;
     }
 
+    /**
+     * Override default list query
+     * @param $query \October\Rain\Database\Builder
+     * @throws ListConfigNotFoundException
+     * @throws \timgws\QBParseException
+     */
+    public function listExtendQuery($query)
+    {
+        $config = $this->widget->list->config;
+        $filterService = new FilterService();
+        if (property_exists($config, 'filter')) {
+            $listFilter = $config->filter;
+            if (!empty($listFilter)) {
+                $filterService->applyFilter($query, $listFilter);
+            }
+            $userFilter = Request::input('userFilter');
+            if (!empty($userFilter)) {
+                $filterService->applyFilter($query, $userFilter);
+            }
+        }
+    }
+
+    /**
+     * Handler for user filter
+     */
+    public function onUserFilter()
+    {
+        return $this->widget->list->onRefresh();
+    }
+
     /**This will make list config*/
     protected function makeListConfig($path = null, $definition = null)
     {
@@ -112,6 +145,11 @@ class AbstractPluginController extends Controller
         return Request::input('view');
     }
 
+    public function getRequestedList()
+    {
+        return Request::input('list');
+    }
+
     public function isViewDefinitionExists($view)
     {
         $controllerDirPath = base_path() . '/plugins/' . strtolower(get_class($this));
@@ -127,12 +165,35 @@ class AbstractPluginController extends Controller
     /**
      * Returns the configuration used by this behavior.
      * Override ListController listGetConfig to render different list views
+     * @param null $definition
      * @return \Backend\Classes\WidgetBase
      * @throws ListConfigNotFoundException
      */
     public function listGetConfig($definition = null)
     {
         $view = $this->getRequestedView();
+        $config = $this->listGetViewConfig($view, $definition);
+        $list = $this->getRequestedList();
+        if (!empty($list)) {
+            if (!strpos($list, '/')) {
+                $config->list = str_replace('columns.yaml', $list . '.yaml', $config->list);
+            } else {
+                $config->list = $list;
+            }
+        }
+        return $config;
+    }
+
+    /**
+     * This will return the list view provided
+     * A view is stored in views directory of the controller. If none provided than default view is returned
+     * @param $view string View of the list to be returned.
+     * @param null $definition
+     * @return array|mixed|\stdClass
+     * @throws ListConfigNotFoundException
+     */
+    public function listGetViewConfig($view, $definition = null)
+    {
         $listController = $this->asExtension('ListController');
         $ListConfig = ReflectionUtil::getPropertyValue(ListController::class, 'listConfig', $listController);
         if (!$definition) {
@@ -152,7 +213,6 @@ class AbstractPluginController extends Controller
         }
         return $config;
     }
-
     /*protected function loadView($type)
     {
         $view = Request::input('view');

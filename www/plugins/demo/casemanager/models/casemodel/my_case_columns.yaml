@@ -1,0 +1,43 @@
+columns:
+    id:
+        label: Id
+        type: text
+    case_number:
+        label: 'Case Number'
+        type: text
+        searchable: true
+    suspect:
+        label: Suspect
+        type: text
+        searchable: true
+    tat_duration:
+        label: Tat
+        type: text
+        searchable: true
+    queue[name]:
+        label: Queue
+        type: text
+    workflow_state[name]:
+        label: State
+        type: text
+    created_at:
+        label: Created At
+        type: datetime
+    updated_at:
+        label: Updated At
+        type: datetime
+    created_by[first_name]:
+        label: Created By
+        type: number
+    updated_by[first_name]:
+        label: updated_by
+        type: number
+title: My Cases
+filter:
+    condition: AND
+    rules:
+        - field: assigned_to_id
+          operator: 'equal'
+          value: '{{currentUser.id}}'
+          id: assigned_to_id
+          type: integer

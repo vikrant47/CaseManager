@@ -12,17 +12,23 @@ fields:
             field: label
             type: slug
         type: text
-    description:
-        label: Description
-        size: ''
-        span: auto
-        type: richeditor
     active:
         label: Active
         span: auto
         default: 1
         required: 1
         type: switch
+    toolbar:
+        label: Toolbar
+        span: auto
+        default: false
+        required: false
+        type: switch
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
     plugin:
         label: Plugin
         nameFrom: code

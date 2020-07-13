@@ -229,11 +229,31 @@ body {
 }
 
 .control-toolbar {
-    padding: 0px 0px 8px 0px;
+    padding: 0 0 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+    float: right;
 }
 
+.control-toolbar .toolbar-item {
+    width: 35% !important;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    order: 2;
+}
+
+.control-toolbar .toolbar-item.toolbar-primary {
+    width: 65% !important;;
+}
+
+
 .toolbar-item .loading-indicator-container {
-    float: right;
+    order: 2;
+}
+
+.control-toolbar .toolbar-item .toolbar {
+    margin-left: auto;
 }
 
 .list-widget table.table.data thead td, .list-widget table.table.data thead th, .list-widget table.table.data .list-checkbox {
