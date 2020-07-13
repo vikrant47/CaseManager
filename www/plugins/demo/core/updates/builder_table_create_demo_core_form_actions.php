@@ -20,6 +20,7 @@ class BuilderTableCreateDemoCoreFormActions extends Migration
             $table->string('form')->nullable();
             $table->string('model')->nullable();
             $table->boolean('active')->default(true);
+            $table->boolean('toolbar')->default(true);
             $table->text('description')->nullable();
             $table->string('icon')->nullable();
             $table->string('css_class')->nullable();

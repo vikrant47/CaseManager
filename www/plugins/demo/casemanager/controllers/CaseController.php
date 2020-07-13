@@ -75,6 +75,7 @@ class CaseController extends AbstractSecurityController
      */
     public function listExtendQuery($query)
     {
+        parent::listExtendQuery($query);
         $list = Request::input('list');
         if ($list === 'mycases') {
             $user = BackendAuth::getUser();

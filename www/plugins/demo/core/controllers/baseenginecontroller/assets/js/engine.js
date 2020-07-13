@@ -220,7 +220,7 @@ Object.assign(Engine.prototype, {
             this.$navFlyout.hide();
         }
     },
-    addActions: function ($element, actions, scope) {
+    addActions: function ($element, actions, scope, prepend) {
         var _this = this;
         if (!scope) {
             scope = this;
@@ -266,10 +266,10 @@ Object.assign(Engine.prototype, {
                     $template.find('i').remove();
                 }
                 if (action.tooltip) {
-                    if(action.tooltip.indexOf('<') >=0){
+                    if (action.tooltip.indexOf('<') >= 0) {
                         action.tooltip = $(action.tooltip).text();
                     }
-                    $template.prop('title',action.tooltip );
+                    $template.prop('title', action.tooltip);
                     $template.attr('data-toggle', 'tooltip');
                 }
                 if (action.attributes) {
@@ -277,7 +277,11 @@ Object.assign(Engine.prototype, {
                         $template.attr(attr.name, attr.value);
                     });
                 }
-                $element.append($template);
+                if(prepend) {
+                    $element.prepend($template);
+                }else {
+                    $element.append($template);
+                }
                 if (action.actions && action.actions.length > 0) {
                     var $appendTo = $template;
                     if (action.element.appendTo) {
