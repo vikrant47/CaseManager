@@ -2,11 +2,16 @@ let Filter = Engine.instance.define('engine.Filter', {
     static: {
         breadcrumbTemplate:
             '<ul class="filter-breadcrumb breadcrumb">\n' +
-            '<li id="all" class="breadcrumb-item"><a href="javascript:void(0)">All</a></li>' +
+            '<li id="item-all" class="breadcrumb-item breadcrumb-item-all">' +
+            '   <a href="javascript:void(0)">All</a>' +
+            '   <div class="condition and"></div> ' +
+            '</li>' +
             '{{~it.items :item:index}}' +
             '   <li id="{{=item.id}}" class="breadcrumb-item">' +
-            '       <div class="condition {{=item.condition.toLowerCase()}}"></div> ' +
             '       <a href="javascript:void(0)">{{=item.field}} {{=item.operator}} {{=item.value}}</a> ' +
+            '   {{? index !== it.items.length -1 }}' +
+            '       <div class="condition {{=item.condition.toLowerCase()}}"></div> ' +
+            '   {{?}}' +
             '   </li>\n' +
             '{{~}}' +
             '</ul>',
@@ -229,8 +234,43 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
         return [];
     },
+    toFilterRules: function (breadcrumbRules) {
+        if (breadcrumbRules.length > 0) {
+            const filterRules = [];
+            let lastCondition = breadcrumbRules[0].condition;
+            let parentRule = {condition: lastCondition, rules: []};
+            for (let i = 0; i < breadcrumbRules.length; i++) {
+                const rule = Object.assign({}, breadcrumbRules[i], {condition: undefined});
+                if (breadcrumbRules[0].condition === lastCondition) {
+                    parentRule.rules.push(rule);
+                } else {
+                    parentRule.rules.push(this.toFilterRules(breadcrumbRules.slice(i)));
+                }
+            }
+            return parentRule;
+        }
+        return null;
+    },
     getBreadcrumbTemplate: function (rule) {
-        const template = doT.template(Filter.breadcrumbTemplate);
-        return template({items: this.getBreadcrumbData(rule)});
+        const ui = Engine.instance.ui;
+        const _this = this;
+        const breadcrumbData = this.getBreadcrumbData(rule);
+        const template = doT.template(Filter.breadcrumbTemplate)({items: breadcrumbData});
+        const $template = $(template).data('rule', rule).data('breadcrumbData', breadcrumbData);
+        $template.find('.breadcrumb-item').not('.breadcrumb-item-all').find('a').click(function () {
+            const $this = $(this);
+            const index = $this.parent().index();
+            const remainingRules = breadcrumbData.slice(0, index);
+            const rules = _this.toFilterRules(remainingRules);
+            if (rules) {
+                ui.navigateByQueryString('urlFilter', rules);
+            } else {
+                ui.navigateByQueryString('urlFilter', {});
+            }
+        });
+        $template.find('.breadcrumb-item-all a').click(function () {
+            ui.navigateByQueryString('urlFilter', {});
+        });
+        return $template;
     },
 });
