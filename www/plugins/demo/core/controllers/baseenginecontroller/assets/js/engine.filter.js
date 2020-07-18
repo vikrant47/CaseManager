@@ -2,10 +2,10 @@ let Filter = Engine.instance.define('engine.Filter', {
     static: {
         breadcrumbTemplate:
             '<ul class="filter-breadcrumb breadcrumb">\n' +
-            '<li id="item-all" class="breadcrumb-item breadcrumb-item-all">' +
-            '   <a href="javascript:void(0)">All</a>' +
-            '   <div class="condition and"></div> ' +
-            '</li>' +
+            '   <li id="item-all" class="breadcrumb-item breadcrumb-item-all">' +
+            '       <a href="javascript:void(0)">All</a>' +
+            '       {{?it.items.length > 0}}<div class="condition and"></div> {{?}}' +
+            '   </li>' +
             '{{~it.items :item:index}}' +
             '   <li id="{{=item.id}}" class="breadcrumb-item">' +
             '       <a href="javascript:void(0)">{{=item.field}} {{=item.operator}} {{=item.value}}</a> ' +
@@ -219,7 +219,10 @@ let Filter = Engine.instance.define('engine.Filter', {
     getBreadcrumbData: function (rule) {
         const _this = this;
         if (!rule) {
-            return this.getBreadcrumbData(this.getRules());
+            rule = this.getRules();
+            if (rule) {
+                return this.getBreadcrumbData(rule);
+            }
         }
         if (rule.rules) {
             let data = [];

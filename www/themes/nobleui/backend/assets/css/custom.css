@@ -6,6 +6,11 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/**href*/
+a {
+    color: rgba(0, 0, 0, 0.6);
+}
+
 .main-wrapper {
     position: absolute;
     top: 0px;
