@@ -23,8 +23,21 @@ let Filter = Engine.instance.define('engine.Filter', {
                 field.id = field.name;
                 field.input = 'select';
                 field.type = 'string';
-                field.values = field.options || {};
+                field.plugin = 'select2',
+                    field.values = field.options || {};
                 return field;
+            }, datetime: function (field) {
+                return Object.assign(field, {
+                    id: field.name,
+                    type: 'date',
+                    plugin: 'datepicker',
+                    plugin_config: {
+                        format: 'yyyy/mm/dd',
+                        todayBtn: 'linked',
+                        todayHighlight: true,
+                        autoclose: true
+                    }
+                });
             }, text: function (field) {
                 field.id = field.name;
                 field.type = 'string';
@@ -144,7 +157,9 @@ let Filter = Engine.instance.define('engine.Filter', {
             return formFields.findIndex(field => {
                 return field.name === column.name || field.id === column.name;
             }) < 0;
-        }));
+        }).map(function (column) {
+            return Object.assign({label: _.startCase(column.name.replace(/_/g, ' '))}, column)
+        })).sort((field1,field2) => field1.label.localeCompare(field2.label));
         let qbFields = [];
         fields.forEach(function (field) {
             let qbField = Object.assign({id: field.name}, field);
