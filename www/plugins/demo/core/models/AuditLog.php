@@ -14,7 +14,7 @@ class AuditLog extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_audit_logs';
-public $incrementing = false;
+    public $incrementing = false;
 
     public $jsonable = ['previous'];
     public $attachAuditedBy = true;

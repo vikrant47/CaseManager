@@ -5,7 +5,9 @@ use Demo\Core\Classes\Utils\ModelUtil;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\Table;
 use Dotenv\Exception\ValidationException;
+use Illuminate\Support\Collection;
 use Model;
+use October\Rain\Exception\ApplicationException;
 use October\Rain\Parse\Yaml;
 use RainLab\Builder\Classes\DatabaseTableModel;
 use RainLab\Builder\Classes\ModelFormModel;
@@ -58,18 +60,12 @@ class ModelModel extends Model
 
     public function getAuditColumnsOptions()
     {
-        /**@var Column[] $columns */
-        $table = $this->getModelTable();
-        if ($table === null) {
-            return ['*'];
-        }
-        $columns = $table->getColumns();
-        $columnNames = array_map(function ($column) {
+        $columns = $this->getColumns();
+        $columnNames = $columns->map(function ($column) {
             /**@var  $column Column */
-            return $column->getName();
-        }, $columns);
-        array_push($columnNames, '*');
-        asort($columnNames);
+            return $column['name'];
+        });
+        $columnNames->push('*')->sort();
         $columnNameOptions = [];
         foreach ($columnNames as $columnName) {
             $columnNameOptions[$columnName] = $columnName;
@@ -77,7 +73,29 @@ class ModelModel extends Model
         return $columnNameOptions;
     }
 
-    public function beforeSave()
+    /**
+     * @return  Collection<array>
+     * @throws ApplicationException
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function getColumns()
+    {
+        /**@var Column[] $columns */
+        $table = $this->getModelTable();
+        if ($table === null) {
+            throw new ApplicationException('Unable to find column. Given table is empty');
+        }
+        $columns = $table->getColumns();
+        return Collection::make($columns)->map(function ($column) {
+            /**@var Column $column */
+            $columnArr = $column->toArray();
+            $columnArr['type'] = strtolower($columnArr['type'] . '');
+            return $columnArr;
+        })->values();
+    }
+
+    public
+    function beforeSave()
     {
         if (!class_exists($this->model)) {
             throw new ValidationException('Invalid model type ' . $this->model);
@@ -91,7 +109,8 @@ class ModelModel extends Model
     }
 
     /**@return ModelFormModel */
-    public function getFormDefinition()
+    public
+    function getFormDefinition()
     {
         if (!empty($this->model)) {
             $formModel = new ModelFormModel();
@@ -104,7 +123,8 @@ class ModelModel extends Model
         return null;
     }
 
-    public function getDefinition($model = null)
+    public
+    function getDefinition($model = null)
     {
         $formDefinition = $this->getFormDefinition();
         if (!empty($this->model)) {
@@ -113,8 +133,11 @@ class ModelModel extends Model
                 $newModel = new $this->model;
             }
             return [
-                'form' => ['controls' => $formDefinition->controls],
+                'form' => [
+                    'controls' => $formDefinition->controls
+                ],
                 'model' => $this->model,
+                'columns' => $this->getColumns(),
                 'associations' => [
                     'belongsTo' => $newModel->belongsTo,
                     'hasMany' => $newModel->hasMany,
@@ -136,7 +159,8 @@ class ModelModel extends Model
         return $options;
     }
 
-    public function getModelOptions()
+    public
+    function getModelOptions()
     {
         return PluginConnection::getAllModelAlias(false);
     }

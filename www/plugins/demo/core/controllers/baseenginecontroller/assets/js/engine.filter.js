@@ -1,7 +1,53 @@
-var Filter = Engine.instance.define('engine.Filter', {
+let Filter = Engine.instance.define('engine.Filter', {
     static: {
+        breadcrumbTemplate:
+            '<ul class="filter-breadcrumb breadcrumb">\n' +
+            '<li id="all" class="breadcrumb-item"><a href="javascript:void(0)">All</a></li>' +
+            '{{~it.items :item:index}}' +
+            '   <li id="{{=item.id}}" class="breadcrumb-item">' +
+            '       <div class="condition {{=item.condition.toLowerCase()}}"></div> ' +
+            '       <a href="javascript:void(0)">{{=item.field}} {{=item.operator}} {{=item.value}}</a> ' +
+            '   </li>\n' +
+            '{{~}}' +
+            '</ul>',
         init: function () {
 
+        },
+        queryBuilderTypeMappings: {
+            dropdown: function (field) {
+                field.id = field.name;
+                field.input = 'select';
+                field.type = 'string';
+                field.values = field.options || {};
+                return field;
+            }, text: function (field) {
+                field.id = field.name;
+                field.type = 'string';
+                return field;
+            }, switch: function (field) {
+                field.id = field.name;
+                field.input = 'radio';
+                field.type = 'boolean';
+                field.values = {1: 'Yes', 0: 'No'};
+                return field;
+            }, number: function (field) {
+                field.id = field.name;
+                field.type = 'double';
+                return field;
+            }, relation: function (field, definition) {
+                let belongsToAssoc = definition.associations.belongsTo;
+                if (belongsToAssoc && belongsToAssoc[field.name]) {
+                    field.id = belongsToAssoc[field.name].key;
+                } else {
+                    field.id = field.name;
+                }
+                field.type = 'string';
+                return field;
+            }, richeditor: function (field) {
+                field.id = field.name;
+                field.type = 'string';
+                return field;
+            }
         }
     },
     constructor: function (el, valueElement, value, destroyExisting = true) {
@@ -29,6 +75,7 @@ var Filter = Engine.instance.define('engine.Filter', {
         const _this = this;
         const ui = Engine.instance.ui;
         return ui.request('onGetModelDefinition', {
+            loadingContainer: '.page-content',
             data: {model: this.model},
             url: ui.getCurrentControllerUrl(),
         }).then(function (response) {
@@ -51,7 +98,7 @@ var Filter = Engine.instance.define('engine.Filter', {
         if (this.$valueField.length > 0) {
             qb.on('rulesChanged', function (e, level) {
                 try {
-                    var sql = _this.getSql() || {};
+                    let sql = _this.getSql() || {};
                     if (!sql.sql) {
                         // TODO : prevent form to be submitted
                     }
@@ -65,19 +112,59 @@ var Filter = Engine.instance.define('engine.Filter', {
             _this.formatRuleDom(rule);
         });
     },
+// definition form field manipulation
+    getFormFields(definition) {
+        definition = definition || this.definition;
+        let fields = definition.form.controls.fields;
+        if (definition.form.controls.tabs) {
+            fields = Object.assign(fields, definition.form.controls.tabs.fields);
+        }
+        return Object.keys(fields).map(function (fieldName) {
+            return Object.assign({name: fieldName}, fields[fieldName]);
+        })
+    },
+    getColumns(definition) {
+        definition = definition || this.definition;
+        return definition.columns;
+    },
+    mapFieldsToQueryBuilderFields: function (definition) {
+        let formFields = this.getFormFields(definition).map(function (field) {
+            if (field.type === 'relation') {
+                return Filter.queryBuilderTypeMappings.relation(field, definition);
+            }
+            return field;
+        });
+        let columns = this.getColumns(definition);
+        let fields = formFields.concat(columns.filter(function (column) {
+            return formFields.findIndex(field => {
+                return field.name === column.name || field.id === column.name;
+            }) < 0;
+        }));
+        let qbFields = [];
+        fields.forEach(function (field) {
+            let qbField = Object.assign({id: field.name}, field);
+            if (typeof Filter.queryBuilderTypeMappings[qbField.type] === 'function') {
+                qbField = Filter.queryBuilderTypeMappings[qbField.type](qbField, definition);
+            } else {
+                qbField.type = 'string';
+            }
+            qbFields.push(qbField);
+        });
+        return qbFields;
+    },
     build: function () {
         const _this = this;
         let defPromise = Promise.resolve(this.definition);
         if (!this.definition) {
             defPromise = this.loadDefinition();
         }
-        defPromise.then(function (definition) {
+        return defPromise.then(function (definition) {
             _this.$el.queryBuilder({
                 plugins: [
                     'bt-tooltip-errors',
                     'not-group'
                 ],
-                filters: Engine.instance.mapFieldsToQueryBuilderFields(definition)
+                filters: _this.mapFieldsToQueryBuilderFields(definition)
             });
             _this.formatRuleDom();
             _this.registerEvents();
@@ -87,7 +174,6 @@ var Filter = Engine.instance.define('engine.Filter', {
             _this.$el.trigger('engine.filter.build', [this]);
             return _this;
         });
-        return this;
     },
     showInPopup: function (options) {
         this.popup = Engine.instance.ui.showPopup(Object.assign({
@@ -96,13 +182,21 @@ var Filter = Engine.instance.define('engine.Filter', {
         }, options));
         return this;
     },
+    closePopup: function () {
+        this.popup.close();
+    },
+    getRules: function () {
+        return this.getQueryBuilder().getRules();
+    },
+    setRules: function (rules) {
+        this.getQueryBuilder().setRules(rules);
+    },
     getQueryBuilder: function () {
         return this.$el.data('queryBuilder');
     },
     setValueFromSql: function (value) {
-        this.value = value;
         if (this.value.trim().length > 0) {
-            this.$el.queryBuilder('setRulesFromSQL', this.value);
+            this.$el.queryBuilder('setRulesFromSQL', value);
         }
     },
     getSQL: function () {
@@ -116,5 +210,27 @@ var Filter = Engine.instance.define('engine.Filter', {
     },
     on: function (event, callback) {
         return this.getQueryBuilder().on(event, callback);
-    }
+    },
+    getBreadcrumbData: function (rule) {
+        const _this = this;
+        if (!rule) {
+            return this.getBreadcrumbData(this.getRules());
+        }
+        if (rule.rules) {
+            let data = [];
+            for (const childRule of rule.rules) {
+                if (!childRule.condition) {
+                    data.push(Object.assign({condition: rule.condition}, childRule));
+                } else {
+                    data = data.concat(this.getBreadcrumbData(childRule));
+                }
+            }
+            return data;
+        }
+        return [];
+    },
+    getBreadcrumbTemplate: function (rule) {
+        const template = doT.template(Filter.breadcrumbTemplate);
+        return template({items: this.getBreadcrumbData(rule)});
+    },
 });

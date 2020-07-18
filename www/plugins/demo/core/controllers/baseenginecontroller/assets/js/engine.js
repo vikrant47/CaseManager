@@ -4,42 +4,6 @@ if (!Object.assign) {
 var Engine = function () {
 
 };
-Engine.QUERY_BUILDER_TYPE_MAPPINGS = {
-    dropdown: function (field) {
-        field.id = field.name;
-        field.input = 'select';
-        field.type = 'string';
-        field.values = field.options || {};
-        return field;
-    }, text: function (field) {
-        field.id = field.name;
-        field.type = 'string';
-        return field;
-    }, switch: function (field) {
-        field.id = field.name;
-        field.input = 'radio';
-        field.type = 'boolean';
-        field.values = {1: 'Yes', 0: 'No'};
-        return field;
-    }, number: function (field) {
-        field.id = field.name;
-        field.type = 'double';
-        return field;
-    }, relation: function (field, definition) {
-        var belongsToAssoc = definition.associations.belongsTo;
-        if (belongsToAssoc && belongsToAssoc[field.name]) {
-            field.id = belongsToAssoc[field.name].key;
-        } else {
-            field.id = field.name;
-        }
-        field.type = 'string';
-        return field;
-    }, richeditor: function (field) {
-        field.id = field.name;
-        field.type = 'string';
-        return field;
-    }
-};
 Engine.defaultActionOption = {
     button: {
         template: '<button class="action action-button"><i></i></button>',
@@ -47,6 +11,10 @@ Engine.defaultActionOption = {
         event: 'click',
         css_class: '',
         attributes: [],
+        beforeRender: function () {
+        },
+        afterRender: function () {
+        },
         handler: function () {
 
         }
@@ -58,6 +26,10 @@ Engine.defaultActionOption = {
         events: {},
         css_class: '',
         attributes: [],
+        beforeRender: function () {
+        },
+        afterRender: function () {
+        },
         handler: function () {
 
         }
@@ -71,6 +43,10 @@ Engine.defaultActionOption = {
         icon: 'icon-link',
         event: 'click',
         css_class: '',
+        beforeRender: function () {
+        },
+        afterRender: function () {
+        },
         handler: function () {
 
         }
@@ -82,6 +58,10 @@ Engine.defaultActionOption = {
         attributes: [],
         event: 'click',
         css_class: '',
+        beforeRender: function () {
+        },
+        afterRender: function () {
+        },
         handler: function () {
 
         }
@@ -220,7 +200,7 @@ Object.assign(Engine.prototype, {
             this.$navFlyout.hide();
         }
     },
-    addActions: function ($element, actions, scope, prepend) {
+    addActions: function ($container, actions, scope, prepend) {
         var _this = this;
         if (!scope) {
             scope = this;
@@ -228,10 +208,11 @@ Object.assign(Engine.prototype, {
         return actions.map(function (action) {
             action.scope = scope;
             if (typeof action.active === 'function') {
-                action.active = action.active.call(action, $element, scope);
+                action.active = action.active.call(action, $container, scope);
             }
             if (action.active) {
                 action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
+                action.beforeRender.apply(this, [{name: 'afterRender'}, scope, action, $container]);
                 var $template = $(action.template).data('action', action).data('scope', scope).prop('id', action.id);
                 if (action.label) {
                     var $textElement = $template;
@@ -247,12 +228,12 @@ Object.assign(Engine.prototype, {
                 }
                 $target.on(action.event, function (event) {
                     event.preventDefault();
-                    action.handler.apply(this, [event, scope, action, $element]);
+                    action.handler.apply(this, [event, scope, action, $container]);
                 });
                 if (action.events) {
                     for (var eventName in action.events) {
                         $target.on(eventName, function (event) {
-                            action.events[eventName].apply(this, [event, scope, action, $element]);
+                            action.events[eventName].apply(this, [event, scope, action, $container]);
                         });
                     }
                 }
@@ -277,10 +258,10 @@ Object.assign(Engine.prototype, {
                         $template.attr(attr.name, attr.value);
                     });
                 }
-                if(prepend) {
-                    $element.prepend($template);
-                }else {
-                    $element.append($template);
+                if (prepend) {
+                    $container.prepend($template);
+                } else {
+                    $container.append($template);
                 }
                 if (action.actions && action.actions.length > 0) {
                     var $appendTo = $template;
@@ -289,33 +270,11 @@ Object.assign(Engine.prototype, {
                     }
                     _this.addActions($appendTo, action.actions, scope);
                 }
+                action.afterRender.apply($template.get(0), [{name: 'afterRender'}, scope, action, $container]);
                 return $template;
             }
             return null;
         });
-    },
-    // definition form field manipulation
-    getFields(definition) {
-        var fields = definition.form.controls.fields;
-        if (definition.form.controls.tabs) {
-            fields = Object.assign(fields, definition.form.controls.tabs.fields);
-        }
-        return fields;
-    },
-    mapFieldsToQueryBuilderFields: function (definition) {
-        var fields = Engine.instance.getFields(definition);
-        var qbFields = [];
-        Object.keys(fields).map(function (fieldName) {
-            var field = fields[fieldName];
-            if (typeof Engine.QUERY_BUILDER_TYPE_MAPPINGS[field.type] === 'function') {
-                var qbField = Engine.QUERY_BUILDER_TYPE_MAPPINGS[field.type](Object.assign({
-                    name: fieldName,
-                    id: fieldName
-                }, field), definition);
-                qbFields.push(qbField);
-            }
-        });
-        return qbFields;
     },
     export: function (module, namespace) {
         this[namespace] = module;

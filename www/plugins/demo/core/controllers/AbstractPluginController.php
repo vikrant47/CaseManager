@@ -111,10 +111,10 @@ class AbstractPluginController extends Controller
             if (!empty($listFilter)) {
                 $filterService->applyFilter($query, $listFilter);
             }
-            $userFilter = Request::input('userFilter');
-            if (!empty($userFilter)) {
-                $filterService->applyFilter($query, $userFilter);
-            }
+        }
+        $urlFilter = Request::input('urlFilter');
+        if (!empty($urlFilter)) {
+            $filterService->applyFilter($query, $urlFilter);
         }
     }
 
