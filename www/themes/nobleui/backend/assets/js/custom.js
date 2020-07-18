@@ -62,7 +62,7 @@ $(document).ready(function () {
                     }).first();
                 }
             }
-            if ($link.length) {
+            if ($link.length && link.prop('href')!=='#' && link.prop('href')!=='javascript:void(0)') {
                 const href = $link.prop('href');
                 if (window.location.href !== href) {
                     const navigated = Engine.instance.ui.navigate(href);
