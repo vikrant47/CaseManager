@@ -19,10 +19,119 @@ var EngineObservable = Engine.instance.define('engine.EngineObservable', {
         return this;
     }
 });
-var EngineUI = Engine.instance.define('engine.ui.EngineUI', {
+let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     constructor: function () {
         this.currentModel = null;
         this.registerPopStateListener();
+    },
+    /**copied from https://raw.githubusercontent.com/cowboy/jquery-bbq/v1.2.1/jquery.ba-bbq.js*/
+    parseParams: function (coerce) {
+        const params = location.search.substring(1);
+        if(params.length===0){
+            return {};
+        }
+        var aps = Array.prototype.slice;
+        var decode = decodeURIComponent;
+        var obj = {},
+            coerce_types = { 'true': !0, 'false': !1, 'null': null };
+
+        // Iterate over all name=value pairs.
+        $.each( params.replace( /\+/g, ' ' ).split( '&' ), function(j,v){
+            var param = v.split( '=' ),
+                key = decode( param[0] ),
+                val,
+                cur = obj,
+                i = 0,
+
+                // If key is more complex than 'foo', like 'a[]' or 'a[b][c]', split it
+                // into its component parts.
+                keys = key.split( '][' ),
+                keys_last = keys.length - 1;
+
+            // If the first keys part contains [ and the last ends with ], then []
+            // are correctly balanced.
+            if ( /\[/.test( keys[0] ) && /\]$/.test( keys[ keys_last ] ) ) {
+                // Remove the trailing ] from the last keys part.
+                keys[ keys_last ] = keys[ keys_last ].replace( /\]$/, '' );
+
+                // Split first keys part into two parts on the [ and add them back onto
+                // the beginning of the keys array.
+                keys = keys.shift().split('[').concat( keys );
+
+                keys_last = keys.length - 1;
+            } else {
+                // Basic 'foo' style key.
+                keys_last = 0;
+            }
+
+            // Are we dealing with a name=value pair, or just a name?
+            if ( param.length === 2 ) {
+                val = decode( param[1] );
+
+                // Coerce values.
+                if ( coerce ) {
+                    val = val && !isNaN(val)            ? +val              // number
+                        : val === 'undefined'             ? undefined         // undefined
+                            : coerce_types[val] !== undefined ? coerce_types[val] // true, false, null
+                                : val;                                                // string
+                }
+
+                if ( keys_last ) {
+                    // Complex key, build deep object structure based on a few rules:
+                    // * The 'cur' pointer starts at the object top-level.
+                    // * [] = array push (n is set to array length), [n] = array if n is
+                    //   numeric, otherwise object.
+                    // * If at the last keys part, set the value.
+                    // * For each keys part, if the current level is undefined create an
+                    //   object or array based on the type of the next keys part.
+                    // * Move the 'cur' pointer to the next level.
+                    // * Rinse & repeat.
+                    for ( ; i <= keys_last; i++ ) {
+                        key = keys[i] === '' ? cur.length : keys[i];
+                        cur = cur[key] = i < keys_last
+                            ? cur[key] || ( keys[i+1] && isNaN( keys[i+1] ) ? {} : [] )
+                            : val;
+                    }
+
+                } else {
+                    // Simple key, even simpler rules, since only scalars and shallow
+                    // arrays are allowed.
+
+                    if ( $.isArray( obj[key] ) ) {
+                        // val is already an array, so push on the next value.
+                        obj[key].push( val );
+
+                    } else if ( obj[key] !== undefined ) {
+                        // val isn't an array, but since a second value has been specified,
+                        // convert val into an array.
+                        obj[key] = [ obj[key], val ];
+
+                    } else {
+                        // val is a scalar.
+                        obj[key] = val;
+                    }
+                }
+
+            } else if ( key ) {
+                // No value was defined, so set something meaningful.
+                obj[key] = coerce
+                    ? undefined
+                    : '';
+            }
+        });
+
+        return obj;
+    },
+    navigateByQueryString(param, value) {
+        if (typeof param === 'string') {
+            let name = param;
+            param = {};
+            param[name] = value;
+        }
+        const existingParams = this.parseParams();
+        let queryString = $.param(Object.assign(existingParams, param));
+        const urlSplit = window.location.href.split('?');
+        this.navigate(urlSplit[0] + '?' + queryString);
     },
     registerPopStateListener: function () {
         const _this = this;
@@ -142,25 +251,40 @@ var EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         if (setting.actions) {
             Engine.instance.addActions($('<div class="modal-footer"></div>').appendTo($body), setting.actions, popup);
         }
-        if (setting.form) {
-            popup.form = setting.form;
-            options.form.$el = $body;
+        if (setting.target) {
+            popup.target = setting.target;
         }
+        popup.close = function () {
+            popup.$modal.modal('hide');
+        };
         return popup;
 
     },
     toUIAction: function (dbActions, modelRecord, props = {}) {
         return dbActions.map(function (action) {
             action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') + ' ' + action.css_class + ' ' + action.icon;
-            action.handler = Function('return ' + action.script)();
             action.id = 'list-action-' + action.id;
             action.attributes = typeof action.html_attributes === 'string' ? JSON.parse(action.html_attributes) : action.html_attributes;
             action.modelRecord = modelRecord;
-            Object.assign(action, props);
-            delete action.icon;
+            action.tooltip = action.description;
+            action.icon = false;
             delete action.html_attributes;
+            const handler = Function('return ' + action.script)();
+            if (typeof handler === 'object') {
+                Object.assign(action, handler);
+            }
+            Object.assign(action, props);
             return action;
         });
+    },
+    getOrigin: function () {
+        return window.location.origin;
+    },
+    getBaseUrl: function () {
+        return window.location.origin + '/backend';
+    },
+    getCurrentControllerUrl: function () {
+        return this.getBaseUrl() + '/' + this.currentModel.controller.replace(/\\/g, '/').replace('/Controllers', '').toLocaleLowerCase();
     },
     request: function (handler, options) {
         if (typeof handler !== 'string') {
@@ -343,6 +467,12 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
     getActionContainer: function () {
         return this.$el.find('.engine-list-toolbar .toolbar-item').children().eq(0);
     },
+    getToolbar: function () {
+        if (this.$el.find('.toolbar-item .toolbar').length === 0) {
+            this.$el.find('.toolbar-item').eq(1).append($('<div class="toolbar"></div>'));
+        }
+        return this.$el.find('.toolbar-item .toolbar');
+    },
     getLocation: function () {
         return ('/backend/' + this.modelRecord.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
     },
@@ -351,7 +481,13 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
     },
     addActions: function (actionRecords) {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {list: this});
-        Engine.instance.addActions(this.getActionContainer(), actions);
+        Engine.instance.addActions(this.getActionContainer(), actions.filter(function (action) {
+            return !action.toolbar;
+        }));
+        // toolbar actions
+        Engine.instance.addActions(this.getToolbar(), actions.filter(function (action) {
+            return action.toolbar;
+        }), this, true);
     },
     getSelectedRecordIds: function () {
         return $('.control-list').listWidget('getChecked');
@@ -438,7 +574,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         this.config = config;
     },
     getField: function (fieldName) {
-        var fields = Engine.instance.getFields(this.config);
+        var fields = Engine.instance.getFormFields(this.config);
         for (var fieldName in fields) {
             return fields[fieldName];
         }
@@ -479,10 +615,12 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         const _this = this;
         this.contentPromise.then(function (content) {
             _this.emit('beforeRender', [content]);
-            Engine.instance.ui.showPopup(Object.assign(options, {
+            const popup = Engine.instance.ui.showPopup(Object.assign(options, {
                 content: content.result,
-                form: _this,
+                target: _this,
             }));
+            _this.popup = popup;
+            _this.$el = popup.$body;
             _this.emit('render', [content]);
         });
     },

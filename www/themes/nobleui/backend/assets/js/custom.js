@@ -64,13 +64,16 @@ $(document).ready(function () {
             }
             if ($link.length) {
                 const href = $link.prop('href');
-                if (window.location.href !== href) {
-                    const navigated = Engine.instance.ui.navigate(href);
-                    navigated.catch(function () {
-                        // window.location.href = href;
-                    })
+                if (href !== '#' && href !== 'javascript:void(0)') {
+
+                    if (window.location.href !== href) {
+                        const navigated = Engine.instance.ui.navigate(href);
+                        navigated.catch(function () {
+                            // window.location.href = href;
+                        })
+                    }
+                    return false;
                 }
-                return false;
             }
         });
 });

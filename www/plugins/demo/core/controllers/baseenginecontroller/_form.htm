@@ -1,23 +1,22 @@
-<?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <?php
 $formActions = $this->getFormActions($context);
 $modelRecord = $this->getModelRecord();
 ?>
 <div class="engine-form-wrapper">
-    <?= $this->makePartial($view, ['contents' => $contents]); ?>
     <script>
-        window.me = {id:<?=$this->user->id?>};
-        $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
-        var actions = <?=$formActions ? $formActions->toJSON() : '[]'?>;
-        var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
-        <?php $model = $this->formGetModel()?>
-        var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
-        var controller = <?=json_encode($this->getControllerInfo())?>;
-        Engine.instance.ui.setModel(modelRecord);
-        var form = EngineForm.getCurrentForm();
-        form.setFormModel(formModel);
-        form.addActions(actions);
+        $(document).ready(function () {
+            window.me = {id:<?=$this->user->id?>};
+            $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
+            var actions = <?=$formActions ? $formActions->toJSON() : '[]'?>;
+            var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
+            <?php $model = $this->formGetModel()?>
+            var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
+            var controller = <?=json_encode($this->getControllerInfo())?>;
+            Engine.instance.ui.setModel(modelRecord);
+            var form = EngineForm.getCurrentForm();
+            form.setFormModel(formModel);
+            form.addActions(actions);
+        });
     </script>
+    <?= $this->makePartial($view, ['contents' => $contents]); ?>
 </div>

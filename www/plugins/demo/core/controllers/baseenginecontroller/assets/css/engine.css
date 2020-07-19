@@ -6,6 +6,28 @@
     margin-right: 20px;
 }
 
-.form-buttons .loading-indicator-container .actions{
+.form-buttons .loading-indicator-container .actions {
     display: inline-block;
+}
+
+.filter-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    display: none;
+}
+
+.filter-breadcrumb .breadcrumb-item {
+    display: flex;
+}
+
+.filter-breadcrumb .condition {
+    color: #007bff;
+    padding: 3px 0 5px 5px;
+    font-size: 10px;
+}
+
+.filter-breadcrumb .condition.or::after {
+    content: "|";
+}
+
+.filter-breadcrumb .condition.and::after {
+    content: ">";
 }

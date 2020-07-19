@@ -239,7 +239,7 @@ class PluginConnection
      * @return string Class with full namespace after loading it.
      * @throws \October\Rain\Database\Attach\FileException
      */
-    public function getClass(string $type = 'Classes', string $className)
+    public function getClass(string $type, string $className)
     {
         $path = $this->pluginManager->getPluginPath($this->identifier)
             . DIRECTORY_SEPARATOR

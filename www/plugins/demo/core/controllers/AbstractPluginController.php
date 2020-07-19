@@ -9,6 +9,7 @@ use Backend\Behaviors\ListController;
 use Backend\Classes\Controller;
 use Demo\Core\Classes\Beans\ApplicationCache;
 use Demo\Core\Classes\Beans\SessionCache;
+use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Errors\ListConfigNotFoundException;
 use Demo\Core\Classes\Helpers\FormBuilder;
 use Demo\Core\Classes\Helpers\PluginConnection;
@@ -22,6 +23,7 @@ use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
+use Demo\Core\Services\FilterService;
 use File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
@@ -29,6 +31,7 @@ use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
 use Db;
 use Response;
+use timgws\QueryBuilderParser;
 use View;
 
 
@@ -93,6 +96,36 @@ class AbstractPluginController extends Controller
         return $result;
     }
 
+    /**
+     * Override default list query
+     * @param $query \October\Rain\Database\Builder
+     * @throws ListConfigNotFoundException
+     * @throws \timgws\QBParseException
+     */
+    public function listExtendQuery($query)
+    {
+        $config = $this->widget->list->config;
+        $filterService = new FilterService();
+        if (property_exists($config, 'filter')) {
+            $listFilter = $config->filter;
+            if (!empty($listFilter)) {
+                $filterService->applyFilter($query, $listFilter);
+            }
+        }
+        $urlFilter = Request::input('urlFilter');
+        if (!empty($urlFilter)) {
+            $filterService->applyFilter($query, $urlFilter);
+        }
+    }
+
+    /**
+     * Handler for user filter
+     */
+    public function onUserFilter()
+    {
+        return $this->widget->list->onRefresh();
+    }
+
     /**This will make list config*/
     protected function makeListConfig($path = null, $definition = null)
     {
@@ -112,6 +145,11 @@ class AbstractPluginController extends Controller
         return Request::input('view');
     }
 
+    public function getRequestedList()
+    {
+        return Request::input('list');
+    }
+
     public function isViewDefinitionExists($view)
     {
         $controllerDirPath = base_path() . '/plugins/' . strtolower(get_class($this));
@@ -127,12 +165,35 @@ class AbstractPluginController extends Controller
     /**
      * Returns the configuration used by this behavior.
      * Override ListController listGetConfig to render different list views
+     * @param null $definition
      * @return \Backend\Classes\WidgetBase
      * @throws ListConfigNotFoundException
      */
     public function listGetConfig($definition = null)
     {
         $view = $this->getRequestedView();
+        $config = $this->listGetViewConfig($view, $definition);
+        $list = $this->getRequestedList();
+        if (!empty($list)) {
+            if (!strpos($list, '/')) {
+                $config->list = str_replace('columns.yaml', $list . '.yaml', $config->list);
+            } else {
+                $config->list = $list;
+            }
+        }
+        return $config;
+    }
+
+    /**
+     * This will return the list view provided
+     * A view is stored in views directory of the controller. If none provided than default view is returned
+     * @param $view string View of the list to be returned.
+     * @param null $definition
+     * @return array|mixed|\stdClass
+     * @throws ListConfigNotFoundException
+     */
+    public function listGetViewConfig($view, $definition = null)
+    {
         $listController = $this->asExtension('ListController');
         $ListConfig = ReflectionUtil::getPropertyValue(ListController::class, 'listConfig', $listController);
         if (!$definition) {
@@ -152,7 +213,6 @@ class AbstractPluginController extends Controller
         }
         return $config;
     }
-
     /*protected function loadView($type)
     {
         $view = Request::input('view');
@@ -501,6 +561,17 @@ class AbstractPluginController extends Controller
     /**
      * Object API Definition start
      */
+    public function onGetModelDefinition()
+    {
+        $model = Request::input('model');
+        if (empty($model)) {
+            $model = $this->modelClass;
+        }
+        $modelRecord = new ModelModel();
+        $modelRecord->model = $model;
+        return ['definition' => $modelRecord->getDefinition()];
+    }
+
     public function onReadRecord($id)
     {
         $request = request();
@@ -594,24 +665,31 @@ class AbstractPluginController extends Controller
         return $model;
     }
 
-    public function onFindMatching($value)
+    public function queryDataExtendQuery($query)
     {
-        if (count($value) > 2) { // type atleast 2 chars
-            $displayField = Request::input('displayField') || 'name';
-            $idField = Request::input('idField') || 'id';
-            $relatedField = Request::input('relatedField');
-            $modelClass = Request::input('modelClass');
+        return $query;
+    }
+
+    public function onQueryData()
+    {
+        $table = Request::input('table');
+        $modelClass = Request::input('model');
+        $filter = Request::input('query');
+        $attributes = Request::input('attributes');
+        if (empty($table)) {
             if (empty($modelClass)) {
                 $modelClass = $this->getModelClass();
             }
-            if (!empty($relatedField)) {
-                $model = new $modelClass();
-                $relation = $model->{$relatedField}();
-                $modelClass = $relation->targetModel;
-            }
-            return Db::table($modelClass->table)->select([$idField, $displayField])
-                ->where($displayField, 'iLike', '%' . $value . '%')->get();
+            $modelInstance = new $modelClass();
+            $table = $modelInstance->table;
         }
-        return [];
+        $query = Db::table($table);
+        $filterService = new FilterService();
+        $filterService->applyFilter($query, $filter);
+        $this->queryDataExtendQuery($query);
+        if (!empty($attributes)) {
+            $query->select($attributes);
+        }
+        return $query->get();
     }
 }

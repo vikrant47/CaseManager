@@ -6,6 +6,11 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/**href*/
+a {
+    color: rgba(0, 0, 0, 0.6);
+}
+
 .main-wrapper {
     position: absolute;
     top: 0px;
@@ -172,6 +177,11 @@ body {
 }
 
 /**Query Builder*/
+.query-builder .rules-group-container {
+    background: none;
+    border: 1px solid #eee;
+}
+
 .rules-group-container {
     width: 100%;
 }
@@ -193,6 +203,11 @@ body {
 }
 
 /***list**/
+.list-header {
+    background-color: transparent;
+    padding: 0 0 0 0;
+}
+
 .table-wrapper {
     position: relative;
 }
@@ -219,11 +234,31 @@ body {
 }
 
 .control-toolbar {
-    padding: 0px 0px 8px 0px;
+    padding: 0 0 8px 0;
+    display: flex;
+    flex-wrap: wrap;
+    float: right;
 }
 
+.control-toolbar .toolbar-item {
+    width: 35% !important;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    order: 2;
+}
+
+.control-toolbar .toolbar-item.toolbar-primary {
+    width: 65% !important;;
+}
+
+
 .toolbar-item .loading-indicator-container {
-    float: right;
+    order: 2;
+}
+
+.control-toolbar .toolbar-item .toolbar {
+    margin-left: auto;
 }
 
 .list-widget table.table.data thead td, .list-widget table.table.data thead th, .list-widget table.table.data .list-checkbox {
@@ -466,6 +501,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 /** Buttons **/
+.tooltip {
+    font-size: 1.3rem;
+}
+
 a.manage-widgets, .action a {
     color: #3a3f51;
 }
@@ -500,3 +539,4 @@ a.manage-widgets, .action a {
 .dropdown-menu {
     font-size: 1rem;
 }
+

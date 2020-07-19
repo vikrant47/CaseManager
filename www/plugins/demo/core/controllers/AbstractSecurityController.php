@@ -75,6 +75,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function listExtendQuery($query)
     {
+        parent::listExtendQuery($query);
         $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::READ);
         if ($permission->count() === 0) {
             return $this->forwardToAccessDenied();
