@@ -73,6 +73,20 @@ Object.assign(Engine.prototype, {
         this.addResizeFlyout();
         this.registerEvents();
         this.moveActions();
+        this.overrideDefaults();
+    },
+    overrideDefaults: function () {
+        const s2CallbackOptions = ['dropdownParent'];
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+        $.fn.modal.Constructor.prototype._enforceFocus = function() {};
+        const s2OptionGet = jQuery.fn.select2.amd.require('select2/options').prototype.get;
+        jQuery.fn.select2.amd.require('select2/options').prototype.get = function (key) {
+            let value = this.options[key];
+            if (typeof value === 'function' && s2CallbackOptions.indexOf(key) >= 0) {
+                value = value.apply(this, arguments);
+            }
+            return value;
+        }
     },
     registerEvents: function () {
         var _this = this;
