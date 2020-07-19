@@ -2,11 +2,16 @@ let Filter = Engine.instance.define('engine.Filter', {
     static: {
         breadcrumbTemplate:
             '<ul class="filter-breadcrumb breadcrumb">\n' +
-            '<li id="all" class="breadcrumb-item"><a href="javascript:void(0)">All</a></li>' +
+            '   <li id="item-all" class="breadcrumb-item breadcrumb-item-all">' +
+            '       <a href="javascript:void(0)">All</a>' +
+            '       {{?it.items.length > 0}}<div class="condition and"></div> {{?}}' +
+            '   </li>' +
             '{{~it.items :item:index}}' +
             '   <li id="{{=item.id}}" class="breadcrumb-item">' +
-            '       <div class="condition {{=item.condition.toLowerCase()}}"></div> ' +
             '       <a href="javascript:void(0)">{{=item.field}} {{=item.operator}} {{=item.value}}</a> ' +
+            '   {{? index !== it.items.length -1 }}' +
+            '       <div class="condition {{=item.condition.toLowerCase()}}"></div> ' +
+            '   {{?}}' +
             '   </li>\n' +
             '{{~}}' +
             '</ul>',
@@ -18,8 +23,21 @@ let Filter = Engine.instance.define('engine.Filter', {
                 field.id = field.name;
                 field.input = 'select';
                 field.type = 'string';
-                field.values = field.options || {};
+                field.plugin = 'select2',
+                    field.values = field.options || {};
                 return field;
+            }, datetime: function (field) {
+                return Object.assign(field, {
+                    id: field.name,
+                    type: 'date',
+                    plugin: 'datepicker',
+                    plugin_config: {
+                        format: 'yyyy/mm/dd',
+                        todayBtn: 'linked',
+                        todayHighlight: true,
+                        autoclose: true
+                    }
+                });
             }, text: function (field) {
                 field.id = field.name;
                 field.type = 'string';
@@ -139,7 +157,9 @@ let Filter = Engine.instance.define('engine.Filter', {
             return formFields.findIndex(field => {
                 return field.name === column.name || field.id === column.name;
             }) < 0;
-        }));
+        }).map(function (column) {
+            return Object.assign({label: _.startCase(column.name.replace(/_/g, ' '))}, column)
+        })).sort((field1, field2) => field1.label.localeCompare(field2.label));
         let qbFields = [];
         fields.forEach(function (field) {
             let qbField = Object.assign({id: field.name}, field);
@@ -152,6 +172,17 @@ let Filter = Engine.instance.define('engine.Filter', {
         });
         return qbFields;
     },
+    initQueryBuilder: function (definition) {
+        this.$el.queryBuilder({
+            plugins: [
+                'bt-tooltip-errors',
+                'not-group'
+            ],
+            filters: this.mapFieldsToQueryBuilderFields(definition)
+        });
+        this.formatRuleDom();
+        this.registerEvents();
+    },
     build: function () {
         const _this = this;
         let defPromise = Promise.resolve(this.definition);
@@ -159,18 +190,7 @@ let Filter = Engine.instance.define('engine.Filter', {
             defPromise = this.loadDefinition();
         }
         return defPromise.then(function (definition) {
-            _this.$el.queryBuilder({
-                plugins: [
-                    'bt-tooltip-errors',
-                    'not-group'
-                ],
-                filters: _this.mapFieldsToQueryBuilderFields(definition)
-            });
-            _this.formatRuleDom();
-            _this.registerEvents();
-            if (_this.value) {
-                _this.setValueFromSql(_this.value);
-            }
+            _this.initQueryBuilder(definition);
             _this.$el.trigger('engine.filter.build', [this]);
             return _this;
         });
@@ -194,14 +214,22 @@ let Filter = Engine.instance.define('engine.Filter', {
     getQueryBuilder: function () {
         return this.$el.data('queryBuilder');
     },
-    setValueFromSql: function (value) {
+    setRulesFromSQL: function (rules) {
         if (this.value.trim().length > 0) {
-            this.$el.queryBuilder('setRulesFromSQL', value);
+            this.$el.queryBuilder('setRulesFromSQL', rules);
         }
     },
     getSQL: function () {
         const qb = this.getQueryBuilder();
         return qb.getSQL();
+    },
+    setRulesFromMongo: function (rules) {
+        const qb = this.getQueryBuilder();
+        return qb.setRulesFromMongo(rules);
+    },
+    getMongo: function () {
+        const qb = this.getQueryBuilder();
+        return qb.getMongo();
     },
     destroy: function () {
         if (this.$el.queryBuilder && this.$el.queryBuilder.destroy) {
@@ -211,10 +239,74 @@ let Filter = Engine.instance.define('engine.Filter', {
     on: function (event, callback) {
         return this.getQueryBuilder().on(event, callback);
     },
+    getFieldsFromMongoQuery: function (query) {
+        const condition = Object.keys(query).find(function (condition) {
+            return condition === '$and' || condition === '$or' || condition === '$not';
+        });
+        if (condition) {
+            let fields = [];
+            for (const rule of query[condition]) {
+                fields = fields.concat(this.getFieldsFromMongoQuery(rule));
+            }
+            return fields;
+        } else {
+            return Object.keys(query);
+        }
+    },
+    parseMongoQuery: function (query) {
+        if (!_.isEmpty(query)) {
+            const definition = this.definition || {
+                form: {
+                    controls: {
+                        fields: this.getFieldsFromMongoQuery(query).map(function (field) {
+                            return {
+                                name: field,
+                                type: 'text',
+                            }
+                        })
+                    }
+                },
+                columns: [],
+            };
+            this.initQueryBuilder(definition);
+            this.setRulesFromMongo(query);
+            return this.getRules();
+        }
+        return null;
+    },
+    select: function (options) {
+        options = options || {};
+        options.operation = 'select';
+        return this.query(options);
+    },
+    query: function (options) {
+        const ui = Engine.instance.ui;
+        const modelRecord = ui.getModel();
+        const settings = Object.assign({
+            model: this.definition && this.definition.model || modelRecord.model,
+            query: {},
+            operation: 'select',
+            loadingContainer: '.page-content',
+            ajax: {},
+        }, options);
+        const rules = this.parseMongoQuery(options.query);
+        return Engine.instance.ui.request('onQueryData', Object.assign({
+            data: {
+                query: rules || undefined,
+                queryType: settings.operation,
+                table: settings.table,
+                model: settings.model,
+            },
+            loadingContainer: settings.loadingContainer,
+        }, settings.ajax));
+    },
     getBreadcrumbData: function (rule) {
         const _this = this;
         if (!rule) {
-            return this.getBreadcrumbData(this.getRules());
+            rule = this.getRules();
+            if (rule) {
+                return this.getBreadcrumbData(rule);
+            }
         }
         if (rule.rules) {
             let data = [];
@@ -229,8 +321,43 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
         return [];
     },
+    toFilterRules: function (breadcrumbRules) {
+        if (breadcrumbRules.length > 0) {
+            const filterRules = [];
+            let lastCondition = breadcrumbRules[0].condition;
+            let parentRule = {condition: lastCondition, rules: []};
+            for (let i = 0; i < breadcrumbRules.length; i++) {
+                const rule = Object.assign({}, breadcrumbRules[i], {condition: undefined});
+                if (breadcrumbRules[0].condition === lastCondition) {
+                    parentRule.rules.push(rule);
+                } else {
+                    parentRule.rules.push(this.toFilterRules(breadcrumbRules.slice(i)));
+                }
+            }
+            return parentRule;
+        }
+        return null;
+    },
     getBreadcrumbTemplate: function (rule) {
-        const template = doT.template(Filter.breadcrumbTemplate);
-        return template({items: this.getBreadcrumbData(rule)});
+        const ui = Engine.instance.ui;
+        const _this = this;
+        const breadcrumbData = this.getBreadcrumbData(rule);
+        const template = doT.template(Filter.breadcrumbTemplate)({items: breadcrumbData});
+        const $template = $(template).data('rule', rule).data('breadcrumbData', breadcrumbData);
+        $template.find('.breadcrumb-item').not('.breadcrumb-item-all').find('a').click(function () {
+            const $this = $(this);
+            const index = $this.parent().index();
+            const remainingRules = breadcrumbData.slice(0, index);
+            const rules = _this.toFilterRules(remainingRules);
+            if (rules) {
+                ui.navigateByQueryString('urlFilter', rules);
+            } else {
+                ui.navigateByQueryString('urlFilter', {});
+            }
+        });
+        $template.find('.breadcrumb-item-all a').click(function () {
+            ui.navigateByQueryString('urlFilter', {});
+        });
+        return $template;
     },
 });

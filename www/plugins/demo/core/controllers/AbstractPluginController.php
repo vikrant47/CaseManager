@@ -665,24 +665,31 @@ class AbstractPluginController extends Controller
         return $model;
     }
 
-    public function onFindMatching($value)
+    public function queryDataExtendQuery($query)
     {
-        if (count($value) > 2) { // type atleast 2 chars
-            $displayField = Request::input('displayField') || 'name';
-            $idField = Request::input('idField') || 'id';
-            $relatedField = Request::input('relatedField');
-            $modelClass = Request::input('modelClass');
+        return $query;
+    }
+
+    public function onQueryData()
+    {
+        $table = Request::input('table');
+        $modelClass = Request::input('model');
+        $filter = Request::input('query');
+        $attributes = Request::input('attributes');
+        if (empty($table)) {
             if (empty($modelClass)) {
                 $modelClass = $this->getModelClass();
             }
-            if (!empty($relatedField)) {
-                $model = new $modelClass();
-                $relation = $model->{$relatedField}();
-                $modelClass = $relation->targetModel;
-            }
-            return Db::table($modelClass->table)->select([$idField, $displayField])
-                ->where($displayField, 'iLike', '%' . $value . '%')->get();
+            $modelInstance = new $modelClass();
+            $table = $modelInstance->table;
         }
-        return [];
+        $query = Db::table($table);
+        $filterService = new FilterService();
+        $filterService->applyFilter($query, $filter);
+        $this->queryDataExtendQuery($query);
+        if (!empty($attributes)) {
+            $query->select($attributes);
+        }
+        return $query->get();
     }
 }

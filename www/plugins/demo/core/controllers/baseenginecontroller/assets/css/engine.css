@@ -20,7 +20,7 @@
 
 .filter-breadcrumb .condition {
     color: #007bff;
-    padding-right: 5px;
+    padding: 3px 0 5px 5px;
     font-size: 10px;
 }
 
