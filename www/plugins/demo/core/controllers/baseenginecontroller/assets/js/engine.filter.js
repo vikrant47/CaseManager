@@ -159,7 +159,7 @@ let Filter = Engine.instance.define('engine.Filter', {
             }) < 0;
         }).map(function (column) {
             return Object.assign({label: _.startCase(column.name.replace(/_/g, ' '))}, column)
-        })).sort((field1,field2) => field1.label.localeCompare(field2.label));
+        })).sort((field1, field2) => field1.label.localeCompare(field2.label));
         let qbFields = [];
         fields.forEach(function (field) {
             let qbField = Object.assign({id: field.name}, field);
@@ -172,6 +172,17 @@ let Filter = Engine.instance.define('engine.Filter', {
         });
         return qbFields;
     },
+    initQueryBuilder: function (definition) {
+        this.$el.queryBuilder({
+            plugins: [
+                'bt-tooltip-errors',
+                'not-group'
+            ],
+            filters: this.mapFieldsToQueryBuilderFields(definition)
+        });
+        this.formatRuleDom();
+        this.registerEvents();
+    },
     build: function () {
         const _this = this;
         let defPromise = Promise.resolve(this.definition);
@@ -179,18 +190,7 @@ let Filter = Engine.instance.define('engine.Filter', {
             defPromise = this.loadDefinition();
         }
         return defPromise.then(function (definition) {
-            _this.$el.queryBuilder({
-                plugins: [
-                    'bt-tooltip-errors',
-                    'not-group'
-                ],
-                filters: _this.mapFieldsToQueryBuilderFields(definition)
-            });
-            _this.formatRuleDom();
-            _this.registerEvents();
-            if (_this.value) {
-                _this.setValueFromSql(_this.value);
-            }
+            _this.initQueryBuilder(definition);
             _this.$el.trigger('engine.filter.build', [this]);
             return _this;
         });
@@ -214,14 +214,22 @@ let Filter = Engine.instance.define('engine.Filter', {
     getQueryBuilder: function () {
         return this.$el.data('queryBuilder');
     },
-    setValueFromSql: function (value) {
+    setRulesFromSQL: function (rules) {
         if (this.value.trim().length > 0) {
-            this.$el.queryBuilder('setRulesFromSQL', value);
+            this.$el.queryBuilder('setRulesFromSQL', rules);
         }
     },
     getSQL: function () {
         const qb = this.getQueryBuilder();
         return qb.getSQL();
+    },
+    setRulesFromMongo: function (rules) {
+        const qb = this.getQueryBuilder();
+        return qb.setRulesFromMongo(rules);
+    },
+    getMongo: function () {
+        const qb = this.getQueryBuilder();
+        return qb.getMongo();
     },
     destroy: function () {
         if (this.$el.queryBuilder && this.$el.queryBuilder.destroy) {
@@ -230,6 +238,67 @@ let Filter = Engine.instance.define('engine.Filter', {
     },
     on: function (event, callback) {
         return this.getQueryBuilder().on(event, callback);
+    },
+    getFieldsFromMongoQuery: function (query) {
+        const condition = Object.keys(query).find(function (condition) {
+            return condition === '$and' || condition === '$or' || condition === '$not';
+        });
+        if (condition) {
+            let fields = [];
+            for (const rule of query[condition]) {
+                fields = fields.concat(this.getFieldsFromMongoQuery(rule));
+            }
+            return fields;
+        } else {
+            return Object.keys(query);
+        }
+    },
+    parseMongoQuery: function (query) {
+        if (!_.isEmpty(query)) {
+            const definition = this.definition || {
+                form: {
+                    controls: {
+                        fields: this.getFieldsFromMongoQuery(query).map(function (field) {
+                            return {
+                                name: field,
+                                type: 'text',
+                            }
+                        })
+                    }
+                },
+                columns: [],
+            };
+            this.initQueryBuilder(definition);
+            this.setRulesFromMongo(query);
+            return this.getRules();
+        }
+        return null;
+    },
+    select: function (options) {
+        options = options || {};
+        options.operation = 'select';
+        return this.query(options);
+    },
+    query: function (options) {
+        const ui = Engine.instance.ui;
+        const modelRecord = ui.getModel();
+        const settings = Object.assign({
+            model: this.definition && this.definition.model || modelRecord.model,
+            query: {},
+            operation: 'select',
+            loadingContainer: '.page-content',
+            ajax: {},
+        }, options);
+        const rules = this.parseMongoQuery(options.query);
+        return Engine.instance.ui.request('onQueryData', Object.assign({
+            data: {
+                query: rules || undefined,
+                queryType: settings.operation,
+                table: settings.table,
+                model: settings.model,
+            },
+            loadingContainer: settings.loadingContainer,
+        }, settings.ajax));
     },
     getBreadcrumbData: function (rule) {
         const _this = this;
