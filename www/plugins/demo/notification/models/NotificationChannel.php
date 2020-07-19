@@ -33,7 +33,7 @@ public $incrementing = false;
     public $jsonable = ['configuration'];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
     ];
 
     private $context = [];

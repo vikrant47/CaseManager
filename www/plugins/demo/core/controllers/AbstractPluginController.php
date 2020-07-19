@@ -27,6 +27,7 @@ use Demo\Core\Services\FilterService;
 use File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
+use October\Rain\Database\Builder;
 use October\Rain\Exception\ApplicationException;
 use System\Classes\PluginManager;
 use Db;
@@ -673,6 +674,7 @@ class AbstractPluginController extends Controller
     public function onQueryData()
     {
         $table = Request::input('table');
+        $limit = Request::input('limit');
         $modelClass = Request::input('model');
         $filter = Request::input('query');
         $attributes = Request::input('attributes');
@@ -683,9 +685,15 @@ class AbstractPluginController extends Controller
             $modelInstance = new $modelClass();
             $table = $modelInstance->table;
         }
+        /**@var $query Builder */
         $query = Db::table($table);
-        $filterService = new FilterService();
-        $filterService->applyFilter($query, $filter);
+        if (!empty($filter)) {
+            $filterService = new FilterService();
+            $filterService->applyFilter($query, $filter);
+        }
+        if (!empty($limit)) {
+            $query->limit($limit);
+        }
         $this->queryDataExtendQuery($query);
         if (!empty($attributes)) {
             $query->select($attributes);

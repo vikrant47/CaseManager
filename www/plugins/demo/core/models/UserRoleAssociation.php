@@ -28,7 +28,7 @@ public $incrementing = false;
     ];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
         'user' => [User::class, 'key' => 'user_id'],
         'role' => [UserRole::class, 'key' => 'role_id'],
     ];

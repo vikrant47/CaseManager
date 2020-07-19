@@ -29,7 +29,7 @@ class Workflow extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
 
