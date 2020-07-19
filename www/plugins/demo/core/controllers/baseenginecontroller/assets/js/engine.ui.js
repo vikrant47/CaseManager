@@ -27,36 +27,36 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     /**copied from https://raw.githubusercontent.com/cowboy/jquery-bbq/v1.2.1/jquery.ba-bbq.js*/
     parseParams: function (coerce) {
         const params = location.search.substring(1);
-        if(params.length===0){
+        if (params.length === 0) {
             return {};
         }
         var aps = Array.prototype.slice;
         var decode = decodeURIComponent;
         var obj = {},
-            coerce_types = { 'true': !0, 'false': !1, 'null': null };
+            coerce_types = {'true': !0, 'false': !1, 'null': null};
 
         // Iterate over all name=value pairs.
-        $.each( params.replace( /\+/g, ' ' ).split( '&' ), function(j,v){
-            var param = v.split( '=' ),
-                key = decode( param[0] ),
+        $.each(params.replace(/\+/g, ' ').split('&'), function (j, v) {
+            var param = v.split('='),
+                key = decode(param[0]),
                 val,
                 cur = obj,
                 i = 0,
 
                 // If key is more complex than 'foo', like 'a[]' or 'a[b][c]', split it
                 // into its component parts.
-                keys = key.split( '][' ),
+                keys = key.split(']['),
                 keys_last = keys.length - 1;
 
             // If the first keys part contains [ and the last ends with ], then []
             // are correctly balanced.
-            if ( /\[/.test( keys[0] ) && /\]$/.test( keys[ keys_last ] ) ) {
+            if (/\[/.test(keys[0]) && /\]$/.test(keys[keys_last])) {
                 // Remove the trailing ] from the last keys part.
-                keys[ keys_last ] = keys[ keys_last ].replace( /\]$/, '' );
+                keys[keys_last] = keys[keys_last].replace(/\]$/, '');
 
                 // Split first keys part into two parts on the [ and add them back onto
                 // the beginning of the keys array.
-                keys = keys.shift().split('[').concat( keys );
+                keys = keys.shift().split('[').concat(keys);
 
                 keys_last = keys.length - 1;
             } else {
@@ -65,18 +65,18 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             }
 
             // Are we dealing with a name=value pair, or just a name?
-            if ( param.length === 2 ) {
-                val = decode( param[1] );
+            if (param.length === 2) {
+                val = decode(param[1]);
 
                 // Coerce values.
-                if ( coerce ) {
-                    val = val && !isNaN(val)            ? +val              // number
-                        : val === 'undefined'             ? undefined         // undefined
+                if (coerce) {
+                    val = val && !isNaN(val) ? +val              // number
+                        : val === 'undefined' ? undefined         // undefined
                             : coerce_types[val] !== undefined ? coerce_types[val] // true, false, null
                                 : val;                                                // string
                 }
 
-                if ( keys_last ) {
+                if (keys_last) {
                     // Complex key, build deep object structure based on a few rules:
                     // * The 'cur' pointer starts at the object top-level.
                     // * [] = array push (n is set to array length), [n] = array if n is
@@ -86,10 +86,10 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
                     //   object or array based on the type of the next keys part.
                     // * Move the 'cur' pointer to the next level.
                     // * Rinse & repeat.
-                    for ( ; i <= keys_last; i++ ) {
+                    for (; i <= keys_last; i++) {
                         key = keys[i] === '' ? cur.length : keys[i];
                         cur = cur[key] = i < keys_last
-                            ? cur[key] || ( keys[i+1] && isNaN( keys[i+1] ) ? {} : [] )
+                            ? cur[key] || (keys[i + 1] && isNaN(keys[i + 1]) ? {} : [])
                             : val;
                     }
 
@@ -97,14 +97,14 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
                     // Simple key, even simpler rules, since only scalars and shallow
                     // arrays are allowed.
 
-                    if ( $.isArray( obj[key] ) ) {
+                    if ($.isArray(obj[key])) {
                         // val is already an array, so push on the next value.
-                        obj[key].push( val );
+                        obj[key].push(val);
 
-                    } else if ( obj[key] !== undefined ) {
+                    } else if (obj[key] !== undefined) {
                         // val isn't an array, but since a second value has been specified,
                         // convert val into an array.
-                        obj[key] = [ obj[key], val ];
+                        obj[key] = [obj[key], val];
 
                     } else {
                         // val is a scalar.
@@ -112,7 +112,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
                     }
                 }
 
-            } else if ( key ) {
+            } else if (key) {
                 // No value was defined, so set something meaningful.
                 obj[key] = coerce
                     ? undefined
@@ -225,6 +225,9 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         const popup = $popup.data('oc.popup');
         const $container = popup.$container;
         const $dialog = popup.$dialog;
+        if (options.id) {
+            $dialog.prop('id', options.id);
+        }
         if ($dialog.find('.modal-body').length === 0) {
             popup.$body = $('<div class="modal-content"></div>').append(
                 $dialog.find('.modal-content')
@@ -272,6 +275,8 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             const handler = Function('return ' + action.script)();
             if (typeof handler === 'object') {
                 Object.assign(action, handler);
+            } else {
+                action.handler = handler;
             }
             Object.assign(action, props);
             return action;
