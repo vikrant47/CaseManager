@@ -24,7 +24,7 @@ public $incrementing = false;
     ];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id']
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id']
     ];
 
     protected $fillable = ['name', 'url', 'method', 'script', 'plugin_id'];

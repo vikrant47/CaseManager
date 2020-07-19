@@ -32,7 +32,7 @@ public $incrementing = false;
     public $attachAuditedBy = true;
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
         'channel' => [NotificationChannel::class, 'key' => 'channel_id'],
         'template' => [MailTemplate::class, 'key' => 'template_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],

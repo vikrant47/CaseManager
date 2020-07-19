@@ -60,38 +60,51 @@ let Filter = Engine.instance.define('engine.Filter', {
                     field.type = 'double';
                     return field;
                 }, relation: function (field, definition) {
-                    let belongsToAssoc = definition.associations.belongsTo;
-                    if (belongsToAssoc && belongsToAssoc[field.name]) {
-                        const association = belongsToAssoc[field.name];
-                        return Object.assign({},field,{
+                    let association = this.getBelongsToAssociation(definition, field.name);
+                    if (association) {
+                        return Object.assign({}, field, {
                             input: 'select',
                             type: 'string',
                             plugin: 'select2',
                             values: {},
+                            name: association.key,
                             plugin_config: {
                                 ajax: {
-                                    transport: function (params, success, failure) {
-                                        new engine.Filter().select({
-                                            model: association[0],
-                                            query: {
-                                                "$and": [
-                                                    {
-                                                        "name": {
-                                                            "$regex": params.data.q
+                                    transport: _.debounce(function (params, success, failure) {
+                                        if (params.data.q) {
+                                            const nameFrom = association.nameFrom || 'name';
+                                            const otherKey = association.otherKey || 'id';
+                                            new engine.Filter().select({
+                                                model: association[0],
+                                                attributes: [nameFrom, otherKey],
+                                                limit: 20,
+                                                query: params.data.q ? {
+                                                    "$and": [
+                                                        {
+                                                            [nameFrom]: {
+                                                                "$regex": params.data.q
+                                                            }
                                                         }
-                                                    }
-                                                ]
-                                            }
-                                        }).then(function (response) {
-                                            success(response.data);
-                                        })
-                                    }
+                                                    ]
+                                                } : {},
+                                            }).then(function (data) {
+                                                success({
+                                                    results: data.map(function (record) {
+                                                        return {
+                                                            id: record[otherKey],
+                                                            text: record[nameFrom],
+                                                        };
+                                                    })
+                                                });
+                                            })
+                                        }
+                                    }, 1000),
                                 },
                                 dropdownCssClass: 'filter-select2',
                             },
                         });
                     }
-                    return this.text(field);
+                    return this.static.queryBuilderTypeMappings.text(field);
                 },
                 richeditor: function (field) {
                     field.id = field.name;
@@ -183,12 +196,27 @@ let Filter = Engine.instance.define('engine.Filter', {
         getColumns(definition) {
             definition = definition || this.definition;
             return definition.columns;
-        }
-        ,
+        },
+        getBelongsToAssociation: function (definition, fieldName) {
+            let belongsToAssocs = definition.associations.belongsTo;
+            if (belongsToAssocs) {
+                for (let key in belongsToAssocs) {
+                    if (key === fieldName || belongsToAssocs[key].key === fieldName) {
+                        const association = belongsToAssocs[key];
+                        return Object.assign({
+                            association: 'belongsTo',
+                            key: fieldName,
+                            targetModel: association[0],
+                        }, association);
+                    }
+                }
+            }
+        },
         mapFieldsToQueryBuilderFields: function (definition) {
+            const _this = this;
             let formFields = this.getFormFields(definition).map(function (field) {
                 if (field.type === 'relation') {
-                    return Filter.queryBuilderTypeMappings.relation(field, definition);
+                    return Filter.queryBuilderTypeMappings.relation.call(_this, field, definition);
                 }
                 return field;
             });
@@ -204,7 +232,7 @@ let Filter = Engine.instance.define('engine.Filter', {
             fields.forEach(function (field) {
                 let qbField = Object.assign({id: field.name}, field);
                 if (typeof Filter.queryBuilderTypeMappings[qbField.type] === 'function') {
-                    qbField = Filter.queryBuilderTypeMappings[qbField.type](qbField, definition);
+                    qbField = Filter.queryBuilderTypeMappings[qbField.type].call(_this, qbField, definition);
                 } else {
                     qbField.type = 'string';
                 }

@@ -29,7 +29,7 @@ class ListAction extends Model
     public $jsonable = ['html_attributes'];
     protected $nullable = ['list'];
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
     public $morphToMany = [

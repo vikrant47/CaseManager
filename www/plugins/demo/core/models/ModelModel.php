@@ -36,7 +36,7 @@ class ModelModel extends Model
     public $jsonable = ['audit_columns'];
     public $attachAuditedBy = true;
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
     ];
 
     /**
