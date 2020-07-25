@@ -36,7 +36,7 @@ public $incrementing = false;
     public $attachAuditedBy = true;
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
         'subscriber' => [CoreUser::class, 'key' => 'subscriber_id'],
         'subscriber_group' => [CoreUserGroup::class, 'key' => 'subscriber_group_id'],
         'notification' => [Notification::class, 'key' => 'notification_id'],

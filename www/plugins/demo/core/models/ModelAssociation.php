@@ -31,7 +31,7 @@ public $incrementing = false;
     public $belongsTo = [
         'source_model_ref' => [ModelModel::class, 'key' => 'source_model', 'otherKey' => 'model'],
         'target_model_ref' => [ModelModel::class, 'key' => 'target_model', 'otherKey' => 'model'],
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id']
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id']
     ];
 
     public function getForeignKeyOptions()

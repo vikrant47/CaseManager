@@ -36,7 +36,7 @@ class Navigation extends Model
 
     public $attachAuditedBy = true;
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'dashboard' => [Dashboard::class, 'key' => 'dashboard_id'],
         'widget' => [Widget::class, 'key' => 'widget_id'],

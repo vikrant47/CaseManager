@@ -29,7 +29,7 @@ public $incrementing = false;
 
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
         'widget' => [Widget::class]
     ];
 

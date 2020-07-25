@@ -43,7 +43,7 @@ class Widget extends Model implements FromCollection
 
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
     ];
     public $belongsToMany = [
         'libraries' => [
