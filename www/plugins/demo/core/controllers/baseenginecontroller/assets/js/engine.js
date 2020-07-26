@@ -77,8 +77,10 @@ Object.assign(Engine.prototype, {
     },
     overrideDefaults: function () {
         const s2CallbackOptions = ['dropdownParent'];
-        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
-        $.fn.modal.Constructor.prototype._enforceFocus = function() {};
+        $.fn.modal.Constructor.prototype.enforceFocus = function () {
+        };
+        $.fn.modal.Constructor.prototype._enforceFocus = function () {
+        };
         const s2OptionGet = jQuery.fn.select2.amd.require('select2/options').prototype.get;
         jQuery.fn.select2.amd.require('select2/options').prototype.get = function (key) {
             let value = this.options[key];
@@ -318,6 +320,11 @@ Object.assign(Engine.prototype, {
         };
         for (let i in settings.static) {
             cls[i] = settings.static[i];
+            if (i === '_ready' && typeof cls[i] === 'function') { // checking for ready event
+                $(document).ready(function () {
+                    cls[i].apply(cls);
+                });
+            }
         }
         if (settings.extends) {
             cls.prototype = Object.create(settings.extends.prototype);

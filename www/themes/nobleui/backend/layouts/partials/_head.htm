@@ -29,31 +29,34 @@ use System\Models\Parameter;
     <link href="<?= Backend::skinAsset('assets/css/october.css') ?>?v<?= $coreBuild ?>" rel="stylesheet">
 
 
-    <!--<script src="<?/*= Backend::skinAsset('assets/js/vendor/jquery.min.js') */?>?v<?/*= $coreBuild */?>"></script>-->
-    <script src="<?= Backend::skinAsset('assets/vendors/core/core.js')?>"></script>
+    <!--<script src="<? /*= Backend::skinAsset('assets/js/vendor/jquery.min.js') */ ?>?v<? /*= $coreBuild */ ?>"></script>-->
+    <script src="<?= Backend::skinAsset('assets/vendors/core/core.js') ?>"></script>
     <script src="<?= Url::asset('modules/system/assets/js/framework.js') ?>?v<?= $coreBuild ?>"></script>
-    <script data-cfasync="false" src="<?= Url::asset('modules/system/assets/ui/storm-min.js') ?>?v<?= $coreBuild ?>"></script>
-    <script data-cfasync="false" src="<?= Backend::skinAsset('assets/js/october-min.js') ?>?v<?= $coreBuild ?>"></script>
-    <script src="<?= Url::asset('modules/system/assets/js/lang/lang.'.App::getLocale().'.js') ?>?v<?= $coreBuild ?>"></script>
+    <script data-cfasync="false"
+            src="<?= Url::asset('modules/system/assets/ui/storm-min.js') ?>?v<?= $coreBuild ?>"></script>
+    <script data-cfasync="false"
+            src="<?= Backend::skinAsset('assets/js/october-min.js') ?>?v<?= $coreBuild ?>"></script>
+    <script src="<?= Url::asset('modules/system/assets/js/lang/lang.' . App::getLocale() . '.js') ?>?v<?= $coreBuild ?>"></script>
 
     <script src="<?= Backend::skinAsset('assets/js/october.flyout.js') ?>"></script>
     <script src="<?= Backend::skinAsset('assets/js/october.tabformexpandcontrols.js') ?>"></script>
-    <script src="<?= Backend::skinAsset('assets/js/custom.js')?>"></script>
+    <script src="<?= Backend::skinAsset('assets/js/custom.js') ?>"></script>
 
     <!-- core:css -->
-    <link rel="stylesheet" href="<?=Backend::skinAsset("assets/vendors/core/core.css")?>">
+    <link rel="stylesheet" href="<?= Backend::skinAsset("assets/vendors/core/core.css") ?>">
     <!-- endinject -->
     <!-- plugin css for this page -->
-    <link rel="stylesheet" href="<?=Backend::skinAsset("assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css")?>">
+    <link rel="stylesheet"
+          href="<?= Backend::skinAsset("assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css") ?>">
     <!-- end plugin css for this page -->
     <!-- inject:css -->
-    <!--<link rel="stylesheet" href="<?/*=Backend::skinAsset("assets/fonts/feather-font/css/iconfont.css")*/?>">-->
-    <link rel="stylesheet" href="<?=Backend::skinAsset("assets/vendors/flag-icon-css/css/flag-icon.min.css")?>">
+    <!--<link rel="stylesheet" href="<? /*=Backend::skinAsset("assets/fonts/feather-font/css/iconfont.css")*/ ?>">-->
+    <link rel="stylesheet" href="<?= Backend::skinAsset("assets/vendors/flag-icon-css/css/flag-icon.min.css") ?>">
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="<?=Backend::skinAsset("assets/css/demo_1/style.css")?>" >
+    <link rel="stylesheet" href="<?= Backend::skinAsset("assets/css/demo_1/style.css") ?>">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?=Backend::skinAsset("assets/images/favicon.png")?>" />
+    <link rel="shortcut icon" href="<?= Backend::skinAsset("assets/images/favicon.png") ?>"/>
 
     <?php $this->addJs('/modules/backend/widgets/lists/assets/js/october.list.js', 'core'); ?>
     <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
@@ -63,11 +66,11 @@ use System\Models\Parameter;
     <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.filter.js') ?>
     <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
     <?php $this->addJs('/plugins/demo/core/formwidgets/querybuilderwidget/assets/js/query-builder.standalone.min.js') ?>
-    <?php $this->addJs('/plugins/demo/core/formwidgets/querybuilderwidget/assets/js/sql-parser.js') ?>
+    <!--<?php $this->addJs('/plugins/demo/core/formwidgets/querybuilderwidget/assets/js/sql-parser.js') ?>-->
     <?php $this->addCss('/plugins/demo/core/formwidgets/querybuilderwidget/assets/css/query-builder.default.min.css') ?>
 
     <?= $this->makeAssets() ?>
     <?= Block::placeholder('head') ?>
     <?= $this->makeLayoutPartial('custom_styles') ?>
-    <link rel="stylesheet" href="<?=Backend::skinAsset("assets/css/custom.css")?>" >
+    <link rel="stylesheet" href="<?= Backend::skinAsset("assets/css/custom.css") ?>">
 </head>

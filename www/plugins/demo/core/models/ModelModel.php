@@ -36,7 +36,7 @@ class ModelModel extends Model
     public $jsonable = ['audit_columns'];
     public $attachAuditedBy = true;
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id'],
     ];
 
     /**
@@ -60,17 +60,21 @@ class ModelModel extends Model
 
     public function getAuditColumnsOptions()
     {
-        $columns = $this->getColumns();
-        $columnNames = $columns->map(function ($column) {
-            /**@var  $column Column */
-            return $column['name'];
-        });
-        $columnNames->push('*')->sort();
-        $columnNameOptions = [];
-        foreach ($columnNames as $columnName) {
-            $columnNameOptions[$columnName] = $columnName;
+        $table = $this->getModelTable();
+        if (!empty($table)) {
+            $columns = $this->getColumns();
+            $columnNames = $columns->map(function ($column) {
+                /**@var  $column Column */
+                return $column['name'];
+            });
+            $columnNames->push('*')->sort();
+            $columnNameOptions = [];
+            foreach ($columnNames as $columnName) {
+                $columnNameOptions[$columnName] = $columnName;
+            }
+            return $columnNameOptions;
         }
-        return $columnNameOptions;
+        return [];
     }
 
     /**
