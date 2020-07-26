@@ -18,6 +18,7 @@ return [
             'pid_file' => env('SWOOLE_HTTP_PID_FILE', base_path('storage/logs/swoole_http.pid')),
             'log_file' => env('SWOOLE_HTTP_LOG_FILE', base_path('storage/logs/swoole_http.log')),
             'daemonize' => env('SWOOLE_HTTP_DAEMONIZE', 0),
+            'worker_num' => 5, // number of parellel php process/threads
         ],
     ],
     'providers' => [
