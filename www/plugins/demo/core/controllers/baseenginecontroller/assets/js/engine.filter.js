@@ -495,7 +495,11 @@ let Filter = Engine.instance.define('engine.Filter', {
         filter.children.push(this);
     },
     addField: function (field) {
-        this.definition = this.definition || {form: {controls: {fields: []}}};
+        this.definition = this.definition || {form: {controls: {fields: {}}}};
+        this.definition.form.controls.fields[field.name] = field;
+    },
+    removeField: function (name) {
+        delete this.definition.form.controls.fields[name];
     }
 });
 
