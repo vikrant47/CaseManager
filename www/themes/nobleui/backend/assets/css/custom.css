@@ -50,6 +50,19 @@ a {
     font-size: 11px;
 }
 
+.select2-container--default .select2-selection--single .select2-selection__arrow b::before {
+    content: "\f107";
+    font-family: FontAwesome;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b::before {
+    content: '\f106';
+}
+
+.form-inline .form-control, .form-inline select, .form-inline .email-compose-fields .select2-container--default .select2-selection--multiple, .email-compose-fields .select2-container--default .form-inline .select2-selection--multiple, .form-inline .select2-container--default .select2-selection--single, .select2-container--default .form-inline .select2-selection--single, .form-inline .select2-container--default .select2-selection--single .select2-search__field, .select2-container--default .select2-selection--single .form-inline .select2-search__field, .form-inline .typeahead, .form-inline .tt-query, .form-inline .tt-hint {
+    height: 30px;
+}
+
 .form-control, select, .email-compose-fields .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
     border: 1px solid #e8ebf1;
     font-weight: 400;
@@ -113,6 +126,11 @@ a {
 /*.select2-container--default .select2-selection--single, span.select2.select2-container {
     height: 100%;
 }*/
+
+span.select2-container {
+    z-index: 10050;
+    width: 100% !important;
+}
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 26px;
     z-index: 10060;
@@ -519,9 +537,6 @@ a.manage-widgets, .action a {
     color: #3a3f51;
 }
 
-span.select2-container {
-    z-index: 10050;
-}
 
 .btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover,
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
