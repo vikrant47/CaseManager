@@ -69,11 +69,15 @@ Engine.defaultActionOption = {
 };
 Object.assign(Engine.prototype, {
     boot: function () {
+        this.noConflicts();
         this.addNavFlyout();
         this.addResizeFlyout();
         this.registerEvents();
         this.moveActions();
         this.overrideDefaults();
+    },
+    noConflicts: function () {
+        Engine._ = _.noConflict();
     },
     overrideDefaults: function () {
         const s2CallbackOptions = ['dropdownParent'];
@@ -357,3 +361,21 @@ Engine.instance = new Engine();
 $(document).ready(function () {
     Engine.instance.boot();
 });
+Engine.libs = {};
+Engine.reloadLibrary = function (lib, callback) {
+    delete Engine.libs[lib];
+    Engine.loadLibrary(lib, callback);
+};
+Engine.loadLibrary = function (lib, callback) {
+    callback = callback || function () {
+
+    };
+    if (Engine.libs[lib]) {
+        callback.apply(this);
+    } else {
+        $.getScript(lib).done(function () {
+            Engine.libs[lib] = lib;
+            callback.apply(Engine);
+        });
+    }
+};

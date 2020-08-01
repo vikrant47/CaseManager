@@ -70,7 +70,7 @@ let Filter = Engine.instance.define('engine.Filter', {
                         name: association.key,
                         plugin_config: {
                             ajax: {
-                                transport: _.debounce(function (params, success, failure) {
+                                transport: Engine._.debounce(function (params, success, failure) {
                                     if (params.data.q) {
                                         const nameFrom = association.nameFrom || 'name';
                                         const otherKey = association.otherKey || 'id';
@@ -142,7 +142,7 @@ let Filter = Engine.instance.define('engine.Filter', {
         mergeDefinitions: function (definitions) {
             const mereged = {};
             for (const definition of definitions) {
-                _.merge(mereged, definition);
+                Engine._.merge(mereged, definition);
             }
             return mereged;
         },
@@ -279,7 +279,7 @@ let Filter = Engine.instance.define('engine.Filter', {
                 return field.name === column.name || field.id === column.name;
             }) < 0;
         }).map(function (column) {
-            return Object.assign({label: _.startCase(column.name.replace(/_/g, ' '))}, column)
+            return Object.assign({label: Engine._.startCase(column.name.replace(/_/g, ' '))}, column)
         }))
     },
     mapFieldsToQueryBuilderFields: function (definition) {
@@ -390,7 +390,7 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
     },
     parseMongoQuery: function (query) {
-        if (!_.isEmpty(query)) {
+        if (!Engine._.isEmpty(query)) {
             const definition = this.definition || {
                 form: {
                     controls: {
