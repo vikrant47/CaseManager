@@ -31,22 +31,23 @@
         "source": "https://github.com/octobercms/october"
     },
     "require": {
-        "php": "^7.2",
+        "php": ">=7.0",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "october/rain": "~1.0",
         "october/system": "~1.0",
         "october/backend": "~1.0",
         "october/cms": "~1.0",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "5.5.*",
         "wikimedia/composer-merge-plugin": "dev-master",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^6.5",
         "maatwebsite/excel": "^3.1",
         "dompdf/dompdf": "^0.8.3",
         "ext-json": "*",
         "bvanhoekelen/performance": "^2.5",
         "webpatser/laravel-uuid": "^3.0",
-        "swooletw/laravel-swoole": "^2.0"
+        "swooletw/laravel-swoole": "^2.0",
+        "timgws/query-builder-parser": "^1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.7",
@@ -75,7 +76,7 @@
     "config": {
         "preferred-install": "dist",
         "platform": {
-            "php": "7.2.19"
+            "php": "7.0"
         }
     },
     "minimum-stability": "dev",

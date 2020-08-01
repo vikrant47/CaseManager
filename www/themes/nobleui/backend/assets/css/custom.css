@@ -127,10 +127,10 @@ a {
     height: 100%;
 }*/
 
-span.select2-container {
+/*span.select2-container {
     z-index: 10050;
     width: 100% !important;
-}
+}*/
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 26px;
     z-index: 10060;
