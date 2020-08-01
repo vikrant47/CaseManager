@@ -68,40 +68,7 @@ let Filter = Engine.instance.define('engine.Filter', {
                         plugin: 'select2',
                         values: {},
                         name: association.key,
-                        plugin_config: {
-                            ajax: {
-                                transport: Engine._.debounce(function (params, success, failure) {
-                                    if (params.data.q) {
-                                        const nameFrom = association.nameFrom || 'name';
-                                        const otherKey = association.otherKey || 'id';
-                                        new engine.Filter().select({
-                                            model: association[0],
-                                            attributes: [nameFrom, otherKey],
-                                            limit: 20,
-                                            query: params.data.q ? {
-                                                "$and": [
-                                                    {
-                                                        [nameFrom]: {
-                                                            "$regex": params.data.q
-                                                        }
-                                                    }
-                                                ]
-                                            } : {},
-                                        }).then(function (data) {
-                                            success({
-                                                results: data.map(function (record) {
-                                                    return {
-                                                        id: record[otherKey],
-                                                        text: record[nameFrom],
-                                                    };
-                                                })
-                                            });
-                                        })
-                                    }
-                                }, 1000),
-                            },
-                            dropdownCssClass: 'filter-select2',
-                        },
+                        plugin_config: engine.component.Reference.getConfig(association),
                     });
                 }
                 return this.static.queryBuilderTypeMappings.text(field);
@@ -279,7 +246,11 @@ let Filter = Engine.instance.define('engine.Filter', {
                 return field.name === column.name || field.id === column.name;
             }) < 0;
         }).map(function (column) {
-            return Object.assign({label: Engine._.startCase(column.name.replace(/_/g, ' '))}, column)
+            return Object.assign({}, column, {
+                    label: Engine._.startCase(column.name.replace(/_/g, ' ').replace('id', '')),
+                    type: column.name.endsWith('id') ? 'relation' : column.type,
+                }
+            )
         }))
     },
     mapFieldsToQueryBuilderFields: function (definition) {
