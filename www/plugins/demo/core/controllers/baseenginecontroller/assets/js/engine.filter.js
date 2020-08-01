@@ -138,7 +138,14 @@ let Filter = Engine.instance.define('engine.Filter', {
                     operators[op].apply_to.push('relation');
                 }
             }
-        }
+        },
+        mergeDefinitions: function (definitions) {
+            const mereged = {};
+            for (const definition of definitions) {
+                _.merge(mereged, definition);
+            }
+            return mereged;
+        },
     },
     constructor: function (el, valueElement, value, destroyExisting = true) {
         if (!el) {
@@ -222,7 +229,10 @@ let Filter = Engine.instance.define('engine.Filter', {
             });
         }
     },
-// definition form field manipulation
+    getDefinition() {
+        return this.definition;
+    },
+    // definition form field manipulation
     getFormFields(definition) {
         definition = definition || this.definition;
         let fields = definition.form.controls.fields;
@@ -288,20 +298,22 @@ let Filter = Engine.instance.define('engine.Filter', {
         return qbFields;
     },
     initQueryBuilder: function (definition) {
-        this.$el.queryBuilder({
-            plugins: [
-                // 'sortable',
-                // 'filter-description',
-                'unique-filter',
-                'bt-tooltip-errors',
-                // 'bt-selectpicker',
-                'bt-checkbox',
-                'invert',
-                'not-group'
-            ],
-            filters: this.mapFieldsToQueryBuilderFields(definition)
-        });
-        this.registerEvents();
+        if (!this.$el[0].queryBuilder) {
+            this.$el.queryBuilder({
+                plugins: [
+                    // 'sortable',
+                    // 'filter-description',
+                    'unique-filter',
+                    'bt-tooltip-errors',
+                    // 'bt-selectpicker',
+                    'bt-checkbox',
+                    'invert',
+                    'not-group'
+                ],
+                filters: this.mapFieldsToQueryBuilderFields(definition)
+            });
+            this.registerEvents();
+        }
     },
     build: function () {
         const _this = this;
@@ -311,7 +323,7 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
         return defPromise.then(function (definition) {
             _this.initQueryBuilder(definition);
-            _this.$el.trigger('engine.filter.build', [this]);
+            _this.$el.trigger('engine.filter.build', [_this]);
             return _this;
         });
     },
@@ -331,6 +343,8 @@ let Filter = Engine.instance.define('engine.Filter', {
         return this.getQueryBuilder().getRules();
     },
     setRules: function (rules) {
+        /**Removing non relevant rules*/
+
         this.getQueryBuilder().setRules(rules);
     },
     getQueryBuilder: function () {
@@ -359,7 +373,7 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
     },
     on: function (event, callback) {
-        return this.getQueryBuilder().on(event, callback);
+        return this.$el.on(event, callback);
     },
     getFieldsFromMongoQuery: function (query) {
         const condition = Object.keys(query).find(function (condition) {
@@ -421,6 +435,25 @@ let Filter = Engine.instance.define('engine.Filter', {
             },
             loadingContainer: settings.loadingContainer,
         }, settings.ajax));
+    },
+    getReleventRules: function (rule, definition) {
+        definition = definition || this.definition;
+        if (!rule) {
+            rule = this.getRules();
+            if (rule) {
+                return this.getBreadcrumbData(rule, fields);
+            }
+        }
+        if (rule.rules) {
+            let data = [];
+            for (const childRule of rule.rules) {
+                if (!childRule.condition) {
+
+                } else {
+
+                }
+            }
+        }
     },
     getBreadcrumbData: function (rule, fields) {
         fields = fields || [];
@@ -500,7 +533,15 @@ let Filter = Engine.instance.define('engine.Filter', {
     },
     removeField: function (name) {
         delete this.definition.form.controls.fields[name];
-    }
+    },
+    apply: function (callback) {
+        if (typeof callback == 'function') {
+            this.$el.on('filter.apply', callback);
+        } else {
+            this.$el.trigger('filter.apply', this);
+        }
+        return this;
+    },
 });
 
 /***Parent Filter implementation*/
@@ -510,12 +551,17 @@ let ParentFilter = Engine.instance.define('engine.ParentFilter', {
     addChild: function (child) {
         child.setParent(this);
     },
-    makeDefinition: function () {
-        for (const child of this.children) {
-
-        }
+    getDefinition() {
+        return this.definition = Filter.mergeDefinitions(this.children.map(child => child.definition));
     },
     build: function () {
+        this.definition = this.getDefinition();
         return Filter.prototype.build.apply(this, arguments);
+    },
+    apply: function () {
+        for (const child of this.children) {
+            child.apply();
+        }
+        this.$el.trigger('filter.apply', this);
     },
 });
