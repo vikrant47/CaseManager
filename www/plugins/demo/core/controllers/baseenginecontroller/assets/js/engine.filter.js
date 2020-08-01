@@ -1,5 +1,36 @@
 let Filter = Engine.instance.define('engine.Filter', {
     static: {
+        defaultPopupConfig: {
+            size: 'lg',
+            title: 'Filter',
+            actions: [{
+                name: 'search',
+                label: 'Search',
+                active: true,
+                icon: '',
+                css_class: 'btn btn-primary',
+                handler: function (e, popup) {
+                    popup.target.apply();
+                }
+            }]
+        },
+        defaultConfig: {
+            fields: [],
+            breadcrumbContainer: null,
+            renderBreadcrumb: true,
+        },
+        create: function (config) {
+            const setting = Object.assign({}, Filter.defaultConfig, config);
+            const filter = new engine.Filter(setting.el);
+            if (setting.fields) {
+                this.filter.setFields(setting.fields);
+            }
+            filter.setBreadcrumbContainer(setting.breadcrumbContainer);
+            if (setting.renderBreadcrumb) {
+                filter.renderBreadcrumb();
+            }
+            return filter;
+        },
         breadcrumbTemplate:
             '<ul class="filter-breadcrumb breadcrumb">\n' +
             '   <li id="item-all" class="breadcrumb-item breadcrumb-item-all">' +
@@ -299,10 +330,11 @@ let Filter = Engine.instance.define('engine.Filter', {
         });
     },
     showInPopup: function (options) {
+        const settings = Object.assign({}, Filter.defaultPopupConfig, options);
         this.popup = Engine.instance.ui.showPopup(Object.assign({
             content: this.$el,
             target: this,
-        }, options, {
+        }, settings, {
             id: 'filter-popup'
         }));
         return this;
@@ -471,6 +503,12 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
         return null;
     },
+    setBreadcrumbContainer: function (breadcrumbContainer) {
+        this.$breadcrumbContainer = breadcrumbContainer instanceof jQuery ? breadcrumbContainer : $(breadcrumbContainer);
+    },
+    renderBreadcrumb: function () {
+        this.$breadcrumbContainer.append(this.getBreadcrumbTemplate(this.rule, this.definition));
+    },
     getBreadcrumbTemplate: function (rule, definition) {
         const ui = Engine.instance.ui;
         const _this = this;
@@ -498,9 +536,21 @@ let Filter = Engine.instance.define('engine.Filter', {
         this.parent = filter;
         filter.children.push(this);
     },
+    setFields: function (fields) {
+        if (Engine._.isArray(fields)) {
+            this.definition = {form: {controls: {fields: {}}}};
+            for (const field of fields) {
+                this.addField(field);
+            }
+        } else {
+            this.definition = {form: {controls: {fields: fields}}}
+        }
+        return this;
+    },
     addField: function (field) {
         this.definition = this.definition || {form: {controls: {fields: {}}}};
         this.definition.form.controls.fields[field.name] = field;
+        return this;
     },
     removeField: function (name) {
         delete this.definition.form.controls.fields[name];

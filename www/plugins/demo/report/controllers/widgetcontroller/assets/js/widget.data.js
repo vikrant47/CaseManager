@@ -113,7 +113,7 @@ var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
         var $toolbar = this.$el.find('.default-toolbar');
         Engine.instance.addActions($toolbar, engine.data.Store.cloneArray(this.static.defaultActions), this);
     },
-    addtActions: function (actions) {
+    addActions: function (actions) {
         var $toolbar = this.$el.find('.user-toolbar');
         return Engine.instance.addActions($toolbar, actions, this);
     }
@@ -150,6 +150,36 @@ Engine.instance.define('engine.report.Widget', {
     setHeader: function (header) {
         this.header = header;
         this.header.init();
+    },
+    /**
+     * Setting filter to widget
+     * @param filter - instance of engine.Filter or field definition {fields:[]}
+     */
+    setFilter: function (filter) {
+        const _this = this;
+        if (filter instanceof engine.Filter) {
+            this.filter = filter;
+        } else {
+            this.filter = engine.Filter.create(Object.assign({
+                breadcrumbContainer: this.header.$el,
+            }, filter));
+        }
+        if (filter.showHeaderAction) {
+            this.makeFilterHeaderAction();
+        }
+        this.filter.apply(function () {
+            _this.fetchAndRender();
+        });
+    },
+    makeFilterHeaderAction: function () {
+        const _this = this;
+        this.header.addActions([{
+            name: 'filter',
+            icon: 'fa fa-filter',
+            handler: function () {
+                _this.filter.showInPopup();
+            }
+        }]);
     },
     getDashboard: function () {
         return this.$el.parents('.dashboard-container').eq(0).data('dashboard');
@@ -188,7 +218,10 @@ Engine.instance.define('engine.report.Widget', {
         var _this = this;
         $.request('onEvalWidget', {
             url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
-            data: {id: this.model.id},
+            data: {
+                id: this.model.id,
+                filter: this.filter ? this.filter.getRules() : null,
+            },
             success: function (data) {
                 var result = data.result;
                 if (typeof result === 'string') {
