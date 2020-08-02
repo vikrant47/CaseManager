@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2350aee029f673e9a59a7a5e33aa7020",
+    "content-hash": "1db4d5436f041739202b1e27febeb382",
     "packages": [
         {
             "name": "bvanhoekelen/performance",
@@ -2542,56 +2542,6 @@
             "time": "2019-09-10T07:55:40+00:00"
         },
         {
-            "name": "open-smf/connection-pool",
-            "version": "v1.0.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/open-smf/connection-pool.git",
-                "reference": "f9289cb5ee61d3e901bc74ab745e5b2162461a1e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/open-smf/connection-pool/zipball/f9289cb5ee61d3e901bc74ab745e5b2162461a1e",
-                "reference": "f9289cb5ee61d3e901bc74ab745e5b2162461a1e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-swoole": ">=4.2.9",
-                "php": ">=7.0.0"
-            },
-            "require-dev": {
-                "swoole/ide-helper": "@dev"
-            },
-            "suggest": {
-                "ext-redis": "A PHP extension for Redis."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Smf\\ConnectionPool\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Xie Biao",
-                    "email": "hhxsv5@sina.com"
-                }
-            ],
-            "description": "A common connection pool based on Swoole is usually used as the database connection pool.",
-            "homepage": "https://github.com/open-smf/connection-pool",
-            "keywords": [
-                "connection-pool",
-                "database-connection-pool",
-                "swoole"
-            ],
-            "time": "2020-05-29T05:20:59+00:00"
-        },
-        {
             "name": "opis/closure",
             "version": "3.5.1",
             "source": {
@@ -3640,6 +3590,56 @@
             "time": "2018-08-09T05:50:03+00:00"
         },
         {
+            "name": "predis/predis",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16T16:22:20+00:00"
+        },
+        {
             "name": "psr/container",
             "version": "1.0.0",
             "source": {
@@ -4607,30 +4607,54 @@
         },
         {
             "name": "swooletw/laravel-swoole",
-            "version": "v2.0.6",
+            "version": "v2.6.67",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swooletw/laravel-swoole.git",
-                "reference": "6171ae6efadd6768420ad640f156006534f34dc9"
+                "reference": "2271aa7fbd881d932ecca46749a609c36e15cf93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swooletw/laravel-swoole/zipball/6171ae6efadd6768420ad640f156006534f34dc9",
-                "reference": "6171ae6efadd6768420ad640f156006534f34dc9",
+                "url": "https://api.github.com/repos/swooletw/laravel-swoole/zipball/2271aa7fbd881d932ecca46749a609c36e15cf93",
+                "reference": "2271aa7fbd881d932ecca46749a609c36e15cf93",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "~5.1",
-                "illuminate/contracts": "~5.1",
-                "illuminate/http": "~5.1",
-                "illuminate/support": "~5.1"
+                "illuminate/console": "~5.4|~6.0|~7.0",
+                "illuminate/contracts": "~5.4|~6.0|~7.0",
+                "illuminate/http": "~5.4|~6.0|~7.0",
+                "illuminate/support": "~5.4|~6.0|~7.0",
+                "php": "^7.2",
+                "predis/predis": "^1.1"
             },
             "require-dev": {
-                "laravel/lumen-framework": "~5.1",
-                "phpunit/phpunit": "~6.0"
+                "codedungeon/phpunit-result-printer": "^0.14.0",
+                "laravel/lumen-framework": "~5.4|~6.0|~7.0",
+                "mockery/mockery": "~1.0",
+                "php-coveralls/php-coveralls": "^2.1",
+                "php-mock/php-mock": "^2.0",
+                "phpunit/php-code-coverage": "^6.1",
+                "phpunit/phpunit": "^7.5",
+                "swoole/ide-helper": "@dev"
             },
             "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SwooleTW\\Http\\LaravelServiceProvider"
+                    ],
+                    "aliases": {
+                        "Server": "SwooleTW\\Http\\Server\\Facades\\Server",
+                        "Table": "SwooleTW\\Http\\Server\\Facades\\Table",
+                        "Room": "SwooleTW\\Http\\Websocket\\Facades\\Room",
+                        "Websocket": "SwooleTW\\Http\\Websocket\\Facades\\Websocket"
+                    }
+                }
+            },
             "autoload": {
+                "files": [
+                    "src/Server/helpers.php"
+                ],
                 "psr-4": {
                     "SwooleTW\\Http\\": "src"
                 }
@@ -4641,12 +4665,12 @@
             ],
             "authors": [
                 {
-                    "name": "Huang Yi",
-                    "email": "coodeer@163.com"
-                },
-                {
                     "name": "Albert Chen",
                     "email": "albert@unisharp.com"
+                },
+                {
+                    "name": "Huang Yi",
+                    "email": "coodeer@163.com"
                 }
             ],
             "description": "High performance HTTP server based on Swoole. Speed up your Laravel and Lumen applications.",
@@ -4658,7 +4682,7 @@
                 "server",
                 "swoole"
             ],
-            "time": "2018-02-24T15:29:21+00:00"
+            "time": "2020-03-29T09:13:36+00:00"
         },
         {
             "name": "symfony/console",
@@ -6373,14 +6397,14 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.0",
+        "php": "^7.2",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "ext-json": "*"
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.0"
+        "php": "7.2.19"
     },
     "plugin-api-version": "1.1.0"
 }

@@ -14,15 +14,18 @@
          stopOnError="false"
          stopOnFailure="false"
          verbose="true"
->
-    <testsuites>
-        <testsuite name="Laravel Swoole Http Test Suite">
-            <directory suffix="Test.php">./tests</directory>
-        </testsuite>
-    </testsuites>
+         printerClass="Codedungeon\PHPUnitPrettyResultPrinter\Printer">
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
+    <testsuites>
+        <testsuite name="Laravel Swoole Http Test Suite">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <const name="IN_PHPUNIT" value="true"/>
+    </php>
 </phpunit>

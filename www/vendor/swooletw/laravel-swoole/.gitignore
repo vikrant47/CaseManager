@@ -1,6 +1,8 @@
 # Files
+.DS_Store
 phpunit.xml
 composer.lock
+.scannerwork
 
 # Folders
 vendor
