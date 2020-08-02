@@ -340,6 +340,10 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     position: static !important;
 }
 
+.editor-fullscreen .ace_editor {
+    height: 99%;
+}
+
 .ace_editor .ace_content {
     font-size: 12px;
     /*position: static !important;*/
