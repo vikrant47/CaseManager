@@ -5,12 +5,15 @@ var Engine = function () {
 
 };
 Engine.defaultActionOption = {
-    button: {
-        template: '<button class="action action-button"><i></i></button>',
+    default: {
+        active: true,
+        template: '<button class="action action-button"><i></i><span></span></button>',
+        element: {text: 'span', icon: 'i'},
         icon: 'icon-link',
         event: 'click',
         css_class: '',
         attributes: [],
+        prepend: false,
         beforeRender: function () {
         },
         afterRender: function () {
@@ -19,6 +22,13 @@ Engine.defaultActionOption = {
 
         }
     },
+    button: {
+        template: '<button class="action action-button"><i></i></button>',
+        icon: 'icon-link',
+        event: 'click',
+        css_class: '',
+        attributes: [],
+    },
     input: {
         template: '<input class="action action-input"><i></i></input>',
         icon: 'icon-link',
@@ -26,13 +36,6 @@ Engine.defaultActionOption = {
         events: {},
         css_class: '',
         attributes: [],
-        beforeRender: function () {
-        },
-        afterRender: function () {
-        },
-        handler: function () {
-
-        }
     },
     dropdown: {
         template: '<div class="dropdown action action-list">   <a href="#" data-toggle="dropdown" class="dropdown-title"></a>' +
@@ -43,13 +46,6 @@ Engine.defaultActionOption = {
         icon: 'icon-link',
         event: 'click',
         css_class: '',
-        beforeRender: function () {
-        },
-        afterRender: function () {
-        },
-        handler: function () {
-
-        }
     },
     dropdownItem: {
         template: '<li class="action-list-item" role="presentation"><a role="menuitem" tabindex="-1" href="#" class=" dropdown-item-title"></a></li>',
@@ -58,18 +54,13 @@ Engine.defaultActionOption = {
         attributes: [],
         event: 'click',
         css_class: '',
-        beforeRender: function () {
-        },
-        afterRender: function () {
-        },
-        handler: function () {
-
-        }
     }
 };
 Object.assign(Engine.prototype, {
     boot: function () {
         this.noConflicts();
+    },
+    ready: function () {
         this.addNavFlyout();
         this.addResizeFlyout();
         this.registerEvents();
@@ -226,6 +217,7 @@ Object.assign(Engine.prototype, {
             scope = this;
         }
         return actions.map(function (action) {
+            Engine._.merge(action, Engine.defaultActionOption.default);
             action.scope = scope;
             if (typeof action.active === 'function') {
                 action.active = action.active.call(action, $container, scope);
@@ -359,7 +351,7 @@ Object.assign(Engine.prototype, {
 window.Engine = Engine;
 Engine.instance = new Engine();
 $(document).ready(function () {
-    Engine.instance.boot();
+    Engine.instance.ready();
 });
 Engine.libs = {};
 Engine.reloadLibrary = function (lib, callback) {
@@ -379,3 +371,4 @@ Engine.loadLibrary = function (lib, callback) {
         });
     }
 };
+Engine.instance.boot();

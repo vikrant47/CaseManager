@@ -5,7 +5,6 @@ use Backend\Models\Preference;
 use System\Models\Parameter;
 
 ?>
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -56,22 +55,18 @@ use System\Models\Parameter;
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= Backend::skinAsset("assets/css/demo_1/style.css") ?>">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="<?= Backend::skinAsset("assets/images/favicon.png") ?>"/>
-
-    <?php $this->addJs('/modules/backend/widgets/lists/assets/js/october.list.js', 'core'); ?>
+    <script src="<?= url('/modules/backend/widgets/lists/assets/js/october.list.js', 'core'); ?>"></script>
+    <script src="<?= url('/plugins/demo/core/controllers/baseenginecontroller/libs/js/lodash.js') ?>"></script>
     <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
-    <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/libs/js/lodash.js') ?>
-    <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
-    <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
-    <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.component.js') ?>
-    <?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.filter.js') ?>
+    <script src="<?= url('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>"></script>
+    <script src="<?= url('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>"></script>
+    <script src="<?= url('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.component.js') ?>"></script>
+    <script src="<?= url('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.filter.js') ?>"></script>
     <?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
-    <?php $this->addJs('/plugins/demo/core/formwidgets/querybuilderwidget/assets/js/query-builder.standalone.min.js') ?>
-    <!--<?php $this->addJs('/plugins/demo/core/formwidgets/querybuilderwidget/assets/js/sql-parser.js') ?>-->
+    <script src="<?= url('/plugins/demo/core/formwidgets/querybuilderwidget/assets/js/query-builder.standalone.min.js') ?>"></script>
     <?php $this->addCss('/plugins/demo/core/formwidgets/querybuilderwidget/assets/css/query-builder.default.min.css') ?>
 
     <?= $this->makeAssets() ?>
     <?= Block::placeholder('head') ?>
     <?= $this->makeLayoutPartial('custom_styles') ?>
     <link rel="stylesheet" href="<?= Backend::skinAsset("assets/css/custom.css") ?>">
-</head>

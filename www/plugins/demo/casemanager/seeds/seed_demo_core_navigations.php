@@ -36,31 +36,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "uipage_id"=> null
-                            ] ,            [
-                                                                            "created_at"=>"2020-05-18 04:33:41",
-                                                                                        "updated_at"=>"2020-06-07 06:06:12",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> null,
-                                                                                        "label"=>"My Cases",
-                                                                                        "type"=>"list",
-                                                                                        "active"=> 1,
-                                                                                        "name"=>"my-cases",
-                                                                                        "description"=> "",
-                                                                                        "url"=>"list=mycases",
-                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
-                                                                                        "view"=> "",
-                                                                                        "form"=> "",
-                                                                                        "plugin_id"=> 6,
-                                                                                        "sort_order"=> 0,
-                                                                                        "icon"=>"oc-icon-briefcase",
-                                                                                        "id"=>"c3984be1-820c-4cc8-a675-742815313468",
-                                                                                        "record_id"=> null,
-                                                                                        "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
-                                                                                        "dashboard_id"=> null,
-                                                                                        "widget_id"=> null,
-                                                                                        "uipage_id"=> null
+                                                                                        "uipage_id"=> null,
+                                                                                        "list"=> null
                             ] ,            [
                                                                             "created_at"=> null,
                                                                                         "updated_at"=>"2020-06-07 06:06:40",
@@ -84,7 +61,33 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "uipage_id"=> null
+                                                                                        "uipage_id"=> null,
+                                                                                        "list"=> null
+                            ] ,            [
+                                                                            "created_at"=>"2020-05-18 04:33:41",
+                                                                                        "updated_at"=>"2020-07-13 11:25:02",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> null,
+                                                                                        "label"=>"My Cases",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"my-cases",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "view"=> "",
+                                                                                        "form"=> "",
+                                                                                        "plugin_id"=> 6,
+                                                                                        "sort_order"=> 0,
+                                                                                        "icon"=>"oc-icon-briefcase",
+                                                                                        "id"=>"c3984be1-820c-4cc8-a675-742815313468",
+                                                                                        "record_id"=> null,
+                                                                                        "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "uipage_id"=> null,
+                                                                                        "list"=>"\$/demo/casemanager/models/casemodel/my_case_columns.yaml"
                             ] ,            [
                                                                             "created_at"=>"2020-05-13 04:37:14",
                                                                                         "updated_at"=>"2020-06-14 06:00:06",
@@ -108,7 +111,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=>"84383d11-89c6-4dac-906c-bb2b08923b53",
-                                                                                        "uipage_id"=> null
+                                                                                        "uipage_id"=> null,
+                                                                                        "list"=> null
                             ] ,            [
                                                                             "created_at"=>"2020-05-13 04:38:17",
                                                                                         "updated_at"=>"2020-06-20 06:33:23",
@@ -132,7 +136,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "dashboard_id"=>"cc326831-e515-44a8-8eb8-b23b8fa8fdaa",
                                                                                         "widget_id"=> null,
-                                                                                        "uipage_id"=> null
+                                                                                        "uipage_id"=> null,
+                                                                                        "list"=> null
                             ]             ]);
         }
 

@@ -71,7 +71,6 @@ class ScriptContext
         $this->exception = new \stdClass();
         $this->request = request();
         foreach ($this->attributes as $key => $value) {
-            ${$key} = $value;
             $this->{$key} = $value;
         }
         foreach (ScriptContext::$EXCEPTION_CLASSES as $key => $value) {

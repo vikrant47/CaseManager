@@ -8,10 +8,10 @@ let ReferenceComponent = Engine.instance.define('engine.component.Reference', {
                             const nameFrom = association.nameFrom || 'name';
                             const otherKey = association.otherKey || 'id';
                             new engine.Filter().select({
-                                model: association[0],
+                                model: association[0] || association.model,
                                 attributes: [nameFrom, otherKey],
                                 limit: 20,
-                                query: params.data.q ? {
+                                where: params.data.q ? {
                                     "$and": [
                                         {
                                             [nameFrom]: {
