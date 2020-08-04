@@ -35,7 +35,8 @@ class EvalSql
             ];
 
         }
-        $dataScript = TwigEngine::eval($this->sql, $paginationContext);
+        $context = $paginationContext + $context;
+        $dataScript = TwigEngine::eval($this->sql, $context);
         $data = Db::select(Db::raw($dataScript));
         if ($this->pagination) {
             $data = new Paginator(Collection::make($data), $perPage, $page);

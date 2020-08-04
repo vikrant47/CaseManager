@@ -50,6 +50,15 @@ class WidgetController extends AbstractSecurityController
         return $widget->loadData(['filter' => $this->getFilter($widget->table)]);
     }
 
+    public function onLoadTemplate($id)
+    {
+        $id = Input::get('id');
+        /**@var $widget Widget */
+        $widget = Widget::where('id', $id)->first();
+
+        return $widget->loadTemplate(['filter' => $this->getFilter($widget->table)]);
+    }
+
     public function onLoadView($id)
     {
         $id = Input::get('id');
@@ -59,6 +68,14 @@ class WidgetController extends AbstractSecurityController
             'template' => $widget->loadTemplate(['filter' => $this->getFilter($widget->table)]),
             'script' => $widget->loadScript(['filter' => $this->getFilter($widget->table)]),
         ];
+    }
+
+    public function onLoadWidget($id)
+    {
+        $id = Input::get('id');
+        /**@var $widget Widget */
+        $widget = Widget::where('id', $id)->first();
+        return $widget->evaluate(['filter' => $this->getFilter($widget->table)]);
     }
 
     public function onPreview($id)

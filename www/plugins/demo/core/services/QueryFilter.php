@@ -49,11 +49,11 @@ class QueryFilter extends QueryBuilderParser
         $limit = $options['limit'];
         $offset = $options['offset'];
         $modelClass = $options['model'];
-        $filter = $options['where'];
+        $filter = $options['filter'];
         $attributes = $options['attributes'];
         if (empty($table)) {
             $modelInstance = new $modelClass();
-            $table = $modelInstance->table;
+            $table = $modelInstance->getTable();
         }
         /**@var $query \October\Rain\Database\Builder */
         $query = Db::table($table);
@@ -97,6 +97,11 @@ class QueryFilter extends QueryBuilderParser
         return $this->sql();
     }
 
+    public function isEmpty()
+    {
+        return strlen($this->filter) === 0;
+    }
+
     /**@param $fields array */
     public function setField($fields = null)
     {
@@ -115,33 +120,37 @@ class QueryFilter extends QueryBuilderParser
      */
     public function sql($prepend = '', $alias = null)
     {
-        $this->applyFilter();
-        $sql = $this->query->toSql();
-        if (count($sql) > 0) {
-            $whereIndex = strpos($sql, 'where');
-            if ($whereIndex) {
-                $sql = substr($sql, $whereIndex);
-            } else {
-                return '';
+        if (!$this->isEmpty()) {
+            $this->applyFilter();
+            $sql = $this->query->toSql();
+            if (strlen($sql) > 0) {
+                $whereIndex = strpos($sql, 'where');
+                if ($whereIndex) {
+                    $sql = substr($sql, $whereIndex + 5); // removing everything before where
+                } else {
+                    return '';
+                }
             }
-        }
-        if ($alias) {
-            // $fields = $this->query->
-        }
-        if (count($sql) > 0) {
-            return $prepend . ' ' . $sql;
+            if ($alias) {
+                // $fields = $this->query->
+            }
+            if (strlen($sql) > 0) {
+                return $prepend . ' ' . $sql;
+            }
         }
         return '';
     }
 
     public function applyFilter()
     {
-        $query = $this->query;
-        if ($query instanceof \October\Rain\Database\Builder) {
-            $query = $query->getQuery();
+        if (!$this->isEmpty()) {
+            $query = $this->query;
+            if ($query instanceof \October\Rain\Database\Builder) {
+                $query = $query->getQuery();
+            }
+            $this->evalFilter();
+            $this->parse($this->filter, $query);
         }
-        $this->evalFilter();
-        $this->parse($this->filter, $query);
     }
 
 }

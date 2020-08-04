@@ -48,9 +48,6 @@ let Filter = Engine.instance.define('engine.Filter', {
             '   </li>\n' +
             '{{~}}' +
             '</ul>',
-        init: function () {
-
-        },
         queryBuilderTypeMappings: {
             dropdown: function (field) {
                 return Object.assign(field, {
@@ -96,10 +93,10 @@ let Filter = Engine.instance.define('engine.Filter', {
                 let association = field.association || this.getBelongsToAssociation(definition, field.name);
                 if (association) {
                     return Object.assign({
-                        id: field.name,
+                        id: association.key,
                     }, field, {
                         input: 'select',
-                        type: 'string',
+                        type: 'relation',
                         plugin: 'select2',
                         values: {},
                         name: association.key,
@@ -114,8 +111,11 @@ let Filter = Engine.instance.define('engine.Filter', {
                 return field;
             }
         },
-        _ready: function () {
+        _static: function () { // when class loads in memory
             this.registerCustomTypes();
+        },
+        _ready: function () { // when document is ready
+
         },
         registerCustomTypes: function () {
             const QueryBuilder = $.fn.queryBuilder.constructor;
@@ -200,7 +200,7 @@ let Filter = Engine.instance.define('engine.Filter', {
             }
         },
         afterUpdateRuleValue: function (e, rule) {
-            console.log(rule);
+           // console.log(rule);
             const $valueEl = rule.$el.find('.rule-value-container :input');
             if ($valueEl.is('select')) {
                 const $selection = $valueEl.find('option[value="' + rule.value + '"]');
@@ -429,7 +429,7 @@ let Filter = Engine.instance.define('engine.Filter', {
         const ui = Engine.instance.ui;
         const modelRecord = ui.getModel();
         const settings = Object.assign({
-            model: this.definition && this.definition.model || modelRecord.model,
+            model: this.definition && this.definition.model || modelRecord && modelRecord.model,
             where: {},
             operation: 'select',
             loadingContainer: '.page-content',

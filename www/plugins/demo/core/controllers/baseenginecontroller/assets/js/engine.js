@@ -8,7 +8,7 @@ Engine.defaultActionOption = {
     default: {
         active: true,
         template: '<button class="action action-button"><i></i><span></span></button>',
-        element: {text: 'span', icon: 'i'},
+        // element: {text: 'span', icon: 'i'},
         icon: 'icon-link',
         event: 'click',
         css_class: '',
@@ -217,13 +217,12 @@ Object.assign(Engine.prototype, {
             scope = this;
         }
         return actions.map(function (action) {
-            Engine._.merge(action, Engine.defaultActionOption.default);
+            action = Object.assign({}, Engine.defaultActionOption.default, Engine.defaultActionOption[action.type || 'button'], action);
             action.scope = scope;
             if (typeof action.active === 'function') {
                 action.active = action.active.call(action, $container, scope);
             }
             if (action.active) {
-                action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
                 action.beforeRender.apply(this, [{name: 'afterRender'}, scope, action, $container]);
                 var $template = $(action.template).data('action', action).data('scope', scope).prop('id', action.id);
                 if (action.label) {
@@ -314,12 +313,16 @@ Object.assign(Engine.prototype, {
             }
             settings.constructor.apply(this, arguments);
         };
+        let staticInitializer = null;
         for (let i in settings.static) {
             cls[i] = settings.static[i];
             if (i === '_ready' && typeof cls[i] === 'function') { // checking for ready event
                 $(document).ready(function () {
                     cls[i].apply(cls);
                 });
+            }
+            if (i === '_static' && typeof cls[i] === 'function') { // checking for ready event
+                staticInitializer = cls[i]; // calling static block/ function on class load
             }
         }
         if (settings.extends) {
@@ -340,6 +343,9 @@ Object.assign(Engine.prototype, {
                 parentPackage = parentPackage[package];
             }
             parentPackage[name] = cls;
+        }
+        if (staticInitializer) {
+            staticInitializer.call(cls);
         }
         return cls;
     },

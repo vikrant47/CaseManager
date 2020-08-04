@@ -122,7 +122,7 @@ var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
 
 Engine.instance.define('engine.report.Widget', {
     constructor: function (id, containerId) {
-        this.model = null;
+        this.model = {id: id};
         this.option = {};
         this.containerId = containerId || id;
         this.$el = $('#widget-container-' + this.containerId);
@@ -172,6 +172,7 @@ Engine.instance.define('engine.report.Widget', {
         }
         return this.filter.apply(function () {
             _this.fetchAndRender();
+            _this.filter.closePopup();
         }).build();
     },
     getFilter: function () {
@@ -180,9 +181,9 @@ Engine.instance.define('engine.report.Widget', {
     makeFilterHeaderAction: function () {
         const _this = this;
         this.header.addActions([{
-            label: 'filter',
+            /*label: 'filter',*/
             name: 'filter',
-            icon: 'fa fa-filter',
+            icon: 'oc-icon-filter',
             handler: function () {
                 _this.filter.showInPopup();
             }
@@ -221,6 +222,9 @@ Engine.instance.define('engine.report.Widget', {
         var $toolbar = this.$footer.find('.widget-toolbar');
         Engine.instance.addActions($toolbar, actions, this);
     },
+    setData: function (data) {
+        return this.store = new Store(data);
+    },
     loadData: function () {
         const _this = this;
         return Engine.instance.ui.request('onLoadData', {
@@ -233,32 +237,33 @@ Engine.instance.define('engine.report.Widget', {
             if (typeof data === 'string') {
                 data = JSON.parse(result);
             }
-            return _this.store = new Store(data);
+            return this.setData(data);
         });
     },
-    loadView: function () {
+    onLoadWidget: function () {
         const _this = this;
-        return Engine.instance.ui.request('onLoadView', {
+        return Engine.instance.ui.request('onLoadWidget', {
             url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
             data: {
                 id: this.model.id,
                 filter: this.filter ? this.filter.getRules() : null,
             }
-        }).then(function () {
-            Object.assign(_this.model, data);
+        }).then(function (widget) {
+            Object.assign(_this.model, widget);
+            _this.setData(widget.data);
             return _this.model;
         });
     },
     render: function () {
         this.init(this.option);
         this.header.render();
-        $(this.getBody()).append(this.model.template);
+        $(this.getBody()).empty().append(this.model.template);
         const script = this.looseParseJSON(this.model.script);
         script.call(this);
     },
     fetchAndRender: function () {
         const _this = this;
-        this.loadView(function (widget) {
+        this.onLoadWidget().then(function (widget) {
             _this.render(widget);
         });
     },
