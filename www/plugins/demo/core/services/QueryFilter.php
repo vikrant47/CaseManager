@@ -113,6 +113,14 @@ class QueryFilter extends QueryBuilderParser
         $this->filter = TwigEngine::eval($this->filter);
     }
 
+    /**@param $query Builder */
+    public function toRawSql($query)
+    {
+        return array_reduce($query->getBindings(), function ($sql, $binding) {
+            return preg_replace('/\?/', is_numeric($binding) ? $binding : "'" . $binding . "'", $sql, 1);
+        }, $query->toSql());
+    }
+
     /**
      * @param string $prepend
      * @param null $alias
@@ -122,7 +130,7 @@ class QueryFilter extends QueryBuilderParser
     {
         if (!$this->isEmpty()) {
             $this->applyFilter();
-            $sql = $this->query->toSql();
+            $sql = $this->toRawSql($this->query);
             if (strlen($sql) > 0) {
                 $whereIndex = strpos($sql, 'where');
                 if ($whereIndex) {

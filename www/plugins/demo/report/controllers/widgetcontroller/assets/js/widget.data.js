@@ -4,12 +4,13 @@ if (!Object.assign) {
 var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
     static: {
         defaultTemplate:
-            '<div class="widget-toolbar row">\n' +
-            '    <div class="user-toolbar col-md-12"></div>\n' +
+            '<h6 class="widget-title card-title mb-1 col-md-9"></h6>\n' +
+            '<div class="widget-toolbar col-md-3" mb-1>\n' +
+            '    <div class="user-toolbar d-flex flex-row-reverse"></div>\n' +
             '    <div class="default-toolbar"></div>\n' +
             '</div>\n' +
-            '<h6 class="widget-title card-title mb-0 col-md-12"></h6>\n' +
-            '<div class="text-muted mb-4 widget-description col-md-12"></div>',
+            '<div class="text-muted mb-1 widget-description col-md-12"></div>' +
+            '<div class="widget-breadcrumb col-md-12"></div>' ,
         defaultActions: [{
             label: '',
             icon: 'icon-minus',
@@ -146,6 +147,7 @@ Engine.instance.define('engine.report.Widget', {
         }
         this.setHeader(new WidgetHeader(this));
         this.setFooterActions(engine.data.Store.cloneArray(option.footer.actions));
+        this.initialized = true;
     },
     setModel: function (model) {
         this.model = model;
@@ -164,7 +166,7 @@ Engine.instance.define('engine.report.Widget', {
             this.filter = filter;
         } else {
             this.filter = engine.Filter.create(Object.assign({
-                breadcrumbContainer: this.header.$el.find('.user-toolbar'),
+                breadcrumbContainer: this.header.$el.find('.widget-breadcrumb'),
             }, filter));
         }
         if (!filter.hideAction) {
@@ -244,6 +246,7 @@ Engine.instance.define('engine.report.Widget', {
         const _this = this;
         return Engine.instance.ui.request('onLoadWidget', {
             url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
+            loadingContainer: _this.getBody(),
             data: {
                 id: this.model.id,
                 filter: this.filter ? this.filter.getRules() : null,
@@ -255,11 +258,30 @@ Engine.instance.define('engine.report.Widget', {
         });
     },
     render: function () {
-        this.init(this.option);
-        this.header.render();
+        const _this = this;
+        if (!this.initialized) {
+            this.init(this.option);
+            this.header.render();
+        }
         $(this.getBody()).empty().append(this.model.template);
         const script = this.looseParseJSON(this.model.script);
-        script.call(this);
+        let widgetScript = script.call(this);
+        if (widgetScript) {
+            if (typeof widgetScript !== 'object') {
+                widgetScript = {render: widgetScript};
+            }
+            let initPromise = Promise.resolve(this);
+            if (typeof widgetScript.init === 'function' && !this.scriptInit) {
+                initPromise = widgetScript.init.call(this);
+                this.scriptInit = true;
+            }
+            if (initPromise instanceof Promise) {
+                initPromise = Promise.resolve(this);
+            }
+            initPromise.then(function () {
+                widgetScript.render.call(_this);
+            });
+        }
     },
     fetchAndRender: function () {
         const _this = this;
@@ -268,7 +290,7 @@ Engine.instance.define('engine.report.Widget', {
         });
     },
     looseParseJSON: function (script) {
-        return new Function(script);
+        return new Function('return ' + script);
     },
     onResize: function (callback) {
         this.events['resize'].push(callback);

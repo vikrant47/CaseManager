@@ -260,6 +260,11 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         popup.close = function () {
             popup.$modal.modal('hide');
         };
+        if (typeof setting.close === 'function') {
+            popup.$modal.on('hide.bs.modal', function (e) {
+                setting.close(e, popup);
+            });
+        }
         return popup;
 
     },

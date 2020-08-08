@@ -3,6 +3,9 @@ let Filter = Engine.instance.define('engine.Filter', {
         defaultPopupConfig: {
             size: 'lg',
             title: 'Filter',
+            close: function (e, popup) {
+                popup.target.rebuildDom();
+            },
             actions: [{
                 name: 'search',
                 label: 'Search',
@@ -28,6 +31,9 @@ let Filter = Engine.instance.define('engine.Filter', {
             filter.setBreadcrumbContainer(setting.breadcrumbContainer);
             if (setting.renderBreadcrumb) {
                 filter.on('engine.filter.build', function () {
+                    filter.renderBreadcrumb();
+                });
+                filter.on('engine.filter.apply', function () {
                     filter.renderBreadcrumb();
                 });
             }
@@ -149,12 +155,12 @@ let Filter = Engine.instance.define('engine.Filter', {
             return mereged;
         },
     },
-    constructor: function (el, valueElement, value, destroyExisting = true) {
+    extends: engine.EngineObservable,
+    constructor: function (el, valueElement, value, destroyExisting = false) {
         if (!el) {
             el = $('<div class="filter"></div>').get(0);
         }
         this.$el = $(el);
-        this.$el.data('engine.filter', this);
         this.$valueField = $(valueElement);
         if (!value && this.$valueField.length > 0) {
             value = this.$valueField.val();
@@ -199,8 +205,11 @@ let Filter = Engine.instance.define('engine.Filter', {
                 ruleData.displayValue = rule.displayValue;
             }
         },
+        beforeDestroy: function () {
+            console.log('filter destroyed', this);
+        },
         afterUpdateRuleValue: function (e, rule) {
-           // console.log(rule);
+            // console.log(rule);
             const $valueEl = rule.$el.find('.rule-value-container :input');
             if ($valueEl.is('select')) {
                 const $selection = $valueEl.find('option[value="' + rule.value + '"]');
@@ -306,6 +315,7 @@ let Filter = Engine.instance.define('engine.Filter', {
     initQueryBuilder: function (definition) {
         if (!this.$el[0].queryBuilder) {
             this.$el.queryBuilder({
+                allow_empty: true,
                 plugins: [
                     // 'sortable',
                     // 'filter-description',
@@ -319,6 +329,7 @@ let Filter = Engine.instance.define('engine.Filter', {
                 filters: this.mapFieldsToQueryBuilderFields(definition)
             });
             this.registerEvents();
+            this.$el.data('engine.filter', this);
         }
     },
     build: function () {
@@ -329,12 +340,17 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
         return this.defPromise.then(function (definition) {
             _this.initQueryBuilder(definition);
-            _this.$el.trigger('engine.filter.build', [_this]);
+            _this.emit('engine.filter.build', [_this]);
             return _this;
         });
     },
     toPromise() {
         return this.defPromise;
+    },
+    rebuildDom: function () {
+        this.$el = $('<div class="filter"></div>');
+        this.initQueryBuilder(this.definition);
+        this.setRules(this._appliedRules);
     },
     showInPopup: function (options) {
         const settings = Object.assign({}, Filter.defaultPopupConfig, options);
@@ -342,20 +358,25 @@ let Filter = Engine.instance.define('engine.Filter', {
             content: this.$el,
             target: this,
         }, settings, {
-            id: 'filter-popup'
+            id: 'filter-popup-' + new Date().getTime(),
         }));
         return this;
     },
     closePopup: function () {
-        this.popup.close();
+        if (this.popup.$modal) {
+            this.popup.close();
+        }
     },
     getRules: function () {
         return this.getQueryBuilder().getRules() || {};
     },
     setRules: function (rules) {
-        /**Removing non relevant rules*/
-
+        /**TODO:Removing non relevant rules*/
         this.getQueryBuilder().setRules(rules);
+    },
+    clearRules: function () {
+        /**TODO:Removing non relevant rules*/
+        this.getQueryBuilder().setRules({rules: []});
     },
     getQueryBuilder: function () {
         return this.$el.data('queryBuilder');
@@ -378,12 +399,9 @@ let Filter = Engine.instance.define('engine.Filter', {
         return qb.getMongo();
     },
     destroy: function () {
-        if (this.$el.queryBuilder && this.$el.queryBuilder.destroy) {
-            this.$el.queryBuilder.destroy();
+        if (this.getQueryBuilder()) {
+            this.getQueryBuilder().destroy();
         }
-    },
-    on: function (event, callback) {
-        return this.$el.on(event, callback);
     },
     getFieldsFromMongoQuery: function (query) {
         const condition = Object.keys(query).find(function (condition) {
@@ -479,10 +497,10 @@ let Filter = Engine.instance.define('engine.Filter', {
             for (const childRule of rule.rules) {
                 if (!childRule.condition) {
                     let fieldObject = fields.find(function (f) {
-                        return f.name === childRule.field;
+                        return f.id === childRule.field;
                     });
                     if (!fieldObject) {
-                        fieldObject = {name: childRule.field, label: childRule.field};
+                        fieldObject = {name: childRule.field, label: childRule.label || childRule.field};
                     }
                     data.push(Object.assign({condition: rule.condition, fieldObject: fieldObject}, childRule));
                 } else {
@@ -514,7 +532,7 @@ let Filter = Engine.instance.define('engine.Filter', {
         this.$breadcrumbContainer = breadcrumbContainer instanceof jQuery ? breadcrumbContainer : $(breadcrumbContainer);
     },
     renderBreadcrumb: function () {
-        this.$breadcrumbContainer.append(this.getBreadcrumbTemplate(this.rule, this.definition));
+        this.$breadcrumbContainer.empty().append(this.getBreadcrumbTemplate(this.rule, this.definition));
     },
     getBreadcrumbTemplate: function (rule, definition) {
         const ui = Engine.instance.ui;
@@ -527,14 +545,12 @@ let Filter = Engine.instance.define('engine.Filter', {
             const index = $this.parent().index();
             const remainingRules = breadcrumbData.slice(0, index);
             const rules = _this.toFilterRules(remainingRules);
-            if (rules) {
-                ui.navigateByQueryString('urlFilter', rules);
-            } else {
-                ui.navigateByQueryString('urlFilter', {});
-            }
+            _this.setRules(rules);
+            _this.apply();
         });
         $template.find('.breadcrumb-item-all a').click(function () {
-            ui.navigateByQueryString('urlFilter', {});
+            _this.clearRules();
+            _this.apply();
         });
         return $template;
     },
@@ -564,9 +580,10 @@ let Filter = Engine.instance.define('engine.Filter', {
     },
     apply: function (callback) {
         if (typeof callback == 'function') {
-            this.$el.on('filter.apply', callback);
+            this.on('engine.filter.apply', callback);
         } else {
-            this.$el.trigger('filter.apply', this);
+            this._appliedRules = this.getRules();
+            this.emit('engine.filter.apply', this);
         }
         return this;
     },
@@ -590,6 +607,6 @@ let ParentFilter = Engine.instance.define('engine.ParentFilter', {
         for (const child of this.children) {
             child.apply();
         }
-        this.$el.trigger('filter.apply', this);
+        this.emit('engine.filter.apply', this);
     },
 });
