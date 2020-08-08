@@ -91,7 +91,7 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "toolbar"=> false
                             ] ,            [
                                                                             "created_at"=>"2020-07-12 11:23:47",
-                                                                                        "updated_at"=>"2020-08-01 12:46:13",
+                                                                                        "updated_at"=>"2020-08-08 10:17:32",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"filter",
