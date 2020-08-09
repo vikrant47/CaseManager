@@ -175,6 +175,10 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     },
     navigate: function (url, skipPushState) {
         const link = this.getUrlInfo(url);
+        if (!skipPushState) {
+            $(document).trigger('engine.ui.navigate');
+            window.history.pushState({href: link.url}, '', link.url);
+        }
         let promise;
         if (link.type === 'list') {
             promise = EngineList.open(link.url);
@@ -186,10 +190,9 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             promise = this.open(link.url);
         }
         if (promise) {
-            promise.then(function () {
+            promise.catch(function () {
                 if (!skipPushState) {
-                    $(document).trigger('engine.ui.navigate');
-                    window.history.pushState({href: link.url}, '', link.url);
+                    window.history.back();
                 }
             });
         }

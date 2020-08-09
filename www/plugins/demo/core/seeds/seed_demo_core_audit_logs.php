@@ -445,6 +445,30 @@ class SeedDemoCoreAuditLogs implements Seedable
                                                                                         "current"=> null,
                                                                                         "id"=>"8bff5410-cfc5-11ea-b5fa-836392110945",
                                                                                         "record_id"=>"8511a1b0-cfc5-11ea-b61f-f3c1964e7cf1"
+                            ] ,            [
+                                                                            "created_at"=>"2020-08-09 09:13:41",
+                                                                                        "updated_at"=>"2020-08-09 09:13:41",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 3,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "previous"=>"{\"case_number\":\"54545\",\"case_version\":\"54545\",\"description\":null,\"priority_id\":null,\"suspect\":\"64\",\"tat_duration\":3171795146,\"title\":null}",
+                                                                                        "current"=> null,
+                                                                                        "id"=>"9e3bba00-da20-11ea-b5b9-57bbf2b886d8",
+                                                                                        "record_id"=>"8dc0d800-bec9-11ea-8024-69f5b89267d0"
+                            ] ,            [
+                                                                            "created_at"=>"2020-08-09 09:14:27",
+                                                                                        "updated_at"=>"2020-08-09 09:14:27",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 1,
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "operation"=>"updating",
+                                                                                        "previous"=>"{\"case_number\":\"5454\",\"case_version\":\"\",\"description\":null,\"priority_id\":null,\"suspect\":\"54545\",\"tat_duration\":3171796030,\"title\":null}",
+                                                                                        "current"=> null,
+                                                                                        "id"=>"b9b7c860-da20-11ea-a390-f35926930677",
+                                                                                        "record_id"=>"9caa4610-becb-11ea-9b6a-9df544c173f0"
                             ]             ]);
         }
 

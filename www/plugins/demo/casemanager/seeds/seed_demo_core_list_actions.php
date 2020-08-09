@@ -34,12 +34,12 @@ class SeedDemoCoreListActions implements Seedable
                                                                                         "toolbar"=> false
                             ] ,            [
                                                                             "created_at"=>"2020-05-17 09:24:19",
-                                                                                        "updated_at"=>"2020-06-21 05:03:28",
+                                                                                        "updated_at"=>"2020-08-09 09:30:23",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"pick-case",
                                                                                         "label"=>"Pick Case",
-                                                                                        "list"=>"\$/demo/casemanager/models/casemodel/columns.yaml",
+                                                                                        "list"=>"\$/demo/casemanager/models/casemodel/my_case_columns.yaml",
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "active"=> 1,
                                                                                         "description"=> "",
