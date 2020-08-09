@@ -260,6 +260,11 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         popup.close = function () {
             popup.$modal.modal('hide');
         };
+        if (typeof setting.close === 'function') {
+            popup.$modal.on('hide.bs.modal', function (e) {
+                setting.close(e, popup);
+            });
+        }
         return popup;
 
     },
@@ -513,6 +518,16 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
 var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     static: {
         el: '.engine-form-wrapper',
+        // definition form field manipulation
+        getFormFields(definition) {
+            let fields = definition.form.controls.fields;
+            if (definition.form.controls.tabs) {
+                fields = Object.assign(fields, definition.form.controls.tabs.fields);
+            }
+            return Object.keys(fields).map(function (fieldName) {
+                return Object.assign({name: fieldName}, fields[fieldName]);
+            })
+        },
         getInstance: function (el, modelRecord) {
             const $el = $(el).eq(0);
             if ($el.data('engineForm')) {
@@ -554,7 +569,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     },
     extends: EngineObservable,
     constructor: function (config) {
-        this.config = config
+        this.config = config;
     },
     bind: function ($el, modelRecord) {
         this.modelRecord = modelRecord;
@@ -570,16 +585,22 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         return this;
     },
     getValue: function (field) {
-        return this.getField(field).val()
+        return this.getFieldElement(field).val()
     },
-    getField: function (field) {
+    getFieldElement: function (field) {
         return this.$el.find('[name$="[' + field + ']"]')
     },
     setConfig: function (config) {
         this.config = config;
     },
+    toDefinition: function () {
+        return {form: {controls: this.config}};
+    },
+    fromDefinition: function (definition) {
+        this.config = definition.form.controls;
+    },
     getField: function (fieldName) {
-        var fields = Engine.instance.getFormFields(this.config);
+        var fields = this.static.getFormFields(this.toDefinition());
         for (var fieldName in fields) {
             return fields[fieldName];
         }

@@ -5,12 +5,15 @@ var Engine = function () {
 
 };
 Engine.defaultActionOption = {
-    button: {
-        template: '<button class="action action-button"><i></i></button>',
+    default: {
+        active: true,
+        template: '<button class="action action-button"><i></i><span></span></button>',
+        // element: {text: 'span', icon: 'i'},
         icon: 'icon-link',
         event: 'click',
         css_class: '',
         attributes: [],
+        prepend: false,
         beforeRender: function () {
         },
         afterRender: function () {
@@ -19,6 +22,13 @@ Engine.defaultActionOption = {
 
         }
     },
+    button: {
+        template: '<button class="action action-button"><i></i></button>',
+        icon: 'icon-link',
+        event: 'click',
+        css_class: '',
+        attributes: [],
+    },
     input: {
         template: '<input class="action action-input"><i></i></input>',
         icon: 'icon-link',
@@ -26,13 +36,6 @@ Engine.defaultActionOption = {
         events: {},
         css_class: '',
         attributes: [],
-        beforeRender: function () {
-        },
-        afterRender: function () {
-        },
-        handler: function () {
-
-        }
     },
     dropdown: {
         template: '<div class="dropdown action action-list">   <a href="#" data-toggle="dropdown" class="dropdown-title"></a>' +
@@ -43,13 +46,6 @@ Engine.defaultActionOption = {
         icon: 'icon-link',
         event: 'click',
         css_class: '',
-        beforeRender: function () {
-        },
-        afterRender: function () {
-        },
-        handler: function () {
-
-        }
     },
     dropdownItem: {
         template: '<li class="action-list-item" role="presentation"><a role="menuitem" tabindex="-1" href="#" class=" dropdown-item-title"></a></li>',
@@ -58,18 +54,13 @@ Engine.defaultActionOption = {
         attributes: [],
         event: 'click',
         css_class: '',
-        beforeRender: function () {
-        },
-        afterRender: function () {
-        },
-        handler: function () {
-
-        }
     }
 };
 Object.assign(Engine.prototype, {
     boot: function () {
         this.noConflicts();
+    },
+    ready: function () {
         this.addNavFlyout();
         this.addResizeFlyout();
         this.registerEvents();
@@ -226,12 +217,12 @@ Object.assign(Engine.prototype, {
             scope = this;
         }
         return actions.map(function (action) {
+            action = Object.assign({}, Engine.defaultActionOption.default, Engine.defaultActionOption[action.type || 'button'], action);
             action.scope = scope;
             if (typeof action.active === 'function') {
                 action.active = action.active.call(action, $container, scope);
             }
             if (action.active) {
-                action = Object.assign({}, Engine.defaultActionOption[action.type || 'button'], action);
                 action.beforeRender.apply(this, [{name: 'afterRender'}, scope, action, $container]);
                 var $template = $(action.template).data('action', action).data('scope', scope).prop('id', action.id);
                 if (action.label) {
@@ -315,13 +306,14 @@ Object.assign(Engine.prototype, {
             if (settings.extends) {
                 const parent = new settings.extends();
                 for (const i in parent) {
-                    if (typeof i !== 'function') {
+                    if (typeof i !== 'function' && typeof this[i] === 'undefined') {
                         this[i] = parent[i];
                     }
                 }
             }
             settings.constructor.apply(this, arguments);
         };
+        let staticInitializer = null;
         for (let i in settings.static) {
             cls[i] = settings.static[i];
             if (i === '_ready' && typeof cls[i] === 'function') { // checking for ready event
@@ -329,11 +321,15 @@ Object.assign(Engine.prototype, {
                     cls[i].apply(cls);
                 });
             }
+            if (i === '_static' && typeof cls[i] === 'function') { // checking for ready event
+                staticInitializer = cls[i]; // calling static block/ function on class load
+            }
         }
         if (settings.extends) {
             cls.prototype = Object.create(settings.extends.prototype);
         }
         Object.assign(cls.prototype, settings);
+        Object.assign(cls.prototype.static, settings.static);
         if (settings.name) {
             let parentPackage = window;
             const namespace = settings.name.split('.');
@@ -349,6 +345,9 @@ Object.assign(Engine.prototype, {
             }
             parentPackage[name] = cls;
         }
+        if (staticInitializer) {
+            staticInitializer.call(cls);
+        }
         return cls;
     },
     extend: function (child, parent) {
@@ -359,7 +358,7 @@ Object.assign(Engine.prototype, {
 window.Engine = Engine;
 Engine.instance = new Engine();
 $(document).ready(function () {
-    Engine.instance.boot();
+    Engine.instance.ready();
 });
 Engine.libs = {};
 Engine.reloadLibrary = function (lib, callback) {
@@ -379,3 +378,4 @@ Engine.loadLibrary = function (lib, callback) {
         });
     }
 };
+Engine.instance.boot();

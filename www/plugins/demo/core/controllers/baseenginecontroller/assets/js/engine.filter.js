@@ -3,6 +3,9 @@ let Filter = Engine.instance.define('engine.Filter', {
         defaultPopupConfig: {
             size: 'lg',
             title: 'Filter',
+            close: function (e, popup) {
+                popup.target.rebuildDom();
+            },
             actions: [{
                 name: 'search',
                 label: 'Search',
@@ -22,12 +25,17 @@ let Filter = Engine.instance.define('engine.Filter', {
         create: function (config) {
             const setting = Object.assign({}, Filter.defaultConfig, config);
             const filter = new engine.Filter(setting.el);
-            if (setting.fields) {
-                this.filter.setFields(setting.fields);
+            if (setting.fields.length > 0) {
+                filter.setFields(setting.fields);
             }
-            filter.setBreadcrumbContainer(setting.breadcrumbContainer);
-            if (setting.renderBreadcrumb) {
-                filter.renderBreadcrumb();
+            filter.breadcrumbContainer = setting.breadcrumbContainer;
+            if (setting.breadcrumbContainer && setting.renderBreadcrumb) {
+                filter.on('engine.filter.build', function () {
+                    filter.renderBreadcrumb();
+                });
+                filter.on('engine.filter.apply', function () {
+                    filter.renderBreadcrumb();
+                });
             }
             return filter;
         },
@@ -46,9 +54,6 @@ let Filter = Engine.instance.define('engine.Filter', {
             '   </li>\n' +
             '{{~}}' +
             '</ul>',
-        init: function () {
-
-        },
         queryBuilderTypeMappings: {
             dropdown: function (field) {
                 return Object.assign(field, {
@@ -91,9 +96,11 @@ let Filter = Engine.instance.define('engine.Filter', {
                 field.type = 'double';
                 return field;
             }, relation: function (field, definition) {
-                let association = this.getBelongsToAssociation(definition, field.name);
+                let association = field.association || this.static.getBelongsToAssociation(definition, field.name);
                 if (association) {
-                    return Object.assign({}, field, {
+                    return Object.assign({
+                        id: association.key,
+                    }, field, {
                         input: 'select',
                         type: 'relation',
                         plugin: 'select2',
@@ -110,8 +117,11 @@ let Filter = Engine.instance.define('engine.Filter', {
                 return field;
             }
         },
-        _ready: function () {
+        _static: function () { // when class loads in memory
             this.registerCustomTypes();
+        },
+        _ready: function () { // when document is ready
+
         },
         registerCustomTypes: function () {
             const QueryBuilder = $.fn.queryBuilder.constructor;
@@ -144,21 +154,38 @@ let Filter = Engine.instance.define('engine.Filter', {
             }
             return mereged;
         },
+        getBelongsToAssociation: function (definition, fieldName) {
+            let belongsToAssocs = definition.associations.belongsTo;
+            if (belongsToAssocs) {
+                for (let key in belongsToAssocs) {
+                    if (key === fieldName || belongsToAssocs[key].key === fieldName) {
+                        const association = belongsToAssocs[key];
+                        return Object.assign({
+                            association: 'belongsTo',
+                            key: fieldName,
+                            targetModel: association[0],
+                        }, association);
+                    }
+                }
+            }
+        },
+        getColumns: function (definition) {
+            return definition.columns || [];
+        },
+        isEmptyRule: function (rule) {
+            return Engine._.isEmpty(rule) || JSON.stringify(rule) === JSON.stringify({
+                "condition": "AND",
+                "not": "false",
+                "valid": "true"
+            });
+        }
     },
-    constructor: function (el, valueElement, value, destroyExisting = true) {
+    extends: engine.EngineObservable,
+    constructor: function (el) {
         if (!el) {
             el = $('<div class="filter"></div>').get(0);
         }
         this.$el = $(el);
-        this.$el.data('engine.filter', this);
-        this.$valueField = $(valueElement);
-        if (!value && this.$valueField.length > 0) {
-            value = this.$valueField.val();
-        }
-        this.value = value;
-        if (destroyExisting) {
-            this.destroy();
-        }
     },
     setDefinition: function (definition) {
         this.definition = definition;
@@ -195,8 +222,11 @@ let Filter = Engine.instance.define('engine.Filter', {
                 ruleData.displayValue = rule.displayValue;
             }
         },
+        beforeDestroy: function () {
+            console.log('filter destroyed', this);
+        },
         afterUpdateRuleValue: function (e, rule) {
-            console.log(rule);
+            // console.log(rule);
             const $valueEl = rule.$el.find('.rule-value-container :input');
             if ($valueEl.is('select')) {
                 const $selection = $valueEl.find('option[value="' + rule.value + '"]');
@@ -207,9 +237,15 @@ let Filter = Engine.instance.define('engine.Filter', {
                 }*/
             }
         },
-        rulesChanged: function (e, rule) {
-            if (this.$valueField.length > 0) {
-                this.$valueField.val(JSON.stringify(this.getRules()));
+        rulesChanged: function (e, rules) {
+            try {
+                const rules = this.getQueryBuilder().getRules();
+                if (!this.static.isEmptyRule(rules)) {
+                    this._rules = rules;
+                }
+                this.emit('engine.filter.rulesChanged', rules);
+            } catch (e) {
+
             }
         }
     },
@@ -230,48 +266,18 @@ let Filter = Engine.instance.define('engine.Filter', {
     getDefinition() {
         return this.definition;
     },
-    // definition form field manipulation
-    getFormFields(definition) {
-        definition = definition || this.definition;
-        let fields = definition.form.controls.fields;
-        if (definition.form.controls.tabs) {
-            fields = Object.assign(fields, definition.form.controls.tabs.fields);
-        }
-        return Object.keys(fields).map(function (fieldName) {
-            return Object.assign({name: fieldName}, fields[fieldName]);
-        })
-    },
-    getColumns(definition) {
-        definition = definition || this.definition;
-        return definition.columns;
-    },
-    getBelongsToAssociation: function (definition, fieldName) {
-        let belongsToAssocs = definition.associations.belongsTo;
-        if (belongsToAssocs) {
-            for (let key in belongsToAssocs) {
-                if (key === fieldName || belongsToAssocs[key].key === fieldName) {
-                    const association = belongsToAssocs[key];
-                    return Object.assign({
-                        association: 'belongsTo',
-                        key: fieldName,
-                        targetModel: association[0],
-                    }, association);
-                }
-            }
-        }
-    },
-    makeFields: function (definition) {
-        if (!definition) {
-            return [];
+    makeFields: function () {
+        if (!this.definition) {
+            throw new Error('No definition loaded in filter, use setDefinition or loadDefinition before calling this');
         }
         const _this = this;
-        let formFields = this.getFormFields(definition).map(function (field) {
+        let formFields = engine.ui.EngineForm.getFormFields(this.definition).map(function (field) {
             if (field.type === 'relation') {
-                return Filter.queryBuilderTypeMappings.relation.call(_this, field, definition);
+                return Filter.queryBuilderTypeMappings.relation.call(_this, field, _this.definition);
             }
             return field;
         });
-        let columns = this.getColumns(definition);
+        let columns = this.static.getColumns(this.definition);
         return formFields.concat(columns.filter(function (column) {
             return formFields.findIndex(field => {
                 return field.name === column.name || field.id === column.name;
@@ -284,14 +290,14 @@ let Filter = Engine.instance.define('engine.Filter', {
             )
         }))
     },
-    mapFieldsToQueryBuilderFields: function (definition) {
+    mapFieldsToQueryBuilderFields: function () {
         const _this = this;
-        let fields = this.makeFields(definition).sort((field1, field2) => field1.label.localeCompare(field2.label));
+        let fields = this.makeFields().sort((field1, field2) => field1.label.localeCompare(field2.label));
         let qbFields = [];
         fields.forEach(function (field) {
             let qbField = Object.assign({id: field.name}, field);
             if (typeof Filter.queryBuilderTypeMappings[qbField.type] === 'function') {
-                qbField = Filter.queryBuilderTypeMappings[qbField.type].call(_this, qbField, definition);
+                qbField = Filter.queryBuilderTypeMappings[qbField.type].call(_this, qbField, _this.definition);
             } else {
                 qbField.type = 'string';
             }
@@ -299,9 +305,10 @@ let Filter = Engine.instance.define('engine.Filter', {
         });
         return qbFields;
     },
-    initQueryBuilder: function (definition) {
+    initQueryBuilder: function () {
         if (!this.$el[0].queryBuilder) {
             this.$el.queryBuilder({
+                allow_empty: true,
                 plugins: [
                     // 'sortable',
                     // 'filter-description',
@@ -312,22 +319,35 @@ let Filter = Engine.instance.define('engine.Filter', {
                     'invert',
                     'not-group'
                 ],
-                filters: this.mapFieldsToQueryBuilderFields(definition)
+                filters: this.mapFieldsToQueryBuilderFields()
             });
             this.registerEvents();
+            this.$el.data('engine.filter', this);
         }
     },
-    build: function () {
+    build: function (rules) {
+        rules = rules || this._rules;
         const _this = this;
-        let defPromise = Promise.resolve(this.definition);
+        this.defPromise = Promise.resolve(this.definition);
         if (!this.definition) {
-            defPromise = this.loadDefinition();
+            this.defPromise = this.loadDefinition();
         }
-        return defPromise.then(function (definition) {
+        return this.defPromise.then(function (definition) {
             _this.initQueryBuilder(definition);
-            _this.$el.trigger('engine.filter.build', [_this]);
+            if (rules) {
+                _this.setRules(rules)
+            }
+            ;_this.emit('engine.filter.build', [_this]);
             return _this;
         });
+    },
+    toPromise() {
+        return this.defPromise;
+    },
+    rebuildDom: function () {
+        this.$el = $('<div class="filter"></div>');
+        this.initQueryBuilder(this.definition);
+        this.setRules(this._appliedRules);
     },
     showInPopup: function (options) {
         const settings = Object.assign({}, Filter.defaultPopupConfig, options);
@@ -335,20 +355,35 @@ let Filter = Engine.instance.define('engine.Filter', {
             content: this.$el,
             target: this,
         }, settings, {
-            id: 'filter-popup'
+            id: 'filter-popup-' + new Date().getTime(),
         }));
         return this;
     },
     closePopup: function () {
-        this.popup.close();
+        if (this.popup && this.popup.$modal) {
+            this.popup.close();
+        }
+    },
+    isEmpty: function () {
+        return this.static.isEmptyRule(this.getRules());
     },
     getRules: function () {
-        return this.getQueryBuilder().getRules();
+        return this._rules || {};
     },
     setRules: function (rules) {
-        /**Removing non relevant rules*/
+        /**TODO:Removing non relevant rules*/
+        this._rules = rules;
+        if (!Engine._.isEmpty(rules) && this.getQueryBuilder()) {
+            try {
+                this.getQueryBuilder().setRules(rules);
+            } catch (e) {
 
-        this.getQueryBuilder().setRules(rules);
+            }
+        }
+    },
+    clearRules: function () {
+        /**TODO:Removing non relevant rules*/
+        this.getQueryBuilder().setRules({rules: []});
     },
     getQueryBuilder: function () {
         return this.$el.data('queryBuilder');
@@ -371,12 +406,9 @@ let Filter = Engine.instance.define('engine.Filter', {
         return qb.getMongo();
     },
     destroy: function () {
-        if (this.$el.queryBuilder && this.$el.queryBuilder.destroy) {
-            this.$el.queryBuilder.destroy();
+        if (this.getQueryBuilder()) {
+            this.getQueryBuilder().destroy();
         }
-    },
-    on: function (event, callback) {
-        return this.$el.on(event, callback);
     },
     getFieldsFromMongoQuery: function (query) {
         const condition = Object.keys(query).find(function (condition) {
@@ -394,7 +426,7 @@ let Filter = Engine.instance.define('engine.Filter', {
     },
     parseMongoQuery: function (query) {
         if (!Engine._.isEmpty(query)) {
-            const definition = this.definition || {
+            this.definition = this.definition || {
                 form: {
                     controls: {
                         fields: this.getFieldsFromMongoQuery(query).map(function (field) {
@@ -407,7 +439,7 @@ let Filter = Engine.instance.define('engine.Filter', {
                 },
                 columns: [],
             };
-            this.initQueryBuilder(definition);
+            this.initQueryBuilder();
             this.setRulesFromMongo(query);
             return this.getRules();
         }
@@ -422,16 +454,16 @@ let Filter = Engine.instance.define('engine.Filter', {
         const ui = Engine.instance.ui;
         const modelRecord = ui.getModel();
         const settings = Object.assign({
-            model: this.definition && this.definition.model || modelRecord.model,
-            query: {},
+            model: this.definition && this.definition.model || modelRecord && modelRecord.model,
+            where: {},
             operation: 'select',
             loadingContainer: '.page-content',
             ajax: {},
         }, options);
-        const rules = this.parseMongoQuery(options.query);
+        const rules = this.parseMongoQuery(options.where);
         return Engine.instance.ui.request('onQueryData', Object.assign({
             data: {
-                query: rules || undefined,
+                where: rules || undefined,
                 queryType: settings.operation,
                 table: settings.table,
                 model: settings.model,
@@ -472,10 +504,10 @@ let Filter = Engine.instance.define('engine.Filter', {
             for (const childRule of rule.rules) {
                 if (!childRule.condition) {
                     let fieldObject = fields.find(function (f) {
-                        return f.name === childRule.field;
+                        return f.id === childRule.field;
                     });
                     if (!fieldObject) {
-                        fieldObject = {name: childRule.field, label: childRule.field};
+                        fieldObject = {name: childRule.field, label: childRule.label || childRule.field};
                     }
                     data.push(Object.assign({condition: rule.condition, fieldObject: fieldObject}, childRule));
                 } else {
@@ -503,31 +535,27 @@ let Filter = Engine.instance.define('engine.Filter', {
         }
         return null;
     },
-    setBreadcrumbContainer: function (breadcrumbContainer) {
-        this.$breadcrumbContainer = breadcrumbContainer instanceof jQuery ? breadcrumbContainer : $(breadcrumbContainer);
-    },
     renderBreadcrumb: function () {
-        this.$breadcrumbContainer.append(this.getBreadcrumbTemplate(this.rule, this.definition));
+        const $breadcrumbContainer = this.breadcrumbContainer instanceof jQuery ? this.breadcrumbContainer : $(this.breadcrumbContainer);
+        $breadcrumbContainer.empty().append(this.getBreadcrumbTemplate(this.getRules(), this.definition));
     },
-    getBreadcrumbTemplate: function (rule, definition) {
+    getBreadcrumbTemplate: function () {
         const ui = Engine.instance.ui;
         const _this = this;
-        const breadcrumbData = this.getBreadcrumbData(rule, this.makeFields(definition));
+        const breadcrumbData = this.getBreadcrumbData(this.getRules(), this.makeFields());
         const template = doT.template(Filter.breadcrumbTemplate)({items: breadcrumbData});
-        const $template = $(template).data('rule', rule).data('breadcrumbData', breadcrumbData);
+        const $template = $(template).data('filter', this).data('breadcrumbData', breadcrumbData);
         $template.find('.breadcrumb-item').not('.breadcrumb-item-all').find('a').click(function () {
             const $this = $(this);
             const index = $this.parent().index();
             const remainingRules = breadcrumbData.slice(0, index);
             const rules = _this.toFilterRules(remainingRules);
-            if (rules) {
-                ui.navigateByQueryString('urlFilter', rules);
-            } else {
-                ui.navigateByQueryString('urlFilter', {});
-            }
+            _this.setRules(rules);
+            _this.apply();
         });
         $template.find('.breadcrumb-item-all a').click(function () {
-            ui.navigateByQueryString('urlFilter', {});
+            _this.clearRules();
+            _this.apply();
         });
         return $template;
     },
@@ -557,9 +585,10 @@ let Filter = Engine.instance.define('engine.Filter', {
     },
     apply: function (callback) {
         if (typeof callback == 'function') {
-            this.$el.on('filter.apply', callback);
+            this.on('engine.filter.apply', callback);
         } else {
-            this.$el.trigger('filter.apply', this);
+            this._appliedRules = this.getRules();
+            this.emit('engine.filter.apply', this);
         }
         return this;
     },
@@ -583,6 +612,6 @@ let ParentFilter = Engine.instance.define('engine.ParentFilter', {
         for (const child of this.children) {
             child.apply();
         }
-        this.$el.trigger('filter.apply', this);
+        this.emit('engine.filter.apply', this);
     },
 });

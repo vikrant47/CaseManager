@@ -1,13 +1,10 @@
-<?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <?php
 $randomId = substr(md5(mt_rand()), 0, 7);
+$this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js');
 ?>
 <?php
 $this->addAssets($this, $widget);
 ?>
-<?php $this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js') ?>
 <?php if ($preview === true) { ?>
     <a class="preview-link" href="../render/<?= $widget->id ?>" style="margin: 0;auto;">View</a>
 <?php } ?>
@@ -16,16 +13,17 @@ $this->addAssets($this, $widget);
             aria-hidden="true">×
     </button>
 <?php } ?>
-<div id="widget-container-<?= $randomId ?>" style="height: 100%;width: 100%;" class="widget-container grid-margin stretch-card"
+<div id="widget-container-<?= $randomId ?>" style="height: 100%;width: 100%;"
+     class="widget-container grid-margin stretch-card"
      data-widget-id="<?= $widget->id ?>">
     <div class="card">
         <div class="card-body">
-            <div class="widget-header d-flex justify-content-between align-items-baseline mb-2">
-                <h6 class="widget-title card-title mb-0"></h6>
-                <div class="widget-toolbar">
-                    <div class="user-toolbar"></div>
+            <div class="widget-header d-flex justify-content-between align-items-baseline mb-2 row">
+                <div class="widget-toolbar col-md-12">
+                    <div class="user-toolbar col-md-12"></div>
                     <div class="default-toolbar"></div>
                 </div>
+                <h6 class="widget-title card-title mb-0 col-md-12"></h6>
                 <div class="text-muted mb-4 widget-description">
 
                 </div>
@@ -61,11 +59,25 @@ $this->addAssets($this, $widget);
         display: inline;
     }
 
+    .widget-container .widget-header .filter-breadcrumb {
+        padding-left: 0;
+    }
+
     .widget-container .widget-header .widget-title {
         font-size: 1.275rem;;
+        width: 100%;
     }
 
     .widget-container .widget-toolbar {
+        width: 100%;
+    }
+
+    .widget-container .widget-toolbar .user-toolbar {
+        width: 100%;
+        padding-right: 15px;
+    }
+
+    .widget-container .widget-toolbar .default-toolbar {
         position: absolute;
         right: 10px;
         top: 5px;
@@ -88,6 +100,6 @@ $this->addAssets($this, $widget);
          }*/
 </style>
 <script>
-    var widget = new engine.report.Widget('<?=$widget->id?>', '<?=$randomId?>');
+    const widget = new engine.report.Widget('<?=$widget->id?>', '<?=$randomId?>');
     widget.fetchAndRender();
 </script>

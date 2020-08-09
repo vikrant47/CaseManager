@@ -36,7 +36,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "uipage_id"=> null
+                                                                                        "uipage_id"=> null,
+                                                                                        "list"=> null
                             ] ,            [
                                                                             "created_at"=>"2020-05-09 15:09:59",
                                                                                         "updated_at"=>"2020-05-16 14:23:03",
@@ -60,7 +61,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "parent_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "uipage_id"=> null
+                                                                                        "uipage_id"=> null,
+                                                                                        "list"=> null
                             ]             ]);
         }
 

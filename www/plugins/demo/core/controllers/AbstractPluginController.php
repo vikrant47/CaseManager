@@ -23,7 +23,7 @@ use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
-use Demo\Core\Services\FilterService;
+use Demo\Core\Services\QueryFilter;
 use File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
@@ -106,16 +106,17 @@ class AbstractPluginController extends Controller
     public function listExtendQuery($query)
     {
         $config = $this->widget->list->config;
-        $filterService = new FilterService();
         if (property_exists($config, 'filter')) {
             $listFilter = $config->filter;
             if (!empty($listFilter)) {
-                $filterService->applyFilter($query, $listFilter);
+                $filterService = new QueryFilter($query, $listFilter);
+                $filterService->applyFilter();
             }
         }
         $urlFilter = Request::input('urlFilter');
         if (!empty($urlFilter)) {
-            $filterService->applyFilter($query, $urlFilter);
+            $urlFilterInstance = new QueryFilter($query, $urlFilter);
+            $urlFilterInstance->applyFilter($query, $urlFilter);
         }
     }
 
@@ -675,29 +676,19 @@ class AbstractPluginController extends Controller
     {
         $table = Request::input('table');
         $limit = Request::input('limit');
+        $offset = Request::input('offset');
         $modelClass = Request::input('model');
-        $filter = Request::input('query');
+        $filter = Request::input('where');
         $attributes = Request::input('attributes');
-        if (empty($table)) {
-            if (empty($modelClass)) {
-                $modelClass = $this->getModelClass();
-            }
-            $modelInstance = new $modelClass();
-            $table = $modelInstance->table;
-        }
-        /**@var $query Builder */
-        $query = Db::table($table);
-        if (!empty($filter)) {
-            $filterService = new FilterService();
-            $filterService->applyFilter($query, $filter);
-        }
-        if (!empty($limit)) {
-            $query->limit($limit);
-        }
+        $query = QueryFilter::getQuery([
+            'table' => $table,
+            'model' => $modelClass,
+            'filter' => $filter,
+            'attributes' => $attributes,
+            'limit' => $limit,
+            'offset' => $offset,
+        ]);
         $this->queryDataExtendQuery($query);
-        if (!empty($attributes)) {
-            $query->select($attributes);
-        }
         return $query->get();
     }
 }

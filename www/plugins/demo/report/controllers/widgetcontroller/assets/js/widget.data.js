@@ -3,12 +3,14 @@ if (!Object.assign) {
 }
 var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
     static: {
-        defaultTemplate: '<h6 class="widget-title card-title mb-0"></h6>\n' +
-            '<div class="widget-toolbar">\n' +
-            '    <div class="user-toolbar"></div>\n' +
+        defaultTemplate:
+            '<h6 class="widget-title card-title mb-1 col-md-9"></h6>\n' +
+            '<div class="widget-toolbar col-md-3" mb-1>\n' +
+            '    <div class="user-toolbar d-flex flex-row-reverse"></div>\n' +
             '    <div class="default-toolbar"></div>\n' +
             '</div>\n' +
-            '<div class="text-muted mb-4 widget-description"></div>',
+            '<div class="text-muted mb-1 widget-description col-md-12"></div>' +
+            '<div class="widget-breadcrumb col-md-12"></div>' ,
         defaultActions: [{
             label: '',
             icon: 'icon-minus',
@@ -114,17 +116,16 @@ var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
         Engine.instance.addActions($toolbar, engine.data.Store.cloneArray(this.static.defaultActions), this);
     },
     addActions: function (actions) {
-        var $toolbar = this.$el.find('.user-toolbar');
+        const $toolbar = this.$el.find('.user-toolbar');
         return Engine.instance.addActions($toolbar, actions, this);
     }
 });
 
 Engine.instance.define('engine.report.Widget', {
     constructor: function (id, containerId) {
-        this.id = id;
+        this.model = {id: id};
         this.option = {};
         this.containerId = containerId || id;
-        this.model = {id: id};
         this.$el = $('#widget-container-' + this.containerId);
         this.$body = this.$el.find('.widget-body');
         this.$footer = this.$el.find('.widget-footer');
@@ -140,12 +141,16 @@ Engine.instance.define('engine.report.Widget', {
         }
     },
     init: function (option) {
-        options = Object.assign(this.static.defaultOptions, option);
+        option = Object.assign(this.static.defaultOptions, option);
         if (!this.isInsideDashboard()) {
             this.$el.find('.widget-body').css('height', '70vh');
         }
         this.setHeader(new WidgetHeader(this));
-        this.setFooterActions(engine.data.Store.cloneArray(options.footer.actions));
+        this.setFooterActions(engine.data.Store.cloneArray(option.footer.actions));
+        this.initialized = true;
+    },
+    setModel: function (model) {
+        this.model = model;
     },
     setHeader: function (header) {
         this.header = header;
@@ -161,21 +166,26 @@ Engine.instance.define('engine.report.Widget', {
             this.filter = filter;
         } else {
             this.filter = engine.Filter.create(Object.assign({
-                breadcrumbContainer: this.header.$el,
+                breadcrumbContainer: this.header.$el.find('.widget-breadcrumb'),
             }, filter));
         }
-        if (filter.showHeaderAction) {
+        if (!filter.hideAction) {
             this.makeFilterHeaderAction();
         }
-        this.filter.apply(function () {
+        return this.filter.apply(function () {
             _this.fetchAndRender();
-        });
+            _this.filter.closePopup();
+        }).build();
+    },
+    getFilter: function () {
+        return this.filter;
     },
     makeFilterHeaderAction: function () {
         const _this = this;
         this.header.addActions([{
+            /*label: 'filter',*/
             name: 'filter',
-            icon: 'fa fa-filter',
+            icon: 'oc-icon-filter',
             handler: function () {
                 _this.filter.showInPopup();
             }
@@ -214,40 +224,73 @@ Engine.instance.define('engine.report.Widget', {
         var $toolbar = this.$footer.find('.widget-toolbar');
         Engine.instance.addActions($toolbar, actions, this);
     },
-    loadData: function (callabck) {
-        var _this = this;
-        $.request('onEvalWidget', {
+    setData: function (data) {
+        return this.store = new Store(data);
+    },
+    loadData: function () {
+        const _this = this;
+        return Engine.instance.ui.request('onLoadData', {
             url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
             data: {
                 id: this.model.id,
                 filter: this.filter ? this.filter.getRules() : null,
-            },
-            success: function (data) {
-                var result = data.result;
-                if (typeof result === 'string') {
-                    result = JSON.parse(result);
-                }
-                Object.assign(_this.model, result);
-                _this.store = new Store(_this.model.data);
-                callabck(_this);
             }
-        })
+        }).then(function (data) {
+            if (typeof data === 'string') {
+                data = JSON.parse(result);
+            }
+            return this.setData(data);
+        });
     },
-    render: function (widget) {
-        this.init(this.option);
-        this.header.render();
-        $(this.getBody()).append(widget.model.template);
-        var script = this.looseParseJSON(widget.model.script);
-        script.call(this);
+    onLoadWidget: function () {
+        const _this = this;
+        return Engine.instance.ui.request('onLoadWidget', {
+            url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
+            loadingContainer: _this.getBody(),
+            data: {
+                id: this.model.id,
+                filter: this.filter ? this.filter.getRules() : null,
+            }
+        }).then(function (widget) {
+            Object.assign(_this.model, widget);
+            _this.setData(widget.data);
+            return _this.model;
+        });
+    },
+    render: function () {
+        const _this = this;
+        if (!this.initialized) {
+            this.init(this.option);
+            this.header.render();
+        }
+        $(this.getBody()).empty().append(this.model.template);
+        const script = this.looseParseJSON(this.model.script);
+        let widgetScript = script.call(this);
+        if (widgetScript) {
+            if (typeof widgetScript !== 'object') {
+                widgetScript = {render: widgetScript};
+            }
+            let initPromise = Promise.resolve(this);
+            if (typeof widgetScript.init === 'function' && !this.scriptInit) {
+                initPromise = widgetScript.init.call(this);
+                this.scriptInit = true;
+            }
+            if (initPromise instanceof Promise) {
+                initPromise = Promise.resolve(this);
+            }
+            initPromise.then(function () {
+                widgetScript.render.call(_this);
+            });
+        }
     },
     fetchAndRender: function () {
-        var _this = this;
-        this.loadData(function (widget) {
+        const _this = this;
+        this.onLoadWidget().then(function (widget) {
             _this.render(widget);
         });
     },
     looseParseJSON: function (script) {
-        return new Function(script);
+        return new Function('return ' + script);
     },
     onResize: function (callback) {
         this.events['resize'].push(callback);

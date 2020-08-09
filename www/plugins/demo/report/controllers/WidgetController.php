@@ -3,6 +3,7 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
+use Demo\Core\Services\QueryFilter;
 use Demo\Report\Models\Widget;
 use Input;
 use Maatwebsite\Excel\Excel;
@@ -21,26 +22,65 @@ class WidgetController extends AbstractSecurityController
         BackendMenu::setContext('Demo.Report', 'main-menu-item', 'side-menu-item');
     }
 
+    public function getFilter($table)
+    {
+        $filter = Input::get('filter');
+        return new QueryFilter($table, $filter); // setting empty where with widget table
+
+    }
+
     public function onEvalWidget($id)
     {
         $id = Input::get('id');
+        /**@var $widget Widget */
         $widget = Widget::where('id', $id)->first();
         if (empty($widget)) {
             $this->setStatusCode(404);
             return [];
         }
-        return ['result' => $widget->evaluate()];
+        return ['result' => $widget->evaluate(['filter' => $this->getFilter($widget->table)])];
     }
 
-    public function onData($id)
+    public function onLoadData($id)
     {
-        $page = Input::get('id');
+        $id = Input::get('id');
+        /**@var $widget Widget */
         $widget = Widget::where('id', $id)->first();
-        return ['result' => $widget->loadData($page)];
+
+        return $widget->loadData(['filter' => $this->getFilter($widget->table)]);
+    }
+
+    public function onLoadTemplate($id)
+    {
+        $id = Input::get('id');
+        /**@var $widget Widget */
+        $widget = Widget::where('id', $id)->first();
+
+        return $widget->loadTemplate(['filter' => $this->getFilter($widget->table)]);
+    }
+
+    public function onLoadView($id)
+    {
+        $id = Input::get('id');
+        /**@var $widget Widget */
+        $widget = Widget::where('id', $id)->first();
+        return [
+            'template' => $widget->loadTemplate(['filter' => $this->getFilter($widget->table)]),
+            'script' => $widget->loadScript(['filter' => $this->getFilter($widget->table)]),
+        ];
+    }
+
+    public function onLoadWidget($id)
+    {
+        $id = Input::get('id');
+        /**@var $widget Widget */
+        $widget = Widget::where('id', $id)->first();
+        return $widget->evaluate(['filter' => $this->getFilter($widget->table)]);
     }
 
     public function onPreview($id)
     {
+        /**@var $widget Widget */
         $widget = Widget::where('id', $id)->first();
         if (empty($widget)) {
             $this->setStatusCode(404);
@@ -53,7 +93,7 @@ class WidgetController extends AbstractSecurityController
             $this->vars['dashboard'] = true;
             $this->vars['preview'] = false;
         }
-        return ['widget' => $widget->getOriginal()];
+        return ['widget' => $widget->getOriginal(), 'filter' => $this->getFilter($widget->table)];
     }
 
     public function addAssets($controller, Widget $widget)

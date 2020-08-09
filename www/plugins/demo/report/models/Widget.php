@@ -43,7 +43,7 @@ class Widget extends Model implements FromCollection
 
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id'],
     ];
     public $belongsToMany = [
         'libraries' => [
@@ -60,51 +60,52 @@ class Widget extends Model implements FromCollection
         return strtolower($startWord) === 'select';
     }
 
-    public function loadData($pagination = true, $page = 1, $perPage = 20)
+    public function loadData($context = [], $pagination = true, $page = 1, $perPage = 20)
     {
+        $context['widget'] = $this;
+        $context['page'] = $page;
         $dataScript = $this->data;
         if ($this->isSqlScript($dataScript)) {
             $evalSql = new EvalSql($dataScript, $pagination);
-            return $evalSql->eval(['widget' => $this], $page, $perPage);
+            return $evalSql->eval($context, $page, $perPage);
         }
-        $context = new ScriptContext();
-        $context->setAttribute('page', $page);
-        $data = $context->execute($dataScript);
+        $scriptContext = new ScriptContext();
+        $data = $scriptContext->execute($dataScript, $context);
         if ($data instanceof QueryBuilder) {
             if ($pagination) {
                 $data = $data->paginate($page);
             }
             $data = $data->get();
         } else if ($data instanceof EvalSql) {
-            $data = $data->eval(['widget' => $this], $page, $perPage);
+            $data = $data->eval($context, $page, $perPage);
         }
         return $data;
     }
 
-    public function loadTemplate()
+    public function loadTemplate($context = [])
     {
         if (empty($this->template)) {
             return null;
         }
         $twigEngine = new TwigEngine();
-        return $twigEngine->compile($this->template)->render(['data' => $this->loadData()]);
+        return $twigEngine->compile($this->template)->render(['data' => $this->loadData($context)]);
     }
 
-    public function loadScript()
+    public function loadScript($context = [])
     {
         if (empty($this->script)) {
             return null;
         }
         $twigEngine = new TwigEngine();
-        return $twigEngine->compile($this->script)->render(['data' => $this->loadData()]);
+        return $twigEngine->compile($this->script)->render(['data' => $this->loadData($context)]);
     }
 
-    public function evaluate()
+    public function evaluate($context)
     {
         $original = $this->getOriginal();
-        $original['data'] = $this->loadData();
-        $original['script'] = $this->loadScript();
-        $original['template'] = $this->loadTemplate();
+        $original['data'] = $this->loadData($context);
+        $original['script'] = $this->loadScript($context);
+        $original['template'] = $this->loadTemplate($context);
         return $original;
     }
 

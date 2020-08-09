@@ -67,6 +67,24 @@ class SeedDemoCasemanagerCases implements Seedable
                                                                                         "priority_id"=> null,
                                                                                         "workflow_state_id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b",
                                                                                         "queue_id"=> null
+                            ] ,            [
+                                                                            "title"=> null,
+                                                                                        "description"=> null,
+                                                                                        "created_at"=>"2020-07-27 04:56:23",
+                                                                                        "updated_at"=>"2020-07-27 04:56:35",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "assigned_to_id"=> null,
+                                                                                        "case_number"=> 4555,
+                                                                                        "case_version"=> "",
+                                                                                        "version"=> 2,
+                                                                                        "suspect"=> 5555,
+                                                                                        "tat_duration"=> 3173662583,
+                                                                                        "comments"=> "",
+                                                                                        "id"=>"8511a1b0-cfc5-11ea-b61f-f3c1964e7cf1",
+                                                                                        "priority_id"=> null,
+                                                                                        "workflow_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
+                                                                                        "queue_id"=> null
                             ]             ]);
         }
 

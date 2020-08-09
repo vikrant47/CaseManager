@@ -31,7 +31,8 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "script"=>"function(event,engine,action,\$element){\r\n    var location = engine.list.navigate({\r\n            controller:'demo/core/auditlogcontroller'\r\n        },{\r\n        filter:{\r\n            record_id:engine.form.getFormModel().id\r\n        }\r\n    });\r\n    console.log(location);\r\n}",
                                                                                         "context"=>"[\"update\",\"preview\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-show\",\"value\":\"return this.data.action.modelRecord.audit===true;\"}]",
-                                                                                        "id"=>"54e73d14-1a67-4327-91a7-3e5b1aa49a90"
+                                                                                        "id"=>"54e73d14-1a67-4327-91a7-3e5b1aa49a90",
+                                                                                        "toolbar"=> false
                             ] ,            [
                                                                             "created_at"=>"2020-04-26 15:37:16",
                                                                                         "updated_at"=>"2020-06-07 05:47:44",
@@ -50,7 +51,8 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "script"=>"function(){}",
                                                                                         "context"=>"[\"create\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+s, cmd+s\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"}]",
-                                                                                        "id"=>"0625b4f7-ab22-48ba-9eb2-e748cad64eab"
+                                                                                        "id"=>"0625b4f7-ab22-48ba-9eb2-e748cad64eab",
+                                                                                        "toolbar"=> false
                             ] ,            [
                                                                             "created_at"=>"2020-04-26 15:38:44",
                                                                                         "updated_at"=>"2020-06-07 05:46:42",
@@ -69,7 +71,8 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "script"=> "",
                                                                                         "context"=>"[\"create\",\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+enter, cmd+enter\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"},{\"name\":\"data-request-data\",\"value\":\"close:1\"}]",
-                                                                                        "id"=>"74aa9c40-9618-4fc2-890f-35d98a81b875"
+                                                                                        "id"=>"74aa9c40-9618-4fc2-890f-35d98a81b875",
+                                                                                        "toolbar"=> false
                             ] ,            [
                                                                             "created_at"=>"2020-04-26 15:37:16",
                                                                                         "updated_at"=>"2020-06-07 05:46:52",
@@ -88,7 +91,8 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "script"=>"function(){}",
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+s, cmd+s\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"},{\"name\":\"data-request-data\",\"value\":\"redirect:0\"}]",
-                                                                                        "id"=>"60f9be27-c475-462f-a146-40588aa0bc91"
+                                                                                        "id"=>"60f9be27-c475-462f-a146-40588aa0bc91",
+                                                                                        "toolbar"=> false
                             ]             ]);
         }
 
