@@ -7,6 +7,7 @@ $modelRecord = $this->getModelRecord();
         window.me = {id:<?=$this->user->id?>};
         $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
         var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
+        modelRecord.definition = <?=json_encode($modelRecord->getDefinition())?>;
         var controller = <?=json_encode($this->getControllerInfo())?>;
         Engine.instance.ui.setModel(modelRecord);
     });

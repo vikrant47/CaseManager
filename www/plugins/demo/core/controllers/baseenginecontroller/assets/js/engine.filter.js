@@ -192,18 +192,22 @@ let Filter = Engine.instance.define('engine.Filter', {
     },
     setModel: function (model) {
         this.model = model;
+        this.definition = this.model.definition;
     },
     loadDefinition: function () {
         const _this = this;
         const ui = Engine.instance.ui;
-        return ui.request('onGetModelDefinition', {
-            loadingContainer: '.page-content',
-            data: {model: this.model},
-            url: ui.getCurrentControllerUrl(),
-        }).then(function (response) {
-            _this.definition = response.definition;
-            return response.definition;
-        })
+        if (!this.definition) {
+            return ui.request('onGetModelDefinition', {
+                loadingContainer: '.page-content',
+                data: {model: this.model},
+                url: ui.getCurrentControllerUrl(),
+            }).then(function (response) {
+                _this.definition = response.definition;
+                return response.definition;
+            })
+        }
+        return Promise.resolve(this.definition);
     },
     qbEvents: {
         'jsonToRule.changer': function (e, ruleData, rule) {
