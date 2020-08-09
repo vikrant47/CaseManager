@@ -306,7 +306,7 @@ Object.assign(Engine.prototype, {
             if (settings.extends) {
                 const parent = new settings.extends();
                 for (const i in parent) {
-                    if (typeof i !== 'function') {
+                    if (typeof i !== 'function' && typeof this[i] === 'undefined') {
                         this[i] = parent[i];
                     }
                 }
@@ -329,6 +329,7 @@ Object.assign(Engine.prototype, {
             cls.prototype = Object.create(settings.extends.prototype);
         }
         Object.assign(cls.prototype, settings);
+        Object.assign(cls.prototype.static, settings.static);
         if (settings.name) {
             let parentPackage = window;
             const namespace = settings.name.split('.');

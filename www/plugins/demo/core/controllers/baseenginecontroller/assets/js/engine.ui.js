@@ -518,6 +518,16 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
 var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     static: {
         el: '.engine-form-wrapper',
+        // definition form field manipulation
+        getFormFields(definition) {
+            let fields = definition.form.controls.fields;
+            if (definition.form.controls.tabs) {
+                fields = Object.assign(fields, definition.form.controls.tabs.fields);
+            }
+            return Object.keys(fields).map(function (fieldName) {
+                return Object.assign({name: fieldName}, fields[fieldName]);
+            })
+        },
         getInstance: function (el, modelRecord) {
             const $el = $(el).eq(0);
             if ($el.data('engineForm')) {
@@ -584,7 +594,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         this.config = config;
     },
     getField: function (fieldName) {
-        var fields = Engine.instance.getFormFields(this.config);
+        var fields = this.static.getFormFields(this.config);
         for (var fieldName in fields) {
             return fields[fieldName];
         }
