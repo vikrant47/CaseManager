@@ -569,7 +569,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     },
     extends: EngineObservable,
     constructor: function (config) {
-        this.config = config
+        this.config = config;
     },
     bind: function ($el, modelRecord) {
         this.modelRecord = modelRecord;
@@ -585,16 +585,22 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         return this;
     },
     getValue: function (field) {
-        return this.getField(field).val()
+        return this.getFieldElement(field).val()
     },
-    getField: function (field) {
+    getFieldElement: function (field) {
         return this.$el.find('[name$="[' + field + ']"]')
     },
     setConfig: function (config) {
         this.config = config;
     },
+    toDefinition: function () {
+        return {form: {controls: this.config}};
+    },
+    fromDefinition: function (definition) {
+        this.config = definition.form.controls;
+    },
     getField: function (fieldName) {
-        var fields = this.static.getFormFields(this.config);
+        var fields = this.static.getFormFields(this.toDefinition());
         for (var fieldName in fields) {
             return fields[fieldName];
         }
