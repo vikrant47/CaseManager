@@ -10,7 +10,7 @@ var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
             '    <div class="default-toolbar"></div>\n' +
             '</div>\n' +
             '<div class="text-muted mb-1 widget-description col-md-12"></div>' +
-            '<div class="widget-breadcrumb col-md-12"></div>' ,
+            '<div class="widget-breadcrumb col-md-12"></div>',
         defaultActions: [{
             label: '',
             icon: 'icon-minus',
@@ -95,8 +95,8 @@ var WidgetHeader = Engine.instance.define('engine.report.WidgetHeader', {
     },
     render: function () {
         this.$template.appendTo(this.$el.empty());
-        this.setTitle(widget.model.name);
-        this.setDescription(widget.model.description);
+        this.setTitle(this.widget.model.name);
+        this.setDescription(this.widget.model.description);
         this.setDefaultActions()
     },
     setTitle: function (title) {
@@ -141,13 +141,17 @@ Engine.instance.define('engine.report.Widget', {
         }
     },
     init: function (option) {
-        option = Object.assign(this.static.defaultOptions, option);
-        if (!this.isInsideDashboard()) {
-            this.$el.find('.widget-body').css('height', '70vh');
+        if (!this.initialized) {
+            option = Object.assign(this.static.defaultOptions, option);
+            if (!this.isInsideDashboard()) {
+                this.$el.find('.widget-body').css('height', '70vh');
+            }
+            this.setHeader(new WidgetHeader(this));
+            this.setFooterActions(engine.data.Store.cloneArray(option.footer.actions));
+            this.header.render();
+            this.initWidgetScript();
+            this.initialized = true;
         }
-        this.setHeader(new WidgetHeader(this));
-        this.setFooterActions(engine.data.Store.cloneArray(option.footer.actions));
-        this.initialized = true;
     },
     setModel: function (model) {
         this.model = model;
@@ -162,6 +166,7 @@ Engine.instance.define('engine.report.Widget', {
      */
     setFilter: function (filter) {
         const _this = this;
+        const ui = Engine.instance.ui;
         if (filter instanceof engine.Filter) {
             this.filter = filter;
         } else {
@@ -169,11 +174,13 @@ Engine.instance.define('engine.report.Widget', {
                 breadcrumbContainer: this.header.$el.find('.widget-breadcrumb'),
             }, filter));
         }
+        const params = ui.parseParams();
+        this.filter.setRules(params.urlFilter);
         if (!filter.hideAction) {
             this.makeFilterHeaderAction();
         }
         return this.filter.apply(function () {
-            _this.fetchAndRender();
+            ui.navigateByQueryString('urlFilter', this.getRules());
             _this.filter.closePopup();
         }).build();
     },
@@ -246,7 +253,7 @@ Engine.instance.define('engine.report.Widget', {
         const _this = this;
         return Engine.instance.ui.request('onLoadWidget', {
             url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
-            loadingContainer: _this.getBody(),
+            // loadingContainer: _this.getBody(),
             data: {
                 id: this.model.id,
                 filter: this.filter ? this.filter.getRules() : null,
@@ -259,32 +266,33 @@ Engine.instance.define('engine.report.Widget', {
     },
     render: function () {
         const _this = this;
-        if (!this.initialized) {
-            this.init(this.option);
-            this.header.render();
-        }
         $(this.getBody()).empty().append(this.model.template);
+        const widgetScript = this.parseScript();
+        widgetScript.render.call(this);
+    },
+    parseScript: function () {
         const script = this.looseParseJSON(this.model.script);
         let widgetScript = script.call(this);
         if (widgetScript) {
             if (typeof widgetScript !== 'object') {
-                widgetScript = {render: widgetScript};
+                widgetScript = {
+                    init: function () {
+                    }, render: widgetScript
+                };
             }
-            let initPromise = Promise.resolve(this);
-            if (typeof widgetScript.init === 'function' && !this.scriptInit) {
-                initPromise = widgetScript.init.call(this);
-                this.scriptInit = true;
-            }
-            if (initPromise instanceof Promise) {
-                initPromise = Promise.resolve(this);
-            }
-            initPromise.then(function () {
-                widgetScript.render.call(_this);
-            });
+        }
+        return widgetScript;
+    },
+    initWidgetScript: function () {
+        if (!this.widgetScriptInitialized) {
+            const script = this.parseScript();
+            script.init.call(this);
+            this.widgetScriptInitialized = true;
         }
     },
     fetchAndRender: function () {
         const _this = this;
+        this.init(this.option);
         this.onLoadWidget().then(function (widget) {
             _this.render(widget);
         });
