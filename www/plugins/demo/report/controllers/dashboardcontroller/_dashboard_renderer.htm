@@ -1,24 +1,37 @@
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.js') ?>
-<?php $this->addJs('/plugins/demo/core/controllers/baseenginecontroller/assets/js/engine.ui.js') ?>
 <?php $this->addCss('/plugins/demo/report/controllers/dashboardcontroller/assets/css/gridstack.min.css') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/dashboardcontroller/assets/js/gridstack.all.js') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/dashboardcontroller/assets/js/dashboard.data.js') ?>
 <?php $this->addJs('/plugins/demo/report/controllers/widgetcontroller/assets/js/widget.data.js') ?>
-<?php $this->addCss('/plugins/demo/core/controllers/baseenginecontroller/assets/css/engine.css') ?>
 <?php if (empty($context) || $context === 'preview') { ?>
-    <!--<a href="../render/<?/*= $dashboard->id */?>" style="margin: 0;auto;">View</a>-->
+    <!--<a href="../render/<? /*= $dashboard->id */ ?>" style="margin: 0;auto;">View</a>-->
 <?php } ?>
 <div id="dashboard-container-<?= $dashboard->id ?>" style="height: 100%;width: 100%;"
      class="dashboard-container">
-    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin dashboard-header"
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin dashboard-header row"
          style="padding-left: 10px;">
-        <div style="width: 100%;" class="mb-2">
+        <div style="width: 100%;" class="mb-1 col-md-9">
             <h4 class="mb-3 mb-md-0 dashboard-title"><?= $dashboard->name ?></h4>
         </div>
-        <div class="text-muted mb-2 dashboard-description">
+        <div class="dashboard-toolbar col-md-3 mb-1">
+            <div class="user-toolbar d-flex flex-row-reverse"></div>
+            <div class="default-toolbar"></div>
+        </div>
+        <div class="text-muted mb-2 dashboard-description col-md-12">
             <?= $dashboard->description ?>
         </div>
+        <div class="dashboard-breadcrumb col-md-12"></div>
     </div>
+    <script>
+        (function ($) {
+            let dashboard = new engine.report.Dashboard('<?= $dashboard->id ?>', '<?=$context?>');
+            $(document).ready(function () {
+                dashboard.render();
+                $(document).on('click', '.dashboard-toolbar .save-dashboard',function () {
+                    dashboard.save();
+                });
+            });
+        })(jQuery);
+    </script>
     <div class="grid-stack">
         <?php
         $widgets = $this->getWidgets($dashboard);
@@ -94,6 +107,7 @@
         background-color: white;
         box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
     }
+
     .grid-stack > .grid-stack-item > .grid-stack-item-content {
         overflow: hidden;
     }
@@ -111,10 +125,4 @@
         border: none;
     }
 </style>
-<script>
-    var dashboard = new Dashboard('<?= $dashboard->id ?>', '<?=$context?>');
-    dashboard.render();
-    $('.dashboard-toolbar .save-dashboard').click(function () {
-        dashboard.save();
-    });
-</script>
+

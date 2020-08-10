@@ -1,15 +1,49 @@
 if (!Object.assign) {
     Object.assign = jQuery.extend;
 }
-var Dashboard = function (id, context) {
-    this.id = id;
-    this.context = context;
-    this.$el = $('#dashboard-container-' + this.id);
-    this.$el.data('dashboard', this);
-    this.registerEvents();
-};
-
-Object.assign(Dashboard.prototype, {
+var Dashboard = Engine.instance.define('engine.report.Dashboard', {
+    extends: engine.EngineObservable,
+    constructor: function (id, context) {
+        this.id = id;
+        this.context = context;
+        this.$el = $('#dashboard-container-' + this.id);
+        this.$el.data('dashboard', this);
+        this.addActions();
+        this.registerEvents();
+        this.initFilter();
+    },
+    initFilter: function () {
+        const ui = Engine.instance.ui;
+        this.filter = engine.ParentFilter.create({
+            type: 'parent',
+            breadcrumbContainer: this.$el.find('.dashboard-breadcrumb'),
+            apply: function () {
+                ui.updateQueryString('urlFilter', this.getRules(), false);
+                this.closePopup();
+            }
+        });
+        const params = ui.parseParams();
+        this.filter.setRules(params.urlFilter);
+        this.on('engine.dashboard.render', function () {
+            this.filter.build();
+        });
+    },
+    addActions: function () {
+        const _this = this;
+        Engine.instance.addActions(this.$el.find('.user-toolbar'), [{
+            /*label: 'filter',*/
+            name: 'filter',
+            css_class: 'btn oc-icon-filter',
+            handler: function () {
+                _this.filter.build().then(function () {
+                    _this.filter.showInPopup();
+                });
+            }
+        }]);
+    },
+    getFilter: function () {
+        return this.filter;
+    },
     getGridStack: function () {
         return this.$el.find('.grid-stack').data('gridstack');
     },
@@ -54,6 +88,7 @@ Object.assign(Dashboard.prototype, {
         }).on('gsresizestop', function (event, elem) {
             $(elem).find('.widget-container').data('widget').resize();
         });
+        this.emit('engine.dashboard.render');
     },
     fetchAndRender: function () {
         var _this = this;

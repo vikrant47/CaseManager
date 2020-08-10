@@ -180,9 +180,16 @@ Engine.instance.define('engine.report.Widget', {
             this.makeFilterHeaderAction();
         }
         return this.filter.apply(function () {
-            ui.navigateByQueryString('urlFilter', this.getRules());
+            if (!_this.isInsideDashboard()) {
+                ui.updateQueryString('urlFilter', this.getRules(), false);
+            }
+            _this.fetchAndRender();
             _this.filter.closePopup();
-        }).build();
+        }).build().then(function () {
+            if (_this.isInsideDashboard()) {
+                _this.getDashboard().getFilter().addChild(_this.filter);
+            }
+        });
     },
     getFilter: function () {
         return this.filter;
