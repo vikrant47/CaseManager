@@ -19,12 +19,20 @@ let Filter = Engine.instance.define('engine.Filter', {
         },
         defaultConfig: {
             fields: [],
+            type: 'base',
             breadcrumbContainer: null,
             renderBreadcrumb: true,
+            apply: function () {
+            },
         },
         create: function (config) {
             const setting = Object.assign({}, Filter.defaultConfig, config);
-            const filter = new engine.Filter(setting.el);
+            let filter;
+            if (setting.type === 'parent') {
+                filter = new engine.ParentFilter(setting.el);
+            } else {
+                filter = new engine.Filter(setting.el);
+            }
             if (setting.fields.length > 0) {
                 filter.setFields(setting.fields);
             }
@@ -35,6 +43,7 @@ let Filter = Engine.instance.define('engine.Filter', {
                 });
                 filter.on('engine.filter.apply', function () {
                     filter.renderBreadcrumb();
+                    setting.apply.call(filter);
                 });
             }
             return filter;
@@ -475,24 +484,28 @@ let Filter = Engine.instance.define('engine.Filter', {
             loadingContainer: settings.loadingContainer,
         }, settings.ajax));
     },
-    getReleventRules: function (rule, definition) {
-        definition = definition || this.definition;
+    getRelevantRules: function (rule, fields) {
         if (!rule) {
             rule = this.getRules();
             if (rule) {
-                return this.getBreadcrumbData(rule, fields);
+                return this.getRelevantRules(rule, fields);
             }
         }
         if (rule.rules) {
-            let data = [];
+            let relevantRules = [];
             for (const childRule of rule.rules) {
                 if (!childRule.condition) {
-
+                    if (fields.findIndex(field => field.id === childRule.id) >= 0) {
+                        relevantRules.push(childRule);
+                    }
                 } else {
-
+                    relevantRules.concat(this.getRelevantRules(rule, fields));
                 }
             }
+            rule.rules = relevantRules;
+            return rule;
         }
+        return {};
     },
     getBreadcrumbData: function (rule, fields) {
         fields = fields || [];
@@ -566,7 +579,6 @@ let Filter = Engine.instance.define('engine.Filter', {
     parent: null,
     setParent: function (filter) {
         this.parent = filter;
-        filter.children.push(this);
     },
     setFields: function (fields) {
         if (Engine._.isArray(fields)) {
@@ -602,8 +614,10 @@ let Filter = Engine.instance.define('engine.Filter', {
 let ParentFilter = Engine.instance.define('engine.ParentFilter', {
     extends: Filter,
     children: [],
+    staticInheritance: true,
     addChild: function (child) {
         child.setParent(this);
+        this.children.push(child);
     },
     getDefinition() {
         return this.definition = Filter.mergeDefinitions(this.children.map(child => child.definition));
@@ -612,10 +626,17 @@ let ParentFilter = Engine.instance.define('engine.ParentFilter', {
         this.definition = this.getDefinition();
         return Filter.prototype.build.apply(this, arguments);
     },
-    apply: function () {
-        for (const child of this.children) {
-            child.apply();
+    apply: function (callback) {
+        if (typeof callback == 'function') {
+            this.on('engine.filter.apply', callback);
+        } else {
+            for (const child of this.children) {
+                const relevantRules = child.getRelevantRules(this.getRules(), child.makeFields());
+                child.setRules(relevantRules);
+                child.apply();
+            }
+            this.emit('engine.filter.apply', this);
         }
-        this.emit('engine.filter.apply', this);
+        return this;
     },
 });

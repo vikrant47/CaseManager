@@ -9,6 +9,7 @@ $modelRecord = $this->getModelRecord();
             $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
             var actions = <?=$formActions ? $formActions->toJSON() : '[]'?>;
             var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
+            modelRecord.definition = <?=$modelRecord ? json_encode($modelRecord->getDefinition()) : null?>;
             <?php $model = $this->formGetModel()?>
             var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
             var controller = <?=json_encode($this->getControllerInfo())?>;

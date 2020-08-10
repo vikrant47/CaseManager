@@ -122,7 +122,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
 
         return obj;
     },
-    navigateByQueryString(param, value) {
+    makeQueryStringURL: function (param, value) {
         if (typeof param === 'string') {
             let name = param;
             param = {};
@@ -131,12 +131,19 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         const existingParams = this.parseParams();
         let queryString = $.param(Object.assign(existingParams, param));
         const urlSplit = window.location.href.split('?');
-        this.navigate(urlSplit[0] + '?' + queryString);
+        return urlSplit[0] + '?' + queryString;
+    },
+    updateQueryString: function (param, value) {
+        const url = this.makeQueryStringURL(param, value);
+        window.history.pushState({href: url, skip: true}, '', url);
+    },
+    navigateByQueryString: function (param, value) {
+        this.navigate(this.makeQueryStringURL(param, value));
     },
     registerPopStateListener: function () {
         const _this = this;
         window.addEventListener('popstate', function (e) {
-            if (e.state) {
+            if (e.state && !e.state.skip) {
                 _this.navigate(e.state.href, true);
             }
         });
@@ -177,7 +184,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         const link = this.getUrlInfo(url);
         if (!skipPushState) {
             $(document).trigger('engine.ui.navigate');
-            window.history.pushState({href: link.url}, '', link.url);
+            window.history.pushState({href: link.url, skip: skipPushState}, '', link.url);
         }
         let promise;
         if (link.type === 'list') {
@@ -190,10 +197,8 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             promise = this.open(link.url);
         }
         if (promise) {
-            promise.catch(function () {
-                if (!skipPushState) {
-                    window.history.back();
-                }
+            promise.catch(function (e) {
+                throw e;
             });
         }
         return promise;

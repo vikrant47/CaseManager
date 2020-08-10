@@ -9,7 +9,7 @@ Engine.defaultActionOption = {
         active: true,
         template: '<button class="action action-button"><i></i><span></span></button>',
         // element: {text: 'span', icon: 'i'},
-        icon: 'icon-link',
+        icon: false,
         event: 'click',
         css_class: '',
         attributes: [],
@@ -24,14 +24,12 @@ Engine.defaultActionOption = {
     },
     button: {
         template: '<button class="action action-button"><i></i></button>',
-        icon: 'icon-link',
         event: 'click',
         css_class: '',
         attributes: [],
     },
     input: {
         template: '<input class="action action-input"><i></i></input>',
-        icon: 'icon-link',
         event: 'change',
         events: {},
         css_class: '',
@@ -43,14 +41,12 @@ Engine.defaultActionOption = {
             '</div>',
         element: {text: '.dropdown-title', appendTo: 'ul', icon: '.dropdown-title'},
         attributes: [],
-        icon: 'icon-link',
         event: 'click',
         css_class: '',
     },
     dropdownItem: {
         template: '<li class="action-list-item" role="presentation"><a role="menuitem" tabindex="-1" href="#" class=" dropdown-item-title"></a></li>',
         element: {text: '.dropdown-item-title', appendTo: 'li', icon: '.dropdown-item-title'},
-        icon: 'icon-link',
         attributes: [],
         event: 'click',
         css_class: '',
@@ -300,7 +296,8 @@ Object.assign(Engine.prototype, {
             constructor: function () {
 
             },
-            static: [],
+            static: {},
+            staticInheritance: false,
         }, options);
         const cls = function () {
             if (settings.extends) {
@@ -313,6 +310,11 @@ Object.assign(Engine.prototype, {
             }
             settings.constructor.apply(this, arguments);
         };
+        /**static fields handling*/
+        // static inheritance
+        if (settings.extends && settings.staticInheritance) {
+            settings.static = Object.assign({}, settings.extends.prototype.static, settings.static);
+        }
         let staticInitializer = null;
         for (let i in settings.static) {
             cls[i] = settings.static[i];
