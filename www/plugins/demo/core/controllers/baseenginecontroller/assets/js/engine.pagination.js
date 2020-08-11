@@ -3,32 +3,24 @@ let Pagination = Engine.instance.define('engine.data.Pagination', {
         template: `<nav aria-label="Engine Pagination">
                       <ul class="pagination">
                         <li class="page-item">
-                            {{?it.hasNext() }}
-                                <a class="page-link prev" href="javascript:void(0)">Previous</a>
-                            {{??}}
-                                <a class="page-link disabled" href="javascript:void(0)">Previous</a>
-                            {{?}}    
+                            <a class="page-link prev" disabled="{{?!it.hasPrev() }}disabled{{?}}" href="javascript:void(0)">Previous</a> 
                         </li>
-                        {{for(var i=0;i<(it.totalPage>it.pageNumDigitDisplayCount+1?it.pageNumDigitDisplayCount:it.totalPage);i++){}}
+                        {{for(var i=0;i<it.getMaxPageNum();i++){}}
                             <li class="page-item"><a class="page-link goto {{?i==it.getCurrentPage()}}active{{?}}" href="javascript:void(0)" data-page="{{=i+1}}">{{=i+1}}</a></li>
-                        {{}}
+                        {{}}}
                         {{?it.totalPage>it.pageNumDigitDisplayCount+1}}
                             <li class="page-item"><a class="" href="javascript:void(0)" >......</a></li>
                             <li class="page-item"><a class="page-link goto {{?it.totalPage-1==it.getCurrentPage()}}active{{?}}" href="javascript:void(0)" data-page="{{=it.totalPage-1 }}">{{=it.totalPage -1}}</a></li>
                             <li class="page-item"><a class="page-link goto {{?it.totalPage==it.getCurrentPage()}}active{{?}}" href="javascript:void(0)" data-page="{{=it.totalPage}}">{{=it.totalPage}}</a></li>
                         {{?}}
                         <li class="page-item">
-                            {{?it.hasNext() }}
-                                <a class="page-link next" href="javascript:void(0)">Previous</a>
-                            {{??}}
-                                <a class="page-link disabled" href="javascript:void(0)">Previous</a>
-                            {{?}}  
+                             <a class="page-link next" disabled="{{?!it.hasNext() }}disabled{{?}}" href="javascript:void(0)">Next</a> 
                         </li>
                       </ul>
                     </nav>`,
         defaultConfig: {
-            totalRecords: 0,
-            recordsPerPage: 0,
+            totalRecords: -1,
+            recordsPerPage: 20,
             offset: 0,
             pageNumDigitDisplayCount: 5,
         }
@@ -41,28 +33,44 @@ let Pagination = Engine.instance.define('engine.data.Pagination', {
         this.$el.data('engine.pagination', this);
         this.settings = Object.assign(this.static.defaultConfig, config);
         this.rxjsSubscriptions = [];
-        this.reset();
+        this.init();
     },
-    reset: function () {
-        this.unscbscribe();
+    init: function () {
+        this.pageNumDigitDisplayCount = this.settings.pageNumDigitDisplayCount;
         this.totalRecords = this.settings.totalRecords;
         this.recordsPerPage = this.settings.recordsPerPage;
         this.offset = this.settings.offset;
         this.totalPage = this.totalRecords / this.recordsPerPage;
-        this.httpSettings = null;
         this.rxjsSubscriptions = [];
         this.rxjsSubject = new rxjs.Subject();
+    },
+    update: function (config) {
+        Object.assign(this.settings, config);
+        const repaint = this.totalPage !== this.settings.totalPage || this.recordsPerPage !== this.settings.recordsPerPage;
+        this.init();
+        if (repaint) {
+            this.render();
+        }
+    },
+    reset: function () {
+        this.httpSettings = null;
+        this.unscbscribe();
+        this.init();
         return this;
+    },
+    getMaxPageNum: function () {
+        return this.totalPage > this.pageNumDigitDisplayCount + 1 ? this.pageNumDigitDisplayCount : this.totalPage;
     },
     getCurrentPage: function () {
         return (this.offset / this.recordsPerPage) + 1;
     },
     map: function (callback) {
-        this.rxjsSubject.map(callback);
+        return this.rxjsSubject.pipe(rxjs.operators.map(callback));
+        return this;
     },
     subscribe: function (callback) {
-        const subscription = this.subject.subscribe({next: callback});
-        this.subscribe.push(subscription);
+        const subscription = this.rxjsSubject.subscribe({next: callback});
+        this.rxjsSubscriptions.push(subscription);
         return subscription;
     },
     unscbscribe: function (subscription) {

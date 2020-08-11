@@ -151,6 +151,7 @@ Engine.instance.define('engine.report.Widget', {
             this.setFooterActions(engine.data.Store.cloneArray(option.footer.actions));
             this.header.render();
             this.initWidgetScript();
+            this.pagination.render();
             this.initialized = true;
         }
     },
@@ -255,7 +256,7 @@ Engine.instance.define('engine.report.Widget', {
             }
         }).paginate().map(function (data) {
             if (typeof data === 'string') {
-                data = JSON.parse(result);
+                data = JSON.parse(data);
             }
             _this.setData(data);
             return _this.model;
@@ -273,7 +274,9 @@ Engine.instance.define('engine.report.Widget', {
                     script: includeScript,
                 }
             }
-        }).paginate().map(function (data) {
+        }).paginate().map(function (widget) {
+            const pagination = widget.data.pagination;
+            _this.pagination.update(pagination);
             Object.assign(_this.model, widget);
             _this.setData(widget.data);
             return _this.model;
