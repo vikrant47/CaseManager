@@ -1,4 +1,4 @@
-let Filter = Engine.instance.define('engine.Filter', {
+let Filter = Engine.instance.define('engine.data.Filter', {
     static: {
         defaultPopupConfig: {
             size: 'lg',
@@ -31,7 +31,7 @@ let Filter = Engine.instance.define('engine.Filter', {
             if (setting.type === 'parent') {
                 filter = new engine.ParentFilter(setting.el);
             } else {
-                filter = new engine.Filter(setting.el);
+                filter = new engine.data.Filter(setting.el);
             }
             if (setting.fields.length > 0) {
                 filter.setFields(setting.fields);

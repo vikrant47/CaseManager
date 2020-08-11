@@ -162,15 +162,15 @@ Engine.instance.define('engine.report.Widget', {
     },
     /**
      * Setting filter to widget
-     * @param filter - instance of engine.Filter or field definition {fields:[]}
+     * @param filter - instance of engine.data.Filter or field definition {fields:[]}
      */
     setFilter: function (filter) {
         const _this = this;
         const ui = Engine.instance.ui;
-        if (filter instanceof engine.Filter) {
+        if (filter instanceof engine.data.Filter) {
             this.filter = filter;
         } else {
-            this.filter = engine.Filter.create(Object.assign({
+            this.filter = engine.data.Filter.create(Object.assign({
                 breadcrumbContainer: this.header.$el.find('.widget-breadcrumb'),
             }, filter));
         }
