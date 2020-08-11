@@ -46,7 +46,8 @@ class QueryFilter extends QueryBuilderParser
     static function getQuery($options)
     {
         $table = $options['table'];
-        $limit = $options['limit'];
+        /**@var $pagination QueryPagination */
+        $pagination = $options['pagination'];
         $offset = $options['offset'];
         $modelClass = $options['model'];
         $filter = $options['filter'];
@@ -61,11 +62,11 @@ class QueryFilter extends QueryBuilderParser
             $filterService = new QueryFilter($query, $filter);
             $filterService->applyFilter();
         }
-        if (!empty($limit)) {
-            $query->limit($limit);
-        }
-        if (!empty($offset)) {
-            $query->offset($offset);
+        if (!empty($pagination)) {
+            $query->offset($pagination->offset);
+            if ($pagination->hasLimit()) {
+                $query->limit($pagination->limit);
+            }
         }
         if (!empty($attributes)) {
             $query->select($attributes);

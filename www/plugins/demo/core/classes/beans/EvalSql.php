@@ -3,6 +3,7 @@
 
 namespace Demo\Core\Classes\Beans;
 
+use Demo\Core\Services\QueryPagination;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -20,28 +21,27 @@ class EvalSql
     }
 
     /**
-     * @return []
+     * @param array $context
+     * @param bool $APPEND_TOTAL
+     * @return array []
      */
-    public function eval($context = [], $page = 1, $perPage = 20)
+    public function eval($context = [], $APPEND_TOTAL = false)
     {
-        $paginationContext = [
-            'offset' => ($page - 1) * $perPage,
-            'limit' => INF,
-        ];
-        if ($this->pagination) {
-            $paginationContext = [
-                'offset' => ($page - 1) * $perPage,
-                'limit' => $page * $perPage - 1,
-            ];
-
-        }
-        $context = $paginationContext + $context;
         $dataScript = TwigEngine::eval($this->sql, $context);
         $data = Db::select(Db::raw($dataScript));
-        if ($this->pagination) {
-            $data = new Paginator(Collection::make($data), $perPage, $page);
+        $totalRecords = -1;
+        /**@var $pagination QueryPagination */
+        $pagination = $context['pagination'];
+        if (!empty($pagination) && $APPEND_TOTAL) {
+            $pagination->clean();
+            $dataScript = TwigEngine::eval($this->sql, $context);
+            $totalRecords = Db::count(Db::raw($dataScript));
+            $pagination->restore();
         }
-        return $data;
+        $result = [
+            'data' => $data, 'pagination' => $pagination->toArray($totalRecords)
+        ];
+        return $result;
 
     }
 }

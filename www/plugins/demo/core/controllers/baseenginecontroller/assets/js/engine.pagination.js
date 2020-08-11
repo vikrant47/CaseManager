@@ -1,4 +1,4 @@
-let Filter = Engine.instance.define('engine.data.Filter', {
+let Pagination = Engine.instance.define('engine.data.Pagination', {
     static: {
         template: `<nav aria-label="Engine Pagination">
                       <ul class="pagination">
@@ -38,19 +38,49 @@ let Filter = Engine.instance.define('engine.data.Filter', {
             el = '<div class="engine-pagination"></div>';
         }
         this.$el = $(el);
-        this.el.data('engine.pagination', this);
-        const settings = Object.assign(this.static.defaultConfig(config), config);
-        this.totalRecords = settings.totalRecords;
-        this.recordsPerPage = settings.recordsPerPage;
-        this.offset = settings.offset;
+        this.$el.data('engine.pagination', this);
+        this.settings = Object.assign(this.static.defaultConfig, config);
+        this.rxjsSubscriptions = [];
+        this.reset();
+    },
+    reset: function () {
+        this.unscbscribe();
+        this.totalRecords = this.settings.totalRecords;
+        this.recordsPerPage = this.settings.recordsPerPage;
+        this.offset = this.settings.offset;
         this.totalPage = this.totalRecords / this.recordsPerPage;
-        this.settings = settings;
+        this.httpSettings = null;
+        this.rxjsSubscriptions = [];
+        this.rxjsSubject = new rxjs.Subject();
+        return this;
     },
     getCurrentPage: function () {
         return (this.offset / this.recordsPerPage) + 1;
     },
+    map: function (callback) {
+        this.rxjsSubject.map(callback);
+    },
+    subscribe: function (callback) {
+        const subscription = this.subject.subscribe({next: callback});
+        this.subscribe.push(subscription);
+        return subscription;
+    },
+    unscbscribe: function (subscription) {
+        if (subscription) {
+            subscription.unsubscribe();
+        } else {
+            for (const subscription of this.rxjsSubscriptions) {
+                try {
+                    subscription.unsubscribe();
+                } catch (e) {
+
+                }
+            }
+            this.rxjsSubscriptions = [];
+        }
+    },
     httpConfig: function (config) {
-        this.httpConfig = Object.assign({
+        this.httpSettings = Object.assign({
             callback: function () {
 
             },
@@ -60,26 +90,26 @@ let Filter = Engine.instance.define('engine.data.Filter', {
     toRequestParams: function () {
         return {
             offset: this.offset,
-            totalPage: this.totalPage,
-            totalRecords: this.totalRecords,
-            recordsPerPage: this.recordsPerPage,
+            limit: this.offset + this.recordsPerPage,
         };
     },
     paginate: function () {
         const _this = this;
-        let options = this.httpConfig.options;
-        let action = this.httpConfig.action;
+        let options = this.httpSettings.options;
+        let action = this.httpSettings.action;
         if (!options) {
             options = action;
         } else {
             options.handler = action;
         }
         const ui = Engine.instance.ui;
-        const settings = Object.assign({}, {pagination: this.toRequestParams()}, options);
-        return ui.request(settings).then(function (response) {
-            _this.httpConfig.callback.call(_this, response);
+        options.data = Object.assign({}, {pagination: this.toRequestParams()}, options.data);
+        ui.request(options).then(function (response) {
+            _this.httpSettings.callback.call(_this, response);
+            _this.rxjsSubject.next(response);
             return response;
         });
+        return this;
     },
     hasNext: function () {
         return this.offset < this.totalRecords;
