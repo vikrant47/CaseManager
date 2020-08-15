@@ -25,17 +25,18 @@ class EvalSql
      * @param bool $APPEND_TOTAL
      * @return array []
      */
-    public function eval($context = [], $APPEND_TOTAL = false)
+    public function eval($context = [])
     {
         $dataScript = TwigEngine::eval($this->sql, $context);
         $data = Db::select(Db::raw($dataScript));
         $totalRecords = -1;
         /**@var $pagination QueryPagination */
         $pagination = $context['pagination'];
-        if (!empty($pagination) && $APPEND_TOTAL) {
+        if ($pagination instanceof QueryPagination && $this->pagination === true) {
             $pagination->clean();
             $dataScript = TwigEngine::eval($this->sql, $context);
-            $totalRecords = Db::count(Db::raw($dataScript));
+            $countResult = Db::select(Db::raw(QueryPagination::getCountQuery($dataScript)));
+            $totalRecords = $countResult[0]->count;
             $pagination->restore();
         }
         $result = [

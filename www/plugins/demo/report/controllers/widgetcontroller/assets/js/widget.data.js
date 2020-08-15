@@ -131,7 +131,7 @@ Engine.instance.define('engine.report.Widget', {
         this.$footer = this.$el.find('.widget-footer');
         this.$el.data('widget', this);
         this.events = {resize: []};
-        this.pagination = new engine.data.Pagination(this.$footer);
+        this.pagination = new engine.data.Pagination();
     },
     static: {
         defaultOptions: {
@@ -151,7 +151,6 @@ Engine.instance.define('engine.report.Widget', {
             this.setFooterActions(engine.data.Store.cloneArray(option.footer.actions));
             this.header.render();
             this.initWidgetScript();
-            this.pagination.render();
             this.initialized = true;
         }
     },
@@ -161,6 +160,12 @@ Engine.instance.define('engine.report.Widget', {
     setHeader: function (header) {
         this.header = header;
         this.header.init();
+    },
+    setPagination: function (pagination) {
+        if (!(pagination instanceof engine.data.Pagination)) {
+            pagination = engine.data.Pagination.create(Object.assign({el: this.$footer.find('.engine-pagination').get()}, pagination));
+        }
+        this.pagination = pagination;
     },
     /**
      * Setting filter to widget
@@ -287,6 +292,7 @@ Engine.instance.define('engine.report.Widget', {
         $(this.getBody()).empty().append(this.model.template);
         const widgetScript = this.parseScript();
         widgetScript.render.call(this);
+        this.pagination.render();
     },
     parseScript: function () {
         const script = this.looseParseJSON(this.model.script);

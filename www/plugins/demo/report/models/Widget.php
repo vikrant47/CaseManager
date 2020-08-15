@@ -70,7 +70,7 @@ class Widget extends Model implements FromCollection
         $dataScript = $this->data;
         if ($this->isSqlScript($dataScript)) {
             $evalSql = new EvalSql($dataScript, true);
-            return $evalSql->eval($context);
+            return $evalSql->eval($context, true);
         }
         $scriptContext = new ScriptContext();
         $data = $scriptContext->execute($dataScript, $context);

@@ -48,7 +48,6 @@ class QueryFilter extends QueryBuilderParser
         $table = $options['table'];
         /**@var $pagination QueryPagination */
         $pagination = $options['pagination'];
-        $offset = $options['offset'];
         $modelClass = $options['model'];
         $filter = $options['filter'];
         $attributes = $options['attributes'];

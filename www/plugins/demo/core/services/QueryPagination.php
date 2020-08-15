@@ -6,11 +6,12 @@ namespace Demo\Core\Services;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 
 class QueryPagination
 {
     public $offset;
-    public $limit;
+    public $limit = -1;
     protected $data;
 
     /**
@@ -58,5 +59,38 @@ class QueryPagination
             'offset' => $this->offset,
             'totalRecords' => $totalRecords,
         ];
+    }
+
+    public function hasLimit()
+    {
+        return $this->limit >= 0;
+    }
+
+    /**@var $query Builder */
+    public function apply($query)
+    {
+        $query->offset($this->offset);
+        $query->limit($this->limit);
+    }
+
+    /**
+     * @return string
+     * @var $sql string
+     */
+    public static function getCountQuery($sql)
+    {
+        $lowerSql = strtolower($sql);
+        $matchers = [" from ", " from\n", "\nfrom ", "\nfrom\n"];
+        $fromIndex = false;
+        foreach ($matchers as $matcher) {
+            $fromIndex = strpos($lowerSql, $matcher);
+            if ($fromIndex) {
+                break;
+            }
+        }
+        if ($fromIndex) {
+            return 'SELECT count(*) FROM ' . substr($sql, $fromIndex + 5);
+        }
+        return $sql;
     }
 }
