@@ -52,6 +52,19 @@ class SeedDemoWorkflowWorkflowTransitions implements Seedable
                                                                                         "workflow_item_id"=>"9cb91bd0-becb-11ea-a623-57a0e0ff0756",
                                                                                         "from_state_id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b",
                                                                                         "to_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de"
+                            ] ,            [
+                                                                            "created_at"=>"2020-08-10 14:57:43",
+                                                                                        "updated_at"=>"2020-08-10 14:57:43",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "data"=>"[]",
+                                                                                        "plugin_id"=> 10,
+                                                                                        "column_12"=> null,
+                                                                                        "backward_direction"=> false,
+                                                                                        "id"=>"d85b9fa0-db19-11ea-b528-2520ae19beed",
+                                                                                        "workflow_item_id"=>"9cb91bd0-becb-11ea-a623-57a0e0ff0756",
+                                                                                        "from_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
+                                                                                        "to_state_id"=>"c5a45023-2d2a-48ca-94b1-3097c0af7d05"
                             ]             ]);
         }
 

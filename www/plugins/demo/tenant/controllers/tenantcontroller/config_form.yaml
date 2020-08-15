@@ -1,0 +1,10 @@
+name: TenantController
+form: $/demo/tenant/models/tenant/fields.yaml
+modelClass: Demo\Tenant\Models\Tenant
+defaultRedirect: demo/tenant/tenantcontroller
+create:
+    redirect: 'demo/tenant/tenantcontroller/update/:id'
+    redirectClose: demo/tenant/tenantcontroller
+update:
+    redirect: demo/tenant/tenantcontroller
+    redirectClose: demo/tenant/tenantcontroller

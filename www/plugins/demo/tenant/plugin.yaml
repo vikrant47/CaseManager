@@ -1,0 +1,20 @@
+plugin:
+    name: 'demo.tenant::lang.plugin.name'
+    description: 'demo.tenant::lang.plugin.description'
+    author: demo
+    icon: oc-icon-code-fork
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Tenant
+        url: demo/tenant/tanantcontroller
+        icon: icon-code-fork
+        sideMenu:
+            side-menu-item:
+                label: Tenants
+                url: /tenant
+                icon: icon-code-fork
+            side-menu-item2:
+                label: 'Tenant Applications'
+                url: demo/tenant/tenantapplicationcontroller
+                icon: icon-plug

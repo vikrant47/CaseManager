@@ -71,20 +71,20 @@ class SeedDemoCasemanagerCases implements Seedable
                                                                             "title"=> null,
                                                                                         "description"=> null,
                                                                                         "created_at"=>"2020-07-05 14:27:10",
-                                                                                        "updated_at"=>"2020-08-09 09:14:27",
+                                                                                        "updated_at"=>"2020-08-10 14:57:43",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "assigned_to_id"=> null,
                                                                                         "case_number"=> 5454,
                                                                                         "case_version"=> "",
-                                                                                        "version"=> 2,
+                                                                                        "version"=> 5,
                                                                                         "suspect"=> 54545,
                                                                                         "tat_duration"=> 3171796030,
                                                                                         "comments"=> "",
                                                                                         "id"=>"9caa4610-becb-11ea-9b6a-9df544c173f0",
                                                                                         "priority_id"=> null,
-                                                                                        "workflow_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
-                                                                                        "queue_id"=> null
+                                                                                        "workflow_state_id"=>"c5a45023-2d2a-48ca-94b1-3097c0af7d05",
+                                                                                        "queue_id"=>"85cd4fd8-16a9-482a-b47f-ff7bae2b79d3"
                             ]             ]);
         }
 
