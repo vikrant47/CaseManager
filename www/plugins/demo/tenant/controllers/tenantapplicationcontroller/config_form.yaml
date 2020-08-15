@@ -1,0 +1,10 @@
+name: TenantApplicationController
+form: $/demo/tenant/models/tenantapplication/fields.yaml
+modelClass: Demo\Tenant\Models\TenantApplication
+defaultRedirect: demo/tenant/tenantapplicationcontroller
+create:
+    redirect: 'demo/tenant/tenantapplicationcontroller/update/:id'
+    redirectClose: demo/tenant/tenantapplicationcontroller
+update:
+    redirect: demo/tenant/tenantapplicationcontroller
+    redirectClose: demo/tenant/tenantapplicationcontroller
