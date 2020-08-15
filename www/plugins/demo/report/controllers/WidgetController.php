@@ -4,8 +4,10 @@ use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
 use Demo\Core\Services\QueryFilter;
+use Demo\Core\Services\QueryPagination;
 use Demo\Report\Models\Widget;
 use Input;
+use Illuminate\Support\Facades\Request;
 use Maatwebsite\Excel\Excel;
 
 class WidgetController extends AbstractSecurityController
@@ -38,7 +40,12 @@ class WidgetController extends AbstractSecurityController
             $this->setStatusCode(404);
             return [];
         }
-        return ['result' => $widget->evaluate(['filter' => $this->getFilter($widget->table)])];
+        return [
+            'result' => $widget->evaluate([
+                'filter' => $this->getFilter($widget->table),
+                'pagination' => new QueryPagination(Request::input('pagination')),
+            ])
+        ];
     }
 
     public function onLoadData($id)
@@ -47,7 +54,10 @@ class WidgetController extends AbstractSecurityController
         /**@var $widget Widget */
         $widget = Widget::where('id', $id)->first();
 
-        return $widget->loadData(['filter' => $this->getFilter($widget->table)]);
+        return $widget->loadData([
+            'filter' => $this->getFilter($widget->table),
+            'pagination' => new QueryPagination(Request::input('pagination')),
+        ]);
     }
 
     public function onLoadTemplate($id)
@@ -56,7 +66,10 @@ class WidgetController extends AbstractSecurityController
         /**@var $widget Widget */
         $widget = Widget::where('id', $id)->first();
 
-        return $widget->loadTemplate(['filter' => $this->getFilter($widget->table)]);
+        return $widget->loadTemplate([
+            'filter' => $this->getFilter($widget->table),
+            'pagination' => new QueryPagination(Request::input('pagination')),
+        ]);
     }
 
     public function onLoadView($id)
@@ -65,8 +78,14 @@ class WidgetController extends AbstractSecurityController
         /**@var $widget Widget */
         $widget = Widget::where('id', $id)->first();
         return [
-            'template' => $widget->loadTemplate(['filter' => $this->getFilter($widget->table)]),
-            'script' => $widget->loadScript(['filter' => $this->getFilter($widget->table)]),
+            'template' => $widget->loadTemplate([
+                'filter' => $this->getFilter($widget->table),
+                'pagination' => new QueryPagination(Request::input('pagination')),
+            ]),
+            'script' => $widget->loadScript([
+                'filter' => $this->getFilter($widget->table),
+                'pagination' => new QueryPagination(Request::input('pagination')),
+            ]),
         ];
     }
 
@@ -75,7 +94,10 @@ class WidgetController extends AbstractSecurityController
         $id = Input::get('id');
         /**@var $widget Widget */
         $widget = Widget::where('id', $id)->first();
-        return $widget->evaluate(['filter' => $this->getFilter($widget->table)]);
+        return $widget->evaluate([
+            'filter' => $this->getFilter($widget->table),
+            'pagination' => new QueryPagination(Request::input('pagination')),
+        ]);
     }
 
     public function onPreview($id)
@@ -93,7 +115,11 @@ class WidgetController extends AbstractSecurityController
             $this->vars['dashboard'] = true;
             $this->vars['preview'] = false;
         }
-        return ['widget' => $widget->getOriginal(), 'filter' => $this->getFilter($widget->table)];
+        return [
+            'widget' => $widget->getOriginal(),
+            'filter' => $this->getFilter($widget->table),
+            'pagination' => new QueryPagination(Request::input('pagination')),
+        ];
     }
 
     public function addAssets($controller, Widget $widget)

@@ -131,6 +131,7 @@ Engine.instance.define('engine.report.Widget', {
         this.$footer = this.$el.find('.widget-footer');
         this.$el.data('widget', this);
         this.events = {resize: []};
+        this.pagination = new engine.data.Pagination();
     },
     static: {
         defaultOptions: {
@@ -160,17 +161,23 @@ Engine.instance.define('engine.report.Widget', {
         this.header = header;
         this.header.init();
     },
+    setPagination: function (pagination) {
+        if (!(pagination instanceof engine.data.Pagination)) {
+            pagination = engine.data.Pagination.create(Object.assign({el: this.$footer.find('.engine-pagination').get()}, pagination));
+        }
+        this.pagination = pagination;
+    },
     /**
      * Setting filter to widget
-     * @param filter - instance of engine.Filter or field definition {fields:[]}
+     * @param filter - instance of engine.data.Filter or field definition {fields:[]}
      */
     setFilter: function (filter) {
         const _this = this;
         const ui = Engine.instance.ui;
-        if (filter instanceof engine.Filter) {
+        if (filter instanceof engine.data.Filter) {
             this.filter = filter;
         } else {
-            this.filter = engine.Filter.create(Object.assign({
+            this.filter = engine.data.Filter.create(Object.assign({
                 breadcrumbContainer: this.header.$el.find('.widget-breadcrumb'),
             }, filter));
         }
@@ -183,6 +190,7 @@ Engine.instance.define('engine.report.Widget', {
             if (!_this.isInsideDashboard()) {
                 ui.updateQueryString('urlFilter', this.getRules(), false);
             }
+            _this.pagination.reset();
             _this.fetchAndRender();
             _this.filter.closePopup();
         }).build().then(function () {
@@ -243,29 +251,37 @@ Engine.instance.define('engine.report.Widget', {
     },
     loadData: function () {
         const _this = this;
-        return Engine.instance.ui.request('onLoadData', {
-            url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
-            data: {
-                id: this.model.id,
-                filter: this.filter ? this.filter.getRules() : null,
+        return this.pagination.httpConfig({
+            action: 'onLoadData', options: {
+                url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
+                data: {
+                    id: this.model.id,
+                    filter: this.filter ? this.filter.getRules() : null,
+                }
             }
-        }).then(function (data) {
+        }).paginate().map(function (data) {
             if (typeof data === 'string') {
-                data = JSON.parse(result);
+                data = JSON.parse(data);
             }
-            return this.setData(data);
+            _this.setData(data);
+            return _this.model;
         });
     },
-    onLoadWidget: function () {
+    onLoadWidget: function (includeScript = true) {
         const _this = this;
-        return Engine.instance.ui.request('onLoadWidget', {
-            url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
-            // loadingContainer: _this.getBody(),
-            data: {
-                id: this.model.id,
-                filter: this.filter ? this.filter.getRules() : null,
+        return this.pagination.httpConfig({
+            action: 'onLoadWidget', options: {
+                url: '/backend/demo/report/widgetcontroller/render/' + this.model.id,
+                // loadingContainer: _this.getBody(),
+                data: {
+                    id: this.model.id,
+                    filter: this.filter ? this.filter.getRules() : null,
+                    script: includeScript,
+                }
             }
-        }).then(function (widget) {
+        }).paginate().map(function (widget) {
+            const pagination = widget.data.pagination;
+            _this.pagination.update(pagination);
             Object.assign(_this.model, widget);
             _this.setData(widget.data);
             return _this.model;
@@ -276,6 +292,7 @@ Engine.instance.define('engine.report.Widget', {
         $(this.getBody()).empty().append(this.model.template);
         const widgetScript = this.parseScript();
         widgetScript.render.call(this);
+        this.pagination.render();
     },
     parseScript: function () {
         const script = this.looseParseJSON(this.model.script);
@@ -300,7 +317,7 @@ Engine.instance.define('engine.report.Widget', {
     fetchAndRender: function () {
         const _this = this;
         this.init(this.option);
-        this.onLoadWidget().then(function (widget) {
+        this.onLoadWidget(!this.initialized).subscribe(function (widget) {
             _this.render(widget);
         });
     },
@@ -325,9 +342,9 @@ var Store = Engine.instance.define('engine.data.Store', {
         }
     },
     constructor: function (data) {
-        if (typeof data.current_page !== 'undefined' && typeof data.per_page !== 'undefed' && typeof data.data !== 'undefined') {
+        if (typeof data.pagination !== 'undefined') {
             this.data = data.data;
-            this.paginator = data;
+            this.pagination = data.pagination;
         } else {
             this.data = data;
         }

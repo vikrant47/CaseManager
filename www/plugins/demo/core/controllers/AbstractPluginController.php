@@ -24,6 +24,7 @@ use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
 use Demo\Core\Services\QueryFilter;
+use Demo\Core\Services\QueryPagination;
 use File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
@@ -675,8 +676,10 @@ class AbstractPluginController extends Controller
     public function onQueryData()
     {
         $table = Request::input('table');
-        $limit = Request::input('limit');
-        $offset = Request::input('offset');
+        $pagination = Request::input('pagination');
+        if (!empty($pagination)) {
+            $pagination = ['offset' => 0];
+        }
         $modelClass = Request::input('model');
         $filter = Request::input('where');
         $attributes = Request::input('attributes');
@@ -685,8 +688,7 @@ class AbstractPluginController extends Controller
             'model' => $modelClass,
             'filter' => $filter,
             'attributes' => $attributes,
-            'limit' => $limit,
-            'offset' => $offset,
+            'pagination' => new QueryPagination($pagination),
         ]);
         $this->queryDataExtendQuery($query);
         return $query->get();

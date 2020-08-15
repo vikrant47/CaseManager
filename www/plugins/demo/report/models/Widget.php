@@ -7,6 +7,8 @@ use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\PluginVersions;
+use Demo\Core\Services\QueryFilter;
+use Demo\Core\Services\QueryPagination;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
@@ -60,24 +62,30 @@ class Widget extends Model implements FromCollection
         return strtolower($startWord) === 'select';
     }
 
-    public function loadData($context = [], $pagination = true, $page = 1, $perPage = 20)
+    public function loadData($context = [])
     {
         $context['widget'] = $this;
-        $context['page'] = $page;
+        /**@var $pagination QueryPagination */
+        $pagination = $context['pagination'];
         $dataScript = $this->data;
         if ($this->isSqlScript($dataScript)) {
-            $evalSql = new EvalSql($dataScript, $pagination);
-            return $evalSql->eval($context, $page, $perPage);
+            $evalSql = new EvalSql($dataScript, true);
+            return $evalSql->eval($context, true);
         }
         $scriptContext = new ScriptContext();
         $data = $scriptContext->execute($dataScript, $context);
         if ($data instanceof QueryBuilder) {
-            if ($pagination) {
-                $data = $data->paginate($page);
-            }
-            $data = $data->get();
-        } else if ($data instanceof EvalSql) {
-            $data = $data->eval($context, $page, $perPage);
+            $query = $data;
+            $filter = new QueryFilter($query, $context['filter']);
+            $filter->applyFilter();
+            $data = $query->get();
+            $totalRecords = $query->count();
+            return [
+                'data' => $data, 'pagination' => $pagination->toArray($totalRecords)
+            ];
+        }
+        if ($data instanceof EvalSql) {
+            return $data->eval($context, true);
         }
         return $data;
     }

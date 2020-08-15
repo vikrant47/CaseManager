@@ -23,7 +23,7 @@ if ($fetchModelFromField === false) {
 <script>
     $(document).ready(function () {
         const sql_import_export = $('<div/>').html('<?= e($value) ?>').html().trim();
-        const filter = new engine.Filter('#<?= $id ?>', '#<?= $id ?>', sql_import_export);
+        const filter = new engine.data.Filter('#<?= $id ?>', '#<?= $id ?>', sql_import_export);
         filter.setModel('<?= str_replace('\\','\\\\',$modelType)?>');
         filter.build();
     });

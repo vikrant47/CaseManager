@@ -7,7 +7,7 @@ let ReferenceComponent = Engine.instance.define('engine.component.Reference', {
                         if (params.data.q) {
                             const nameFrom = association.nameFrom || 'name';
                             const otherKey = association.otherKey || 'id';
-                            new engine.Filter().select({
+                            new engine.data.Filter().select({
                                 model: association[0] || association.model,
                                 attributes: [nameFrom, otherKey],
                                 limit: 20,

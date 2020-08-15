@@ -357,7 +357,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
                 if (typeof handler === 'string') {
                     $reqElem.request(handler, setting);
                 } else {
-                    $reqElem.request(setting);
+                    $reqElem.request(setting.handler, setting);
                 }
             }
         });
