@@ -36,7 +36,7 @@ class Navigation extends Model
 
     public $attachAuditedBy = true;
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'plugin' => [PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id'],
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'dashboard' => [Dashboard::class, 'key' => 'dashboard_id'],
         'widget' => [Widget::class, 'key' => 'widget_id'],
@@ -98,6 +98,11 @@ class Navigation extends Model
         return ['cyclic' => false, 'cycle' => $cycle];
     }
 
+    public static function isDefaultList($model, $list)
+    {
+        return $list == 'default' || ends_with($list, strtolower(str_replace('\\', '/', $model)) . '/columns.yaml');
+    }
+
     public function beforeSave()
     {
         $result = $this->isCyclic($this, $this->parent);
@@ -132,7 +137,7 @@ class Navigation extends Model
             } else {
                 $generatedUrl = $index;
             }
-            if (!empty($navigation->list) && $navigation->list !== 'default') {
+            if (!empty($navigation->list) && !Navigation::isDefaultList($navigation->model, $navigation->list)) {
                 $list = $navigation->list;
                 $index = strripos($list, '/');
                 if ($index) {

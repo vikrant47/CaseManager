@@ -19,7 +19,7 @@ class JavascriptLibrary extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_libraries';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
@@ -28,7 +28,7 @@ public $incrementing = false;
     ];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id']
+        'plugin' => [PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id']
     ];
 
     public $attachMany = [
@@ -65,14 +65,14 @@ public $incrementing = false;
 
     public function getJsFiles()
     {
-        return  $this->javascript_files->map(function ($file) {
+        return $this->javascript_files->map(function ($file) {
             return $file->path;
         });
     }
 
     public function getCssFiles()
     {
-        return  $this->css_files->map(function ($file) {
+        return $this->css_files->map(function ($file) {
             return $file->path;
         });
     }

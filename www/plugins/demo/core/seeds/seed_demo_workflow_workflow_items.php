@@ -88,7 +88,7 @@ class SeedDemoWorkflowWorkflowItems implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "created_at"=>"2020-07-05 14:27:11",
-                                                                                        "updated_at"=>"2020-08-09 09:14:27",
+                                                                                        "updated_at"=>"2020-08-10 14:57:43",
                                                                                         "assigned_at"=> null,
                                                                                         "assigned_to_id"=> null,
                                                                                         "finished_at"=> null,
@@ -96,7 +96,7 @@ class SeedDemoWorkflowWorkflowItems implements Seedable
                                                                                         "id"=>"9cb91bd0-becb-11ea-a623-57a0e0ff0756",
                                                                                         "workflow_id"=>"dd25a3b6-0e8b-4af7-b50d-d9030068b84a",
                                                                                         "record_id"=>"9caa4610-becb-11ea-9b6a-9df544c173f0",
-                                                                                        "current_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de"
+                                                                                        "current_state_id"=>"c5a45023-2d2a-48ca-94b1-3097c0af7d05"
                             ]             ]);
         }
 
