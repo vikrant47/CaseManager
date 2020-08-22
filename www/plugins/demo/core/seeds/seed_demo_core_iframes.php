@@ -21,7 +21,7 @@ class SeedDemoCoreIframes implements Seedable
                                                                                         "name"=>"Test",
                                                                                         "description"=> "",
                                                                                         "backend_menu"=>"[{\"plugin\":\"10\",\"main_menu\":\"main-menu-item\",\"side_menu\":\"side-menu-item2\"}]",
-                                                                                        "slug"=>"test",
+                                                                                        "code"=>"test",
                                                                                         "url"=>"https://www.youtube.com/watch?v=cTbIjrF05N0",
                                                                                         "active"=> 1,
                                                                                         "iframe"=> 1,

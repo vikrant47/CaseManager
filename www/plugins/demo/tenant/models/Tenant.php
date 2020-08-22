@@ -1,7 +1,9 @@
 <?php namespace Demo\Tenant\Models;
 
 use Demo\Core\Models\PluginVersions;
+use Demo\Tenant\Services\TenantService;
 use Model;
+use October\Rain\Exception\ApplicationException;
 
 /**
  * Model
@@ -36,7 +38,12 @@ class Tenant extends Model
             'table' => 'demo_tenant_applications',
             'key' => 'tenant_id',
             'otherKey' => 'application_id',
-            'where'=>['code','ILIKE','Demo%'],
+            'where' => ['code', 'ILIKE', 'Demo%'],
         ],
     ];
+
+    public function beforeUpdate()
+    {
+        //TODO: can not change tenant code
+    }
 }

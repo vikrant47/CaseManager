@@ -3,9 +3,13 @@
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use \Demo\Core\Classes\Helpers\PluginHelper;
+use Demo\Core\Classes\Helpers\StringInput;
+use Demo\Core\Classes\Helpers\StringOutput;
+use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Models\PluginVersions;
 use Demo\Core\Plugin;
 use Illuminate\Console\Command;
+use Illuminate\Console\OutputStyle;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,6 +42,43 @@ class SeedRunner extends Command
         $this->files = new Filesystem();
     }
 
+    public function runSeeds($plugin, $operation, $clean = false)
+    {
+        if (!empty($plugin) && $plugin !== 'all' && $plugin !== 'a') {
+            $plugins[] = $plugin;
+        } else {
+            $plugins = Db::table('system_plugin_versions')->where('code', 'like', 'Demo%')->orderBy('id', 'ASC')->get(['code'])
+                ->map(function ($plugin) {
+                    return $plugin->code;
+                });
+        }
+        foreach ($plugins as $plugin) {
+            $pluginConnection = PluginConnection::getConnection($plugin);
+            $seedPath = $pluginConnection->getSeedsPath($plugin);
+            if ($operation === 'dump' || $operation === 'd') {
+                $path = $this->argument('path');
+                if (empty($path)) {
+                    $path = $seedPath;
+                }
+                $this->info('***************** Dumping seeds for plugin ' . $plugin . ' ******************');
+                $this->info('path = ' . $path);
+                $this->runDump($plugin, $path, $clean);
+            } else {
+                $this->info('***************** Collecting seeds for plugin ' . $plugin . ' ******************');
+                $seedFiles = $this->getSeedsFiles($seedPath);
+                if (count($seedFiles) === 0) {
+                    $this->info('***************** No seeds  found for plugin ' . $plugin . ' ******************');
+                } else {
+                    if ($operation === 'uninstall' || $operation === 'u') {
+                        $this->runUninstall($plugin, $seedFiles);
+                    } else {
+                        $this->runInstall($plugin, $seedFiles);
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Execute the console command.
      * @return void
@@ -48,40 +89,8 @@ class SeedRunner extends Command
             $plugins = [];
             $plugin = $this->argument('plugin');
             $clean = $this->options('clean');
-            if (!empty($plugin) && $plugin !== 'all' && $plugin !== 'a') {
-                $plugins[] = $plugin;
-            } else {
-                $plugins = Db::table('system_plugin_versions')->where('code', 'like', 'Demo%')->orderBy('id', 'ASC')->get(['code'])
-                    ->map(function ($plugin) {
-                        return $plugin->code;
-                    });
-            }
-            foreach ($plugins as $plugin) {
-                $pluginConnection = PluginConnection::getConnection($plugin);
-                $seedPath = $pluginConnection->getSeedsPath($plugin);
-                $operation = $this->argument('operation');
-                if ($operation === 'dump' || $operation === 'd') {
-                    $path = $this->argument('path');
-                    if (empty($path)) {
-                        $path = $seedPath;
-                    }
-                    $this->info('***************** Dumping seeds for plugin ' . $plugin . ' ******************');
-                    $this->info('path = ' . $path);
-                    $this->runDump($plugin, $path, $clean);
-                } else {
-                    $this->info('***************** Collecting seeds for plugin ' . $plugin . ' ******************');
-                    $seedFiles = $this->getSeedsFiles($seedPath);
-                    if (count($seedFiles) === 0) {
-                        $this->info('***************** No seeds  found for plugin ' . $plugin . ' ******************');
-                    } else {
-                        if ($operation === 'uninstall' || $operation === 'u') {
-                            $this->runUninstall($plugin, $seedFiles);
-                        } else {
-                            $this->runInstall($plugin, $seedFiles);
-                        }
-                    }
-                }
-            }
+            $operation = $this->argument('operation');
+            $this->runSeeds($plugin, $operation, $clean);
         } catch (\Exception $e) {
             if (!empty($this->option('debug'))) {
                 $this->error($e);
@@ -89,6 +98,16 @@ class SeedRunner extends Command
                 throw $e;
             }
         }
+    }
+
+    public function setStringOutputChannel()
+    {
+        $this->output = new OutputStyle(new StringInput(), new StringOutput());
+    }
+
+    public function getOutputString()
+    {
+        return ReflectionUtil::getPropertyValue(get_class($this->output), 'output', $this->output);
     }
 
     /**

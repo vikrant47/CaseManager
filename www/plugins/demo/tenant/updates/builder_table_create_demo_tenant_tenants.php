@@ -15,13 +15,13 @@ class BuilderTableCreateDemoTenantTenants extends Migration
             $table->string('code');
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
-            $table->text('logo');
+            $table->text('logo')->nullable();
             $table->string('default_theme')->nullable()->default('engine-default');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('version');
+            $table->integer('version')->nullable()->default(0);
             $table->primary(['id']);
         });
     }

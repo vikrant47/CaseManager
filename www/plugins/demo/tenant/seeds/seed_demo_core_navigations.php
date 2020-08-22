@@ -18,7 +18,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "updated_at"=>"2020-08-15 14:14:29",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "version"=> null,
+                                                                                        "version"=> 0,
                                                                                         "label"=>"Tenants",
                                                                                         "type"=>"list",
                                                                                         "active"=> 1,
