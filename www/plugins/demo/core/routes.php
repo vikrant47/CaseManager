@@ -6,16 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
 Route::match(['get', 'put', 'post', 'delete'], '/tenant/{tenantCode}/{wildcard}', function (Request $request, $tenantCode, $wildcard) {
-    $wildcard = '/' . $wildcard;
+    // $wildcard = '/' . $wildcard;
     $tenant = \Demo\Tenant\Models\Tenant::where(['code' => $tenantCode, 'active' => true])->first();
     if (empty($tenant)) {
         return response('Page not found', 404);
     }
     $tenantService = new \Demo\Tenant\Services\TenantService(null);
-    $tenantService->pushTenantDatabaseConfiguration($tenant);
-    $tenantService->setDefaultDatabaseConnection($tenant);
-    return redirect()->route($wildcard);
-})->where('wildcard', '.+');
+    $tenantService->configureConnectionByName($tenantCode);
+    $tenantService->setDefaultDatabaseConnection($tenantCode);
+    $backendController = app()->make(ltrim(\Backend\Classes\BackendController::class, '\\'));
+    return $backendController->run($wildcard);
+})->where('wildcard', '.+')->middleware('web');
 Route::get('/backend/engine/api/{pluginName}/models/{modelName}', function ($pluginName, $modelName) {
     $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
     $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);

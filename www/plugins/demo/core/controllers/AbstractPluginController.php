@@ -106,18 +106,20 @@ class AbstractPluginController extends Controller
      */
     public function listExtendQuery($query)
     {
-        $config = $this->widget->list->config;
-        if (property_exists($config, 'filter')) {
-            $listFilter = $config->filter;
-            if (!empty($listFilter)) {
-                $filterService = new QueryFilter($query, $listFilter);
-                $filterService->applyFilter();
+        if (property_exists($this->widget, 'list')) {
+            $config = $this->widget->list->config;
+            if (property_exists($config, 'filter')) {
+                $listFilter = $config->filter;
+                if (!empty($listFilter)) {
+                    $filterService = new QueryFilter($query, $listFilter);
+                    $filterService->applyFilter();
+                }
             }
-        }
-        $urlFilter = Request::input('urlFilter');
-        if (!empty($urlFilter)) {
-            $urlFilterInstance = new QueryFilter($query, $urlFilter);
-            $urlFilterInstance->applyFilter($query, $urlFilter);
+            $urlFilter = Request::input('urlFilter');
+            if (!empty($urlFilter)) {
+                $urlFilterInstance = new QueryFilter($query, $urlFilter);
+                $urlFilterInstance->applyFilter($query, $urlFilter);
+            }
         }
     }
 

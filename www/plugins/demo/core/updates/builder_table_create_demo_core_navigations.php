@@ -15,7 +15,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('version')->default(0);
+            $table->integer('version')->nullable()->default(0);
             $table->string('label');
             $table->string('icon');
             $table->string('type');
