@@ -22,7 +22,6 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->text('data');
             $table->text('script');
             $table->boolean('public');
-            $table->uuid('library_id');
             $table->integer('plugin_id');
             $table->boolean('active')->default(true);
         });

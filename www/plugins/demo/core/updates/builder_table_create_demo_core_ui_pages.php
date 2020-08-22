@@ -15,7 +15,7 @@ class BuilderTableCreateDemoCoreUiPages extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('version')->nullable();
+            $table->integer('version')->default(0);
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('code');

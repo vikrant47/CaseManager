@@ -28,7 +28,6 @@ class SeedDemoReportWidgets implements Seedable
                                                                                         "plugin_id"=> 3,
                                                                                         "active"=> 1,
                                                                                         "id"=>"44778960-b508-11ea-bbc1-096310b9696e",
-                                                                                        "library_id"=> null
                             ]             ]);
         }
 

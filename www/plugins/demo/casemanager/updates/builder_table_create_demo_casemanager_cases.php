@@ -21,7 +21,7 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->uuid('priority_id')->nullable();
             $table->string('case_number', 255);
             $table->string('case_version', 255);
-            $table->integer('version');
+            $table->integer('version')->default(0);
             $table->string('suspect', 255);
             $table->bigInteger('tat_duration');
             $table->text('comments', 255);

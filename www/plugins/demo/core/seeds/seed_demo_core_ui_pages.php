@@ -18,7 +18,7 @@ class SeedDemoCoreUiPages implements Seedable
                                                                                         "updated_at"=>"2020-05-16 15:13:38",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "version"=> null,
+                                                                                        "version"=> 0,
                                                                                         "name"=>"Hello World",
                                                                                         "description"=> "",
                                                                                         "code"=>"hello-world",

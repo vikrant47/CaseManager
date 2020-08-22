@@ -27,8 +27,7 @@ class SeedDemoReportWidgets implements Seedable
                                                                                         "public"=> 0,
                                                                                         "plugin_id"=> 6,
                                                                                         "active"=> 1,
-                                                                                        "id"=>"8be0d030-b3d3-11ea-90ed-bfdae0c12a09",
-                                                                                        "library_id"=> null
+                                                                                        "id"=>"8be0d030-b3d3-11ea-90ed-bfdae0c12a09"
                             ] ,            [
                                                                             "created_at"=>"2019-12-01 07:42:56",
                                                                                         "updated_at"=>"2020-08-08 16:18:21",
@@ -43,8 +42,7 @@ class SeedDemoReportWidgets implements Seedable
                                                                                         "public"=> 0,
                                                                                         "plugin_id"=> 6,
                                                                                         "active"=> 1,
-                                                                                        "id"=>"84383d11-89c6-4dac-906c-bb2b08923b53",
-                                                                                        "library_id"=>"a65cda17-3942-4dac-995b-fd66fe412d1a"
+                                                                                        "id"=>"84383d11-89c6-4dac-906c-bb2b08923b53"
                             ]             ]);
         }
 

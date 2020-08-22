@@ -36,6 +36,18 @@ class TenantService extends ServiceProvider
     }
 
     /**
+     * Drops a new database schema.
+     * @param string $schemaName The new schema name.
+     * @return bool
+     */
+    public function dropDatabase($schemaName)
+    {
+        // We will use the `statement` method from the connection class so that
+        // we have access to parameter binding.
+        DB::statement(DB::raw('DROP DATABASE ' . $schemaName));
+    }
+
+    /**
      * Configures a tenant's database connection.
      * @param string $tenantName The database name.
      * @return void
@@ -69,13 +81,13 @@ class TenantService extends ServiceProvider
     }
 
     /**
-     * @param $tenant
+     * @param $database string
      * @param null $output
      */
-    public function runMigration($tenant, $output = null)
+    public function runMigration($database, $output = null)
     {
-        $this->pushTenantDatabaseConfiguration($tenant);
-        $this->setDefaultDatabaseConnection($tenant->code);
+        $this->configureConnectionByName($database);
+        $this->setDefaultDatabaseConnection($database);
         DB::transaction(function () use ($output) {
             UpdateManager::instance()
                 ->setNotesOutput($output)
@@ -84,14 +96,15 @@ class TenantService extends ServiceProvider
         $this->setDefaultDatabaseConnection($this->originalDatabase);
     }
 
-    /**@var $tenant Tenant */
-    public function runSeeds($tenant)
+    /*** @param $database string*/
+    public function runSeeds($database)
     {
-        $this->pushTenantDatabaseConfiguration($tenant);
-        $this->setDefaultDatabaseConnection($tenant->code);
+        $this->configureConnectionByName($database);
+        $this->setDefaultDatabaseConnection($database);
         DB::transaction(function () {
             $seedRunner = new SeedRunner();
-            $seedRunner->runSeeds(['plugin' => 'all', 'operation' => 'install'], []);
+            $seedRunner->setStringOutputChannel();
+            $seedRunner->runSeeds('all', 'operation');
         });
         $this->setDefaultDatabaseConnection($this->originalDatabase);
     }

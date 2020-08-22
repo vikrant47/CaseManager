@@ -3,9 +3,13 @@
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use \Demo\Core\Classes\Helpers\PluginHelper;
+use Demo\Core\Classes\Helpers\StringInput;
+use Demo\Core\Classes\Helpers\StringOutput;
+use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Models\PluginVersions;
 use Demo\Core\Plugin;
 use Illuminate\Console\Command;
+use Illuminate\Console\OutputStyle;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -94,6 +98,16 @@ class SeedRunner extends Command
                 throw $e;
             }
         }
+    }
+
+    public function setStringOutputChannel()
+    {
+        $this->output = new OutputStyle(new StringInput(), new StringOutput());
+    }
+
+    public function getOutputString()
+    {
+        return ReflectionUtil::getPropertyValue(get_class($this->output), 'output', $this->output);
     }
 
     /**
