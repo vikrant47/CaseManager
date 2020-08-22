@@ -15,6 +15,7 @@ Route::match(['get', 'put', 'post', 'delete'], '/tenant/{tenantCode}/{wildcard}'
     $tenantService->configureConnectionByName($tenantCode);
     $tenantService->setDefaultDatabaseConnection($tenantCode);
     $backendController = app()->make(ltrim(\Backend\Classes\BackendController::class, '\\'));
+    $request->attributes->set('tenant', $tenant);
     return $backendController->run($wildcard);
 })->where('wildcard', '.+')->middleware('web');
 Route::get('/backend/engine/api/{pluginName}/models/{modelName}', function ($pluginName, $modelName) {

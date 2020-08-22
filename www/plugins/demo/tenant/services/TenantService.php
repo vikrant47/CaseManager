@@ -4,6 +4,7 @@
 namespace Demo\Tenant\Services;
 
 
+use Backend\Facades\Backend;
 use Demo\Core\Console\SeedRunner;
 use Demo\Tenant\Models\Tenant;
 use App;
@@ -96,7 +97,7 @@ class TenantService extends ServiceProvider
         $this->setDefaultDatabaseConnection($this->originalDatabase);
     }
 
-    /*** @param $database string*/
+    /*** @param $database string */
     public function runSeeds($database)
     {
         $this->configureConnectionByName($database);
@@ -135,5 +136,19 @@ class TenantService extends ServiceProvider
     {
         Config::set('database.default', $databaseName);
         DB::setDefaultConnection($databaseName);
+    }
+
+    /**
+     * @param $tenant Tenant
+     * @param $controllerType string
+     */
+    public static function generateUrl($tenant, $controllerType)
+    {
+        $url = Backend::url(str_replace('\\', '/', strtolower(str_replace('\\Controllers', '', $controllerType))));
+        $index = strpos($url, '/backend');
+        if ($index) {
+            $url = '/tenant/' . $tenant->code . substr($url, $index + 8);
+        }
+        return $url;
     }
 }

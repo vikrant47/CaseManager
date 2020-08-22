@@ -10,6 +10,7 @@ use Demo\Report\Controllers\DashboardController;
 use Demo\Report\Controllers\WidgetController;
 use Demo\Report\Models\Dashboard;
 use Demo\Report\Models\Widget;
+use Demo\Tenant\Services\TenantService;
 use Model;
 use October\Rain\Exception\ApplicationException;
 use RainLab\Builder\Classes\IconList;
@@ -114,24 +115,24 @@ class Navigation extends Model
 
     public static function getUrl($navigation)
     {
-
+        $tenant = request()->attributes->get('tenant');
         $generatedUrl = '';//$navigation->generated_url;
         if ($navigation->type === 'url') {
-            $generatedUrl = ControllerHelper::generateUrl(NavigationController::class) . '/embed/' . $navigation->id;
+            $generatedUrl = TenantService::generateUrl($tenant, NavigationController::class) . '/embed/' . $navigation->id;
         } else if ($navigation->type === 'dashboard') {
-            $index = ControllerHelper::generateUrl(DashboardController::class);
+            $index = TenantService::generateUrl($tenant, DashboardController::class);
             $generatedUrl = $index . '/render/' . $navigation->dashboard_id;
         } else if ($navigation->type === 'widget') {
-            $index = ControllerHelper::generateUrl(WidgetController::class);
+            $index = TenantService::generateUrl($tenant, WidgetController::class);
             $generatedUrl = $index . '/render/' . $navigation->widget_id;
         } else if ($navigation->type === 'uipage') {
-            $index = ControllerHelper::generateUrl(UiPageController::class);
+            $index = TenantService::generateUrl($tenant, UiPageController::class);
             $generatedUrl = $index . '/render/' . $navigation->uipage_id;
         } else if ($navigation->type === 'list') {
             /*try {*/
 
             $model = $navigation->model_ref;
-            $index = ControllerHelper::generateUrl($model->controller);
+            $index = TenantService::generateUrl($tenant, $model->controller);
             if (!empty($navigation->view) && $navigation->view !== 'default') {
                 $generatedUrl = $index . '?view=' . $navigation->view;
             } else {
@@ -158,7 +159,7 @@ class Navigation extends Model
             }*/
         } else if ($navigation->type === 'form') {
             $model = $navigation->model_ref;
-            $index = ControllerHelper::generateUrl($model->controller);
+            $index = TenantService::generateUrl($tenant, $model->controller);
             if (empty($navigation->record_id)) {
                 $generatedUrl = $index . '/update' . $navigation->record_id;
             } else {
