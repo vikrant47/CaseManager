@@ -38,6 +38,43 @@ class SeedRunner extends Command
         $this->files = new Filesystem();
     }
 
+    public function runSeeds($plugin, $operation, $clean = false)
+    {
+        if (!empty($plugin) && $plugin !== 'all' && $plugin !== 'a') {
+            $plugins[] = $plugin;
+        } else {
+            $plugins = Db::table('system_plugin_versions')->where('code', 'like', 'Demo%')->orderBy('id', 'ASC')->get(['code'])
+                ->map(function ($plugin) {
+                    return $plugin->code;
+                });
+        }
+        foreach ($plugins as $plugin) {
+            $pluginConnection = PluginConnection::getConnection($plugin);
+            $seedPath = $pluginConnection->getSeedsPath($plugin);
+            if ($operation === 'dump' || $operation === 'd') {
+                $path = $this->argument('path');
+                if (empty($path)) {
+                    $path = $seedPath;
+                }
+                $this->info('***************** Dumping seeds for plugin ' . $plugin . ' ******************');
+                $this->info('path = ' . $path);
+                $this->runDump($plugin, $path, $clean);
+            } else {
+                $this->info('***************** Collecting seeds for plugin ' . $plugin . ' ******************');
+                $seedFiles = $this->getSeedsFiles($seedPath);
+                if (count($seedFiles) === 0) {
+                    $this->info('***************** No seeds  found for plugin ' . $plugin . ' ******************');
+                } else {
+                    if ($operation === 'uninstall' || $operation === 'u') {
+                        $this->runUninstall($plugin, $seedFiles);
+                    } else {
+                        $this->runInstall($plugin, $seedFiles);
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Execute the console command.
      * @return void
@@ -48,40 +85,8 @@ class SeedRunner extends Command
             $plugins = [];
             $plugin = $this->argument('plugin');
             $clean = $this->options('clean');
-            if (!empty($plugin) && $plugin !== 'all' && $plugin !== 'a') {
-                $plugins[] = $plugin;
-            } else {
-                $plugins = Db::table('system_plugin_versions')->where('code', 'like', 'Demo%')->orderBy('id', 'ASC')->get(['code'])
-                    ->map(function ($plugin) {
-                        return $plugin->code;
-                    });
-            }
-            foreach ($plugins as $plugin) {
-                $pluginConnection = PluginConnection::getConnection($plugin);
-                $seedPath = $pluginConnection->getSeedsPath($plugin);
-                $operation = $this->argument('operation');
-                if ($operation === 'dump' || $operation === 'd') {
-                    $path = $this->argument('path');
-                    if (empty($path)) {
-                        $path = $seedPath;
-                    }
-                    $this->info('***************** Dumping seeds for plugin ' . $plugin . ' ******************');
-                    $this->info('path = ' . $path);
-                    $this->runDump($plugin, $path, $clean);
-                } else {
-                    $this->info('***************** Collecting seeds for plugin ' . $plugin . ' ******************');
-                    $seedFiles = $this->getSeedsFiles($seedPath);
-                    if (count($seedFiles) === 0) {
-                        $this->info('***************** No seeds  found for plugin ' . $plugin . ' ******************');
-                    } else {
-                        if ($operation === 'uninstall' || $operation === 'u') {
-                            $this->runUninstall($plugin, $seedFiles);
-                        } else {
-                            $this->runInstall($plugin, $seedFiles);
-                        }
-                    }
-                }
-            }
+            $operation = $this->argument('operation');
+            $this->runSeeds($plugin, $operation, $clean);
         } catch (\Exception $e) {
             if (!empty($this->option('debug'))) {
                 $this->error($e);
