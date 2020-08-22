@@ -224,6 +224,9 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     getModel: function () {
         return this.currentModel;
     },
+    setTenant: function (tenant) {
+        this.tenant = tenant;
+    },
     setModel: function (model) {
         this.currentModel = model;
     },
@@ -299,7 +302,14 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         return window.location.origin;
     },
     getBaseUrl: function () {
-        return window.location.origin + '/backend';
+        return window.location.origin + this.getBaseTenantUrl();
+    },
+    getBaseTenantUrl: function () {
+        const tenantCode = this.tenant.code;
+        if (tenantCode === 'default') {
+            return '/backend';
+        }
+        return '/tenant/' + tenantCode;
     },
     getCurrentControllerUrl: function () {
         return this.getBaseUrl() + '/' + this.currentModel.controller.replace(/\\/g, '/').replace('/Controllers', '').toLocaleLowerCase();
@@ -492,7 +502,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         return this.$el.find('.toolbar-item .toolbar');
     },
     getLocation: function () {
-        return ('/backend/' + this.modelRecord.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
+        return Engine.instance.ui.getBaseUrl() + '/' + (this.modelRecord.controller.replace(/\\/g, '/').replace('/Controllers', '')).toLocaleLowerCase();
     },
     navigate: function (view = 'index', queryParams = {}) {
         Engine.instance.ui.navigate(this.getLocation() + '/' + view + (Object.keys(queryParams).length > 0 ? '?' + $.param(queryParams) : ''));

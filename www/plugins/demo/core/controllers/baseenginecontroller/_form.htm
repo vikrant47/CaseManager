@@ -13,7 +13,9 @@ $modelRecord = $this->getModelRecord();
             <?php $model = $this->formGetModel()?>
             var formModel = <?=empty($model) ? 'null' : $model->toJSON()?>;
             var controller = <?=json_encode($this->getControllerInfo())?>;
+            var tenant = <?=request()->attributes->get('tenant')->toJSON()?>;
             Engine.instance.ui.setModel(modelRecord);
+            Engine.instance.ui.setTenant(tenant);
             var form = EngineForm.getCurrentForm();
             form.setFormModel(formModel);
             form.addActions(actions);
