@@ -16,7 +16,6 @@ class BuilderTableCreateDemoWorkflowWorkflowItems extends Migration
             $table->integer('updated_by_id');
             $table->string('model', 255);
             $table->uuid('record_id');
-            $table->timestamp('assigned_at');
             $table->uuid('workflow_id');
             $table->integer('assigned_to_id');
             $table->uuid('current_state_id');

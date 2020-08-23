@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         }
     });
-    $(document).on('click',
+/*    $(document).on('click',
         '.nav-type-link,.rowlink td, .engine-form-wrapper .form-buttons a,.breadcrumb-item a',
         function () {
             let $link = $(this);
@@ -75,5 +75,5 @@ $(document).ready(function () {
                     return false;
                 }
             }
-        });
+        });*/
 });

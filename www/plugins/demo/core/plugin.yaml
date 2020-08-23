@@ -77,6 +77,10 @@ navigation:
                 label: 'UI Pages'
                 url: demo/core/uipagecontroller
                 icon: icon-codepen
+            side-menu-item16:
+                label: Applications
+                url: demo/core/applicationcontroller
+                icon: icon-dropbox
     main-menu-item2:
         label: Security
         url: demo/core/usercontroller

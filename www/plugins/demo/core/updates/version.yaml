@@ -66,3 +66,6 @@
 1.0.23:
     - 'Created table demo_core_ui_pages'
     - builder_table_create_demo_core_ui_pages.php
+1.0.24:
+    - 'Created table demo_core_applications'
+    - builder_table_create_demo_core_applications.php

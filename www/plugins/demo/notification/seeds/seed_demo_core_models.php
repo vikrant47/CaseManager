@@ -14,7 +14,8 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
-                                                                            "created_at"=>"2020-05-17 05:53:01",
+                                                                            "id"=>"0e210d37-73e2-49b9-b80a-9e3ebd8b1998",
+                                                                                        "created_at"=>"2020-05-17 05:53:01",
                                                                                         "updated_at"=>"2020-05-17 05:53:01",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -23,14 +24,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\MailTemplates",
                                                                                         "plugin_id"=> 3,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"0e210d37-73e2-49b9-b80a-9e3ebd8b1998"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-17 05:46:59",
+                                                                            "id"=>"497b52bf-f370-4ef4-92de-5b6802d7f7c9",
+                                                                                        "created_at"=>"2020-05-17 05:46:59",
                                                                                         "updated_at"=>"2020-05-17 05:46:59",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -39,14 +40,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\MailBrandSetting",
                                                                                         "plugin_id"=> 3,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"497b52bf-f370-4ef4-92de-5b6802d7f7c9"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-17 05:47:53",
+                                                                            "id"=>"d4b21a16-1e18-42f4-8efc-36fde559c739",
+                                                                                        "created_at"=>"2020-05-17 05:47:53",
                                                                                         "updated_at"=>"2020-05-17 05:47:53",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -55,14 +56,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\MailLayouts",
                                                                                         "plugin_id"=> 3,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"d4b21a16-1e18-42f4-8efc-36fde559c739"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-17 05:52:11",
+                                                                            "id"=>"f8506ae5-277a-4a14-8d91-8412d9d27650",
+                                                                                        "created_at"=>"2020-05-17 05:52:11",
                                                                                         "updated_at"=>"2020-05-17 05:52:11",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -71,12 +72,11 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\MailPartials",
                                                                                         "plugin_id"=> 3,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"f8506ae5-277a-4a14-8d91-8412d9d27650"
+                                                                                        "attach_audited_by"=> false
                             ]             ]);
         }
 

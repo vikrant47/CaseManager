@@ -105,7 +105,7 @@ class TenantService extends ServiceProvider
         DB::transaction(function () {
             $seedRunner = new SeedRunner();
             $seedRunner->setStringOutputChannel();
-            $seedRunner->runSeeds('all', 'operation');
+            $seedRunner->runSeeds('all', 'insert');
         });
         $this->setDefaultDatabaseConnection($this->originalDatabase);
     }

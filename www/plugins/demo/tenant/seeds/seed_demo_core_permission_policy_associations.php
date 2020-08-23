@@ -14,39 +14,39 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
     {
             Db::table('demo_core_permission_policy_associations')->insert([
             [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"749f20f0-df01-11ea-9ac4-5f661f94cb54",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 12,
-                                                                                        "id"=>"749f20f0-df01-11ea-9ac4-5f661f94cb54",
                                                                                         "permission_id"=>"748cefd0-df01-11ea-b3b6-efa39ebcecce",
                                                                                         "policy_id"=>"747625e0-df01-11ea-9120-072bcc3760e8"
                             ] ,            [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74b938d0-df01-11ea-9e4b-a9c80f37fac7",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 12,
-                                                                                        "id"=>"74b938d0-df01-11ea-9e4b-a9c80f37fac7",
                                                                                         "permission_id"=>"74aee020-df01-11ea-b3f4-b9feac704a0f",
                                                                                         "policy_id"=>"747625e0-df01-11ea-9120-072bcc3760e8"
                             ] ,            [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74cfb3d0-df01-11ea-9095-0bb088b99907",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 12,
-                                                                                        "id"=>"74cfb3d0-df01-11ea-9095-0bb088b99907",
                                                                                         "permission_id"=>"74c577b0-df01-11ea-9eef-07cb0182a026",
                                                                                         "policy_id"=>"747625e0-df01-11ea-9120-072bcc3760e8"
                             ] ,            [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74e5bc70-df01-11ea-a0fc-f3d42398073d",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "plugin_id"=> 12,
-                                                                                        "id"=>"74e5bc70-df01-11ea-a0fc-f3d42398073d",
                                                                                         "permission_id"=>"74dbbe80-df01-11ea-a87e-2bb614060bbb",
                                                                                         "policy_id"=>"747625e0-df01-11ea-9120-072bcc3760e8"
                             ]             ]);

@@ -16,6 +16,7 @@ Route::match(['get', 'put', 'post', 'delete'], '/tenant/{tenantCode}/{wildcard}'
         $tenantService->configureConnectionByName($tenantCode);
         $tenantService->setDefaultDatabaseConnection($tenantCode);
     }
+    \Backend\Facades\BackendAuth::setUser(\Backend\Models\User::where('id',1)->first());
     $backendController = app()->make(ltrim(\Backend\Classes\BackendController::class, '\\'));
     $request->attributes->set('tenant', $tenant);
     return $backendController->run($wildcard);

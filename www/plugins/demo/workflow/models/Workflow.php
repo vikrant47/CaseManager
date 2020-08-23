@@ -92,7 +92,7 @@ class Workflow extends Model
         $current_stateId = $current_state->id;
         foreach ($this->definition as $entry) {
             if ($entry['to_state'] == $current_stateId) {
-                return $entry['form_state'];
+                return $entry['from_state'];
             }
         }
         return null;

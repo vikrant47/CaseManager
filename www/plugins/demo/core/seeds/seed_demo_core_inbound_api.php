@@ -14,7 +14,8 @@ class SeedDemoCoreInboundApi implements Seedable
     {
             Db::table('demo_core_inbound_api')->insert([
             [
-                                                                            "created_at"=> null,
+                                                                            "id"=>"6ed75cc6-467c-441a-9a45-f8a20e825452",
+                                                                                        "created_at"=> null,
                                                                                         "updated_at"=>"2020-06-16 14:19:41",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -24,8 +25,7 @@ class SeedDemoCoreInboundApi implements Seedable
                                                                                         "name"=>"Test",
                                                                                         "description"=>"<p><a href=\"http://localhost:8084/engine/inbound-api/demo-casemanager/test/aditya\">http://localhost:8084/engine/inbound-api/demo-core/test/aditya</a></p>",
                                                                                         "url"=>"/test/{name}",
-                                                                                        "active"=> 1,
-                                                                                        "id"=>"6ed75cc6-467c-441a-9a45-f8a20e825452"
+                                                                                        "active"=> 1
                             ]             ]);
         }
 

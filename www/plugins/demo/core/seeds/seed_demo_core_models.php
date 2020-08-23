@@ -14,7 +14,8 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
-                                                                            "created_at"=>"2020-04-26 07:09:40",
+                                                                            "id"=>"58500474-fd4d-4bda-a1c4-892f5301e008",
+                                                                                        "created_at"=>"2020-04-26 07:09:40",
                                                                                         "updated_at"=>"2020-04-26 07:09:40",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -23,14 +24,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\ListActionController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> 1,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> 1,
-                                                                                        "id"=>"58500474-fd4d-4bda-a1c4-892f5301e008"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-04-18 15:35:39",
+                                                                            "id"=>"0d43527c-ba2f-47a8-8b0d-a78eaa2c630d",
+                                                                                        "created_at"=>"2020-04-18 15:35:39",
                                                                                         "updated_at"=>"2020-04-18 15:35:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -39,14 +40,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\AuditLogController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"0d43527c-ba2f-47a8-8b0d-a78eaa2c630d"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"f9386c03-0314-4fc1-b2db-15dc43e917cf",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2020-06-06 13:53:37",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -55,14 +56,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\InboundApiController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"f9386c03-0314-4fc1-b2db-15dc43e917cf"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"1ee08836-c156-48db-a72f-586b89af118f",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2020-06-14 07:08:21",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -71,14 +72,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\ModelAssociationController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"1ee08836-c156-48db-a72f-586b89af118f"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-04-18 14:53:04",
+                                                                            "id"=>"42f978b1-8e9d-41c5-ba7a-da69c1af7819",
+                                                                                        "created_at"=>"2020-04-18 14:53:04",
                                                                                         "updated_at"=>"2020-04-18 15:36:42",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -87,14 +88,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\ModelController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"42f978b1-8e9d-41c5-ba7a-da69c1af7819"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-04-13 14:06:29",
+                                                                            "id"=>"e6ce6d2e-148d-466d-9799-508739a32095",
+                                                                                        "created_at"=>"2020-04-13 14:06:29",
                                                                                         "updated_at"=>"2020-04-13 14:06:29",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -103,14 +104,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\UniversalController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"e6ce6d2e-148d-466d-9799-508739a32095"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"4bd73094-51ff-47f0-92d8-d31549fd3e78",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -119,14 +120,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\NotificationSubscriberController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"4bd73094-51ff-47f0-92d8-d31549fd3e78"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"2550e0aa-637c-418f-a1b8-e5d9c972e68b",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -135,14 +136,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\CustomFieldController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"2550e0aa-637c-418f-a1b8-e5d9c972e68b"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"0e20e8d5-0f54-4352-8fdc-8ee48fd6d005",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -151,14 +152,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\FormFieldController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"0e20e8d5-0f54-4352-8fdc-8ee48fd6d005"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"62203afe-185b-40c3-b0fd-d263f1341e0e",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -167,14 +168,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\EventHandlerController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"62203afe-185b-40c3-b0fd-d263f1341e0e"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"887d85ea-3f6e-4a62-9f5d-b5a138962b68",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -183,14 +184,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\CommandController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"887d85ea-3f6e-4a62-9f5d-b5a138962b68"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"79751975-864a-4015-b180-e706acb78593",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -199,14 +200,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\IframeController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"79751975-864a-4015-b180-e706acb78593"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"de7379fc-82da-4a93-b43f-7cf367df891b",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -215,14 +216,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\JavascriptLibraryController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"de7379fc-82da-4a93-b43f-7cf367df891b"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"b1345d69-71f1-4490-8c4a-2141394018f9",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -231,14 +232,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\WebhookController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"b1345d69-71f1-4490-8c4a-2141394018f9"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"6a3300da-7e73-4d8a-a6ee-c3a4e542a796",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -247,14 +248,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\PermissionController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"6a3300da-7e73-4d8a-a6ee-c3a4e542a796"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"cd1515c3-05e0-48c5-a8fa-bed69abf1c99",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -263,14 +264,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\SecurityPolicyController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"cd1515c3-05e0-48c5-a8fa-bed69abf1c99"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"f1336bfe-b511-4604-80d4-863856a19988",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -279,14 +280,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\PermissionPolicyAssociationController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"f1336bfe-b511-4604-80d4-863856a19988"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"359d2111-d338-42bc-a3b3-8251ed0dce3b",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -295,14 +296,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\RolePolicyAssociationController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"359d2111-d338-42bc-a3b3-8251ed0dce3b"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"d393c0d0-86c2-4f9c-9cf7-1b58baac86f0",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -311,14 +312,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\NotificationChannelController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"d393c0d0-86c2-4f9c-9cf7-1b58baac86f0"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"ce1f8927-fa3f-4705-b10d-3fafead0e583",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -327,14 +328,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\NotificationController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"ce1f8927-fa3f-4705-b10d-3fafead0e583"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                            "id"=>"12ff4f7c-17b1-4510-8fb9-00d93fa1128a",
+                                                                                        "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -343,14 +344,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\UserGroupController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"12ff4f7c-17b1-4510-8fb9-00d93fa1128a"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-04-27 12:16:53",
+                                                                            "id"=>"d1dfa6e2-65e9-49de-839d-f2a65c9c19d2",
+                                                                                        "created_at"=>"2020-04-27 12:16:53",
                                                                                         "updated_at"=>"2020-05-08 08:13:16",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -359,14 +360,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\RoleController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"d1dfa6e2-65e9-49de-839d-f2a65c9c19d2"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                            "id"=>"9d9f08c6-32a3-48ce-b172-9bbffb81b4ad",
+                                                                                        "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -375,14 +376,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\UserController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"9d9f08c6-32a3-48ce-b172-9bbffb81b4ad"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                            "id"=>"94cb17a6-aa2d-4bc4-b603-612e09f39a2f",
+                                                                                        "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -391,14 +392,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Casemanager\Controllers\CasepriorityController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"94cb17a6-aa2d-4bc4-b603-612e09f39a2f"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                            "id"=>"9ad92a08-cf91-47e5-bc59-263614415960",
+                                                                                        "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -407,14 +408,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Workflow\Controllers\WorkflowTransitionsController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"9ad92a08-cf91-47e5-bc59-263614415960"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                            "id"=>"7ccd8ade-691b-47f4-8999-54a616098cf8",
+                                                                                        "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -423,14 +424,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Notification\Controllers\NotificationLogController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"7ccd8ade-691b-47f4-8999-54a616098cf8"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                            "id"=>"7ae49b89-62ed-4026-8136-d649a7428d8c",
+                                                                                        "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -439,14 +440,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\UserRoleAssociationController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"7ae49b89-62ed-4026-8136-d649a7428d8c"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 04:11:48",
+                                                                            "id"=>"51789f2c-c05b-4813-8adb-d98fff1e5d80",
+                                                                                        "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -455,14 +456,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Workflow\Controllers\QueueRoutingruleController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"51789f2c-c05b-4813-8adb-d98fff1e5d80"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"bc6274fa-a406-4410-8749-de61e8cd7ab5",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -471,14 +472,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\UserController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"bc6274fa-a406-4410-8749-de61e8cd7ab5"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"8eb30d4a-48bd-4ca7-b848-d9245be0d63d",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -487,14 +488,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\UserGroupController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\" * \"]",
                                                                                         "description"=> null,
-                                                                                        "attach_audited_by"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"8eb30d4a-48bd-4ca7-b848-d9245be0d63d"
+                                                                                        "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-04-26 07:16:16",
+                                                                            "id"=>"a24b1957-9aa4-462c-a5b0-e3fa356a25c1",
+                                                                                        "created_at"=>"2020-04-26 07:16:16",
                                                                                         "updated_at"=>"2020-04-26 07:16:16",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -503,14 +504,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\FormActionController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> 1,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> 1,
-                                                                                        "id"=>"a24b1957-9aa4-462c-a5b0-e3fa356a25c1"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-10 05:15:28",
+                                                                            "id"=>"eff49bc7-518a-4b08-94ec-265d854e1f1a",
+                                                                                        "created_at"=>"2020-05-10 05:15:28",
                                                                                         "updated_at"=>"2020-05-10 05:15:28",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -519,14 +520,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\NavigationRoleAssociationController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"eff49bc7-518a-4b08-94ec-265d854e1f1a"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-26 14:00:24",
+                                                                            "id"=>"9acbce33-243a-4362-a3f6-bf3eaf45fa3e",
+                                                                                        "created_at"=>"2020-05-26 14:00:24",
                                                                                         "updated_at"=>"2020-05-26 14:00:24",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -535,14 +536,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\SettingController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"9acbce33-243a-4362-a3f6-bf3eaf45fa3e"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-09 11:25:29",
+                                                                            "id"=>"90ba5e4a-f8c9-4cbd-a475-c2d7a6b534cd",
+                                                                                        "created_at"=>"2020-05-09 11:25:29",
                                                                                         "updated_at"=>"2020-05-10 16:00:23",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -551,14 +552,14 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\NavigationController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"90ba5e4a-f8c9-4cbd-a475-c2d7a6b534cd"
+                                                                                        "attach_audited_by"=> false
                             ] ,            [
-                                                                            "created_at"=>"2020-05-16 05:56:51",
+                                                                            "id"=>"5994e845-740a-431b-8adb-7def380ebbc2",
+                                                                                        "created_at"=>"2020-05-16 05:56:51",
                                                                                         "updated_at"=>"2020-05-16 05:56:51",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -567,12 +568,11 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Core\Controllers\UiPageController",
                                                                                         "plugin_id"=> 10,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"5994e845-740a-431b-8adb-7def380ebbc2"
+                                                                                        "attach_audited_by"=> false
                             ]             ]);
         }
 

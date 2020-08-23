@@ -14,7 +14,8 @@ class SeedDemoCoreUiPages implements Seedable
     {
             Db::table('demo_core_ui_pages')->insert([
             [
-                                                                            "created_at"=>"2020-05-16 06:00:56",
+                                                                            "id"=>"3ed2a26a-8fee-48f9-87f6-48cc51bec3eb",
+                                                                                        "created_at"=>"2020-05-16 06:00:56",
                                                                                         "updated_at"=>"2020-05-16 15:13:38",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -23,8 +24,7 @@ class SeedDemoCoreUiPages implements Seedable
                                                                                         "description"=> "",
                                                                                         "code"=>"hello-world",
                                                                                         "template"=>"<h1>\r\n    Hello World\r\n</h1>",
-                                                                                        "plugin_id"=> 10,
-                                                                                        "id"=>"3ed2a26a-8fee-48f9-87f6-48cc51bec3eb"
+                                                                                        "plugin_id"=> 10
                             ]             ]);
         }
 

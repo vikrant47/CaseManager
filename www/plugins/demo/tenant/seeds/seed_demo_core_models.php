@@ -14,7 +14,8 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74359f60-df01-11ea-8ee1-8bbb436e69b5",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -23,12 +24,11 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "controller"=>"Demo\Tenant\Controllers\TenantController",
                                                                                         "plugin_id"=> 12,
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"74359f60-df01-11ea-8ee1-8bbb436e69b5"
+                                                                                        "attach_audited_by"=> false
                             ]             ]);
         }
 

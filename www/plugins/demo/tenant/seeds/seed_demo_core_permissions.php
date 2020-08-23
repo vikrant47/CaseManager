@@ -14,7 +14,8 @@ class SeedDemoCorePermissions implements Seedable
     {
             Db::table('demo_core_permissions')->insert([
             [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"748cefd0-df01-11ea-b3b6-efa39ebcecce",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -28,10 +29,10 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Tenant read Permission",
                                                                                         "description"=>"This is the system generated permission for Tenant read",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"748cefd0-df01-11ea-b3b6-efa39ebcecce"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74aee020-df01-11ea-b3f4-b9feac704a0f",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -45,10 +46,10 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Tenant write Permission",
                                                                                         "description"=>"This is the system generated permission for Tenant write",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"74aee020-df01-11ea-b3f4-b9feac704a0f"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74c577b0-df01-11ea-9eef-07cb0182a026",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -62,10 +63,10 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Tenant create Permission",
                                                                                         "description"=>"This is the system generated permission for Tenant create",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"74c577b0-df01-11ea-9eef-07cb0182a026"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74dbbe80-df01-11ea-a87e-2bb614060bbb",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -79,8 +80,7 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Tenant delete Permission",
                                                                                         "description"=>"This is the system generated permission for Tenant delete",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"74dbbe80-df01-11ea-a87e-2bb614060bbb"
+                                                                                        "system"=> 1
                             ]             ]);
         }
 
