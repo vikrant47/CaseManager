@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\App;
 Route::match(['get', 'put', 'post', 'delete'], '/tenant/{tenantCode}/{wildcard}', function (Request $request, $tenantCode, $wildcard) {
     // $wildcard = '/' . $wildcard;
     $tenant = \Demo\Tenant\Models\Tenant::where(['code' => $tenantCode, 'active' => true])->first();
-    if (empty($tenant)) {
-        return response('Page not found', 404);
+    if ($tenantCode !== 'default') {
+        if (empty($tenant)) {
+            return response('Page not found', 404);
+        }
+        $tenantService = new \Demo\Tenant\Services\TenantService(null);
+        $tenantService->configureConnectionByName($tenantCode);
+        $tenantService->setDefaultDatabaseConnection($tenantCode);
     }
-    $tenantService = new \Demo\Tenant\Services\TenantService(null);
-    $tenantService->configureConnectionByName($tenantCode);
-    $tenantService->setDefaultDatabaseConnection($tenantCode);
     $backendController = app()->make(ltrim(\Backend\Classes\BackendController::class, '\\'));
+    $request->attributes->set('tenant', $tenant);
     return $backendController->run($wildcard);
 })->where('wildcard', '.+')->middleware('web');
 Route::get('/backend/engine/api/{pluginName}/models/{modelName}', function ($pluginName, $modelName) {

@@ -25,6 +25,7 @@ use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
 use Demo\Core\Services\QueryFilter;
 use Demo\Core\Services\QueryPagination;
+use Demo\Tenant\Models\Tenant;
 use File;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
@@ -86,6 +87,12 @@ class AbstractPluginController extends Controller
     /**Overriding default run method to inject code*/
     public function run($action = null, $params = [])
     {
+        $tenant = request()->attributes->get('tenant');
+        if (empty($tenant)) {
+            $tenant = new Tenant();
+            $tenant->code = 'default';
+            request()->attributes->set('tenant', $tenant);
+        }
         $this->extensionData;
         $pluginMiddleware = $this->getPluginMiddleware();
         foreach ($pluginMiddleware as $mw) {
