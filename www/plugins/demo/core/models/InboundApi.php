@@ -27,6 +27,6 @@ public $incrementing = false;
         'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id']
     ];
 
-    protected $fillable = ['name', 'url', 'method', 'script', 'plugin_id'];
+    protected $fillable = ['name', 'url', 'method', 'script', 'engine_application_id'];
     public $attachAuditedBy = true;
 }

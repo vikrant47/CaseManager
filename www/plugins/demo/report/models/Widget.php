@@ -129,6 +129,6 @@ class Widget extends Model implements FromCollection
 
     public function beforeSave()
     {
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->libraries(), $this->libraries, $this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->libraries(), $this->libraries, $this->engine_application_id);
     }
 }

@@ -16,64 +16,27 @@ Route::match(['get', 'put', 'post', 'delete'], '/tenant/{tenantCode}/{wildcard}'
         $tenantService->configureConnectionByName($tenantCode);
         $tenantService->setDefaultDatabaseConnection($tenantCode);
     }
-    \Backend\Facades\BackendAuth::setUser(\Backend\Models\User::where('id',1)->first());
+    \Backend\Facades\BackendAuth::setUser(\Backend\Models\User::where('id', 1)->first());
     $backendController = app()->make(ltrim(\Backend\Classes\BackendController::class, '\\'));
     $request->attributes->set('tenant', $tenant);
     return $backendController->run($wildcard);
 })->where('wildcard', '.+')->middleware('web');
-Route::get('/backend/engine/api/{pluginName}/models/{modelName}', function ($pluginName, $modelName) {
-    $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
-    $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
-    $data = $pluginConnection->getModel($modelName)::all();
-    if (empty($data)) {
-        return response($data, 404);
-    }
-    return response($data, 200);
-})->middleware('web');
 
-Route::get('/backend/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
-    $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
-    $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
-    $data = $pluginConnection->getModel($modelName)::find($id);
-    if (empty($data)) {
-        return response($data, 404);
-    }
-    return response($data->first(), 200);
-})->middleware('web');
-
-Route::post('/backend/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
-    $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
-    $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
-    $data = $pluginConnection->getModel($modelName)::find($id);
-    if (empty($data)) {
-        return response($data, 404);
-    }
-    return response($data->first(), 200);
-})->middleware('web');
-
-Route::delete('/backend/engine/api/{pluginName}/models/{modelName}/{id}', function ($pluginName, $modelName, $id) {
-    $pluginId = str_replace(' ', '.', ucwords(str_replace('.', ' ', $pluginName)));
-    $pluginConnection = new \Demo\Core\Classes\Helpers\PluginConnection($pluginId);
-    $data = $pluginConnection->getModel($modelName)::find($id);
-    if (empty($data)) {
-        return response($data, 404);
-    }
-    return response($data->first(), 200);
-})->middleware('web');
-
-Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{pluginCode}/{wildcard}', function (Request $request, $pluginCode, $wildcard) {
+Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{applicationName}/{wildcard}', function (Request $request, $applicationCode, $wildcard) {
     $wildcard = '/' . $wildcard;
     /**@var $currentRoute  Illuminate\Routing\Route */
-    $code = str_replace(' ', '.', ucwords(str_replace('-', ' ', $pluginCode)));
-    $plugin = \Demo\Core\Models\PluginVersions::where('code', $code)->first();
-    if (empty($plugin)) {
-        return response(['message' => 'No matching plugin found with code ' . $code], 404);
+    $application = \Demo\Core\Models\EngineApplication::where([
+        'active' => true,
+        'code' => $applicationCode,
+    ])->first(['id']);
+    if (empty($application)) {
+        return response(['message' => 'No matching application found with code ' . $applicationCode], 404);
     }
     $currentRoute = Route::getCurrentRoute();
     $apis = \Demo\Core\Models\InboundApi::where([
         'method' => strtolower($request->method()),
-        'plugin_id' => $plugin->id,
-    ])->get();
+        'engine_application_id' => $application->id,
+    ])->orderBy('sort_order', 'ASC')->get();
     foreach ($apis as $api) {
         $pattern = str_replace('/', '\\/', preg_replace('/\{(\s*?.*?)*?\}/', '(.*)', $api->url));
         $pathVariables = [];

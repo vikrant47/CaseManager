@@ -26,7 +26,7 @@ class SeedDemoReportWidgets implements Seedable
                                                                                         "data"=>"return [\r\n    'data'=> \$context->evalSql('SELECT * from backend_user where id = {{request.param.userId}}'),\r\n    'user'=> Db::table('backend_user')->where('id',\$context->request->get('userId')),\r\n];",
                                                                                         "script"=>"this.header.setTitle(this.store.user.email);",
                                                                                         "public"=> false,
-                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "active"=> 1
                             ]             ]);
         }
@@ -34,6 +34,6 @@ class SeedDemoReportWidgets implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_report_widgets')->where('plugin_id', 3)->delete();
+                    Db::table('demo_report_widgets')->where('engine_application_id', 'c79b3f36-a77a-4de9-a9f0-f890a99728ef')->delete();
             }
 }

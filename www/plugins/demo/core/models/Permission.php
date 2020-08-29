@@ -35,7 +35,7 @@ public $incrementing = false;
     public $rules = [
         'name' => 'required',
         'model' => 'required',
-        'plugin_id' => 'required',
+        'engine_application_id' => 'required',
         'operation' => 'required'
     ];
 
@@ -75,7 +75,7 @@ public $incrementing = false;
         $securityService = new SecurityService();
         $level = empty($this->columns) ? 'row' : 'column';
         $this->code = $securityService->getPermissionPrefix($this->model) . '.' . $level . '.' . $this->operation;
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(), $this->policies, $this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(), $this->policies, $this->engine_application_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
     }
 }

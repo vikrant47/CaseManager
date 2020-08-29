@@ -14,6 +14,6 @@ columns:
     application_id:
         label: Application
         type: number
-    plugin_id:
-        label: plugin_id
+    engine_application_id:
+        label: engine_application_id
         type: number

@@ -48,7 +48,7 @@ class {{ className }} implements Seedable
     public function uninstall()
     {
         {% if packagable == true %}
-            Db::table('{{ table }}')->where('plugin_id', {{ plugin.id }})->delete();
+            Db::table('{{ table }}')->where('engine_application_id', {{ plugin.id }})->delete();
         {% else %}
             Db::table('{{ table }}')->delete();
         {% endif %}

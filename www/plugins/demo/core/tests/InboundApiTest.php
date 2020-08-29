@@ -4,6 +4,7 @@
 namespace Demo\Core\Tests;
 
 
+use Demo\Core\Models\EngineApplication;
 use Demo\Core\Models\InboundApi;
 
 class InboundApiTest extends PluginTestSetup
@@ -15,7 +16,7 @@ class InboundApiTest extends PluginTestSetup
             'url' => '/test/{hello}',
             'method' => 'get',
             'script' => 'return ["print"=>"Hello World"]',
-            'plugin_id' => 10
+            'engine_application_id' => EngineApplication::ENGINE_APP_ID
         ]);
         $this->assertNotEmpty($inboundApi->id);
         $this->assertAuditableFields($inboundApi);

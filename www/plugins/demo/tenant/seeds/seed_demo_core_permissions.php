@@ -19,7 +19,7 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "model"=>"Demo\Tenant\Models\Tenant",
                                                                                         "operation"=>"read",
                                                                                         "columns"=> null,
@@ -36,7 +36,7 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "model"=>"Demo\Tenant\Models\Tenant",
                                                                                         "operation"=>"write",
                                                                                         "columns"=> null,
@@ -53,7 +53,7 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "model"=>"Demo\Tenant\Models\Tenant",
                                                                                         "operation"=>"create",
                                                                                         "columns"=> null,
@@ -70,7 +70,7 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "model"=>"Demo\Tenant\Models\Tenant",
                                                                                         "operation"=>"delete",
                                                                                         "columns"=> null,
@@ -87,6 +87,6 @@ class SeedDemoCorePermissions implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_permissions')->where('plugin_id', 12)->delete();
+                    Db::table('demo_core_permissions')->where('engine_application_id', '801c3e91-8be6-402e-9872-69d6ea29fe06')->delete();
             }
 }

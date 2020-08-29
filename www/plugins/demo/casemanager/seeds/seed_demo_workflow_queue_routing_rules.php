@@ -22,13 +22,13 @@ class SeedDemoWorkflowQueueRoutingRules implements Seedable
                                                                                         "script"=>"\$model = \$context->model; \r\nif(empty(\$model)){\r\nthrow new \$context->exception->ApplicationException('No item left to assign');\r\n}\r\nreturn \$context->currentUser;",
                                                                                         "name"=>"Route to current User",
                                                                                         "description"=>"Route to current User",
-                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_workflow_queue_routing_rules')->where('plugin_id', 6)->delete();
+                    Db::table('demo_workflow_queue_routing_rules')->where('engine_application_id', 'df07f9b4-26c1-40ca-ba1f-1b77b1692b83')->delete();
             }
 }

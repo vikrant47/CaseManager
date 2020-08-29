@@ -22,7 +22,7 @@ class SeedDemoCoreRoles implements Seedable
                                                                                         "name"=>"Administrator",
                                                                                         "code"=>"admin",
                                                                                         "description"=>"Admin of the platform",
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
                                                                             "id"=>"90bafbbe-fbfd-42ed-9e51-5434f2733247",
                                                                                         "created_at"=>"2019-12-20 14:15:39",
@@ -32,13 +32,13 @@ class SeedDemoCoreRoles implements Seedable
                                                                                         "name"=>"Everyone",
                                                                                         "code"=>"everyone",
                                                                                         "description"=>"Every user of the platform",
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_roles')->where('plugin_id', 10)->delete();
+                    Db::table('demo_core_roles')->where('engine_application_id', 'dc81b635-1d0a-4f3e-83af-13642d56abe4')->delete();
             }
 }

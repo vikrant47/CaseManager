@@ -22,7 +22,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Widget",
                                                                                         "model"=>"Demo\Report\Models\Widget",
                                                                                         "controller"=>"Demo\Report\Controllers\WidgetController",
-                                                                                        "plugin_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -38,7 +38,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Dashboard",
                                                                                         "model"=>"Demo\Report\Models\Dashboard",
                                                                                         "controller"=>"Demo\Report\Controllers\DashboardController",
-                                                                                        "plugin_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -54,7 +54,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Service Channel",
                                                                                         "model"=>"Demo\Workflow\Models\ServiceChannel",
                                                                                         "controller"=>"Demo\Workflow\Controllers\ServiceChannelController",
-                                                                                        "plugin_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -67,6 +67,6 @@ class SeedDemoCoreModels implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_models')->where('plugin_id', 14)->delete();
+                    Db::table('demo_core_models')->where('engine_application_id', 'cf0c66c7-12c9-43df-813c-14aeafdf6ae1')->delete();
             }
 }

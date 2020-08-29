@@ -16,6 +16,7 @@ class SeedDemoCoreApplications implements Seedable
             [
                                                                             "id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "name"=>"Engine",
+                                                                                        "code"=>"engine",
                                                                                         "plugin_code"=>"Demo.Core",
                                                                                         "description"=>"Engine Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
@@ -26,6 +27,7 @@ class SeedDemoCoreApplications implements Seedable
                             ] ,            [
                                                                             "id"=>"cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "name"=>"Report",
+                                                                                        "code"=>"report",
                                                                                         "plugin_code"=>"Demo.Report",
                                                                                         "description"=>"Report Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
@@ -36,6 +38,7 @@ class SeedDemoCoreApplications implements Seedable
                             ] ,            [
                                                                             "id"=>"801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "name"=>"Tenant",
+                                                                                        "code"=>"tenant",
                                                                                         "plugin_code"=>"Demo.Tenant",
                                                                                         "description"=>"Tenant Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
@@ -46,6 +49,7 @@ class SeedDemoCoreApplications implements Seedable
                             ] ,            [
                                                                             "id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "name"=>"Case Manager",
+                                                                                        "code"=>"casemanager",
                                                                                         "plugin_code"=>"Demo.Casemanager",
                                                                                         "description"=>"Case Manager",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
@@ -56,6 +60,7 @@ class SeedDemoCoreApplications implements Seedable
                             ] ,            [
                                                                             "id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "name"=>"Workflow",
+                                                                                        "code"=>"workflow",
                                                                                         "plugin_code"=>"Demo.Workflow",
                                                                                         "description"=>"Workflow Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
@@ -66,6 +71,7 @@ class SeedDemoCoreApplications implements Seedable
                             ] ,            [
                                                                             "id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "name"=>"Notification",
+                                                                                        "code"=>"notification",
                                                                                         "plugin_code"=>"Demo.Notification",
                                                                                         "description"=>"Notification",
                                                                                         "created_at"=>"2020-08-23 15:50:25",

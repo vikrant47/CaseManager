@@ -24,13 +24,13 @@ class SeedDemoCoreUiPages implements Seedable
                                                                                         "description"=> "",
                                                                                         "code"=>"hello-world",
                                                                                         "template"=>"<h1>\r\n    Hello World\r\n</h1>",
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_ui_pages')->where('plugin_id', 10)->delete();
+                    Db::table('demo_core_ui_pages')->where('engine_application_id', 'dc81b635-1d0a-4f3e-83af-13642d56abe4')->delete();
             }
 }

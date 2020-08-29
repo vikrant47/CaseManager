@@ -24,7 +24,7 @@ public $incrementing = false;
      */
     public $rules = [
         'name' => 'required',
-        'plugin_id' => 'required',
+        'engine_application_id' => 'required',
     ];
 
     public $belongsTo = [
@@ -44,7 +44,7 @@ public $incrementing = false;
 
     public function beforeSave()
     {
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->permissions(),$this->permissions,$this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->permissions(),$this->permissions,$this->engine_application_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
     }
 }

@@ -25,13 +25,13 @@ class SeedDemoReportDashboards implements Seedable
                                                                                         "widgets_config"=>"[{\"x\": \"0\", \"y\": \"0\", \"width\": \"5\", \"height\": \"4\", \"widget\": \"84383d11-89c6-4dac-906c-bb2b08923b53\"}, {\"x\": \"5\", \"y\": \"0\", \"width\": \"7\", \"height\": \"4\", \"widget\": \"8be0d030-b3d3-11ea-90ed-bfdae0c12a09\"}]",
                                                                                         "public"=> false,
                                                                                         "code"=>"default-dashboard",
-                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef"
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef"
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_report_dashboards')->where('plugin_id', 3)->delete();
+                    Db::table('demo_report_dashboards')->where('engine_application_id', 'c79b3f36-a77a-4de9-a9f0-f890a99728ef')->delete();
             }
 }

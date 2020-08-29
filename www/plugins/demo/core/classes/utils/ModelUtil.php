@@ -1,6 +1,7 @@
 <?php namespace Demo\Core\Classes\Utils;
 
 
+use Demo\Core\Models\EngineApplication;
 use Demo\Core\Services\SecurityService;
 use October\Rain\Database\Collection;
 use October\Rain\Database\Relations\BelongsToMany;
@@ -27,22 +28,22 @@ class ModelUtil
     public static function fillDefaultColumnsInBelongsToMany(
         BelongsToMany $association,
         Collection &$data,
-        $pluginId = 10,
+        $engineAppId = EngineApplication::ENGINE_APP_ID,
         $otherColumns = []
     )
     {
         if (empty($data)) {
             return;
         }
-        if (empty($pluginId)) {
-            $pluginId = 10;
+        if (empty($engineAppId)) {
+            $engineAppId = EngineApplication::ENGINE_APP_ID;
         }
         $user = BackendAuth::getUser();
         $pivotValues = [
             // 'id' => (string)Uuid::generate(),
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime(),
-            'plugin_id' => $pluginId,
+            'engine_application_id' => $engineAppId,
             'created_by_id' => $user->id,
             'updated_by_id' => $user->id,
         ];
@@ -52,7 +53,7 @@ class ModelUtil
                 'id' => (string)Uuid::generate(),
                 'created_at' => new \DateTime(),
                 'updated_at' => new \DateTime(),
-                'plugin_id' => $pluginId,
+                'engine_application_id' => $engineAppId,
                 'created_by_id' => $user->id,
                 'updated_by_id' => $user->id,
             ];

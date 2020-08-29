@@ -8,6 +8,7 @@ use Backend\Facades\Backend;
 use Demo\Core\Console\SeedRunner;
 use Demo\Tenant\Models\Tenant;
 use App;
+use October\Rain\Exception\ApplicationException;
 use October\Rain\Support\ServiceProvider;
 use DB;
 use System\Classes\UpdateManager;
@@ -98,14 +99,15 @@ class TenantService extends ServiceProvider
     }
 
     /*** @param $database string */
-    public function runSeeds($database)
+    public function runSeeds($database, $applications)
     {
         $this->configureConnectionByName($database);
         $this->setDefaultDatabaseConnection($database);
-        DB::transaction(function () {
+        DB::transaction(function () use ($applications) {
             $seedRunner = new SeedRunner();
             $seedRunner->setStringOutputChannel();
-            $seedRunner->runSeeds('all', 'insert');
+            $seedRunner->runApplicationSeeds($applications, 'insert');
+            // throw new ApplicationException($seedRunner->getOutputString());
         });
         $this->setDefaultDatabaseConnection($this->originalDatabase);
     }

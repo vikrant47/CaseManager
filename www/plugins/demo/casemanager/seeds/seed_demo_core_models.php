@@ -22,7 +22,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Project",
                                                                                         "model"=>"Demo\Casemanager\Models\Project",
                                                                                         "controller"=>"Demo\Casemanager\Controllers\ProjectController",
-                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -38,7 +38,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Case Priority",
                                                                                         "model"=>"Demo\Casemanager\Models\CasePriority",
                                                                                         "controller"=>"Demo\Casemanager\Controllers\CasePriorityController",
-                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -54,7 +54,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Case Model",
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "controller"=>"Demo\Casemanager\Controllers\CaseController",
-                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "audit"=> 1,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -67,6 +67,6 @@ class SeedDemoCoreModels implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_models')->where('plugin_id', 6)->delete();
+                    Db::table('demo_core_models')->where('engine_application_id', 'df07f9b4-26c1-40ca-ba1f-1b77b1692b83')->delete();
             }
 }

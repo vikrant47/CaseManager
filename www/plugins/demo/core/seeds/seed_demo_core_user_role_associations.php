@@ -19,7 +19,7 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 14:03:21",
                                                                                         "user_id"=> 6,
                                                                                         "role_id"=>"f314578a-4686-46d0-acb5-2b6c096cc687",
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
                             ] ,            [
@@ -28,7 +28,7 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "user_id"=> 1,
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
                             ] ,            [
@@ -37,7 +37,7 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 08:54:23",
                                                                                         "user_id"=> 3,
                                                                                         "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
                             ] ,            [
@@ -46,7 +46,7 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "updated_at"=>"2020-06-13 12:12:52",
                                                                                         "user_id"=> 2,
                                                                                         "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
                             ]             ]);
@@ -55,6 +55,6 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_user_role_associations')->where('plugin_id', 10)->delete();
+                    Db::table('demo_core_user_role_associations')->where('engine_application_id', 'dc81b635-1d0a-4f3e-83af-13642d56abe4')->delete();
             }
 }

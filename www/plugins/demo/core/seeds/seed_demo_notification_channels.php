@@ -22,7 +22,7 @@ class SeedDemoNotificationChannels implements Seedable
                                                                                         "script"=>"\$fromUser = \$context->self->getConfig('from_user');\r\n\$notification = \$context->notification;\r\n\$subscribers = \$notification->getSubscribers();\r\n\$template = \$notification->template;\r\nforeach(\$subscribers as \$subscriber){\r\n    \$context->Mail::queue(\$template->code, \$context->toArray() , function(\$message) use(\$notification,\$template,\$subscriber) {\r\n        \$message->to( \$subscriber->email, \$subscriber->first_name.' '.\$subscriber->last_name);    \r\n    });    \r\n}",
                                                                                         "configuration"=>"[{\"configuration\":\"from_user\",\"value\":\"test@test.com\"}]",
                                                                                         "active"=> 1,
-                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "name"=>"Queued Email Channel",
                                                                                         "description"=>"Email Notification channel"
                             ]             ]);
@@ -31,6 +31,6 @@ class SeedDemoNotificationChannels implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_notification_channels')->where('plugin_id', 10)->delete();
+                    Db::table('demo_notification_channels')->where('engine_application_id', 'dc81b635-1d0a-4f3e-83af-13642d56abe4')->delete();
             }
 }

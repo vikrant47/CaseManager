@@ -27,7 +27,7 @@ public $incrementing = false;
     public $rules = [
         'name' => 'required',
         'model' => 'required',
-        'plugin_id' => 'required',
+        'engine_application_id' => 'required',
         'event' => 'required'
     ];
 

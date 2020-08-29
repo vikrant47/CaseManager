@@ -21,7 +21,7 @@ class SeedDemoCoreLibraries implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "css_files"=> null,
                                                                                         "javascript_files"=> null,
-                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "name"=>"Chart Js Slandered",
                                                                                         "code"=>"chart-js-slandered",
                                                                                         "description"=>"<h2>Simple yet flexible JavaScript charting for designers &amp; developers</h2>",
@@ -32,6 +32,6 @@ class SeedDemoCoreLibraries implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_libraries')->where('plugin_id', 3)->delete();
+                    Db::table('demo_core_libraries')->where('engine_application_id', 'c79b3f36-a77a-4de9-a9f0-f890a99728ef')->delete();
             }
 }

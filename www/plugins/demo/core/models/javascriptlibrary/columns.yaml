@@ -14,8 +14,8 @@ columns:
     updated_by_id:
         label: updated_by_id
         type: number
-    plugin_id:
-        label: plugin_id
+    engine_application_id:
+        label: engine_application_id
         type: number
     name:
         searchable: true

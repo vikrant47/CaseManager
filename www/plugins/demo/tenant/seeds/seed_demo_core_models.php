@@ -22,7 +22,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Tenant",
                                                                                         "model"=>"Demo\Tenant\Models\Tenant",
                                                                                         "controller"=>"Demo\Tenant\Controllers\TenantController",
-                                                                                        "plugin_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -35,6 +35,6 @@ class SeedDemoCoreModels implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_models')->where('plugin_id', 12)->delete();
+                    Db::table('demo_core_models')->where('engine_application_id', '801c3e91-8be6-402e-9872-69d6ea29fe06')->delete();
             }
 }

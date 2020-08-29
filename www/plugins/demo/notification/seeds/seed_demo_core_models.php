@@ -22,7 +22,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Mail Templates",
                                                                                         "model"=>"Demo\Notification\Models\MailTemplate",
                                                                                         "controller"=>"Demo\Notification\Controllers\MailTemplates",
-                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -38,7 +38,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Mail Brand Setting",
                                                                                         "model"=>"Demo\Notification\Models\MailBrandSetting",
                                                                                         "controller"=>"Demo\Notification\Controllers\MailBrandSetting",
-                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -54,7 +54,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Mail Layouts",
                                                                                         "model"=>"Demo\Notification\Models\MailLayout",
                                                                                         "controller"=>"Demo\Notification\Controllers\MailLayouts",
-                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -70,7 +70,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Mail Partial",
                                                                                         "model"=>"Demo\Notification\Models\MailPartial",
                                                                                         "controller"=>"Demo\Notification\Controllers\MailPartials",
-                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -83,6 +83,6 @@ class SeedDemoCoreModels implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_models')->where('plugin_id', 3)->delete();
+                    Db::table('demo_core_models')->where('engine_application_id', 'c79b3f36-a77a-4de9-a9f0-f890a99728ef')->delete();
             }
 }

@@ -110,7 +110,7 @@ class Navigation extends Model
         if ($result['cyclic'] === true) {
             throw new ApplicationException('Circular dependancy ' . $result['cyclic']);
         }
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->engine_application_id);
     }
 
     public static function getUrl($navigation)

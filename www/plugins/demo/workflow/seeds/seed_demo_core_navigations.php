@@ -35,7 +35,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 5
                             ] ,            [
@@ -60,7 +60,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 5
                             ]             ]);
@@ -69,6 +69,6 @@ class SeedDemoCoreNavigations implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_navigations')->where('plugin_id', 11)->delete();
+                    Db::table('demo_core_navigations')->where('engine_application_id', '8374144e-94a5-470d-8d9e-4cbad05102ad')->delete();
             }
 }

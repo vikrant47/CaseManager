@@ -4,6 +4,7 @@ use Backend\Models\UserGroup;
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
+use Demo\Core\Models\EngineApplication;
 use Demo\Core\Services\EventHandlerServiceProvider;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -81,7 +82,7 @@ class Queue extends Model
         ModelUtil::fillDefaultColumnsInBelongsToMany(
             $this->assignment_groups(),
             $this->assignment_groups,
-            $this->plugin_id,
+            $this->engine_application_id,
             ['sort_order' => 100]
         );
     }
@@ -158,7 +159,7 @@ class Queue extends Model
                 $queueItem->queue = $this;
                 $queueItem->record_id = $model->id;
                 $queueItem->model = $modelClass;
-                $queueItem->plugin_id = $model->plugin_id || 0;
+                $queueItem->engine_application_id = $model->engine_application_id;
                 $queueItem->save();
             }
             if ($this->virtual == 1) {

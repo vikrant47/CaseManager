@@ -37,7 +37,7 @@ class CoreUser extends User
 
     public function beforeSave()
     {
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(),$this->roles,$this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(),$this->roles,$this->engine_application_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
         parent::beforeSave();
     }

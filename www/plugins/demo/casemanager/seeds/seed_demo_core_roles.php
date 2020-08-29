@@ -22,13 +22,13 @@ class SeedDemoCoreRoles implements Seedable
                                                                                         "name"=>"Agent",
                                                                                         "code"=>"agent",
                                                                                         "description"=>"test",
-                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_roles')->where('plugin_id', 6)->delete();
+                    Db::table('demo_core_roles')->where('engine_application_id', 'df07f9b4-26c1-40ca-ba1f-1b77b1692b83')->delete();
             }
 }

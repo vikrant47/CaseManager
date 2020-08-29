@@ -22,7 +22,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Queue",
                                                                                         "model"=>"Demo\Workflow\Models\Queue",
                                                                                         "controller"=>"Demo\Workflow\Controllers\QueueController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -38,7 +38,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Queue Item",
                                                                                         "model"=>"Demo\Workflow\Models\QueueItem",
                                                                                         "controller"=>"Demo\Workflow\Controllers\QueueItemController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -54,7 +54,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Queue Pop Criteria",
                                                                                         "model"=>"Demo\Workflow\Models\QueuePopCriteria",
                                                                                         "controller"=>"Demo\Workflow\Controllers\QueuePopCriteriaController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -70,7 +70,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Queue Routing Rule",
                                                                                         "model"=>"Demo\Workflow\Models\QueueRoutingRule",
                                                                                         "controller"=>"Demo\Workflow\Controllers\QueueRoutingRuleController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -86,7 +86,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Workflow",
                                                                                         "model"=>"Demo\Workflow\Models\Workflow",
                                                                                         "controller"=>"Demo\Workflow\Controllers\WorkflowController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -102,7 +102,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Workflow State",
                                                                                         "model"=>"Demo\Workflow\Models\WorkflowState",
                                                                                         "controller"=>"Demo\Workflow\Controllers\WorkflowStateController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -118,7 +118,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Workflow Transition",
                                                                                         "model"=>"Demo\Workflow\Models\WorkflowTransition",
                                                                                         "controller"=>"Demo\Workflow\Controllers\WorkflowTransitionController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -134,7 +134,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Webhook",
                                                                                         "model"=>"Demo\Workflow\Models\Webhook",
                                                                                         "controller"=>"Demo\Workflow\Controllers\WebhookController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -150,7 +150,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Workflow Item",
                                                                                         "model"=>"Demo\Workflow\Models\WorkflowItem",
                                                                                         "controller"=>"Demo\Workflow\Controllers\WorkflowItemController",
-                                                                                        "plugin_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -163,6 +163,6 @@ class SeedDemoCoreModels implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_models')->where('plugin_id', 11)->delete();
+                    Db::table('demo_core_models')->where('engine_application_id', '8374144e-94a5-470d-8d9e-4cbad05102ad')->delete();
             }
 }

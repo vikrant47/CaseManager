@@ -23,7 +23,7 @@ public $incrementing = false;
     public $rules = [
         'role_id' => 'required',
         'navigation_id' => 'required',
-        'plugin_id' => 'required',
+        'engine_application_id' => 'required',
     ];
 
     public $belongsTo = [

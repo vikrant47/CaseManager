@@ -29,7 +29,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-photo",
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> 3,
-                                                                                        "plugin_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "script"=>"function(){\r\n}",
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-toggle\",\"value\":\"model\"},{\"name\":\"href\",\"value\":\"#previewModal\"},{\"name\":\"data-size\",\"value\":\"large\"},{\"name\":\"data-request\",\"value\":\"onPreview\"},{\"name\":\"data-load-indicator\",\"value\":\"Loading\"},{\"name\":\"data-request-update\",\"value\":\"widget_renderer: '#previewModal .modal-body'\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+p, cmd+p\"}]"
@@ -49,7 +49,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-photo",
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> 3,
-                                                                                        "plugin_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "script"=>"function(){\r\n}",
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-toggle\",\"value\":\"model\"},{\"name\":\"href\",\"value\":\"#previewModal\"},{\"name\":\"data-size\",\"value\":\"large\"},{\"name\":\"data-request\",\"value\":\"onPreview\"},{\"name\":\"data-load-indicator\",\"value\":\"Loading\"},{\"name\":\"data-request-update\",\"value\":\"widget_renderer: '#previewModal .modal-body'\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+p, cmd+p\"}]"
@@ -59,6 +59,6 @@ class SeedDemoCoreFormActions implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_form_actions')->where('plugin_id', 14)->delete();
+                    Db::table('demo_core_form_actions')->where('engine_application_id', 'cf0c66c7-12c9-43df-813c-14aeafdf6ae1')->delete();
             }
 }

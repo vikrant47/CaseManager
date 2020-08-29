@@ -25,6 +25,6 @@ columns:
         searchable: true
         label: code
         type: text
-    plugin_id:
-        label: plugin_id
+    engine_application_id:
+        label: engine_application_id
         type: number

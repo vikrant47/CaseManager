@@ -23,7 +23,7 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "record_id"=>"c916ac69-bfd1-4ccc-8b75-2d8160831de6",
                                                                                         "model"=>"Demo\Core\Models\FormAction",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
-                                                                                        "plugin_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1"
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1"
                             ] ,            [
                                                                             "id"=>"5adf4740-a882-11ea-b2e7-97310c06d0e6",
                                                                                         "created_at"=>"2020-06-07 05:47:21",
@@ -34,13 +34,13 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "record_id"=>"eaa211e4-d899-413b-b6ef-64339b3b3626",
                                                                                         "model"=>"Demo\Core\Models\FormAction",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
-                                                                                        "plugin_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1"
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1"
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_view_role_associations')->where('plugin_id', 14)->delete();
+                    Db::table('demo_core_view_role_associations')->where('engine_application_id', 'cf0c66c7-12c9-43df-813c-14aeafdf6ae1')->delete();
             }
 }

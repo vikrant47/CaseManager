@@ -35,7 +35,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "plugin_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 0
                             ]             ]);
@@ -44,6 +44,6 @@ class SeedDemoCoreNavigations implements Seedable
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_navigations')->where('plugin_id', 12)->delete();
+                    Db::table('demo_core_navigations')->where('engine_application_id', '801c3e91-8be6-402e-9872-69d6ea29fe06')->delete();
             }
 }

@@ -22,7 +22,7 @@ public $incrementing = false;
     public $rules = [
         'permission_id' => 'required',
         'policy_id' => 'required',
-        'plugin_id' => 'required',
+        'engine_application_id' => 'required',
     ];
 
     public $belongsTo = [

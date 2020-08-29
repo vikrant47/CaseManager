@@ -83,7 +83,7 @@ class Workflow extends Model
         $from_state = new WorkflowState();
         $from_state->id = $this->definition[0]['from_state'];
         $workflowItem->current_state = $from_state;
-        $workflowItem->plugin_id = PluginConnection::getCurrentPlugin()->id;
+        $workflowItem->engine_application_id = EngineApplication::getCurrentApplication()->id;
         $workflowItem->save();
     }
 

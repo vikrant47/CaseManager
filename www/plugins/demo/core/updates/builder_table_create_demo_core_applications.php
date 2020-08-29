@@ -14,6 +14,7 @@ class BuilderTableCreateDemoCoreApplications extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('plugin_code');
+            $table->boolean('active')->default(true);
             $table->text('description')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
