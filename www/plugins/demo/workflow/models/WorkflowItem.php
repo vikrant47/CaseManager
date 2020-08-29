@@ -28,7 +28,7 @@ public $incrementing = false;
         'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
         'workflow' => [Workflow::class, 'key' => 'workflow_id'],
         'current_state' => [WorkflowState::class, 'key' => 'current_state_id'],
-        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
+        'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id']
     ];
 
     /**

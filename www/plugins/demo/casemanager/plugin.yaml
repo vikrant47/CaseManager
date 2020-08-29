@@ -1,6 +1,6 @@
-plugin:
-    name: 'demo.casemanager::lang.plugin.name'
-    description: 'demo.casemanager::lang.plugin.description'
+application:
+    name: 'demo.casemanager::lang.application.name'
+    description: 'demo.casemanager::lang.application.description'
     author: demo
     icon: oc-icon-adjust
     homepage: ''

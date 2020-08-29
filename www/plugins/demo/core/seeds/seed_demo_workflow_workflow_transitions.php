@@ -24,7 +24,7 @@ class SeedDemoWorkflowWorkflowTransitions implements Seedable
                                                                                         "from_state_id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b",
                                                                                         "to_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
                                                                                         "data"=>"[]",
-                                                                                        "plugin_id"=> 10
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
                                                                             "id"=>"8c2473f0-cfc5-11ea-9b6b-9b251ee63d0a",
                                                                                         "created_at"=>"2020-07-27 04:56:35",
@@ -36,7 +36,7 @@ class SeedDemoWorkflowWorkflowTransitions implements Seedable
                                                                                         "from_state_id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b",
                                                                                         "to_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
                                                                                         "data"=>"[]",
-                                                                                        "plugin_id"=> 10
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
                                                                             "id"=>"b9dca100-da20-11ea-ab74-339b1b5a868b",
                                                                                         "created_at"=>"2020-08-09 09:14:28",
@@ -48,7 +48,7 @@ class SeedDemoWorkflowWorkflowTransitions implements Seedable
                                                                                         "from_state_id"=>"09dfd34e-0db5-49f3-96b2-23831d811a0b",
                                                                                         "to_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
                                                                                         "data"=>"[]",
-                                                                                        "plugin_id"=> 10
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
                                                                             "id"=>"d85b9fa0-db19-11ea-b528-2520ae19beed",
                                                                                         "created_at"=>"2020-08-10 14:57:43",
@@ -60,7 +60,7 @@ class SeedDemoWorkflowWorkflowTransitions implements Seedable
                                                                                         "from_state_id"=>"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de",
                                                                                         "to_state_id"=>"c5a45023-2d2a-48ca-94b1-3097c0af7d05",
                                                                                         "data"=>"[]",
-                                                                                        "plugin_id"=> 10
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ]             ]);
         }
 

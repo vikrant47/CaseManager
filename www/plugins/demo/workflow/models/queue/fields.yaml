@@ -21,8 +21,8 @@ fields:
         label: Service Channel
         span: auto
         type: relation
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: version
         span: auto

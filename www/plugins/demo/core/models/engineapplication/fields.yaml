@@ -13,8 +13,8 @@ fields:
         type: textarea
         size: tiny
 
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: description
         span: auto

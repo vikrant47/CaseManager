@@ -32,7 +32,7 @@ class Role extends Model
     ];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
     ];
 
     public $belongsToMany = [

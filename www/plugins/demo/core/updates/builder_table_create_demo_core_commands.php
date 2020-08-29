@@ -22,7 +22,7 @@ class BuilderTableCreateDemoCoreCommands extends Migration
             $table->text('arguments');
             $table->text('parameters');
             $table->text('script');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     

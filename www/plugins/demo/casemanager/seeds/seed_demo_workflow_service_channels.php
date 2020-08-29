@@ -19,7 +19,7 @@ class SeedDemoWorkflowServiceChannels implements Seedable
                                                                                         "updated_at"=>"2020-04-04 07:22:51",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "name"=>"Case Assignment Channel",
                                                                                         "event"=>"[\"creating\",\"updating\"]",
                                                                                         "description"=> "",

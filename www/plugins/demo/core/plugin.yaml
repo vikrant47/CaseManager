@@ -1,13 +1,13 @@
-plugin:
-    name: 'demo.core::lang.plugin.name'
-    description: 'demo.core::lang.plugin.description'
+application:
+    name: 'demo.core::lang.application.name'
+    description: 'demo.core::lang.application.description'
     author: vikrant
     icon: oc-icon-adjust
     homepage: ''
 model-alias:
     EventHandler: 'Event Handlers'
     InboundApi: 'Inbound Apis'
-    PluginVersions: 'Plugin Versions'
+    PluginVersions: 'Application Versions'
 navigation:
     main-menu-item:
         label: Engine

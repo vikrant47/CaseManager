@@ -35,7 +35,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "plugin_id"=> 3,
+                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "sort_order"=> 4
                             ] ,            [
@@ -60,7 +60,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "plugin_id"=> 3,
+                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 3
                             ]             ]);

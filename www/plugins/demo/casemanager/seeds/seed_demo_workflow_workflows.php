@@ -24,7 +24,7 @@ class SeedDemoWorkflowWorkflows implements Seedable
                                                                                         "definition"=>"[{\"from_state\":\"09dfd34e-0db5-49f3-96b2-23831d811a0b\",\"to_state\":\"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de\"},{\"from_state\":\"16d9ddab-a130-4bbd-8d5c-b3e82fbf00de\",\"to_state\":\"c5a45023-2d2a-48ca-94b1-3097c0af7d05\"},{\"from_state\":\"c5a45023-2d2a-48ca-94b1-3097c0af7d05\",\"to_state\":\"8c7e9158-b65c-437a-a5d9-4b975f7b6f51\"}]",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "sort_order"=> 0,
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "input_condition"=>"return true;",

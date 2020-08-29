@@ -12,6 +12,7 @@ class BuilderTableCreateDemoCoreApplications extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->string('name');
+            $table->string('code');
             $table->string('plugin_code');
             $table->text('description')->nullable();
             $table->timestamp('created_at');

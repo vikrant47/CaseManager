@@ -1,6 +1,6 @@
 <?php namespace Demo\Notification\Models;
 
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Model;
 
 /**

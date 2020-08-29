@@ -12,8 +12,8 @@ fields:
         label: 'Model'
         span: auto
         type: text
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: version
         span: auto

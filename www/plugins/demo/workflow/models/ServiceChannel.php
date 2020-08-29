@@ -25,7 +25,7 @@ public $incrementing = false;
     ];
 
     public $belongsTo = [
-        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id'],
+        'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
 

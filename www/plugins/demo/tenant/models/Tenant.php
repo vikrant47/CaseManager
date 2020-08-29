@@ -1,6 +1,6 @@
 <?php namespace Demo\Tenant\Models;
 
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Demo\Tenant\Services\TenantService;
 use Model;
 use October\Rain\Exception\ApplicationException;
@@ -34,7 +34,7 @@ class Tenant extends Model
     ];
     public $belongsToMany = [
         'applications' => [
-            PluginVersions::class,
+            EngineApplication::class,
             'table' => 'demo_tenant_applications',
             'key' => 'tenant_id',
             'otherKey' => 'application_id',

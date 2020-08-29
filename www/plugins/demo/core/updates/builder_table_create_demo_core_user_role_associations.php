@@ -15,7 +15,7 @@ class BuilderTableCreateDemoCoreUserRoleAssociations extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('user_id');
             $table->uuid('role_id');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
         });

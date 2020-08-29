@@ -6,7 +6,7 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\JavascriptLibrary;
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Demo\Core\Services\QueryFilter;
 use Demo\Core\Services\QueryPagination;
 use Doctrine\DBAL\Query\QueryBuilder;
@@ -45,7 +45,7 @@ class Widget extends Model implements FromCollection
 
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
     ];
     public $belongsToMany = [
         'libraries' => [

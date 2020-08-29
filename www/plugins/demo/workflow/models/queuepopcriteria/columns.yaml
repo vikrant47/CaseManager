@@ -33,5 +33,5 @@ columns:
         type: text
         searchable: true
     plugin_id:
-        label: Plugin
+        label: Application
         type: number

@@ -19,7 +19,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 10:59:16",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"35fce9b9-8b6a-4a92-a214-6d4e554f1e81",
                                                                                         "policy_id"=>"0dcd7801-d4ae-439d-907d-950b72a9f24d"
                             ] ,            [
@@ -28,7 +28,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 10:59:16",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"b4e3b6cb-ebb1-4fbc-bc65-f59a2008da61",
                                                                                         "policy_id"=>"0dcd7801-d4ae-439d-907d-950b72a9f24d"
                             ] ,            [
@@ -37,7 +37,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 10:59:16",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"58faebcc-6b97-4b46-9e9e-0070f1556837",
                                                                                         "policy_id"=>"0dcd7801-d4ae-439d-907d-950b72a9f24d"
                             ] ,            [
@@ -46,7 +46,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 10:59:17",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"50880924-3110-478c-b01b-63c5c456edeb",
                                                                                         "policy_id"=>"0dcd7801-d4ae-439d-907d-950b72a9f24d"
                             ] ,            [
@@ -55,7 +55,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:56:24",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"973f538e-62d3-4570-90d1-0310970e3046",
                                                                                         "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
@@ -64,7 +64,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:56:24",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"687046cf-9692-4292-ad35-efce1aaf42d4",
                                                                                         "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
@@ -73,7 +73,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:56:24",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"dab8870c-1ba8-4846-b9b7-00bbd39ec3a4",
                                                                                         "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
@@ -82,7 +82,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:56:24",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"36edd8af-c53b-4f2b-9fb7-461f741a7676",
                                                                                         "policy_id"=>"694b6dcf-0017-4013-bc71-c7d71dae6a3a"
                             ] ,            [
@@ -91,7 +91,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:58:19",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"df0f2fe6-9528-421b-8462-81491b982d82",
                                                                                         "policy_id"=>"7d48cc5f-ae88-47fa-a29e-5566e08fe187"
                             ] ,            [
@@ -100,7 +100,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:58:19",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"f20adac9-f180-4720-b892-b58cf18f3166",
                                                                                         "policy_id"=>"7d48cc5f-ae88-47fa-a29e-5566e08fe187"
                             ] ,            [
@@ -109,7 +109,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:58:19",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"167aea1d-751c-4064-b7b4-b7a9a7e474ac",
                                                                                         "policy_id"=>"7d48cc5f-ae88-47fa-a29e-5566e08fe187"
                             ] ,            [
@@ -118,7 +118,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-06 07:58:19",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"9662eafc-606b-4108-b60a-28554776a560",
                                                                                         "policy_id"=>"7d48cc5f-ae88-47fa-a29e-5566e08fe187"
                             ] ,            [
@@ -127,7 +127,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 11:51:21",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"b6ccd813-b2c9-4df1-961c-04df2031a3a9",
                                                                                         "policy_id"=>"b70d97bf-4ef2-4fa1-bc21-332b0bf6aef9"
                             ] ,            [
@@ -136,7 +136,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 11:51:21",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"9dd592de-c8bf-4c60-ae3f-5b48a49ed314",
                                                                                         "policy_id"=>"b70d97bf-4ef2-4fa1-bc21-332b0bf6aef9"
                             ] ,            [
@@ -145,7 +145,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 11:51:21",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"2fe02db1-77fd-43eb-9cb6-e1c84b44bf7b",
                                                                                         "policy_id"=>"b70d97bf-4ef2-4fa1-bc21-332b0bf6aef9"
                             ] ,            [
@@ -154,7 +154,7 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "updated_at"=>"2020-04-27 11:51:21",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 6,
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "permission_id"=>"c17220cd-f6f5-4912-9dfd-5045a93604a9",
                                                                                         "policy_id"=>"b70d97bf-4ef2-4fa1-bc21-332b0bf6aef9"
                             ]             ]);

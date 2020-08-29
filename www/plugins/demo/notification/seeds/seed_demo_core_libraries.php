@@ -21,7 +21,7 @@ class SeedDemoCoreLibraries implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "css_files"=> null,
                                                                                         "javascript_files"=> null,
-                                                                                        "plugin_id"=> 3,
+                                                                                        "plugin_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "name"=>"Chart Js Slandered",
                                                                                         "code"=>"chart-js-slandered",
                                                                                         "description"=>"<h2>Simple yet flexible JavaScript charting for designers &amp; developers</h2>",

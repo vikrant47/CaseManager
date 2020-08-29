@@ -1,6 +1,6 @@
-plugin:
-    name: 'demo.report::lang.plugin.name'
-    description: 'demo.report::lang.plugin.description'
+application:
+    name: 'demo.report::lang.application.name'
+    description: 'demo.report::lang.application.description'
     author: demo
     icon: oc-icon-book
     homepage: ''

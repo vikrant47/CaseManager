@@ -25,7 +25,7 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->uuid('service_channel_id');
             $table->uuid('pop_criteria_id');
             $table->uuid('routing_rule_id');

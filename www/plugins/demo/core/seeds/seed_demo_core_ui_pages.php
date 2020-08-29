@@ -24,7 +24,7 @@ class SeedDemoCoreUiPages implements Seedable
                                                                                         "description"=> "",
                                                                                         "code"=>"hello-world",
                                                                                         "template"=>"<h1>\r\n    Hello World\r\n</h1>",
-                                                                                        "plugin_id"=> 10
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ]             ]);
         }
 

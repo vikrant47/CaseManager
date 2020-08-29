@@ -20,7 +20,7 @@ class SeedDemoCoreInboundApi implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "method"=>"get",
-                                                                                        "plugin_id"=> 10,
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "script"=>"return \$context->pathVariables;",
                                                                                         "name"=>"Test",
                                                                                         "description"=>"<p><a href=\"http://localhost:8084/engine/inbound-api/demo-casemanager/test/aditya\">http://localhost:8084/engine/inbound-api/demo-core/test/aditya</a></p>",

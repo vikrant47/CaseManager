@@ -17,7 +17,7 @@ class BuilderTableCreateDemoNotificationSubscribers extends Migration
             $table->integer('updated_by_id');
             $table->uuid('subscriber_id');
             $table->uuid('subscriber_group_id');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->uuid('notification_id');
         });
     }

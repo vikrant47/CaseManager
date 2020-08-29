@@ -3,7 +3,7 @@
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\JavascriptLibrary;
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Illuminate\Support\Facades\Mail;
 use Model;
 
@@ -33,7 +33,7 @@ public $incrementing = false;
     public $jsonable = ['configuration'];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
     ];
 
     private $context = [];

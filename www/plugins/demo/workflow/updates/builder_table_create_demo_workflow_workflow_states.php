@@ -19,7 +19,7 @@ class BuilderTableCreateDemoWorkflowWorkflowStates extends Migration
             $table->text('description');
             $table->integer('active');
             $table->string('code');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     

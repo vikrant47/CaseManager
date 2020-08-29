@@ -20,8 +20,8 @@ fields:
         default: 1
         required: 1
         type: switch
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: version
         span: left

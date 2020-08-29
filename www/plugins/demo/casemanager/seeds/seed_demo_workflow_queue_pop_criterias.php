@@ -22,7 +22,7 @@ class SeedDemoWorkflowQueuePopCriterias implements Seedable
                                                                                         "name"=>"Simple Pop Criteria",
                                                                                         "description"=>"This will pop any random item from queue",
                                                                                         "script"=>"return \$context->query->where('demo_workflow_queue_items.model','Demo\Workflow\Models\WorkflowItem');",
-                                                                                        "plugin_id"=> 6
+                                                                                        "plugin_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ]             ]);
         }
 

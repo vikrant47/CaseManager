@@ -29,7 +29,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-history",
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> 0,
-                                                                                        "plugin_id"=> 10,
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "script"=>"function(event,engine,action,\$element){\r\n    var location = engine.list.navigate({\r\n            controller:'demo/core/auditlogcontroller'\r\n        },{\r\n        filter:{\r\n            record_id:engine.form.getFormModel().id\r\n        }\r\n    });\r\n    console.log(location);\r\n}",
                                                                                         "context"=>"[\"update\",\"preview\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-show\",\"value\":\"return this.data.action.modelRecord.audit===true;\"}]"
@@ -49,7 +49,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-adjust",
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> -2,
-                                                                                        "plugin_id"=> 10,
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "script"=>"function(){}",
                                                                                         "context"=>"[\"create\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+s, cmd+s\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"}]"
@@ -69,7 +69,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-save",
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> -1,
-                                                                                        "plugin_id"=> 10,
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "script"=> "",
                                                                                         "context"=>"[\"create\",\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+enter, cmd+enter\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"},{\"name\":\"data-request-data\",\"value\":\"close:1\"}]"
@@ -89,7 +89,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-adjust",
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> -2,
-                                                                                        "plugin_id"=> 10,
+                                                                                        "plugin_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "script"=>"function(){}",
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onSave\"},{\"name\":\"data-hotkey\",\"value\":\"ctrl+s, cmd+s\"},{\"name\":\"data-load-indicator\",\"value\":\"Saving...\"},{\"name\":\"data-request-data\",\"value\":\"redirect:0\"}]"

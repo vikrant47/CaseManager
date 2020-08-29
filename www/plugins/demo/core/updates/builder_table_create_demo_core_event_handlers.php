@@ -22,7 +22,7 @@ class BuilderTableCreateDemoCoreEventHandlers extends Migration
             $table->text('script');
             $table->integer('sort_order');
             $table->boolean('active')->default(1);
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     
