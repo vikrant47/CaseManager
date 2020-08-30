@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         }
     });
-/*    $(document).on('click',
+    $(document).on('click',
         '.nav-type-link,.rowlink td, .engine-form-wrapper .form-buttons a,.breadcrumb-item a',
         function () {
             let $link = $(this);
@@ -63,7 +63,12 @@ $(document).ready(function () {
                 }
             }
             if ($link.length) {
-                const href = $link.prop('href');
+                let href = $link.prop('href');
+                // converting backend link to tenant link
+                href = href.replace(window.location.origin, '');
+                if (href.startsWith('/backend')) {
+                    href = Engine.instance.ui.getBaseTenantUrl() + href.substring(href.indexOf('/backend') + 8);
+                }
                 if (href !== '#' && href !== 'javascript:void(0)') {
 
                     if (window.location.href !== href) {
@@ -75,5 +80,5 @@ $(document).ready(function () {
                     return false;
                 }
             }
-        });*/
+        });
 });

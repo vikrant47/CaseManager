@@ -16,19 +16,33 @@ fields:
         label: Description
         size: ''
         span: auto
-        type: textarea
-    logo:
-        label: Logo
-        mode: file
-        useCaption: true
-        thumbOptions:
-            mode: crop
-            extension: auto
+        type: richeditor
+    application:
+        label: Application
+        nameFrom: name
+        descriptionFrom: description
         span: auto
-        type: fileupload
-#    applications:
-#        nameFrom: code
-#        descriptionFrom: description
-#        span: auto
-#        required: 1
-#        type: relation
+        required: 1
+        type: relation
+tabs:
+    fields:
+        default_theme:
+            label: Default Theme
+            span: auto
+            required: 1
+            type: dropdown
+            tab: Display
+            options:
+                nobleui: Basic
+                #adminlte: Admin
+                #demo: Native
+        logo:
+            label: Logo
+            mode: file
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: Display

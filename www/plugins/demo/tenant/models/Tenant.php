@@ -41,6 +41,9 @@ class Tenant extends Model
             'where' => ['code', 'ILIKE', 'Demo%'],
         ],
     ];
+    public $belongsTo = [
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
+    ];
 
     public function beforeUpdate()
     {

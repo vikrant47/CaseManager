@@ -30,7 +30,7 @@ class EngineApplication extends Model
     ];
 
     public $belongsTo = [
-        'application' => [EngineApplication::class,'nameFrom'=>'code', 'key' => 'plugin_code'],
+        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_code'],
     ];
     /**@return EngineApplication */
     public static function getCurrentApplication()
