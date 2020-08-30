@@ -14,22 +14,24 @@ class SeedDemoCoreLibraries implements Seedable
     {
             Db::table('demo_core_libraries')->insert([
             [
-                                                                            "created_at"=>"2020-06-21 04:18:38",
+                                                                            "id"=>"484b31f0-b376-11ea-a48a-af29a00365d7",
+                                                                                        "created_at"=>"2020-06-21 04:18:38",
                                                                                         "updated_at"=>"2020-06-21 04:18:38",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 3,
+                                                                                        "css_files"=> null,
+                                                                                        "javascript_files"=> null,
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "name"=>"Chart Js Slandered",
-                                                                                        "description"=>"<h2>Simple yet flexible JavaScript charting for designers &amp; developers</h2>",
-                                                                                        "website"=>"https://www.chartjs.org/",
                                                                                         "code"=>"chart-js-slandered",
-                                                                                        "id"=>"484b31f0-b376-11ea-a48a-af29a00365d7"
+                                                                                        "description"=>"<h2>Simple yet flexible JavaScript charting for designers &amp; developers</h2>",
+                                                                                        "website"=>"https://www.chartjs.org/"
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_libraries')->where('plugin_id', 3)->delete();
+                    Db::table('demo_core_libraries')->where('engine_application_id', 'c79b3f36-a77a-4de9-a9f0-f890a99728ef')->delete();
             }
 }

@@ -31,7 +31,6 @@ class BeforeUpdateAutoAssignCaseToUser
             if ($model->isDirty('assigned_to_id') || $model->isDirty('current_state_id')) {
                 $entity = CaseModel::find($model->record_id);
                 $entity->assigned_to_id = $model->assigned_to_id;
-                $entity->assigned_at = new \DateTime();
                 $entity->workflow_state_id = $model->current_state_id; // TODO: fetch workflow_state_id field from workflow model_state_field
                 if ($entity->exists) {
                     $entity->save();

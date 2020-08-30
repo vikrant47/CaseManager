@@ -50,8 +50,8 @@ fields:
         span: auto
         type: relation
         emptyOption: 'Please Select'
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: version
         span: auto

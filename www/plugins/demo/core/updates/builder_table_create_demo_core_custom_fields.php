@@ -23,7 +23,7 @@ class BuilderTableCreateDemoCoreCustomFields extends Migration
             $table->boolean('unsigned')->nullable();
             $table->boolean('allow_null');
             $table->text('default');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
 
             $table->unique('model', 'name');
         });

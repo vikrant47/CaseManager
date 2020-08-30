@@ -5,7 +5,7 @@ use Backend\Models\UserGroup;
 use Demo\Core\Models\CoreUser;
 use Demo\Core\Models\CoreUserGroup;
 use Demo\Core\Models\ModelModel;
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Illuminate\Validation\UnauthorizedException;
 use Model;
 use October\Rain\Exception\ApplicationException;
@@ -36,7 +36,7 @@ public $incrementing = false;
     public $attachAuditedBy = true;
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
         'subscriber' => [CoreUser::class, 'key' => 'subscriber_id'],
         'subscriber_group' => [CoreUserGroup::class, 'key' => 'subscriber_group_id'],
         'notification' => [Notification::class, 'key' => 'notification_id'],

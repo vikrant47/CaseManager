@@ -19,8 +19,8 @@ fields:
         label: Website
         span: full
         type: text
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: version
         span: auto

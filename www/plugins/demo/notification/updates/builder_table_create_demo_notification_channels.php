@@ -18,7 +18,7 @@ class BuilderTableCreateDemoNotificationChannels extends Migration
             $table->text('script');
             $table->text('configuration')->nullable();
             $table->boolean('active')->default(1);
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->string('name');
             $table->text('description')->nullable();
         });

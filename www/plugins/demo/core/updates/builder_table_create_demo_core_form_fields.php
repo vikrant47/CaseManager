@@ -18,7 +18,7 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
             $table->string('label');
             $table->uuid('field_id')->nullable();
             $table->string('form');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->text('controls');
             $table->text('description')->nullable();
             $table->boolean('active');

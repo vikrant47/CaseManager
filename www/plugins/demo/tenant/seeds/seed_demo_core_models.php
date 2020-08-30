@@ -14,27 +14,27 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
-                                                                            "created_at"=>"2020-08-15 14:13:13",
+                                                                            "id"=>"74359f60-df01-11ea-8ee1-8bbb436e69b5",
+                                                                                        "created_at"=>"2020-08-15 14:13:13",
                                                                                         "updated_at"=>"2020-08-15 14:13:13",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Tenant",
                                                                                         "model"=>"Demo\Tenant\Models\Tenant",
                                                                                         "controller"=>"Demo\Tenant\Controllers\TenantController",
-                                                                                        "plugin_id"=> 12,
+                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "audit"=> false,
+                                                                                        "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"*",
                                                                                         "description"=> "",
-                                                                                        "attach_audited_by"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "id"=>"74359f60-df01-11ea-8ee1-8bbb436e69b5"
+                                                                                        "attach_audited_by"=> false
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_models')->where('plugin_id', 12)->delete();
+                    Db::table('demo_core_models')->where('engine_application_id', '801c3e91-8be6-402e-9872-69d6ea29fe06')->delete();
             }
 }

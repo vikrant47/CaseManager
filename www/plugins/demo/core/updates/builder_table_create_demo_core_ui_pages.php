@@ -20,7 +20,7 @@ class BuilderTableCreateDemoCoreUiPages extends Migration
             $table->text('description')->nullable();
             $table->string('code');
             $table->text('template');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     

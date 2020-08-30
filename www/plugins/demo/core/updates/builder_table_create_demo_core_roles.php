@@ -17,7 +17,7 @@ class BuilderTableCreateDemoCoreRoles extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->text('description');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
 

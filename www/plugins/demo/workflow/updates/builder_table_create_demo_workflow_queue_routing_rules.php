@@ -18,7 +18,7 @@ class BuilderTableCreateDemoWorkflowQueueRoutingRules extends Migration
             $table->text('script');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     

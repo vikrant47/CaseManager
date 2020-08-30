@@ -21,7 +21,7 @@ class BuilderTableCreateDemoReportDashboards extends Migration
             $table->text('widgets_config');
             $table->boolean('public');
             $table->string('code');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     

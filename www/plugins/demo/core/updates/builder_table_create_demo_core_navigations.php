@@ -31,7 +31,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->uuid('record_id')->nullable();
             $table->uuid('dashboard_id')->nullable();
             $table->uuid('widget_id')->nullable();
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->uuid('parent_id')->nullable();
             $table->integer('sort_order');
         });

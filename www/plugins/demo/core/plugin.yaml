@@ -1,13 +1,13 @@
-plugin:
-    name: 'demo.core::lang.plugin.name'
-    description: 'demo.core::lang.plugin.description'
+application:
+    name: 'demo.core::lang.application.name'
+    description: 'demo.core::lang.application.description'
     author: vikrant
     icon: oc-icon-adjust
     homepage: ''
 model-alias:
     EventHandler: 'Event Handlers'
     InboundApi: 'Inbound Apis'
-    PluginVersions: 'Plugin Versions'
+    PluginVersions: 'Application Versions'
 navigation:
     main-menu-item:
         label: Engine
@@ -77,6 +77,10 @@ navigation:
                 label: 'UI Pages'
                 url: demo/core/uipagecontroller
                 icon: icon-codepen
+            side-menu-item16:
+                label: Applications
+                url: demo/core/applicationcontroller
+                icon: icon-dropbox
     main-menu-item2:
         label: Security
         url: demo/core/usercontroller

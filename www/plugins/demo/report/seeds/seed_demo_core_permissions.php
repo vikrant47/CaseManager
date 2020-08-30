@@ -14,11 +14,12 @@ class SeedDemoCorePermissions implements Seedable
     {
             Db::table('demo_core_permissions')->insert([
             [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"8a09a529-1512-42bd-b6c4-e57a27f17a2a",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Dashboard",
                                                                                         "operation"=>"delete",
                                                                                         "columns"=> null,
@@ -28,14 +29,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Dashboard Delete Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"8a09a529-1512-42bd-b6c4-e57a27f17a2a"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"0bf32ab8-1e24-4c0b-a6e4-e8e52373cd53",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Dashboard",
                                                                                         "operation"=>"create",
                                                                                         "columns"=> null,
@@ -45,14 +46,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Dashboard Create Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"0bf32ab8-1e24-4c0b-a6e4-e8e52373cd53"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"a37361fd-a121-4587-bd77-c9c6fd623a97",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Widget",
                                                                                         "operation"=>"write",
                                                                                         "columns"=> null,
@@ -62,14 +63,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Widget Write Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"a37361fd-a121-4587-bd77-c9c6fd623a97"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"6ecec6f1-5c18-4562-ab1f-6001f84ad9d4",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Widget",
                                                                                         "operation"=>"read",
                                                                                         "columns"=> null,
@@ -79,14 +80,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Widget Read Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"6ecec6f1-5c18-4562-ab1f-6001f84ad9d4"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"a70dbd44-6388-4c3c-b350-bd5e2985703a",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Dashboard",
                                                                                         "operation"=>"write",
                                                                                         "columns"=> null,
@@ -96,14 +97,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Dashboard Write Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"a70dbd44-6388-4c3c-b350-bd5e2985703a"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"b332dfde-b251-46fc-9869-c528283dc6ae",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Dashboard",
                                                                                         "operation"=>"read",
                                                                                         "columns"=> null,
@@ -113,14 +114,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Dashboard Read Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"b332dfde-b251-46fc-9869-c528283dc6ae"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"639cde2f-d356-449a-b4df-479b5926857e",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Widget",
                                                                                         "operation"=>"delete",
                                                                                         "columns"=> null,
@@ -130,14 +131,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Widget Delete Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"639cde2f-d356-449a-b4df-479b5926857e"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2019-12-20 14:15:39",
+                                                                            "id"=>"57ced49d-6541-4d24-a332-2540ecb06466",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Report\Models\Widget",
                                                                                         "operation"=>"create",
                                                                                         "columns"=> null,
@@ -147,14 +148,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Widget Create Permission",
                                                                                         "description"=> null,
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"57ced49d-6541-4d24-a332-2540ecb06466"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-05-29 08:12:46",
+                                                                            "id"=>"9f626681-b9be-439a-9b3d-451dbef42196",
+                                                                                        "created_at"=>"2020-05-29 08:12:46",
                                                                                         "updated_at"=>"2020-05-29 08:12:46",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Workflow\Models\ServiceChannel",
                                                                                         "operation"=>"read",
                                                                                         "columns"=> null,
@@ -164,14 +165,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Service Channel read Permission",
                                                                                         "description"=>"This is the system generated permission for Service Channel read",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"9f626681-b9be-439a-9b3d-451dbef42196"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-05-29 08:12:46",
+                                                                            "id"=>"19e19159-28a0-4fa6-9c6c-d7b3881646c2",
+                                                                                        "created_at"=>"2020-05-29 08:12:46",
                                                                                         "updated_at"=>"2020-05-29 08:12:46",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Workflow\Models\ServiceChannel",
                                                                                         "operation"=>"write",
                                                                                         "columns"=> null,
@@ -181,14 +182,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Service Channel write Permission",
                                                                                         "description"=>"This is the system generated permission for Service Channel write",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"19e19159-28a0-4fa6-9c6c-d7b3881646c2"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-05-29 08:12:46",
+                                                                            "id"=>"c91090cd-d197-4fc0-ad11-ca96eff84cd7",
+                                                                                        "created_at"=>"2020-05-29 08:12:46",
                                                                                         "updated_at"=>"2020-05-29 08:12:46",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Workflow\Models\ServiceChannel",
                                                                                         "operation"=>"create",
                                                                                         "columns"=> null,
@@ -198,14 +199,14 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Service Channel create Permission",
                                                                                         "description"=>"This is the system generated permission for Service Channel create",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"c91090cd-d197-4fc0-ad11-ca96eff84cd7"
+                                                                                        "system"=> 1
                             ] ,            [
-                                                                            "created_at"=>"2020-05-29 08:12:46",
+                                                                            "id"=>"13647c7a-fb93-42b4-8e72-14abd3efcee2",
+                                                                                        "created_at"=>"2020-05-29 08:12:46",
                                                                                         "updated_at"=>"2020-05-29 08:12:46",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "plugin_id"=> 14,
+                                                                                        "engine_application_id"=> "cf0c66c7-12c9-43df-813c-14aeafdf6ae1",
                                                                                         "model"=>"Demo\Workflow\Models\ServiceChannel",
                                                                                         "operation"=>"delete",
                                                                                         "columns"=> null,
@@ -215,14 +216,13 @@ class SeedDemoCorePermissions implements Seedable
                                                                                         "name"=>"Service Channel delete Permission",
                                                                                         "description"=>"This is the system generated permission for Service Channel delete",
                                                                                         "active"=> 1,
-                                                                                        "system"=> 1,
-                                                                                        "id"=>"13647c7a-fb93-42b4-8e72-14abd3efcee2"
+                                                                                        "system"=> 1
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_core_permissions')->where('plugin_id', 14)->delete();
+                    Db::table('demo_core_permissions')->where('engine_application_id', 'cf0c66c7-12c9-43df-813c-14aeafdf6ae1')->delete();
             }
 }

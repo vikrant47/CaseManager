@@ -18,7 +18,7 @@ class BuilderTableCreateDemoWorkflowQueueAssignmentGroups extends Migration
             $table->integer('group_id');
             $table->uuid('queue_id');
             $table->integer('sort_order');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     

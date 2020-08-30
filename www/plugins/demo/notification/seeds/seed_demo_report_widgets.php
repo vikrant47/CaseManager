@@ -14,7 +14,8 @@ class SeedDemoReportWidgets implements Seedable
     {
             Db::table('demo_report_widgets')->insert([
             [
-                                                                            "created_at"=>"2020-06-23 04:16:10",
+                                                                            "id"=>"44778960-b508-11ea-bbc1-096310b9696e",
+                                                                                        "created_at"=>"2020-06-23 04:16:10",
                                                                                         "updated_at"=>"2020-06-23 05:21:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
@@ -24,16 +25,15 @@ class SeedDemoReportWidgets implements Seedable
                                                                                         "template"=> "",
                                                                                         "data"=>"return [\r\n    'data'=> \$context->evalSql('SELECT * from backend_user where id = {{request.param.userId}}'),\r\n    'user'=> Db::table('backend_user')->where('id',\$context->request->get('userId')),\r\n];",
                                                                                         "script"=>"this.header.setTitle(this.store.user.email);",
-                                                                                        "public"=> 0,
-                                                                                        "plugin_id"=> 3,
-                                                                                        "active"=> 1,
-                                                                                        "id"=>"44778960-b508-11ea-bbc1-096310b9696e",
+                                                                                        "public"=> false,
+                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "active"=> 1
                             ]             ]);
         }
 
     /**This will be executed to uninstall seeds*/
     public function uninstall()
     {
-                    Db::table('demo_report_widgets')->where('plugin_id', 3)->delete();
+                    Db::table('demo_report_widgets')->where('engine_application_id', 'c79b3f36-a77a-4de9-a9f0-f890a99728ef')->delete();
             }
 }

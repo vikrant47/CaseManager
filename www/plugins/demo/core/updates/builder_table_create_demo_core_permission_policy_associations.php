@@ -15,7 +15,7 @@ class BuilderTableCreateDemoCorePermissionPolicyAssociations extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->uuid('permission_id');
             $table->uuid('policy_id');
         });

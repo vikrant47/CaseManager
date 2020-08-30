@@ -3,7 +3,7 @@
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Model;
 use October\Rain\Support\Collection;
 use System\Models\MailTemplate;
@@ -32,7 +32,7 @@ public $incrementing = false;
     public $attachAuditedBy = true;
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
         'channel' => [NotificationChannel::class, 'key' => 'channel_id'],
         'template' => [MailTemplate::class, 'key' => 'template_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],

@@ -17,7 +17,7 @@ class BuilderTableCreateDemoCoreLibraries extends Migration
             $table->integer('updated_by_id');
             $table->text('css_files')->nullable();
             $table->text('javascript_files')->nullable();
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->string('name');
             $table->string('code');
             $table->text('description');

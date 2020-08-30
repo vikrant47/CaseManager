@@ -17,7 +17,7 @@ class BuilderTableCreateDemoCoreModels extends Migration
             $table->string('name', 255);
             $table->string('model', 255);
             $table->string('controller', 255);
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->boolean('audit')->default(false);
             $table->boolean('viewable')->default(false);
             $table->boolean('record_history')->default(false);

@@ -22,11 +22,11 @@ public $incrementing = false;
     public $rules = [
         'permission_id' => 'required',
         'policy_id' => 'required',
-        'plugin_id' => 'required',
+        'engine_application_id' => 'required',
     ];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
         'policy' => [SecurityPolicy::class, 'key' => 'policy_id'],
         'permission' => [Permission::class, 'key' => 'permission_id'],
     ];

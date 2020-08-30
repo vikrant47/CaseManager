@@ -37,7 +37,7 @@ class Navigation extends Model
 
     public $attachAuditedBy = true;
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'dashboard' => [Dashboard::class, 'key' => 'dashboard_id'],
         'widget' => [Widget::class, 'key' => 'widget_id'],
@@ -110,7 +110,7 @@ class Navigation extends Model
         if ($result['cyclic'] === true) {
             throw new ApplicationException('Circular dependancy ' . $result['cyclic']);
         }
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->engine_application_id);
     }
 
     public static function getUrl($navigation)

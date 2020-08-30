@@ -22,7 +22,7 @@ class BuilderTableCreateDemoReportWidgets extends Migration
             $table->text('data');
             $table->text('script');
             $table->boolean('public');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->boolean('active')->default(true);
         });
     }

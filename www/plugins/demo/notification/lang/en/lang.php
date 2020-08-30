@@ -1,5 +1,5 @@
 <?php return [
-    'plugin' => [
+    'application' => [
         'name' => 'Notification',
         'description' => ''
     ]

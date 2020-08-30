@@ -27,7 +27,7 @@ public $incrementing = false;
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id']
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id']
     ];
     public $attachAuditedBy = true;
 

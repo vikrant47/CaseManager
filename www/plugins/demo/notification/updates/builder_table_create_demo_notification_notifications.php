@@ -20,7 +20,7 @@ class BuilderTableCreateDemoNotificationNotifications extends Migration
             $table->string('name', 255);
             $table->text('description')->nullable();
             $table->text('condition');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->boolean('active');
             $table->boolean('enable_logging')->default(false);
             $table->uuid('template_id');

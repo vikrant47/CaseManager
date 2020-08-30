@@ -15,7 +15,7 @@ class BuilderTableCreateDemoWorkflowServiceChannels extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->string('name');
             $table->string('event');
             $table->text('description');

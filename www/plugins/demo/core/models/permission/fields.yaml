@@ -24,8 +24,8 @@ fields:
         disabled: 1
         readOnly: 1
         type: text
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: description
         span: auto

@@ -30,7 +30,7 @@ class FormAction extends Model
     public $jsonable = ['html_attributes', 'context'];
     protected $nullable = ['form'];
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
     public $morphToMany = [
@@ -59,7 +59,7 @@ class FormAction extends Model
 
     public function beforeSave()
     {
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->engine_application_id);
     }
 
 }

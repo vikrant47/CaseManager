@@ -36,8 +36,8 @@ fields:
         language: php
         span: full
         type: codeeditor
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: description
         span: auto

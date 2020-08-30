@@ -17,7 +17,7 @@ class BuilderTableCreateDemoCoreSecurityPolicies extends Migration
             $table->integer('updated_by_id');
             $table->string('name');
             $table->text('description');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
 
             // Index definitions
             $table->unique('name');

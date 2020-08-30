@@ -6,6 +6,7 @@ use BackendMenu;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Controllers\AbstractSecurityController;
+use Demo\Core\Models\EngineApplication;
 use Demo\Tenant\Services\TenantService;
 
 class TenantController extends AbstractSecurityController
@@ -27,11 +28,12 @@ class TenantController extends AbstractSecurityController
         $saveData = (object)$formWidget->getSaveData();
         try {
             $database = $saveData->code;
+            $applications = EngineApplication::where('active', true)->get();
             $tenantService = new TenantService(null);
             $tenantService->createDatabase($database);
             $tenantService->configureConnectionByName($database);
             $tenantService->runMigration($database);
-            $tenantService->runSeeds($database);
+            $tenantService->runSeeds($database, $applications);
         } catch (\Exception $exception) {
             try {
                 $tenantService->dropDatabase($saveData->code);

@@ -20,8 +20,8 @@ columns:
     subscriber_group_id:
         label: subscriber_group_id
         type: number
-    plugin_id:
-        label: plugin_id
+    engine_application_id:
+        label: engine_application_id
         type: number
     notification_id:
         label: notification_id

@@ -20,8 +20,8 @@ fields:
         span: auto
         default: 0
         type: switch
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: version
         span: auto

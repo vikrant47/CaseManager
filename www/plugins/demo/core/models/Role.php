@@ -32,7 +32,7 @@ class Role extends Model
     ];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
     ];
 
     public $belongsToMany = [
@@ -108,13 +108,13 @@ class Role extends Model
 
     public function beforeSave()
     {
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(), $this->policies, $this->plugin_id);
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->navigations(), $this->navigations, $this->plugin_id);
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->uipages(), $this->uipages, $this->plugin_id);
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->list_actions(), $this->list_actions, $this->plugin_id);
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->form_actions(), $this->form_actions, $this->plugin_id);
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->widgets(), $this->widgets, $this->plugin_id);
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->dashboards(), $this->dashboards, $this->plugin_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(), $this->policies, $this->engine_application_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->navigations(), $this->navigations, $this->engine_application_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->uipages(), $this->uipages, $this->engine_application_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->list_actions(), $this->list_actions, $this->engine_application_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->form_actions(), $this->form_actions, $this->engine_application_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->widgets(), $this->widgets, $this->engine_application_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->dashboards(), $this->dashboards, $this->engine_application_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
     }
 }

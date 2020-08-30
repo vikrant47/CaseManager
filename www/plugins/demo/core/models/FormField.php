@@ -31,7 +31,7 @@ public $incrementing = false;
     public $attachAuditedBy = true;
     public $jsonable = ['controls'];
     public $belongsTo = [
-        'plugin' => [PluginVersions::class,'nameFrom'=>'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
         'field' => [CustomField::class, 'key' => 'field_id']
     ];
 

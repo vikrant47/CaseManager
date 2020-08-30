@@ -36,8 +36,8 @@ fields:
         cssClass: layout
         tab: 'rainlab.builder::lang.form.controls'
         span: auto
-    plugin:
-        label: Plugin
+    application:
+        label: Application
         nameFrom: code
         descriptionFrom: version
         span: auto

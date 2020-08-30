@@ -1,0 +1,10 @@
+name: ApplicationController
+form: $/demo/core/models/engineapplication/fields.yaml
+modelClass: Demo\Core\Models\EngineApplication
+defaultRedirect: demo/core/applicationcontroller
+create:
+    redirect: 'demo/core/applicationcontroller/update/:id'
+    redirectClose: demo/core/applicationcontroller
+update:
+    redirect: demo/core/applicationcontroller
+    redirectClose: demo/core/applicationcontroller

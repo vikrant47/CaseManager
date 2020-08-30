@@ -30,7 +30,7 @@ public $incrementing = false;
         'workflow_item' => [WorkflowItem::class, 'key' => 'workflow_item_id'],
         'from_state' => [WorkflowState::class, 'key' => 'from_state_id'],
         'to_state' => [WorkflowState::class, 'key' => 'to_state_id'],
-        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'key' => 'plugin_id']
+        'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id']
     ];
 
     public $jsonable = ['data'];

@@ -1,6 +1,6 @@
-plugin:
-    name: 'demo.notification::lang.plugin.name'
-    description: 'demo.notification::lang.plugin.description'
+application:
+    name: 'demo.notification::lang.application.name'
+    description: 'demo.notification::lang.application.description'
     author: demo
     icon: oc-icon-envelope
     homepage: ''

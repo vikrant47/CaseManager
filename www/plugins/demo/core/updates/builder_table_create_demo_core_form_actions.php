@@ -25,7 +25,7 @@ class BuilderTableCreateDemoCoreFormActions extends Migration
             $table->string('icon')->nullable();
             $table->string('css_class')->nullable();
             $table->integer('sort_order')->default(0);
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
             $table->text('script');
             $table->text('context')->default('["create","update","delete"]');
             $table->text('html_attributes')->default('[]');

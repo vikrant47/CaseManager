@@ -2,7 +2,7 @@
 
 use Backend\Classes\Controller;
 use Backend\Facades\Backend;
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Illuminate\Support\Facades\Storage;
 use Model;
 use System\Classes\MediaLibrary;
@@ -28,7 +28,7 @@ class JavascriptLibrary extends Model
     ];
 
     public $belongsTo = [
-        'plugin' => [PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id']
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id']
     ];
 
     public $attachMany = [

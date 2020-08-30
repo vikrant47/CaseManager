@@ -38,8 +38,8 @@ fields:
         type: repeater
         form:
             fields:
-                plugin:
-                    label: Plugin
+                application:
+                    label: Application
                     nameFrom: code
                     descriptionFrom: description
                     span: auto

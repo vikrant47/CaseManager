@@ -19,7 +19,7 @@ class BuilderTableCreateDemoCoreNavRoleAssociations extends Migration
             $table->uuid('record_id');
             $table->string('model');
             $table->uuid('role_id');
-            $table->integer('plugin_id');
+            $table->uuid('engine_application_id');
         });
     }
     

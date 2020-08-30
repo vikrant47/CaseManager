@@ -1,6 +1,6 @@
-plugin:
-    name: 'demo.workflow::lang.plugin.name'
-    description: 'demo.workflow::lang.plugin.description'
+application:
+    name: 'demo.workflow::lang.application.name'
+    description: 'demo.workflow::lang.application.description'
     author: vikrant
     icon: icon-recycle
     homepage: ''

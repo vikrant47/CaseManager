@@ -1,5 +1,5 @@
 1.0.1:
-    - 'Initialize plugin.'
+    - 'Initialize application.'
 1.0.2:
     - 'Created table demo_casemanager_cases'
     - builder_table_create_demo_casemanager_cases.php

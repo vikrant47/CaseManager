@@ -2,7 +2,7 @@
 
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
-use Demo\Core\Models\PluginVersions;
+use Demo\Core\Models\EngineApplication;
 use Demo\Core\Services\EventHandlerServiceProvider;
 use Leafo\ScssPhp\Node\Number;
 use Model;
@@ -29,7 +29,7 @@ class Workflow extends Model
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'plugin' => [\Demo\Core\Models\PluginVersions::class, 'nameFrom' => 'code', 'key' => 'plugin_id'],
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
 
@@ -83,7 +83,7 @@ class Workflow extends Model
         $from_state = new WorkflowState();
         $from_state->id = $this->definition[0]['from_state'];
         $workflowItem->current_state = $from_state;
-        $workflowItem->plugin_id = PluginConnection::getCurrentPlugin()->id;
+        $workflowItem->engine_application_id = EngineApplication::getCurrentApplication()->id;
         $workflowItem->save();
     }
 
@@ -92,7 +92,7 @@ class Workflow extends Model
         $current_stateId = $current_state->id;
         foreach ($this->definition as $entry) {
             if ($entry['to_state'] == $current_stateId) {
-                return $entry['form_state'];
+                return $entry['from_state'];
             }
         }
         return null;
