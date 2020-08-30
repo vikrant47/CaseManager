@@ -248,7 +248,7 @@ class SeedRunner extends Command
     {
         $identifier = $application->plugin_code;
         $corePluginConnection = PluginConnection::getConnection('Demo.Core');
-        $application = PluginVersions::where('code', $identifier)->first();
+        // $application = PluginVersions::where('code', $identifier)->first();
         $tableNamespace = str_replace('.', '_', strtolower($identifier));
         $this->info('Searching tables with namespace ' . $tableNamespace);
         $pluggableTables = Db::select("SELECT columns.table_name
@@ -281,7 +281,7 @@ class SeedRunner extends Command
             $data = new \October\Rain\Database\Collection();
             $packagable = true;
             $columns = Db::getSchemaBuilder()->getColumnListing($table);
-            if (in_array('application_id', $columns)) {
+            if (in_array('engine_application_id', $columns)) {
                 // getQuery will return result as array instead of stdclass
                 $data = Db::table($table)->where('engine_application_id', $application->id)->get();
             } else {

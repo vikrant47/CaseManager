@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Notification d */
+/**Auto generated using cmd _: php artisan core:run-seeds notification d */
 class SeedDemoReportWidgets implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -26,7 +26,7 @@ class SeedDemoReportWidgets implements Seedable
                                                                                         "data"=>"return [\r\n    'data'=> \$context->evalSql('SELECT * from backend_user where id = {{request.param.userId}}'),\r\n    'user'=> Db::table('backend_user')->where('id',\$context->request->get('userId')),\r\n];",
                                                                                         "script"=>"this.header.setTitle(this.store.user.email);",
                                                                                         "public"=> false,
-                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "active"=> 1
                             ]             ]);
         }

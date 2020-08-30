@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Core d */
+/**Auto generated using cmd _: php artisan core:run-seeds engine d */
 class SeedDemoCoreLibraries implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -21,7 +21,7 @@ class SeedDemoCoreLibraries implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "css_files"=> null,
                                                                                         "javascript_files"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "name"=>"EchartJS",
                                                                                         "code"=>"echart-js",
                                                                                         "description"=> "",
@@ -34,7 +34,7 @@ class SeedDemoCoreLibraries implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "css_files"=> null,
                                                                                         "javascript_files"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "name"=>"Ag Grid Community Edition",
                                                                                         "code"=>"ag-grid",
                                                                                         "description"=>"<p>ag-Grid is the industry standard for JavaScript Enterprise Applications. Developers using ag-Grid are building applications that would not be possible if ag-Grid did not exist.</p>",

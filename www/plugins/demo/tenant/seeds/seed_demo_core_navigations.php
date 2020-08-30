@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Tenant d */
+/**Auto generated using cmd _: php artisan core:run-seeds tenant d */
 class SeedDemoCoreNavigations implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -35,7 +35,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=>"801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 0
                             ]             ]);

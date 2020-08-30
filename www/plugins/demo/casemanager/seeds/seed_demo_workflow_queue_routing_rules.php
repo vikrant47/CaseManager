@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Casemanager d */
+/**Auto generated using cmd _: php artisan core:run-seeds casemanager d */
 class SeedDemoWorkflowQueueRoutingRules implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -22,7 +22,7 @@ class SeedDemoWorkflowQueueRoutingRules implements Seedable
                                                                                         "script"=>"\$model = \$context->model; \r\nif(empty(\$model)){\r\nthrow new \$context->exception->ApplicationException('No item left to assign');\r\n}\r\nreturn \$context->currentUser;",
                                                                                         "name"=>"Route to current User",
                                                                                         "description"=>"Route to current User",
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ]             ]);
         }
 

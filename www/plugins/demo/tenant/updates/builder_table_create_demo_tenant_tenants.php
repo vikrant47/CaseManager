@@ -20,6 +20,7 @@ class BuilderTableCreateDemoTenantTenants extends Migration
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
+            $table->uuid('engine_application_id');
             $table->integer('updated_by_id');
             $table->integer('version')->nullable()->default(0);
             $table->primary(['id']);

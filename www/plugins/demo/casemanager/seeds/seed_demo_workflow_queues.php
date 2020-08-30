@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Casemanager d */
+/**Auto generated using cmd _: php artisan core:run-seeds casemanager d */
 class SeedDemoWorkflowQueues implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -29,7 +29,7 @@ class SeedDemoWorkflowQueues implements Seedable
                                                                                         "updated_at"=>"2020-04-04 13:26:49",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "service_channel_id"=>"6aec2f36-3de0-4131-b326-de418cb8549a",
                                                                                         "pop_criteria_id"=>"b9aadb51-d325-48d2-a903-c2e12fbbad34",
                                                                                         "routing_rule_id"=>"0e0ccad0-13fe-447e-a476-966159910a54"
@@ -49,7 +49,7 @@ class SeedDemoWorkflowQueues implements Seedable
                                                                                         "updated_at"=>"2020-06-07 04:13:30",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "service_channel_id"=>"6aec2f36-3de0-4131-b326-de418cb8549a",
                                                                                         "pop_criteria_id"=>"b9aadb51-d325-48d2-a903-c2e12fbbad34",
                                                                                         "routing_rule_id"=>"0e0ccad0-13fe-447e-a476-966159910a54"
@@ -69,7 +69,7 @@ class SeedDemoWorkflowQueues implements Seedable
                                                                                         "updated_at"=>"2020-06-07 05:48:38",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "service_channel_id"=>"6aec2f36-3de0-4131-b326-de418cb8549a",
                                                                                         "pop_criteria_id"=>"b9aadb51-d325-48d2-a903-c2e12fbbad34",
                                                                                         "routing_rule_id"=>"0e0ccad0-13fe-447e-a476-966159910a54"
@@ -89,7 +89,7 @@ class SeedDemoWorkflowQueues implements Seedable
                                                                                         "updated_at"=>"2020-05-31 12:54:23",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "service_channel_id"=>"6aec2f36-3de0-4131-b326-de418cb8549a",
                                                                                         "pop_criteria_id"=>"b9aadb51-d325-48d2-a903-c2e12fbbad34",
                                                                                         "routing_rule_id"=>"0e0ccad0-13fe-447e-a476-966159910a54"

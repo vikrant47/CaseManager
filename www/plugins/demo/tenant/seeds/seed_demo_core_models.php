@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Tenant d */
+/**Auto generated using cmd _: php artisan core:run-seeds tenant d */
 class SeedDemoCoreModels implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -22,7 +22,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Tenant",
                                                                                         "model"=>"Demo\Tenant\Models\Tenant",
                                                                                         "controller"=>"Demo\Tenant\Controllers\TenantController",
-                                                                                        "engine_application_id"=> "801c3e91-8be6-402e-9872-69d6ea29fe06",
+                                                                                        "engine_application_id"=>"801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,

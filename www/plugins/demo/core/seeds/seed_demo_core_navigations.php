@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Core d */
+/**Auto generated using cmd _: php artisan core:run-seeds engine d */
 class SeedDemoCoreNavigations implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -35,7 +35,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -60,7 +60,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"03b0b444-c20a-4480-8549-67bab2b176f3",
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -85,7 +85,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 4
                             ] ,            [
@@ -110,7 +110,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"03b0b444-c20a-4480-8549-67bab2b176f3",
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -135,7 +135,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -160,7 +160,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 0
                             ] ,            [
@@ -185,7 +185,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 7
                             ] ,            [
@@ -210,7 +210,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 9
                             ] ,            [
@@ -235,7 +235,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 0
                             ] ,            [
@@ -260,7 +260,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -285,7 +285,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 3
                             ] ,            [
@@ -310,7 +310,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -335,7 +335,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"139f4d70-98d4-492d-84ab-99eabb2e2865",
                                                                                         "sort_order"=> 0
                             ] ,            [
@@ -360,7 +360,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"139f4d70-98d4-492d-84ab-99eabb2e2865",
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -385,7 +385,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 0
                             ] ,            [
@@ -410,7 +410,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 8
                             ] ,            [
@@ -435,7 +435,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 6
                             ] ,            [
@@ -460,7 +460,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 8
                             ] ,            [
@@ -485,7 +485,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -510,7 +510,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 4
                             ] ,            [
@@ -535,7 +535,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 15
                             ] ,            [
@@ -560,7 +560,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 5
                             ] ,            [
@@ -585,7 +585,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 13
                             ] ,            [
@@ -610,7 +610,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 5
                             ] ,            [
@@ -635,7 +635,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 3
                             ] ,            [
@@ -660,7 +660,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -685,7 +685,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "sort_order"=> 3
                             ] ,            [
@@ -710,7 +710,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 7
                             ] ,            [
@@ -735,7 +735,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 7
                             ] ,            [
@@ -760,7 +760,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 5
                             ] ,            [
@@ -785,7 +785,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -810,7 +810,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 3
                             ] ,            [
@@ -835,7 +835,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -860,7 +860,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"7ffd7ee5-deb5-41af-876f-6bac700a35be",
                                                                                         "sort_order"=> 6
                             ] ,            [
@@ -885,7 +885,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 10
                             ] ,            [
@@ -910,7 +910,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -935,7 +935,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "sort_order"=> 0
                             ] ,            [
@@ -960,7 +960,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 4
                             ] ,            [
@@ -985,7 +985,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -1010,7 +1010,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 6
                             ] ,            [
@@ -1035,7 +1035,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 6
                             ] ,            [
@@ -1060,7 +1060,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "sort_order"=> 4
                             ] ,            [
@@ -1085,7 +1085,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 1
                             ] ,            [
@@ -1110,7 +1110,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 3
                             ] ,            [
@@ -1135,7 +1135,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 12
                             ] ,            [
@@ -1160,7 +1160,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 11
                             ] ,            [
@@ -1185,7 +1185,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "sort_order"=> 10
                             ] ,            [
@@ -1210,7 +1210,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -1235,7 +1235,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"03b0b444-c20a-4480-8549-67bab2b176f3",
                                                                                         "sort_order"=> 2
                             ] ,            [
@@ -1260,7 +1260,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 1
                             ]             ]);

@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Casemanager d */
+/**Auto generated using cmd _: php artisan core:run-seeds casemanager d */
 class SeedDemoCoreModels implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -22,7 +22,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Project",
                                                                                         "model"=>"Demo\Casemanager\Models\Project",
                                                                                         "controller"=>"Demo\Casemanager\Controllers\ProjectController",
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -38,7 +38,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Case Priority",
                                                                                         "model"=>"Demo\Casemanager\Models\CasePriority",
                                                                                         "controller"=>"Demo\Casemanager\Controllers\CasePriorityController",
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
@@ -54,7 +54,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Case Model",
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "controller"=>"Demo\Casemanager\Controllers\CaseController",
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "audit"=> 1,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,

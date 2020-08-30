@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Core d */
+/**Auto generated using cmd _: php artisan core:run-seeds engine d */
 class SeedDemoCoreModelAssociations implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -24,7 +24,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"source_model",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"Model Association Belongs To a Source Model",
@@ -40,7 +40,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"target_model",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"Model Association Belongs To a Target Model",
@@ -56,7 +56,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"model",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"Event Handler Belongs To a Model",
@@ -72,7 +72,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"model",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"Custom Field Belongs To a Model",
@@ -88,7 +88,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"field_id",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"Custom Field Belongs To a Model",
@@ -104,7 +104,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"role_id",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"RolePolicyAssociation Belongs To a Role",
@@ -120,7 +120,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"policy_id",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"RolePolicyAssociation Belongs To a SecurityPolicy",
@@ -136,7 +136,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"permission_id",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"PermissionPolicyAssociation Belongs To a Permission",
@@ -152,7 +152,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "foreign_key"=>"policy_id",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
                                                                                         "name"=>"PermissionPolicyAssociation Belongs To a SecurityPolicy",

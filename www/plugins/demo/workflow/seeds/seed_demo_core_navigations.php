@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Workflow d */
+/**Auto generated using cmd _: php artisan core:run-seeds workflow d */
 class SeedDemoCoreNavigations implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -35,7 +35,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "sort_order"=> 5
                             ] ,            [
@@ -60,7 +60,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
-                                                                                        "engine_application_id"=> "8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 5
                             ]             ]);

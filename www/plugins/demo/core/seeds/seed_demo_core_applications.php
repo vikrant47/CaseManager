@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Core d */
+/**Auto generated using cmd _: php artisan core:run-seeds engine d */
 class SeedDemoCoreApplications implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -18,6 +18,7 @@ class SeedDemoCoreApplications implements Seedable
                                                                                         "name"=>"Engine",
                                                                                         "code"=>"engine",
                                                                                         "plugin_code"=>"Demo.Core",
+                                                                                        "active"=> 1,
                                                                                         "description"=>"Engine Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
                                                                                         "updated_at"=>"2020-08-23 15:50:25",
@@ -29,6 +30,7 @@ class SeedDemoCoreApplications implements Seedable
                                                                                         "name"=>"Report",
                                                                                         "code"=>"report",
                                                                                         "plugin_code"=>"Demo.Report",
+                                                                                        "active"=> 1,
                                                                                         "description"=>"Report Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
                                                                                         "updated_at"=>"2020-08-23 15:50:25",
@@ -40,6 +42,7 @@ class SeedDemoCoreApplications implements Seedable
                                                                                         "name"=>"Tenant",
                                                                                         "code"=>"tenant",
                                                                                         "plugin_code"=>"Demo.Tenant",
+                                                                                        "active"=> 1,
                                                                                         "description"=>"Tenant Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
                                                                                         "updated_at"=>"2020-08-23 15:50:25",
@@ -51,6 +54,7 @@ class SeedDemoCoreApplications implements Seedable
                                                                                         "name"=>"Case Manager",
                                                                                         "code"=>"casemanager",
                                                                                         "plugin_code"=>"Demo.Casemanager",
+                                                                                        "active"=> 1,
                                                                                         "description"=>"Case Manager",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
                                                                                         "updated_at"=>"2020-08-23 15:50:25",
@@ -62,6 +66,7 @@ class SeedDemoCoreApplications implements Seedable
                                                                                         "name"=>"Workflow",
                                                                                         "code"=>"workflow",
                                                                                         "plugin_code"=>"Demo.Workflow",
+                                                                                        "active"=> 1,
                                                                                         "description"=>"Workflow Application",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
                                                                                         "updated_at"=>"2020-08-23 15:50:25",
@@ -73,6 +78,7 @@ class SeedDemoCoreApplications implements Seedable
                                                                                         "name"=>"Notification",
                                                                                         "code"=>"notification",
                                                                                         "plugin_code"=>"Demo.Notification",
+                                                                                        "active"=> 1,
                                                                                         "description"=>"Notification",
                                                                                         "created_at"=>"2020-08-23 15:50:25",
                                                                                         "updated_at"=>"2020-08-23 15:50:25",

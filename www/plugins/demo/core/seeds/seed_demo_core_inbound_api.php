@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Core d */
+/**Auto generated using cmd _: php artisan core:run-seeds engine d */
 class SeedDemoCoreInboundApi implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -20,7 +20,7 @@ class SeedDemoCoreInboundApi implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "method"=>"get",
-                                                                                        "engine_application_id"=> "dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "script"=>"return \$context->pathVariables;",
                                                                                         "name"=>"Test",
                                                                                         "description"=>"<p><a href=\"http://localhost:8084/engine/inbound-api/demo-casemanager/test/aditya\">http://localhost:8084/engine/inbound-api/demo-core/test/aditya</a></p>",

@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Notification d */
+/**Auto generated using cmd _: php artisan core:run-seeds notification d */
 class SeedDemoCoreLibraries implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -21,7 +21,7 @@ class SeedDemoCoreLibraries implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "css_files"=> null,
                                                                                         "javascript_files"=> null,
-                                                                                        "engine_application_id"=> "c79b3f36-a77a-4de9-a9f0-f890a99728ef",
+                                                                                        "engine_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "name"=>"Chart Js Slandered",
                                                                                         "code"=>"chart-js-slandered",
                                                                                         "description"=>"<h2>Simple yet flexible JavaScript charting for designers &amp; developers</h2>",

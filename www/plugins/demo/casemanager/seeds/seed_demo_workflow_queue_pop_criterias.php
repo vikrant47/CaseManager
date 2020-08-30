@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Casemanager d */
+/**Auto generated using cmd _: php artisan core:run-seeds casemanager d */
 class SeedDemoWorkflowQueuePopCriterias implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -22,7 +22,7 @@ class SeedDemoWorkflowQueuePopCriterias implements Seedable
                                                                                         "name"=>"Simple Pop Criteria",
                                                                                         "description"=>"This will pop any random item from queue",
                                                                                         "script"=>"return \$context->query->where('demo_workflow_queue_items.model','Demo\Workflow\Models\WorkflowItem');",
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ]             ]);
         }
 

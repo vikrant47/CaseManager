@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds Demo.Casemanager d */
+/**Auto generated using cmd _: php artisan core:run-seeds casemanager d */
 class SeedDemoCoreFormActions implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -29,7 +29,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-adjust",
                                                                                         "css_class"=> "",
                                                                                         "sort_order"=> 0,
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "script"=>"function(){\r\n        alert('Alert from action');\r\n        return false;\r\n}",
                                                                                         "context"=>"[\"create\",\"update\"]",
                                                                                         "html_attributes"=>"[]"
@@ -49,7 +49,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-arrow-circle-up",
                                                                                         "css_class"=>"btn-secondary",
                                                                                         "sort_order"=> 4,
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "script"=>"function(){\r\n}",
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-request\",\"value\":\"onPushCase\"},{\"name\":\"data-request-flash\",\"value\":\"\"},{\"name\":\"data-request-success\",\"value\":\"\$(this).hide()\"},{\"name\":\"data-load-indicator\",\"value\":\"Pushing\"},{\"name\":\"data-request-confirm\",\"value\":\"Are you sure?\"},{\"name\":\"data-show\",\"value\":\"return action.form.getFormModel().assigned_to_id === me.id\"}]"
@@ -69,7 +69,7 @@ class SeedDemoCoreFormActions implements Seedable
                                                                                         "icon"=>"oc-icon-undo",
                                                                                         "css_class"=>"btn-default",
                                                                                         "sort_order"=> 5,
-                                                                                        "engine_application_id"=> "df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "script"=>"function () {\r\n    var form = new EngineForm({\r\n        fields: {\r\n            remark: {\r\n                type: 'richeditor',\r\n                label: 'Enter you remark',\r\n                span: 'full',\r\n            },\r\n        }\r\n    }).build();\r\n    form.showInPopup({\r\n        size: 'md',\r\n        title: 'Are you sure?',\r\n        actions: [{\r\n            name: 'revert-case',\r\n            label: 'Revert',\r\n            active: true,\r\n            icon: '',\r\n            css_class: 'btn btn-primary',\r\n            handler: function () {\r\n                \$.request('onRevertCase', {\r\n                    url: EngineForm.getCurrentForm().\$el.find('form').prop('action'),\r\n                    loading: \$.oc.stripeLoadIndicator,\r\n                    data: {\r\n                        remark: form.getValue('remark')\r\n                    }\r\n                });\r\n            }\r\n        }]\r\n    });\r\n}",
                                                                                         "context"=>"[\"update\"]",
                                                                                         "html_attributes"=>"[{\"name\":\"data-show\",\"value\":\"return action.form.getFormModel().assigned_to_id === me.id\"}]"
