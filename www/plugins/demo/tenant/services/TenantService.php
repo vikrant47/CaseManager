@@ -5,6 +5,8 @@ namespace Demo\Tenant\Services;
 
 
 use Backend\Facades\Backend;
+use Backend\Models\BrandSetting;
+use Cyd293\BackendSkin\Classes\Skin;
 use Demo\Core\Console\SeedRunner;
 use Demo\Tenant\Models\Tenant;
 use App;
@@ -152,5 +154,37 @@ class TenantService extends ServiceProvider
             $url = '/tenant/' . $tenant->code . substr($url, $index + 8);
         }
         return $url;
+    }
+
+    /**
+     * @param $database string Name of the database/tenant
+     * @param $settings array brand settings
+     */
+    public function setBrandSettings($database, $settings = [])
+    {
+        $this->configureConnectionByName($database);
+        $this->setDefaultDatabaseConnection($database);
+        DB::transaction(function () use ($settings) {
+            $brandSettings = BrandSetting::instance();
+            foreach ($settings as $key => $setting) {
+                $brandSettings->setSettingsValue($key, $setting);
+            }
+            $brandSettings->save();
+        });
+        $this->setDefaultDatabaseConnection($this->originalDatabase);
+    }
+
+    /**
+     * @param $database string Name of the database/tenant
+     * @param $theme string Name of the theme
+     */
+    public function setTheme($database, $theme)
+    {
+        $this->configureConnectionByName($database);
+        $this->setDefaultDatabaseConnection($database);
+        DB::transaction(function () use ($theme) {
+            Skin::setActiveSkin($theme);
+        });
+        $this->setDefaultDatabaseConnection($this->originalDatabase);
     }
 }
