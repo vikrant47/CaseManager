@@ -133,7 +133,7 @@ class QueryFilter extends QueryBuilderParser
             $sql = $this->toRawSql($this->query);
             if (strlen($sql) > 0) {
                 $whereIndex = strpos($sql, 'where');
-                if ($whereIndex) {
+                if ($whereIndex !== false) {
                     $sql = substr($sql, $whereIndex + 5); // removing everything before where
                 } else {
                     return '';

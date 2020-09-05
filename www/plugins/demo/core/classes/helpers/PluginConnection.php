@@ -215,9 +215,9 @@ class PluginConnection
      * Will return the seed path inside plugin
      * @return string Path of the seed folder
      */
-    function getSeedsPath()
+    function getSeedsPath($version)
     {
-        return $this->pluginManager->getPluginPath($this->identifier) . DIRECTORY_SEPARATOR . 'seeds';
+        return $this->pluginManager->getPluginPath($this->identifier) . DIRECTORY_SEPARATOR . 'seeds' . DIRECTORY_SEPARATOR . $version;
     }
 
     /**

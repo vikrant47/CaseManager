@@ -44,13 +44,13 @@ class SeedRunner extends Command
     }
 
     /**@param $applicationCode string unique Code of the application */
-    public function runApplicationSeeds($applications, $operation, $clean = false)
+    public function runApplicationSeeds($applications, $version, $operation, $clean = false)
     {
 
         foreach ($applications as $application) {
             $pluginCode = $application->plugin_code;
             $applicationConnection = PluginConnection::getConnection($pluginCode);
-            $seedPath = $applicationConnection->getSeedsPath();
+            $seedPath = $applicationConnection->getSeedsPath($version);
             if ($operation === 'dump' || $operation === 'd') {
                 $path = $this->argument('path');
                 if (empty($path)) {
@@ -76,7 +76,7 @@ class SeedRunner extends Command
     }
 
     /**@param $applicationCode string unique Code of the application */
-    public function runSeeds($applicationCode, $operation, $clean = false)
+    public function runSeeds($applicationCode, $version, $operation, $clean = false)
     {
         if (!empty($applicationCode) && $applicationCode !== 'all' && $applicationCode !== 'a') {
             $applications = Db::table('demo_core_applications')->where([
@@ -86,7 +86,7 @@ class SeedRunner extends Command
         } else {
             $applications = Db::table('demo_core_applications')->where('active', true)->orderBy('name', 'ASC')->get();
         }
-        $this->runApplicationSeeds($applications, $operation, $clean);
+        $this->runApplicationSeeds($applications, $version, $operation, $clean);
     }
 
     /**
@@ -98,9 +98,10 @@ class SeedRunner extends Command
         try {
             $applications = [];
             $applicationCode = $this->argument('application');
+            $version = $this->argument('version') || '1.0';
             $clean = $this->options('clean');
             $operation = $this->argument('operation');
-            $this->runSeeds($applicationCode, $operation, $clean);
+            $this->runSeeds($applicationCode, $version, $operation, $clean);
         } catch (\Exception $e) {
             if (!empty($this->option('debug'))) {
                 $this->error($e);

@@ -99,7 +99,7 @@ tabs:
             span: auto
             required: 1
             type: dropdown
-            tab: backend::lang.branding.favicon
+            tab: Settings
             options:
                 nobleui: Basic
                 #adminlte: Admin

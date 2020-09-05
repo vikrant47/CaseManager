@@ -147,7 +147,7 @@ class Navigation extends Model
                 $navigation->url = 'list=' . $list . (!empty($navigation->url) ? '&' . $navigation->url : '');
             }
             if (!empty($navigation->url)) {
-                if (strpos($generatedUrl, '?')) {
+                if (strpos($generatedUrl, '?') !== false) {
                     $generatedUrl = $generatedUrl . '&' . $navigation->url;
                 } else {
                     $generatedUrl = $generatedUrl . '?' . $navigation->url;
@@ -169,7 +169,7 @@ class Navigation extends Model
                 $generatedUrl = $generatedUrl . '?view=' . $navigation->view;
             }
             if (!empty($navigation->url)) {
-                if (strpos($generatedUrl, '?')) {
+                if (strpos($generatedUrl, '?') !== false) {
                     $generatedUrl = $generatedUrl . '&' . $navigation->url;
                 } else {
                     $generatedUrl = $generatedUrl . '?' . $navigation->url;

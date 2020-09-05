@@ -22,31 +22,49 @@ class TenantController extends AbstractSecurityController
         BackendMenu::setContext('Demo.Tenant', 'main-menu-item', 'side-menu-item');
     }
 
+    public function formBeforeUpdate($model)
+    {
+        $formWidget = ReflectionUtil::getPropertyValue(FormController::class, 'formWidget', $this->asExtension('FormController'));
+        $formData = (object)$formWidget->getSaveData();
+        $database = $formData->code;
+        $brandSettings = [];
+        foreach ($formData as $param => $value) {
+            if (strpos($param, 'brand_setting_') !== false) {
+                $brandSettings[str_replace('brand_setting_', '', $param)] = $value;
+            }
+        }
+        $tenantService = new TenantService(null);
+        $tenantService->connect($database);
+        $tenantService->setTheme($formData->default_theme);
+        $tenantService->setBrandSettings($brandSettings);
+        $tenantService->close();
+    }
+
     public function formBeforeCreate($model)
     {
         $formWidget = ReflectionUtil::getPropertyValue(FormController::class, 'formWidget', $this->asExtension('FormController'));
         $formData = (object)$formWidget->getSaveData();
         $brandSettings = [];
         foreach ($formData as $param => $value) {
-            if (strpos($param, '__brand_setting_')) {
-                $brandSettings[str_replace('$brandSettings', '', $param)] = $value;
+            if (strpos($param, '_brand_setting_') !== false) {
+                $brandSettings[str_replace('brand_setting_', '', $param)] = $value;
             }
         }
+        $tenantService = new TenantService(null);
         try {
             $database = $formData->code;
-            $applications = EngineApplication::where('active', true)->get();
-            $tenantService = new TenantService(null);
+            $applications = EngineApplication::where('active', true)->where('code', '!=', 'tenant')->get();
             $tenantService->createDatabase($database);
-            $tenantService->configureConnectionByName($database);
-            $tenantService->runMigration($database);
-            $tenantService->runSeeds($database, $applications);
-            $tenantService->setTheme($database, $formData->default_theme);
-            $tenantService->setBrandSettings($database, $brandSettings);
+            $tenantService->connect($database);
+            $tenantService->runMigration();
+            $tenantService->runSeeds($applications);
+            $tenantService->setTheme($formData->default_theme);
+            $tenantService->setBrandSettings($brandSettings);
+            $tenantService->close();
         } catch (\Exception $exception) {
-            try {
+            $tenantService->close();
+            if ($exception->getCode() !== '42P04') {
                 $tenantService->dropDatabase($formData->code);
-            } catch (\Exception $ex) {
-
             }
             PluginConnection::getLogger('demo.core')->debug('Tenant creation failed , dropping the db ' . json_encode($formData));
             throw $exception;

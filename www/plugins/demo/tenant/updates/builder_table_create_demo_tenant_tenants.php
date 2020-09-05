@@ -15,8 +15,11 @@ class BuilderTableCreateDemoTenantTenants extends Migration
             $table->string('code');
             $table->text('description')->nullable();
             $table->boolean('active')->default(true);
-            $table->text('logo')->nullable();
+            $table->text('brand_setting_logo')->nullable();
             $table->string('default_theme')->nullable()->default('engine-default');
+            $table->string('brand_setting_app_name')->nullable();
+            $table->string('brand_setting_app_tagline')->nullable();
+            $table->string('brand_setting_favicon')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');

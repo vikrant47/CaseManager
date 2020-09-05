@@ -84,7 +84,7 @@ class QueryPagination
         $fromIndex = false;
         foreach ($matchers as $matcher) {
             $fromIndex = strpos($lowerSql, $matcher);
-            if ($fromIndex) {
+            if ($fromIndex !== false) {
                 break;
             }
         }

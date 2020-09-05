@@ -1,5 +1,6 @@
 <?php namespace Demo\Tenant\Models;
 
+use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\EngineApplication;
 use Demo\Tenant\Services\TenantService;
 use Model;
@@ -20,7 +21,8 @@ class Tenant extends Model
     public $incrementing = false;
     public $attachAuditedBy = true;
     public $attachOne = [
-        'logo' => 'System\Models\File'
+        'brand_setting_favicon' => 'System\Models\File',
+        'brand_setting_logo' => 'System\Models\File'
     ];
     /**
      * @var string The database table used by the model.
@@ -48,5 +50,8 @@ class Tenant extends Model
     public function beforeUpdate()
     {
         //TODO: can not change tenant code
+        if (ModelUtil::isChanged($this, 'code')) {
+            throw new ApplicationException('Tenant code can not be changed');
+        }
     }
 }

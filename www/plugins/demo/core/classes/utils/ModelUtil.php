@@ -25,6 +25,12 @@ class ModelUtil
         return empty($model->id);
     }
 
+    public static function isChanged($model, string $prop)
+    {
+        $original = $model->getOriginal();
+        return $original[$prop] !== $model->attributes[$prop];
+    }
+
     public static function fillDefaultColumnsInBelongsToMany(
         BelongsToMany $association,
         Collection &$data,

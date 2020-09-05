@@ -27,6 +27,21 @@ class TenantService extends ServiceProvider
         $this->originalDatabase = Config::get('database.default');
     }
 
+    public function close()
+    {
+        $this->setDefaultDatabaseConnection($this->originalDatabase);
+    }
+
+    /**
+     * Connect to the given tenant database
+     * @param $tenant string
+     */
+    public function connect($tenant)
+    {
+        $this->configureConnectionByName($tenant);
+        $this->setDefaultDatabaseConnection($tenant);
+    }
+
     /**
      * Creates a new database schema.
      * @param string $schemaName The new schema name.
@@ -85,33 +100,28 @@ class TenantService extends ServiceProvider
     }
 
     /**
-     * @param $database string
      * @param null $output
      */
-    public function runMigration($database, $output = null)
+    public function runMigration($output = null)
     {
-        $this->configureConnectionByName($database);
-        $this->setDefaultDatabaseConnection($database);
+
         DB::transaction(function () use ($output) {
             UpdateManager::instance()
                 ->setNotesOutput($output)
                 ->update();
         });
-        $this->setDefaultDatabaseConnection($this->originalDatabase);
+
     }
 
-    /*** @param $database string */
-    public function runSeeds($database, $applications)
+    /*** @param $applications string[] */
+    public function runSeeds($applications)
     {
-        $this->configureConnectionByName($database);
-        $this->setDefaultDatabaseConnection($database);
         DB::transaction(function () use ($applications) {
             $seedRunner = new SeedRunner();
             $seedRunner->setStringOutputChannel();
-            $seedRunner->runApplicationSeeds($applications, 'insert');
+            $seedRunner->runApplicationSeeds($applications, '1.0', 'insert');
             // throw new ApplicationException($seedRunner->getOutputString());
         });
-        $this->setDefaultDatabaseConnection($this->originalDatabase);
     }
 
     /**Push all tenant db config from database to laravel config object*/
@@ -145,25 +155,23 @@ class TenantService extends ServiceProvider
     /**
      * @param $tenant Tenant
      * @param $controllerType string
+     * @return string
      */
     public static function generateUrl($tenant, $controllerType)
     {
         $url = Backend::url(str_replace('\\', '/', strtolower(str_replace('\\Controllers', '', $controllerType))));
         $index = strpos($url, '/backend');
-        if ($index) {
+        if ($index !== false) {
             $url = '/tenant/' . $tenant->code . substr($url, $index + 8);
         }
         return $url;
     }
 
     /**
-     * @param $database string Name of the database/tenant
      * @param $settings array brand settings
      */
-    public function setBrandSettings($database, $settings = [])
+    public function setBrandSettings($settings = [])
     {
-        $this->configureConnectionByName($database);
-        $this->setDefaultDatabaseConnection($database);
         DB::transaction(function () use ($settings) {
             $brandSettings = BrandSetting::instance();
             foreach ($settings as $key => $setting) {
@@ -171,20 +179,15 @@ class TenantService extends ServiceProvider
             }
             $brandSettings->save();
         });
-        $this->setDefaultDatabaseConnection($this->originalDatabase);
     }
 
     /**
-     * @param $database string Name of the database/tenant
      * @param $theme string Name of the theme
      */
-    public function setTheme($database, $theme)
+    public function setTheme($theme)
     {
-        $this->configureConnectionByName($database);
-        $this->setDefaultDatabaseConnection($database);
         DB::transaction(function () use ($theme) {
             Skin::setActiveSkin($theme);
         });
-        $this->setDefaultDatabaseConnection($this->originalDatabase);
     }
 }
