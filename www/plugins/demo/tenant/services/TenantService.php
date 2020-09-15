@@ -119,7 +119,7 @@ class TenantService extends ServiceProvider
         DB::transaction(function () use ($applications) {
             $seedRunner = new SeedRunner();
             $seedRunner->setStringOutputChannel();
-            $seedRunner->runApplicationSeeds($applications, '1.0', 'insert');
+            $seedRunner->runApplicationSeeds($applications, '0.0', 'insert');
             // throw new ApplicationException($seedRunner->getOutputString());
         });
     }

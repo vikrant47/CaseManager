@@ -98,7 +98,10 @@ class SeedRunner extends Command
         try {
             $applications = [];
             $applicationCode = $this->argument('application');
-            $version = $this->argument('version') || '0.0';
+            $version = $this->argument('version');
+            if (!$version) {
+                $version = '0.0';
+            }
             $clean = $this->options('clean');
             $operation = $this->argument('operation');
             $this->runSeeds($applicationCode, $version, $operation, $clean);
