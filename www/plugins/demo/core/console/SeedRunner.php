@@ -98,7 +98,7 @@ class SeedRunner extends Command
         try {
             $applications = [];
             $applicationCode = $this->argument('application');
-            $version = $this->argument('version') || '1.0';
+            $version = $this->argument('version') || '0.0';
             $clean = $this->options('clean');
             $operation = $this->argument('operation');
             $this->runSeeds($applicationCode, $version, $operation, $clean);
@@ -130,6 +130,7 @@ class SeedRunner extends Command
         return [
             ['application', InputArgument::OPTIONAL, 'Plugin Name to run seeds.'],
             ['operation', InputArgument::OPTIONAL, 'Operation - install or i  / uninstall or u.'],
+            ['version', InputArgument::OPTIONAL, 'Version - version of the application , default 0.0.'],
             ['path', InputArgument::OPTIONAL, 'Path to dump the seeds ,default is seed dir in application'],
         ];
     }
