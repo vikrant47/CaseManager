@@ -56,14 +56,14 @@ class SeedRunner extends Command
                 if (empty($path)) {
                     $path = $seedPath;
                 }
-                $this->info('***************** Dumping seeds for application ' . $application->name . ' ******************');
+                $this->info('***************** Dumping seeds for application ' . $application->name . ' V (' . $version . ') ******************');
                 $this->info('path = ' . $path);
                 $this->runDump($application, $path, $clean);
             } else {
-                $this->info('***************** Collecting seeds for application ' . $application->name . ' ******************');
+                $this->info('***************** Collecting seeds for application ' . $application->name . ' V (' . $version . ') ******************');
                 $seedFiles = $this->getSeedsFiles($seedPath);
                 if (count($seedFiles) === 0) {
-                    $this->info('***************** No seeds  found for application ' . $application->name . ' ******************');
+                    $this->info('***************** No seeds  found for application ' . $application->name . ' V (' . $version . ') ******************');
                 } else {
                     if ($operation === 'uninstall' || $operation === 'u') {
                         $this->runUninstall($application, $seedFiles);
