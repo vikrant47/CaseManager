@@ -105,7 +105,7 @@ class SeedRunner extends Command
             $applicationCode = $this->argument('application');
             $version = $this->argument('version');
             if (!$version) {
-                $version = '0.0';
+                $version = 'V0.0';
             }
             $clean = $this->option('clean');
             $operation = $this->argument('operation');
