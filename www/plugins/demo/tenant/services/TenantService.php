@@ -5,6 +5,8 @@ namespace Demo\Tenant\Services;
 
 
 use Backend\Facades\Backend;
+use Backend\Models\BrandSetting;
+use Cyd293\BackendSkin\Classes\Skin;
 use Demo\Core\Console\SeedRunner;
 use Demo\Tenant\Models\Tenant;
 use App;
@@ -23,6 +25,21 @@ class TenantService extends ServiceProvider
     {
         parent::__construct($app);
         $this->originalDatabase = Config::get('database.default');
+    }
+
+    public function close()
+    {
+        $this->setDefaultDatabaseConnection($this->originalDatabase);
+    }
+
+    /**
+     * Connect to the given tenant database
+     * @param $tenant string
+     */
+    public function connect($tenant)
+    {
+        $this->configureConnectionByName($tenant);
+        $this->setDefaultDatabaseConnection($tenant);
     }
 
     /**
@@ -83,33 +100,28 @@ class TenantService extends ServiceProvider
     }
 
     /**
-     * @param $database string
      * @param null $output
      */
-    public function runMigration($database, $output = null)
+    public function runMigration($output = null)
     {
-        $this->configureConnectionByName($database);
-        $this->setDefaultDatabaseConnection($database);
+
         DB::transaction(function () use ($output) {
             UpdateManager::instance()
                 ->setNotesOutput($output)
                 ->update();
         });
-        $this->setDefaultDatabaseConnection($this->originalDatabase);
+
     }
 
-    /*** @param $database string */
-    public function runSeeds($database, $applications)
+    /*** @param $applications string[] */
+    public function runSeeds($applications)
     {
-        $this->configureConnectionByName($database);
-        $this->setDefaultDatabaseConnection($database);
         DB::transaction(function () use ($applications) {
             $seedRunner = new SeedRunner();
             $seedRunner->setStringOutputChannel();
-            $seedRunner->runApplicationSeeds($applications, 'insert');
+            $seedRunner->runApplicationSeeds($applications, 'V0.0', 'insert');
             // throw new ApplicationException($seedRunner->getOutputString());
         });
-        $this->setDefaultDatabaseConnection($this->originalDatabase);
     }
 
     /**Push all tenant db config from database to laravel config object*/
@@ -143,14 +155,39 @@ class TenantService extends ServiceProvider
     /**
      * @param $tenant Tenant
      * @param $controllerType string
+     * @return string
      */
     public static function generateUrl($tenant, $controllerType)
     {
         $url = Backend::url(str_replace('\\', '/', strtolower(str_replace('\\Controllers', '', $controllerType))));
         $index = strpos($url, '/backend');
-        if ($index) {
+        if ($index !== false) {
             $url = '/tenant/' . $tenant->code . substr($url, $index + 8);
         }
         return $url;
+    }
+
+    /**
+     * @param $settings array brand settings
+     */
+    public function setBrandSettings($settings = [])
+    {
+        DB::transaction(function () use ($settings) {
+            $brandSettings = BrandSetting::instance();
+            foreach ($settings as $key => $setting) {
+                $brandSettings->setSettingsValue($key, $setting);
+            }
+            $brandSettings->save();
+        });
+    }
+
+    /**
+     * @param $theme string Name of the theme
+     */
+    public function setTheme($theme)
+    {
+        DB::transaction(function () use ($theme) {
+            Skin::setActiveSkin($theme);
+        });
     }
 }

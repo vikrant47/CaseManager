@@ -57,6 +57,12 @@ class PluginConnection
         return $this->pluginManager->getPluginPath($this->identifier);
     }
 
+    /**Return the name of the plugin base directory e.g. demo.core -> core*/
+    public function getPluginBaseDirName()
+    {
+        return Str::substr($this->identifier, strpos($this->identifier, '.') + 1);
+    }
+
     public function exists()
     {
         return $this->pluginManager->exists($this->identifier);
@@ -215,9 +221,9 @@ class PluginConnection
      * Will return the seed path inside plugin
      * @return string Path of the seed folder
      */
-    function getSeedsPath()
+    function getSeedsPath($version)
     {
-        return $this->pluginManager->getPluginPath($this->identifier) . DIRECTORY_SEPARATOR . 'seeds';
+        return $this->pluginManager->getPluginPath($this->identifier) . DIRECTORY_SEPARATOR . 'seeds' . DIRECTORY_SEPARATOR . $version;
     }
 
     /**

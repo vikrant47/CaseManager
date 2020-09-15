@@ -187,7 +187,7 @@ class AbstractPluginController extends Controller
         $config = $this->listGetViewConfig($view, $definition);
         $list = $this->getRequestedList();
         if (!empty($list)) {
-            if (!strpos($list, '/')) {
+            if (strpos($list, '/')===false) {
                 $config->list = str_replace('columns.yaml', $list . '.yaml', $config->list);
             } else {
                 $config->list = $list;

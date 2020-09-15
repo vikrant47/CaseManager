@@ -306,9 +306,6 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     },
     getBaseTenantUrl: function () {
         const tenantCode = this.tenant.code;
-        if (tenantCode === 'default') {
-            return '/backend';
-        }
         return '/tenant/' + tenantCode;
     },
     getCurrentControllerUrl: function () {

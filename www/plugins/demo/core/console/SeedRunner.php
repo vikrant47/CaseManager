@@ -44,30 +44,35 @@ class SeedRunner extends Command
     }
 
     /**@param $applicationCode string unique Code of the application */
-    public function runApplicationSeeds($applications, $operation, $clean = false)
+    public function runApplicationSeeds($applications, $version, $operation, $clean = false)
     {
 
         foreach ($applications as $application) {
             $pluginCode = $application->plugin_code;
             $applicationConnection = PluginConnection::getConnection($pluginCode);
-            $seedPath = $applicationConnection->getSeedsPath();
+            $seedPath = $applicationConnection->getSeedsPath($version);
+            $path = $this->option('path');
+            if (empty($path)) {
+                $path = $seedPath;
+            }
+            $path = TwigEngine::eval($path, [
+                'application' => $applicationConnection->getPluginBaseDirName(),
+            ]);
             if ($operation === 'dump' || $operation === 'd') {
-                $path = $this->argument('path');
-                if (empty($path)) {
-                    $path = $seedPath;
-                }
-                $this->info('***************** Dumping seeds for application ' . $application->name . ' ******************');
+                $this->info('***************** Dumping seeds for application ' . $application->name . 'V(' . $version . ') ******************');
                 $this->info('path = ' . $path);
                 $this->runDump($application, $path, $clean);
+            } else if ($operation === 'fsclean' || $operation === 'fsc') { // remove seeds from filesystem
+                $this->runClean($application, $path);
             } else {
-                $this->info('***************** Collecting seeds for application ' . $application->name . ' ******************');
-                $seedFiles = $this->getSeedsFiles($seedPath);
+                $this->info('***************** Collecting seeds for application ' . $application->name . 'V(' . $version . ') ******************');
+                $seedFiles = $this->getSeedsFiles($path);
                 if (count($seedFiles) === 0) {
-                    $this->info('***************** No seeds  found for application ' . $application->name . ' ******************');
+                    $this->info('***************** No seeds  found for application ' . $application->name . 'V(' . $version . ') ******************');
                 } else {
                     if ($operation === 'uninstall' || $operation === 'u') {
                         $this->runUninstall($application, $seedFiles);
-                    } else {
+                    } else if ($operation === 'install' || $operation === 'i') {
                         $this->runInstall($application, $seedFiles);
                     }
                 }
@@ -76,7 +81,7 @@ class SeedRunner extends Command
     }
 
     /**@param $applicationCode string unique Code of the application */
-    public function runSeeds($applicationCode, $operation, $clean = false)
+    public function runSeeds($applicationCode, $version, $operation, $clean = false)
     {
         if (!empty($applicationCode) && $applicationCode !== 'all' && $applicationCode !== 'a') {
             $applications = Db::table('demo_core_applications')->where([
@@ -86,7 +91,7 @@ class SeedRunner extends Command
         } else {
             $applications = Db::table('demo_core_applications')->where('active', true)->orderBy('name', 'ASC')->get();
         }
-        $this->runApplicationSeeds($applications, $operation, $clean);
+        $this->runApplicationSeeds($applications, $version, $operation, $clean);
     }
 
     /**
@@ -98,9 +103,13 @@ class SeedRunner extends Command
         try {
             $applications = [];
             $applicationCode = $this->argument('application');
-            $clean = $this->options('clean');
+            $version = $this->argument('version');
+            if (!$version) {
+                $version = 'V0.0';
+            }
+            $clean = $this->option('clean');
             $operation = $this->argument('operation');
-            $this->runSeeds($applicationCode, $operation, $clean);
+            $this->runSeeds($applicationCode, $version, $operation, $clean);
         } catch (\Exception $e) {
             if (!empty($this->option('debug'))) {
                 $this->error($e);
@@ -129,7 +138,7 @@ class SeedRunner extends Command
         return [
             ['application', InputArgument::OPTIONAL, 'Plugin Name to run seeds.'],
             ['operation', InputArgument::OPTIONAL, 'Operation - install or i  / uninstall or u.'],
-            ['path', InputArgument::OPTIONAL, 'Path to dump the seeds ,default is seed dir in application'],
+            ['version', InputArgument::OPTIONAL, 'Version - version of the application , default 0.0.'],
         ];
     }
 
@@ -142,6 +151,7 @@ class SeedRunner extends Command
         return [
             ['debug', null, InputOption::VALUE_OPTIONAL, 'Print debug logs on console'],
             ['clean', null, InputOption::VALUE_OPTIONAL, 'Clean the seed directory'],
+            ['path', null, InputOption::VALUE_OPTIONAL, 'Path to dump the seeds ,default is seed dir in application'],
         ];
     }
 
@@ -243,12 +253,18 @@ class SeedRunner extends Command
         }, $collection);
     }
 
+    public function runClean($application, $path)
+    {
+        $this->info('*************** Cleaning directory ***************' . $path);
+        return File::deleteDirectory($path);
+    }
+
     /**@param $application EngineApplication */
     public function runDump($application, $path, $cleanDir = false)
     {
         $identifier = $application->plugin_code;
         $corePluginConnection = PluginConnection::getConnection('Demo.Core');
-        $application = PluginVersions::where('code', $identifier)->first();
+        // $application = PluginVersions::where('code', $identifier)->first();
         $tableNamespace = str_replace('.', '_', strtolower($identifier));
         $this->info('Searching tables with namespace ' . $tableNamespace);
         $pluggableTables = Db::select("SELECT columns.table_name
@@ -262,8 +278,7 @@ class SeedRunner extends Command
             ['pluggableTables' => join("','", $pluggableTables)]);
         $applicationTables = $this->collectionToArray($applicationTables, 'table_name');
         if ($cleanDir) {
-            $this->info('Cleaning directory  ' . $path);
-            File::deleteDirectory($path);
+            $this->runClean($application, $path);
         }
         $this->dumpSeed(array_merge($pluggableTables, $applicationTables), $application, $corePluginConnection->getTemplate('seed.file.twig'), $path);
     }
@@ -281,7 +296,7 @@ class SeedRunner extends Command
             $data = new \October\Rain\Database\Collection();
             $packagable = true;
             $columns = Db::getSchemaBuilder()->getColumnListing($table);
-            if (in_array('application_id', $columns)) {
+            if (in_array('engine_application_id', $columns)) {
                 // getQuery will return result as array instead of stdclass
                 $data = Db::table($table)->where('engine_application_id', $application->id)->get();
             } else {

@@ -1,12 +1,12 @@
 <?php
-namespace {{ plugin.code|replace({'.':'\\'})}}\Seeds;
+namespace {{ application.plugin_code|replace({'.':'\\'})}}\Seeds;
 
 use Schema;
 use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds {{ plugin.code }} d */
+/**Auto generated using cmd _: php artisan core:run-seeds {{ application.code }} d */
 class {{ className }} implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -48,7 +48,7 @@ class {{ className }} implements Seedable
     public function uninstall()
     {
         {% if packagable == true %}
-            Db::table('{{ table }}')->where('engine_application_id', {{ plugin.id }})->delete();
+            Db::table('{{ table }}')->where('engine_application_id', '{{ application.id }}')->delete();
         {% else %}
             Db::table('{{ table }}')->delete();
         {% endif %}
