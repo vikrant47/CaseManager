@@ -51,23 +51,28 @@ class SeedRunner extends Command
             $pluginCode = $application->plugin_code;
             $applicationConnection = PluginConnection::getConnection($pluginCode);
             $seedPath = $applicationConnection->getSeedsPath($version);
+            $path = $this->option('path');
+            if (empty($path)) {
+                $path = $seedPath;
+            }
+            $path = TwigEngine::eval($path, [
+                'application' => $applicationConnection->getPluginBaseDirName(),
+            ]);
             if ($operation === 'dump' || $operation === 'd') {
-                $path = $this->argument('path');
-                if (empty($path)) {
-                    $path = $seedPath;
-                }
-                $this->info('***************** Dumping seeds for application ' . $application->name . ' V (' . $version . ') ******************');
+                $this->info('***************** Dumping seeds for application ' . $application->name . 'V(' . $version . ') ******************');
                 $this->info('path = ' . $path);
                 $this->runDump($application, $path, $clean);
+            } else if ($operation === 'fsclean' || $operation === 'fsc') { // remove seeds from filesystem
+                $this->runClean($application, $path);
             } else {
-                $this->info('***************** Collecting seeds for application ' . $application->name . ' V (' . $version . ') ******************');
-                $seedFiles = $this->getSeedsFiles($seedPath);
+                $this->info('***************** Collecting seeds for application ' . $application->name . 'V(' . $version . ') ******************');
+                $seedFiles = $this->getSeedsFiles($path);
                 if (count($seedFiles) === 0) {
-                    $this->info('***************** No seeds  found for application ' . $application->name . ' V (' . $version . ') ******************');
+                    $this->info('***************** No seeds  found for application ' . $application->name . 'V(' . $version . ') ******************');
                 } else {
                     if ($operation === 'uninstall' || $operation === 'u') {
                         $this->runUninstall($application, $seedFiles);
-                    } else {
+                    } else if ($operation === 'install' || $operation === 'i') {
                         $this->runInstall($application, $seedFiles);
                     }
                 }
@@ -102,7 +107,7 @@ class SeedRunner extends Command
             if (!$version) {
                 $version = '0.0';
             }
-            $clean = $this->options('clean');
+            $clean = $this->option('clean');
             $operation = $this->argument('operation');
             $this->runSeeds($applicationCode, $version, $operation, $clean);
         } catch (\Exception $e) {
@@ -134,7 +139,6 @@ class SeedRunner extends Command
             ['application', InputArgument::OPTIONAL, 'Plugin Name to run seeds.'],
             ['operation', InputArgument::OPTIONAL, 'Operation - install or i  / uninstall or u.'],
             ['version', InputArgument::OPTIONAL, 'Version - version of the application , default 0.0.'],
-            ['path', InputArgument::OPTIONAL, 'Path to dump the seeds ,default is seed dir in application'],
         ];
     }
 
@@ -147,6 +151,7 @@ class SeedRunner extends Command
         return [
             ['debug', null, InputOption::VALUE_OPTIONAL, 'Print debug logs on console'],
             ['clean', null, InputOption::VALUE_OPTIONAL, 'Clean the seed directory'],
+            ['path', null, InputOption::VALUE_OPTIONAL, 'Path to dump the seeds ,default is seed dir in application'],
         ];
     }
 
@@ -248,6 +253,12 @@ class SeedRunner extends Command
         }, $collection);
     }
 
+    public function runClean($application, $path)
+    {
+        $this->info('*************** Cleaning directory ***************' . $path);
+        return File::deleteDirectory($path);
+    }
+
     /**@param $application EngineApplication */
     public function runDump($application, $path, $cleanDir = false)
     {
@@ -267,8 +278,7 @@ class SeedRunner extends Command
             ['pluggableTables' => join("','", $pluggableTables)]);
         $applicationTables = $this->collectionToArray($applicationTables, 'table_name');
         if ($cleanDir) {
-            $this->info('Cleaning directory  ' . $path);
-            File::deleteDirectory($path);
+            $this->runClean($application, $path);
         }
         $this->dumpSeed(array_merge($pluggableTables, $applicationTables), $application, $corePluginConnection->getTemplate('seed.file.twig'), $path);
     }

@@ -57,6 +57,12 @@ class PluginConnection
         return $this->pluginManager->getPluginPath($this->identifier);
     }
 
+    /**Return the name of the plugin base directory e.g. demo.core -> core*/
+    public function getPluginBaseDirName()
+    {
+        return Str::substr($this->identifier, strpos($this->identifier, '.') + 1);
+    }
+
     public function exists()
     {
         return $this->pluginManager->exists($this->identifier);
