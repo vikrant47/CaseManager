@@ -60,7 +60,6 @@ class MailTemplates extends AbstractSecurityController
         MailTemplate::syncAll();
         $this->asExtension('ListController')->index();
         $this->bodyClass = 'compact-container';
-
         $this->vars['activeTab'] = $tab ?: 'templates';
     }
 

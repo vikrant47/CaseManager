@@ -42,6 +42,7 @@ class AbstractPluginController extends Controller
 {
     use \Backend\Traits\SessionMaker;
 
+    const CONTROLLER_RUN_PARAMS = 'CONTROLLER_RUN_PARAMS';
     static $pluginMiddleware = [];
 
     protected $modelClass;
@@ -102,6 +103,11 @@ class AbstractPluginController extends Controller
         foreach ($pluginMiddleware as $mw) {
             $mw->after(request(), $result);
         }
+        /**Storing params in request to process them in future*/
+        request()->attributes->set(AbstractPluginController::CONTROLLER_RUN_PARAMS, [
+            'action' => $action,
+            'params' => $params,
+        ]);
         return $result;
     }
 
@@ -187,7 +193,7 @@ class AbstractPluginController extends Controller
         $config = $this->listGetViewConfig($view, $definition);
         $list = $this->getRequestedList();
         if (!empty($list)) {
-            if (strpos($list, '/')===false) {
+            if (strpos($list, '/') === false) {
                 $config->list = str_replace('columns.yaml', $list . '.yaml', $config->list);
             } else {
                 $config->list = $list;
@@ -313,17 +319,21 @@ class AbstractPluginController extends Controller
      * @param bool $bodyOnly Only make body section of layout
      * @return string
      */
-    public function makeView($view, $bodyOnly = false)
+    public function makeView($view, $bodyOnly = false, $controllerParams = [])
     {
 
         $ajaxCall = Request::input('ajax');
+        $partialVars = [];
+        if (method_exists($this, $view)) {
+            $partialVars = ReflectionUtil::invoke(null, $this, $view, $controllerParams);
+        }
         $requestedView = $this->getRequestedView();
         if (!empty($requestedView) && $this->isViewDefinitionExists($requestedView)) {
             $viewPath = $this->getViewRootDir($requestedView) . DIRECTORY_SEPARATOR . strtolower($view) . '.htm';
         } else {
             $viewPath = $this->getViewPath(strtolower($view) . '.htm');
         }
-        $contents = $this->makeFileContents($viewPath);
+        $contents = $this->makeFileContents($viewPath, $partialVars);
         if ($view === 'create' || $view === 'update' || $view === 'preview') {
             $basePath = $this->getBaseEnginePartial();
             $contents = $this->makePartial($basePath . '/form', [
@@ -367,8 +377,9 @@ class AbstractPluginController extends Controller
 
     public function onListRender()
     {
+        $runParams = \request()->attributes->get(AbstractPluginController::CONTROLLER_RUN_PARAMS);
         $list = $this->makeLists();
-        return $this->makeView('index', true);
+        return $this->makeView('index', true, $runParams ? $runParams['params'] : []);
     }
 
     public function onRender($id)

@@ -146,14 +146,6 @@ class Navigation extends Model
                 }
                 $navigation->url = 'list=' . $list . (!empty($navigation->url) ? '&' . $navigation->url : '');
             }
-            if (!empty($navigation->url)) {
-                if (strpos($generatedUrl, '?') !== false) {
-                    $generatedUrl = $generatedUrl . '&' . $navigation->url;
-                } else {
-                    $generatedUrl = $generatedUrl . '?' . $navigation->url;
-                }
-
-            }
             /*} catch (\Exception $e) {
                 throw $e;
             }*/
@@ -168,15 +160,21 @@ class Navigation extends Model
             if (!empty($navigation->view) && $navigation->view !== 'default') {
                 $generatedUrl = $generatedUrl . '?view=' . $navigation->view;
             }
-            if (!empty($navigation->url)) {
-                if (strpos($generatedUrl, '?') !== false) {
-                    $generatedUrl = $generatedUrl . '&' . $navigation->url;
-                } else {
-                    $generatedUrl = $generatedUrl . '?' . $navigation->url;
-                }
-            }
         } else {
             $generatedUrl = Backend::url($navigation->name);
+        }
+        if (!empty($navigation->url)) {
+            if (strpos($navigation->url, '?') !== false) {
+                $queryStartIndex = strpos($generatedUrl, '?');
+                if ($queryStartIndex !== false) {
+                    $generatedUrl = substr($generatedUrl, 0, $queryStartIndex) . $navigation->url . '&' . substr($generatedUrl, $queryStartIndex + 1);
+                } else {
+                    $generatedUrl = $generatedUrl . $navigation->url;
+                }
+            } else {
+                $generatedUrl = $generatedUrl . $navigation->url;
+            }
+
         }
         return $generatedUrl;
     }

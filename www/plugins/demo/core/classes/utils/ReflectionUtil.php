@@ -26,8 +26,11 @@ class ReflectionUtil
 
     public static function invoke($class, $instance, $method, $parameters = [])
     {
+        if (empty($class)) {
+            $class = get_class($instance);
+        }
         $r = new \ReflectionMethod($class, $method);
         $r->setAccessible(true);
-        $r->invoke($instance, $parameters);
+        return $r->invoke($instance, $parameters);
     }
 }
