@@ -131,7 +131,7 @@ class Navigation extends Model
         } else if ($navigation->type === 'list') {
             /*try {*/
 
-            $model = $navigation->model_ref;
+            $model = $navigation->model_ref ?? (object)['controller' => null];
             $index = TenantService::generateUrl($tenant, $model->controller);
             if (!empty($navigation->view) && $navigation->view !== 'default') {
                 $generatedUrl = $index . '?view=' . $navigation->view;

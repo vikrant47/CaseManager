@@ -7,6 +7,7 @@ namespace Demo\Core\Controllers;
 use Backend\Behaviors\FormController;
 use Backend\Behaviors\ListController;
 use Backend\Classes\Controller;
+use Backend\Widgets\Lists;
 use Demo\Core\Classes\Beans\ApplicationCache;
 use Demo\Core\Classes\Beans\SessionCache;
 use Demo\Core\Classes\Beans\TwigEngine;
@@ -365,6 +366,16 @@ class AbstractPluginController extends Controller
         }
         $partialContent = parent::makePartial($partial, $params, $throwException);
         return $partialContent;
+    }
+
+    /**
+     * @param  $list Lists
+     * @return ModelModel
+     */
+    public function getListModelRecord($list)
+    {
+        return ModelModel::where('model', get_class($list->model))->first();
+
     }
 
     public function getModelRecord()
