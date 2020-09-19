@@ -21,6 +21,12 @@ fields:
         type: relation
 tabs:
     fields:
+        async:
+            label: Async
+            span: auto
+            default: 1
+            type: switch
+            tab: 'API Config'
         url:
             label: URL
             span: auto

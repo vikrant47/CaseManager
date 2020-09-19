@@ -1,4 +1,4 @@
-application:
+plugin:
     name: 'demo.notification::lang.application.name'
     description: 'demo.notification::lang.application.description'
     author: demo

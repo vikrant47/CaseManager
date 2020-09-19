@@ -1,4 +1,4 @@
-application:
+plugin:
     name: 'demo.casemanager::lang.application.name'
     description: 'demo.casemanager::lang.application.description'
     author: demo

@@ -1,4 +1,4 @@
-application:
+plugin:
     name: 'demo.tenant::lang.application.name'
     description: 'demo.tenant::lang.application.description'
     author: demo
