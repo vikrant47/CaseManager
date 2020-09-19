@@ -589,6 +589,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false
+                            ] ,            [
+                                                                            "id"=>"ff41c880-fa72-11ea-89c2-23b667e263a9",
+                                                                                        "created_at"=>"2020-09-19 12:24:01",
+                                                                                        "updated_at"=>"2020-09-19 13:45:10",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Webhook Endpoint",
+                                                                                        "model"=>"Demo\Core\Models\WebhookEndpoint",
+                                                                                        "controller"=>"Demo\Core\Controllers\WebhookEndpointControllers",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "audit"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\"*\"]",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false
                             ]             ]);
         }
 
