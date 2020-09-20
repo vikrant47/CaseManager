@@ -115,7 +115,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
                         plugin: 'select2',
                         values: {},
                         name: association.key,
-                        plugin_config: engine.component.Reference.getConfig(association),
+                        plugin_config: engine.component.Reference.getConfig(Object.assign(association, {nameFrom: field.nameFrom})),
                     });
                 }
                 return this.static.queryBuilderTypeMappings.text(field);

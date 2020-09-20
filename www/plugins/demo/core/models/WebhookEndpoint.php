@@ -27,7 +27,10 @@ class WebhookEndpoint extends Model
         'name' => 'required',
         'engine_application_id' => 'required',
     ];
-
+    public $belongsTo = [
+        'webhook' => [Webhook::class, 'nameFrom' => 'name', 'key' => 'webhook_id'],
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
+    ];
     public $jsonable = ['headers'];
 
     protected $asyncExecution = false;

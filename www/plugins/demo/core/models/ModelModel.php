@@ -1,5 +1,6 @@
 <?php namespace Demo\Core\Models;
 
+use Backend\Models\User;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Doctrine\DBAL\Schema\Column;
@@ -38,6 +39,54 @@ class ModelModel extends Model
     public $belongsTo = [
         'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
     ];
+
+    static function getSystemFieldDefinition()
+    {
+        return [
+            'application' => [
+                'label' => 'Application',
+                'nameFrom' => 'name',
+                'descriptionFrom' => 'description',
+                'span' => 'auto',
+                'type' => 'relation',
+                'association' => [
+                    'model' => EngineApplication::class,
+                    'key' => 'engine_application_id'
+                ]
+            ], 'created_at' => [
+                'label' => 'Created At',
+                'span' => 'auto',
+                'type' => 'datetime',
+            ], 'updated_at' => [
+                'label' => 'Updated At',
+                'span' => 'auto',
+                'type' => 'datetime',
+            ], 'created_by' => [
+                'label' => 'Created By',
+                'nameFrom' => 'email',
+                'span' => 'auto',
+                'type' => 'relation',
+                'association' => [
+                    'model' => User::class,
+                    'key' => 'created_by_id'
+                ],
+            ], 'updated_by' => [
+                'label' => 'Updated By',
+                'nameFrom' => 'email',
+                'descriptionFrom' => 'description',
+                'span' => 'auto',
+                'type' => 'relation',
+                'association' => [
+                    'model' => User::class,
+                    'key' => 'updated_by_id'
+                ],
+            ], 'version' => [
+                'label' => 'Version',
+                'span' => 'auto',
+                'type' => 'integer',
+            ]
+        ];
+    }
 
     /**
      * Return the model table instance
@@ -98,8 +147,7 @@ class ModelModel extends Model
         })->values();
     }
 
-    public
-    function beforeSave()
+    public function beforeSave()
     {
         if (!class_exists($this->model)) {
             throw new ValidationException('Invalid model type ' . $this->model);
@@ -113,8 +161,7 @@ class ModelModel extends Model
     }
 
     /**@return ModelFormModel */
-    public
-    function getFormDefinition()
+    public function getFormDefinition()
     {
         if (!empty($this->model)) {
             $formModel = new ModelFormModel();
@@ -122,13 +169,14 @@ class ModelModel extends Model
             $formModel->setPluginCode(PluginConnection::getPluginCodeFromClass($this->model));
             $modelDirPath = 'fields.yaml';
             $formModel->loadForm($modelDirPath);
+            $systemFields = self::getSystemFieldDefinition();
+            $formModel->controls['fields'] = array_merge($formModel->controls['fields'], $systemFields);
             return $formModel;
         }
         return null;
     }
 
-    public
-    function getDefinition($model = null)
+    public function getDefinition($model = null)
     {
         $formDefinition = $this->getFormDefinition();
         if (!empty($this->model)) {
@@ -163,8 +211,7 @@ class ModelModel extends Model
         return $options;
     }
 
-    public
-    function getModelOptions()
+    public function getModelOptions()
     {
         return PluginConnection::getAllModelAlias(false);
     }

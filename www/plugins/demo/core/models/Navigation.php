@@ -144,7 +144,7 @@ class Navigation extends Model
                 if ($index) {
                     $list = str_replace('.yaml', '', substr($list, $index + 1));
                 }
-                $navigation->url = 'list=' . $list . (!empty($navigation->url) ? '&' . $navigation->url : '');
+                $generatedUrl = $generatedUrl . '?list=' . $list . (!empty($navigation->url));
             }
             /*} catch (\Exception $e) {
                 throw $e;
