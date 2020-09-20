@@ -1,1 +1,30 @@
-<?= $widget->render() ?>
+<div id="<?= $id ?>"></div>
+<script>
+    const containerId = '<?= $id ?>';
+    const list = new EngineList('<div/>', {
+        controller: '<?=$modelRecord->controller?>'
+    });
+    var associationConfig = <?=json_encode($this->getAssociationConfig())?>;
+    let filter = null;
+    if (associationConfig.relation === 'HasMany') {
+        list.setFixedFilter({
+            where: {
+                [associationConfig.targetKey]: associationConfig.targetFieldValue,
+            }
+        });
+    } else if (associationConfig.relation === 'BelongsToMany') {
+        list.setFixedFilter({
+            include: [{
+                attributes: ['id'],
+                sourceKey: associationConfig.sourceKey || 'id',
+                model: associationConfig.throughModel,
+                targetKey: associationConfig.targetKey,
+                'alias': 'through',
+                where: {
+                    [associationConfig.otherKey]: associationConfig.targetFieldValue,
+                }
+            }],
+        });
+    }
+    list.render('#' + containerId);
+</script>

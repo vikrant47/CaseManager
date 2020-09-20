@@ -474,18 +474,45 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
             $(document).trigger('engine.list.open', list);
         },
         open: function (controller) {
-            return Engine.instance.ui.request('onListRender', {
-                url: controller,
-                loadingContainer: '.page-content',
-                success: function (data) {
-                    $('#page-content').html(data.result);
-                    $('[data-control="rowlink"]').rowLink();
-                    $('[data-control="listwidget"]').listWidget();
-                    const list = EngineList.getCurrentList();
-                    EngineList.afterOpen(list);
-                }
-            });
+            return new EngineList('<div/>', {
+                controller: controller,
+            }).render('#page-content');
         },
+    },
+    setFixedFilter: function (fixedFilter) {
+        this.fixedFilter = Object.assign({
+            model: this.modelRecord.model,
+        }, fixedFilter);
+        return this;
+    },
+    applyFilter: function () {
+        this.render();
+    },
+    render: function (options) {
+        options = options || {};
+        let $container = [];
+        if (options.$container) {
+            $container = options.container instanceof jQuery ? options.container : $(options.container);
+        } else if (this.$container) {
+            $container = this.$container;
+        }
+        if ($container.length === 0) {
+            throw new Error('Empty container ');
+        }
+        const _this = this;
+        return Engine.instance.ui.request('onListRender', Object.assign({
+            url: this.modelRecord.controller,
+            loadingContainer: $container.get(0) || '.page-content',
+            data: {
+                filter: this.fixedFilter,
+            },
+            success: function (data) {
+                $container.html(data.result);
+                $container.find('[data-control="rowlink"]').rowLink();
+                $container.find('[data-control="listwidget"]').listWidget();
+                Object.assign(_this, $container.find('.engine-list-wrapper').data('engineList')); // updating current object with new
+            }
+        }, options))
     },
     getContainer() {
         return this.$el;
