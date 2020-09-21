@@ -8,6 +8,7 @@ use Demo\Core\Models\ModelModel;
 use Demo\Workflow\Models\QueueItem;
 use October\Rain\Database\QueryBuilder;
 use October\Rain\Exception\ApplicationException;
+use Ramsey\Uuid\Uuid;
 
 class RelatedList extends FormWidgetBase
 {
@@ -205,6 +206,7 @@ class RelatedList extends FormWidgetBase
         $widget->bindToController();
         $this->applyRelationFilter($widget);
         $this->vars['widget'] = $widget;*/
+        $this->vars['id'] = 'related-list-' . Uuid::uuid4()->toString();
         $this->vars['modelRecord'] = ModelModel::where('model', $this->targetModel)->first();
 
     }

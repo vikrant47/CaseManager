@@ -26,6 +26,7 @@ use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
 use Demo\Core\Services\QueryFilter;
 use Demo\Core\Services\QueryPagination;
+use Demo\Core\Services\RestQuery;
 use Demo\Tenant\Models\Tenant;
 use File;
 use Illuminate\Support\Collection;
@@ -132,7 +133,7 @@ class AbstractPluginController extends Controller
             $urlFilter = Request::input('urlFilter');
             if (!empty($urlFilter)) {
                 $urlFilterInstance = new QueryFilter($query, $urlFilter);
-                $urlFilterInstance->applyFilter($query, $urlFilter);
+                $urlFilterInstance->applyFilter();
             }
         }
     }
@@ -388,8 +389,18 @@ class AbstractPluginController extends Controller
 
     public function onListRender()
     {
-        $runParams = \request()->attributes->get(AbstractPluginController::CONTROLLER_RUN_PARAMS);
+        $request = \request();
+        $runParams = $request->attributes->get(AbstractPluginController::CONTROLLER_RUN_PARAMS);
+        /**@var  $list Lists[] */
         $list = $this->makeLists();
+        $restQuery = $request->get('restQuery');
+        $restQuery['model'] = $this->getModelClass();
+        if (!empty($restQuery)) {
+            $list['list']->bindEvent('list.extendQuery', function ($queryBuilder) use ($restQuery) {
+                $restQuery = new RestQuery($queryBuilder, $restQuery);
+                $restQuery->apply();
+            });
+        }
         return $this->makeView('index', true, $runParams ? $runParams['params'] : []);
     }
 

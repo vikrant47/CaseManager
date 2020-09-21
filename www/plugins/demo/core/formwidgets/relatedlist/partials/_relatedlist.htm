@@ -1,24 +1,23 @@
-<div id="<?= $id ?>"></div>
+<div id="<?= $id ?>" class="related-list-widget"></div>
 <script>
-    const containerId = '<?= $id ?>';
     const list = new EngineList('<div/>', {
         controller: '<?=$modelRecord->controller?>'
     });
     var associationConfig = <?=json_encode($this->getAssociationConfig())?>;
     let filter = null;
     if (associationConfig.relation === 'HasMany') {
-        list.setFixedFilter({
+        list.setRestQuery({
             where: {
-                [associationConfig.targetKey]: associationConfig.targetFieldValue,
+                [associationConfig.key]: associationConfig.targetFieldValue,
             }
         });
     } else if (associationConfig.relation === 'BelongsToMany') {
-        list.setFixedFilter({
+        list.setRestQuery({
             include: [{
                 attributes: ['id'],
-                sourceKey: associationConfig.sourceKey || 'id',
+                key: associationConfig.key,
                 model: associationConfig.throughModel,
-                targetKey: associationConfig.targetKey,
+                targetKey: associationConfig.targetKey || 'id',
                 'alias': 'through',
                 where: {
                     [associationConfig.otherKey]: associationConfig.targetFieldValue,
@@ -26,5 +25,5 @@
             }],
         });
     }
-    list.render('#' + containerId);
+    list.render({container: '#<?= $id ?>'});
 </script>

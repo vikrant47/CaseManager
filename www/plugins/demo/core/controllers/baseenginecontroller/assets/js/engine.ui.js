@@ -476,13 +476,13 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         open: function (controller) {
             return new EngineList('<div/>', {
                 controller: controller,
-            }).render('#page-content');
+            }).render({container: '#page-content'});
         },
     },
-    setFixedFilter: function (fixedFilter) {
-        this.fixedFilter = Object.assign({
+    setRestQuery: function (restQuery) {
+        this.restQuery = Object.assign({
             model: this.modelRecord.model,
-        }, fixedFilter);
+        }, restQuery);
         return this;
     },
     applyFilter: function () {
@@ -491,7 +491,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
     render: function (options) {
         options = options || {};
         let $container = [];
-        if (options.$container) {
+        if (options.container) {
             $container = options.container instanceof jQuery ? options.container : $(options.container);
         } else if (this.$container) {
             $container = this.$container;
@@ -504,7 +504,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
             url: this.modelRecord.controller,
             loadingContainer: $container.get(0) || '.page-content',
             data: {
-                filter: this.fixedFilter,
+                restQuery: this.restQuery,
             },
             success: function (data) {
                 $container.html(data.result);

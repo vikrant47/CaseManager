@@ -74,8 +74,8 @@ secondaryTabs:
             label: Subscribers
             span: full
             relation: HasMany
-            sourceKey: id
+            targetKey: id
             targetModel: Demo\Notification\Models\NotificationSubscriber
-            targetKey: notification_id
+            key: notification_id
             type: relatedlist
             tab: Subscribers

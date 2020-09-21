@@ -85,18 +85,18 @@ secondaryTabs:
             label: 'Workflow Items'
             span: full
             relation: HasMany
-            sourceKey: id
+            targetKey: id
             targetModel: Demo\Workflow\Models\WorkflowItem
-            targetKey: workflow_id
+            key: workflow_id
             type: relatedlist
             tab: 'Workflow Items'
         _workflow_transition:
             label: Transitions
             span: full
             relation: HasMany
-            sourceKey: id
+            targetKey: id
             targetModel: Demo\Workflow\Models\WorkflowTransition
-            targetKey: workflow_id
+            key: workflow_id
             throughModel: Demo\Workflow\Models\WorkflowItem
             otherKey: workflow_item_id
             type: relatedlist

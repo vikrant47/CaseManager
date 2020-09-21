@@ -101,8 +101,8 @@ secondaryTabs:
             label: 'Queue Items'
             span: full
             relation: HasMany
-            sourceKey: id
+            targetKey: id
             targetModel: Demo\Workflow\Models\QueueItem
-            targetKey: queue_id
+            key: queue_id
             type: relatedlist
             tab: 'Queue Items'
