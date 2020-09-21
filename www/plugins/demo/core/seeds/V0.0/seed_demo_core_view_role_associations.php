@@ -311,17 +311,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
-                                                                            "id"=>"d0aece34-75dd-4f61-95f4-40e509e31567",
-                                                                                        "created_at"=>"2020-06-06 13:24:09",
-                                                                                        "updated_at"=>"2020-06-06 13:24:09",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> 0,
-                                                                                        "record_id"=>"9ab44ba4-d108-437f-8025-b999fcffa10c",
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
-                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
-                            ] ,            [
                                                                             "id"=>"e0f00062-a811-43b8-b897-f75985b8e3c7",
                                                                                         "created_at"=>"2020-06-06 13:24:09",
                                                                                         "updated_at"=>"2020-06-06 13:24:09",

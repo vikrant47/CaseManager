@@ -1,0 +1,10 @@
+name: WebhookEndpointController
+form: $/demo/core/models/webhookendpoint/fields.yaml
+modelClass: Demo\Core\Models\WebhookEndpoint
+defaultRedirect: demo/core/webhookendpointcontroller
+create:
+    redirect: 'demo/core/webhookendpointcontroller/update/:id'
+    redirectClose: demo/core/webhookendpointcontroller
+update:
+    redirect: demo/core/webhookendpointcontroller
+    redirectClose: demo/core/webhookendpointcontroller

@@ -36,8 +36,8 @@ tabs:
             label: Transitions
             span: full
             relation: HasMany
-            sourceKey: id
+            targetKey: id
             targetModel: Demo\Workflow\Models\WorkflowTransition
-            targetKey: workflow_item_id
+            key: workflow_item_id
             type: relatedlist
             tab: Transitions

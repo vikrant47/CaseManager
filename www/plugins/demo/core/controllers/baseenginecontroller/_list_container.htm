@@ -1,15 +1,15 @@
 <?php
 $listActions = $this->getListActions();
-$modelRecord = $this->getModelRecord();
+$modelRecord = $this->getListModelRecord($list);
 ?>
 <script>
+    var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
+    var controller = <?=json_encode($this->getControllerInfo())?>;
+    modelRecord.definition = <?=$modelRecord ? json_encode($modelRecord->getDefinition()) : null?>;
     $(document).ready(function () {
         window.me = {id:<?=$this->user->id?>};
-        $('.engine-list-wrapper .toolbar-primary .btn').remove(); // removing cms buttons
-        var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
+        $('.engine-list-wrapper .toolbar-primary .btn').not('.action').remove(); // removing cms buttons
         var tenant = <?=request()->attributes->get('tenant')->toJSON()?>;
-        modelRecord.definition = <?=$modelRecord ? json_encode($modelRecord->getDefinition()) : null?>;
-        var controller = <?=json_encode($this->getControllerInfo())?>;
         Engine.instance.ui.setModel(modelRecord);
         Engine.instance.ui.setTenant(tenant);
     });
@@ -41,15 +41,19 @@ $modelRecord = $this->getModelRecord();
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        var list = EngineList.getCurrentList();
-        var actions = <?=$listActions ? $listActions->toJSON() : '[]'?>;
-        list.addActions(actions);
-        list.setPagination(<?= json_encode([
-                'from' => $list->vars['pageFrom'],
-                'to' => $list->vars['pageTo'],
-                'total' => $list->vars['recordTotal']
-            ])
-            ?>);
-    });
+    (function ($list) {
+        $(document).ready(function () {
+            var listId = $list.prop('id');
+            var listElem = $list.parents('.engine-list-wrapper').get(0);
+            var list = EngineList.getInstance(listElem, $list.data('model'), listId);
+            var actions = <?=$listActions ? $listActions->toJSON() : '[]'?>;
+            list.addActions(actions);
+            list.setPagination(<?= json_encode([
+                    'from' => $list->vars['pageFrom'],
+                    'to' => $list->vars['pageTo'],
+                    'total' => $list->vars['recordTotal']
+                ])
+                ?>);
+        });
+    })($('#<?=$list->getId()?>').data('model', modelRecord));
 </script>

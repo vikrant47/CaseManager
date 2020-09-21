@@ -131,7 +131,7 @@ class Navigation extends Model
         } else if ($navigation->type === 'list') {
             /*try {*/
 
-            $model = $navigation->model_ref;
+            $model = $navigation->model_ref ?? (object)['controller' => null];
             $index = TenantService::generateUrl($tenant, $model->controller);
             if (!empty($navigation->view) && $navigation->view !== 'default') {
                 $generatedUrl = $index . '?view=' . $navigation->view;
@@ -144,7 +144,7 @@ class Navigation extends Model
                 if ($index) {
                     $list = str_replace('.yaml', '', substr($list, $index + 1));
                 }
-                $navigation->url = 'list=' . $list . (!empty($navigation->url) ? '&' . $navigation->url : '');
+                $generatedUrl = $generatedUrl . '?list=' . $list . (!empty($navigation->url));
             }
             /*} catch (\Exception $e) {
                 throw $e;

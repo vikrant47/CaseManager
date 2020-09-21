@@ -1,4 +1,4 @@
-application:
+plugin:
     name: 'demo.report::lang.application.name'
     description: 'demo.report::lang.application.description'
     author: demo

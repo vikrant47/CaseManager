@@ -193,6 +193,42 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "permission_id"=>"83cd01a7-e56d-4fa3-93cf-3751ff791914",
                                                                                         "policy_id"=>"263d4d8d-d000-4bf1-b341-14be05cf39b2"
+                            ] ,            [
+                                                                            "id"=>"ff77dc00-fa72-11ea-b4d5-5f2735419da0",
+                                                                                        "created_at"=>"2020-09-19 12:24:00",
+                                                                                        "updated_at"=>"2020-09-19 12:24:00",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "permission_id"=>"ff68f060-fa72-11ea-8700-0517195f646a",
+                                                                                        "policy_id"=>"ff509aa0-fa72-11ea-8336-35af234bd531"
+                            ] ,            [
+                                                                            "id"=>"ff9270e0-fa72-11ea-bcd1-8b497ffbdcf2",
+                                                                                        "created_at"=>"2020-09-19 12:24:00",
+                                                                                        "updated_at"=>"2020-09-19 12:24:00",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "permission_id"=>"ff8818f0-fa72-11ea-af80-e3cfb1434ec7",
+                                                                                        "policy_id"=>"ff509aa0-fa72-11ea-8336-35af234bd531"
+                            ] ,            [
+                                                                            "id"=>"ffa940d0-fa72-11ea-8190-032f1d0f59bd",
+                                                                                        "created_at"=>"2020-09-19 12:24:01",
+                                                                                        "updated_at"=>"2020-09-19 12:24:01",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "permission_id"=>"ff9ecaf0-fa72-11ea-9185-f59ff521d10b",
+                                                                                        "policy_id"=>"ff509aa0-fa72-11ea-8336-35af234bd531"
+                            ] ,            [
+                                                                            "id"=>"ffc098a0-fa72-11ea-9ce7-79ea65658dc8",
+                                                                                        "created_at"=>"2020-09-19 12:24:01",
+                                                                                        "updated_at"=>"2020-09-19 12:24:01",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "permission_id"=>"ffb604a0-fa72-11ea-897a-753b337f5af6",
+                                                                                        "policy_id"=>"ff509aa0-fa72-11ea-8336-35af234bd531"
                             ]             ]);
         }
 

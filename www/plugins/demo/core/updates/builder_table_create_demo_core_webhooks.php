@@ -19,14 +19,8 @@ class BuilderTableCreateDemoCoreWebhooks extends Migration
             $table->text('description');
             $table->boolean('active');
             $table->text('url');
-            $table->string('method');
-            $table->text('request_headers')->nullable();
-            $table->text('request_body')->nullable();
-            $table->text('condition')->nullable();
-            $table->string('event', 255);
-            $table->string('model', 255);
-            $table->boolean('async')->default(true);
-            $table->integer('timeout')->default(3600);
+            $table->text('headers')->nullable();
+            $table->text('body')->nullable();
         });
     }
     

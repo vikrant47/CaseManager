@@ -1263,6 +1263,31 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "sort_order"=> 1
+                            ] ,            [
+                                                                            "id"=>"468f6180-fa7e-11ea-bde6-f10820793c8e",
+                                                                                        "created_at"=>"2020-09-19 13:44:44",
+                                                                                        "updated_at"=>"2020-09-19 13:44:44",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "label"=>"Webhook Endpoints",
+                                                                                        "icon"=>"oc-icon-link",
+                                                                                        "type"=>"list",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"webhook-endpoints",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=>"Demo\Core\Models\WebhookEndpoint",
+                                                                                        "list"=>"\$/demo/core/models/webhookendpoint/columns.yaml",
+                                                                                        "form"=> null,
+                                                                                        "view"=> "",
+                                                                                        "uipage_id"=> null,
+                                                                                        "record_id"=> null,
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
+                                                                                        "sort_order"=> 8
                             ]             ]);
         }
 

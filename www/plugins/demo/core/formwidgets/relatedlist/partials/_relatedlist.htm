@@ -1,1 +1,33 @@
-<?= $widget->render() ?>
+<div id="<?= $id ?>" class="related-list-widget"></div>
+<script>
+    (function (containerId) {
+        const $container = $('#' + containerId);
+        const list = new EngineList('<div/>', {
+            controller: '<?=$modelRecord->controller?>'
+        });
+        var associationConfig = <?=json_encode($this->getAssociationConfig())?>;
+        let filter = null;
+        if (associationConfig.relation === 'HasMany') {
+            list.setRestQuery({
+                where: {
+                    [associationConfig.key]: associationConfig.targetFieldValue,
+                }
+            });
+        } else if (associationConfig.relation === 'BelongsToMany') {
+            list.setRestQuery({
+                include: [{
+                    attributes: ['id'],
+                    key: associationConfig.key,
+                    model: associationConfig.throughModel,
+                    targetKey: associationConfig.targetKey || 'id',
+                    'alias': 'through',
+                    where: {
+                        [associationConfig.otherKey]: associationConfig.targetFieldValue,
+                    }
+                }],
+            });
+        }
+        list.render({container: '#' + containerId});
+        $container.parents('.widget-field').find('label').eq(0).hide();
+    })('<?= $id ?>');
+</script>

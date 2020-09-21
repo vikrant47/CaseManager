@@ -69,3 +69,6 @@
 1.0.24:
     - 'Created table demo_core_applications'
     - builder_table_create_demo_core_applications.php
+1.0.25:
+    - 'Created table demo_core_webhook_endpoints'
+    - builder_table_create_demo_core_webhook_endpoints.php

@@ -4,9 +4,11 @@ namespace Demo\Core\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
 use Demo\Core\Classes\Helpers\PluginConnection;
+use Demo\Core\Models\ModelModel;
 use Demo\Workflow\Models\QueueItem;
 use October\Rain\Database\QueryBuilder;
 use October\Rain\Exception\ApplicationException;
+use Ramsey\Uuid\Uuid;
 
 class RelatedList extends FormWidgetBase
 {
@@ -145,6 +147,17 @@ class RelatedList extends FormWidgetBase
         $relatedList->targetTable = $targetModel->table;
     }
 
+    public function getAssociationConfig()
+    {
+        return [
+            'relation' => $this->relation,
+            'targetFieldValue' => $this->model->{$this->sourceKey},
+            'targetKey' => $this->targetKey,
+            'throughTable' => $this->throughTable,
+            'otherKey' => $this->otherKey,
+        ];
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -182,7 +195,7 @@ class RelatedList extends FormWidgetBase
             'recordUrl',
             'otherKey',
         ]);
-        $config = $this->makeConfig('$/' . strtolower($this->targetModel) . '/columns.yaml');
+        /*$config = $this->makeConfig('$/' . strtolower($this->targetModel) . '/columns.yaml');
 
         $config->model = new $this->targetModel;
 
@@ -192,7 +205,9 @@ class RelatedList extends FormWidgetBase
 
         $widget->bindToController();
         $this->applyRelationFilter($widget);
-        $this->vars['widget'] = $widget;
+        $this->vars['widget'] = $widget;*/
+        $this->vars['id'] = 'related-list-' . Uuid::uuid4()->toString();
+        $this->vars['modelRecord'] = ModelModel::where('model', $this->targetModel)->first();
 
     }
 

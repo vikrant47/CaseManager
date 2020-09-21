@@ -282,7 +282,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     toUIAction: function (dbActions, modelRecord, props = {}) {
         return dbActions.map(function (action) {
             action.css_class = (action.css_class.indexOf('btn') < 0 ? 'btn btn-primary ' : 'btn') + ' ' + action.css_class + ' ' + action.icon;
-            action.id = 'list-action-' + action.id;
+            action.id = (props.list ? props.list.id : '') + 'list-action-' + action.id;
             action.attributes = typeof action.html_attributes === 'string' ? JSON.parse(action.html_attributes) : action.html_attributes;
             action.modelRecord = modelRecord;
             action.tooltip = action.description;
@@ -451,13 +451,14 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
     extends: EngineObservable,
     static: {
         el: '.engine-list-wrapper',
-        getInstance: function (el, modelRecord) {
+        getInstance: function (el, modelRecord, id) {
             const $el = $(el).eq(0);
             if ($el.data('engineList')) {
                 return $el.data('engineList');
             }
             const list = new EngineList();
             list.bind($el, modelRecord);
+            list.id = id;
             return list;
         },
         getCurrentList: function () {
@@ -473,18 +474,45 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
             $(document).trigger('engine.list.open', list);
         },
         open: function (controller) {
-            return Engine.instance.ui.request('onListRender', {
-                url: controller,
-                loadingContainer: '.page-content',
-                success: function (data) {
-                    $('#page-content').html(data.result);
-                    $('[data-control="rowlink"]').rowLink();
-                    $('[data-control="listwidget"]').listWidget();
-                    const list = EngineList.getCurrentList();
-                    EngineList.afterOpen(list);
-                }
-            });
+            return new EngineList('<div/>', {
+                controller: controller,
+            }).render({container: '#page-content'});
         },
+    },
+    setRestQuery: function (restQuery) {
+        this.restQuery = Object.assign({
+            model: this.modelRecord.model,
+        }, restQuery);
+        return this;
+    },
+    applyFilter: function () {
+        this.render();
+    },
+    render: function (options) {
+        options = options || {};
+        let $container = [];
+        if (options.container) {
+            $container = options.container instanceof jQuery ? options.container : $(options.container);
+        } else if (this.$container) {
+            $container = this.$container;
+        }
+        if ($container.length === 0) {
+            throw new Error('Empty container ');
+        }
+        const _this = this;
+        return Engine.instance.ui.request('onListRender', Object.assign({
+            url: this.modelRecord.controller,
+            loadingContainer: $container.get(0) || '.page-content',
+            data: {
+                restQuery: this.restQuery,
+            },
+            success: function (data) {
+                $container.html(data.result);
+                $container.find('[data-control="rowlink"]').rowLink();
+                $container.find('[data-control="listwidget"]').listWidget();
+                Object.assign(_this, $container.find('.engine-list-wrapper').data('engineList')); // updating current object with new
+            }
+        }, options))
     },
     getContainer() {
         return this.$el;
@@ -508,11 +536,11 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {list: this});
         Engine.instance.addActions(this.getActionContainer(), actions.filter(function (action) {
             return !action.toolbar;
-        }));
+        }), {list: this});
         // toolbar actions
         Engine.instance.addActions(this.getToolbar(), actions.filter(function (action) {
             return action.toolbar;
-        }), this, true);
+        }), {list: this}, true);
     },
     getSelectedRecordIds: function () {
         return $('.control-list').listWidget('getChecked');
@@ -698,7 +726,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     },
     addActions: function (actionRecords) {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {form: this});
-        Engine.instance.addActions(this.getActionContainer(), actions);
+        Engine.instance.addActions(this.getActionContainer(), actions, {form: this});
     }
 });
 

@@ -115,7 +115,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
                         plugin: 'select2',
                         values: {},
                         name: association.key,
-                        plugin_config: engine.component.Reference.getConfig(association),
+                        plugin_config: engine.component.Reference.getConfig(Object.assign(association, {nameFrom: field.nameFrom})),
                     });
                 }
                 return this.static.queryBuilderTypeMappings.text(field);
@@ -410,7 +410,13 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         const qb = this.getQueryBuilder();
         return qb.getSQL();
     },
+    mongoQuery: function (rules) {
+        this.mongoQuery = rules;
+    },
     setRulesFromMongo: function (rules) {
+        if (!rules.$and && !rules.$or) {
+            rules.$and = [rules];
+        }
         const qb = this.getQueryBuilder();
         return qb.setRulesFromMongo(rules);
     },
@@ -552,6 +558,9 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         }
         return null;
     },
+    setBreadcrumbContainer: function (breadcrumbContainer) {
+        this.breadcrumbContainer = breadcrumbContainer;
+    },
     renderBreadcrumb: function () {
         const $breadcrumbContainer = this.breadcrumbContainer instanceof jQuery ? this.breadcrumbContainer : $(this.breadcrumbContainer);
         $breadcrumbContainer.empty().append(this.getBreadcrumbTemplate(this.getRules(), this.definition));
@@ -639,4 +648,81 @@ let ParentFilter = Engine.instance.define('engine.ParentFilter', {
         }
         return this;
     },
+});
+
+let RestQuery = Engine.instance.define('engine.data.RestQuery', {
+    constructor: function (query) {
+        this.query = query;
+    },
+    static: {
+        queryParser: new Filter(),
+        toQueryBuilderRules: function (query) {
+            const _this = this;
+            let clonedQuery = JSON.parse(JSON.stringify(query));
+            let mongoQuery = clonedQuery.where;
+            if (!mongoQuery.$and && !mongoQuery.$or) {
+                mongoQuery = {$and: [mongoQuery]};
+            }
+            clonedQuery.where = this.queryParser.parseMongoQuery(mongoQuery);
+            if (clonedQuery.includes) {
+                clonedQuery.includes = clonedQuery.includes.map(function (query) {
+                    _this.toQueryBuilderRules(query);
+                });
+            }
+            return clonedQuery;
+        },
+        /**
+         * This will merge given query array and return a single query
+         * Note: queries should be mongo query
+         * @return Object
+         */
+        merge: function (queries) {
+            const _this = this;
+            return queries.slice(1).reduce(function (query, next) {
+                if (next.model !== query.model) {
+                    throw new Error('Can not merge querries of different models "' + query.model + '" != "' + next.model + '"');
+                }
+                /**initializing where*/
+                let where = query.where;
+                if (!where || Object.keys(where).length === 0) {
+                    where = {$and: []};
+                } else if (!where.$and) {
+                    where = {$and: [query]};
+                }
+                query.where = where;
+                /**merging include queries*/
+                if (next.include) {
+                    if (!query.include) {
+                        query.include = [];
+                    }
+                    for (const include of next.include) {
+                        const index = query.include.findIndex(qinclude => qinclude.model === include.model);
+                        if (index > -1) {
+                            _this.merge(query.include[index], include);
+                        } else {
+                            query.include.push(include);
+                        }
+                    }
+                    delete next.include;
+                }
+                if (next.where && Object.keys(where).length > 0) {
+                    query.where.$and.push(next.where);
+                }
+                return query;
+            }, queries[0]);
+        }
+
+    },
+    select: function (ajaxOptions) {
+        options.operation = 'select';
+        return this.execute(ajaxOptions);
+    },
+    execute: function (ajaxOptions) {
+        return Engine.instance.ui.request('onQueryData', Object.assign({
+            data: {
+                query: this.static.toQueryBuilderRules(this.query),
+            },
+            loadingContainer: ajaxOptions.loadingContainer || '.page-content',
+        }, ajaxOptions || {}));
+    }
 });

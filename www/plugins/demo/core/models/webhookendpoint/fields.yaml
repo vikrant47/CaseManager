@@ -15,12 +15,25 @@ fields:
         type: switch
     application:
         label: Application
-        nameFrom: code
+        nameFrom: name
         descriptionFrom: description
         span: auto
         type: relation
 tabs:
     fields:
+        webhook:
+            label: Webhook
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: 'API Config'
+        override_url:
+            label: Override URL
+            span: auto
+            default: 1
+            type: switch
+            tab: 'API Config'
         url:
             label: URL
             span: auto
@@ -38,7 +51,7 @@ tabs:
             type: dropdown
             tab: 'API Config'
         headers:
-            label: 'Request Headers'
+            label: 'Headers'
             prompt: 'Add new item'
             span: auto
             type: repeater
@@ -54,7 +67,7 @@ tabs:
                         span: auto
                         type: text
         body:
-            label: 'Request Body'
+            label: 'Body'
             prompt: 'Add new item'
             span: auto
             type: codeeditor

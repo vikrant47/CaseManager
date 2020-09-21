@@ -40,7 +40,9 @@ class QueryFilter extends QueryBuilderParser
 
     /**@var $query Builder */
     protected $query;
-    protected $filter;
+    protected $rules;
+    protected $alias;
+    protected $eval;
 
     /**@return Builder */
     static function getQuery($options)
@@ -49,7 +51,7 @@ class QueryFilter extends QueryBuilderParser
         /**@var $pagination QueryPagination */
         $pagination = $options['pagination'];
         $modelClass = $options['model'];
-        $filter = $options['filter'];
+        $rules = $options['filter'];
         $attributes = $options['attributes'];
         if (empty($table)) {
             $modelInstance = new $modelClass();
@@ -57,9 +59,9 @@ class QueryFilter extends QueryBuilderParser
         }
         /**@var $query \October\Rain\Database\Builder */
         $query = Db::table($table);
-        if (!empty($filter)) {
-            $filterService = new QueryFilter($query, $filter);
-            $filterService->applyFilter();
+        if (!empty($rules)) {
+            $rulesService = new QueryFilter($query, $rules);
+            $rulesService->applyFilter();
         }
         if (!empty($pagination)) {
             $query->offset($pagination->offset);
@@ -79,17 +81,19 @@ class QueryFilter extends QueryBuilderParser
         return $query->get();
     }
 
-    public function __construct($query, $filter, array $fields = null)
+    public function __construct($query, $rules, $alias = null, array $fields = null, $eval = true)
     {
         parent::__construct($fields);
         if (is_string($query)) {
             $query = DB::table($query);
         }
         $this->query = $query;
-        if (is_array($filter)) {
-            $filter = json_encode($filter);
+        if (is_array($rules)) {
+            $rules = json_encode($rules);
         }
-        $this->filter = $filter;
+        $this->rules = $rules;
+        $this->alias = $alias;
+        $this->eval = $eval;
     }
 
     public function __toString()
@@ -99,7 +103,7 @@ class QueryFilter extends QueryBuilderParser
 
     public function isEmpty()
     {
-        return strlen($this->filter) === 0;
+        return strlen($this->rules) === 0;
     }
 
     /**@param $fields array */
@@ -110,7 +114,7 @@ class QueryFilter extends QueryBuilderParser
 
     public function evalFilter()
     {
-        $this->filter = TwigEngine::eval($this->filter);
+        $this->rules = TwigEngine::eval($this->rules);
     }
 
     /**@param $query Builder */
@@ -149,6 +153,23 @@ class QueryFilter extends QueryBuilderParser
         return '';
     }
 
+    public function appendAlias(array $rules)
+    {
+        foreach ($rules as $rule) {
+            /*
+             * If makeQuery does not see the correct fields, it will return the QueryBuilder without modifications
+             */
+            if (strpos($rule['field'], '.')) {
+                throw new \Exception('Fields already aliased unable to add alias');
+            }
+            $rule['field'] = $this->alias . '.' . $rule['field'];
+            if ($this->isNested($rule)) {
+                return $this->appendAlias($rule['rules']);
+            }
+        }
+        return $this;
+    }
+
     public function applyFilter()
     {
         if (!$this->isEmpty()) {
@@ -156,8 +177,10 @@ class QueryFilter extends QueryBuilderParser
             if ($query instanceof \October\Rain\Database\Builder) {
                 $query = $query->getQuery();
             }
-            $this->evalFilter();
-            $this->parse($this->filter, $query);
+            if ($this->eval) {
+                $this->evalFilter();
+            }
+            $this->parse($this->rules, $query);
         }
     }
 
