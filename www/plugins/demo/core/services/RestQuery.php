@@ -52,17 +52,17 @@ class RestQuery
         $sourceModelInstance = new $json['model']();
         $sourceTable = $sourceModelInstance->getTable();
         if (array_key_exists('include', $json) && is_array($json['include'])) {
-            foreach ($json['include'] as $include) {
-                $includedModel = new $include['model']();
+            foreach ($json['include'] as $join) {
+                $includedModel = new $join['model']();
                 $includedTable = $includedModel->getTable();
-                $include['alias'] = array_key_exists('alias', $include) ? $include['alias'] : $includedTable;
+                $join['alias'] = array_key_exists('alias', $join) ? $join['alias'] : $includedTable;
                 $queryBuilder->join(
                     $includedTable,
-                    $include['alias'] . '.' . $include['key'],
+                    $join['alias'] . '.' . $join['key'],
                     '=',
-                    $sourceTable . '.' . $include['targetKey']
+                    $sourceTable . '.' . $join['targetKey']
                 );
-                $this->parse($include, $queryBuilder);
+                $this->parse($join, $queryBuilder);
             }
         }
         if (!empty($json['where'])) {

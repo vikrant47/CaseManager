@@ -84,20 +84,25 @@ secondaryTabs:
         _workflow_item:
             label: 'Workflow Items'
             span: full
-            relation: HasMany
-            targetKey: id
             targetModel: Demo\Workflow\Models\WorkflowItem
-            key: workflow_id
+            list: default
             type: relatedlist
             tab: 'Workflow Items'
+            query:
+                where:
+                    workflow_id: '{{model.id}}'
+
         _workflow_transition:
             label: Transitions
             span: full
-            relation: HasMany
-            targetKey: id
             targetModel: Demo\Workflow\Models\WorkflowTransition
-            key: workflow_id
-            throughModel: Demo\Workflow\Models\WorkflowItem
-            otherKey: workflow_item_id
+            list: default
             type: relatedlist
             tab: 'Workflow Transitions'
+            query:
+                join:
+                    model: Demo\Workflow\Models\WorkflowItem
+                    key: id
+                    targetKey: workflow_item_id
+                    where:
+                        workflow_id: '{{model.id}}'

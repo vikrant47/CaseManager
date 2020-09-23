@@ -3,9 +3,8 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
-use Demo\Workflow\Models\WorkflowItem;
 
-class WorkflowTransitions extends AbstractSecurityController
+class WorkflowStateController extends AbstractSecurityController
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
     
@@ -16,11 +15,6 @@ class WorkflowTransitions extends AbstractSecurityController
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Demo.Workflow', 'main-menu-item', 'side-menu-item5');
+        BackendMenu::setContext('Demo.Workflow', 'main-menu-item', 'side-menu-item7');
     }
-    public $belongsTo = [
-        'created_by' => [User::class, 'key' => 'created_by_id'],
-        'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'workflow_item' => [WorkflowItem::class, 'key' => 'workflow_entities_id'],
-    ];
 }

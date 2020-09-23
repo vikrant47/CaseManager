@@ -308,8 +308,11 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         const tenantCode = this.tenant.code;
         return '/tenant/' + tenantCode;
     },
+    getControllerUrl: function (controller) {
+        return this.getBaseUrl() + '/' + controller.replace(/\\/g, '/').replace('/Controllers', '').toLocaleLowerCase();
+    },
     getCurrentControllerUrl: function () {
-        return this.getBaseUrl() + '/' + this.currentModel.controller.replace(/\\/g, '/').replace('/Controllers', '').toLocaleLowerCase();
+        return this.getCurrentControllerUrl(this.currentModel.controller);
     },
     request: function (handler, options) {
         if (typeof handler !== 'string') {
@@ -501,7 +504,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         }
         const _this = this;
         return Engine.instance.ui.request('onListRender', Object.assign({
-            url: this.modelRecord.controller,
+            url: Engine.instance.ui.getControllerUrl(this.modelRecord.controller),
             loadingContainer: $container.get(0) || '.page-content',
             data: {
                 restQuery: this.restQuery,

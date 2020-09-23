@@ -1,6 +1,6 @@
 <?php namespace Demo\Workflow\Models;
 
-use Demo\Workflow\Controllers\WorkflowTransitions;
+use Demo\Workflow\Controllers\WorkflowTransitionController;
 use Illuminate\Support\Collection;
 use Model;
 use Backend\Models\User;

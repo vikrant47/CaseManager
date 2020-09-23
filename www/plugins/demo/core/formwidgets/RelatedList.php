@@ -3,6 +3,7 @@
 namespace Demo\Core\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
+use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
 use Demo\Workflow\Models\QueueItem;
@@ -15,34 +16,15 @@ class RelatedList extends FormWidgetBase
     static function getProperties()
     {
         return [
-            'relation' => [
-                'title' => 'Type of the relation',
-                'type' => 'dropdown',
-                'options' => [
-                    'HasMany' => 'Has Many',
-                    'BelongsToMany' => 'Belongs To Many',
-                ],
+            'list' => [
+                'title' => 'List',
+                'list' => 'string',
                 'ignoreIfEmpty' => false,
-                'validation' => [
-                    'required' => [
-                        'message' => 'Please select the relation'
-                    ]
-                ]
-            ],
-            'sourceKey' => [
-                'title' => 'Source Key',
-                'type' => 'string',
-                'ignoreIfEmpty' => false,
-                'default' => 'id',
-                'validation' => [
-                    'required' => [
-                        'message' => 'Please enter Source Key'
-                    ]
-                ]
+                'default' => 'default',
             ],
             'targetModel' => [
                 'title' => 'Target Model',
-                'type' => 'dropdown',
+                'list' => 'dropdown',
                 'options' => PluginConnection::getAllModelAlias(),
                 'ignoreIfEmpty' => false,
                 'validation' => [
@@ -51,36 +33,15 @@ class RelatedList extends FormWidgetBase
                     ]
                 ]
             ],
-            'targetKey' => [
-                'title' => 'Target Key',
-                'type' => 'string',
-                'ignoreIfEmpty' => false,
-                'validation' => [
-                    'required' => [
-                        'message' => 'Please enter Target Key'
-                    ]
-                ]
-            ],
-            'throughModel' => [
-                'title' => 'Through Model',
-                'type' => 'dropdown',
-                'options' => PluginConnection::getAllModelAlias(),
-                'ignoreIfEmpty' => true,
-            ],
-            'throughTable' => [
-                'title' => 'Through Table',
-                'type' => 'string',
-                'ignoreIfEmpty' => true,
-            ],
-            'otherKey' => [
-                'title' => 'Other Key',
+            'query' => [
+                'title' => 'Other list',
                 'description' => 'This should be the key column of through table in HasMany relationship',
-                'type' => 'string',
+                'list' => 'repeater',
                 'ignoreIfEmpty' => false
             ],
             'recordUrl' => [
                 'title' => 'Record Url',
-                'type' => 'string',
+                'list' => 'string',
             ],
         ];
     }
@@ -90,14 +51,6 @@ class RelatedList extends FormWidgetBase
      */
     protected $defaultAlias = 'relatedlist';
 
-    //
-    // Configurable properties
-    //
-
-    /**
-     * @var string $relation HasMany or BelongsToMany.
-     */
-    public $relation = 'HasMany';
 
     /**
      * Target Model Class
@@ -105,34 +58,9 @@ class RelatedList extends FormWidgetBase
     public $targetModel = null;
 
     /**
-     * Target Model Class
+     * @var array query for the related list
      */
-    public $targetTable = null;
-
-    /**
-     * @var string source key column of the relation
-     */
-    public $sourceKey = 'id';
-
-    /**
-     * @var string target key column of the relation
-     */
-    public $targetKey;
-
-    /**
-     * @var string through table name in case of BelongsToMany
-     */
-    public $throughTable;
-
-    /**
-     * @var string through model
-     */
-    public $throughModel;
-
-    /**
-     * @var string other key column of the relation
-     */
-    public $otherKey;
+    public $query;
 
     public $editable = false;
     public $recordUrl;
@@ -150,11 +78,10 @@ class RelatedList extends FormWidgetBase
     public function getAssociationConfig()
     {
         return [
-            'relation' => $this->relation,
-            'targetFieldValue' => $this->model->{$this->sourceKey},
-            'targetKey' => $this->targetKey,
-            'throughTable' => $this->throughTable,
-            'otherKey' => $this->otherKey,
+            'targetModel' => $this->targetModel,
+            'list' => $this->list,
+            'query' => json_decode(TwigEngine::eval(json_encode($this->query), ['model' => $this->model, 'self' => $this])),
+            'recordUrl' => $this->recordUrl,
         ];
     }
 
@@ -168,16 +95,16 @@ class RelatedList extends FormWidgetBase
             if ($relatedList->relation === 'HasMany') {
                 /** @var \October\Rain\Database\Builder $query */
                 if (empty($relatedList->throughModel) && empty($relatedList->throughTable)) {
-                    return $query->where($relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
+                    return $query->where($relatedList->targettype, '=', $relatedList->model->{$relatedList->list});
                 }
                 $this->loadTableNames($relatedList);
-                return $query->join($relatedList->throughTable, $relatedList->targetTable . '.' . $relatedList->otherKey, '=', $relatedList->throughTable . '.id')
-                    ->where($relatedList->throughTable . '.' . $relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
+                return $query->join($relatedList->throughTable, $relatedList->targetTable . '.' . $relatedList->query, '=', $relatedList->throughTable . '.id')
+                    ->where($relatedList->throughTable . '.' . $relatedList->targettype, '=', $relatedList->model->{$relatedList->list});
                 // TODO: HasMany with through table
             } else if ($relatedList->relation === 'BelongsToMany') {
                 $this->loadTableNames($relatedList);
-                return $query->join($relatedList->throughTable, $relatedList->targetTable . '.' . $relatedList->otherKey, '=', $relatedList->throughTable . '.id')
-                    ->where($relatedList->throughTable . '.' . $relatedList->targetKey, '=', $relatedList->model->{$relatedList->sourceKey});
+                return $query->join($relatedList->throughTable, $relatedList->targetTable . '.' . $relatedList->query, '=', $relatedList->throughTable . '.id')
+                    ->where($relatedList->throughTable . '.' . $relatedList->targettype, '=', $relatedList->model->{$relatedList->list});
             }
         });
         return $widget;
@@ -188,12 +115,9 @@ class RelatedList extends FormWidgetBase
         $this->fillFromConfig([
             'relation',
             'targetModel',
-            'sourceKey',
-            'targetKey',
-            'throughTable',
-            'throughModel',
+            'list',
             'recordUrl',
-            'otherKey',
+            'query',
         ]);
         /*$config = $this->makeConfig('$/' . strtolower($this->targetModel) . '/columns.yaml');
 
