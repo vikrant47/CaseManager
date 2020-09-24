@@ -148,6 +148,24 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             }
         });
     },
+    buildUrl: function (settings) {
+        if (typeof settings.url === 'string') {
+            return url;
+        }
+        const controllerUrl = this.getControllerUrl(settings.controller);
+        const urlParams = $.param(settings.params);
+        if (settings.type === 'list') {
+            return controllerUrl + '?' + urlParams;
+        } else if (settings.type === 'form') {
+            return controllerUrl + '/' + settings.context + '/' + settings.recordId + '?' + urlParams;
+        } else if (settings.type === 'embed') {
+            return this.getBaseUrl() + '/demo/core/controller/navigationcontroller/embed' + settings.recordId + '?' + urlParams;
+        } else if (settings.type === 'dashboard') {
+            return this.getBaseUrl() + '/demo/report/dashboardcontroller/' + settings.recordId + '?' + urlParams;
+        } else if (settings.type === 'report') {
+            return this.getBaseUrl() + '/demo/report/widgetcontroller/' + settings.recordId + '?' + urlParams;
+        }
+    },
     getUrlInfo: function (url) {
         let urlInfo = {url: url, type: 'list'};
         const queryParamIndex = url.indexOf('?');
@@ -188,7 +206,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         }
         let promise;
         if (link.type === 'list') {
-            promise = EngineList.open(link.url);
+            promise = EngineList.open({url: link.url});
         } else if (link.type === 'form') {
             promise = EngineForm.open(link.url, link.context, link.recordId);
         } else if (link.type === 'widget' || link.type === 'dashboard' || link.type === 'embed') {
@@ -436,6 +454,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         }
         this.$el = $(el).eq(0);
         this.$el.data('engineList', this);
+        this.$container = this.$el.parent();
         this.emit('init');
         $(document).trigger('engine.list.init', [this]);
     },
@@ -476,10 +495,10 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         afterOpen: function (list) {
             $(document).trigger('engine.list.open', list);
         },
-        open: function (controller) {
+        open: function (options) {
             return new EngineList('<div/>', {
-                controller: controller,
-            }).render({container: '#page-content'});
+                controller: options.controller,
+            }).render(Object.assign({container: '#page-content'}, options));
         },
     },
     setRestQuery: function (restQuery) {
@@ -504,7 +523,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         }
         const _this = this;
         return Engine.instance.ui.request('onListRender', Object.assign({
-            url: Engine.instance.ui.getControllerUrl(this.modelRecord.controller),
+            url: options.url ? options.url : Engine.instance.ui.getControllerUrl(this.modelRecord.controller),
             loadingContainer: $container.get(0) || '.page-content',
             data: {
                 restQuery: this.restQuery,
@@ -517,7 +536,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
             }
         }, options))
     },
-    getContainer() {
+    getDom() {
         return this.$el;
     },
     getActionContainer: function () {
@@ -733,7 +752,35 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     }
 });
 
-
+var EngineIframe = Engine.instance.define('engine.ui.Iframe', {
+    static: {
+        template: '<iframe frameborder="0"></iframe>',
+        defaultSettings: {
+            width: '100%',
+            height: '400px',
+        },
+    },
+    constructor: function (settings) {
+        this.settings = Object.assign({}, this.static.defaultSettings, settings);
+        this.$container = settings.container instanceof jQuery ? settings.container : $(settings.container);
+    },
+    render: function () {
+        this.rendered = true;
+        const url = Engine.instance.ui.buildUrl(this.settings.url);
+        this.$el = $(this.static.template);
+        const _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.$el.prop('src', url).css({
+                height: _this.settings.height,
+                width: _this.settings.width,
+            }).appendTo(_this.$container).on('load', function () {
+                resolve(this);
+            });
+        }).then(function (iframe) {
+            return iframe;
+        });
+    }
+});
 Engine.instance.export(new EngineFormService(), 'formService');
 Engine.instance.export(new EngineListService(), 'listService');
 Engine.instance.export(new EngineUI(), 'ui');

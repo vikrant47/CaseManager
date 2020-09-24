@@ -2,12 +2,31 @@
 <script>
     (function (containerId) {
         const $container = $('#' + containerId);
-        const list = new EngineList('<div/>', {
+        var associationConfig = <?=json_encode($this->getAssociationConfig())?>;
+        /*const list = new EngineList('<div/>', {
             controller: '<?=str_replace('\\', '/', $modelRecord->controller)?>'
         });
-        var associationConfig = <?=json_encode($this->getAssociationConfig())?>;
+
         list.setRestQuery(associationConfig.query);
-        list.render({container: '#' + containerId});
-        $container.parents('.widget-field').find('label').eq(0).hide();
+        list.render({
+            container: '#' + containerId,
+            iframe: {
+                width: '100%',
+                height: '500px;',
+            }
+        });
+        $container.parents('.widget-field').find('label').eq(0).hide();*/
+        const iframe = new engine.ui.Iframe({
+            container: '#' + containerId,
+            url: {
+                type: 'list',
+                controller: '<?=str_replace('\\', '/', $modelRecord->controller)?>',
+                params: {
+                    query: associationConfig.query,
+                    iframeMode: true,
+                    renderBody: true,
+                },
+            }
+        }).render();
     })('<?= $id ?>');
 </script>
