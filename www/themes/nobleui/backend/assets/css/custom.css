@@ -225,6 +225,27 @@ a {
     background-color: transparent;
 }
 
+.navbar .navbar-content {
+    padding-left: 10px;
+}
+.navbar .navbar-content .navbar-nav.programable-navbar .nav-item .nav-link{
+    color: #fff;
+}
+.navbar .navbar-content .navbar-nav.programable-navbar [class*=" oc-icon-"]:before{
+    font-size: 15px;
+}
+.navbar-content .programable-navbar {
+    width: 87%;
+}
+
+.navbar-content .search-form {
+    width: 10%;
+}
+
+.navbar-content .user-settings {
+    width: 3%;
+}
+
 /***list**/
 .list-header {
     background-color: transparent;

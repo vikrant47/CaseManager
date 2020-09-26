@@ -1,7 +1,29 @@
 <!DOCTYPE html>
 <html lang="<?= App::getLocale() ?>" class="no-js <?= $this->makeLayoutPartial('browser_detector') ?>">
 
-
+<?php
+$sectionConfig = [
+    'header' => [
+        'render' => true,
+    ],
+    'footer' => [
+        'render' => true,
+    ],
+    'sidebar' => [
+        'render' => true,
+    ],
+    'body' => [
+        'render' => true,
+    ]
+];
+$iframeMode = request()->get('iframeMode');
+if (trim($iframeMode) === 'true') {
+    $sectionConfig['header']['render'] = request()->get('renderHeader');
+    $sectionConfig['footer']['render'] = request()->get('renderFooter');
+    $sectionConfig['sidebar']['render'] = request()->get('renderSidebar');
+    $sectionConfig['body']['render'] = request()->get('renderBody');
+}
+?>
 <!-- Mirrored from www.nobleui.com/html/template/demo_1/dashboard-one.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 May 2020 05:22:20 GMT -->
 <head>
     <?= $this->makeLayoutPartial('partials/head') ?>
@@ -12,35 +34,54 @@
 
 <div class="main-wrapper">
 
-    <!-- partial:partials/_sidebar.html -->
-    <nav class="sidebar">
-        <?= $this->makeLayoutPartial('partials/sidebar') ?>
-    </nav>
-    <nav class="settings-sidebar">
-        <?= $this->makeLayoutPartial('partials/setting') ?>
-    </nav>
+    <?php if ($sectionConfig['sidebar']['render']) { ?>
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar">
+            <?= $this->makeLayoutPartial('partials/sidebar') ?>
+        </nav>
+
+        <nav class="settings-sidebar">
+            <?= $this->makeLayoutPartial('partials/setting') ?>
+        </nav>
+    <?php } else { ?>
+        <style>
+            .main-wrapper .page-wrapper {
+                margin-left: auto;
+                width: 100%;
+            }
+        </style>
+    <?php } ?>
     <!-- partial -->
 
     <div class="page-wrapper">
 
         <!-- partial:partials/_navbar.html -->
-        <nav class="navbar">
-            <?= $this->makeLayoutPartial('partials/header') ?>
-        </nav>
-
-
+        <?php if ($sectionConfig['header']['render']) { ?>
+            <nav class="navbar">
+                <?= $this->makeLayoutPartial('partials/header') ?>
+            </nav>
+        <?php } else { ?>
+        <style>
+            .main-wrapper .page-wrapper .page-content {
+                margin-top: auto;
+                width: 100%;
+            }
+        </style>
+        <?php } ?>
         <!-- partial -->
+        <?php if ($sectionConfig['body']['render']) { ?>
+            <div class="page-content" id="page-content">
 
-        <div class="page-content" id="page-content">
+                <?= $this->makeLayoutPartial('partials/body') ?>
 
-            <?= $this->makeLayoutPartial('partials/body') ?>
-
-        </div>
-
+            </div>
+        <?php } ?>
         <!-- partial:partials/_footer.html -->
-        <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <?= $this->makeLayoutPartial('partials/footer') ?>
-        </footer>
+        <?php if ($sectionConfig['body']['render']) { ?>
+            <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
+                <?= $this->makeLayoutPartial('partials/footer') ?>
+            </footer>
+        <?php } ?>
         <!-- partial -->
 
     </div>

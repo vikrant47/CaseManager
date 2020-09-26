@@ -50,9 +50,15 @@ class HttpServerCommand extends Command
      */
     public function handle()
     {
-        $this->loadConfigs();
-        $this->initAction();
-        $this->runAction();
+        try {
+            $this->loadConfigs();
+            $this->initAction();
+            $this->runAction();
+        } catch (\Exception $ex) {
+            $this->info($ex->getTraceAsString());
+            $this->error($ex->getTraceAsString());
+        }
+
     }
 
     /**
@@ -88,7 +94,7 @@ class HttpServerCommand extends Command
         $this->info("Swoole http server started: <http://{$host}:{$port}>");
         if ($this->isDaemon()) {
             $this->info('> (You can run this command to ensure the ' .
-            'swoole_http_server process is running: ps aux|grep "swoole")');
+                'swoole_http_server process is running: ps aux|grep "swoole")');
         }
 
         $this->laravel->make('swoole.http')->run();
@@ -101,7 +107,7 @@ class HttpServerCommand extends Command
     {
         $pid = $this->getPid();
 
-        if (! $this->isRunning($pid)) {
+        if (!$this->isRunning($pid)) {
             $this->error("Failed! There is no swoole_http_server process running.");
             exit(1);
         }
@@ -143,7 +149,7 @@ class HttpServerCommand extends Command
     {
         $pid = $this->getPid();
 
-        if (! $this->isRunning($pid)) {
+        if (!$this->isRunning($pid)) {
             $this->error("Failed! There is no swoole_http_server process running.");
             exit(1);
         }
@@ -152,7 +158,7 @@ class HttpServerCommand extends Command
 
         $isRunning = $this->killProcess($pid, SIGUSR1);
 
-        if (! $isRunning) {
+        if (!$isRunning) {
             $this->error('> failure');
             exit(1);
         }
@@ -193,7 +199,7 @@ class HttpServerCommand extends Command
     {
         $this->action = $this->argument('action');
 
-        if (! in_array($this->action, ['start', 'stop', 'restart', 'reload', 'infos'])) {
+        if (!in_array($this->action, ['start', 'stop', 'restart', 'reload', 'infos'])) {
             $this->error("Invalid argument '{$this->action}'. Expected 'start', 'stop', 'restart', 'reload' or 'infos'.");
             exit(1);
         }
@@ -207,13 +213,13 @@ class HttpServerCommand extends Command
      */
     protected function isRunning($pid)
     {
-        if (! $pid) {
+        if (!$pid) {
             return false;
         }
 
         Process::kill($pid, 0);
 
-        return ! swoole_errno();
+        return !swoole_errno();
     }
 
     /**
@@ -232,7 +238,7 @@ class HttpServerCommand extends Command
             $start = time();
 
             do {
-                if (! $this->isRunning($pid)) {
+                if (!$this->isRunning($pid)) {
                     break;
                 }
 
@@ -258,9 +264,9 @@ class HttpServerCommand extends Command
         $path = $this->getPidPath();
 
         if (file_exists($path)) {
-            $pid = (int) file_get_contents($path);
+            $pid = (int)file_get_contents($path);
 
-            if (! $pid) {
+            if (!$pid) {
                 $this->removePidFile();
             } else {
                 $this->pid = $pid;

@@ -5,6 +5,8 @@ www/.DS_Store
 www/*.log
 www/bootstrap
 www/install_files
+swoole-ext
+swoole-src
 !www/storage/app/media/system/plugins
 !www/storage/app/uploads/public
 www/storage/app/uploads
@@ -13,6 +15,7 @@ www/storage/cms
 www/storage/logs
 www/storage/temp
 www/storage/framework
+www/vendor
 www/vendor/*
 !www/vendor/october
 !www/vendor/swooletw

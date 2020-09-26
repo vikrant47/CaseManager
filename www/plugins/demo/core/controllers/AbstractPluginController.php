@@ -483,11 +483,12 @@ class AbstractPluginController extends Controller
         return $widget;
     }
 
-    public function getNavigations()
+    public function getNavigations($position = 'sidebar')
     {
-        // return SessionCache::instance()->get('NAVIGATION', function () {
+        // return SessionCache::instance()->get('NAVIGATION'.$position, function () {
         $query = Navigation::where([
             'active' => true,
+            'position' => $position,
         ])->orderBy('sort_order', 'ASC');
         $this->viewExtendQuery(Navigation::class, $query);
         $navigations = $query->get()->map(function ($navigation) {
@@ -723,12 +724,12 @@ class AbstractPluginController extends Controller
             $pagination = ['offset' => 0];
         }
         $modelClass = Request::input('model');
-        $filter = Request::input('where');
+        $where = Request::input('where');
         $attributes = Request::input('attributes');
         $query = QueryFilter::getQuery([
             'table' => $table,
             'model' => $modelClass,
-            'filter' => $filter,
+            'where' => $where,
             'attributes' => $attributes,
             'pagination' => new QueryPagination($pagination),
         ]);

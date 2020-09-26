@@ -5,11 +5,16 @@ use System\Classes\SettingsManager;
 
 $mySettings = System\Classes\SettingsManager::instance()->listItems('mysettings');
 $profileImage = $this->user->getAvatarThumb(40, ['mode' => 'crop', 'extension' => 'png']);
+$navigations = $this->getNavigations('topnav');
 ?>
 <a href="#" class="sidebar-toggler">
     <i data-feather="menu"></i>
 </a>
 <div class="navbar-content">
+    <ul class="navbar-nav programable-navbar">
+        <?= $this->makeLayoutPartial('partials/navigation', ['navigations' => $navigations]) ?>
+    </ul>
+
     <form class="search-form">
         <div class="input-group">
             <div class="input-group-prepend">
@@ -20,7 +25,7 @@ $profileImage = $this->user->getAvatarThumb(40, ['mode' => 'crop', 'extension' =
             <input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
         </div>
     </form>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav user-settings">
         <!--<li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -257,3 +262,4 @@ $profileImage = $this->user->getAvatarThumb(40, ['mode' => 'crop', 'extension' =
         </li>
     </ul>
 </div>
+

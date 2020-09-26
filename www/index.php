@@ -44,6 +44,7 @@ Config::setConsoleLive(true);  // status: true or false
 Performance::point();
 
 Config::setQueryLog(true);*/
+// return phpinfo();
 $kernel = $app->make('Illuminate\Contracts\Http\Kernel');
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()

@@ -2,32 +2,31 @@
 <script>
     (function (containerId) {
         const $container = $('#' + containerId);
-        const list = new EngineList('<div/>', {
-            controller: '<?=$modelRecord->controller?>'
-        });
         var associationConfig = <?=json_encode($this->getAssociationConfig())?>;
-        let filter = null;
-        if (associationConfig.relation === 'HasMany') {
-            list.setRestQuery({
-                where: {
-                    [associationConfig.key]: associationConfig.targetFieldValue,
-                }
-            });
-        } else if (associationConfig.relation === 'BelongsToMany') {
-            list.setRestQuery({
-                include: [{
-                    attributes: ['id'],
-                    key: associationConfig.key,
-                    model: associationConfig.throughModel,
-                    targetKey: associationConfig.targetKey || 'id',
-                    'alias': 'through',
-                    where: {
-                        [associationConfig.otherKey]: associationConfig.targetFieldValue,
-                    }
-                }],
-            });
-        }
-        list.render({container: '#' + containerId});
-        $container.parents('.widget-field').find('label').eq(0).hide();
+        /*const list = new EngineList('<div/>', {
+            controller: '<?=str_replace('\\', '/', $modelRecord->controller)?>'
+        });
+
+        list.setRestQuery(associationConfig.query);
+        list.render({
+            container: '#' + containerId,
+            iframe: {
+                width: '100%',
+                height: '500px;',
+            }
+        });
+        $container.parents('.widget-field').find('label').eq(0).hide();*/
+        const iframe = new engine.ui.Iframe({
+            container: '#' + containerId,
+            url: {
+                type: 'list',
+                controller: '<?=str_replace('\\', '/', $modelRecord->controller)?>',
+                params: {
+                    query: associationConfig.query,
+                    iframeMode: true,
+                    renderBody: true,
+                },
+            }
+        }).render();
     })('<?= $id ?>');
 </script>

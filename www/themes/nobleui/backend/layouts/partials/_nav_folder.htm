@@ -8,7 +8,9 @@ if ($folder->type !== 'folder') { ?>
     '' ?>">
         <a href="<?= $folder->generated_url ?>"
            class="nav-link nav-type-link"
+           title="<?= $folder->tooltip ?>"
            data-type="<?= $folder->type ?>"
+           data-handler="<?= base64_encode($folder->script ?? 'null') ?>"
         >
             <span class="link-title"> <?= e(trans($folder->label)) ?></span>
             <i class="link-icon <?= $folder->icon ?>"></i>
@@ -21,7 +23,9 @@ if ($folder->type !== 'folder') { ?>
         <a class="nav-link nav-type-folder" data-toggle="collapse" href="#<?= $id ?>" role="button"
            aria-expanded="false"
            aria-controls="emails"
+           title="<?= $folder->tooltip ?>"
            data-type="<?= $folder->type ?>"
+           data-handler="<?= base64_encode($folder->script ?? 'null') ?>"
         >
             <i class="link-icon <?= $folder->icon ?>"></i>
             <span class="link-title"><?= e(trans($folder->label)) ?></span>
@@ -41,10 +45,12 @@ if ($folder->type !== 'folder') { ?>
                             '' ?>">
                                 <a href="<?= $sideItem->generated_url ?>"
                                    class="nav-link nav-type-link"
+                                   title="<?= $sideItem->tooltip ?>"
+                                   data-handler="<?= base64_encode($sideItem->script ?? 'null') ?>"
                                    data-type="<?= $sideItem->type ?>"
                                 >
                                     <span
-                                            class="link-title"> <?= e(trans($sideItem->label)) ?></span>
+                                        class="link-title"> <?= e(trans($sideItem->label)) ?></span>
                                     <i class="link-icon <?= $sideItem->icon ?>"></i>
                                 </a>
                             </li>

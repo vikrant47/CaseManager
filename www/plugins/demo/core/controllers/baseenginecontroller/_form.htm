@@ -4,9 +4,8 @@ $modelRecord = $this->getModelRecord();
 ?>
 <div class="engine-form-wrapper">
     <script>
-        $(document).ready(function () {
+        (function () {
             window.me = {id:<?=$this->user->id?>};
-            $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
             var actions = <?=$formActions ? $formActions->toJSON() : '[]'?>;
             var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
             modelRecord.definition = <?=$modelRecord ? json_encode($modelRecord->getDefinition()) : null?>;
@@ -18,8 +17,12 @@ $modelRecord = $this->getModelRecord();
             Engine.instance.ui.setTenant(tenant);
             var form = EngineForm.getCurrentForm();
             form.setFormModel(formModel);
-            form.addActions(actions);
-        });
+            $(document).ready(function () {
+                $('.form-buttons .loading-indicator-container').prepend('<div class="actions"></div>').find('>button').remove();
+                form.addActions(actions);
+            });
+
+        })();
     </script>
     <?= $this->makePartial($view, ['contents' => $contents]); ?>
 </div>

@@ -21,15 +21,15 @@ class SeedDemoTenantTenants implements Seedable
                                                                                         "active"=> 1,
                                                                                         "brand_setting_logo"=> "",
                                                                                         "default_theme"=> "",
+                                                                                        "brand_setting_app_name"=> null,
+                                                                                        "brand_setting_app_tagline"=> null,
+                                                                                        "brand_setting_favicon"=> null,
                                                                                         "created_at"=>"2020-08-29 15:59:45",
                                                                                         "updated_at"=>"2020-08-29 15:59:49",
                                                                                         "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> 0,
                                                                                         "engine_application_id"=>"801c3e91-8be6-402e-9872-69d6ea29fe06",
-                                                                                        "brand_setting_favicon"=> null,
-                                                                                        "brand_setting_app_name"=> null,
-                                                                                        "brand_setting_app_tagline"=> null
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0
                             ]             ]);
         }
 

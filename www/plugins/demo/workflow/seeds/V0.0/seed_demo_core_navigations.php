@@ -37,7 +37,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 5
+                                                                                        "sort_order"=> 5,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "created_at"=>"2020-05-09 15:13:06",
@@ -62,7 +65,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 5
+                                                                                        "sort_order"=> 5,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ]             ]);
         }
 

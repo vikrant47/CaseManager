@@ -18,6 +18,8 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->integer('version')->nullable()->default(0);
             $table->string('label');
             $table->string('icon');
+            $table->string('tooltip')->default(null);
+            $table->string('position')->default('sidebar');
             $table->string('type');
             $table->boolean('active');
             $table->string('name');
@@ -27,6 +29,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->string('list')->nullable();
             $table->string('form')->nullable();
             $table->string('view')->nullable();
+            $table->text('script')->nullable();
             $table->uuid('uipage_id')->nullable();
             $table->uuid('record_id')->nullable();
             $table->uuid('dashboard_id')->nullable();
@@ -36,7 +39,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->integer('sort_order');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_core_navigations');
