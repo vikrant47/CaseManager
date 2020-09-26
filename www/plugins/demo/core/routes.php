@@ -5,6 +5,9 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
+Route::match(['get', 'put', 'post', 'delete'], '/system/php/info', function (Request $request) {
+    return phpinfo();
+});
 Route::match(['get', 'put', 'post', 'delete'], '/tenant/{tenantCode}/{wildcard}', function (Request $request, $tenantCode, $wildcard) {
     // $wildcard = '/' . $wildcard;
     $tenant = \Demo\Tenant\Models\Tenant::where(['code' => $tenantCode, 'active' => true])->first();

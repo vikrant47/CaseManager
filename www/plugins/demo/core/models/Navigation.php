@@ -117,6 +117,9 @@ class Navigation extends Model
     {
         $tenant = request()->attributes->get('tenant');
         $generatedUrl = '';//$navigation->generated_url;
+        if ($navigation->type === 'script'){
+            return '#';
+        }
         if ($navigation->type === 'url') {
             $generatedUrl = TenantService::generateUrl($tenant, NavigationController::class) . '/embed/' . $navigation->id;
         } else if ($navigation->type === 'dashboard') {

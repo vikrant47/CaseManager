@@ -67,6 +67,7 @@ class Plugin extends PluginBase
         App::register('\Demo\Core\Services\CommandServiceProvider');
         App::register('\Demo\Core\Services\EventHandlerServiceProvider');
         App::register('\Demo\Core\Services\FormFieldService');
+        App::register('\Demo\Core\Services\SwooleServiceProvider');
     }
 
     /**

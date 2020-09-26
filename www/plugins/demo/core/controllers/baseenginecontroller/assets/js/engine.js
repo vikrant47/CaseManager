@@ -87,7 +87,10 @@ Object.assign(Engine.prototype, {
             _this.onDocumentReady();
         });
     },
-    evalFunction: function (fun, scope, args) {
+    evalFunction: function (script) {
+        return Function('return ' + script)();
+    },
+    evalScript: function (fun, scope, args) {
         scope = scope || this;
         let keys = Object.keys(args);
         return (Function('return function(' + keys.join(',') + '){\n' +
@@ -124,7 +127,7 @@ Object.assign(Engine.prototype, {
                     dataActionConfig[dataActionKey].call(
                         this,
                         data[dataActionKey] === 'true'
-                        || _this.evalFunction(data[dataActionKey], this, data)
+                        || _this.evalScript(data[dataActionKey], this, data)
                     );
                 }
             }

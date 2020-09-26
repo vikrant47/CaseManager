@@ -37,7 +37,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
                                                                                         "created_at"=>"2020-05-09 15:07:01",
@@ -62,7 +65,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"03b0b444-c20a-4480-8549-67bab2b176f3",
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"139f4d70-98d4-492d-84ab-99eabb2e2865",
                                                                                         "created_at"=>"2020-05-09 15:11:36",
@@ -87,7 +93,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 4
+                                                                                        "sort_order"=> 4,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
                                                                                         "created_at"=>"2020-05-09 11:33:08",
@@ -112,7 +121,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"03b0b444-c20a-4480-8549-67bab2b176f3",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"05e13a5f-d931-4328-84ed-100acf537174",
                                                                                         "created_at"=> null,
@@ -137,7 +149,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"6dfa72ba-9fe1-4d81-aed2-dc945f0ef502",
                                                                                         "created_at"=>"2020-05-09 11:48:03",
@@ -162,7 +177,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 0
+                                                                                        "sort_order"=> 0,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"85546192-4e1a-4dea-95fe-b8ebcc758b0d",
                                                                                         "created_at"=> null,
@@ -187,7 +205,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 7
+                                                                                        "sort_order"=> 7,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"336cc40e-0020-4959-9dfe-190f6907c80c",
                                                                                         "created_at"=> null,
@@ -212,7 +233,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 9
+                                                                                        "sort_order"=> 9,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"1e73e4d1-f263-4744-a537-ab2d22d90e3c",
                                                                                         "created_at"=> null,
@@ -237,7 +261,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 0
+                                                                                        "sort_order"=> 0,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"15264ae2-d1b0-43f7-87fe-eda08a884bb0",
                                                                                         "created_at"=> null,
@@ -262,7 +289,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"be77fb91-0909-40fe-8e23-7d094adcbd09",
                                                                                         "created_at"=> null,
@@ -287,7 +317,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 3
+                                                                                        "sort_order"=> 3,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"be560371-c757-49b5-b1e1-8497c9150a3e",
                                                                                         "created_at"=> null,
@@ -312,7 +345,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"1b4aebe2-66f2-4984-a3d0-f69c3cfb90fc",
                                                                                         "created_at"=> null,
@@ -337,7 +373,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"139f4d70-98d4-492d-84ab-99eabb2e2865",
-                                                                                        "sort_order"=> 0
+                                                                                        "sort_order"=> 0,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"0ca975a1-b152-4289-a5aa-2d4b2453a95a",
                                                                                         "created_at"=> null,
@@ -362,7 +401,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"139f4d70-98d4-492d-84ab-99eabb2e2865",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"84398af6-6036-43ed-b987-8f11ffb7057e",
                                                                                         "created_at"=> null,
@@ -387,7 +429,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 0
+                                                                                        "sort_order"=> 0,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"2b9c5851-39a1-4c32-9bb9-b51958fdeee8",
                                                                                         "created_at"=> null,
@@ -412,7 +457,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 8
+                                                                                        "sort_order"=> 8,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"bd770875-29b9-496e-afe0-44d8f777c4ed",
                                                                                         "created_at"=> null,
@@ -437,7 +485,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 6
+                                                                                        "sort_order"=> 6,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"a5c69317-c4fd-4618-a92b-cff6a1f1da2f",
                                                                                         "created_at"=> null,
@@ -462,7 +513,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 8
+                                                                                        "sort_order"=> 8,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"8d1a72d6-e7b4-49d0-a0b0-c1d1be57f044",
                                                                                         "created_at"=> null,
@@ -487,7 +541,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"35e67af3-a99d-4be8-bfc9-ee75e912d8b1",
                                                                                         "created_at"=> null,
@@ -512,7 +569,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 4
+                                                                                        "sort_order"=> 4,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"bae0b847-c210-4b91-89f7-e1f4117b1987",
                                                                                         "created_at"=>"2020-05-16 06:47:21",
@@ -537,7 +597,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 15
+                                                                                        "sort_order"=> 15,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"9ee0e7d0-43e9-4d8a-be8a-9d0606437956",
                                                                                         "created_at"=>"2020-05-16 14:51:56",
@@ -562,7 +625,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 5
+                                                                                        "sort_order"=> 5,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"fcfcb7de-516c-415a-8ddd-3b7392c3c37f",
                                                                                         "created_at"=> null,
@@ -587,7 +653,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 13
+                                                                                        "sort_order"=> 13,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"3004557a-c1b4-41c6-b4e3-3d0a4de1a52a",
                                                                                         "created_at"=> null,
@@ -612,7 +681,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 5
+                                                                                        "sort_order"=> 5,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"1836974e-0ea8-438a-9054-d4a42692cf94",
                                                                                         "created_at"=>"2020-05-09 15:27:27",
@@ -637,7 +709,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 3
+                                                                                        "sort_order"=> 3,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"47fe334b-d0da-4d4f-b9a7-9b9a6e59b1b2",
                                                                                         "created_at"=> null,
@@ -662,7 +737,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"a29b979e-dcf0-4fef-9b58-cbaccecedc92",
                                                                                         "created_at"=> null,
@@ -687,7 +765,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
-                                                                                        "sort_order"=> 3
+                                                                                        "sort_order"=> 3,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"a541a960-fc25-48a7-b498-8443b2715bf5",
                                                                                         "created_at"=> null,
@@ -712,7 +793,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 7
+                                                                                        "sort_order"=> 7,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"bcd5d88e-e08f-47e0-a377-5761c8cc3754",
                                                                                         "created_at"=> null,
@@ -737,7 +821,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 7
+                                                                                        "sort_order"=> 7,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"530b5272-a8a3-43cd-af15-8ea6a8a7c822",
                                                                                         "created_at"=> null,
@@ -762,7 +849,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 5
+                                                                                        "sort_order"=> 5,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"016140c0-a7f9-11ea-a09c-77440aa34325",
                                                                                         "created_at"=> null,
@@ -787,7 +877,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
                                                                                         "created_at"=> null,
@@ -812,7 +905,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 3
+                                                                                        "sort_order"=> 3,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"03b0b444-c20a-4480-8549-67bab2b176f3",
                                                                                         "created_at"=>"2020-05-09 15:23:48",
@@ -837,7 +933,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"3280cd3c-8a95-4683-b661-7846bc9fdf03",
                                                                                         "created_at"=>"2020-05-09 15:16:49",
@@ -862,7 +961,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"7ffd7ee5-deb5-41af-876f-6bac700a35be",
-                                                                                        "sort_order"=> 6
+                                                                                        "sort_order"=> 6,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"7ffd7ee5-deb5-41af-876f-6bac700a35be",
                                                                                         "created_at"=>"2020-05-09 15:28:15",
@@ -887,7 +989,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 10
+                                                                                        "sort_order"=> 10,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"6adbdf35-29f5-468f-8d0d-4e3003f298d0",
                                                                                         "created_at"=> null,
@@ -912,7 +1017,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"211608c8-5b81-47bf-8757-8c39889924b7",
                                                                                         "created_at"=> null,
@@ -937,7 +1045,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
-                                                                                        "sort_order"=> 0
+                                                                                        "sort_order"=> 0,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"1f280b8a-9dbd-4b58-a295-59c0740b315d",
                                                                                         "created_at"=> null,
@@ -962,7 +1073,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 4
+                                                                                        "sort_order"=> 4,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"93b19b14-276d-4422-b2d4-3d4fb869de0c",
                                                                                         "created_at"=> null,
@@ -987,7 +1101,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"06df55ff-f6c2-4b71-8493-c4b74f75b640",
                                                                                         "created_at"=> null,
@@ -1012,7 +1129,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 6
+                                                                                        "sort_order"=> 6,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"d044112f-9928-4685-b9c5-acb536b15a84",
                                                                                         "created_at"=> null,
@@ -1037,7 +1157,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 6
+                                                                                        "sort_order"=> 6,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"5bec7e75-a7ff-48f0-8c90-03123697af4d",
                                                                                         "created_at"=> null,
@@ -1062,7 +1185,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"ede0b65d-15ca-43a2-ab83-11643c154327",
-                                                                                        "sort_order"=> 4
+                                                                                        "sort_order"=> 4,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"5080c46a-c9d4-45dc-93d0-8835e4731f4d",
                                                                                         "created_at"=> null,
@@ -1087,7 +1213,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"e149e54e-ddcb-4b1b-b80b-2c37755ad953",
                                                                                         "created_at"=> null,
@@ -1112,7 +1241,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 3
+                                                                                        "sort_order"=> 3,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"dcbc468c-12c8-4f92-b57c-6f05d092b1c1",
                                                                                         "created_at"=> null,
@@ -1137,7 +1269,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 12
+                                                                                        "sort_order"=> 12,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"7b2d4011-b582-457e-8549-637b0a61f93b",
                                                                                         "created_at"=> null,
@@ -1162,7 +1297,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 11
+                                                                                        "sort_order"=> 11,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"485ac274-9ef0-45fa-87f7-1e77a8f6b234",
                                                                                         "created_at"=> null,
@@ -1187,7 +1325,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
-                                                                                        "sort_order"=> 10
+                                                                                        "sort_order"=> 10,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"88a02697-074c-4dfc-9e7c-5dd964901e21",
                                                                                         "created_at"=>"2020-05-09 15:26:31",
@@ -1212,7 +1353,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"529c983e-43eb-4c04-b89f-24ac65ab4356",
                                                                                         "created_at"=>"2020-05-16 06:02:40",
@@ -1237,7 +1381,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"03b0b444-c20a-4480-8549-67bab2b176f3",
-                                                                                        "sort_order"=> 2
+                                                                                        "sort_order"=> 2,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"04bef9e0-e9c7-11ea-aea2-d1385f85ca82",
                                                                                         "created_at"=>"2020-08-29 07:12:37",
@@ -1262,7 +1409,10 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 1
+                                                                                        "sort_order"=> 1,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
                             ] ,            [
                                                                             "id"=>"468f6180-fa7e-11ea-bde6-f10820793c8e",
                                                                                         "created_at"=>"2020-09-19 13:44:44",
@@ -1287,7 +1437,38 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "widget_id"=> null,
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 8
+                                                                                        "sort_order"=> 8,
+                                                                                        "position"=>"sidebar",
+                                                                                        "script"=> null,
+                                                                                        "tooltip"=> null
+                            ] ,            [
+                                                                            "id"=>"c0d96860-ffd0-11ea-9efe-21afb4e6d919",
+                                                                                        "created_at"=>"2020-09-26 08:17:44",
+                                                                                        "updated_at"=>"2020-09-26 13:31:07",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "label"=> "",
+                                                                                        "icon"=>"oc-icon-th",
+                                                                                        "type"=>"script",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"switch-apps",
+                                                                                        "description"=>"<p>Switch the apps&nbsp;</p>",
+                                                                                        "url"=> "",
+                                                                                        "model"=> null,
+                                                                                        "list"=> "",
+                                                                                        "form"=> null,
+                                                                                        "view"=> "",
+                                                                                        "uipage_id"=> null,
+                                                                                        "record_id"=> null,
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "parent_id"=> null,
+                                                                                        "sort_order"=> 0,
+                                                                                        "position"=>"topnav",
+                                                                                        "script"=>"function(event,scope){\r\n    const \$this = \$(this);\r\n    const \$container = \$this.parent();\r\n    debugger\r\n    if(\$container.find('.app-list').length===0){\r\n        const template = '<div class=\"app-list\">'+\r\n                            '{{~it.apps :app:index}}' +\r\n                                '<div class=\"app\" id = \"{{=app.id}}\">'+\r\n                                    '<a class=\"app-link\"><i class = \"{{=app.icon}}\"/> <span>{{=app.label}}<span></a>'+\r\n                                '</div>'+\r\n                            '{{~}}'+\r\n                         '</div>'\r\n        new engine.data.RestQuery('Demo.Core.Models.EngineApplication').findAll({\r\n            where:{\r\n                active:true,\r\n            },\r\n        }).then(function(apps){\r\n            const \$template = \$(doT.template(template)({apps: apps}));\r\n            \$template.appendTo(\$container).find('.app-link').click(function(){\r\n                Engine.instance.ui.request('setUserApplication',{\r\n                    data:{\r\n                        id: \$(this).aprent().prop('id'),\r\n                    },\r\n                });\r\n            });\r\n            Popper.createPopper(\$this.get(0), \$template.get(0));\r\n            \$this.click();\r\n        });\r\n    }\r\n}",
+                                                                                        "tooltip"=>"Applications"
                             ]             ]);
         }
 

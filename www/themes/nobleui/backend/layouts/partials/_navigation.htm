@@ -1,0 +1,38 @@
+<?php
+$counter = 0;
+foreach ($navigations as $navigation) {
+    $isActive = false;
+    $mainMenuId = $navigation->name . '-' . $navigation->id;
+    if ($navigation->type === 'seperator') {
+        ?>
+        <li class="nav-item nav-category"
+            title="<?= $navigation->tooltip ?>"
+            data-handler="<?= base64_encode($navigation->script ?? 'null') ?>"
+        <?= $navigation->label ?>
+        </li>
+        <?php
+        $folders = $navigation->children;
+        if (!empty($folders)) {
+            foreach ($folders as $folder) {
+                print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $folder]);
+            }
+        }
+    } else {
+        print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $navigation]);
+    }
+} ?>
+<script>
+    $('.nav-link').click(function (e) {
+        let handler = $(this).data('handler');
+        if (handler) {
+            handler = atob(handler);
+        }
+        if (handler && handler !== 'null') {
+            e.preventDefault();
+            const callback = Engine.instance.evalFunction(handler);
+            callback.call(this,e);
+            return false;
+        }
+    })
+</script>
+

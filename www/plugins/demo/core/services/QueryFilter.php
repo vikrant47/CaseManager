@@ -51,7 +51,7 @@ class QueryFilter extends QueryBuilderParser
         /**@var $pagination QueryPagination */
         $pagination = $options['pagination'];
         $modelClass = $options['model'];
-        $rules = $options['filter'];
+        $rules = $options['where'];
         $attributes = $options['attributes'];
         if (empty($table)) {
             $modelInstance = new $modelClass();

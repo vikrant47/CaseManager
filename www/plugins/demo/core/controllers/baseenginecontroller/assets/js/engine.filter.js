@@ -651,8 +651,8 @@ let ParentFilter = Engine.instance.define('engine.ParentFilter', {
 });
 
 let RestQuery = Engine.instance.define('engine.data.RestQuery', {
-    constructor: function (query) {
-        this.query = query;
+    constructor: function (model) {
+        this.model = model;
     },
     static: {
         queryParser: new Filter(),
@@ -713,16 +713,30 @@ let RestQuery = Engine.instance.define('engine.data.RestQuery', {
         }
 
     },
-    select: function (ajaxOptions) {
-        options.operation = 'select';
-        return this.execute(ajaxOptions);
+    findOne: function (query, ajaxOptions) {
+        query.offeset = 1;
+        return this.execute(query, ajaxOptions).then(function (result) {
+            if (result.length > 0) {
+                return result[0];
+            }
+            return result;
+        });
     },
-    execute: function (ajaxOptions) {
+    findAll: function (query, ajaxOptions) {
+        return this.execute(query, ajaxOptions);
+    },
+    select: function (query, ajaxOptions) {
+        options.operation = 'select';
+        return this.execute(query, ajaxOptions);
+    },
+    execute: function (query, ajaxOptions = {}) {
+        let q = Object.assign(this.static.toQueryBuilderRules(query), {
+            model: this.model,
+        });
+        q.model = q.model.replaceAll('.', '\\');
         return Engine.instance.ui.request('onQueryData', Object.assign({
-            data: {
-                query: this.static.toQueryBuilderRules(this.query),
-            },
+            data: q,
             loadingContainer: ajaxOptions.loadingContainer || '.page-content',
-        }, ajaxOptions || {}));
+        }, ajaxOptions));
     }
 });

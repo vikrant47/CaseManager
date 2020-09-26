@@ -12,23 +12,39 @@ fields:
             field: label
             type: slug
         type: text
-    description:
-        label: Description
-        size: ''
+    tooltip:
+        label: Tooltip
         span: auto
-        type: richeditor
+        required: 1
+        type: text
+        preset:
+            field: label
     active:
         label: Active
         span: auto
         default: 1
         required: 1
         type: switch
+    description:
+        label: Description
+        size: ''
+        span: full
+        type: richeditor
     icon:
         label: Icon
         span: auto
         required: 1
         type: dropdown
         tab: Config
+    position:
+        label: Position
+        span: auto
+        required: 1
+        type: dropdown
+        tab: Config
+        options:
+            sidebar: Sidebar
+            topnav: Top Navigation
     type:
         label: Type
         span: auto
@@ -44,6 +60,7 @@ fields:
             widget: Widget
             uipage: UI Page
             url: URL
+            script: Script
     parent:
         label: Parent
         nameFrom: label
@@ -135,6 +152,19 @@ tabs:
                 field: type
                 condition: 'value[url] || value[list] || value[form]'
 
+        script:
+            label: Script
+            span: full
+            required: 1
+            type: codeeditor
+            language: javascript
+            tab: Config
+            dependsOn:
+                - type
+            trigger:
+                action: show
+                field: type
+                condition: 'value[script]'
         dashboard:
             label: Dashboard
             nameFrom: name

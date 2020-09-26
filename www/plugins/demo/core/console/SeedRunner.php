@@ -89,7 +89,17 @@ class SeedRunner extends Command
                 'code' => $applicationCode,
             ])->orderBy('name', 'ASC')->get();
         } else {
-            $applications = Db::table('demo_core_applications')->where('active', true)->orderBy('name', 'ASC')->get();
+            $applications = Db::table('demo_core_applications')->where([
+                'active' => true,
+            ])->orderBy('name', 'ASC')->get();
+            if ($applications->count() === 0) {
+                $applications = Db::table('system_plugin_versions')->get()->map(function ($plugin) {
+                    return (object)[
+                        'plugin_code' => $plugin->code,
+                        'name' => $plugin->code,
+                    ];
+                });
+            }
         }
         $this->runApplicationSeeds($applications, $version, $operation, $clean);
     }
@@ -273,7 +283,7 @@ class SeedRunner extends Command
                                  and columns.column_name = 'engine_application_id'");
         $pluggableTables = $this->collectionToArray($pluggableTables, 'table_name');
         $applicationTables = Db::select("SELECT table_name
-                                FROM information_schema.tables 
+                                FROM information_schema.tables
                                 where table_name iLike '" . $tableNamespace . "%' and table_name not in (:pluggableTables)",
             ['pluggableTables' => join("','", $pluggableTables)]);
         $applicationTables = $this->collectionToArray($applicationTables, 'table_name');
