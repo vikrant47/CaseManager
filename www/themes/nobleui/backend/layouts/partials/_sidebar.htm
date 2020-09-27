@@ -24,11 +24,12 @@ $navigations = $this->getNavigations('sidebar');
 </div>
 <div class="sidebar-search">
     <div class="input-group">
-        <input autocomplete="off" id="nav-search-box" type="text" class="form-control icon search growable" id="navbarForm" placeholder="Search Navigation">
+        <input autocomplete="off" id="nav-search-box" type="text" class="form-control icon search growable"
+               id="navbarForm" placeholder="Search Navigation">
     </div>
 </div>
 <div class="sidebar-body">
     <ul class="nav">
-        <?=$this->makeLayoutPartial('partials/navigation', ['navigations' => $navigations])?>
+        <?= $this->makeLayoutPartial('partials/navigation', ['navigations' => $navigations, 'dropdown' => false]) ?>
     </ul>
 </div>

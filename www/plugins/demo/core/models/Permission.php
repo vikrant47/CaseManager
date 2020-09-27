@@ -27,7 +27,7 @@ class Permission extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_permissions';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
@@ -40,7 +40,7 @@ public $incrementing = false;
     ];
 
     public $belongsTo = [
-        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
     ];
 
@@ -53,7 +53,7 @@ public $incrementing = false;
         ]
     ];
 
-    public $jsonable = ['columns'];
+    public $jsonable = ['columns','condition'];
 
     public $attachAuditedBy = true;
 

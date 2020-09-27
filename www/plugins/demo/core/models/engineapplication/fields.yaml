@@ -5,13 +5,33 @@
 fields:
     name:
         label: Name
-        commentAbove: name
         span: auto
+    code:
+        label: Code
+        span: auto
+        type: text
+        preset:
+            field: name
+            type: slug
+    icon:
+        label: Icon
+        span: auto
+        required: 1
+        type: dropdown
+        tab: Config
 
     description:
         label: Description
         type: textarea
         size: tiny
+
+    home_nav:
+        label: Home Page
+        nameFrom: label
+        descriptionFrom: description
+        span: auto
+        type: relation
+        required: 1
 
     plugin:
         label: Plugin

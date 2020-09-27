@@ -49,6 +49,19 @@ $(document).ready(function () {
             }
         }
     });
+    /**Scriptable navbars*/
+    $('.nav-link[data-type="script"]').click(function (e) {
+        let handler = $(this).data('handler');
+        if (handler) {
+            handler = atob(handler);
+        }
+        if (handler && handler !== 'null') {
+            e.preventDefault();
+            const callback = Engine.instance.evalFunction(handler);
+            callback.call(this, e);
+            return false;
+        }
+    });
     $(document).on('click',
         '.nav-type-link,.rowlink td, .engine-form-wrapper .form-buttons a,.breadcrumb-item a',
         function () {

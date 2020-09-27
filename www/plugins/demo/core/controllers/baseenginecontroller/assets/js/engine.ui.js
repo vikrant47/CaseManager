@@ -332,6 +332,16 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
     getCurrentControllerUrl: function () {
         return this.getCurrentControllerUrl(this.currentModel.controller);
     },
+    navigateToApp: function (appCode) {
+        return this.request('onNavigateApplication', {
+            data: {
+                code: appCode,
+            },
+            loadingContainer: '.main-wrapper',
+        }).then(function (application) {
+            window.location.href = application.url;
+        });
+    },
     request: function (handler, options) {
         if (typeof handler !== 'string') {
             options = handler;
@@ -496,9 +506,13 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
             $(document).trigger('engine.list.open', list);
         },
         open: function (options) {
+            const _this = this;
             return new EngineList('<div/>', {
                 controller: options.controller,
-            }).render(Object.assign({container: '#page-content'}, options));
+            }).render(Object.assign({container: '#page-content'}, options)).then(function (list) {
+                _this.afterOpen(list);
+                return list;
+            });
         },
     },
     setRestQuery: function (restQuery) {

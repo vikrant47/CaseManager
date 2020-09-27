@@ -6,11 +6,16 @@ namespace Demo\Core\Models;
 
 use Backend\Models\User;
 use Backend\Models\UserGroup;
+use Backend\Models\UserPreference;
+use Backend\Traits\PreferenceMaker;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Services\SecurityService;
+use Config;
 
 class CoreUser extends User
 {
+    use PreferenceMaker;
+
     /**
      * Relations
      */
@@ -28,6 +33,14 @@ class CoreUser extends User
             'otherKey' => 'role_id'
         ]
     ];
+    /**@var User */
+    protected $backendUser;
+
+    /**@param $backendUser User */
+    public function setUser($backendUser)
+    {
+        $this->backendUser = $backendUser;
+    }
 
     public function beforeCreate()
     {
@@ -37,8 +50,37 @@ class CoreUser extends User
 
     public function beforeSave()
     {
-        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(),$this->roles,$this->engine_application_id);
+        ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->engine_application_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
         parent::beforeSave();
+    }
+
+    /**@param $application EngineApplication */
+    public function setUserApplication($application)
+    {
+        $this->putUserPreference('engine_application_id', $application->id);
+    }
+
+    /**unique id for pref table*/
+    public function getId()
+    {
+        return 'engine';
+    }
+
+    /**@return string Application id for the current user */
+    public function getUserApplicationId()
+    {
+        $appId = $this->getUserPreference('engine_application_id');
+        if (empty($appId)) {
+            $appId = EngineSettings::get('default_application_id');
+        }
+        return $appId;
+    }
+
+    public function saveSetting($settings = [])
+    {
+        foreach ($settings as $key => $setting) {
+            $this->putUserPreference($key, $setting);
+        }
     }
 }

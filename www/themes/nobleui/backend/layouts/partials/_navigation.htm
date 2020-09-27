@@ -7,32 +7,20 @@ foreach ($navigations as $navigation) {
         ?>
         <li class="nav-item nav-category"
             title="<?= $navigation->tooltip ?>"
+            id="<?= $navigation->id ?>"
             data-handler="<?= base64_encode($navigation->script ?? 'null') ?>"
+            data-type="<?= $navigation->tooltip ?>" ,
         <?= $navigation->label ?>
         </li>
         <?php
         $folders = $navigation->children;
         if (!empty($folders)) {
             foreach ($folders as $folder) {
-                print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $folder]);
+                print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $folder, 'dropdown' => $dropdown]);
             }
         }
     } else {
-        print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $navigation]);
+        print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $navigation, 'dropdown' => $dropdown]);
     }
 } ?>
-<script>
-    $('.nav-link').click(function (e) {
-        let handler = $(this).data('handler');
-        if (handler) {
-            handler = atob(handler);
-        }
-        if (handler && handler !== 'null') {
-            e.preventDefault();
-            const callback = Engine.instance.evalFunction(handler);
-            callback.call(this,e);
-            return false;
-        }
-    })
-</script>
 

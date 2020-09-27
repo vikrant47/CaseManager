@@ -228,13 +228,41 @@ a {
 .navbar .navbar-content {
     padding-left: 10px;
 }
-.navbar .navbar-content .navbar-nav.programable-navbar .nav-item .nav-link{
+
+.navbar .navbar-content .navbar-nav .navbar .navbar-content .top-navbar .nav-item .nav-link {
     color: #fff;
 }
-.navbar .navbar-content .navbar-nav.programable-navbar [class*=" oc-icon-"]:before{
+
+.navbar .navbar-content .navbar-nav .navbar .navbar-content .top-navbar [class*=" oc-icon-"]:before {
     font-size: 15px;
 }
-.navbar-content .programable-navbar {
+
+.navbar .navbar-content .navbar-nav .nav-item .nav-link:hover, .navbar .navbar-content .navbar-nav .nav-item .nav-link[aria-expanded="true"] {
+    color: #FFFFFF;
+}
+.navbar .navbar-content .top-navbar.navbar-nav>.nav-item>.nav-link{
+    color: #FFFFFF;
+}
+.navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item{
+    margin-left: 0px;
+    margin-right: 0px;
+    display: contents;
+}
+.navbar .navbar-content .top-navbar .dropdown-menu {
+    background-color: #3a3f51;
+    position: absolute;
+    top: 44px;
+    left: -8px;
+    border: black;
+    font-size: 11px;
+}
+
+.navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item a {
+    padding: 10px;
+    border: none;
+}
+
+.navbar .navbar-content .top-navbar {
     width: 87%;
 }
 
@@ -432,7 +460,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     color: #a6a8b1;
 }
 
-.sidebar .sidebar-body .nav .nav-item .nav-link:hover .link-icon {
+.navbar .navbar-content .top-navbar .nav-item .nav-link:hover .link-icon, .sidebar .sidebar-body .nav .nav-item .nav-link:hover .link-icon {
     color: #fff;
 }
 
@@ -440,6 +468,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     color: #fff;
 }
 
+.navbar .navbar-content .top-navbar nav .nav-item:hover .nav-link,
 .sidebar .sidebar-body .nav .nav-item:hover .nav-link,
 .sidebar .sidebar-body .nav .nav-item .nav-link,
 .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link,
@@ -451,11 +480,12 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     height: 35px;
 }
 
-
+.navbar .navbar-content .top-navbar .nav .nav-item .nav-link[aria-expanded="true"],
 .sidebar .sidebar-body .nav .nav-item .nav-link[aria-expanded="true"] {
     color: #fff;
 }
 
+.navbar .navbar-content .top-navbar .nav .nav-item:hover .nav-link:hover,
 .sidebar .sidebar-body .nav .nav-item:hover .nav-link:hover,
 .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover,
 .sidebar .sidebar-body .nav .nav-item .nav-link:hover {
@@ -464,14 +494,20 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
     background-color: #2e3344;
 }
 
+.navbar .navbar-content .top-navbar .nav .nav-item .nav-link, .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link,
 .sidebar .sidebar-body .nav .nav-item .nav-link, .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link {
     color: #a6a8b1;
-    padding: 15px 20px;
-    font-size: 14px;
+    padding: 8px 20px;
+    font-size: 12px;
     border: .001rem solid #2e3344;
+    width: 100%;
 }
 
 
+.navbar .navbar-content .top-navbar .nav .nav-item.active > .nav-link,
+.navbar .navbar-content .top-navbar .nav.sub-menu .nav-item .nav-link:hover,
+.navbar .navbar-content .top-navbar .nav.sub-menu .nav-item .nav-link:hover .link-icon,
+.navbar .navbar-content .top-navbar .nav .nav-item.active > .nav-link .link-icon,
 .sidebar .sidebar-body .nav .nav-item.active > .nav-link,
 .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover,
 .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link:hover .link-icon,
@@ -481,16 +517,20 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 }
 
 
+.navbar .navbar-content .top-navbar .nav.sub-menu .nav-item .nav-link::before,
 .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link::before {
     display: none;
 }
 
+.navbar .navbar-content .top-navbar .nav.sub-menu .nav-item .nav-link.active,
+.navbar .navbar-content .top-navbar .nav.sub-menu .nav-item .nav-link.active .link-icon,
 .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link.active,
 .sidebar .sidebar-body .nav.sub-menu .nav-item > .nav-link.active .link-icon {
     color: #fff;
     background-color: #2e3344;
 }
 
+.navbar .navbar-content .top-navbar .nav .nav-item.active .nav-link .link-icon,
 .sidebar .sidebar-body .nav .nav-item.active .nav-link .link-icon {
     color: #a6a8b1;
 }

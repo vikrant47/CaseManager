@@ -11,8 +11,8 @@ $navigations = $this->getNavigations('topnav');
     <i data-feather="menu"></i>
 </a>
 <div class="navbar-content">
-    <ul class="navbar-nav programable-navbar">
-        <?= $this->makeLayoutPartial('partials/navigation', ['navigations' => $navigations]) ?>
+    <ul class="navbar-nav top-navbar">
+        <?= $this->makeLayoutPartial('partials/navigation', ['navigations' => $navigations, 'dropdown' => true]) ?>
     </ul>
 
     <form class="search-form">

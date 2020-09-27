@@ -4,9 +4,10 @@ use \Demo\Core\Models\Navigation;
 
 $id = $folder->name . '-' . $folder->id;
 if ($folder->type !== 'folder') { ?>
-    <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
+    <li class="nav-item <?= $dropdown ? 'dropdown-toggle' : '' ?><?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
     '' ?>">
         <a href="<?= $folder->generated_url ?>"
+           id="<?= $folder->id ?>"
            class="nav-link nav-type-link"
            title="<?= $folder->tooltip ?>"
            data-type="<?= $folder->type ?>"
@@ -20,38 +21,50 @@ if ($folder->type !== 'folder') { ?>
 <?php } else {
     ?>
     <li class="nav-item <?= Navigation::isActiveNavigation($folder) ? 'active' : '' ?>">
-        <a class="nav-link nav-type-folder" data-toggle="collapse" href="#<?= $id ?>" role="button"
+        <a class="nav-link nav-type-folder <?= $dropdown ? 'dropdown-toggle' : '' ?>"
+            <?= $dropdown ? 'data-toggle="dropdown"' : 'data-toggle="collapse"' ?>
+           aria-haspopup="true"
+           href="#<?= $id ?>" role="button"
            aria-expanded="false"
            aria-controls="emails"
            title="<?= $folder->tooltip ?>"
            data-type="<?= $folder->type ?>"
+           id="<?= $folder->id ?>"
            data-handler="<?= base64_encode($folder->script ?? 'null') ?>"
         >
             <i class="link-icon <?= $folder->icon ?>"></i>
             <span class="link-title"><?= e(trans($folder->label)) ?></span>
             <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
-        <div class="collapse" id="<?= $id ?>">
+        <div
+            class="<?= $dropdown ? 'dropdown-menu' : 'collapse' ?>"
+            id="<?= $id ?>"
+            <?= $dropdown ? 'aria-labelledby="' . $folder->id . '"' : '' ?>
+        >
             <ul class="nav sub-menu nested">
                 <?php
                 $sideMenuItems = $folder->children;
                 if (!empty($sideMenuItems)) {
                     foreach ($sideMenuItems as $sideItem) {
                         if ($sideItem->type === 'folder') {
-                            print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $sideItem]);
+                            print $this->makeLayoutPartial('partials/nav_folder', ['folder' => $sideItem, 'dropdown' => $dropdown]);
                         } else {
                             ?>
                             <li class="nav-item <?= /*BackendMenu::isSideMenuItemActive($item) ? 'active' :*/
                             '' ?>">
                                 <a href="<?= $sideItem->generated_url ?>"
-                                   class="nav-link nav-type-link"
+                                   class="nav-link nav-type-link <?= $dropdown ? 'dropdown-toggle' : '' ?>"
+                                    <?= $dropdown ? 'data-toggle="dropdown"' : 'data-toggle="collapse"' ?>
+                                   aria-haspopup="true"
+                                   aria-expanded="false"
                                    title="<?= $sideItem->tooltip ?>"
                                    data-handler="<?= base64_encode($sideItem->script ?? 'null') ?>"
                                    data-type="<?= $sideItem->type ?>"
+                                   id="<?= $sideItem->id ?>"
                                 >
+                                    <i class="link-icon <?= $sideItem->icon ?>"></i>
                                     <span
                                         class="link-title"> <?= e(trans($sideItem->label)) ?></span>
-                                    <i class="link-icon <?= $sideItem->icon ?>"></i>
                                 </a>
                             </li>
                         <?php }
