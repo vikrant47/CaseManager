@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds universal d */
+/**Auto generated using cmd _: php artisan core:run-seeds engine d */
 class SeedDemoCoreIframes implements Seedable
 {
     /**This will be executed to install seeds*/
