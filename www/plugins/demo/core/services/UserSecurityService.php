@@ -173,13 +173,16 @@ class UserSecurityService
 
     /**
      * This will merge all the permissions condition with or operator
+     * @param $permissions
+     * @param bool $eval weather or not evaluate the given condition expression
+     * @return array
      */
-    public function mergeConditions($permissions)
+    public function mergeConditions($permissions, $eval = true)
     {
-        $condition = $permissions->map(function ($permission) {
+        $conditions = $permissions->forEach(function ($permission) {
             return $permission->condition;
-        })->implode(' ) or ( ');
-        return '(' . TwigEngine::eval($condition, []) . ')';
+        })->toArray();
+        return QueryFilter::mergeConditions($conditions, 'OR', $eval);
     }
 
     public function flushCache()

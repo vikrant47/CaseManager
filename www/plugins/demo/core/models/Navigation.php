@@ -37,6 +37,7 @@ class Navigation extends Model
 
     public $attachAuditedBy = true;
     public $belongsTo = [
+        'nav_application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'nav_application_id'],
         'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
         'parent' => [Navigation::class, 'key' => 'parent_id'],
         'dashboard' => [Dashboard::class, 'key' => 'dashboard_id'],
@@ -117,7 +118,7 @@ class Navigation extends Model
     {
         $tenant = request()->attributes->get('tenant');
         $generatedUrl = '';//$navigation->generated_url;
-        if ($navigation->type === 'script'){
+        if ($navigation->type === 'script') {
             return '#';
         }
         if ($navigation->type === 'url') {

@@ -11,6 +11,12 @@ columns:
         label: backend::lang.user.role.code_field
         searchable: true
 
+    home_nav[label]:
+        label: Home Page
+
+    plugin[code]:
+        label: Plugin
+
     description:
         label: backend::lang.user.role.description_field
         searchable: yes

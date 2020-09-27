@@ -18,6 +18,8 @@ use Demo\Core\Classes\Ifs\IPluginMiddleware;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
+use Demo\Core\Models\CoreUser;
+use Demo\Core\Models\EngineApplication;
 use Demo\Core\Models\FormAction;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\ListAction;
@@ -33,12 +35,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 use October\Rain\Database\Builder;
 use October\Rain\Exception\ApplicationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use System\Classes\PluginManager;
 use Db;
 use Response;
 use timgws\QueryBuilderParser;
 use View;
-
+use Config;
 
 class AbstractPluginController extends Controller
 {
@@ -398,7 +401,7 @@ class AbstractPluginController extends Controller
         if (!empty($restQuery)) {
             $list['list']->bindEvent('list.extendQuery', function ($queryBuilder) use ($restQuery) {
                 $restQuery = new RestQuery($queryBuilder, $restQuery);
-                $restQuery->apply();
+                $restQuery->apply(false);
             });
         }
         return $this->makeView('index', true, $runParams ? $runParams['params'] : []);
@@ -485,11 +488,16 @@ class AbstractPluginController extends Controller
 
     public function getNavigations($position = 'sidebar')
     {
+        $user = new CoreUser();
+        $appId = $user->getUserApplicationId();
         // return SessionCache::instance()->get('NAVIGATION'.$position, function () {
         $query = Navigation::where([
             'active' => true,
             'position' => $position,
-        ])->orderBy('sort_order', 'ASC');
+        ])->where(function ($query) use ($appId) {
+            $query->where('nav_application_id', EngineApplication::UNIVERSAL_APP_ID)
+                ->orWhere('nav_application_id', $appId);
+        })->orderBy('sort_order', 'ASC');
         $this->viewExtendQuery(Navigation::class, $query);
         $navigations = $query->get()->map(function ($navigation) {
             return ModelUtil::toPojo($navigation, ['model_ref'], [
@@ -735,5 +743,24 @@ class AbstractPluginController extends Controller
         ]);
         $this->queryDataExtendQuery($query);
         return $query->get();
+    }
+
+    /**This will save the current app in user pref and return the home url*/
+    public function onNavigateApplication()
+    {
+        return Db::transaction(function () {
+            $code = Request::input('code');
+            if (empty($code)) {
+                throw new BadRequestHttpException('Empty code');
+            }
+            $application = EngineApplication::where('code', $code)->first();
+            if (empty($application)) {
+                throw new BadRequestHttpException('Invalid application code ' . $code);
+            }
+            $user = new CoreUser();
+            $user->setUserApplication($application);
+            $application->url = $application->getUrl();
+            return $application;
+        });
     }
 }

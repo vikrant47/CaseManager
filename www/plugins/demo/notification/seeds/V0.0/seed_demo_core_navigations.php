@@ -40,7 +40,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 3,
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
-                                                                                        "tooltip"=> null
+                                                                                        "tooltip"=> null,
+                                                                                        "nav_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef"
                             ] ,            [
                                                                             "id"=>"9ab44ba4-d108-437f-8025-b999fcffa10c",
                                                                                         "created_at"=>"2020-05-17 06:17:22",
@@ -68,7 +69,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 4,
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
-                                                                                        "tooltip"=> null
+                                                                                        "tooltip"=> null,
+                                                                                        "nav_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef"
                             ]             ]);
         }
 

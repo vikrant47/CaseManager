@@ -40,7 +40,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 5,
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
-                                                                                        "tooltip"=> null
+                                                                                        "tooltip"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ] ,            [
                                                                             "id"=>"01f868fa-2ac6-42c1-b5e0-030df343dd31",
                                                                                         "created_at"=> null,
@@ -68,7 +69,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
-                                                                                        "tooltip"=> null
+                                                                                        "tooltip"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ] ,            [
                                                                             "id"=>"c3984be1-820c-4cc8-a675-742815313468",
                                                                                         "created_at"=>"2020-05-18 04:33:41",
@@ -96,7 +98,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
-                                                                                        "tooltip"=> null
+                                                                                        "tooltip"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ] ,            [
                                                                             "id"=>"6f85afbb-3858-4387-b4ce-9f70cf19ed20",
                                                                                         "created_at"=>"2020-05-13 04:37:14",
@@ -124,7 +127,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 0,
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
-                                                                                        "tooltip"=> null
+                                                                                        "tooltip"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ] ,            [
                                                                             "id"=>"81d30c41-fd09-4757-a6f9-e92463faf8bc",
                                                                                         "created_at"=>"2020-05-13 04:38:17",
@@ -152,7 +156,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "sort_order"=> 4,
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
-                                                                                        "tooltip"=> null
+                                                                                        "tooltip"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ]             ]);
         }
 

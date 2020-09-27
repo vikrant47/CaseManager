@@ -5,8 +5,10 @@ namespace Demo\Core\Services;
 
 
 use Demo\Core\Classes\Beans\TwigEngine;
+use Demo\Core\Models\Permission;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\UnauthorizedException;
 
 class RestQuery
 {
@@ -25,6 +27,7 @@ class RestQuery
         if (!empty($model)) {
             $this->json['model'] = $model;
         }
+        $this->json['required'] = true;
     }
 
     public static function evalJSON($json)
@@ -36,9 +39,23 @@ class RestQuery
         return json_decode($json, true);
     }
 
-    public function apply()
+    public function apply($evalPermissions = true)
     {
-        return $this->parse($this->json, $this->queryBuilder);
+        return $this->parse($this->json, $this->queryBuilder, $evalPermissions);
+    }
+
+    public function evaluatePermissions($modeInstance, $queryBuilder, $json, $permission = 'READ')
+    {
+        $userSecurityService = UserSecurityService::getInstance();
+        $permission = $userSecurityService->getRowLevelPermissions($modeInstance, Permission::READ);
+        if (array_key_exists('required', $json) && $json['required'] === true && $permission->count() === 0) {
+            throw new UnauthorizedException(' You don\'t have permission on ' . $modeInstance->table);
+        }
+        if (!$userSecurityService->hasAstrixPermission($permission)) {
+            $permissionConditions = $userSecurityService->mergeConditions($permission, false);
+            $queryFilter = new QueryFilter($queryBuilder, $permissionConditions, $json['alias'] ?? $modeInstance->table, $json['fields'] ?? null, true);
+            $queryFilter->applyFilter();
+        }
     }
 
     /***Parse filter and build query
@@ -47,10 +64,13 @@ class RestQuery
      * @return Builder
      * @throws \timgws\QBParseException
      */
-    public function parse($json, $queryBuilder)
+    public function parse($json, $queryBuilder, $evalPermissions = true)
     {
         $sourceModelInstance = new $json['model']();
         $sourceTable = $sourceModelInstance->getTable();
+        if ($evalPermissions === true) {
+            $this->evaluatePermissions($sourceModelInstance, $queryBuilder, $json, Permission::READ);
+        }
         if (array_key_exists('include', $json) && is_array($json['include'])) {
             foreach ($json['include'] as $join) {
                 $includedModel = new $join['model']();

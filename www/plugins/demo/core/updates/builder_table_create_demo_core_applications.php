@@ -12,6 +12,8 @@ class BuilderTableCreateDemoCoreApplications extends Migration
             $table->engine = 'InnoDB';
             $table->uuid('id');
             $table->string('name');
+            $table->uuid('home_nav_id');
+            $table->string('icon');
             $table->string('code');
             $table->string('plugin_code');
             $table->boolean('active')->default(true);
@@ -24,7 +26,7 @@ class BuilderTableCreateDemoCoreApplications extends Migration
             $table->primary(['id']);
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_core_applications');

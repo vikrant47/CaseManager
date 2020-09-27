@@ -96,6 +96,23 @@ class QueryFilter extends QueryBuilderParser
         $this->eval = $eval;
     }
 
+    /**
+     * This will merge all the permissions condition with or operator
+     * @param $conditions
+     * @param bool $eval weather or not evaluate the given condition expression
+     * @return array
+     */
+    public static function mergeConditions($conditions, $operator = 'AND', $eval = true)
+    {
+        if ($eval === true) {
+            $conditions = json_decode(TwigEngine::eval(json_encode($conditions), []), true);
+        }
+        return [
+            'condition' => $operator,
+            'rules' => $conditions,
+        ];
+    }
+
     public function __toString()
     {
         return $this->sql();

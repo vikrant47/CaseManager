@@ -67,9 +67,16 @@ fields:
         span: auto
         type: relation
         emptyOption: 'Please Select'
+    nav_application:
+        label: Navigation Application
+        nameFrom: name
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
     application:
         label: Application
-        nameFrom: code
+        nameFrom: name
         descriptionFrom: version
         span: auto
         required: 1

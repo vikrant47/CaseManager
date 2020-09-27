@@ -7,6 +7,7 @@ use Demo\Core\Classes\Helpers\StringInput;
 use Demo\Core\Classes\Helpers\StringOutput;
 use Demo\Core\Classes\Utils\ReflectionUtil;
 use Demo\Core\Models\EngineApplication;
+use Demo\Core\Models\EngineSettings;
 use Demo\Core\Models\PluginVersions;
 use Demo\Core\Plugin;
 use Illuminate\Console\Command;
@@ -102,6 +103,12 @@ class SeedRunner extends Command
             }
         }
         $this->runApplicationSeeds($applications, $version, $operation, $clean);
+    }
+
+    public function addDefaultProperties()
+    {
+
+        EngineSettings::set(['default_application_id' => 'df07f9b4-26c1-40ca-ba1f-1b77b1692b83']);
     }
 
     /**

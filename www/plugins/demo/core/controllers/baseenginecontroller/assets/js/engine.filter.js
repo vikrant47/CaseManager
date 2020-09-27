@@ -687,7 +687,7 @@ let RestQuery = Engine.instance.define('engine.data.RestQuery', {
                 if (!where || Object.keys(where).length === 0) {
                     where = {$and: []};
                 } else if (!where.$and) {
-                    where = {$and: [query]};
+                    where = {$and: [where]};
                 }
                 query.where = where;
                 /**merging include queries*/
