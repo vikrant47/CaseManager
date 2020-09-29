@@ -50,20 +50,24 @@ $(document).ready(function () {
         }
     });
     /**Scriptable navbars*/
-    $('.nav-link[data-type="script"]').click(function (e) {
-        let handler = $(this).data('handler');
-        if (handler) {
-            handler = atob(handler);
-        }
-        if (handler && handler !== 'null') {
-            e.preventDefault();
-            const callback = Engine.instance.evalFunction(handler);
-            callback.call(this, e);
-            return false;
+    $('.nav-link[data-type="script"]').click(Engine.instance.ui.navigationLinkHandler);
+    /****Top nav outside click**/
+    $(document).mouseup(function (e) {
+        let $container = $('.top-navbar li.nav-item').filter(function () {
+            return $(this).find('.dropdown-menu').hasClass('show')
+        });
+
+        // if the target of the click isn't the container nor a descendant of the container
+        if ($container.length && !$container.is(e.target) && $container.has(e.target).length === 0) {
+            $container.find('.dropdown-menu').removeClass('show').addClass('hide');
         }
     });
     $(document).on('click',
-        '.nav-type-link,.rowlink td, .engine-form-wrapper .form-buttons a,.breadcrumb-item a',
+        '.nav-type-link:not([data-type="script"]),' +
+        '.rowlink td, ' +
+        '.engine-form-wrapper ' +
+        '.form-buttons a,' +
+        '.breadcrumb-item a',
         function () {
             let $link = $(this);
             if ($(this).is('td')) {

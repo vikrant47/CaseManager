@@ -122,6 +122,21 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
 
         return obj;
     },
+    /**Nav link click handler*/
+    navigationLinkHandler: function (e) {
+        let handler = $(this).data('handler');
+        if (handler) {
+            handler = atob(handler);
+        }
+        if (handler && handler !== 'null') {
+            e.preventDefault();
+            if (typeof handler === 'string') {
+                handler = Engine.instance.evalFunction(handler);
+            }
+            handler.call(this, e);
+            return false;
+        }
+    },
     makeQueryStringURL: function (param, value) {
         if (typeof param === 'string') {
             let name = param;
