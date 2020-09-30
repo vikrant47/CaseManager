@@ -41,7 +41,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
                                                                                         "tooltip"=> null,
-                                                                                        "nav_application_id"=>"801c3e91-8be6-402e-9872-69d6ea29fe06"
+                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ]             ]);
         }
 

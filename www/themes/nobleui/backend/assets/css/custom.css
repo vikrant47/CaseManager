@@ -240,6 +240,12 @@ a {
 .navbar .navbar-content .navbar-nav .nav-item .nav-link:hover, .navbar .navbar-content .navbar-nav .nav-item .nav-link[aria-expanded="true"] {
     color: #FFFFFF;
 }
+.navbar .navbar-content .top-navbar.navbar-nav .nav-item .dropdown-toggle::after{
+    display: none;
+}
+.navbar .navbar-content .top-navbar.navbar-nav .nav-item .nav-link svg{
+    display: none;
+}
 .navbar .navbar-content .top-navbar.navbar-nav>.nav-item>.nav-link{
     color: #FFFFFF;
 }

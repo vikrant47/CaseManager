@@ -16,21 +16,21 @@ class SeedDemoCoreNavigations implements Seedable
             [
                                                                             "id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
                                                                                         "created_at"=>"2020-05-09 15:09:59",
-                                                                                        "updated_at"=>"2020-05-16 14:23:03",
+                                                                                        "updated_at"=>"2020-09-30 04:40:44",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 0,
                                                                                         "label"=>"Notification",
-                                                                                        "icon"=>"oc-icon-folder",
+                                                                                        "icon"=>"oc-icon-envelope-o",
                                                                                         "type"=>"folder",
                                                                                         "active"=> 1,
                                                                                         "name"=>"notification",
                                                                                         "description"=> "",
                                                                                         "url"=> "",
                                                                                         "model"=> null,
-                                                                                        "list"=> null,
+                                                                                        "list"=> "",
                                                                                         "form"=> "",
-                                                                                        "view"=> null,
+                                                                                        "view"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
@@ -39,9 +39,9 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "parent_id"=> null,
                                                                                         "sort_order"=> 3,
                                                                                         "position"=>"sidebar",
-                                                                                        "script"=> null,
-                                                                                        "tooltip"=> null,
-                                                                                        "nav_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef"
+                                                                                        "script"=> "",
+                                                                                        "tooltip"=> "",
+                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
                                                                             "id"=>"9ab44ba4-d108-437f-8025-b999fcffa10c",
                                                                                         "created_at"=>"2020-05-17 06:17:22",
@@ -70,7 +70,7 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "position"=>"sidebar",
                                                                                         "script"=> null,
                                                                                         "tooltip"=> null,
-                                                                                        "nav_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef"
+                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ]             ]);
         }
 
