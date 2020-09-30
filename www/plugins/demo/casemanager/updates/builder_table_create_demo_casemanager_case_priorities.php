@@ -16,12 +16,12 @@ class BuilderTableCreateDemoCasemanagerCasePriorities extends Migration
             $table->string('name');
             $table->integer('active');
             $table->string('description');
-            $table->bigInteger('duration');
+            $table->integer('value');
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_casemanager_case_priorities');

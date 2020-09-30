@@ -40,10 +40,10 @@ fields:
         label: 'Case Version'
         span: auto
         type: text
-    tat_duration:
-        label: 'Tat Duration'
+    ttl:
+        label: 'TTL'
         span: auto
-        type: durationwidget
+        type: datepicker
 tabs:
     fields:
         workflow_state:

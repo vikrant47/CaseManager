@@ -9,10 +9,12 @@ fields:
         size: ''
         span: auto
         type: textarea
-    duration:
-        label: Duration
+    value:
+        label: value
         span: auto
         type: number
+        min: 1
+        max: 10
     active:
         label: Active
         span: auto

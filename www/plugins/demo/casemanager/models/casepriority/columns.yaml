@@ -15,8 +15,8 @@ columns:
     description:
         label: description
         type: text
-    duration:
-        label: duration
+    value:
+        label: Value
         type: text
     created_by_id:
         label: created_by_id

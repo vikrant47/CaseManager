@@ -1,14 +1,18 @@
 body {
     font-family: "Overpass", sans-serif;
     font-size: 1.3rem;
-    font-weight: 400;
+    font-weight: 200;
     line-height: .75;
     -webkit-font-smoothing: antialiased;
 }
 
+.btn, .fc .fc-button, .swal2-modal .swal2-actions button, .wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions .disabled a {
+    font-weight: 100;
+}
+
 /**href*/
 a {
-    color: rgba(0, 0, 0, 0.6);
+    color: black;
 }
 
 .main-wrapper {
@@ -64,8 +68,8 @@ a {
 }
 
 .form-control, select, .email-compose-fields .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
-    border: 1px solid #e8ebf1;
-    font-weight: 400;
+    border: 1px solid #b5b6b8;
+    font-weight: 100;
     font-size: 1.375rem;
     padding: 2px 5px;
     width: 100%;
@@ -93,7 +97,7 @@ a {
 }
 
 .field-repeater .field-repeater-add-item > a {
-    font-weight: 400;
+    font-weight: 100;
 }
 
 .control-tabs > div.tab-content > div.tab-pane.active.layout-cell {
@@ -104,7 +108,7 @@ a {
 .custom-switch > span, .custom-switch input:checked ~ span {
     background-color: rgb(188, 189, 202);
     font-size: 1.175rem;
-    font-weight: 400;
+    font-weight: 100;
 }
 
 .custom-switch input:checked ~ span {
@@ -185,7 +189,7 @@ a {
 
 .control-tabs.primary-tabs > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a {
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 100;
 }
 
 
@@ -240,20 +244,25 @@ a {
 .navbar .navbar-content .navbar-nav .nav-item .nav-link:hover, .navbar .navbar-content .navbar-nav .nav-item .nav-link[aria-expanded="true"] {
     color: #FFFFFF;
 }
-.navbar .navbar-content .top-navbar.navbar-nav .nav-item .dropdown-toggle::after{
+
+.navbar .navbar-content .top-navbar.navbar-nav .nav-item .dropdown-toggle::after {
     display: none;
 }
-.navbar .navbar-content .top-navbar.navbar-nav .nav-item .nav-link svg{
+
+.navbar .navbar-content .top-navbar.navbar-nav .nav-item .nav-link svg {
     display: none;
 }
-.navbar .navbar-content .top-navbar.navbar-nav>.nav-item>.nav-link{
+
+.navbar .navbar-content .top-navbar.navbar-nav > .nav-item > .nav-link {
     color: #FFFFFF;
 }
-.navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item{
+
+.navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item {
     margin-left: 0px;
     margin-right: 0px;
     display: contents;
 }
+
 .navbar .navbar-content .top-navbar .dropdown-menu {
     background-color: #3a3f51;
     position: absolute;
@@ -278,6 +287,10 @@ a {
 
 .navbar-content .user-settings {
     width: 3%;
+}
+
+.marktext {
+    background: #eeda16;
 }
 
 /***list**/
@@ -365,6 +378,7 @@ a {
 
 table.table.data tbody td, table.table.data tbody th {
     padding: 10px 10px;
+    color: #0a0a0a;
 }
 
 /**Buttons*/
@@ -382,9 +396,11 @@ table.table.data tbody tr td, table.table.data tbody tr th {
 
 table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-data).selected td {
     background-color: #eaeaea !important;
-    color: #666;
+    color: #0a0a0a;
 }
-
+table.table.data thead td >a, table.table.data thead th >a, table.table.data thead td >span, table.table.data thead th >span{
+    color: #0a0a0a;
+}
 .form-control.icon.search {
     background-position: right -84px;
     float: right;

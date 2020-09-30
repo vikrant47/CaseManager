@@ -2,6 +2,7 @@
 
 use Model;
 use Backend\Models\User;
+
 /**
  * Model
  */
@@ -14,12 +15,13 @@ class CasePriority extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_casemanager_case_priorities';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
      */
     public $rules = [
+        'value' => 'required|min:1|max:10',
     ];
 
     public $belongsTo = [

@@ -118,14 +118,18 @@
                     if (force ||
                         (url && url.toLowerCase().endsWith($navElement.attr('href').toLowerCase())) ||
                         (searchText && $navElement.text().toLowerCase().indexOf(searchText.toLowerCase()) > -1)) {
-                        $(".nav-item").removeClass('active')
-                        $(".nav-link").removeClass('active')
-                        // $navElement.parents('.nav-item').last().addClass('active');
+                        $(".sidebar .nav-item").removeClass('active')
+                        $(".sidebar .nav-link").removeClass('active')
+                        $navElement.parents('.nav-item').show();
                         if ($navElement.parents('.sub-menu').length) {
-                            $navElement.parents('.collapse').siblings().attr('aria-expanded', 'true');
-                            $navElement.parents('.collapse').addClass('show');
+                            $navElement.parents('.collapse').siblings().attr('aria-expanded', 'true').show();
+                            $navElement.parents('.collapse').addClass('show').show();
                             if (!searchText) {
-                                $navElement.addClass('active');
+                                $navElement.addClass('active').show();
+                            } else {
+                                const text = $navElement.find('.link-title').text().trim();
+                                const matchIndex = text.toLowerCase().indexOf(searchText.toLowerCase());
+                                $navElement.find('.link-title').html(text.substring(0, matchIndex) + '<span class="marktext">' + text.substring(matchIndex, searchText.length) + '</span>' + text.substring(matchIndex + searchText.length));
                             }
                         }
                         /*if ($navElement.parents('.submenu-item').length && !searchText) {
@@ -138,7 +142,7 @@
 
 
         var currentPageUrl = location.href;
-        $('.nav li a,.horizontal-menu .nav li a').each(function () {
+        $('.sidebar .nav li a,.horizontal-menu .nav li a').each(function () {
             markActiveNav($(this), currentPageUrl);
         }).click(function () {
             markActiveNav($(this), currentPageUrl, null, true);
@@ -149,13 +153,14 @@
             function (e) {
                 const searchText = e.target.value;
                 if (searchText.trim().length === 0) {
-                    $(".nav-item").show();
+                    $(".sidebar .nav-item").show().find('.link-title').text(function () {
+                        return $(this).text();
+                    });
                 } else {
-                    $(".collapse").removeClass('show')
-                    $(".nav-item").removeClass('active').hide();
-                    $(".nav-link").removeClass('active')
-                    $(".nav-link").attr('aria-expanded', 'false');
-                    $('.nav li a', sidebar).each(function () {
+                    $(".sidebar .collapse").removeClass('show')
+                    $(".sidebar .nav-item").removeClass('active').hide();
+                    $(".sidebar .nav-link").removeClass('active').attr('aria-expanded', 'false');
+                    $('.sidebar .nav li a').each(function () {
                         markActiveNav($(this), null, searchText);
                     });
                 }
