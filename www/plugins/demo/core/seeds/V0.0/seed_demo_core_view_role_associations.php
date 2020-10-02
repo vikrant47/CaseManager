@@ -25,17 +25,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
-                                                                            "id"=>"84113c20-a7f9-11ea-899f-e92a613db19b",
-                                                                                        "created_at"=>"2020-06-06 13:27:49",
-                                                                                        "updated_at"=>"2020-06-06 13:27:49",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> 0,
-                                                                                        "record_id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
-                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
-                            ] ,            [
                                                                             "id"=>"7d1832a7-efbf-4316-88c1-e06fbddb1d5a",
                                                                                         "created_at"=>"2020-06-06 13:24:09",
                                                                                         "updated_at"=>"2020-06-06 13:24:09",
@@ -318,17 +307,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 0,
                                                                                         "record_id"=>"016140c0-a7f9-11ea-a09c-77440aa34325",
-                                                                                        "model"=>"Demo\Core\Models\Navigation",
-                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
-                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
-                            ] ,            [
-                                                                            "id"=>"2d7d5443-4949-487e-a5f7-8c0d043c6f33",
-                                                                                        "created_at"=>"2020-06-06 13:24:09",
-                                                                                        "updated_at"=>"2020-06-06 13:24:09",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> 0,
-                                                                                        "record_id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
                                                                                         "model"=>"Demo\Core\Models\Navigation",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
@@ -659,6 +637,28 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 0,
                                                                                         "record_id"=>"139f4d70-98d4-492d-84ab-99eabb2e2865",
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                            ] ,            [
+                                                                            "id"=>"51069360-0486-11eb-9c4f-01a5fa938eda",
+                                                                                        "created_at"=>"2020-10-02 08:07:29",
+                                                                                        "updated_at"=>"2020-10-02 08:07:29",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "record_id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                            ] ,            [
+                                                                            "id"=>"51077ea0-0486-11eb-ba6e-a7fec1ebe651",
+                                                                                        "created_at"=>"2020-10-02 08:07:29",
+                                                                                        "updated_at"=>"2020-10-02 08:07:29",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "record_id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
                                                                                         "model"=>"Demo\Core\Models\Navigation",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"

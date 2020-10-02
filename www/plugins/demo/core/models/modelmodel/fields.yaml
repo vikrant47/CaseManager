@@ -1,15 +1,19 @@
 fields:
     name:
         label: Name
-        span: auto
+        span: full
         type: text
     description:
         label: Description
         size: ''
-        span: auto
+        span: full
         type: richeditor
     model:
         label: 'Model'
+        span: auto
+        type: text
+    controller:
+        label: 'Controller'
         span: auto
         type: text
     application:
@@ -19,10 +23,6 @@ fields:
         span: auto
         required: 1
         type: relation
-    controller:
-        label: 'Controller'
-        span: auto
-        type: text
     viewable:
         label: 'Viewable'
         span: auto
@@ -43,3 +43,19 @@ tabs:
             tab: 'Audit Settings'
             attributes:
                 multiple: true
+        created_by:
+            label: 'Created By'
+            nameFrom: email
+            descriptionFrom: email
+            span: auto
+            readOnly: 1
+            type: relation
+            tab: System
+        updated_by:
+            label: 'Updated By'
+            nameFrom: email
+            descriptionFrom: email
+            span: auto
+            readOnly: 1
+            type: relation
+            tab: System

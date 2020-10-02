@@ -143,6 +143,7 @@
 
         var currentPageUrl = location.href;
         $('.sidebar .nav li a,.horizontal-menu .nav li a').each(function () {
+            $(this).data('label', $(this).text().trim());
             markActiveNav($(this), currentPageUrl);
         }).click(function () {
             markActiveNav($(this), currentPageUrl, null, true);
@@ -154,7 +155,7 @@
                 const searchText = e.target.value;
                 if (searchText.trim().length === 0) {
                     $(".sidebar .nav-item").show().find('.link-title').text(function () {
-                        return $(this).text();
+                        return $(this).parent().data('label');
                     });
                 } else {
                     $(".sidebar .collapse").removeClass('show')

@@ -459,7 +459,7 @@ class AbstractPluginController extends Controller
         $wrap = $request->get('wrap', 'false');
         $context = $request->get('context', 'create');
         $recordId = $request->get('recordId');
-        $formConfig = $request->get('config', []);
+        $formConfig = $request->get('formConfig', []);
         return $this->buildForm($formConfig, $context, $recordId, $wrap);
     }
 

@@ -158,22 +158,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "id"=>"62203afe-185b-40c3-b0fd-d263f1341e0e",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Event Handler",
-                                                                                        "model"=>"Demo\Core\Models\EventHandler",
-                                                                                        "controller"=>"Demo\Core\Controllers\EventHandlerController",
-                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
-                                                                                        "audit"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\" * \"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1
-                            ] ,            [
                                                                             "id"=>"887d85ea-3f6e-4a62-9f5d-b5a138962b68",
                                                                                         "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
@@ -592,12 +576,12 @@ class SeedDemoCoreModels implements Seedable
                             ] ,            [
                                                                             "id"=>"ff41c880-fa72-11ea-89c2-23b667e263a9",
                                                                                         "created_at"=>"2020-09-19 12:24:01",
-                                                                                        "updated_at"=>"2020-09-19 13:45:10",
+                                                                                        "updated_at"=>"2020-10-02 08:16:47",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Webhook Endpoint",
                                                                                         "model"=>"Demo\Core\Models\WebhookEndpoint",
-                                                                                        "controller"=>"Demo\Core\Controllers\WebhookEndpointControllers",
+                                                                                        "controller"=>"Demo\Core\Controllers\WebhookEndpointController",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
@@ -605,6 +589,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=>"[\"*\"]",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false
+                            ] ,            [
+                                                                            "id"=>"62203afe-185b-40c3-b0fd-d263f1341e0e",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2020-10-02 08:15:18",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Event Handler",
+                                                                                        "model"=>"Demo\Core\Models\EventHandler",
+                                                                                        "controller"=>"Demo\Core\Controllers\EventHandlers",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "audit"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=> 0,
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> 1
                             ]             ]);
         }
 
