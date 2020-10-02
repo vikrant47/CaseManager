@@ -1,14 +1,18 @@
 body {
     font-family: "Overpass", sans-serif;
-    font-size: 1.3rem;
-    font-weight: 400;
+    font-size: 13px;
+    font-weight: normal;
     line-height: .75;
     -webkit-font-smoothing: antialiased;
 }
 
+.btn, .fc .fc-button, .swal2-modal .swal2-actions button, .wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions .disabled a {
+    font-weight: 100;
+}
+
 /**href*/
 a {
-    color: rgba(0, 0, 0, 0.6);
+    color: black;
 }
 
 .main-wrapper {
@@ -43,7 +47,16 @@ a {
 }
 
 .form-group label {
-    font-size: 1.3rem;
+    /* font-size: 1.3rem; */
+    color: #5e6c84;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    /* float: none; */
+    margin: 0 16px 0 0;
+    display: block;
+    text-align: left;
+    /* width: auto; */
 }
 
 .help-block {
@@ -64,11 +77,20 @@ a {
 }
 
 .form-control, select, .email-compose-fields .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
-    border: 1px solid #e8ebf1;
-    font-weight: 400;
-    font-size: 1.375rem;
-    padding: 2px 5px;
     width: 100%;
+    height: 32px;
+    color: #172b4d;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 20px;
+    background-color: #f4f5f733;
+    border: 1px solid #dfe1e6;
+    padding: 4px 7px 5px;
+}
+
+.form-control:focus, select:focus, .email-compose-fields .select2-container--default .select2-selection--multiple:focus, .select2-container--default .select2-selection--single:focus, .select2-container--default .select2-selection--single .select2-search__field:focus, .typeahead:focus, .tt-query:focus, .tt-hint:focus {
+    box-shadow: 0 0 0 1px #adb5c31a;
 }
 
 .form-inline .form-control, .form-inline select, .form-inline .email-compose-fields .select2-container--default .select2-selection--multiple, .email-compose-fields .select2-container--default .form-inline .select2-selection--multiple, .form-inline .select2-container--default .select2-selection--single, .select2-container--default .form-inline .select2-selection--single, .form-inline .select2-container--default .select2-selection--single .select2-search__field, .select2-container--default .select2-selection--single .form-inline .select2-search__field, .form-inline .typeahead, .form-inline .tt-query, .form-inline .tt-hint {
@@ -93,7 +115,7 @@ a {
 }
 
 .field-repeater .field-repeater-add-item > a {
-    font-weight: 400;
+    font-weight: 100;
 }
 
 .control-tabs > div.tab-content > div.tab-pane.active.layout-cell {
@@ -103,8 +125,8 @@ a {
 
 .custom-switch > span, .custom-switch input:checked ~ span {
     background-color: rgb(188, 189, 202);
-    font-size: 1.175rem;
-    font-weight: 400;
+    font-size: 13px;
+    font-weight: 100;
 }
 
 .custom-switch input:checked ~ span {
@@ -160,7 +182,12 @@ a {
 
 .control-tabs.primary-tabs > ul.nav-tabs > li.active a > span.title, .control-tabs.primary-tabs > div > ul.nav-tabs > li.active a > span.title, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li.active a > span.title {
     border-top-color: #e8ebf1;
-    /*z-index: 12;*/
+    color: #5e6c84;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+    /* float: none; */
+    text-align: left;
 }
 
 .control-tabs.primary-tabs > ul.nav-tabs > li.active a > span.title span, .control-tabs.primary-tabs > div > ul.nav-tabs > li.active a > span.title span, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li.active a > span.title span {
@@ -184,19 +211,19 @@ a {
 }
 
 .control-tabs.primary-tabs > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > ul.nav-tabs > li a, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li a {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
 }
 
 
 /**Richeditor*/
 .fr-toolbar .fr-command.fr-btn i, .fr-popup .fr-command.fr-btn i, .fr-toolbar .fr-command.fr-btn svg, .fr-popup .fr-command.fr-btn svg {
-    font-size: 11px;
+    font-size: 12px;
 }
 
 /**Select2*/
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    font-size: 1.175rem;
+    font-size: 13px;
 }
 
 /**Query Builder*/
@@ -216,7 +243,7 @@ a {
 
 /**Default buttons*/
 .btn.btn-xs, .fc .btn-xs.fc-button, .swal2-modal .swal2-actions button.btn-xs, .wizard > .actions a.btn-xs {
-    font-size: 1.175rem;
+    font-size: 13px;
 }
 
 /***navbar**/
@@ -240,21 +267,32 @@ a {
 .navbar .navbar-content .navbar-nav .nav-item .nav-link:hover, .navbar .navbar-content .navbar-nav .nav-item .nav-link[aria-expanded="true"] {
     color: #FFFFFF;
 }
-.navbar .navbar-content .top-navbar.navbar-nav>.nav-item>.nav-link{
+
+.navbar .navbar-content .top-navbar.navbar-nav .nav-item .dropdown-toggle::after {
+    display: none;
+}
+
+.navbar .navbar-content .top-navbar.navbar-nav .nav-item .nav-link svg {
+    display: none;
+}
+
+.navbar .navbar-content .top-navbar.navbar-nav > .nav-item > .nav-link {
     color: #FFFFFF;
 }
-.navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item{
+
+.navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item {
     margin-left: 0px;
     margin-right: 0px;
     display: contents;
 }
+
 .navbar .navbar-content .top-navbar .dropdown-menu {
     background-color: #3a3f51;
     position: absolute;
     top: 44px;
     left: -8px;
     border: black;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item a {
@@ -272,6 +310,10 @@ a {
 
 .navbar-content .user-settings {
     width: 3%;
+}
+
+.marktext {
+    background: #eeda16;
 }
 
 /***list**/
@@ -353,21 +395,36 @@ a {
     border-color: #d4d8da;
 }
 
-.table td {
-    font-size: 1.2rem;
-}
-
 table.table.data tbody td, table.table.data tbody th {
     padding: 10px 10px;
+    color: rgba(81, 72, 72, 0.88);
 }
 
 /**Buttons*/
 .btn, .fc .fc-button, .swal2-modal .swal2-actions button, .wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions .disabled a {
-    font-size: 1.175rem;
+    font-size: 13px;
 }
-
+table.table.data tbody tr td{
+    background-color: transparent;
+    color: #5e6c84;
+    font-size: 13px;
+    font-weight: 400;
+    /* line-height: 16px; */
+    /* float: none; */
+    /* margin: 0 16px 0 0; */
+    /* display: block; */
+    text-align: left;
+}
 table.table.data tbody tr:nth-child(even) td, table.table.data tbody tr:nth-child(even) th {
     background-color: transparent;
+    color: #5e6c84;
+    font-size: 13px;
+    font-weight: 400;
+    /* line-height: 16px; */
+    /* float: none; */
+    /* margin: 0 16px 0 0; */
+    /* display: block; */
+    text-align: left;
 }
 
 table.table.data tbody tr td, table.table.data tbody tr th {
@@ -376,7 +433,19 @@ table.table.data tbody tr td, table.table.data tbody tr th {
 
 table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-data).selected td {
     background-color: #eaeaea !important;
-    color: #666;
+    color: rgba(81, 72, 72, 0.88);
+}
+
+table.table.data thead td > a, table.table.data thead th > a, table.table.data thead td > span, table.table.data thead th > span {
+    color: #5e6c84;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    /* float: none; */
+    margin: 0 16px 0 0;
+    display: block;
+    text-align: left;
+    /* width: auto; */
 }
 
 .form-control.icon.search {
@@ -405,7 +474,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 
 
 .nav .nav-item .nav-link .link-icon {
-    font-size: 1.550rem;
+    font-size: 13px;
 }
 
 .sidebar .sidebar-body .nav {
@@ -498,7 +567,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 .sidebar .sidebar-body .nav .nav-item .nav-link, .sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link {
     color: #a6a8b1;
     padding: 8px 20px;
-    font-size: 12px;
+    font-size: 13px;
     border: .001rem solid #2e3344;
     width: 100%;
 }
@@ -537,7 +606,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 
 /** breadcrumb**/
 .breadcrumb {
-    font-size: 1.350rem;
+    font-size: 13px;
 }
 
 /**SWAL*/
@@ -595,7 +664,7 @@ table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-da
 
 /** Buttons **/
 .tooltip {
-    font-size: 1.3rem;
+    font-size: 13px;
 }
 
 a.manage-widgets, .action a {
@@ -631,6 +700,6 @@ a.manage-widgets, .action a {
 
 /**Dropdown*/
 .dropdown-menu {
-    font-size: 1rem;
+    font-size: 12px;
 }
 

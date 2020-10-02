@@ -38,6 +38,8 @@ class ModelModel extends Model
     public $attachAuditedBy = true;
     public $belongsTo = [
         'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
+        'created_by' => [CoreUser::class, 'nameFrom' => 'email', 'key' => 'created_by_id'],
+        'updated_by' => [CoreUser::class, 'nameFrom' => 'email', 'key' => 'updated_by_id'],
     ];
 
     static function getSystemFieldDefinition()

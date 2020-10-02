@@ -9,18 +9,24 @@ columns:
     model:
         label: model
         type: text
-    engine_application_id:
-        label: engine_application_id
-        type: number
+    application[name]:
+        label: Engine Application
+        type: text
     audit:
         label: audit
-        type: text
+        type: switch
     record_history:
-        label: record_history
+        label: Record History
         type: text
     audit_columns:
-        label: audit_columns
+        label: Audit Columns
         type: text
     attach_audited_by:
-        label: attach_audited_by
+        label: Attachm Audited By
+        type: switch
+    created_by[email]:
+        label: Created By
+        type: text
+    updated_by[email]:
+        label: Updated By
         type: text

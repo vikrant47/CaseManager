@@ -23,13 +23,13 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->string('case_version', 255);
             $table->integer('version')->nullable()->default(0);
             $table->string('suspect', 255);
-            $table->bigInteger('tat_duration');
+            $table->timestamp('ttl');
             $table->text('comments', 255);
             $table->uuid('workflow_state_id')->nullable();
             $table->uuid('queue_id')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_casemanager_cases');

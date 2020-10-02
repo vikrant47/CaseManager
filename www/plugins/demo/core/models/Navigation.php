@@ -33,6 +33,10 @@ class Navigation extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'name' => 'required',
+        'sort_order' => 'required',
+        'model' => 'required_if:type,list|required_if:type,form',
+        'dashboard' => 'required_if:type,dashboard'
     ];
 
     public $attachAuditedBy = true;

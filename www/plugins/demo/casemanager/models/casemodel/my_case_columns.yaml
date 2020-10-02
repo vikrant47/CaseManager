@@ -10,8 +10,8 @@ columns:
         label: Suspect
         type: text
         searchable: true
-    tat_duration:
-        label: Tat
+    tat:
+        label: TAT
         type: text
         searchable: true
     queue[name]:

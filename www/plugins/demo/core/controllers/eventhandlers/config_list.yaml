@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'demo/core/eventhandler/update/:id'
+recordUrl: 'demo/core/eventhandlers/update/:id'

@@ -57,7 +57,7 @@ Object.assign(Engine.prototype, {
         this.noConflicts();
     },
     ready: function () {
-        this.addNavFlyout();
+        // this.addNavFlyout();
         this.addResizeFlyout();
         this.registerEvents();
         this.moveActions();

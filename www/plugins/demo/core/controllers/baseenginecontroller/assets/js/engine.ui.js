@@ -611,7 +611,10 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
 });
 var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     static: {
-        el: '.engine-form-wrapper',
+        defaultSettings: {
+            el: '.engine-form-wrapper',
+            formConfig: {},
+        },
         // definition form field manipulation
         getFormFields(definition) {
             let fields = definition.form.controls.fields;
@@ -622,27 +625,30 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
                 return Object.assign({name: fieldName}, fields[fieldName]);
             })
         },
-        getInstance: function (el, modelRecord) {
-            const $el = $(el).eq(0);
-            if ($el.data('engineForm')) {
-                return $el.data('engineForm');
+        getInstance: function (options) {
+            if (options.el) {
+                const $el = $(options.el).eq(0);
+                if ($el.data('engineForm')) {
+                    return $el.data('engineForm');
+                }
             } else {
-                return new EngineForm().bind($el, modelRecord);
+                return new EngineForm(options);
             }
         },
         getCurrentForm: function () {
-            var $form = $(EngineForm.el).eq(0);
+            var $form = $(this.defaultSettings.el).eq(0);
             var form = $form.data('engineForm');
             if (!form) {
                 form = new EngineForm($form.get(0), Engine.instance.ui.getModel());
             }
-            form.bind($form, Engine.instance.ui.getModel());
+            form.bindElement($form);
+            form.bindModel(Engine.instance.ui.getModel());
             return form;
         },
         afterOpen: function (form) {
             $(document).trigger('engine.form.open', form);
         },
-        open: function (controller, context, recordId) {
+        open: function (controller, context, recordId, container = '#page-content') {
             if (context) {
                 controller = controller + '/';
                 if (recordId) {
@@ -654,7 +660,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
                 data: {context, context, recordId: recordId},
                 loadingContainer: '.page-content',
                 success: function (data) {
-                    $('#page-content').html(data.result);
+                    $(container).html(data.result);
                     const form = EngineForm.getCurrentForm();
                     EngineForm.afterOpen(form);
                 }
@@ -662,20 +668,29 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         },
     },
     extends: EngineObservable,
-    constructor: function (config) {
-        this.config = config;
+    constructor: function (options) {
+        this.settings = Object.assign({}, this.static.defaultSettings, options);
+        this.bindElement(this.settings.el);
+        this.bindModel(this.settings.modelRecord);
     },
-    bind: function ($el, modelRecord) {
-        this.modelRecord = modelRecord;
-        if (this.modelRecord) {
-            if (typeof modelRecord === 'string') {
-                this.modelRecord = {model: modelRecord};
-            }
-            this.model = this.modelRecord.model;
-        }
+    bindElement: function (el) {
         this.formData = null;
-        this.$el = $el;
+        this.$el = el;
+        if (!(el instanceof jQuery)) {
+            this.$el = $(el);
+        }
         this.$el.data('engineForm', this);
+    },
+    bindModel: function (modelRecord) {
+        if (modelRecord) {
+            this.modelRecord = modelRecord;
+            if (this.modelRecord) {
+                if (typeof modelRecord === 'string') {
+                    this.modelRecord = {model: modelRecord};
+                }
+                this.model = this.modelRecord.model;
+            }
+        }
         return this;
     },
     getValue: function (field) {
@@ -684,14 +699,14 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     getFieldElement: function (field) {
         return this.$el.find('[name$="[' + field + ']"]')
     },
-    setConfig: function (config) {
-        this.config = config;
+    setFormConfig: function (formConfig) {
+        this.settings.formConfig = formConfig;
     },
     toDefinition: function () {
-        return {form: {controls: this.config}};
+        return {form: {formConfig: this.settings.formConfig}};
     },
     fromDefinition: function (definition) {
-        this.config = definition.form.controls;
+        this.settings.formConfig = definition.form.controls;
     },
     getField: function (fieldName) {
         var fields = this.static.getFormFields(this.toDefinition());
@@ -702,32 +717,46 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     addFields: function (fields, showInTab = false) {
         let container;
         if (showInTab) {
-            if (this.config.tabs) {
-                this.config.tabs = {};
+            if (this.settings.formConfig.tabs) {
+                this.settings.formConfig.tabs = {};
             }
-            container = this.config.tabs;
+            container = this.settings.formConfig.tabs;
         } else {
-            if (!this.config.fields) {
-                this.config.fields = {};
+            if (!this.settings.formConfig.fields) {
+                this.settings.formConfig.fields = {};
             }
-            container = this.config.fields;
+            container = this.settings.formConfig.fields;
         }
         Object.assign(container, fields);
+    },
+    loadFormContent: function (options) {
+        const settings = Object.assign({context: 'create', recordId: null, loadingContainer: '.page-content'}, options);
+        let url = this.modelRecord.controller + '/' + settings.context;
+        if (settings.recordId) {
+            url = url + '/' + settings.recordId;
+        }
+        this.contentPromise = Engine.instance.ui.request('onFormRender', {
+            url: url,
+            data: {context: settings.context, recordId: settings.recordId},
+            loadingContainer: settings.loadingContainer,
+        });
+        return this;
     },
     build: function (url, wrap = false) {
         const _this = this;
         this.contentPromise = Engine.instance.ui.request('onBuildForm', {
             url: url,
             wrap: wrap,
-            data: {config: this.config}
+            data: {formConfig: this.settings.formConfig}
         });
         return this;
     },
     render: function (selector) {
         const _this = this;
+        selector = selector || this.$el.get(0);
         this.contentPromise.then(function (content) {
             _this.emit('beforeRender', [content]);
-            $(selector).append(content);
+            $(selector).append(content.result);
             _this.emit('render', [content]);
         });
     },
@@ -740,7 +769,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
                 target: _this,
             }));
             _this.popup = popup;
-            _this.$el = popup.$body;
+            _this.bindElement(popup.$body);
             _this.emit('render', [content]);
         });
     },
