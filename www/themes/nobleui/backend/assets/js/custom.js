@@ -18,34 +18,34 @@ $(document).ready(function () {
             $('[data-trigger]').triggerOn();
         }, 500);
     }).trigger('engine.list.open');
-    $(document).on('engine.ui.navigate', function () {
+    /*$(document).on('engine.ui.navigate', function () {
         $('.main-wrapper').scrollTop(0).data('perfectScroller').update()
-    });
+    });*/
 });
 
 $(document).ready(function () {
-    $('.main-wrapper').data('perfectScroller', new PerfectScrollbar('.main-wrapper'));
+    /*$('.main-wrapper').data('perfectScroller', new PerfectScrollbar('.main-wrapper'));*/
     $(document).on('show.oc.popup', function (event, target, $modal) {
         var $content = $modal.find('.modal-body');
         if ($modal.find('.recordfinder-list').length > 0) {
             $content = $modal.find('.recordfinder-list');
         }
-        const scrollbarExample = new PerfectScrollbar($content.get(0), {
+       /* const scrollbarExample = new PerfectScrollbar($content.get(0), {
             wheelSpeed: 2,
             wheelPropagation: true,
             minScrollbarLength: 20
-        });
+        });*/
     });
     $(document).on('engine.list.init', function (e, list) {
         if (!list.scroller) {
             const $table = list.$el.find('.list-scrollable >table');
             if ($table.length) {
                 $table.wrap('<div class="table-wrapper"></div>');
-                list.scroller = new PerfectScrollbar('.table-wrapper', {
+                /*list.scroller = new PerfectScrollbar($table.parent().get(0), {
                     wheelSpeed: 2,
                     wheelPropagation: true,
                     minScrollbarLength: 20
-                });
+                });*/
             }
         }
     });
