@@ -1,9 +1,10 @@
 <div class="control-list list-scrollable" data-control="listwidget">
-    <table class="table data" data-control="rowlink">
-        <thead>
+    <div class="table-wrapper">
+        <table class="table data" data-control="rowlink">
+            <thead>
             <?= $this->makePartial('list_head_row') ?>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <?php if (count($records)): ?>
                 <?= $this->makePartial('list_body_rows') ?>
             <?php else: ?>
@@ -13,8 +14,9 @@
                     </td>
                 </tr>
             <?php endif ?>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     <?php if ($showPagination): ?>
         <div class="list-footer">
             <div class="list-pagination">

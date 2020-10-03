@@ -6,6 +6,24 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/*
+ *  STYLE 3
+ */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #978e8e59;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+}
+
 .btn, .fc .fc-button, .swal2-modal .swal2-actions button, .wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions .disabled a {
     font-weight: 100;
 }
@@ -46,7 +64,7 @@ a {
     margin-bottom: 1rem;
 }
 
-.form-group label {
+.form-group label,.filter-breadcrumb.breadcrumb a {
     /* font-size: 1.3rem; */
     color: #5e6c84;
     font-size: 13px;
@@ -84,7 +102,7 @@ a {
     font-weight: 400;
     font-style: normal;
     line-height: 20px;
-    background-color: #f4f5f733;
+    /*background-color: #f4f5f733;*/
     border: 1px solid #dfe1e6;
     padding: 4px 7px 5px;
 }
@@ -324,6 +342,17 @@ a {
 
 .table-wrapper {
     position: relative;
+    height: 430px;
+    width: 100%;
+    border: 1px solid #b8c2c6;
+    overflow: scroll;
+}
+
+.list-footer .list-pagination {
+    font-size: 14px;
+    text-align: right;
+    padding-top: 5px;
+    overflow: hidden;
 }
 
 /**Filters*/
@@ -360,7 +389,7 @@ a {
 }
 
 .control-toolbar .toolbar-item {
-    width: 35% !important;
+    width: 100% !important;
     display: flex;
     flex-wrap: wrap;
     margin-left: auto;
@@ -368,7 +397,7 @@ a {
 }
 
 .control-toolbar .toolbar-item.toolbar-primary {
-    width: 65% !important;;
+    width: 100% !important;;
 }
 
 
@@ -380,12 +409,54 @@ a {
     margin-left: auto;
 }
 
+.list-widget table.table.data thead th a, table.table.data thead td.active, table.table.data thead th.active {
+    background: #f1f2f6;
+}
+
+table.table.data thead .list-checkbox .custom-checkbox {
+    top: -10px;
+}
+
+.list-widget table.table.data thead th {
+    /*resize: horizontal;*/
+    z-index: 1;
+    position: sticky;
+    overflow: auto;
+    top: 0; /* Don't forget this, required for the stickiness */
+    /*box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);*/
+}
+
 .list-widget table.table.data thead td, .list-widget table.table.data thead th, .list-widget table.table.data .list-checkbox {
-    border: none;
+    border-right: 1px solid #d5d5d5;
+    /* border: none; */
+    border-bottom: 1px solid #0000003d;
+}
+
+table.table.data thead tr th.list-checkbox {
+    padding: 10px 0 0 20px;
+}
+
+table.table.data thead {
+    background: #f1f2f6;
+}
+
+table.table.data thead td, table.table.data thead th {
+    border-width: 1px;
+    border-top: 1px solid #d4d8da !important;
+    border-bottom: 2px solid #d4d8da !important;
+    border-color: #d4d8da;
+    padding: 0;
+    font-weight: normal;
+    /* text-transform: uppercase; */
+    font-size: 11px;
+    white-space: nowrap;
+    background: #f1f2f6;
 }
 
 .list-with-sidebar table.table.data {
     border: none;
+    font-size: 13px;
+    color: #212529;
 }
 
 .list-flush table.table.data thead tr th {
@@ -404,22 +475,18 @@ table.table.data tbody td, table.table.data tbody th {
 .btn, .fc .fc-button, .swal2-modal .swal2-actions button, .wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions .disabled a {
     font-size: 13px;
 }
-table.table.data tbody tr td{
-    background-color: transparent;
-    color: #5e6c84;
-    font-size: 13px;
-    font-weight: 400;
-    /* line-height: 16px; */
-    /* float: none; */
-    /* margin: 0 16px 0 0; */
-    /* display: block; */
-    text-align: left;
+
+.card {
+    border: none;
 }
-table.table.data tbody tr:nth-child(even) td, table.table.data tbody tr:nth-child(even) th {
+
+table.table.data tbody tr td {
+    border-bottom: 1px solid #00000014;
     background-color: transparent;
-    color: #5e6c84;
-    font-size: 13px;
-    font-weight: 400;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 200;
+    padding: 10px 10px;
     /* line-height: 16px; */
     /* float: none; */
     /* margin: 0 16px 0 0; */
@@ -432,12 +499,17 @@ table.table.data tbody tr td, table.table.data tbody tr th {
 }
 
 table.table.data tbody tr.rowlink:hover td, table.table.data tbody tr:not(.no-data).selected td {
-    background-color: #eaeaea !important;
+    background-color: #e9f4ff !important;
     color: rgba(81, 72, 72, 0.88);
 }
 
+table.table.data tbody tr:nth-child(even) td, table.table.data tbody tr:nth-child(even) th {
+    background-color: #ebf0f152;
+}
+
 table.table.data thead td > a, table.table.data thead th > a, table.table.data thead td > span, table.table.data thead th > span {
-    color: #5e6c84;
+    text-transform: initial;
+    color: #343536;
     font-size: 12px;
     font-weight: 600;
     line-height: 16px;
@@ -446,6 +518,7 @@ table.table.data thead td > a, table.table.data thead th > a, table.table.data t
     display: block;
     text-align: left;
     /* width: auto; */
+    padding: 10px 15px;;
 }
 
 .form-control.icon.search {
@@ -607,6 +680,11 @@ table.table.data thead td > a, table.table.data thead th > a, table.table.data t
 /** breadcrumb**/
 .breadcrumb {
     font-size: 13px;
+}
+
+.filter-breadcrumb.breadcrumb {
+    padding-top: 17px;
+    padding-left: 0px;
 }
 
 /**SWAL*/

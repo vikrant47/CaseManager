@@ -612,8 +612,10 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
 var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     static: {
         defaultSettings: {
+            context: 'create',
             el: '.engine-form-wrapper',
             formConfig: {},
+            loadingContainer: '.page-content',
         },
         // definition form field manipulation
         getFormFields(definition) {
@@ -648,22 +650,17 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         afterOpen: function (form) {
             $(document).trigger('engine.form.open', form);
         },
-        open: function (controller, context, recordId, container = '#page-content') {
-            if (context) {
-                controller = controller + '/';
-                if (recordId) {
-                    controller = controller + '/' + recordId;
-                }
-            }
-            return Engine.instance.ui.request('onFormRender', {
-                url: controller,
-                data: {context, context, recordId: recordId},
-                loadingContainer: '.page-content',
-                success: function (data) {
-                    $(container).html(data.result);
-                    const form = EngineForm.getCurrentForm();
-                    EngineForm.afterOpen(form);
-                }
+        open: function (url, context, recordId, container = '#page-content') {
+            engine.ui.EngineForm.getInstance({
+                context: context,
+                recordId: recordId,
+                container: container,
+                modelRecord: {
+                    controller: url
+                },
+                url: url,
+            }).loadFormContent().render(container).then(function () {
+
             });
         },
     },
@@ -729,11 +726,14 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         }
         Object.assign(container, fields);
     },
-    loadFormContent: function (options) {
-        const settings = Object.assign({context: 'create', recordId: null, loadingContainer: '.page-content'}, options);
-        let url = this.modelRecord.controller + '/' + settings.context;
-        if (settings.recordId) {
-            url = url + '/' + settings.recordId;
+    loadFormContent: function () {
+        const settings = this.settings;
+        let url = settings.url;
+        if (!url) {
+            url = Engine.instance.ui.getControllerUrl(this.modelRecord.controller) + '/' + settings.context;
+            if (settings.recordId) {
+                url = url + '/' + settings.recordId;
+            }
         }
         this.contentPromise = Engine.instance.ui.request('onFormRender', {
             url: url,
@@ -751,18 +751,22 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         });
         return this;
     },
-    render: function (selector) {
+    render: function (selector, appender = 'html') {
         const _this = this;
-        selector = selector || this.$el.get(0);
-        this.contentPromise.then(function (content) {
+        let $selector = selector instanceof jQuery ? selector : $(selector);
+        if ($selector.length === 0) {
+            $selector = this.$el.get(0);
+        }
+        return this.contentPromise.then(function (content) {
             _this.emit('beforeRender', [content]);
-            $(selector).append(content.result);
+            $selector[appender](content.result);
             _this.emit('render', [content]);
+            $(document).trigger('engine.form.open', _this);
         });
     },
     showInPopup: function (options = {}) {
         const _this = this;
-        this.contentPromise.then(function (content) {
+        return this.contentPromise.then(function (content) {
             _this.emit('beforeRender', [content]);
             const popup = Engine.instance.ui.showPopup(Object.assign(options, {
                 content: content.result,
@@ -771,6 +775,8 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
             _this.popup = popup;
             _this.bindElement(popup.$body);
             _this.emit('render', [content]);
+            $(document).trigger('engine.form.open', _this);
+            return popup;
         });
     },
     isNew: function () {
