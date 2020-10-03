@@ -64,7 +64,9 @@ a {
     padding-bottom: 0px;
     margin-bottom: 1rem;
 }
-
+.form-group .custom-checkbox label{
+    font-weight: 400;
+}
 .form-group label, .filter-breadcrumb.breadcrumb a {
     /* font-size: 1.3rem; */
     color: #5e6c84;
@@ -98,8 +100,8 @@ a {
 .form-control, select, .email-compose-fields .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
     width: 100%;
     height: 32px;
-    color: #172b4d;
-    font-size: 14px;
+    color: #3f3a3a;
+    font-size: 13px;
     font-weight: 400;
     font-style: normal;
     line-height: 20px;
@@ -122,7 +124,7 @@ a {
 }
 
 .card .card-body {
-    padding: 0 1.5rem 1.5rem;
+    padding: 10px 1.5rem 1.5rem;
 }
 
 .card-body .field-repeater li.field-repeater-item {
@@ -443,8 +445,8 @@ table.table.data thead {
 
 table.table.data thead td, table.table.data thead th {
     border-width: 1px;
-    border-top: 1px solid #d4d8da !important;
-    border-bottom: 2px solid #d4d8da !important;
+    border-top: 0px solid #d4d8da !important;
+    border-bottom: 1px solid #d4d8da !important;
     border-color: #d4d8da;
     padding: 0;
     font-weight: normal;
@@ -484,9 +486,9 @@ table.table.data tbody td, table.table.data tbody th {
 table.table.data tbody tr td {
     border-bottom: 1px solid #00000014;
     background-color: transparent;
-    color: #000000;
+    color: #3f3a3a;
     font-size: 12px;
-    font-weight: 200;
+    font-weight: 400;
     padding: 10px 10px;
     /* line-height: 16px; */
     /* float: none; */
@@ -754,13 +756,31 @@ a.manage-widgets, .action a {
 .btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover,
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background: #678a74d9;
-    border-color: #678a74d9;
+    /* background-color: #4eb5f1;
+    /* border-color: #678a74d9; */
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    background-color: #4eb5f1;
+    text-align: center;
+    transition: all 0.2s;
+    height: 30px;
+    border-color: #007effd9;
 }
 
 .btn-primary:hover, .swal2-modal .swal2-actions button.swal2-confirm:hover, .wizard > .actions a:hover, .btn-primary:focus, .swal2-modal .swal2-actions button.swal2-confirm:focus, .wizard > .actions a:focus, .btn-primary.focus, .swal2-modal .swal2-actions button.focus.swal2-confirm, .wizard > .actions a.focus,
 .btn-primary:not(:disabled):not(.disabled):active, .swal2-modal .swal2-actions button.swal2-confirm:not(:disabled):not(.disabled):active, .wizard > .actions a:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .swal2-modal .swal2-actions button.swal2-confirm:not(:disabled):not(.disabled).active, .wizard > .actions a:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle, .swal2-modal .swal2-actions .show > button.dropdown-toggle.swal2-confirm, .wizard > .actions .show > a.dropdown-toggle {
-    background-color: #4f6356d9;
-    border-color: #4f6356d9;
+    background-color: #4095c6;
+    border-color: #727cf5;;
 }
 
 .btn-primary.disabled, .swal2-modal .swal2-actions button.disabled.swal2-confirm, .wizard > .actions a.disabled, .btn-primary:disabled, .swal2-modal .swal2-actions button.swal2-confirm:disabled, .wizard > .actions a:disabled {
@@ -781,4 +801,7 @@ a.manage-widgets, .action a {
 .dropdown-menu {
     font-size: 12px;
 }
+
+
+
 

@@ -10183,7 +10183,7 @@ input[type="button"].btn-block {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center; }
-  
+
   .btn-group-vertical > .btn,
   .fc .btn-group-vertical > .fc-button,
   .swal2-modal .swal2-actions .btn-group-vertical > button,
@@ -19283,7 +19283,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset; }
-
+/*
 @font-face {
   font-family: 'Overpass';
   src: url("../../../assets/fonts/overpass/Overpass-Regular.eot");
@@ -19331,7 +19331,7 @@ input:-webkit-autofill:active {
   src: url("../../../assets/fonts/overpass/Overpass-Black.eot");
   src: url("../../../assets/fonts/overpass/Overpass-Black.eot?#iefix") format("embedded-opentype"), url("../../../assets/fonts/overpass/Overpass-Black.woff2") format("woff2"), url("../../../assets/fonts/overpass/Overpass-Black.woff") format("woff"), url("../../../assets/fonts/overpass/Overpass-Black.ttf") format("truetype");
   font-weight: 900;
-  font-style: normal; }
+  font-style: normal; }*/
 
 /* Footer */
 .footer {
