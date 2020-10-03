@@ -102,7 +102,7 @@ a {
     font-weight: 400;
     font-style: normal;
     line-height: 20px;
-    background-color: #f4f5f733;
+    /*background-color: #f4f5f733;*/
     border: 1px solid #dfe1e6;
     padding: 4px 7px 5px;
 }
@@ -418,8 +418,10 @@ table.table.data thead .list-checkbox .custom-checkbox {
 }
 
 .list-widget table.table.data thead th {
+    /*resize: horizontal;*/
     z-index: 1;
     position: sticky;
+    overflow: auto;
     top: 0; /* Don't forget this, required for the stickiness */
     /*box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);*/
 }

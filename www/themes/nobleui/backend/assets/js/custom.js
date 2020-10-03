@@ -37,17 +37,17 @@ $(document).ready(function () {
         });*/
     });
     $(document).on('engine.list.init', function (e, list) {
-        if (!list.scroller) {
+        /*if (!list.scroller) {
             const $table = list.$el.find('.list-scrollable >table');
             if ($table.length) {
                 $table.wrap('<div class="table-wrapper"></div>');
-                /*list.scroller = new PerfectScrollbar($table.parent().get(0), {
+                /!*list.scroller = new PerfectScrollbar($table.parent().get(0), {
                     wheelSpeed: 2,
                     wheelPropagation: true,
                     minScrollbarLength: 20
-                });*/
+                });*!/
             }
-        }
+        }*/
     });
     /**Scriptable navbars*/
     $('.nav-link[data-type="script"]').click(Engine.instance.ui.navigationLinkHandler);

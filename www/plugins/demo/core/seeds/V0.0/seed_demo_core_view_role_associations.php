@@ -212,17 +212,6 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ] ,            [
-                                                                            "id"=>"074d5c60-db9f-11ea-8a6e-0987bef35c7d",
-                                                                                        "created_at"=>"2020-08-11 06:51:05",
-                                                                                        "updated_at"=>"2020-08-11 06:51:05",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "version"=> 0,
-                                                                                        "record_id"=>"2741f560-c432-11ea-8b7b-b38010411630",
-                                                                                        "model"=>"Demo\Core\Models\ListAction",
-                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
-                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
-                            ] ,            [
                                                                             "id"=>"66f947d2-84d3-4b07-8abc-d1c4021e8fe9",
                                                                                         "created_at"=>"2020-06-06 13:24:09",
                                                                                         "updated_at"=>"2020-06-06 13:24:09",
@@ -661,6 +650,17 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "record_id"=>"fdf384c5-bdb6-4294-81a4-af302b12b332",
                                                                                         "model"=>"Demo\Core\Models\Navigation",
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                            ] ,            [
+                                                                            "id"=>"8f4ed8e0-0536-11eb-85b8-5b6e9e688702",
+                                                                                        "created_at"=>"2020-10-03 05:09:05",
+                                                                                        "updated_at"=>"2020-10-03 05:09:05",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "record_id"=>"2741f560-c432-11ea-8b7b-b38010411630",
+                                                                                        "model"=>"Demo\Core\Models\ListAction",
+                                                                                        "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
                             ]             ]);
         }
