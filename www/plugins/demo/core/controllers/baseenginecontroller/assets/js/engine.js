@@ -53,6 +53,7 @@ Engine.defaultActionOption = {
     }
 };
 Object.assign(Engine.prototype, {
+    keys: {},
     boot: function () {
         this.noConflicts();
     },
@@ -86,6 +87,16 @@ Object.assign(Engine.prototype, {
         $(document).ready(function () {
             _this.onDocumentReady();
         });
+        $(document).keydown(function (event) {
+            _this.keys[event.which] = true;
+        });
+
+        $(document).keyup(function (event) {
+            delete _this.keys[event.which];
+        });
+    },
+    getPressedKeys: function () {
+        return Object.keys(this.keys);
     },
     evalFunction: function (script) {
         return Function('return ' + script)();

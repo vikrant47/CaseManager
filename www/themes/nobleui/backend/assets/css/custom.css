@@ -568,6 +568,7 @@ table.table.data thead td > a, table.table.data thead th > a, table.table.data t
 }
 
 .sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm, input#nav-search-box {
+    overflow-x: hidden;
     background-color: #3a3f51;
     color: #a6a8b1;
     border: 0px;
