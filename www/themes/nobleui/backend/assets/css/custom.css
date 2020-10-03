@@ -64,9 +64,11 @@ a {
     padding-bottom: 0px;
     margin-bottom: 1rem;
 }
-.form-group .custom-checkbox label{
+
+.form-group .custom-checkbox label {
     font-weight: 400;
 }
+
 .form-group label, .filter-breadcrumb.breadcrumb a {
     /* font-size: 1.3rem; */
     color: #5e6c84;
@@ -78,6 +80,9 @@ a {
     display: block;
     text-align: left;
     /* width: auto; */
+}
+.filter-breadcrumb.breadcrumb a{
+    margin: 0 1px 0 0;
 }
 
 .help-block {
@@ -98,16 +103,21 @@ a {
 }
 
 .form-control, select, .email-compose-fields .select2-container--default .select2-selection--multiple, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint {
+    padding-top: 3px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    display: block;
     width: 100%;
-    height: 32px;
-    color: #3f3a3a;
-    font-size: 13px;
-    font-weight: 400;
-    font-style: normal;
-    line-height: 20px;
-    /*background-color: #f4f5f733;*/
-    border: 1px solid #dfe1e6;
-    padding: 4px 7px 5px;
+    height: 34px;
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .form-control:focus, select:focus, .email-compose-fields .select2-container--default .select2-selection--multiple:focus, .select2-container--default .select2-selection--single:focus, .select2-container--default .select2-selection--single .select2-search__field:focus, .typeahead:focus, .tt-query:focus, .tt-hint:focus {
@@ -567,8 +577,12 @@ table.table.data thead td > a, table.table.data thead th > a, table.table.data t
     border-bottom: 1px solid #9e9fa247;
 }
 
-.sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm, input#nav-search-box {
+.sidebar .sidebar-body {
     overflow-x: hidden;
+}
+
+.sidebar .sidebar-body, .navbar, .navbar .search-form, input#navbarForm, input#nav-search-box {
+
     background-color: #3a3f51;
     color: #a6a8b1;
     border: 0px;

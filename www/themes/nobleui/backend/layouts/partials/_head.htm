@@ -25,7 +25,7 @@ use System\Models\Parameter;
     $coreBuild = System\Models\Parameter::get('system::core.build', 1);
     ?>
     <link href="<?= Url::asset('modules/system/assets/ui/storm.css') ?>?v<?= $coreBuild ?>" rel="stylesheet">
-   <!-- <link href="<?/*= Backend::skinAsset('assets/css/october.css') */?>?v<?/*= $coreBuild */?>" rel="stylesheet">-->
+   <link href="<?= Backend::skinAsset('assets/css/october.css')?>?v<?= $coreBuild ?>" rel="stylesheet">
 
 
     <!--<script src="<? /*= Backend::skinAsset('assets/js/vendor/jquery.min.js') */ ?>?v<? /*= $coreBuild */ ?>"></script>-->
