@@ -30,11 +30,11 @@ $(document).ready(function () {
         if ($modal.find('.recordfinder-list').length > 0) {
             $content = $modal.find('.recordfinder-list');
         }
-       /* const scrollbarExample = new PerfectScrollbar($content.get(0), {
-            wheelSpeed: 2,
-            wheelPropagation: true,
-            minScrollbarLength: 20
-        });*/
+        /* const scrollbarExample = new PerfectScrollbar($content.get(0), {
+             wheelSpeed: 2,
+             wheelPropagation: true,
+             minScrollbarLength: 20
+         });*/
     });
     $(document).on('engine.list.init', function (e, list) {
         /*if (!list.scroller) {
@@ -83,6 +83,10 @@ $(document).ready(function () {
                 let href = $link.prop('href');
                 // converting backend link to tenant link
                 href = href.replace(window.location.origin, '');
+                if (Engine.instance.getPressedKeys().indexOf('17') > -1) {
+                    window.open(href);
+                    return;
+                }
                 if (href.startsWith('/backend')) {
                     href = Engine.instance.ui.getBaseTenantUrl() + href.substring(href.indexOf('/backend') + 8);
                 }
