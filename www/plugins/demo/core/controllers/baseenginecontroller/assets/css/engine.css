@@ -20,7 +20,7 @@
 
 .filter-breadcrumb .condition {
     color: #007bff;
-    padding: 3px 0 5px 5px;
+    padding: 5px 0 5px 5px;
     font-size: 10px;
 }
 
@@ -30,4 +30,7 @@
 
 .filter-breadcrumb .condition.and::after {
     content: ">";
+}
+.filter-breadcrumb.breadcrumb a{
+    margin: 0 1px 0 0;
 }

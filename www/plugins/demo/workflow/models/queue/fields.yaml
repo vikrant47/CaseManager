@@ -4,14 +4,14 @@ fields:
         span: auto
         required: 1
         type: text
-    description:
-        label: Description
-        span: auto
-        type: text
     active:
         label: Active
         span: auto
         type: switch
+    description:
+        label: Description
+        span: full
+        type: richeditor
     virtual:
         label: Virtual
         span: auto
