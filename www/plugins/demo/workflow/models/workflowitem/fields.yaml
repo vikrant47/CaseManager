@@ -9,10 +9,10 @@ fields:
         label: 'Current State'
         span: auto
         type: relation
-    model:
+    model_ref:
         label: 'Model'
         span: auto
-        type: text
+        type: relation
     record_id:
         label: 'Record Id'
         span: auto

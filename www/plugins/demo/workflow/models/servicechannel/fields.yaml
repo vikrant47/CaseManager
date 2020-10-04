@@ -39,12 +39,13 @@ tabs:
             tab: Input
         condition:
             label: Condition
-            size: large
-            language: php
             span: auto
-            hidden: 0
-            type: codeeditor
+            modelField: model
+            modelType: Demo\Core\Models\Webhook
+            type: querybuilderwidget
             tab: Input
+            dependsOn:
+                - model_ref
         inbox_order:
             label: 'Inbox Order'
             showSearch: true

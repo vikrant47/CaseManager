@@ -1,5 +1,6 @@
 <?php namespace Demo\Workflow\Models;
 
+use Demo\Core\Models\ModelModel;
 use Demo\Workflow\Controllers\WorkflowTransitionController;
 use Illuminate\Support\Collection;
 use Model;
@@ -27,6 +28,7 @@ public $incrementing = false;
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
         'workflow' => [Workflow::class, 'key' => 'workflow_id'],
+        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
         'current_state' => [WorkflowState::class, 'key' => 'current_state_id'],
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id']
     ];
