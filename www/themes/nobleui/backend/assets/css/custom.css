@@ -152,7 +152,9 @@ a {
 .control-tabs > div.tab-content > div.tab-pane.active.layout-cell {
     display: block;
 }
-
+.control-tabs.primary-tabs >ul.nav-tabs >li:first-child, .control-tabs.primary-tabs >div >ul.nav-tabs >li:first-child, .control-tabs.primary-tabs >div >div >ul.nav-tabs >li:first-child{
+    padding-left: 0px !important;
+}
 
 .custom-switch > span, .custom-switch input:checked ~ span {
     background-color: rgb(188, 189, 202);
@@ -308,7 +310,7 @@ a {
 }
 
 .navbar .navbar-content .top-navbar.navbar-nav > .nav-item > .nav-link {
-    color: #FFFFFF;
+    color: #d7d5d5;
 }
 
 .navbar .navbar-content .top-navbar.navbar-nav .dropdown-menu .nav-item {
@@ -767,7 +769,22 @@ a.manage-widgets, .action a {
     color: #3a3f51;
 }
 
-
+.btn{
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    transition: all 0.2s;
+    height: 30px;
+}
 .btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover,
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background: #678a74d9;
