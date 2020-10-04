@@ -1,13 +1,13 @@
 <?php
 
-namespace Demo\Casemanager\EventHandlers\QueueItem;
+namespace Demo\Casemanager\EventHandlers\Task;
 
 
 use Demo\Casemanager\Models\CaseModel;
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
-use Demo\Workflow\Models\QueueItem;
+use Demo\Workflow\Models\Task;
 use Demo\Workflow\Models\Workflow;
 use Demo\Workflow\Models\WorkflowItem;
 use Demo\Workflow\Models\WorkflowTransition;
@@ -15,9 +15,9 @@ use Log;
 use October\Rain\Exception\ApplicationException;
 use System\Models\EventLog;
 
-class BeforeCreateQueueItemAssignQueueToCase
+class BeforeCreateTaskAssignQueueToCase
 {
-    public $model = QueueItem::class;
+    public $model = Task::class;
     public $events = ['creating'];
     public $sort_order = 999;
 

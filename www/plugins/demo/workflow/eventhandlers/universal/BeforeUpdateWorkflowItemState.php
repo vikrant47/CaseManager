@@ -7,7 +7,7 @@ namespace Demo\Workflow\EventHandlers\Universal;
 use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Workflow\Models\Queue;
-use Demo\Workflow\Models\QueueItem;
+use Demo\Workflow\Models\Task;
 use Demo\Workflow\Models\WorkflowItem;
 use Demo\Workflow\Models\WorkflowTransition;
 

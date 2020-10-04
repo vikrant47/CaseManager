@@ -1,6 +1,6 @@
-list: $/demo/workflow/models/queueitem/columns.yaml
-modelClass: Demo\Workflow\Models\QueueItem
-title: QueueItem
+list: $/demo/workflow/models/task/columns.yaml
+modelClass: Demo\Workflow\Models\Task
+title: Task
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
 showCheckboxes: true
@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'demo/workflow/queueitemcontroller/update/:id'
+recordUrl: 'demo/workflow/taskcontroller/update/:id'

@@ -19,7 +19,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "updated_at"=>"2019-12-21 11:25:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "source_model"=>"Demo\Workflow\Models\QueueItem",
+                                                                                        "source_model"=>"Demo\Workflow\Models\Task",
                                                                                         "target_model"=>"Demo\Workflow\Models\Queue",
                                                                                         "foreign_key"=>"queue_id",
                                                                                         "cascade"=>"delete",
@@ -27,7 +27,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
-                                                                                        "name"=>"Queue Item Belongs To a Queue",
+                                                                                        "name"=>"Task Belongs To a Queue",
                                                                                         "active"=> 1
                             ] ,            [
                                                                             "id"=>"6e0bc7ae-fd91-4847-8b41-0ab6162153d5",

@@ -98,11 +98,11 @@ tabs:
 secondaryTabs:
     fields:
         _queue_items:
-            label: 'Queue Items'
+            label: 'Tasks'
             span: full
             relation: HasMany
             targetKey: id
-            targetModel: Demo\Workflow\Models\QueueItem
+            targetModel: Demo\Workflow\Models\Task
             key: queue_id
             type: relatedlist
-            tab: 'Queue Items'
+            tab: 'Tasks'

@@ -4,8 +4,8 @@
     - 'Created table demo_workflow_queues'
     - builder_table_create_demo_workflow_queues.php
 1.0.3:
-    - 'Created table demo_workflow_queue_items'
-    - builder_table_create_demo_workflow_queue_items.php
+    - 'Created table demo_workflow_tasks'
+    - builder_table_create_demo_workflow_tasks.php
 1.0.4:
     - 'Created table demo_workflow_workflows'
     - builder_table_create_demo_workflow_workflows.php

@@ -17,7 +17,7 @@ fields:
         required: 1
         stretch: 1
         type: codeeditor
-        commentAbove: 'This should return a Queue Item to be poped.'
+        commentAbove: 'This should return a Task to be poped.'
     application:
         label: Application
         nameFrom: code

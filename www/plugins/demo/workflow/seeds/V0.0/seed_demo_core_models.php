@@ -30,22 +30,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "id"=>"bca86a91-3f71-49e9-bf51-72b7003c9571",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Item",
-                                                                                        "model"=>"Demo\Workflow\Models\QueueItem",
-                                                                                        "controller"=>"Demo\Workflow\Controllers\QueueItemController",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
-                                                                                        "audit"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\"*\"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1
-                            ] ,            [
                                                                             "id"=>"1a2a24f6-af44-4098-84b8-78f6975e81e9",
                                                                                         "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
@@ -155,6 +139,22 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
                                                                                         "audit_columns"=>"[\"id\",\"created_at\",\"updated_at\",\"0\"]",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> 1
+                            ] ,            [
+                                                                            "id"=>"bca86a91-3f71-49e9-bf51-72b7003c9571",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2020-10-04 06:53:23",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Task",
+                                                                                        "model"=>"Demo\Workflow\Models\Task",
+                                                                                        "controller"=>"Demo\Workflow\Controllers\TaskController",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "audit"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\"*\"]",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> 1
                             ]             ]);

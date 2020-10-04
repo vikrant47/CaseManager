@@ -19,8 +19,8 @@ class SeedDemoCoreSecurityPolicies implements Seedable
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Item Security Policy-2",
-                                                                                        "description"=>"Security Policy for all operations on Queue Item",
+                                                                                        "name"=>"Task Security Policy-2",
+                                                                                        "description"=>"Security Policy for all operations on Task",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
                             ] ,            [
                                                                             "id"=>"b4d18d6e-fb92-4a5a-8223-c5b18b7b3eb6",
@@ -91,8 +91,8 @@ class SeedDemoCoreSecurityPolicies implements Seedable
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Item Security Policy-3",
-                                                                                        "description"=>"Security Policy for all operations on Queue Item",
+                                                                                        "name"=>"Task Security Policy-3",
+                                                                                        "description"=>"Security Policy for all operations on Task",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
                             ] ,            [
                                                                             "id"=>"33985503-c882-48d6-b5b0-642cb22534e8",
@@ -217,8 +217,8 @@ class SeedDemoCoreSecurityPolicies implements Seedable
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Item Security Policy",
-                                                                                        "description"=>"Security Policy for all operations on Queue Item",
+                                                                                        "name"=>"Task Security Policy",
+                                                                                        "description"=>"Security Policy for all operations on Task",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
                             ] ,            [
                                                                             "id"=>"4ea8aa69-562b-43cd-b120-d4bd4ec3443f",
@@ -253,8 +253,8 @@ class SeedDemoCoreSecurityPolicies implements Seedable
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Item Security Policy-1",
-                                                                                        "description"=>"Security Policy for all operations on Queue Item",
+                                                                                        "name"=>"Task Security Policy-1",
+                                                                                        "description"=>"Security Policy for all operations on Task",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
                             ] ,            [
                                                                             "id"=>"72a3cc6b-9ac4-45ae-9e42-1b55234a0a70",

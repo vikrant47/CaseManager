@@ -7,7 +7,7 @@ plugin:
 model-alias:
     Workflow: Workflows
     Queue: Queues
-    QueueItem: 'Queue Items'
+    Task: 'Tasks'
     WorkflowItem: 'Workflow Item'
     WorkflowTransition: 'Workflow Transition'
 navigation:
@@ -44,8 +44,8 @@ navigation:
                 url: demo/workflow/queue
                 icon: icon-stack-overflow
             side-menu-item3:
-                label: 'Queue Items'
-                url: demo/workflow/queueitem
+                label: 'Tasks'
+                url: demo/workflow/task
                 icon: icon-stack-exchange
             side-menu-item6:
                 label: 'Routing Rules'

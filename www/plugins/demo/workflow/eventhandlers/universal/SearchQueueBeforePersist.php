@@ -7,7 +7,7 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Queue;
-use Demo\Workflow\Models\QueueItem;
+use Demo\Workflow\Models\Task;
 use Demo\Workflow\Models\ServiceChannel;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -53,7 +53,7 @@ class SearchQueueBeforePersist
     public function handler($event, $model)
     {
         $logger = PluginConnection::getCurrentLogger();
-        $ignoreModels = [QueueItem::class, Queue::class, ServiceChannel::class, EventLog::class];
+        $ignoreModels = [Task::class, Queue::class, ServiceChannel::class, EventLog::class];
         $includedPackage = ['Workflow'];
         $modelClass = get_class($model);
         if (!in_array($modelClass, $ignoreModels) /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/) {
