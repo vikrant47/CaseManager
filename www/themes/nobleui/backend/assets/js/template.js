@@ -117,19 +117,19 @@
                     //for other url
                     if (force ||
                         (url && url.toLowerCase().endsWith($navElement.attr('href').toLowerCase())) ||
-                        (searchText && $navElement.text().toLowerCase().indexOf(searchText.toLowerCase()) > -1)) {
+                        (searchText && $navElement.data('label').toLowerCase().indexOf(searchText.toLowerCase()) > -1)) {
                         $(".sidebar .nav-item").removeClass('active')
                         $(".sidebar .nav-link").removeClass('active')
                         $navElement.parents('.nav-item').show();
-                        if ($navElement.parents('.sub-menu').length) {
+                        if ($navElement.parents('.sub-menu').length || searchText) {
                             $navElement.parents('.collapse').siblings().attr('aria-expanded', 'true').show();
                             $navElement.parents('.collapse').addClass('show').show();
                             if (!searchText) {
                                 $navElement.addClass('active').show();
                             } else {
-                                const text = $navElement.find('.link-title').text().trim();
+                                const text = $navElement.data('label').trim();
                                 const matchIndex = text.toLowerCase().indexOf(searchText.toLowerCase());
-                                $navElement.find('.link-title').html(text.substring(0, matchIndex) + '<span class="marktext">' + text.substring(matchIndex, searchText.length) + '</span>' + text.substring(matchIndex + searchText.length));
+                                $navElement.find('.link-title').html(text.substring(0, matchIndex) + '<span class="marktext">' + text.substring(matchIndex, matchIndex + searchText.length) + '</span>' + text.substring(matchIndex + searchText.length));
                             }
                         }
                         /*if ($navElement.parents('.submenu-item').length && !searchText) {
