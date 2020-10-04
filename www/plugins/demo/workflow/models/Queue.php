@@ -21,6 +21,7 @@ use Backend\Facades\BackendAuth;
 class Queue extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+
     const ADD_NEW_POLICY = 'addNew';
     const OVERRIDE_POLICY = 'override';
     const REJECT_POLICY = 'reject';
@@ -56,6 +57,7 @@ class Queue extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'name' => 'required',
     ];
 
     /**
@@ -189,12 +191,11 @@ class Queue extends Model
         if ($this->isUserInAssignmentGroups($user) === false) {
             throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
         }
-        $assignToField = $this->service_channel->assigned_to_field;
         if (!empty($task)) {
             $task->assigned_to_id = $user->id;
             $task->save();
         }
-        $model->{$assignToField} = $user->id;
+        $model->assigned_to_id = $user->id;
         if ($model->exists) {
             $model->update();
         }

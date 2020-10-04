@@ -30,3 +30,6 @@
 1.0.11:
     - 'Created table demo_workflow_service_channels'
     - builder_table_create_demo_workflow_service_channels.php
+1.0.12:
+    - 'Created table demo_workflow_work_profiles'
+    - builder_table_create_demo_workflow_work_profiles.php

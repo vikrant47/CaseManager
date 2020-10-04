@@ -14,87 +14,6 @@ class SeedDemoCoreSecurityPolicies implements Seedable
     {
             Db::table('demo_core_security_policies')->insert([
             [
-                                                                            "id"=>"e9d3df0c-da53-4ead-93c8-53b08cddec40",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Task Security Policy-2",
-                                                                                        "description"=>"Security Policy for all operations on Task",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"b4d18d6e-fb92-4a5a-8223-c5b18b7b3eb6",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Pop Criteria Security Policy-2",
-                                                                                        "description"=>"Security Policy for all operations on Queue Pop Criteria",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"37ff64b4-7584-4f8a-ad6b-8d736237738c",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Routing Rule Security Policy-2",
-                                                                                        "description"=>"Security Policy for all operations on Queue Routing Rule",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"f6ff3253-e8ca-4897-9f1b-6bbcaf27b53d",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Report Security Policy",
-                                                                                        "description"=>"Security Policy for all operations on Report",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"4cc3ad2e-d9ad-4661-9359-e9bbb2af4bea",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Report Item Security Policy",
-                                                                                        "description"=>"Security Policy for all operations on Report Item",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"1e657cff-ed04-4ecd-9a2c-ec8026339c76",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Report State Security Policy",
-                                                                                        "description"=>"Security Policy for all operations on Report State",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"e326190a-0c2a-4ee6-a653-44fbd07d7280",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Report Transition Security Policy",
-                                                                                        "description"=>"Security Policy for all operations on Report Transition",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"ea90a52a-a1cf-4cb1-9034-812dcb426013",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Security Policy-3",
-                                                                                        "description"=>"Security Policy for all operations on Queue",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
-                                                                            "id"=>"5560fa3f-b5fb-44a1-90ce-1389ca9d6fb6",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Task Security Policy-3",
-                                                                                        "description"=>"Security Policy for all operations on Task",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
-                            ] ,            [
                                                                             "id"=>"33985503-c882-48d6-b5b0-642cb22534e8",
                                                                                         "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
@@ -327,6 +246,87 @@ class SeedDemoCoreSecurityPolicies implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Queue Security Policy-2",
                                                                                         "description"=>"Security Policy for all operations on Queue",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"e9d3df0c-da53-4ead-93c8-53b08cddec40",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Task Security Policy-2",
+                                                                                        "description"=>"Security Policy for all operations on Task",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"b4d18d6e-fb92-4a5a-8223-c5b18b7b3eb6",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Queue Pop Criteria Security Policy-2",
+                                                                                        "description"=>"Security Policy for all operations on Queue Pop Criteria",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"37ff64b4-7584-4f8a-ad6b-8d736237738c",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Queue Routing Rule Security Policy-2",
+                                                                                        "description"=>"Security Policy for all operations on Queue Routing Rule",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"f6ff3253-e8ca-4897-9f1b-6bbcaf27b53d",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Report Security Policy",
+                                                                                        "description"=>"Security Policy for all operations on Report",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"4cc3ad2e-d9ad-4661-9359-e9bbb2af4bea",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Report Item Security Policy",
+                                                                                        "description"=>"Security Policy for all operations on Report Item",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"1e657cff-ed04-4ecd-9a2c-ec8026339c76",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Report State Security Policy",
+                                                                                        "description"=>"Security Policy for all operations on Report State",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"e326190a-0c2a-4ee6-a653-44fbd07d7280",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Report Transition Security Policy",
+                                                                                        "description"=>"Security Policy for all operations on Report Transition",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"ea90a52a-a1cf-4cb1-9034-812dcb426013",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Queue Security Policy-3",
+                                                                                        "description"=>"Security Policy for all operations on Queue",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"5560fa3f-b5fb-44a1-90ce-1389ca9d6fb6",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2019-12-20 14:15:39",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Task Security Policy-3",
+                                                                                        "description"=>"Security Policy for all operations on Task",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
                             ]             ]);
         }

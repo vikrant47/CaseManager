@@ -20,14 +20,12 @@ class BuilderTableCreateDemoWorkflowServiceChannels extends Migration
             $table->string('event');
             $table->text('description');
             $table->string('model');
-            $table->integer('inbox_order');
+            $table->integer('priority');
             $table->boolean('active')->default(true);
-            $table->string('assigned_to_field')->default('assigned_to_id');
-            $table->integer('assignment_capacity')->default(-1);
             $table->text('condition');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_workflow_service_channels');

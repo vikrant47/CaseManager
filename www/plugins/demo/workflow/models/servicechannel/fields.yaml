@@ -46,26 +46,19 @@ tabs:
             tab: Input
             dependsOn:
                 - model_ref
-        inbox_order:
+        _inbox_order:
             label: 'Inbox Order'
             showSearch: true
             span: auto
             type: number
             tab: 'Agent Config'
-        assignment_capacity:
+        _assignment_capacity:
             label: 'Assignment Capacity'
             showSearch: true
             span: auto
             type: number
             tab: 'Agent Config'
             default: -1
-        assigned_to_field:
-            label: 'Assign To Field'
-            showSearch: true
-            span: auto
-            type: text
-            tab: 'Agent Config'
-            default: assigned_to_id
         _queues:
             label: '&nbsp;'
             span: full

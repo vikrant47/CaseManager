@@ -21,18 +21,24 @@ if ($fetchModelFromField === false) {
 <input id="<?= $id ?>-input" name="<?= $name ?>" type="hidden" value="<?= json_encode($value) ?>"/>
 <div id="<?= $id ?>"></div>
 <script>
-    const $input = $('#<?= $id ?>-input');
-    $(document).ready(function () {
-        const rules = JSON.parse(<?= json_encode($value) ?>);
-        const filter = new engine.data.Filter('#<?= $id ?>', '#<?= $id ?>', rules);
-        filter.setModel('<?= str_replace('\\', '\\\\', $modelType)?>');
-        filter.build().then(function (){
-            filter.setRules(rules);
+    (function () {
+        const $input = $('#<?= $id ?>-input');
+        $(document).ready(function () {
+            let rules = <?= json_encode($value) ?>;
+            try {
+                rules = JSON.parse(rules);
+            } catch (e) {
+            }
+            const filter = new engine.data.Filter('#<?= $id ?>', '#<?= $id ?>', rules);
+            filter.setModel('<?= str_replace('\\', '\\\\', $modelType)?>');
+            filter.build().then(function () {
+                filter.setRules(rules);
+            });
+            filter.on('engine.filter.rulesChanged', function (rules) {
+                $input.val(JSON.stringify(rules));
+            });
         });
-        filter.on('engine.filter.rulesChanged', function (rules) {
-            $input.val(JSON.stringify(rules));
-        });
-    });
+    })();
 </script>
 <!-- <script>
     var sql_import_export = $('<div/>').html('<?= json_encode($value) ?>').html().trim();

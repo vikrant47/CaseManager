@@ -24,11 +24,9 @@ class SeedDemoWorkflowServiceChannels implements Seedable
                                                                                         "event"=>"[\"creating\"]",
                                                                                         "description"=> "",
                                                                                         "model"=>"Demo\Workflow\Models\WorkflowItem",
-                                                                                        "inbox_order"=> 1,
+                                                                                        "priority"=> 1,
                                                                                         "active"=> 1,
-                                                                                        "assigned_to_field"=>"assigned_to_id",
-                                                                                        "assignment_capacity"=> -1,
-                                                                                        "condition"=>"\"{\"condition\":\"AND\",\"rules\":[{\"id\":\"model\",\"field\":\"model\",\"type\":\"relation\",\"input\":\"select\",\"operator\":\"equal\",\"value\":\"Demo\\Casemanager\\Models\\CaseModel\",\"displayValue\":\"Case Model\"}],\"not\":false,\"valid\":true}\""
+                                                                                        "condition"=>"{\r\n  \"condition\": \"AND\",\r\n  \"rules\": [\r\n    {\r\n      \"id\": \"model\",\r\n      \"field\": \"model\",\r\n      \"type\": \"relation\",\r\n      \"input\": \"select\",\r\n      \"operator\": \"equal\",\r\n      \"value\": \"Demo\\Casemanager\\Models\\CaseModel\",\r\n      \"displayValue\": \"Case Model\"\r\n    }\r\n  ],\r\n  \"not\": false,\r\n  \"valid\": true\r\n}"
                             ]             ]);
         }
 
