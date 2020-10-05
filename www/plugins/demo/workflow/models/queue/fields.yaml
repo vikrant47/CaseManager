@@ -41,7 +41,7 @@ tabs:
             required: 1
             type: dropdown
             tab: Input
-        input_condition:
+        condition:
             label: 'Input Condition'
             size: large
             language: php

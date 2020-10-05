@@ -38,7 +38,7 @@ class SearchWorkflowBeforePersist
             /**@var  $workflow Workflow */
             foreach ($workflows as $workflow) {
                 $context = new ScriptContext();
-                $value = $context->execute($workflow->input_condition, ['workflow' => $workflow, 'event' => $event, 'model' => $model]);
+                $value = $context->execute($workflow->condition, ['workflow' => $workflow, 'event' => $event, 'model' => $model]);
                 if ($value === true) {
                     $logger->info('Staring the workflow ' . $workflow->name . ' for model id ' . $model->id);
                     $workflow->start($model);

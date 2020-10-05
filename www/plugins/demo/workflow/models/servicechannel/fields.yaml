@@ -32,11 +32,6 @@ tabs:
             type: relation
             tab: Input
             comment: 'Qualified Model for channel.'
-        event:
-            label: Event
-            span: auto
-            type: checkboxlist
-            tab: Input
         condition:
             label: Condition
             span: auto

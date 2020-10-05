@@ -12,18 +12,17 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
             $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->string('name');
-            $table->string('code');
             $table->text('description');
             $table->text('definition');
+            $table->integer('priority');
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->uuid('engine_application_id');
             $table->integer('sort_order');
             $table->string('model',255);
-            $table->text('input_condition');
-            $table->string('event')->nullable();
+            $table->text('condition');
             $table->string('model_state_field')->default('workflow_state_id');
         });
     }

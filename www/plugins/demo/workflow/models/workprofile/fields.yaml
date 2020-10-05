@@ -18,7 +18,7 @@ fields:
         type: relation
 tabs:
     fields:
-        channels_profile:
+        channel_profiles:
             label: Channels Profile
             prompt: 'Add new item'
             span: full
@@ -40,3 +40,8 @@ tabs:
                         label: Weightage
                         span: auto
                         type: number
+                    inbox_order:
+                        label: Inbox Order
+                        span: auto
+                        type: number
+                        default: 0

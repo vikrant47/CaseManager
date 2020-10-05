@@ -4,6 +4,8 @@ use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\EngineApplication;
 use Demo\Core\Services\EventHandlerServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Leafo\ScssPhp\Node\Number;
 use Model;
 use October\Rain\Exception\ApplicationException;
@@ -43,6 +45,10 @@ class Workflow extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'name' => 'required',
+        'model' => 'required',
+        'application' => 'required',
+        'definition' => 'required|array|min:2',
     ];
     public $attachAuditedBy = true;
 
@@ -67,6 +73,43 @@ class Workflow extends Model
             }
         }
         return $options;
+    }
+
+    public function validateDefinition()
+    {
+        $validator = Validator::make([
+            'definition' => $this->definition,
+        ], [
+            'definition.*.from_state' => 'required',
+            'definition.*.to_state' => 'required',
+            'definition' => [
+                function ($attribute, $value, $fail) {
+                    if ($value[0]['from_state'] !== '09dfd34e-0db5-49f3-96b2-23831d811a0b') {
+                        return $fail('Invalid Definition! Workflow definition must start with Start State');
+                    }
+                    if ($value[count($value) - 1]['to_state'] !== '8c7e9158-b65c-437a-a5d9-4b975f7b6f51') {
+                        return $fail('Invalid Definition! Workflow definition must end with End State');
+                    }
+                    foreach ($value as $entry) {
+                        if ($entry['to_state'] !== '8c7e9158-b65c-437a-a5d9-4b975f7b6f51' && !array_key_exists($entry, 'queue')) {
+                            return $fail('Invalid Definition! Queue is require except the last state');
+                        }
+                    }
+                },
+            ],
+        ], [
+            'definition.*.from_state' => 'Invalid Definition! From state field is required',
+            'definition.*.to_state' => 'Invalid Definition! To state field is required',
+            'definition.*.queue' => 'Invalid Definition! Queue field is required',
+        ]);
+        if ($validator->fails()) {
+            throw new \October\Rain\Exception\ValidationException($validator);
+        }
+    }
+
+    public function beforeSave()
+    {
+        $this->validateDefinition();
     }
 
     /**

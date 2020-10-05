@@ -17,7 +17,6 @@ class BuilderTableCreateDemoWorkflowServiceChannels extends Migration
             $table->integer('updated_by_id');
             $table->uuid('engine_application_id');
             $table->string('name');
-            $table->string('event');
             $table->text('description');
             $table->string('model');
             $table->integer('priority');

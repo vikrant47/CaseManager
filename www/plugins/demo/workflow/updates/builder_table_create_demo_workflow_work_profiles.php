@@ -12,7 +12,7 @@ class BuilderTableCreateDemoWorkflowWorkProfiles extends Migration
             $table->uuid('id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->text('channels_profile');
+            $table->text('channel_profiles');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->integer('created_by_id');

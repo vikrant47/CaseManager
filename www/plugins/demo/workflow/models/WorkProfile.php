@@ -28,29 +28,31 @@ class WorkProfile extends Model
      */
     public $rules = [
         'name' => 'required',
-        'channels_profile' => 'required',
+        'channel_profiles' => 'required',
     ];
     public $channelProfileRules = [
-        'channel' => 'required|unique',
-        'capacity' => 'min:0',
-        'weightage' => 'max:100'
+        'channelsProfile.*.channel' => 'required|distinct',
+        'channelsProfile.*.capacity' => 'numeric|min:0',
+        'channelsProfile.*.weightage' => 'numeric|min:1|max:100'
+    ];
+    public $messages = [
+        'channelsProfile.*.channel.required' => 'Channel in channel profile is mandatory',
+        'channelsProfile.*.channel.distinct' => 'Channels in channel profile must be unique',
     ];
     public $belongsTo = [
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id'],
         'channel' => [ServiceChannel::class]
     ];
-    public $jsonable = ['channels_profile'];
+    public $jsonable = ['channel_profiles'];
 
     public function beforeSave()
     {
-        $channelsProfile = collect($this->channels_profile);
-        $uniqueProfiles = $channelsProfile->unique('channel');
-        $validator = Validator::make($this->channels_profile, $this->channelProfileRules);
+        // $uniqueProfiles = $channelsProfile->unique('channel');
+        /*foreach ($channelsProfile as $channelProfile) {*/
+        $validator = Validator::make(['channelsProfile' => $this->channel_profiles], $this->channelProfileRules, $this->messages);
         if ($validator->fails()) {
             throw new \October\Rain\Exception\ValidationException($validator);
         }
-        if ($uniqueProfiles->count() !== $channelsProfile->count()) {
-            throw new ApplicationException('Channels in channel profile must be unique');
-        }
+        /*}*/
     }
 }

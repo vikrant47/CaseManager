@@ -292,7 +292,7 @@ class Queue extends Model
                 // if event are empty than it returns integer so should check if its array
                 if (is_array($queue->event)) {
                     if (in_array($eventName, $queue->event)) {
-                        $value = eval($queue->input_condition);
+                        $value = eval($queue->condition);
                         if ($value === true) {
                             $queue->pushItem($model);
                         }

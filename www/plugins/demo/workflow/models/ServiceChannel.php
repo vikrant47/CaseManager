@@ -22,6 +22,8 @@ class ServiceChannel extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'name' => 'required',
+        'model' => 'required',
     ];
     public $belongsTo = [
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id'],
@@ -33,7 +35,7 @@ class ServiceChannel extends Model
         return EventHandlerServiceProvider::$MODEL_EVENTS_OPTIONS;
     }
 
-    public $jsonable = ['event','condition'];
+    public $jsonable = ['condition'];
 
     public $attachAuditedBy = true;
 
