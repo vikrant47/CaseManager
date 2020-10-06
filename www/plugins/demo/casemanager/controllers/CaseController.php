@@ -6,7 +6,7 @@ use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
 use Demo\Workflow\Classes\Traits\WorkflowControllerTrait;
 use Demo\Casemanager\Models\CaseModel;
-use Demo\Workflow\Models\WorkflowItem;
+use Demo\Workflow\Models\Work;
 use Illuminate\Support\Facades\Request;
 use Model;
 use October\Rain\Exception\ApplicationException;
@@ -33,11 +33,11 @@ class CaseController extends AbstractSecurityController
         Db::transaction(function () use ($id) {
             $model = $this->formFindModelObject($id);
             if ($model->assigned_to_id === $this->user->id) {
-                $workflowItem = WorkflowItem::where(['model' => get_class($model), 'record_id' => $id])->first();
-                if (empty($workflowItem)) {
+                $work = Work::where(['model' => get_class($model), 'record_id' => $id])->first();
+                if (empty($work)) {
                     throw new ApplicationException('No active workflow item found for case ', $id);
                 }
-                $workflowItem->makeForwardTransition();
+                $work->makeForwardTransition();
                 Flash::success('Case pushed successfully');
             } else {
                 Flash::error('Unable to push case as it\'s not assigned to you !');
@@ -55,12 +55,12 @@ class CaseController extends AbstractSecurityController
             }
             $model = $this->formFindModelObject($id);
             if ($model->assigned_to_id === $this->user->id) {
-                /**@var $workflowItem WorkflowItem */
-                $workflowItem = WorkflowItem::where(['model' => get_class($model), 'record_id' => $id])->first();
-                if (empty($workflowItem)) {
+                /**@var $work Work */
+                $work = Work::where(['model' => get_class($model), 'record_id' => $id])->first();
+                if (empty($work)) {
                     throw new ApplicationException('No active workflow item found for case ', $id);
                 }
-                $workflowItem->makeBackwardTransition([
+                $work->makeBackwardTransition([
                     'remark' => $remark
                 ]);
                 Flash::success('Case pushed successfully');
@@ -86,7 +86,7 @@ class CaseController extends AbstractSecurityController
             if (!empty($queueId)) {
                 $queueIds = [$queueId];
             }
-            $query->where('assigned_to_id', null);//->join('demo_workflow_item','demo_workflow_item.');*/
+            $query->where('assigned_to_id', null);//->join('demo_work','demo_work.');*/
         }
     }
 

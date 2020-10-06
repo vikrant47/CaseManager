@@ -4,14 +4,14 @@
     - 'Created table demo_workflow_queues'
     - builder_table_create_demo_workflow_queues.php
 1.0.3:
-    - 'Created table demo_workflow_queue_items'
-    - builder_table_create_demo_workflow_queue_items.php
+    - 'Created table demo_workflow_tasks'
+    - builder_table_create_demo_workflow_tasks.php
 1.0.4:
     - 'Created table demo_workflow_workflows'
     - builder_table_create_demo_workflow_workflows.php
 1.0.5:
-    - 'Created table demo_workflow_workflow_items'
-    - builder_table_create_demo_workflow_workflow_items.php
+    - 'Created table demo_workflow_works'
+    - builder_table_create_demo_workflow_works.php
 1.0.6:
     - 'Created table demo_workflow_workflow_transitions'
     - builder_table_create_demo_workflow_workflow_transitions.php
@@ -30,3 +30,6 @@
 1.0.11:
     - 'Created table demo_workflow_service_channels'
     - builder_table_create_demo_workflow_service_channels.php
+1.0.12:
+    - 'Created table demo_workflow_work_profiles'
+    - builder_table_create_demo_workflow_work_profiles.php

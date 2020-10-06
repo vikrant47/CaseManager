@@ -15,7 +15,7 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->boolean('backward_direction')->default(false);
-            $table->uuid('workflow_item_id');
+            $table->uuid('work_id');
             $table->uuid('from_state_id');
             $table->uuid('to_state_id');
             $table->text('data')->nullable();

@@ -7,7 +7,7 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Queue;
-use Demo\Workflow\Models\QueueItem;
+use Demo\Workflow\Models\Task;
 use Demo\Workflow\Models\ServiceChannel;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -31,7 +31,7 @@ class SearchQueueBeforePersist
             $logger->info('Queue found with name ' . $queue->name . ' , evaluating input condition');
             // throw new ApplicationException('Queue found with name "'.$queue->name. '" , Evaluating input condition."');
             $context = new ScriptContext();
-            $value = $context->execute($queue->input_condition, [
+            $value = $context->execute($queue->condition, [
                 'queue' => $queue, 'event' => $event, 'model' => $model, 'serviceChannel' => $serviceChannel
             ]);
             $logger->info('Input condition evaluated to ' . $value);
@@ -53,14 +53,16 @@ class SearchQueueBeforePersist
     public function handler($event, $model)
     {
         $logger = PluginConnection::getCurrentLogger();
-        $ignoreModels = [QueueItem::class, Queue::class, ServiceChannel::class, EventLog::class];
+        $ignoreModels = [Task::class, Queue::class, ServiceChannel::class, EventLog::class];
         $includedPackage = ['Workflow'];
         $modelClass = get_class($model);
-        if (!in_array($modelClass, $ignoreModels) /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/) {
+        if (!in_array($modelClass, $ignoreModels)
+            /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/
+        ) {
             /**@var $queues Collection<Queue> */
             // throw new ApplicationException('Searching for queue , $event = ' . $event . ' , model = ' . get_class($model));
             $logger->debug('Searching service channel for model ' . ModelUtil::toString($model));
-            $serviceChannels = ServiceChannel::where(['active' => true, 'model' => $modelClass])->where('event', 'iLike', '%' . $event . '%')->get();
+            /*$serviceChannels = ServiceChannel::where(['active' => true, 'model' => $modelClass])->where('event', 'iLike', '%' . $event . '%')->get();
             $logger->debug('Total channel found ' . $serviceChannels->count() . ' for model ' . ModelUtil::toString($model));
             foreach ($serviceChannels as $serviceChannel) {
                 $logger->debug('Evaluating service channel ' . $serviceChannel->name . ' for model ' . ModelUtil::toString($model));
@@ -69,7 +71,7 @@ class SearchQueueBeforePersist
                 if ($value === true) {
                     $this->executeChannel($serviceChannel, $model, $event);
                 }
-            }
+            }*/
         }
     }
 }

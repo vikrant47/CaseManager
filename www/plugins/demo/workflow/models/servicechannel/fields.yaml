@@ -6,13 +6,19 @@ fields:
         type: text
     description:
         label: Description
-        span: auto
-        type: text
+        span: full
+        type: richeditor
     active:
         label: Active
         span: auto
         default: 1
         type: switch
+    auto_start_workflow:
+        label: Auto Start Workflow
+        span: auto
+        default: 1
+        type: switch
+        commentBelow: 'Auto start workflow when an item of this channel is created'
     application:
         label: Application
         nameFrom: code
@@ -30,41 +36,37 @@ tabs:
             span: auto
             required: 1
             type: relation
-            tab: Input
+            tab: 'Model Configuration'
             comment: 'Qualified Model for channel.'
-        event:
-            label: Event
-            span: auto
-            type: checkboxlist
-            tab: Input
         condition:
             label: Condition
-            size: large
-            language: php
             span: auto
-            hidden: 0
-            type: codeeditor
-            tab: Input
-        inbox_order:
+            modelField: model
+            modelType: Demo\Core\Models\Webhook
+            type: querybuilderwidget
+            tab: 'Model Configuration'
+            dependsOn:
+                - model_ref
+        sort_order:
+            label: Order
+            span: auto
+            default: 1
+            type: number
+            tab: 'Model Configuration'
+            required: 1
+        _inbox_order:
             label: 'Inbox Order'
             showSearch: true
             span: auto
             type: number
             tab: 'Agent Config'
-        assignment_capacity:
+        _assignment_capacity:
             label: 'Assignment Capacity'
             showSearch: true
             span: auto
             type: number
             tab: 'Agent Config'
             default: -1
-        assigned_to_field:
-            label: 'Assign To Field'
-            showSearch: true
-            span: auto
-            type: text
-            tab: 'Agent Config'
-            default: assigned_to_id
         _queues:
             label: '&nbsp;'
             span: full

@@ -201,7 +201,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
     },
     setModel: function (model) {
         this.model = model;
-        this.definition = this.model.definition;
+        this.definition = model.definition; // do not remove this
     },
     loadDefinition: function () {
         const _this = this;
@@ -242,7 +242,9 @@ let Filter = Engine.instance.define('engine.data.Filter', {
             // console.log(rule);
             const $valueEl = rule.$el.find('.rule-value-container :input');
             if ($valueEl.is('select')) {
-                const $selection = $valueEl.find('option[value="' + rule.value + '"]');
+                const $selection = $valueEl.find('option').filter(function () {
+                    return $(this).val().trim() === rule.value.trim();
+                });
                 if ($selection.length > 0) {
                     rule.displayValue = $selection.text().trim();
                 } /*else if (typeof rule.value !== 'undefined') { // no option found for value ,i.e. its being rendered by setRules method
@@ -256,7 +258,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
                 if (!this.static.isEmptyRule(rules)) {
                     this._rules = rules;
                 }
-                this.emit('engine.filter.rulesChanged', rules);
+                this.emit('engine.filter.rulesChanged', this._rules);
             } catch (e) {
 
             }

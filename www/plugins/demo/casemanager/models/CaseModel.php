@@ -12,7 +12,7 @@ class CaseModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelTrait;
-    use \Demo\Workflow\Classes\Traits\WorkflowItemTrait;
+    use \Demo\Workflow\Classes\Traits\WorkTrait;
 
     /**
      * @var string The database table used by the model.

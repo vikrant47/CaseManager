@@ -14,7 +14,7 @@ use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
 use Demo\Core\FormWidgets\SearchableRelatedList;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Core\Services\SwooleServiceProvider;
-use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkflowItemState;
+use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkState;
 use RainLab\Builder\Classes\ControlLibrary;
 use System\Classes\PluginBase;
 use BackendAuth;
@@ -29,7 +29,7 @@ class Plugin extends PluginBase
         return [
             /*BeforeCreateMigrations::class,*/
             BeforeCreateOrUpdateAudit::class,
-            BeforeUpdateWorkflowItemState::class,
+            BeforeUpdateWorkState::class,
             BeforeCreateOrUpdateCustomField::class,
             BeforeDeleteCascade::class,
             UniversalWebhookHandler::class,

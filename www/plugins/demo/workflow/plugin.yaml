@@ -7,8 +7,8 @@ plugin:
 model-alias:
     Workflow: Workflows
     Queue: Queues
-    QueueItem: 'Queue Items'
-    WorkflowItem: 'Workflow Item'
+    Task: Tasks
+    work: 'Work'
     WorkflowTransition: 'Workflow Transition'
 navigation:
     main-menu-item:
@@ -24,8 +24,8 @@ navigation:
                 url: demo/workflow/workflow
                 icon: icon-recycle
             side-menu-item4:
-                label: 'Workflow Items'
-                url: demo/workflow/workflowitemcontroller
+                label: 'Works'
+                url: demo/workflow/workcontroller
                 icon: icon-tag
             side-menu-item5:
                 label: 'Workflow Transitions'
@@ -44,8 +44,8 @@ navigation:
                 url: demo/workflow/queue
                 icon: icon-stack-overflow
             side-menu-item3:
-                label: 'Queue Items'
-                url: demo/workflow/queueitem
+                label: Tasks
+                url: demo/workflow/task
                 icon: icon-stack-exchange
             side-menu-item6:
                 label: 'Routing Rules'
@@ -55,6 +55,10 @@ navigation:
                 label: 'Pop Criteria'
                 url: demo/workflow/queuepopcriteriacontroller
                 icon: icon-code
+            side-menu-item10:
+                label: 'Work Profiles'
+                url: demo/workflow/workprofilecontroller
+                icon: icon-user-md
 permissions:
     workflow.table.create:
         tab: Workflow

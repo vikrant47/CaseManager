@@ -1,8 +1,8 @@
 <?php namespace Demo\Casemanager;
 
-use Demo\Casemanager\EventHandlers\QueueItem\BeforeCreateQueueItemAssignQueueToCase;
-use Demo\Casemanager\EventHandlers\WorkflowItem\BeforeUpdateAutoAssignCaseToUser;
-use Demo\Casemanager\Models\QueueItem;
+use Demo\Casemanager\EventHandlers\Task\BeforeCreateTaskAssignQueueToCase;
+use Demo\Casemanager\EventHandlers\Work\BeforeUpdateAutoAssignCaseToUser;
+use Demo\Casemanager\Models\Task;
 use Demo\Casemanager\Models\Queue;
 use System\Classes\PluginBase;
 use BackendAuth;
@@ -14,7 +14,7 @@ class Plugin extends PluginBase
     {
         return [
             BeforeUpdateAutoAssignCaseToUser::class,
-            BeforeCreateQueueItemAssignQueueToCase::class,
+            BeforeCreateTaskAssignQueueToCase::class,
         ];
     }
 

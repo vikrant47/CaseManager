@@ -1,0 +1,81 @@
+fields:
+    model_ref:
+        emptyOption: '-- Select --'
+        label: Model
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+        tab: Input
+        comment: 'Model for this task.'
+    record_id:
+        label: 'Record Id'
+        span: auto
+        type: text
+        required: 1
+    priority:
+        label: 'Priority'
+        span: auto
+        type: number
+        min: 0
+        comment: 'A task with higher priority will be picked first than with lower'
+tabs:
+    fields:
+        queue:
+            label: Queue
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            required: 1
+            type: relation
+            tab: Queue
+            comment: 'Current Queue for the task. Selecting a queue to push this task in that queue'
+        poped_at:
+            label: 'Poped At'
+            span: auto
+            readOnly: 1
+            type: text
+            tab: Queue
+        pushed_at:
+            label: 'Pushed At'
+            span: auto
+            readOnly: 1
+            type: text
+            tab: Queue
+
+        assigned_to:
+            emptyOption: '-- Select --'
+            label: Assigned To
+            nameFrom: email
+            descriptionFrom: description
+            span: auto
+            required: 1
+            type: relation
+            tab: Assignment
+            comment: 'User this task is assigned to.'
+        assigned_at:
+            label: 'Assigned At'
+            span: auto
+            readOnly: 1
+            type: text
+            tab: Assignment
+        completed_at:
+            label: 'Completed At'
+            span: auto
+            readOnly: 1
+            type: text
+            tab: Assignment
+        created_at:
+            label: 'Created At'
+            span: auto
+            readOnly: 1
+            type: text
+            tab: System
+        updated_at:
+            label: 'Updated At'
+            span: auto
+            readOnly: 1
+            type: text
+            tab: System
+

@@ -3,13 +3,7 @@ fields:
         label: Name
         span: auto
         type: text
-    code:
-        label: Code
-        span: auto
-        preset:
-            field: name
-            type: slug
-        type: text
+        required: 1
     description:
         label: Description
         size: ''
@@ -18,8 +12,14 @@ fields:
     active:
         label: Active
         span: auto
-        default: 1
+        default: true
         type: switch
+    priority:
+        label: 'Priority'
+        span: auto
+        type: number
+        required: 1
+        default: 1
     application:
         label: Application
         nameFrom: code
@@ -29,36 +29,16 @@ fields:
         type: relation
 tabs:
     fields:
-        definition:
-            label: Configuration
-            prompt: 'Add new item'
-            span: auto
-            type: repeater
-            tab: Definition
-            form:
-                fields:
-                    from_state:
-                        label: 'From State'
-                        span: auto
-                        type: relation
-                    to_state:
-                        label: 'To State'
-                        span: auto
-                        type: relation
         model_ref:
-            label: 'Model'
-            emptyOption: None
-            showSearch: true
+            emptyOption: '-- Select --'
+            label: Model
+            nameFrom: name
+            descriptionFrom: description
             span: auto
+            required: 1
             type: relation
-            tab: 'Auto Initialization Options'
-        event:
-            label: Event
-            emptyOption: None
-            showSearch: true
-            span: auto
-            type: dropdown
-            tab: 'Auto Initialization Options'
+            tab: 'Model Configuration'
+            comment: 'Qualified Model for workflow.'
         model_state_field:
             label: State Field
             span: auto
@@ -66,28 +46,55 @@ tabs:
             showSearch: true
             dependsOn: 'model_ref'
             default: 'workflow_state_id'
-            tab: 'Auto Initialization Options'
-        input_condition:
-            label: 'Input Condition'
-            size: large
-            language: php
+            tab: 'Model Configuration'
+            readOnly: true
+        condition:
+            label: Condition
             span: auto
-            type: codeeditor
-            tab: 'Auto Initialization Options'
+            modelField: model
+            modelType: Demo\Core\Models\Webhook
+            type: querybuilderwidget
+            tab: 'Model Configuration'
+            dependsOn:
+                - model_ref
         sort_order:
-            label: 'Sort Order'
+            label: Order
             span: auto
+            default: 1
             type: number
-            tab: 'Auto Initialization Options'
-secondaryTabs:
-    fields:
-        _workflow_item:
-            label: 'Workflow Items'
+            tab: 'Model Configuration'
+            required: 1
+        definition:
+            label: Definition
+            prompt: 'Add new item'
             span: full
-            targetModel: Demo\Workflow\Models\WorkflowItem
+            type: repeater
+            tab: Definition
+            required: 1
+            form:
+                fields:
+                    from_state:
+                        label: 'From State'
+                        span: auto
+                        type: relation
+                        required: 1
+                    to_state:
+                        label: 'To State'
+                        span: auto
+                        type: relation
+                        required: 1
+                    queue:
+                        label: 'Queue'
+                        span: auto
+                        type: relation
+                        required: 1
+        _work:
+            label: 'Works'
+            span: full
+            targetModel: Demo\Workflow\Models\Work
             list: default
             type: relatedlist
-            tab: 'Workflow Items'
+            tab: 'Works'
             query:
                 where:
                     workflow_id: '{{model.id}}'
@@ -101,8 +108,8 @@ secondaryTabs:
             tab: 'Workflow Transitions'
             query:
                 join:
-                    model: Demo\Workflow\Models\WorkflowItem
+                    model: Demo\Workflow\Models\Work
                     key: id
-                    targetKey: workflow_item_id
+                    targetKey: work_id
                     where:
                         workflow_id: '{{model.id}}'

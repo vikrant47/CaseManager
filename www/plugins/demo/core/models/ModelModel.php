@@ -98,7 +98,7 @@ class ModelModel extends Model
     public function getModelTable()
     {
         $table = null;
-        if (empty($this->model)) {
+        if (empty($this->model) || (!class_exists($this->model))) {
             return null;
         }
         $model = new $this->model();

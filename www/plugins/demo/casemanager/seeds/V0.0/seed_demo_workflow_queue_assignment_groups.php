@@ -43,16 +43,6 @@ class SeedDemoWorkflowQueueAssignmentGroups implements Seedable
                                                                                         "queue_id"=>"b875f437-6cb0-4fe6-8cdf-a7ab3b92a369",
                                                                                         "sort_order"=> 100,
                                                                                         "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
-                            ] ,            [
-                                                                            "id"=>"88bf4020-a882-11ea-a4b6-d99aa93534a8",
-                                                                                        "created_at"=>"2020-06-07 05:48:38",
-                                                                                        "updated_at"=>"2020-06-07 05:48:38",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "group_id"=> 2,
-                                                                                        "queue_id"=>"c83b37aa-0fd9-4987-bff7-1a604da1ffde",
-                                                                                        "sort_order"=> 100,
-                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ]             ]);
         }
 

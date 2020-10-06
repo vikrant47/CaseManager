@@ -1,0 +1,47 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+        comment: 'Enter the profile name'
+    description:
+        label: Description
+        size: ''
+        span: auto
+        type: richeditor
+    application:
+        label: Application
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        channel_profiles:
+            label: Channels Profile
+            prompt: 'Add new item'
+            span: full
+            type: repeater
+            tab: Configuration
+            form:
+                fields:
+                    channel:
+                        label: Channel
+                        nameFrom: name
+                        descriptionFrom: description
+                        span: full
+                        type: relation
+                    capacity:
+                        label: Capacity
+                        span: auto
+                        type: number
+                    weightage:
+                        label: Weightage
+                        span: auto
+                        type: number
+                    inbox_order:
+                        label: Inbox Order
+                        span: auto
+                        type: number
+                        default: 0

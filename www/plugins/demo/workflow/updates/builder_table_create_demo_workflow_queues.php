@@ -18,7 +18,7 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->boolean('virtual')->default(true);
             $table->string('queue_order', 255);
             $table->integer('sort_order');
-            $table->text('input_condition');
+            $table->text('condition');
             $table->string('model',255);
             $table->string('redundancy_policy',255);
             $table->timestamp('created_at')->nullable();
@@ -31,7 +31,7 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->uuid('routing_rule_id');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_workflow_queues');

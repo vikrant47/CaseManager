@@ -21,6 +21,7 @@ use Backend\Facades\BackendAuth;
 class Queue extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+
     const ADD_NEW_POLICY = 'addNew';
     const OVERRIDE_POLICY = 'override';
     const REJECT_POLICY = 'reject';
@@ -56,6 +57,7 @@ class Queue extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'name' => 'required',
     ];
 
     /**
@@ -102,7 +104,7 @@ class Queue extends Model
             ->where('backend_users_groups.user_id', '=', $user->id)
             ->where('demo_workflow_queues.active', '=', true)
             ->orderBy('demo_workflow_queues.name', 'ASC')->get();
-        $items = DB::table('demo_workflow_queue_items')->select('queue_id', DB::raw('count(*) as total'))
+        $items = DB::table('demo_workflow_tasks')->select('queue_id', DB::raw('count(*) as total'))
             ->whereIn('queue_id', $queues->map(function ($queue) {
                 return $queue->id;
             }))
@@ -140,12 +142,12 @@ class Queue extends Model
         $modelClass = get_class($model);
         $this->logger->info('Pushing item to queue [' . $this->name . ']' . ModelUtil::toString($model));
         if ($this->service_channel->model === $modelClass) {
-            $queueItem = QueueItem::where(['record_id' => $model->id, 'model' => $modelClass, 'poped_at' => null])->first();
+            $task = Task::where(['record_id' => $model->id, 'model' => $modelClass, 'poped_at' => null])->first();
             $insert = true;
-            if (!empty($queueItem)) {
+            if (!empty($task)) {
                 $this->logger->info('Item already exists applying redendancy policy');
                 if ($this->redundancy_policy === Queue::OVERRIDE_POLICY) {
-                    $queueItem->updated_at = new \DateTime();
+                    $task->updated_at = new \DateTime();
                     $insert = false;
                 } elseif ($this->redundancy_policy === Queue::ADD_NEW_POLICY) {
                     $insert = true;
@@ -155,17 +157,17 @@ class Queue extends Model
                 }
             }
             if ($insert === true) {
-                $queueItem = new QueueItem();
-                $queueItem->queue = $this;
-                $queueItem->record_id = $model->id;
-                $queueItem->model = $modelClass;
-                $queueItem->engine_application_id = $model->engine_application_id;
-                $queueItem->save();
+                $task = new Task();
+                $task->queue = $this;
+                $task->record_id = $model->id;
+                $task->model = $modelClass;
+                $task->engine_application_id = $model->engine_application_id;
+                $task->save();
             }
             if ($this->virtual == 1) {
                 $this->logger->info('Queue is virtual do assigning item');
-                $this->popItem($queueItem);
-                $this->assignItem($queueItem, $model); // if its a virtual queue than immediately call assign item
+                $this->popItem($task);
+                $this->assignItem($task, $model); // if its a virtual queue than immediately call assign item
             }
         } else {
             throw new ApplicationException('Unsupported element type .Unable to push element in queue');
@@ -176,12 +178,12 @@ class Queue extends Model
      * Processing poped item by assignment rule
      * Item can be any model in queue
      */
-    public function assignItem($queueItem, $model)
+    public function assignItem($task, $model)
     {
         $this->logger->info('Assigning the item ' . ModelUtil::toString($model) . ' using assignment rule ' . ModelUtil::toString($this->routing_rule, 'name'));
         // creating context
         $context = new ScriptContext();
-        $user = $context->execute($this->routing_rule->script, ['queue' => $this, 'model' => $model, 'queueItem' => $queueItem]);
+        $user = $context->execute($this->routing_rule->script, ['queue' => $this, 'model' => $model, 'task' => $task]);
         if (empty($user)) {
             throw new ApplicationException('Routing Rule "' . $this->routing_rule->name . '" din\'t return any user');
         }
@@ -189,12 +191,11 @@ class Queue extends Model
         if ($this->isUserInAssignmentGroups($user) === false) {
             throw new ApplicationException('Unable to assign to given user as its not in assignment groups');
         }
-        $assignToField = $this->service_channel->assigned_to_field;
-        if (!empty($queueItem)) {
-            $queueItem->assigned_to_id = $user->id;
-            $queueItem->save();
+        if (!empty($task)) {
+            $task->assigned_to_id = $user->id;
+            $task->save();
         }
-        $model->{$assignToField} = $user->id;
+        $model->assigned_to_id = $user->id;
         if ($model->exists) {
             $model->update();
         }
@@ -210,7 +211,7 @@ class Queue extends Model
      * Step 5. If element not exists than call pop method again and return
      * Step 6. Delete that element from queue
      * Step 7. Return that element
-     * @param QueueItem $item if not given then pooped form queue based on criteria otherwise used the given item
+     * @param Task $item if not given then pooped form queue based on criteria otherwise used the given item
      * @return |null
      * @throws ApplicationException
      */
@@ -221,7 +222,7 @@ class Queue extends Model
         } else {
             $this->logger->debug('Pooping an item for assignment using ' . ModelUtil::toString($this->pop_criteria, 'name'));
             $context = new ScriptContext();
-            $query = DB::table('demo_workflow_queue_items')->select('demo_workflow_queue_items.*');
+            $query = DB::table('demo_workflow_tasks')->select('demo_workflow_tasks.*');
             $qyery = $context->execute($this->pop_criteria->script, ['queue' => $this, 'query' => $query]);
             if (!($qyery instanceof \October\Rain\Database\QueryBuilder)) {
                 throw new ApplicationException('Pop criteria should return a QueryBuilder instance');
@@ -236,9 +237,9 @@ class Queue extends Model
             $this->logger->debug('No item found for assignement');
             return null;
         } else {
-            $queueItem = DB::table('demo_workflow_queue_items')->where('id', '=', $item->id)->lockForUpdate()->first();
-            if (!empty($queueItem) && !empty($queueItem->model) && !empty($queueItem->record_id)) {
-                DB::table('demo_workflow_queue_items')->where('id', '=', $item->id)->update(['poped_at' => new \DateTime()]);
+            $task = DB::table('demo_workflow_tasks')->where('id', '=', $item->id)->lockForUpdate()->first();
+            if (!empty($task) && !empty($task->model) && !empty($task->record_id)) {
+                DB::table('demo_workflow_tasks')->where('id', '=', $item->id)->update(['poped_at' => new \DateTime()]);
                 return $item->model::find($item->record_id);
             } else {
                 return $this->popItem();
@@ -257,11 +258,11 @@ class Queue extends Model
      */
     public function popAndAssign()
     {
-        $queueItem = $this->popItem();
-        if (empty($queueItem)) {
+        $task = $this->popItem();
+        if (empty($task)) {
             throw new ApplicationException('No item left to assign');
         }
-        return $this->assignItem($queueItem, $queueItem->getModel());
+        return $this->assignItem($task, $task->getModel());
     }
 
     /**
@@ -277,7 +278,7 @@ class Queue extends Model
     }
     /*public static function listenEntityEvents($eventName, $model)
     {
-        $ignoreModels = [QueueItem::class];
+        $ignoreModels = [Task::class];
         $includedPackage = ['Workflow'];
         if (!in_array(get_class($model), $ignoreModels) && in_array(explode('\\', get_class($model))[1], $includedPackage)) {
             // @var $queues Collection<Queue>
@@ -291,7 +292,7 @@ class Queue extends Model
                 // if event are empty than it returns integer so should check if its array
                 if (is_array($queue->event)) {
                     if (in_array($eventName, $queue->event)) {
-                        $value = eval($queue->input_condition);
+                        $value = eval($queue->condition);
                         if ($value === true) {
                             $queue->pushItem($model);
                         }

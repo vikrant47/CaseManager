@@ -2,7 +2,7 @@ var EngineObservable = Engine.instance.define('engine.EngineObservable', {
     constructor: function () {
         this.events = {};
     },
-    emit: function (eventName, args) {
+    emit: function (eventName, ...args) {
         const _this = this;
         if (this.events[eventName]) {
             this.events[eventName].forEach(function (callbaack) {
@@ -345,7 +345,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         return this.getBaseUrl() + '/' + controller.replace(/\\/g, '/').replace('/Controllers', '').toLocaleLowerCase();
     },
     getCurrentControllerUrl: function () {
-        return this.getCurrentControllerUrl(this.currentModel.controller);
+        return this.getControllerUrl(this.currentModel.controller);
     },
     navigateToApp: function (appCode) {
         return this.request('onNavigateApplication', {

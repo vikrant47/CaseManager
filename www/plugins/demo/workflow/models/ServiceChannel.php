@@ -16,14 +16,16 @@ class ServiceChannel extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_service_channels';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
      */
     public $rules = [
+        'name' => 'required',
+        'model' => 'required',
+        'sort_order' => 'required',
     ];
-
     public $belongsTo = [
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
@@ -34,7 +36,7 @@ public $incrementing = false;
         return EventHandlerServiceProvider::$MODEL_EVENTS_OPTIONS;
     }
 
-    public $jsonable = ['event'];
+    public $jsonable = ['condition'];
 
     public $attachAuditedBy = true;
 

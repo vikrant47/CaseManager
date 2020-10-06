@@ -14,6 +14,22 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
+                                                                            "id"=>"e9f77000-0784-11eb-9634-45f73bce36cc",
+                                                                                        "created_at"=>"2020-10-06 03:35:00",
+                                                                                        "updated_at"=>"2020-10-06 03:35:14",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Work",
+                                                                                        "model"=>"Demo\Workflow\Models\Work",
+                                                                                        "controller"=>"DemoWorkflow\Controllers\WorkController",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "audit"=> false,
+                                                                                        "viewable"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\"*\"]",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> false
+                            ] ,            [
                                                                             "id"=>"655c489d-961b-458c-b233-ade97b1d2eb4",
                                                                                         "created_at"=>"2019-12-20 14:15:39",
                                                                                         "updated_at"=>"2019-12-20 14:15:39",
@@ -22,22 +38,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "name"=>"Queue",
                                                                                         "model"=>"Demo\Workflow\Models\Queue",
                                                                                         "controller"=>"Demo\Workflow\Controllers\QueueController",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
-                                                                                        "audit"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\"*\"]",
-                                                                                        "description"=> null,
-                                                                                        "attach_audited_by"=> 1
-                            ] ,            [
-                                                                            "id"=>"bca86a91-3f71-49e9-bf51-72b7003c9571",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Queue Item",
-                                                                                        "model"=>"Demo\Workflow\Models\QueueItem",
-                                                                                        "controller"=>"Demo\Workflow\Controllers\QueueItemController",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
@@ -142,19 +142,19 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "description"=> null,
                                                                                         "attach_audited_by"=> 1
                             ] ,            [
-                                                                            "id"=>"cf9c3c76-767e-4081-9149-3769465c0fc7",
+                                                                            "id"=>"bca86a91-3f71-49e9-bf51-72b7003c9571",
                                                                                         "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2020-04-12 13:38:42",
+                                                                                        "updated_at"=>"2020-10-04 06:53:23",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "name"=>"Workflow Item",
-                                                                                        "model"=>"Demo\Workflow\Models\WorkflowItem",
-                                                                                        "controller"=>"Demo\Workflow\Controllers\WorkflowItemController",
+                                                                                        "name"=>"Task",
+                                                                                        "model"=>"Demo\Workflow\Models\Task",
+                                                                                        "controller"=>"Demo\Workflow\Controllers\TaskController",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "audit"=> false,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
-                                                                                        "audit_columns"=>"[\"id\",\"created_at\",\"updated_at\",\"0\"]",
+                                                                                        "audit_columns"=>"[\"*\"]",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> 1
                             ]             ]);
