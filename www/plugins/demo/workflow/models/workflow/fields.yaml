@@ -57,6 +57,13 @@ tabs:
             tab: 'Model Configuration'
             dependsOn:
                 - model_ref
+        sort_order:
+            label: Order
+            span: auto
+            default: 1
+            type: number
+            tab: 'Model Configuration'
+            required: 1
         definition:
             label: Definition
             prompt: 'Add new item'

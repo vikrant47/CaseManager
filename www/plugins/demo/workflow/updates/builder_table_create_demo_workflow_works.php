@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoWorkflowworks extends Migration
+class BuilderTableCreateDemoWorkflowWorks extends Migration
 {
     public function up()
     {
@@ -18,9 +18,11 @@ class BuilderTableCreateDemoWorkflowworks extends Migration
             $table->uuid('record_id');
             $table->uuid('workflow_id');
             $table->integer('assigned_to_id');
+            $table->integer('priority')->default(1);
             $table->uuid('current_state_id');
-            $table->timestamp('finished_at')->nullable();
-            $table->uuid('engine_application_id');
+            $table->string('status')->default('init');
+            $table->timestamp('completed_at')->nullable();
+            $table->json('context')->nullable();
         });
     }
 

@@ -17,11 +17,12 @@ class Work extends Model
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelTrait;
 
+
     /**
      * @var string The database table used by the model.
      */
     public $table = 'demo_workflow_works';
-public $incrementing = false;
+    public $incrementing = false;
 
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
@@ -37,6 +38,10 @@ public $incrementing = false;
      * @var array Validation rules
      */
     public $rules = [
+        'status' => 'required',
+        'priority' => 'required',
+        'model' => 'required',
+        'record_id' => 'required',
     ];
     public $attachAuditedBy = true;
 

@@ -49,6 +49,7 @@ class Workflow extends Model
         'model' => 'required',
         'application' => 'required',
         'definition' => 'required|array|min:2',
+        'sort_order' => 'required',
     ];
     public $attachAuditedBy = true;
 

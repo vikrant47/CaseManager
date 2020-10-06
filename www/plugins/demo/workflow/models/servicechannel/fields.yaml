@@ -6,13 +6,19 @@ fields:
         type: text
     description:
         label: Description
-        span: auto
-        type: text
+        span: full
+        type: richeditor
     active:
         label: Active
         span: auto
         default: 1
         type: switch
+    auto_start_workflow:
+        label: Auto Start Workflow
+        span: auto
+        default: 1
+        type: switch
+        commentBelow: 'Auto start workflow when an item of this channel is created'
     application:
         label: Application
         nameFrom: code
@@ -30,7 +36,7 @@ tabs:
             span: auto
             required: 1
             type: relation
-            tab: Input
+            tab: 'Model Configuration'
             comment: 'Qualified Model for channel.'
         condition:
             label: Condition
@@ -38,9 +44,16 @@ tabs:
             modelField: model
             modelType: Demo\Core\Models\Webhook
             type: querybuilderwidget
-            tab: Input
+            tab: 'Model Configuration'
             dependsOn:
                 - model_ref
+        sort_order:
+            label: Order
+            span: auto
+            default: 1
+            type: number
+            tab: 'Model Configuration'
+            required: 1
         _inbox_order:
             label: 'Inbox Order'
             showSearch: true

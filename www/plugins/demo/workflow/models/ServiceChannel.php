@@ -24,6 +24,7 @@ class ServiceChannel extends Model
     public $rules = [
         'name' => 'required',
         'model' => 'required',
+        'sort_order' => 'required',
     ];
     public $belongsTo = [
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id'],

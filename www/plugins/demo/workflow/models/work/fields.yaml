@@ -9,27 +9,37 @@ fields:
         label: 'Current State'
         span: auto
         type: relation
+    status:
+        label: Status
+        span: auto
+        type: text
+        required: 1
+    priority:
+        label: Priority
+        span: auto
+        type: text
+        required: 1
     model_ref:
         label: 'Model'
         span: auto
         type: relation
+        required: 1
     record_id:
         label: 'Record Id'
         span: auto
         type: text
+        required: 1
     assigned_to:
         label: 'Assigned To'
         nameFrom: email
         descriptionFrom: description
         span: auto
         type: relation
-    application:
-        label: Application
-        nameFrom: code
-        descriptionFrom: version
+    context:
+        label: Context
         span: auto
-        required: 1
-        type: relation
+        type: codeeditor
+        language: javascript
 tabs:
     fields:
         _transitions:
