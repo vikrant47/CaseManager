@@ -38,6 +38,6 @@ tabs:
             relation: HasMany
             targetKey: id
             targetModel: Demo\Workflow\Models\WorkflowTransition
-            key: workflow_item_id
+            key: work_id
             type: relatedlist
             tab: Transitions

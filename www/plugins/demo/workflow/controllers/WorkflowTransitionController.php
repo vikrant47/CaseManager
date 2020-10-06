@@ -3,12 +3,12 @@
 use Backend\Classes\Controller;
 use BackendMenu;
 use Demo\Core\Controllers\AbstractSecurityController;
-use Demo\Workflow\Models\WorkflowItem;
+use Demo\Workflow\Models\Work;
 
 class WorkflowTransitionController extends AbstractSecurityController
 {
     public $implement = [        'Backend\Behaviors\ListController',        'Backend\Behaviors\FormController',        'Backend\Behaviors\ReorderController'    ];
-    
+
     public $listConfig = 'config_list.yaml';
     public $formConfig = 'config_form.yaml';
     public $reorderConfig = 'config_reorder.yaml';
@@ -21,6 +21,6 @@ class WorkflowTransitionController extends AbstractSecurityController
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'workflow_item' => [WorkflowItem::class, 'key' => 'workflow_entities_id'],
+        'work' => [work::class, 'key' => 'workflow_entities_id'],
     ];
 }

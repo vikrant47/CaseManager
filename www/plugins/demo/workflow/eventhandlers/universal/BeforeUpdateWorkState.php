@@ -8,12 +8,12 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Workflow\Models\Queue;
 use Demo\Workflow\Models\Task;
-use Demo\Workflow\Models\WorkflowItem;
+use Demo\Workflow\Models\Work;
 use Demo\Workflow\Models\WorkflowTransition;
 
-class BeforeUpdateWorkflowItemState
+class BeforeUpdateWorkState
 {
-    public $model = WorkflowItem::class;
+    public $model = work::class;
     public $events = ['updated'];
     public $sort_order = -1000;
 
@@ -29,7 +29,7 @@ class BeforeUpdateWorkflowItemState
             $transition = new WorkflowTransition();
             $transition->from_state_id = $original['current_state_id'];
             $transition->to_state_id = $model->current_state_id;
-            $transition->workflow_item_id = $model->id;
+            $transition->work_id = $model->id;
             $data = request()->attributes->get('WORKFLOW_ITEM_DATA_' . $model->id);
             $backward_direction = request()->attributes->get('backwardDirection');
             $transition->data = $data;

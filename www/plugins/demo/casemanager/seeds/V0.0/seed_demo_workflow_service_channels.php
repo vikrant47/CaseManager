@@ -21,12 +21,13 @@ class SeedDemoWorkflowServiceChannels implements Seedable
                                                                                         "updated_by_id"=> 1,
                                                                                         "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "name"=>"Case Channel",
-                                                                                        "event"=>"[\"creating\"]",
                                                                                         "description"=> "",
-                                                                                        "model"=>"Demo\Workflow\Models\WorkflowItem",
+                                                                                        "model"=>"Demo\Workflow\Models\Work",
                                                                                         "priority"=> 1,
                                                                                         "active"=> 1,
-                                                                                        "condition"=>"{\r\n  \"condition\": \"AND\",\r\n  \"rules\": [\r\n    {\r\n      \"id\": \"model\",\r\n      \"field\": \"model\",\r\n      \"type\": \"relation\",\r\n      \"input\": \"select\",\r\n      \"operator\": \"equal\",\r\n      \"value\": \"Demo\\Casemanager\\Models\\CaseModel\",\r\n      \"displayValue\": \"Case Model\"\r\n    }\r\n  ],\r\n  \"not\": false,\r\n  \"valid\": true\r\n}"
+                                                                                        "condition"=>"{\r\n  \"condition\": \"AND\",\r\n  \"rules\": [\r\n    {\r\n      \"id\": \"model\",\r\n      \"field\": \"model\",\r\n      \"type\": \"relation\",\r\n      \"input\": \"select\",\r\n      \"operator\": \"equal\",\r\n      \"value\": \"Demo\Casemanager\Models\CaseModel\",\r\n      \"displayValue\": \"Case Model\"\r\n    }\r\n  ],\r\n  \"not\": false,\r\n  \"valid\": true\r\n}",
+                                                                                        "sort_order"=> 0,
+                                                                                        "auto_start_workflow"=> 1
                             ]             ]);
         }
 

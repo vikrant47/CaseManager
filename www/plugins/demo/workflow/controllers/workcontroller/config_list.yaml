@@ -1,5 +1,5 @@
-list: $/demo/workflow/models/workflowitem/columns.yaml
-modelClass: Demo\Workflow\Models\WorkflowItem
+list: $/demo/workflow/models/work/columns.yaml
+modelClass: Demo\Workflow\Models\Work
 title: WorkflowEntities
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true
@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'demo/workflow/workflowitemcontroller/update/:id'
+recordUrl: 'demo/workflow/workcontroller/update/:id'

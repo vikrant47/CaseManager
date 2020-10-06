@@ -7,7 +7,7 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Workflow;
-use Demo\Workflow\Models\WorkflowItem;
+use Demo\Workflow\Models\Work;
 use Demo\Workflow\Models\WorkflowTransition;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -27,7 +27,7 @@ class SearchWorkflowBeforePersist
     public function handler($event, $model)
     {
         $logger = PluginConnection::getCurrentLogger();
-        $ignoreModels = [WorkflowItem::class, WorkflowTransition::class, EventLog::class];
+        $ignoreModels = [work::class, WorkflowTransition::class, EventLog::class];
         $includedPackage = ['Workflow'];
         $modelClass = get_class($model);
         if (!in_array($modelClass, $ignoreModels) /*&& in_array(explode('\\', get_class($model))[1], $includedPackage)*/) {

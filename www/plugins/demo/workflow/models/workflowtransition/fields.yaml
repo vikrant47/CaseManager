@@ -1,6 +1,6 @@
 fields:
-    workflow_item:
-        label: 'Workflow Item'
+    work:
+        label: 'Work'
         nameFrom: id
         descriptionFrom: description
         span: auto

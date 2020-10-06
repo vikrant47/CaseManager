@@ -115,19 +115,19 @@ class Workflow extends Model
     /**
      * This will start workflow for given model
      * Steps -
-     * Create entry in Workflow Items with given model and starting state of workflow.
+     * Create entry in Works with given model and starting state of workflow.
      */
     public function start($model)
     {
-        $workflowItem = new WorkflowItem();
-        $workflowItem->workflow = $this;
-        $workflowItem->record_id = $model->id;
-        $workflowItem->model = get_class($model);
+        $work = new work();
+        $work->workflow = $this;
+        $work->record_id = $model->id;
+        $work->model = get_class($model);
         $from_state = new WorkflowState();
         $from_state->id = $this->definition[0]['from_state'];
-        $workflowItem->current_state = $from_state;
-        $workflowItem->engine_application_id = EngineApplication::getCurrentApplication()->id;
-        $workflowItem->save();
+        $work->current_state = $from_state;
+        $work->engine_application_id = EngineApplication::getCurrentApplication()->id;
+        $work->save();
     }
 
     public function getPreviousStateId(WorkflowState $current_state)

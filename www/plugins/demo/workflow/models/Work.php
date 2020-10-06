@@ -12,7 +12,7 @@ use October\Rain\Exception\ApplicationException;
  * Model
  * An entity can only be part of 1 workflow. A unique index has been added on record_id,entity_name combination
  */
-class WorkflowItem extends Model
+class Work extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelTrait;
@@ -20,7 +20,7 @@ class WorkflowItem extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'demo_workflow_workflow_items';
+    public $table = 'demo_workflow_works';
 public $incrementing = false;
 
     public $belongsTo = [
@@ -97,7 +97,7 @@ public $incrementing = false;
         }
         $next_queue->pushItem($model);
         $transition = new WorkflowTransition();
-        $transition->workflow_item = $this;
+        $transition->work = $this;
         $transition->from_state = $this->current_state;
         $transition->to_state = $next_state;
         $transition->save();
@@ -113,7 +113,7 @@ public $incrementing = false;
 
     public function forceUpdate()
     {
-        WorkflowItem::where('id', $this->id)->update($this->toArray());
+        work::where('id', $this->id)->update($this->toArray());
     }
 
     public function scopeFindByEntity($query, $entityType, $id)

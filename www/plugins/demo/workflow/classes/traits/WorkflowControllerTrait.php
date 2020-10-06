@@ -4,9 +4,9 @@
 namespace Demo\Workflow\Classes\Traits;
 
 
-use Demo\Workflow\Controllers\WorkflowItemController;
+use Demo\Workflow\Controllers\WorkController;
 use Demo\Workflow\Models\Queue;
-use Demo\Workflow\Models\WorkflowItem;
+use Demo\Workflow\Models\Work;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -17,19 +17,19 @@ use Backend\Models\User;
 
 trait WorkflowControllerTrait
 {
-    public function onSubmitWorkflowItem($model)
+    public function onSubmitwork($model)
     {
         if (is_numeric($model)) {
             $model = $this->formFindModelObject($model);
         }
-        /**@var $workflowItems Collection<WorkflowItem> */
-        $workflowItem = WorkflowItem::where('model', '=', get_class($model))->where('record_id', '=', $model->id)->first();
+        /**@var $works Collection<work> */
+        $work = work::where('model', '=', get_class($model))->where('record_id', '=', $model->id)->first();
         // throw new ApplicationException(json_encode($workflowEntities, true));
-        if (empty($workflowItem)) {
+        if (empty($work)) {
             throw new ApplicationException('Unable to submit. No active workflow found');
         } else {
-            /**@var $workflowItem WorkflowItem */
-            $workflowItem->makeTransition();
+            /**@var $work work */
+            $work->makeTransition();
         }
         Flash::success('Pushed Successfully!');
         return $this->makeRedirect('-close');

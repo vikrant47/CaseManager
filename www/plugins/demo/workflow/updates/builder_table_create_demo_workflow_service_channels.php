@@ -7,8 +7,7 @@ class BuilderTableCreateDemoWorkflowServiceChannels extends Migration
 {
     public function up()
     {
-        Schema::create('demo_workflow_service_channels', function($table)
-        {
+        Schema::create('demo_workflow_service_channels', function ($table) {
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
@@ -22,6 +21,8 @@ class BuilderTableCreateDemoWorkflowServiceChannels extends Migration
             $table->integer('priority');
             $table->boolean('active')->default(true);
             $table->text('condition');
+            $table->integrer('sort_order')->default(0);
+            $table->boolean('auto_start_workflow')->default(true);
         });
     }
 

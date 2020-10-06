@@ -9,7 +9,7 @@ use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Task;
 use Demo\Workflow\Models\Workflow;
-use Demo\Workflow\Models\WorkflowItem;
+use Demo\Workflow\Models\Work;
 use Demo\Workflow\Models\WorkflowTransition;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -27,10 +27,10 @@ class BeforeCreateTaskAssignQueueToCase
     public function handler($event, $model)
     {
         $logger = PluginConnection::getCurrentLogger();
-        if ($model->model === WorkflowItem::class) {
-            $workflowItem = WorkflowItem::where(['id' => $model->record_id, 'model' => CaseModel::class])->first();
-            if (!empty($workflowItem)) {
-                $entity = CaseModel::find($workflowItem->record_id);
+        if ($model->model === Work::class) {
+            $work = Work::where(['id' => $model->record_id, 'model' => CaseModel::class])->first();
+            if (!empty($work)) {
+                $entity = CaseModel::find($work->record_id);
                 $entity->queue_id = $model->queue_id;
                 if ($entity->exists) {
                     $entity->save();

@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo\Casemanager\EventHandlers\WorkflowItem;
+namespace Demo\Casemanager\EventHandlers\Work;
 
 
 use Demo\Casemanager\Models\CaseModel;
@@ -8,7 +8,7 @@ use Demo\Core\Classes\Beans\ScriptContext;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Workflow;
-use Demo\Workflow\Models\WorkflowItem;
+use Demo\Workflow\Models\Work;
 use Demo\Workflow\Models\WorkflowTransition;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -16,7 +16,7 @@ use System\Models\EventLog;
 
 class BeforeUpdateAutoAssignCaseToUser
 {
-    public $model = WorkflowItem::class;
+    public $model = Work::class;
     public $events = ['updating', 'creating'];
     public $sort_order = 999;
 

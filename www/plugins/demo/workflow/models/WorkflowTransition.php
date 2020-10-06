@@ -27,7 +27,7 @@ public $incrementing = false;
     public $belongsTo = [
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
-        'workflow_item' => [WorkflowItem::class, 'key' => 'workflow_item_id'],
+        'work' => [work::class, 'key' => 'work_id'],
         'from_state' => [WorkflowState::class, 'key' => 'from_state_id'],
         'to_state' => [WorkflowState::class, 'key' => 'to_state_id'],
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id']

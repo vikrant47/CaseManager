@@ -7,7 +7,7 @@ use Demo\Core\Controllers\AbstractSecurityController;
 use Demo\Workflow\Models\Workflow;
 use October\Rain\Exception\ApplicationException;
 
-class WorkflowItemController extends AbstractSecurityController
+class workController extends AbstractSecurityController
 {
     public $implement = ['Backend\Behaviors\ListController', 'Backend\Behaviors\FormController', 'Backend\Behaviors\ReorderController'];
 

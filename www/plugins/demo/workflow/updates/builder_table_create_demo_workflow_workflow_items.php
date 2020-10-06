@@ -3,11 +3,11 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableCreateDemoWorkflowWorkflowItems extends Migration
+class BuilderTableCreateDemoWorkflowworks extends Migration
 {
     public function up()
     {
-        Schema::create('demo_workflow_workflow_items', function ($table) {
+        Schema::create('demo_workflow_works', function ($table) {
             $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
             $table->timestamp('created_at')->nullable();
@@ -26,6 +26,6 @@ class BuilderTableCreateDemoWorkflowWorkflowItems extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('demo_workflow_workflow_items');
+        Schema::dropIfExists('demo_workflow_works');
     }
 }

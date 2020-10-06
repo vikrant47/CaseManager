@@ -83,7 +83,7 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "updated_at"=>"2019-12-21 11:25:39",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "source_model"=>"Demo\Workflow\Models\WorkflowItem",
+                                                                                        "source_model"=>"Demo\Workflow\Models\Work",
                                                                                         "target_model"=>"Demo\Workflow\Models\Workflow",
                                                                                         "foreign_key"=>"workflow_id",
                                                                                         "cascade"=>"restrict",
@@ -100,14 +100,14 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "source_model"=>"Demo\Workflow\Models\WorkflowTransition",
-                                                                                        "target_model"=>"Demo\Workflow\Models\WorkflowItem",
-                                                                                        "foreign_key"=>"workflow_item",
+                                                                                        "target_model"=>"Demo\Workflow\Models\Work",
+                                                                                        "foreign_key"=>"work",
                                                                                         "cascade"=>"delete",
                                                                                         "relation"=>"belongs_to",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "cascade_priority_order"=> 0,
                                                                                         "description"=> "",
-                                                                                        "name"=>"Workflow Transition belongs to a WorkflowItem",
+                                                                                        "name"=>"Workflow Transition belongs to a work",
                                                                                         "active"=> 1
                             ]             ]);
         }
