@@ -30,7 +30,7 @@ class Work extends Model
         'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
         'workflow' => [Workflow::class, 'key' => 'workflow_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
-        'current_state' => [WorkflowState::class, 'key' => 'current_state_id'],
+        'current_state' => [WorkflowState::class, 'key' => 'workflow_state_id'],
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id']
     ];
 
@@ -61,7 +61,7 @@ class Work extends Model
     }
 
     /**
-     * Make a transition from current state to new state
+     * Make a transition from workflow state to new state
      * Steps -
      * Step 1. Check if workflow is active if not then throw exception
      * Step 2. Check if assigned to a user if not then throw exception
@@ -71,7 +71,7 @@ class Work extends Model
      * Step 6. Push item to queue
      * Step 7. Create/Persist transition object
      * Step 8. Set assigned user to null in current QueueEntity record because it must be assigned using queue
-     * Step 9. Update current state in current QueueEntity record
+     * Step 9. Update workflow state in current QueueEntity record
      * Step 10. Update current QueueEntity record
      * @param null $next_state
      * @param bool $backwardDirection

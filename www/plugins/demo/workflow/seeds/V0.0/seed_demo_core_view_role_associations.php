@@ -14,6 +14,28 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
     {
             Db::table('demo_core_view_role_associations')->insert([
             [
+                                                                            "id"=>"428bc2b0-084c-11eb-9e8a-0334846384c5",
+                                                                                        "created_at"=>"2020-10-07 03:21:59",
+                                                                                        "updated_at"=>"2020-10-07 03:21:59",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "record_id"=>"bcd5d88e-e08f-47e0-a377-5761c8cc3754",
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
+                                                                            "id"=>"615474e0-084d-11eb-b7d6-ff6a5a4bf945",
+                                                                                        "created_at"=>"2020-10-07 03:30:00",
+                                                                                        "updated_at"=>"2020-10-07 03:30:00",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "record_id"=>"2b9c5851-39a1-4c32-9bb9-b51958fdeee8",
+                                                                                        "model"=>"Demo\Core\Models\Navigation",
+                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
+                            ] ,            [
                                                                             "id"=>"26a99480-02d3-11eb-bc4b-052282e390f2",
                                                                                         "created_at"=>"2020-09-30 04:12:27",
                                                                                         "updated_at"=>"2020-09-30 04:12:27",

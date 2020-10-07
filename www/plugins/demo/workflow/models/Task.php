@@ -23,7 +23,8 @@ class Task extends Model
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'queue' => [Queue::class, 'key' => 'queue_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
-        'assigned_to' => [User::class, 'key' => 'assigned_to_id']
+        'workflow_transition' => [WorkflowTransition::class, 'key' => 'workflow_transition_id'],
+        'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
     ];
 
     /**
@@ -31,7 +32,8 @@ class Task extends Model
      */
     public $rules = [
         'name' => 'required',
-        'priority' => 'required',
+        'age_priority' => 'boolean',
+        'priority' => 'required|numeric',
         'model_ref' => 'required',
         'record_id' => 'required',
     ];

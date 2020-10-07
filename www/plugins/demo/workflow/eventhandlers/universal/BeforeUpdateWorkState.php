@@ -25,10 +25,10 @@ class BeforeUpdateWorkState
     public function handler($event, $model)
     {
         $original = $model->getOriginal();
-        if (!empty($original['current_state_id']) && $original['current_state_id'] != $model->current_state_id) {
+        if (!empty($original['workflow_state_id']) && $original['workflow_state_id'] != $model->workflow_state_id) {
             $transition = new WorkflowTransition();
-            $transition->from_state_id = $original['current_state_id'];
-            $transition->to_state_id = $model->current_state_id;
+            $transition->from_state_id = $original['workflow_state_id'];
+            $transition->to_state_id = $model->workflow_state_id;
             $transition->work_id = $model->id;
             $data = request()->attributes->get('WORKFLOW_ITEM_DATA_' . $model->id);
             $backward_direction = request()->attributes->get('backwardDirection');

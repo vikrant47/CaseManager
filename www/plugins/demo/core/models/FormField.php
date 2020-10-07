@@ -17,7 +17,7 @@ class FormField extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_form_fields';
-public $incrementing = false;
+    public $incrementing = false;
 
 
     /**
@@ -25,13 +25,17 @@ public $incrementing = false;
      */
     public $rules = [
         // 'field' => 'required',
-        'form' => 'required'
+        'form' => 'required',
+        'name' => 'required',
+        'code' => 'required|regex:/^[a-zA-Z0-9_]*$/i',
     ];
-
+    public $messages = [
+        'code.regex' => 'Invalid Code! Code can only contain alphanumeric and underscore'
+    ];
     public $attachAuditedBy = true;
     public $jsonable = ['controls'];
     public $belongsTo = [
-        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id'],
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
         'field' => [CustomField::class, 'key' => 'field_id']
     ];
 

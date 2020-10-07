@@ -77,9 +77,9 @@ class BeforeCreateOrUpdateCustomField
         Schema::table($tableName, function ($table) use ($column, $self) {
             $primaryKeyColumns = [];
             $type = trim($column['type']);
-            $typeName = MigrationColumnType::toDoctrineTypeName($type);
+            $typeName = CustomField::toDoctrineTypeName($type);
             $options = $self->formatOptions($type, $column);
-            $table->addColumn($typeName, $column['name'], $options);
+            $table->addColumn($typeName, $column['code'], $options);
             /*if ($column['primary_key']) {
                 $primaryKeyColumns[] = $column['name'];
             }

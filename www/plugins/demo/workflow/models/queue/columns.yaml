@@ -1,30 +1,30 @@
 columns:
     id:
-        label: id
+        label: Id
         type: number
     name:
         searchable: true
-        label: name
+        label: Name
         type: text
-    description:
-        label: description
+    priority:
+        label: Priority
         type: text
-    model:
-        label: type
-        type: text
-    sort_order:
-        label: sort_order
+    age_priority:
+        label: Age Priority
+        type: checkbox
+    routing_rule[name]:
+        label: Routing Rule
         type: text
     created_at:
-        label: created_at
+        label: Created At
         type: datetime
     updated_at:
-        label: updated_at
+        label: Updated At
         type: datetime
     created_by[first_name]:
-        label: created_by
+        label: Created By
         type: number
     updated_by[first_name]:
-        label: updated_by
+        label: Updated By
         type: number
 

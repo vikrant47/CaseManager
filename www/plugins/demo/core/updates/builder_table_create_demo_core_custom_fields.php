@@ -16,6 +16,7 @@ class BuilderTableCreateDemoCoreCustomFields extends Migration
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
             $table->string('name');
+            $table->string('code');
             $table->text('description');
             $table->string('type');
             $table->string('model');
@@ -25,10 +26,10 @@ class BuilderTableCreateDemoCoreCustomFields extends Migration
             $table->text('default');
             $table->uuid('engine_application_id');
 
-            $table->unique('model', 'name');
+            $table->unique(['model', 'code']);
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_core_custom_fields');

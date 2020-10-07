@@ -14,12 +14,19 @@ fields:
         span: auto
         type: text
         required: 1
+        comment: 'Targeted record for this task.'
     priority:
         label: 'Priority'
         span: auto
         type: number
         min: 0
         comment: 'A task with higher priority will be picked first than with lower'
+    age_priority:
+        label: 'Age Priority'
+        span: auto
+        type: switch
+        default: true
+        comment: 'Enable this to consider the age priority of the task while calculating the priority'
 tabs:
     fields:
         queue:
@@ -27,7 +34,6 @@ tabs:
             nameFrom: name
             descriptionFrom: description
             span: auto
-            required: 1
             type: relation
             tab: Queue
             comment: 'Current Queue for the task. Selecting a queue to push this task in that queue'
@@ -43,7 +49,15 @@ tabs:
             readOnly: 1
             type: text
             tab: Queue
-
+        transition:
+            label: Transition
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            required: 0
+            type: relation
+            tab: Workflow
+            comment: 'Transition made by this task'
         assigned_to:
             emptyOption: '-- Select --'
             label: Assigned To

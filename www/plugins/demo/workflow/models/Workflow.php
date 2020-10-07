@@ -48,6 +48,7 @@ class Workflow extends Model
         'name' => 'required',
         'model' => 'required',
         'application' => 'required',
+        'priority' => 'numeric|min:1',
         'definition' => 'required|array|min:2',
         'sort_order' => 'required',
     ];
@@ -83,6 +84,7 @@ class Workflow extends Model
         ], [
             'definition.*.from_state' => 'required',
             'definition.*.to_state' => 'required',
+            'definition.*.timeout' => 'numeric|min:-1|not_in:0',
             'definition' => [
                 function ($attribute, $value, $fail) {
                     if ($value[0]['from_state'] !== '09dfd34e-0db5-49f3-96b2-23831d811a0b') {
@@ -92,7 +94,7 @@ class Workflow extends Model
                         return $fail('Invalid Definition! Workflow definition must end with End State');
                     }
                     foreach ($value as $entry) {
-                        if ($entry['to_state'] !== '8c7e9158-b65c-437a-a5d9-4b975f7b6f51' && !array_key_exists($entry, 'queue')) {
+                        if ($entry['to_state'] !== '8c7e9158-b65c-437a-a5d9-4b975f7b6f51' && !array_key_exists('queue', $entry)) {
                             return $fail('Invalid Definition! Queue is require except the last state');
                         }
                     }
@@ -102,6 +104,8 @@ class Workflow extends Model
             'definition.*.from_state' => 'Invalid Definition! From state field is required',
             'definition.*.to_state' => 'Invalid Definition! To state field is required',
             'definition.*.queue' => 'Invalid Definition! Queue field is required',
+            'definition.*.timeout.min' => 'Invalid Definition! Timeout value can not be less than -1',
+            'definition.*.timeout.not_in' => 'Invalid Definition! Timeout value can not be 0 (Zero)',
         ]);
         if ($validator->fails()) {
             throw new \October\Rain\Exception\ValidationException($validator);

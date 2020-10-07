@@ -36,8 +36,6 @@ class Queue extends Model
 
     public $belongsTo = [
         'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id'],
-        'service_channel' => [\Demo\Workflow\Models\ServiceChannel::class, 'key' => 'service_channel_id'],
-        'pop_criteria' => [\Demo\Workflow\Models\QueuePopCriteria::class, 'key' => 'pop_criteria_id'],
         'routing_rule' => [\Demo\Workflow\Models\QueueRoutingRule::class, 'key' => 'routing_rule_id'],
     ];
 
@@ -58,6 +56,8 @@ class Queue extends Model
      */
     public $rules = [
         'name' => 'required',
+        'priority' => 'required|numeric',
+        'age_priority'=>'boolean',
     ];
 
     /**
@@ -217,7 +217,7 @@ class Queue extends Model
      */
     public function popItem($item = null)
     {
-        if (!empty($item) && !empty($item->poped_at)) {
+        /*if (!empty($item) && !empty($item->poped_at)) {
             throw new ApplicationException('Item already popped ,cannot pop again' . $item->id);
         } else {
             $this->logger->debug('Pooping an item for assignment using ' . ModelUtil::toString($this->pop_criteria, 'name'));
@@ -244,7 +244,7 @@ class Queue extends Model
             } else {
                 return $this->popItem();
             }
-        }
+        }*/
         return null;
     }
 
