@@ -16,6 +16,7 @@ class CoreUser extends User
 {
     use PreferenceMaker;
 
+    public $table = 'backend_users';
     /**
      * Relations
      */

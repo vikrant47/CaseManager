@@ -22,7 +22,7 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
             $table->uuid('engine_application_id');
             $table->integer('sort_order');
             $table->string('model',255);
-            $table->text('condition');
+            $table->json('condition');
             $table->string('model_state_field')->default('workflow_state_id');
         });
     }

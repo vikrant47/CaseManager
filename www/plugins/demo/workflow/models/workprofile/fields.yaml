@@ -32,14 +32,17 @@ tabs:
                         descriptionFrom: description
                         span: full
                         type: relation
+                        comment: 'Name of the channel'
                     capacity:
                         label: Capacity
                         span: auto
                         type: number
+                        comment: 'Max number of tasks which can be handled by an Agent simultaneously. Max Task Count = (100-Weightage * N or Capacity) whichever is less'
                     weightage:
                         label: Weightage
                         span: auto
                         type: number
+                        comment: 'An agent can handle a total of 100 weightage. Max Task Count = (100/weightage or capacity) whichever is less'
                     inbox_order:
                         label: Inbox Order
                         span: auto

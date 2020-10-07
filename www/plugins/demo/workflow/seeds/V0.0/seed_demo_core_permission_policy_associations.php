@@ -50,6 +50,42 @@ class SeedDemoCorePermissionPolicyAssociations implements Seedable
                                                                                         "permission_id"=>"ea00ed00-0784-11eb-ac70-23bc12104985",
                                                                                         "policy_id"=>"e9f92600-0784-11eb-9e3a-6119dc8d869f"
                             ] ,            [
+                                                                            "id"=>"28a68c10-084d-11eb-8317-b1cb2e8ef700",
+                                                                                        "created_at"=>"2020-10-07 03:28:25",
+                                                                                        "updated_at"=>"2020-10-07 03:28:25",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "permission_id"=>"28a52ab0-084d-11eb-9df4-499d4c58db51",
+                                                                                        "policy_id"=>"28a259b0-084d-11eb-b9c6-d92efd9c0910"
+                            ] ,            [
+                                                                            "id"=>"28a84ce0-084d-11eb-bef3-79dc97887071",
+                                                                                        "created_at"=>"2020-10-07 03:28:25",
+                                                                                        "updated_at"=>"2020-10-07 03:28:25",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "permission_id"=>"28a7ccc0-084d-11eb-b8e8-873e3f0fc2dd",
+                                                                                        "policy_id"=>"28a259b0-084d-11eb-b9c6-d92efd9c0910"
+                            ] ,            [
+                                                                            "id"=>"28a97150-084d-11eb-9267-5da1a584b948",
+                                                                                        "created_at"=>"2020-10-07 03:28:25",
+                                                                                        "updated_at"=>"2020-10-07 03:28:25",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "permission_id"=>"28a8f350-084d-11eb-a658-3b626abe0ec3",
+                                                                                        "policy_id"=>"28a259b0-084d-11eb-b9c6-d92efd9c0910"
+                            ] ,            [
+                                                                            "id"=>"28aa9300-084d-11eb-b2de-cdf40cd298d7",
+                                                                                        "created_at"=>"2020-10-07 03:28:25",
+                                                                                        "updated_at"=>"2020-10-07 03:28:25",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "permission_id"=>"28aa1590-084d-11eb-95ae-a3828ee503c6",
+                                                                                        "policy_id"=>"28a259b0-084d-11eb-b9c6-d92efd9c0910"
+                            ] ,            [
                                                                             "id"=>"ea0053f0-0646-11eb-8933-57f7e283060a",
                                                                                         "created_at"=>"2020-10-04 13:38:40",
                                                                                         "updated_at"=>"2020-10-04 13:38:40",

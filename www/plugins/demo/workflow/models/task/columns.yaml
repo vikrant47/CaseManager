@@ -1,25 +1,31 @@
 columns:
     id:
-        label: id
-        type: number
-    queue_id:
-        label: queue_id
-        type: number
-    record_id:
-        label: record_id
-        type: number
-    model:
+        label: Id
+        type: text
+    queue:
+        label: Queue
+        type: text
+    model_ref[name]:
         label: model
         type: text
+    record_id:
+        label: Record Id
+        type: text
+    priority:
+        label: Priority
+        type: number
+    age_priority:
+        label: Age Priority
+        type: checkbox
     created_at:
-        label: created_at
+        label: Created At
         type: datetime
     updated_at:
-        label: updated_at
+        label: Updated At
         type: datetime
     created_by[first_name]:
-        label: created_by
-        type: number
+        label: Created By
+        type: text
     updated_by[first_name]:
-        label: updated_by
-        type: number
+        label: Updated By
+        type: text

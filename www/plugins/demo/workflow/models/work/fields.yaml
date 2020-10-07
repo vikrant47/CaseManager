@@ -6,7 +6,7 @@ fields:
         span: auto
         type: relation
     current_state:
-        label: 'Current State'
+        label: 'Workflow State'
         span: auto
         type: relation
     status:

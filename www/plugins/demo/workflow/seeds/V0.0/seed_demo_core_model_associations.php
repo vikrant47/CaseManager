@@ -62,22 +62,6 @@ class SeedDemoCoreModelAssociations implements Seedable
                                                                                         "name"=>"Queue belongs To a Model",
                                                                                         "active"=> 1
                             ] ,            [
-                                                                            "id"=>"6d3770ee-048a-44b1-972e-db4eb3e7c8f6",
-                                                                                        "created_at"=>"2019-12-21 11:25:39",
-                                                                                        "updated_at"=>"2019-12-21 11:25:39",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "source_model"=>"Demo\Workflow\Models\QueuePopCriteria",
-                                                                                        "target_model"=>"Demo\Workflow\Models\Queue",
-                                                                                        "foreign_key"=>"pop_criteria_id",
-                                                                                        "cascade"=>"delete",
-                                                                                        "relation"=>"belongs_to",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
-                                                                                        "cascade_priority_order"=> 0,
-                                                                                        "description"=> "",
-                                                                                        "name"=>"Queue Belongs To a Pop Criteria",
-                                                                                        "active"=> 1
-                            ] ,            [
                                                                             "id"=>"8b249641-e989-45f2-933b-9aece616278c",
                                                                                         "created_at"=>"2019-12-21 11:25:39",
                                                                                         "updated_at"=>"2019-12-21 11:25:39",

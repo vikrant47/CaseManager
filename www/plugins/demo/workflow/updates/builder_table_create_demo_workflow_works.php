@@ -19,7 +19,7 @@ class BuilderTableCreateDemoWorkflowWorks extends Migration
             $table->uuid('workflow_id');
             $table->integer('assigned_to_id');
             $table->integer('priority')->default(1);
-            $table->uuid('current_state_id');
+            $table->uuid('workflow_state_id');
             $table->string('status')->default('init');
             $table->timestamp('completed_at')->nullable();
             $table->json('context')->nullable();

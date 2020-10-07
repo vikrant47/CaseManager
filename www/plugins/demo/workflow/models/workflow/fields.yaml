@@ -20,6 +20,7 @@ fields:
         type: number
         required: 1
         default: 1
+        min: 1
     application:
         label: Application
         nameFrom: code
@@ -66,7 +67,7 @@ tabs:
             required: 1
         definition:
             label: Definition
-            prompt: 'Add new item'
+            prompt: 'Add new transition'
             span: full
             type: repeater
             tab: Definition
@@ -88,6 +89,13 @@ tabs:
                         span: auto
                         type: relation
                         required: 1
+                    timeout:
+                        label: Timeout
+                        span: auto
+                        type: number
+                        min: -1
+                        default: -1
+                        comment: 'Max time for a work to stay in this transition. -1 = infinity'
         _work:
             label: 'Works'
             span: full
