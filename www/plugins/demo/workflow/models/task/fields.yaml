@@ -30,6 +30,7 @@ fields:
 tabs:
     fields:
         queue:
+            emptyOption: '-- Select --'
             label: Queue
             nameFrom: name
             descriptionFrom: description
@@ -49,9 +50,10 @@ tabs:
             readOnly: 1
             type: text
             tab: Queue
-        transition:
+        workflow_transition:
+            emptyOption: '-- Select --'
             label: Transition
-            nameFrom: name
+            nameFrom: id
             descriptionFrom: description
             span: auto
             required: 0

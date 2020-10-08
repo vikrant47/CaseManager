@@ -42,6 +42,7 @@ class Work extends Model
         'priority' => 'required',
         'model' => 'required',
         'record_id' => 'required',
+        'context' => 'json',
     ];
     public $attachAuditedBy = true;
 

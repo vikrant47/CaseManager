@@ -58,6 +58,8 @@ class Queue extends Model
         'name' => 'required',
         'priority' => 'required|numeric',
         'age_priority'=>'boolean',
+        'age_priority_boost'=>'numeric|required_if:age_priority,1',
+        'age_unit'=>'required_if:age_priority,1',
     ];
 
     /**

@@ -11,7 +11,7 @@ columns:
         type: text
     age_priority:
         label: Age Priority
-        type: checkbox
+        type: switch
     routing_rule[name]:
         label: Routing Rule
         type: text

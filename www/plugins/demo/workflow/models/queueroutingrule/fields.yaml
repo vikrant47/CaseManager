@@ -4,11 +4,18 @@ fields:
         span: auto
         required: 1
         type: text
+    application:
+        label: Application
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
     description:
         label: Description
         size: ''
-        span: auto
-        type: textarea
+        span: full
+        type: richeditor
     script:
         label: Script
         size: giant
@@ -18,10 +25,3 @@ fields:
         stretch: 1
         type: codeeditor
         commentAbove: 'This should return User Object'
-    application:
-        label: Application
-        nameFrom: code
-        descriptionFrom: version
-        span: auto
-        required: 1
-        type: relation
