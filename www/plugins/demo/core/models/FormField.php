@@ -24,10 +24,7 @@ class FormField extends Model
      * @var array Validation rules
      */
     public $rules = [
-        // 'field' => 'required',
-        'form' => 'required',
-        'name' => 'required',
-        'code' => 'required|regex:/^[a-zA-Z0-9_]*$/i',
+        'field' => 'required_if:virtual,false',
     ];
     public $messages = [
         'code.regex' => 'Invalid Code! Code can only contain alphanumeric and underscore'

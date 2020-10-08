@@ -37,6 +37,9 @@ class CustomField extends Model
      * @var array Validation rules
      */
     public $rules = [
+        'form' => 'required',
+        'name' => 'required',
+        'code' => 'required|regex:/^[a-zA-Z0-9_]*$/i',
     ];
 
     public $attachAuditedBy = true;

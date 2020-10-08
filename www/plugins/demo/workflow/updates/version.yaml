@@ -30,3 +30,6 @@
 1.0.12:
     - 'Created table demo_workflow_work_profiles'
     - builder_table_create_demo_workflow_work_profiles.php
+1.0.13:
+    - 'Altered table backend_users, added work profile columns'
+    - builder_table_alter_demo_core_users.php

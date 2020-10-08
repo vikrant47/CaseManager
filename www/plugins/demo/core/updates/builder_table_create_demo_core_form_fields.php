@@ -15,7 +15,6 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
-            $table->string('label');
             $table->uuid('field_id')->nullable();
             $table->string('form');
             $table->uuid('engine_application_id');
@@ -27,7 +26,7 @@ class BuilderTableCreateDemoCoreFormFields extends Migration
             $table->unique('form', 'field_id');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_core_form_fields');

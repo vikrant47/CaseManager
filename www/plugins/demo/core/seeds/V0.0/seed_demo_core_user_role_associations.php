@@ -23,15 +23,6 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
                             ] ,            [
-                                                                            "id"=>"980dc6d1-033c-4dae-a7ef-4522e6c976a7",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2019-12-20 14:15:39",
-                                                                                        "user_id"=> 1,
-                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
-                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1
-                            ] ,            [
                                                                             "id"=>"d9f9f39e-1a2d-4eb9-9619-0fc673ca4c14",
                                                                                         "created_at"=>"2020-04-06 08:54:23",
                                                                                         "updated_at"=>"2020-04-06 08:54:23",
@@ -46,6 +37,15 @@ class SeedDemoCoreUserRoleAssociations implements Seedable
                                                                                         "updated_at"=>"2020-06-13 12:12:52",
                                                                                         "user_id"=> 2,
                                                                                         "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
+                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1
+                            ] ,            [
+                                                                            "id"=>"defccb80-091b-11eb-8bee-5dae8384f233",
+                                                                                        "created_at"=>"2020-10-08 04:08:07",
+                                                                                        "updated_at"=>"2020-10-08 04:08:07",
+                                                                                        "user_id"=> 1,
+                                                                                        "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
                                                                                         "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1
