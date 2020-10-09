@@ -1,10 +1,10 @@
 name: WorkflowState
 form: $/demo/workflow/models/workflowstate/fields.yaml
 modelClass: Demo\Workflow\Models\WorkflowState
-defaultRedirect: demo/workflow/workflowstate
+defaultRedirect: demo/workflow/workflowstatecontroller
 create:
-    redirect: 'demo/workflow/workflowstate/update/:id'
-    redirectClose: demo/workflow/workflowstate
+    redirect: 'demo/workflow/workflowstatecontroller/update/:id'
+    redirectClose: demo/workflow/workflowstatecontroller
 update:
-    redirect: demo/workflow/workflowstate
-    redirectClose: demo/workflow/workflowstate
+    redirect: demo/workflow/workflowstatecontroller
+    redirectClose: demo/workflow/workflowstatecontroller

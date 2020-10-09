@@ -4,19 +4,22 @@ fields:
         span: auto
         required: 1
         type: text
+        comment: 'Name of the priority.'
     description:
         label: Description
         size: ''
         span: auto
         type: textarea
+        comment: 'Description for the priority.'
     value:
         label: value
         span: auto
         type: number
         min: 1
-        max: 10
+        comment: 'This value will be added to total task priority. A task with higher priority value will be picked first'
     active:
         label: Active
         span: auto
         default: 1
         type: switch
+        comment: 'Activate/Deactivate priority'

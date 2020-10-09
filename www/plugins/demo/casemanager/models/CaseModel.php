@@ -1,6 +1,7 @@
 <?php namespace Demo\Casemanager\Models;
 
 use Demo\Workflow\Models\Queue;
+use Demo\Workflow\Models\Work;
 use Demo\Workflow\Models\WorkflowState;
 use Model;
 use Backend\Models\User;
@@ -27,8 +28,12 @@ class CaseModel extends Model
         'priority' => [CasePriority::class, 'key' => 'priority_id'],
         'workflow_state' => [WorkflowState::class, 'key' => 'workflow_state_id'],
         'queue' => [Queue::class, 'key' => 'queue_id'],
-    ];
+        'work' => [Work::class, 'key' => 'work_id'],
 
+    ];
+    public $attachMany = [
+        'documents' => 'System\Models\File'
+    ];
     /**
      * @var array Validation rules
      */

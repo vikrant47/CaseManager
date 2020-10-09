@@ -6,6 +6,4 @@
 1.0.3:
     - 'Created table demo_casemanager_case_priorities'
     - builder_table_create_demo_casemanager_case_priorities.php
-1.0.4:
-    - 'Created table demo_casemanager_projects'
-    - builder_table_create_demo_casemanager_projects.php
+

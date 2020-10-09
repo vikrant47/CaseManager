@@ -39,7 +39,7 @@ class Work extends Model
      */
     public $rules = [
         'status' => 'required',
-        'priority' => 'required',
+        'priority' => 'required|numeric',
         'model' => 'required',
         'record_id' => 'required',
         'context' => 'json',

@@ -20,22 +20,12 @@ fields:
         descriptionFrom: description
         span: auto
         required: 1
-        type: recordfinder
-        list: $/demo/casemanager/models/casepriority/columns.yaml
-        prompt: Click the %s button to find a user
-        comment: 'Select Priority'
-    comments:
-        label: Comments
-        size: small
-        span: auto
-        type: richeditor
-    assigned_to:
-        label: 'Assigned To'
-        nameFrom: email
-        emptyOption: 'Select a user'
-        descriptionFrom: description
-        span: auto
+        emptyOption: '--Select--'
         type: relation
+        #type: recordfinder
+        #list: $/demo/casemanager/models/casepriority/columns.yaml
+        #prompt: Click the %s button to find a user
+        comment: 'Select Priority'
     case_version:
         label: 'Case Version'
         span: auto
@@ -44,20 +34,31 @@ fields:
         label: 'TTL'
         span: auto
         type: datepicker
+    comments:
+        label: Comments
+        size: large
+        span: full
+        type: richeditor
 tabs:
     fields:
+        documents:
+            label: ''
+            type: fileupload
+            mode: file
+            comment: 'Upload a document'
+            tab: 'Documents'
         workflow_state:
             label: State
             span: auto
             readOnly: 1
             type: relation
-            tab: System
+            tab: 'Routing'
         queue:
             label: Queue
             span: auto
             readOnly: 1
             type: relation
-            tab: System
+            tab: 'Routing'
         assigned_to:
             label: 'Assigned To'
             nameFrom: login
@@ -65,11 +66,19 @@ tabs:
             span: auto
             readOnly: 1
             type: relation
-            tab: System
+            tab: 'Routing'
+        work:
+            label: 'Work'
+            nameFrom: id
+            descriptionFrom: status
+            span: auto
+            readOnly: 1
+            type: relation
+            tab: 'Routing'
         version:
             label: 'Audit Version'
             span: auto
             readOnly: 1
             type: number
-            tab: System
+            tab: 'Routing'
 

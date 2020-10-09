@@ -9,4 +9,4 @@ toolbar:
     buttons: list_toolbar
     search:
         prompt: 'backend::lang.list.search_prompt'
-recordUrl: 'demo/casemanager/casepriority/update/:id'
+recordUrl: 'demo/casemanager/caseprioritycontroller/update/:id'

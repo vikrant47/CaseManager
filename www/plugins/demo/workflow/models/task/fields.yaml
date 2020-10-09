@@ -20,7 +20,8 @@ fields:
         span: auto
         type: number
         min: 0
-        comment: 'A task with higher priority will be picked first than with lower'
+        commentAbove: 'A task with higher priority will be picked first than with lower'
+        comment: 'This is auto generated gross priority for the task. P = (CP * WFP * QP + (WP + AGE)) / Transition TTL'
     age_priority:
         label: 'Age Priority'
         span: auto
