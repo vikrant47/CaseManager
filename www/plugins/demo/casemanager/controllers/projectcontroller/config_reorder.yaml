@@ -1,4 +1,0 @@
-title: ProjectController
-modelClass: Demo\Casemanager\Models\Project
-toolbar:
-    buttons: reorder_toolbar

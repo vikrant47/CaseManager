@@ -81,7 +81,8 @@ a {
     text-align: left;
     /* width: auto; */
 }
-.filter-breadcrumb.breadcrumb a{
+
+.filter-breadcrumb.breadcrumb a {
     margin: 0 1px 0 0;
 }
 
@@ -152,7 +153,8 @@ a {
 .control-tabs > div.tab-content > div.tab-pane.active.layout-cell {
     display: block;
 }
-.control-tabs.primary-tabs >ul.nav-tabs >li:first-child, .control-tabs.primary-tabs >div >ul.nav-tabs >li:first-child, .control-tabs.primary-tabs >div >div >ul.nav-tabs >li:first-child{
+
+.control-tabs.primary-tabs > ul.nav-tabs > li:first-child, .control-tabs.primary-tabs > div > ul.nav-tabs > li:first-child, .control-tabs.primary-tabs > div > div > ul.nav-tabs > li:first-child {
     padding-left: 0px !important;
 }
 
@@ -163,8 +165,8 @@ a {
 }
 
 .custom-switch input:checked ~ span {
-    /* background-color: #727cf5;*/
-    background: #678a74d9;
+    /*background-color: #727cf5;*/
+    background: #4eb5f1;
 }
 
 .custom-switch .slide-button {
@@ -769,7 +771,7 @@ a.manage-widgets, .action a {
     color: #3a3f51;
 }
 
-.btn{
+.btn {
     display: inline-block;
     padding: 0.3em 1.2em;
     margin: 0 0.3em 0.3em 0;
@@ -785,11 +787,12 @@ a.manage-widgets, .action a {
     transition: all 0.2s;
     height: 30px;
 }
+
 .btn-primary, .swal2-modal .swal2-actions button.swal2-confirm, .wizard > .actions a, .wizard > .actions a:hover,
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background: #678a74d9;
+    background: #4eb5f1;
     /* background-color: #4eb5f1;
-    /* border-color: #678a74d9; */
+    /* border-color: #4eb5f1; */
     display: inline-block;
     padding: 0.3em 1.2em;
     margin: 0 0.3em 0.3em 0;
@@ -818,6 +821,15 @@ a.manage-widgets, .action a {
 .btn-primary.disabled, .swal2-modal .swal2-actions button.disabled.swal2-confirm, .wizard > .actions a.disabled, .btn-primary:disabled, .swal2-modal .swal2-actions button.swal2-confirm:disabled, .wizard > .actions a:disabled {
     background: #a6a8b1;
     border-color: #a6a8b1;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    display: block;
+    text-align: initial;
+    padding: 6px;
+    margin: 0 0 0 0;
+    transition: none;
+    height: auto;
 }
 
 /***October cms widget css*/

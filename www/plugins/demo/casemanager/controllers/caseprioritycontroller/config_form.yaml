@@ -1,10 +1,10 @@
 name: CasePriority
 form: $/demo/casemanager/models/casepriority/fields.yaml
 modelClass: Demo\Casemanager\Models\CasePriority
-defaultRedirect: demo/casemanager/casepriority
+defaultRedirect: demo/casemanager/caseprioritycontroller
 create:
-    redirect: 'demo/casemanager/casepriority/update/:id'
-    redirectClose: demo/casemanager/casepriority
+    redirect: 'demo/casemanager/caseprioritycontroller/update/:id'
+    redirectClose: demo/casemanager/caseprioritycontroller
 update:
-    redirect: demo/casemanager/casepriority
-    redirectClose: demo/casemanager/casepriority
+    redirect: demo/casemanager/caseprioritycontroller
+    redirectClose: demo/casemanager/caseprioritycontroller

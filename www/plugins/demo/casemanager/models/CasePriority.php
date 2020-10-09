@@ -21,7 +21,8 @@ class CasePriority extends Model
      * @var array Validation rules
      */
     public $rules = [
-        'value' => 'required|min:1|max:10',
+        'name' => 'required',
+        'value' => 'required|numeric|min:0',
     ];
 
     public $belongsTo = [

@@ -27,6 +27,7 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->text('comments', 255);
             $table->uuid('workflow_state_id')->nullable();
             $table->uuid('queue_id')->nullable();
+            $table->uuid('work_id')->nullable();
         });
     }
 

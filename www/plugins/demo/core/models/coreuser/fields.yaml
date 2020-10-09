@@ -1,4 +1,24 @@
 fields:
+    first_name:
+        span: left
+        label: 'backend::lang.user.first_name'
+        type: text
+    last_name:
+        span: right
+        label: 'backend::lang.user.last_name'
+        type: text
+    full_name:
+        context: update
+        span: auto
+        label: Full Name
+        type: text
+        readOnly: true
+    is_activated:
+        context: update
+        label: Active
+        type: switch
+        default: 1
+        span: auto
     login:
         span: left
         label: 'backend::lang.user.login'
@@ -13,14 +33,6 @@ fields:
         label: 'backend::lang.user.send_invite'
         comment: 'backend::lang.user.send_invite_comment'
         default: true
-    first_name:
-        span: left
-        label: 'backend::lang.user.first_name'
-        type: text
-    last_name:
-        span: right
-        label: 'backend::lang.user.last_name'
-        type: text
     password:
         type: password
         span: left

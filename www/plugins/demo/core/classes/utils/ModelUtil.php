@@ -11,6 +11,16 @@ use Webpatser\Uuid\Uuid;
 
 class ModelUtil
 {
+    /**Returns models class from form/list config */
+    public static function getModelClass($config)
+    {
+        $modelClass = $config->modelClass;
+        if (strpos($modelClass, '\\') === 0) { // some model classes starts with \\
+            $modelClass = substr($modelClass, 1);
+        }
+        return $modelClass;
+    }
+
     /**Return given model as classname -> recordId format*/
     public static function toString($model, $prop = 'id')
     {

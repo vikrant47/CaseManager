@@ -89,8 +89,8 @@ tabs:
                         span: auto
                         type: relation
                         required: 1
-                    timeout:
-                        label: Timeout
+                    transition_ttl:
+                        label: ttl
                         span: auto
                         type: number
                         min: -1

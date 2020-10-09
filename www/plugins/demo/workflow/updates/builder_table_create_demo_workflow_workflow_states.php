@@ -17,12 +17,12 @@ class BuilderTableCreateDemoWorkflowWorkflowStates extends Migration
             $table->integer('updated_by_id');
             $table->string('name');
             $table->text('description');
-            $table->integer('active');
+            $table->boolean('active');
             $table->string('code');
             $table->uuid('engine_application_id');
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('demo_workflow_workflow_states');

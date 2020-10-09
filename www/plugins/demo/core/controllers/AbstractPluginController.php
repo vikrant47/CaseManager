@@ -26,6 +26,7 @@ use Demo\Core\Models\ListAction;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\UniversalModel;
+use Demo\Core\Services\FormFieldService;
 use Demo\Core\Services\QueryFilter;
 use Demo\Core\Services\QueryPagination;
 use Demo\Core\Services\RestQuery;
@@ -461,6 +462,15 @@ class AbstractPluginController extends Controller
         $recordId = $request->get('recordId');
         $formConfig = $request->get('formConfig', []);
         return $this->buildForm($formConfig, $context, $recordId, $wrap);
+    }
+
+    /**Adding associations before saving/loading the form*/
+    public function formFindModelObject($recordId)
+    {
+        $widget = new \stdClass();
+        $fields = FormFieldService::getCustomFields($this);
+        FormFieldService::addFieldAssociations($fields, $this->modelClass);
+        return $this->asExtension('FormController')->formFindModelObject($recordId);
     }
 
     public function viewExtendQuery($modelClass, $query)

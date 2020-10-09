@@ -17,6 +17,12 @@ class CoreUser extends User
     use PreferenceMaker;
 
     public $table = 'backend_users';
+    public $attachAuditedBy = true;
+    public $rules = [
+        'login' => 'required',
+        'email' => 'required',
+        'first_name' => 'required',
+    ];
     /**
      * Relations
      */
@@ -53,6 +59,7 @@ class CoreUser extends User
     {
         ModelUtil::fillDefaultColumnsInBelongsToMany($this->roles(), $this->roles, $this->engine_application_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
+        $this->full_name = $this->first_name . ' ' . $this->last_name;
         parent::beforeSave();
     }
 

@@ -27,15 +27,50 @@ tabs:
             type: number
             min: 0
             comment: 'The tasks of queue with higher priority will be picked first than the queue with lower priority '
-            tab: Configuration
+            tab: Priority
         age_priority:
             label: 'Age Priority'
             span: auto
             type: switch
             default: true
             comment: 'Enable this to consider the age priority of the task while calculating the priority'
-            tab: Configuration
+            tab: 'Priority'
+        age_unit:
+            label: 'Age Unit'
+            span: auto
+            type: dropdown
+            emptyOption: '--Select--'
+            default: second
+            required: 1
+            tab: 'Priority'
+            dependsOn: age_priority
+            trigger:
+                action: show
+                field: age_priority
+                condition: checked
+            options:
+                millisecond: Milliseconds
+                second: Second
+                minutes: Minutes
+                hours: Hours
+                day: Day
+            comment: 'By what unit you would want to trigger change in age' # This should be duration widget
+        age_priority_boost:
+            label: 'Age Priority Boost'
+            span: auto
+            required: 1
+            type: number
+            default: 1
+            min: 0
+            tab: 'Priority'
+            dependsOn: age_priority
+            trigger:
+                action: show
+                field: age_priority
+                condition: checked
+            comment: 'The unit amount by which the priority will get increased when age is increased by given Age Unit'
         routing_rule:
+            emptyOption: '--Select--'
             label: 'Routing Rule'
             nameFrom: name
             descriptionFrom: description
@@ -45,6 +80,7 @@ tabs:
             comment: 'Select Routing Rule'
             tab: Configuration
         assignment_groups:
+            emptyOption: '--Select--'
             label: 'Assignment Groups'
             nameFrom: name
             descriptionFrom: description

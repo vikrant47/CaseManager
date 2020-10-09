@@ -8,10 +8,7 @@ class BuilderTableAlterDemoCoreUsers extends Migration
     public function up()
     {
         Schema::table('backed_users', function ($table) {
-            $table->string('name')->default(null);
-            $table->integer('created_by_id');
-            $table->integer('updated_by_id');
-            $table->integer('version')->default(0);
+            $table->uuid('demo_workflow_work_profile_id')->default(null);
         });
     }
 

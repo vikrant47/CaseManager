@@ -72,3 +72,7 @@
 1.0.25:
     - 'Created table demo_core_webhook_endpoints'
     - builder_table_create_demo_core_webhook_endpoints.php
+    - builder_table_alter_demo_core_users.php
+1.0.26:
+    - 'Altered table backend_users, added basic auditing columns'
+    - builder_table_alter_demo_core_users.php

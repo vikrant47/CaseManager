@@ -9,6 +9,7 @@ use Demo\Core\Controllers\AbstractSecurityController;
 class FormFieldController extends AbstractSecurityController
 {
     public $implement = [
+        'RainLab.Builder.Behaviors.IndexDataRegistry',
         'Backend\Behaviors\ListController',
         'Backend\Behaviors\FormController',
         ];

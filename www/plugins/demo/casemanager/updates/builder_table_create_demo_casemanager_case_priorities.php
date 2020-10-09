@@ -14,7 +14,7 @@ class BuilderTableCreateDemoCasemanagerCasePriorities extends Migration
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->string('name');
-            $table->integer('active');
+            $table->boolean('active');
             $table->string('description');
             $table->integer('value');
             $table->integer('created_by_id');
