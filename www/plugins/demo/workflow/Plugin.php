@@ -1,7 +1,7 @@
 <?php namespace Demo\Workflow;
 
 use Demo\Workflow\EventHandlers\Universal\SearchQueueBeforePersist;
-use Demo\Workflow\EventHandlers\Universal\SearchWorkflowBeforePersist;
+use Demo\Workflow\EventHandlers\Universal\SearchChannelBeforePersist;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
@@ -10,7 +10,7 @@ class Plugin extends PluginBase
     {
         return [
             SearchQueueBeforePersist::class,
-            SearchWorkflowBeforePersist::class
+            SearchChannelBeforePersist::class
         ];
     }
 

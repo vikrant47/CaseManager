@@ -1,7 +1,7 @@
 <?php
 
 use Backend\Classes\AuthManager;
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -44,7 +44,7 @@ Route::match(['get', 'put', 'post', 'delete'], '/engine/inbound-api/{application
         $pattern = str_replace('/', '\\/', preg_replace('/\{(\s*?.*?)*?\}/', '(.*)', $api->url));
         $pathVariables = [];
         if (preg_match('/' . $pattern . '/', $wildcard, $pathVariables)) {
-            $context = new ScriptContext();
+            $context = new TemplateEngine();
             $result = $context->execute($api->script, ['request' => $request, 'pathVariables' => $pathVariables]);
             return $result;
         }

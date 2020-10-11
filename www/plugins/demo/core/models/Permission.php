@@ -53,7 +53,7 @@ class Permission extends Model
         ]
     ];
 
-    public $jsonable = ['columns','condition'];
+    public $jsonable = ['columns', 'condition'];
 
     public $attachAuditedBy = true;
 
@@ -77,5 +77,16 @@ class Permission extends Model
         $this->code = $securityService->getPermissionPrefix($this->model) . '.' . $level . '.' . $this->operation;
         ModelUtil::fillDefaultColumnsInBelongsToMany($this->policies(), $this->policies, $this->engine_application_id);
         // TODO : for now setting date and plugin nullable in demo_core_role_permission_associations
+    }
+
+    /**
+     * @param \Illuminate\Support\Collection $permissions
+     * @return array Array of merged conditions json
+     */
+    public static function getConditions($permissions)
+    {
+        return $permissions->forEach(function ($permission) {
+            return $permission->condition;
+        })->toArray();
     }
 }

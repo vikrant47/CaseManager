@@ -1,7 +1,7 @@
 <?php namespace Demo\Workflow\Models;
 
 use Backend\Models\UserGroup;
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\EngineApplication;
@@ -184,7 +184,7 @@ class Queue extends Model
     {
         $this->logger->info('Assigning the item ' . ModelUtil::toString($model) . ' using assignment rule ' . ModelUtil::toString($this->routing_rule, 'name'));
         // creating context
-        $context = new ScriptContext();
+        $context = new TemplateEngine();
         $user = $context->execute($this->routing_rule->script, ['queue' => $this, 'model' => $model, 'task' => $task]);
         if (empty($user)) {
             throw new ApplicationException('Routing Rule "' . $this->routing_rule->name . '" din\'t return any user');

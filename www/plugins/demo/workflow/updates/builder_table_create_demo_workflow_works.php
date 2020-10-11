@@ -17,6 +17,7 @@ class BuilderTableCreateDemoWorkflowWorks extends Migration
             $table->string('model', 255);
             $table->uuid('record_id');
             $table->uuid('workflow_id');
+            $table->uuid('service_channel_id');
             $table->integer('assigned_to_id');
             $table->integer('priority')->default(1);
             $table->uuid('workflow_state_id');

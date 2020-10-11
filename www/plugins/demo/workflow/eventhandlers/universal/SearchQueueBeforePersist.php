@@ -3,7 +3,7 @@
 namespace Demo\Workflow\EventHandlers\Universal;
 
 
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Workflow\Models\Queue;
@@ -30,7 +30,7 @@ class SearchQueueBeforePersist
             // if event are empty than it returns integer so should check if its array
             $logger->info('Queue found with name ' . $queue->name . ' , evaluating input condition');
             // throw new ApplicationException('Queue found with name "'.$queue->name. '" , Evaluating input condition."');
-            $context = new ScriptContext();
+            $context = new TemplateEngine();
             $value = $context->execute($queue->condition, [
                 'queue' => $queue, 'event' => $event, 'model' => $model, 'serviceChannel' => $serviceChannel
             ]);

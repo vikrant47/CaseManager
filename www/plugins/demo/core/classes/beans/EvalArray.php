@@ -34,7 +34,7 @@ class EvalArray
 
     public function evalItem($value, $context)
     {
-        $scriptContext = new ScriptContext();
-        return $scriptContext->execute($value, $context);
+        $templateEngine = new TemplateEngine();
+        return $templateEngine->execute($value, $context);
     }
 }

@@ -1,6 +1,6 @@
 <?php namespace Demo\Notification\Models;
 
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\JavascriptLibrary;
 use Demo\Core\Models\EngineApplication;
@@ -67,8 +67,8 @@ public $incrementing = false;
         $logger = $pluginConnection->getPluginLogger();
         $logger->debug('Sending notification with name ' . $notification->name);
         $this->setContext($context);
-        $scriptContext = new ScriptContext();
-        $scriptContext->execute($this->script, [
+        $templateEngine = new TemplateEngine();
+        $templateEngine->execute($this->script, [
             'notification' => $notification,
             'self' => $this, 'Mail' => Mail::class,
         ]);

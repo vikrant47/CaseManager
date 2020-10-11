@@ -32,7 +32,8 @@ class Workflow extends Model
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id'],
-        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
+        'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model', 'scope' => 'channelModels'],
+        'service_channel' => [ServiceChannel::class, 'key' => 'service_channel_id'],
     ];
 
     public $hasOne = [
@@ -47,12 +48,20 @@ class Workflow extends Model
     public $rules = [
         'name' => 'required',
         'model' => 'required',
+        'service_channel' => 'required',
         'application' => 'required',
         'priority' => 'numeric|min:1',
         'definition' => 'required|array|min:2',
         'sort_order' => 'required',
     ];
     public $attachAuditedBy = true;
+
+    public $immutables = ['engine_application_id', 'service_channel_id'];
+
+    public function scopeChannelModels($query)
+    {
+        return $query->where();
+    }
 
     public function getEventOptions()
     {
@@ -76,6 +85,7 @@ class Workflow extends Model
         }
         return $options;
     }
+
 
     public function validateDefinition()
     {
@@ -115,6 +125,7 @@ class Workflow extends Model
     public function beforeSave()
     {
         $this->validateDefinition();
+        $this->model = $this->service_channel->model;
     }
 
     /**
@@ -124,7 +135,7 @@ class Workflow extends Model
      */
     public function start($model)
     {
-        $work = new work();
+        $work = new Work();
         $work->workflow = $this;
         $work->record_id = $model->id;
         $work->model = get_class($model);

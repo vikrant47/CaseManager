@@ -51,7 +51,11 @@ return [
             'database' => 'storage/database.sqlite',
             'prefix'   => '',
         ],
-
+        'sqlite_memory' => [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ],
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',

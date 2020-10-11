@@ -33,9 +33,9 @@ class TwigEngine extends Twig
 
     public function buildContext($context = [])
     {
-        $scriptContext = new ScriptContext();
-        $scriptContext->buildContext($context);
-        $this->context = $scriptContext->toArray();
+        $templateEngine = new TemplateEngine();
+        $templateEngine->buildContext($context);
+        $this->context = $templateEngine->toArray();
         return $this->context;
     }
 

@@ -4,7 +4,7 @@
 namespace Demo\Core\Services;
 
 
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Enums\HandlerType;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\EventHandler;
@@ -51,7 +51,7 @@ class EventHandlerServiceProvider extends ServiceProvider
         foreach ($handlers as $handler) {
             $this->logger->debug(get_class($model) . ' ' . $eventName . ' Executing ' . get_class($handler));
             if ($handler->model === 'universal' || $handler->model === get_class($model)) {
-                $context = new ScriptContext();
+                $context = new TemplateEngine();
                 $handler->handler($eventName, $model);
             }
         }

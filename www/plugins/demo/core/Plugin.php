@@ -2,6 +2,7 @@
 
 use Demo\Core\EventHandlers\Migrations\BeforeCreateMigrations;
 use Demo\Core\EventHandlers\Model\BeforeCreateModels;
+use Demo\Core\EventHandlers\Universal\BeforeAllRestrict;
 use Demo\Core\EventHandlers\Universal\BeforeCreateOrUpdateAudit;
 use Demo\Core\EventHandlers\CustomField\BeforeCreateOrUpdateCustomField;
 use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
@@ -14,6 +15,7 @@ use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
 use Demo\Core\FormWidgets\RelationDynamicDropdown;
 use Demo\Core\FormWidgets\SearchableRelatedList;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
+use Demo\Core\Services\InMemoryQueryFilter;
 use Demo\Core\Services\SwooleServiceProvider;
 use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkState;
 use RainLab\Builder\Classes\ControlLibrary;
@@ -34,7 +36,7 @@ class Plugin extends PluginBase
             BeforeCreateOrUpdateCustomField::class,
             BeforeDeleteCascade::class,
             UniversalWebhookHandler::class,
-            RestrictSystemRecordHandler::class,
+            BeforeAllRestrict::class,
             BeforeCreateModels::class,
         ];
     }
@@ -75,6 +77,11 @@ class Plugin extends PluginBase
         App::register('\Demo\Core\Services\SwooleServiceProvider');
     }
 
+    public static function registerServices()
+    {
+
+    }
+
     /**
      * Bootstrap any application services.
      *
@@ -86,6 +93,7 @@ class Plugin extends PluginBase
         trace_sql();
         DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('jsonb', 'text');
         Plugin::registerServiceProviders();
+        Plugin::registerServices();
         DefaultDesignProvider::listenWidgetEvents();
     }
 }

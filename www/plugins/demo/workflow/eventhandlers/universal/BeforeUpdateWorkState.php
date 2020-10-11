@@ -4,7 +4,7 @@
 namespace Demo\Workflow\EventHandlers\Universal;
 
 
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Workflow\Models\Queue;
 use Demo\Workflow\Models\Task;
@@ -13,7 +13,7 @@ use Demo\Workflow\Models\WorkflowTransition;
 
 class BeforeUpdateWorkState
 {
-    public $model = work::class;
+    public $model = Work::class;
     public $events = ['updated'];
     public $sort_order = -1000;
 

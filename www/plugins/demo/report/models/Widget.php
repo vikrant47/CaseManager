@@ -2,7 +2,7 @@
 
 use Demo\Core\Classes\Beans\EvalArray;
 use Demo\Core\Classes\Beans\EvalSql;
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\JavascriptLibrary;
@@ -23,6 +23,7 @@ use Db;
 class Widget extends Model implements FromCollection
 {
     use \Maatwebsite\Excel\Concerns\Exportable;
+
     const SUPPORTED_EXPORT_FORMATS = ['xls', 'pdf', 'csv'];
 
     private $loadedData = null;
@@ -70,14 +71,14 @@ class Widget extends Model implements FromCollection
         $dataScript = $this->data;
         if ($this->isSqlScript($dataScript)) {
             $evalSql = new EvalSql($dataScript, true);
-            return $evalSql->eval($context, true);
+            return $evalSql->eval($context);
         }
-        $scriptContext = new ScriptContext();
-        $data = $scriptContext->execute($dataScript, $context);
+        $templateEngine = new TemplateEngine();
+        $data = $templateEngine->execute($dataScript, $context);
         if ($data instanceof QueryBuilder) {
             $query = $data;
-            $filter = new QueryFilter($query, $context['filter']);
-            $filter->applyFilter();
+            $filter = new QueryFilter($query);
+            $filter->applyFilter($context['rules'] ?? []);
             $data = $query->get();
             $totalRecords = $query->count();
             return [
@@ -85,7 +86,7 @@ class Widget extends Model implements FromCollection
             ];
         }
         if ($data instanceof EvalSql) {
-            return $data->eval($context, true);
+            return $data->eval($context);
         }
         return $data;
     }

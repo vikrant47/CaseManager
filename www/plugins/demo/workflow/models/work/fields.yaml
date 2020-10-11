@@ -1,4 +1,10 @@
 fields:
+    service_channel:
+        label: Channel
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
     workflow:
         label: Workflow
         nameFrom: name
