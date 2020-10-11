@@ -53,12 +53,14 @@ tabs:
             readOnly: 1
             type: relation
             tab: 'Routing'
+            context: update
         queue:
             label: Queue
             span: auto
             readOnly: 1
             type: relation
             tab: 'Routing'
+            context: update
         assigned_to:
             label: 'Assigned To'
             nameFrom: login
@@ -67,6 +69,7 @@ tabs:
             readOnly: 1
             type: relation
             tab: 'Routing'
+            context: update
         work:
             label: 'Work'
             nameFrom: id
@@ -75,10 +78,12 @@ tabs:
             readOnly: 1
             type: relation
             tab: 'Routing'
+            context: update
         version:
             label: 'Audit Version'
             span: auto
             readOnly: 1
             type: number
             tab: 'Routing'
+            context: update
 

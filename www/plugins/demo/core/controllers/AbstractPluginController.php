@@ -130,14 +130,14 @@ class AbstractPluginController extends Controller
             if (property_exists($config, 'filter')) {
                 $listFilter = $config->filter;
                 if (!empty($listFilter)) {
-                    $filterService = new QueryFilter($query, $listFilter);
-                    $filterService->applyFilter();
+                    $filterService = new QueryFilter($query);
+                    $filterService->applyFilter($listFilter);
                 }
             }
             $urlFilter = Request::input('urlFilter');
             if (!empty($urlFilter)) {
-                $urlFilterInstance = new QueryFilter($query, $urlFilter);
-                $urlFilterInstance->applyFilter();
+                $urlFilterInstance = new QueryFilter($query);
+                $urlFilterInstance->applyFilter($urlFilter);
             }
         }
     }

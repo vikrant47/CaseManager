@@ -26,8 +26,7 @@ class WidgetController extends AbstractSecurityController
 
     public function getFilter($table)
     {
-        $filter = Input::get('filter');
-        return new QueryFilter($table, $filter); // setting empty where with widget table
+        return new QueryFilter($table); // setting empty where with widget table
 
     }
 
@@ -42,7 +41,8 @@ class WidgetController extends AbstractSecurityController
         }
         return [
             'result' => $widget->evaluate([
-                'filter' => $this->getFilter($widget->table),
+                'filter' => new QueryFilter($widget->table),
+                'rules'=> Input::get('filter'),
                 'pagination' => new QueryPagination(Request::input('pagination')),
             ])
         ];

@@ -53,8 +53,8 @@ class RestQuery
         }
         if (!$userSecurityService->hasAstrixPermission($permission)) {
             $permissionConditions = $userSecurityService->mergeConditions($permission, false);
-            $queryFilter = new QueryFilter($queryBuilder, $permissionConditions, $json['alias'] ?? $modeInstance->table, $json['fields'] ?? null, true);
-            $queryFilter->applyFilter();
+            $queryFilter = new QueryFilter($queryBuilder, $json['alias'] ?? $modeInstance->table, $json['fields'] ?? null);
+            $queryFilter->applyFilter($permissionConditions);
         }
     }
 
@@ -86,8 +86,8 @@ class RestQuery
             }
         }
         if (!empty($json['where'])) {
-            $queryFilter = new QueryFilter($queryBuilder, $json['where'] ?? [], $json['alias'] ?? null, $json['fields'] ?? null, false);
-            $queryFilter->applyFilter();
+            $queryFilter = new QueryFilter($queryBuilder, $json['alias'] ?? null, $json['fields'] ?? null);
+            $queryFilter->applyFilter($json['where'] ?? [], false);
         }
     }
 }

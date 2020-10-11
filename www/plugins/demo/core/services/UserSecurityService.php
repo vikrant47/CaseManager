@@ -11,6 +11,7 @@ use Demo\Core\Classes\Utils\StringUtil;
 use BackendAuth;
 use Demo\Core\Models\CoreUserGroup;
 use Demo\Core\Models\Navigation;
+use Demo\Core\Models\Permission;
 use Demo\Core\Models\Role;
 use Db;
 use October\Rain\Support\Collection;
@@ -179,9 +180,7 @@ class UserSecurityService
      */
     public function mergeConditions($permissions, $eval = true)
     {
-        $conditions = $permissions->forEach(function ($permission) {
-            return $permission->condition;
-        })->toArray();
+        $conditions = Permission::getConditions($permissions);
         return QueryFilter::mergeConditions($conditions, 'OR', $eval);
     }
 

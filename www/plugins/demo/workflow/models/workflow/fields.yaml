@@ -4,16 +4,16 @@ fields:
         span: auto
         type: text
         required: 1
-    description:
-        label: Description
-        size: ''
-        span: auto
-        type: textarea
     active:
         label: Active
         span: auto
         default: true
         type: switch
+    description:
+        label: Description
+        size: ''
+        span: full
+        type: textarea
     priority:
         label: 'Priority'
         span: auto
@@ -30,16 +30,27 @@ fields:
         type: relation
 tabs:
     fields:
-        model_ref:
+        service_channel:
             emptyOption: '-- Select --'
-            label: Model
+            label: Channel
             nameFrom: name
             descriptionFrom: description
             span: auto
             required: 1
             type: relation
             tab: 'Model Configuration'
-            comment: 'Qualified Model for workflow.'
+            comment: 'Qualified Channel for workflow.'
+            #model_ref:
+            #   emptyOption: '-- Select --'
+            #  label: Model
+            # nameFrom: name
+            #descriptionFrom: description
+            #span: auto
+            #required: 1
+            #type: relation
+            #dependsOn: channel
+            #tab: 'Model Configuration'
+            #comment: 'Qualified Model for workflow.'
         model_state_field:
             label: State Field
             span: auto
@@ -50,14 +61,14 @@ tabs:
             tab: 'Model Configuration'
             readOnly: true
         condition:
+            context: update
             label: Condition
             span: auto
-            modelField: model
-            modelType: Demo\Core\Models\Webhook
+            modelType: '${model.service_channel? model.service_channel.model:"Demo\\Workflow\\Models\\Work"}'
             type: querybuilderwidget
             tab: 'Model Configuration'
             dependsOn:
-                - model_ref
+                - service_channel
         sort_order:
             label: Order
             span: auto

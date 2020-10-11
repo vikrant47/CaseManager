@@ -3,6 +3,7 @@
 namespace Demo\Core\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
 use Demo\Workflow\Models\Task;
@@ -63,7 +64,11 @@ class QueryBuilderWidget extends FormWidgetBase
         if (!empty($this->modelField)) {
             $this->vars['modelType'] = $this->model->{$this->modelField};
         } else {
-            $this->vars['modelType'] = $this->modelType;
+            if (TemplateEngine::isDynamicTemplate($this->modelType)) {
+                $this->vars['modelType'] = TemplateEngine::evalTemplate($this->modelType, ['model' => $this->model]);
+            } else {
+                $this->vars['modelType'] = $this->modelType;
+            }
         }
         $this->vars['modelField'] = $this->modelField;
         $this->vars['fetchModelFromField'] = empty($this->modelType);

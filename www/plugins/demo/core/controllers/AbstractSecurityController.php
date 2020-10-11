@@ -11,6 +11,7 @@ use Demo\Core\Models\FormAction;
 use Demo\Core\Models\ListAction;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\Permission;
+use Demo\Core\Services\SecuredEntityService;
 use Demo\Core\Services\SecurityService;
 use Demo\Core\Services\UserSecurityService;
 use DB;
@@ -90,15 +91,9 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function formBeforeCreate($model)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::CREATE);
-        if ($permission->count() === 0) {
+        $securedEntityService = new SecuredEntityService(get_class($model));
+        if ($securedEntityService->canInsert($model) === false) {
             return $this->forwardToAccessDenied(true);
-        }
-        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
-            /*$count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
-            if ($count === 0) {*/
-            return $this->forwardToAccessDenied(true);
-            /*}*/
         }
     }
 
@@ -107,15 +102,9 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function formBeforeUpdate($model)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::WRITE);
-        if ($permission->count() === 0) {
+        $securedEntityService = new SecuredEntityService(get_class($model));
+        if($securedEntityService->canUpdate($model)===false){
             return $this->forwardToAccessDenied(true);
-        }
-        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
-            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
-            if ($count === 0) {
-                return $this->forwardToAccessDenied(true);
-            }
         }
     }
 
@@ -124,15 +113,9 @@ abstract class AbstractSecurityController extends AbstractPluginController
      */
     public function formBeforeDelete($model)
     {
-        $permission = $this->userSecurityService->getRowLevelPermissions($this->getModelClass(), Permission::DELETE);
-        if ($permission->count() === 0) {
+        $securedEntityService = new SecuredEntityService(get_class($model));
+        if($securedEntityService->canDelete($model)===false){
             return $this->forwardToAccessDenied(true);
-        }
-        if (!$this->userSecurityService->hasAstrixPermission($permission)) {
-            $count = get_class($model)::where('id', '=', $model->id)->where(DB::raw($this->userSecurityService->mergeConditions($permission)))->count();
-            if ($count === 0) {
-                return $this->forwardToAccessDenied(true);
-            }
         }
     }
 

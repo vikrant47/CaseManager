@@ -49,9 +49,5 @@ class CustomField extends Model
         'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id']
     ];
 
-    public function getModelOptions()
-    {
-        return PluginConnection::getAllModelAlias(true);
-    }
 
 }

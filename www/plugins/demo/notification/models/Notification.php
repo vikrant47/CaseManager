@@ -1,6 +1,6 @@
 <?php namespace Demo\Notification\Models;
 
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\EngineApplication;
@@ -62,8 +62,8 @@ public $incrementing = false;
         $pluginConnection = PluginConnection::getConnection('demo.notification');
         $logger = $pluginConnection->getPluginLogger();
         $condition = $this->condition;
-        $scriptContext = new ScriptContext();
-        if (trim(strlen($condition)) === 0 || $scriptContext->execute($condition, $context) === true) {
+        $templateEngine = new TemplateEngine();
+        if (trim(strlen($condition)) === 0 || $templateEngine->execute($condition, $context) === true) {
             $notificationLog = new NotificationLog();
             $notificationLog->notification_id = $this->id;
             try {

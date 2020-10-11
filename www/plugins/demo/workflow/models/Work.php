@@ -1,6 +1,7 @@
 <?php namespace Demo\Workflow\Models;
 
 use Demo\Core\Models\ModelModel;
+use Demo\Workflow\Classes\Enums\WorkStatus;
 use Demo\Workflow\Controllers\WorkflowTransitionController;
 use Illuminate\Support\Collection;
 use Model;
@@ -28,6 +29,7 @@ class Work extends Model
         'created_by' => [User::class, 'key' => 'created_by_id'],
         'updated_by' => [User::class, 'key' => 'updated_by_id'],
         'assigned_to' => [User::class, 'key' => 'assigned_to_id'],
+        'service_channel' => [ServiceChannel::class, 'key' => 'service_channel_id'],
         'workflow' => [Workflow::class, 'key' => 'workflow_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
         'current_state' => [WorkflowState::class, 'key' => 'workflow_state_id'],
@@ -44,6 +46,11 @@ class Work extends Model
         'record_id' => 'required',
         'context' => 'json',
     ];
+    public $attributes = [
+        'status' => WorkStatus::INIT,
+        'priority' => 1,
+    ];
+
     public $attachAuditedBy = true;
 
     public function makeForwardTransition($data = [])

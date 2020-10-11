@@ -40,9 +40,7 @@ class QueryFilter extends QueryBuilderParser
 
     /**@var $query Builder */
     protected $query;
-    protected $rules;
     protected $alias;
-    protected $eval;
 
     /**@return Builder */
     static function getQuery($options)
@@ -60,8 +58,8 @@ class QueryFilter extends QueryBuilderParser
         /**@var $query \October\Rain\Database\Builder */
         $query = Db::table($table);
         if (!empty($rules)) {
-            $rulesService = new QueryFilter($query, $rules);
-            $rulesService->applyFilter();
+            $rulesService = new QueryFilter($query);
+            $rulesService->applyFilter($rules);
         }
         if (!empty($pagination)) {
             $query->offset($pagination->offset);
@@ -81,19 +79,35 @@ class QueryFilter extends QueryBuilderParser
         return $query->get();
     }
 
-    public function __construct($query, $rules, $alias = null, array $fields = null, $eval = true)
+    public function __construct($query, $alias = null, array $fields = null)
     {
         parent::__construct($fields);
+        $this->alias = $alias;
+        $this->setQuery($query);
+    }
+
+    public function makeRules($rules)
+    {
+        if (is_array($rules)) {
+            return json_encode($rules);
+        }
+        return $rules;
+    }
+
+    /**
+     * @param Builder|string $query
+     * @param null|string $connection The connection string
+     */
+    public function setQuery($query, $connection = null)
+    {
         if (is_string($query)) {
-            $query = DB::table($query);
+            if ($connection !== null) {
+                $query = DB::connection($connection)->table($query);
+            } else {
+                $query = DB::table($query);
+            }
         }
         $this->query = $query;
-        if (is_array($rules)) {
-            $rules = json_encode($rules);
-        }
-        $this->rules = $rules;
-        $this->alias = $alias;
-        $this->eval = $eval;
     }
 
     /**
@@ -118,9 +132,9 @@ class QueryFilter extends QueryBuilderParser
         return $this->sql();
     }
 
-    public function isEmpty()
+    public function isEmptyRules($rules)
     {
-        return strlen($this->rules) === 0;
+        return strlen($rules) === 0;
     }
 
     /**@param $fields array */
@@ -129,9 +143,9 @@ class QueryFilter extends QueryBuilderParser
         $this->fields = $fields;
     }
 
-    public function evalFilter()
+    public function evalFilter($rules)
     {
-        $this->rules = TwigEngine::eval($this->rules);
+        return TwigEngine::eval($rules);
     }
 
     /**@param $query Builder */
@@ -144,13 +158,14 @@ class QueryFilter extends QueryBuilderParser
 
     /**
      * @param string $prepend
-     * @param null $alias
+     * @param array $rules
+     * @param bool $eval
      * @return string
      */
-    public function sql($prepend = '', $alias = null)
+    public function sql($prepend = '', $rules = [], $eval = true)
     {
-        if (!$this->isEmpty()) {
-            $this->applyFilter();
+        if (!$this->isEmptyRules()) {
+            $this->applyFilter($rules, $eval);
             $sql = $this->toRawSql($this->query);
             if (strlen($sql) > 0) {
                 $whereIndex = strpos($sql, 'where');
@@ -160,7 +175,7 @@ class QueryFilter extends QueryBuilderParser
                     return '';
                 }
             }
-            if ($alias) {
+            if ($this->alias) {
                 // $fields = $this->query->
             }
             if (strlen($sql) > 0) {
@@ -187,18 +202,27 @@ class QueryFilter extends QueryBuilderParser
         return $this;
     }
 
-    public function applyFilter()
+    public function applyFilter($rules = null, $eval = true)
     {
-        if (!$this->isEmpty()) {
+        if ($rules !== null) {
+            $rules = $this->makeRules($rules);
+        }
+        if (!$this->isEmptyRules($rules)) {
             $query = $this->query;
             if ($query instanceof \October\Rain\Database\Builder) {
                 $query = $query->getQuery();
             }
-            if ($this->eval) {
-                $this->evalFilter();
+            if ($eval === true) {
+                $rules = $this->evalFilter($rules);
             }
-            $this->parse($this->rules, $query);
+            $this->parse($rules, $query);
         }
+        return $query;
     }
 
+    public static function apply($query, $rules = null, $eval = true)
+    {
+        $qf = new QueryFilter($query);
+        return $qf->applyFilter($rules, $eval);
+    }
 }

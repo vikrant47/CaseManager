@@ -1,6 +1,6 @@
 <?php namespace Demo\Core\Models;
 
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Model;

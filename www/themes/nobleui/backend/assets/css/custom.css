@@ -559,7 +559,7 @@ table.table.data thead td > a, table.table.data thead th > a, table.table.data t
 
 /***navigation ***/
 .navbar, .sidebar {
-    z-index: 10;
+    z-index: 1000;
 }
 
 

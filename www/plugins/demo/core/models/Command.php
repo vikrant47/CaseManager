@@ -1,6 +1,6 @@
 <?php namespace Demo\Core\Models;
 
-use Demo\Core\Classes\Beans\ScriptContext;
+use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Model;
 
@@ -40,7 +40,7 @@ public $incrementing = false;
 
     public function execute()
     {
-        $context = new ScriptContext();
+        $context = new TemplateEngine();
         return $context->execute($this->script, ['command' => $this]);
     }
 }
