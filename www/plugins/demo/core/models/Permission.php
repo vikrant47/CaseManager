@@ -16,6 +16,14 @@ class Permission extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
+    const ELOQUENT_EVENTS = [
+        'creating' => 'create',
+        'updating' => 'write',
+        'deleting' => 'delete',
+        'created' => 'create',
+        'updated' => 'write',
+        'deleted' => 'delete',
+    ];
     const READ = 'read';
     const WRITE = 'write';
     const DELETE = 'delete';
@@ -88,5 +96,13 @@ class Permission extends Model
         return $permissions->forEach(function ($permission) {
             return $permission->condition;
         })->toArray();
+    }
+
+    /**This will returs the operation frmo eloquent event
+     * @param string $eloquentEvent Eloquent Event
+     */
+    public static function getOperationByEloquentEvent(string $eloquentEvent)
+    {
+        return Permission::ELOQUENT_EVENTS[$eloquentEvent];
     }
 }

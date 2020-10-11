@@ -39,7 +39,7 @@ class SecuredEntityService
     public function secureQuery($query, $operation = Permission::READ)
     {
         $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, $operation);
-        if($permissions->count()===0){
+        if ($permissions->count() === 0) {
             return $query;
         }
         return QueryFilter::apply($query, $this->userSecurityService->mergeConditions($permissions));
@@ -105,7 +105,11 @@ class SecuredEntityService
         if ($checkInMemory === true) {
             return $this->filterAllowed(collect([$model]), Permission::WRITE)->count() > 0;
         }
-        return $this->secureQuery(get_class($model)::where('id', '=', $model->id), Permission::WRITE)->count() > 0;
+        $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::WRITE);
+        if ($permissions->count() === 0) {
+            return false;
+        }
+        return QueryFilter::apply(get_class($model)::where('id', '=', $model->id), $this->userSecurityService->mergeConditions($permissions))->count() > 0;
 
     }
 
@@ -118,6 +122,28 @@ class SecuredEntityService
         if ($checkInMemory === true) {
             return $this->filterAllowed(collect([$model]), Permission::DELETE)->count() > 0;
         }
-        return $this->secureQuery(get_class($model)::where('id', '=', $model->id), Permission::DELETE)->count() > 0;
+        $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::DELETE);
+        if ($permissions->count() === 0) {
+            return false;
+        }
+        return QueryFilter::apply(get_class($model)::where('id', '=', $model->id), $this->userSecurityService->mergeConditions($permissions))->count() > 0;
+    }
+
+    /**Check if user can CRUD the given model record
+     * @param $model
+     * @return bool
+     */
+    public function canCRUD($model, $operation, $checkInMemory = false)
+    {
+        if ($operation === Permission::CREATE) {
+            return $this->canInsert($model);
+        }
+        if ($operation === Permission::WRITE) {
+            return $this->canUpdate($model, $checkInMemory);
+        }
+        if ($operation === Permission::DELETE) {
+            return $this->canDelete($model, $checkInMemory);
+        }
+        return false;
     }
 }
