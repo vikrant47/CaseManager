@@ -449,6 +449,10 @@ table.table.data thead .list-checkbox .custom-checkbox {
     border-bottom: 1px solid #0000003d;
 }
 
+tr.rowlink.active {
+    background: #edf6ff;
+}
+
 table.table.data thead tr th.list-checkbox {
     padding: 10px 0 0 20px;
 }

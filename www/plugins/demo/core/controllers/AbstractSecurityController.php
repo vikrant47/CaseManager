@@ -92,7 +92,8 @@ abstract class AbstractSecurityController extends AbstractPluginController
     public function formBeforeCreate($model)
     {
         $securedEntityService = new SecuredEntityService(get_class($model));
-        if ($securedEntityService->canInsert($model) === false) {
+        $formData = $this->asExtension('FormController')->formGetWidget()->getSaveData();
+        if ($securedEntityService->canInsert($formData) === false) {
             return $this->forwardToAccessDenied(true);
         }
     }
@@ -103,7 +104,8 @@ abstract class AbstractSecurityController extends AbstractPluginController
     public function formBeforeUpdate($model)
     {
         $securedEntityService = new SecuredEntityService(get_class($model));
-        if($securedEntityService->canUpdate($model)===false){
+        $formData = $this->asExtension('FormController')->formGetWidget()->getSaveData();
+        if($securedEntityService->canUpdate($formData)===false){
             return $this->forwardToAccessDenied(true);
         }
     }

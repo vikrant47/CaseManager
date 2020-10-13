@@ -56,6 +56,9 @@ class SecuredEntityService
         if ($permissions->count() === 0) {
             return collect([]);
         }
+        if ($this->userSecurityService->hasAstrixPermission($permissions)) {
+            return $data;
+        }
         $inMemoryFilter = new InMemoryQueryFilter($data);
         $inMemoryFilter->init();
         $query = $inMemoryFilter->createQuery();
@@ -109,6 +112,9 @@ class SecuredEntityService
         if ($permissions->count() === 0) {
             return false;
         }
+        if ($this->userSecurityService->hasAstrixPermission($permissions)) {
+            return true;
+        }
         return QueryFilter::apply(get_class($model)::where('id', '=', $model->id), $this->userSecurityService->mergeConditions($permissions))->count() > 0;
 
     }
@@ -125,6 +131,9 @@ class SecuredEntityService
         $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::DELETE);
         if ($permissions->count() === 0) {
             return false;
+        }
+        if ($this->userSecurityService->hasAstrixPermission($permissions)) {
+            return true;
         }
         return QueryFilter::apply(get_class($model)::where('id', '=', $model->id), $this->userSecurityService->mergeConditions($permissions))->count() > 0;
     }

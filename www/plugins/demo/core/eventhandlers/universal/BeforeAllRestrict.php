@@ -37,6 +37,7 @@ class BeforeAllRestrict
         $this->restrictSystemPermissionChanges($event, $model);
     }
 
+    /**This should be moved to after all restrict*/
     public function restrictSecured($event, $model)
     {
         if ($model->SECURED === true) {
@@ -50,7 +51,7 @@ class BeforeAllRestrict
 
     public function restrictImmutable($model)
     {
-        if (property_exists($model, 'immutables')) {
+        if (property_exists($model, 'immutables') && is_array($model->immutables)) {
             $immutables = $model->immutables;
             $original = $model->getOriginal();
             $current = $model->attributes;

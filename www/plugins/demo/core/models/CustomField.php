@@ -37,11 +37,13 @@ class CustomField extends Model
      * @var array Validation rules
      */
     public $rules = [
-        'form' => 'required',
+        'engine_application_id' => 'required',
+        'model' => 'required',
         'name' => 'required',
-        'code' => 'required|regex:/^[a-zA-Z0-9_]*$/i',
+        'code' => 'regex:/^[a-zA-Z0-9_]*$/i',
     ];
 
+    public $immutables = ['code'];
     public $attachAuditedBy = true;
 
     public $belongsTo = [
@@ -49,5 +51,8 @@ class CustomField extends Model
         'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id']
     ];
 
-
+    public function beforeCreate()
+    {
+        $this->code = $this->application->code . '_' . snake_case(trim($this->name));
+    }
 }

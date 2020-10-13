@@ -93,7 +93,7 @@ class Permission extends Model
      */
     public static function getConditions($permissions)
     {
-        return $permissions->forEach(function ($permission) {
+        return $permissions->map(function ($permission) {
             return $permission->condition;
         })->toArray();
     }

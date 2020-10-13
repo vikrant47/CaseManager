@@ -4,13 +4,23 @@
 namespace Demo\Workflow\Services;
 
 
+use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Services\InMemoryQueryFilter;
 use Demo\Workflow\Models\ServiceChannel;
 use Demo\Workflow\Models\Workflow;
+use Monolog\Logger;
 
 class ChannelService
 {
+    /**@var $logger Logger */
+    protected $logegr;
+
+    public function __construct()
+    {
+        $this->logger = PluginConnection::getCurrentLogger();
+    }
+
     /**
      * This will search for a channel by given model
      * @return ServiceChannel matched channel
