@@ -10,6 +10,6 @@ interface WorkStatus
     const START = 'start';
     const ASSIGNED = 'assigned';
     const WAITING = 'waiting';
-    const COMPLETED = 'completed';
+    const FINISHED = 'finished';
     const FAILED = 'failed';
 }

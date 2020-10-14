@@ -33,7 +33,6 @@ class Work extends Model
         'workflow' => [Workflow::class, 'key' => 'workflow_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
         'current_state' => [WorkflowState::class, 'key' => 'workflow_state_id'],
-        'application' => [\Demo\Core\Models\EngineApplication::class, 'key' => 'engine_application_id']
     ];
 
     /**
@@ -124,9 +123,20 @@ class Work extends Model
         $this->update();
     }
 
-    public function forceUpdate()
+    public function beforeSave()
     {
-        work::where('id', $this->id)->update($this->toArray());
+        $original = $this->getOriginal();
+        if ($this->attributes['current_state_id'] !== $original['current_state_id']) {
+            $this->attributes['status'] = WorkStatus::WAITING;
+            $this->assigned_to_id = null; // updating assignee on a transition
+        }
+        if (!empty($this->attributes['assigned_to_id'])) {
+            $this->attributes['status'] = WorkStatus::ASSIGNED;
+        } elseif ($this->current_state_id === WorkflowState::START) {
+            $this->attributes['status'] = WorkStatus::START;
+        } elseif ($this->current_state_id === WorkflowState::FINISH) {
+            $this->attributes['status'] = WorkStatus::FINISHED;
+        }
     }
 
     public function scopeFindByEntity($query, $entityType, $id)

@@ -46,7 +46,7 @@ class SearchChannelBeforePersist
             }
             $logger->debug($channel->name . ' Channel matched for model ' . ModelUtil::toString($model));
             $workService = new WorkService();
-            $work = $workService->createWork($channel, $model);
+            $work = $workService->newWork($channel, $model);
             if ($channel->auto_start_workflow) {
                 $logger->debug('Searching workflow for channel ' . ModelUtil::toString($channel));
                 $wokflowService = new WorkflowService();
@@ -57,7 +57,9 @@ class SearchChannelBeforePersist
                 }
                 $wokflowService->startWorkflow($workflow, $work);
             }
-            SecuredEntityService::save($work);
+            if(!$work->exists) {
+                SecuredEntityService::save($work);
+            }
         }
     }
 }

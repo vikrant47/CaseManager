@@ -21,7 +21,7 @@ class WorkService
      * @param $channel ServiceChannel The channel which is matched
      * @return Work newly created work instance
      */
-    public function createWork($channel, $model)
+    public function newWork($channel, $model)
     {
         $work = new Work();
         $work->service_channel_id = $channel->id;

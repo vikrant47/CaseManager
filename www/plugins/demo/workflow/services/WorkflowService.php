@@ -53,9 +53,8 @@ class WorkflowService
     public function startWorkflow($workFlow, $work)
     {
         $work->current_state_id = WorkflowState::START;
-        $work->workflow_id = $workFlow;
-        $work->status = WorkStatus::START;
-        $work->save();
+        $work->workflow = $workFlow;
+        SecuredEntityService::save($work);
     }
 
     /**
@@ -84,6 +83,7 @@ class WorkflowService
     }
 
     /**
+     * @Depricated - User model api's instead of this
      * This will make a transition from given given state to next state
      * Make a transition from workflow state to new state
      * Steps -
@@ -98,51 +98,19 @@ class WorkflowService
      * Step 9. Update workflow state in current QueueEntity record
      * Step 10. Update current QueueEntity record
      * @param Work $work
-     * @param null|WorkflowState $toState
-     * @return void strtaed workflow instance
-     * @throws ValidationException
+     * @param WorkflowState $toState
+     * @param bool $backward_direction
+     * @return WorkflowTransition started workflow instance
      */
-    public function makeTransition($work, $toState = null)
+    public function makeTransition($work, $toState, $backward_direction = false)
     {
-        $workflow = $work->workflow;
-        if ($workflow->active === false) {
-            throw new ValidationException([
-                'workflow' => 'Unable to execute an inactive workflow.'
-            ]);
-        }
-        if (empty($work->assigned_to)) {
-            throw new ValidationException([
-                'workflow' => 'Unable to process as this item has not been assigned to anybody'
-            ]);
-        }
-        /*if ($work->assigned_to->id !== $currentUser->id) {
-            throw new ValidationException([
-                'workflow' => 'Unable to execute workflow. You are not assigned'
-            ]);
-        }*/
-        if (empty($toState)) {
-            throw new ValidationException([
-                'workflow' => 'Invalid workflow definition ' . $work->workflow->name . '. Next state not found for ' . $work->current_state
-            ]);
-        }
-        if ($workflow->containsState($toState) === false) {
-            throw new ValidationException([
-                'workflow' => 'TransitionError : Given state ' . $toState->name . ' doesn\'t belong to ' . $work->workflow->name . ' workflow'
-            ]);
-        }
-        /*$next_queue = $work->workflow->getCurrentQueue($work->current_state);
-        if ($next_queue === null) {
-            throw new ApplicationException('Invalid workflow definition ' . $work->workflow->name . '. Next queue not found for ' . $work->current_state);
-        }
-        $next_queue->pushItem($model);
-        */
         $transition = new WorkflowTransition();
         $transition->work = $this;
         $transition->from_state = $work->current_state;
-        $transition->to_state = $toState;
+        $transition->to_state = $backward_direction;
+        $transition->backward_direction = $toState;
         SecuredEntityService::save($transition);// saving by applying permissions
-        $work->current_state = $toState;
-        $work->assigned_to = null;
-        SecuredEntityService::update($work);
+        return $transition;
     }
 }
+
