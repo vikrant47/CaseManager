@@ -8,11 +8,13 @@ use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Services\InMemoryQueryFilter;
 use Demo\Core\Services\QueryFilter;
+use Demo\Core\Services\SecuredEntityService;
 use Demo\Workflow\Models\ServiceChannel;
 use Demo\Workflow\Models\Workflow;
 use Demo\Workflow\Models\Work;
 use Demo\Workflow\Models\WorkflowTransition;
 use Demo\Workflow\Services\ChannelService;
+use Demo\Workflow\Services\WorkflowService;
 use Demo\Workflow\Services\WorkService;
 use Log;
 use October\Rain\Exception\ApplicationException;
@@ -32,6 +34,7 @@ class SearchChannelBeforePersist
     public function handler($event, $model)
     {
         $logger = PluginConnection::getCurrentLogger();
+        $logger->debug('Searching channel for model ' . ModelUtil::toString($model));
         $ignoreModels = [Work::class, WorkflowTransition::class, EventLog::class];
         $includedPackage = ['Workflow'];
         $modelClass = get_class($model);
@@ -44,9 +47,17 @@ class SearchChannelBeforePersist
             $logger->debug($channel->name . ' Channel matched for model ' . ModelUtil::toString($model));
             $workService = new WorkService();
             $work = $workService->createWork($channel, $model);
-            if ($channel->auto_start_) {
-               // $wokflowService = new WorkflowSeri
+            if ($channel->auto_start_workflow) {
+                $logger->debug('Searching workflow for channel ' . ModelUtil::toString($channel));
+                $wokflowService = new WorkflowService();
+                $workflow = $wokflowService->searchWorkflow($channel);
+                if ($workflow === null) {
+                    $logger->debug('No matching workflow found for channel ' . ModelUtil::toString($channel));
+                    return;
+                }
+                $wokflowService->startWorkflow($workflow, $work);
             }
+            SecuredEntityService::save($work);
         }
     }
 }

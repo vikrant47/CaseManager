@@ -9,8 +9,8 @@ fields:
     data:
         label: Data
         size: ''
-        span: auto
-        type: textarea
+        span: full
+        type: codeeditor
     from_state:
         label: 'From State'
         span: auto
@@ -19,10 +19,10 @@ fields:
         label: 'To State'
         span: auto
         type: relation
-    application:
-        label: 'Application'
-        nameFrom: code
-        descriptionFrom: version
+    workflow:
+        label: 'Workflow'
+        nameFrom: name
+        descriptionFrom: description
         span: auto
-        required: 1
+        readOnly: true
         type: relation

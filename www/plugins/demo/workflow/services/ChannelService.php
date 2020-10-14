@@ -9,6 +9,7 @@ use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Services\InMemoryQueryFilter;
 use Demo\Workflow\Models\ServiceChannel;
 use Demo\Workflow\Models\Workflow;
+use Illuminate\Support\Collection;
 use Monolog\Logger;
 
 class ChannelService
@@ -30,7 +31,7 @@ class ChannelService
         $modelClass = get_class($model);
         /**@var $channels Collection<ServiceChannel> */
         $channels = ServiceChannel::where('active', 1)->where('model', '=', $modelClass)->orderBy('sort_order', 'ASC')->get();
-        $this->logger->info('Evaluating channels to accept item' . ModelUtil::toString($model) . '. total = ' . $workflows->count());
+        $this->logger->info('Evaluating channels to accept item' . ModelUtil::toString($model) . '. total = ' . $channels->count());
         return InMemoryQueryFilter::findMatchingEntity(collect([$model]), $channels);
     }
 }

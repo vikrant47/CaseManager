@@ -4,6 +4,7 @@
 namespace Demo\Core\Services;
 
 use Demo\Core\Models\Permission;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\UnauthorizedException;
@@ -17,6 +18,37 @@ class SecuredEntityService
     protected $modelClass;
     protected $userSecurityService;
     protected $useEntityQuery = true;
+
+    /**
+     * This will save the model by appliying security
+     * @param Model $model
+     */
+    public static function save($model)
+    {
+        $model->SECURED = true;
+        $model->save();
+    }
+
+    /**
+     * This will save the model by appliying security
+     * @param Model $model
+     */
+    public static function update($model)
+    {
+        $model->SECURED = true;
+        $model->update();
+    }
+
+    /**
+     * This will save the model by appliying security
+     * @param Model $model
+     * @throws \Exception
+     */
+    public static function delete($model)
+    {
+        $model->SECURED = true;
+        $model->delete();
+    }
 
     /**
      * SecuredEntityService constructor.
