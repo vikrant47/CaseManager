@@ -58,7 +58,7 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit"=> 1,
                                                                                         "viewable"=> false,
                                                                                         "record_history"=> false,
-                                                                                        "audit_columns"=>"[\"case_number\",\"case_version\",\"description\",\"priority_id\",\"suspect\",\"tat_duration\",\"title\"]",
+                                                                                        "audit_columns"=>"[\"case_number\",\"case_version\",\"description\",\"priority_id\",\"suspect\",\"ttl\",\"title\"]",
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> 1
                             ]             ]);

@@ -8,6 +8,7 @@ use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\CustomField;
 use Demo\Workflow\Models\Workflow;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -67,7 +68,7 @@ class InMemoryQueryFilter extends QueryFilter
         $fields = [];
         $record = $this->data->get(0);
         if ($record instanceof \Illuminate\Database\Eloquent\Model) {
-            $record = $record->attributesToArray();
+            $record = $record->toArray();
         }
         foreach ($record as $field => $value) {
             $fields[$field] = SqlLiteService::phpToDoctrineType(gettype($value));
@@ -85,10 +86,27 @@ class InMemoryQueryFilter extends QueryFilter
         return $this;
     }
 
+    /**This will sanitize the given data by converting it to array and removing all relational fields*/
+    public function sanitizeData()
+    {
+
+    }
+
     public function insertData()
     {
         if ($this->dataInserted === false) {
-            $this->sqLiteService->getConnection()->table($this->tableNme)->insert($this->data->toArray());
+            $records = $this->data->map(function ($record) {
+                if ($record instanceof Model) {
+                    $record = $record->toArray();
+                }
+                foreach ($record as $name => $value) {
+                    if (is_array($value)) {
+                        $record[$name] = json_encode($value);
+                    }
+                }
+                return $record;
+            });
+            $this->sqLiteService->getConnection()->table($this->tableNme)->insert($records->toArray());
             $this->dataInserted = true;
         }
         return $this;

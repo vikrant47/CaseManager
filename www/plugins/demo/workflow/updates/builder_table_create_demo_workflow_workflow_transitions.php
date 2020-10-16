@@ -20,6 +20,7 @@ class BuilderTableCreateDemoWorkflowWorkflowTransitions extends Migration
             $table->uuid('to_state_id');
             $table->text('data')->nullable();
             $table->uuid('workflow_id');
+            $table->uuid('configured_queue_id');
         });
     }
 

@@ -47,18 +47,16 @@ class SearchChannelBeforePersist
             $logger->debug($channel->name . ' Channel matched for model ' . ModelUtil::toString($model));
             $workService = new WorkService();
             $work = $workService->newWork($channel, $model);
-            if ($channel->auto_start_workflow) {
-                $logger->debug('Searching workflow for channel ' . ModelUtil::toString($channel));
-                $wokflowService = new WorkflowService();
-                $workflow = $wokflowService->searchWorkflow($channel);
-                if ($workflow === null) {
-                    $logger->debug('No matching workflow found for channel ' . ModelUtil::toString($channel));
-                    return;
-                }
-                $wokflowService->startWorkflow($workflow, $work);
+            $logger->debug('Searching workflow for channel ' . ModelUtil::toString($channel));
+            $wrokflowService = new WorkflowService();
+            $workflow = $wrokflowService->searchWorkflow($channel);
+            if ($workflow !== null) {
+                $wrokflowService->startWorkflow($workflow, $work);
+            } else {
+                $logger->debug('No matching workflow found for channel ' . ModelUtil::toString($channel));
             }
-            if(!$work->exists) {
-                SecuredEntityService::save($work);
+            if (!$work->exists) {
+                $work->save();
             }
         }
     }

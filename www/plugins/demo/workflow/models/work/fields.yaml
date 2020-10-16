@@ -11,7 +11,7 @@ fields:
         descriptionFrom: description
         span: auto
         type: relation
-    current_state:
+    workflow_state:
         label: 'Workflow State'
         span: auto
         type: relation

@@ -25,7 +25,7 @@ class BeforeUpdateWorkState
     public function handler($event, $model)
     {
         $original = $model->getOriginal();
-        if (!empty($original['workflow_state_id']) && $original['workflow_state_id'] != $model->workflow_state_id) {
+        if ($model->isDirty('workflow_state_id')) {
             $transition = new WorkflowTransition();
             $transition->from_state_id = $original['workflow_state_id'];
             $transition->to_state_id = $model->workflow_state_id;

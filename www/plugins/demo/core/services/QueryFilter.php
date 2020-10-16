@@ -207,8 +207,8 @@ class QueryFilter extends QueryBuilderParser
         if ($rules !== null) {
             $rules = $this->makeRules($rules);
         }
+        $query = $this->query;
         if (!$this->isEmptyRules($rules)) {
-            $query = $this->query;
             if ($query instanceof \October\Rain\Database\Builder) {
                 $query = $query->getQuery();
             }

@@ -23,6 +23,7 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
             $table->integer('sort_order');
             $table->string('model',255);
             $table->json('condition');
+            $table->boolean('auto_publish')->default(false);
             $table->string('model_state_field')->default('workflow_state_id');
         });
     }

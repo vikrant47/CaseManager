@@ -13,7 +13,7 @@ fields:
         span: auto
         default: 1
         type: switch
-    auto_start_workflow:
+    auto_publish:
         label: Auto Start Workflow
         span: auto
         default: 1

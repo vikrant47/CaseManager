@@ -22,7 +22,6 @@ class BuilderTableCreateDemoWorkflowServiceChannels extends Migration
             $table->boolean('active')->default(true);
             $table->text('condition');
             $table->integrer('sort_order')->default(0);
-            $table->boolean('auto_start_workflow')->default(true);
         });
     }
 

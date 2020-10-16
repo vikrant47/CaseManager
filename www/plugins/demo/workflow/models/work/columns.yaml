@@ -20,6 +20,6 @@ columns:
     record_id:
         label: record_id
         type: number
-    current_state:
-        label: current_state
+    workflow_state:
+        label: workflow_state
         type: text

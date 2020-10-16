@@ -36,10 +36,6 @@ class BeforeCreateOrUpdateCustomField
 
     public function handlerUpdated($model)
     {
-        $original = $model->getOriginal();
-        if ($original['model'] !== $model->attributes['model']) {
-            throw new ApplicationException('Changing model is not allowed');
-        }
         $targetModel = new $model->model();
         $this->updateColumn($targetModel->table, $model->name, $this->attributes);
     }

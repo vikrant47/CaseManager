@@ -27,7 +27,7 @@ class WorkService
         $work->service_channel_id = $channel->id;
         $work->status = WorkStatus::INIT;
         $work->model = get_class($model);
-        $work->record_id = get_class($model->id);
+        $work->record_id = $model->id;
         return $work;
     }
 }

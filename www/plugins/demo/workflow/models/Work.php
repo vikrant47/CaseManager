@@ -32,7 +32,7 @@ class Work extends Model
         'service_channel' => [ServiceChannel::class, 'key' => 'service_channel_id'],
         'workflow' => [Workflow::class, 'key' => 'workflow_id'],
         'model_ref' => [ModelModel::class, 'key' => 'model', 'otherKey' => 'model'],
-        'current_state' => [WorkflowState::class, 'key' => 'workflow_state_id'],
+        'workflow_state' => [WorkflowState::class, 'key' => 'workflow_state_id'],
     ];
 
     /**
@@ -54,13 +54,13 @@ class Work extends Model
 
     public function makeForwardTransition($data = [])
     {
-        $next_state = $this->workflow->getNextState($this->current_state);
+        $next_state = $this->workflow->getNextState($this->workflow_state);
         return $this->makeTransition($next_state, $data);
     }
 
     public function makeBackwardTransition($data = [])
     {
-        $previous_state = $this->workflow->getPreviousState($this->current_state);
+        $previous_state = $this->workflow->getPreviousState($this->workflow_state);
         if (empty($previous_state)) {
             throw new ApplicationException('No previous state found for revert');
         }
@@ -98,23 +98,23 @@ class Work extends Model
             throw new ApplicationException('Unable to execute workflow. You are not assigned');
         }
         if (empty($next_state)) {
-            throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next state not found for ' . $this->current_state);
+            throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next state not found for ' . $this->workflow_state);
         }
         if ($this->workflow->containsState($next_state) === false) {
             throw new ApplicationException('TransitionError : Given state ' . $next_state->name . ' doesn\'t belong to ' . $this->workflow->name . ' workflow');
         }
-        /*$next_queue = $this->workflow->getCurrentQueue($this->current_state);
+        /*$next_queue = $this->workflow->getCurrentQueue($this->workflow_state);
         if ($next_queue === null) {
-            throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next queue not found for ' . $this->current_state);
+            throw new ApplicationException('Invalid workflow definition ' . $this->workflow->name . '. Next queue not found for ' . $this->workflow_state);
         }
         $next_queue->pushItem($model);
         $transition = new WorkflowTransition();
         $transition->work = $this;
-        $transition->from_state = $this->current_state;
+        $transition->from_state = $this->workflow_state;
         $transition->to_state = $next_state;
         $transition->save();
         */
-        $this->current_state = $next_state;
+        $this->workflow_state = $next_state;
         $this->assigned_to = null;
         request()->attributes->add([
             'WORKFLOW_ITEM_DATA_' . $this->id => $data,
@@ -125,17 +125,19 @@ class Work extends Model
 
     public function beforeSave()
     {
-        $original = $this->getOriginal();
-        if ($this->attributes['current_state_id'] !== $original['current_state_id']) {
-            $this->attributes['status'] = WorkStatus::WAITING;
-            $this->assigned_to_id = null; // updating assignee on a transition
+        if ($this->exists) {
+            /**Change of an state means work is waiting to be assigned*/
+            if ($this->isDirty('workflow_state_id')) {
+                $this->attributes['status'] = WorkStatus::WAITING;
+                $this->assigned_to_id = null; // updating assignee on a transition
+            }
         }
-        if (!empty($this->attributes['assigned_to_id'])) {
-            $this->attributes['status'] = WorkStatus::ASSIGNED;
-        } elseif ($this->current_state_id === WorkflowState::START) {
+        if ($this->workflow_state_id === WorkflowState::START) {
             $this->attributes['status'] = WorkStatus::START;
-        } elseif ($this->current_state_id === WorkflowState::FINISH) {
+        } elseif ($this->workflow_state_id === WorkflowState::FINISH) {
             $this->attributes['status'] = WorkStatus::FINISHED;
+        } elseif (!empty($this->attributes['assigned_to_id'])) {
+            $this->attributes['status'] = WorkStatus::ASSIGNED;
         }
     }
 

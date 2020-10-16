@@ -53,6 +53,7 @@ class Workflow extends Model
         'priority' => 'numeric|min:1',
         'definition' => 'required|array|min:2',
         'sort_order' => 'required',
+        'auto_publish' => 'boolean',
     ];
     public $attachAuditedBy = true;
 
@@ -141,27 +142,27 @@ class Workflow extends Model
         $work->model = get_class($model);
         $from_state = new WorkflowState();
         $from_state->id = $this->definition[0]['from_state'];
-        $work->current_state = $from_state;
+        $work->workflow_state = $from_state;
         $work->engine_application_id = EngineApplication::getCurrentApplication()->id;
         $work->save();
     }
 
-    public function getPreviousStateId(WorkflowState $current_state)
+    public function getPreviousStateId(WorkflowState $workflow_state)
     {
-        $current_stateId = $current_state->id;
+        $workflow_stateId = $workflow_state->id;
         foreach ($this->definition as $entry) {
-            if ($entry['to_state'] == $current_stateId) {
+            if ($entry['to_state'] == $workflow_stateId) {
                 return $entry['from_state'];
             }
         }
         return null;
     }
 
-    public function getNextStateId(WorkflowState $current_state)
+    public function getNextStateId(WorkflowState $workflow_state)
     {
-        $current_stateId = $current_state->id;
+        $workflow_stateId = $workflow_state->id;
         foreach ($this->definition as $entry) {
-            if ($entry['from_state'] == $current_stateId) {
+            if ($entry['from_state'] == $workflow_stateId) {
                 return $entry['to_state'];
             }
         }
@@ -185,42 +186,42 @@ class Workflow extends Model
         return false;
     }
 
-    public function getCurrentQueueId($current_state)
+    public function getCurrentQueueId($workflow_state)
     {
-        $current_stateId = $current_state;
-        if ($current_state instanceof WorkflowState) {
-            $current_stateId = $current_state->id;
+        $workflow_stateId = $workflow_state;
+        if ($workflow_state instanceof WorkflowState) {
+            $workflow_stateId = $workflow_state->id;
         }
         foreach ($this->definition as $entry) {
-            if ($entry['from_state'] == $current_stateId) {
+            if ($entry['from_state'] == $workflow_stateId) {
                 return $entry['queue'];
             }
         }
         return null;
     }
 
-    public function getNextQueueId(WorkflowState $current_state)
+    public function getNextQueueId(WorkflowState $workflow_state)
     {
-        return $this->getCurrentQueueId($this->getNextStateId($current_state));
+        return $this->getCurrentQueueId($this->getNextStateId($workflow_state));
     }
 
-    public function getNextState(WorkflowState $current_state)
+    public function getNextState(WorkflowState $workflow_state)
     {
-        return WorkflowState::find($this->getNextStateId($current_state));
+        return WorkflowState::find($this->getNextStateId($workflow_state));
     }
 
-    public function getPreviousState(WorkflowState $current_state)
+    public function getPreviousState(WorkflowState $workflow_state)
     {
-        return WorkflowState::find($this->getPreviousStateId($current_state));
+        return WorkflowState::find($this->getPreviousStateId($workflow_state));
     }
 
-    public function getCurrentQueue(WorkflowState $current_state)
+    public function getCurrentQueue(WorkflowState $workflow_state)
     {
-        return Queue::find($this->getCurrentQueueId($current_state));
+        return Queue::find($this->getCurrentQueueId($workflow_state));
     }
 
-    public function getNextQueue(WorkflowState $current_state)
+    public function getNextQueue(WorkflowState $workflow_state)
     {
-        return Queue::find($this->getNextQueueId($current_state));
+        return Queue::find($this->getNextQueueId($workflow_state));
     }
 }

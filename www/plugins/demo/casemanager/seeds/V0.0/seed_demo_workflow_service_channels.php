@@ -27,7 +27,7 @@ class SeedDemoWorkflowServiceChannels implements Seedable
                                                                                         "active"=> 1,
                                                                                         "condition"=> "",
                                                                                         "sort_order"=> 0,
-                                                                                        "auto_start_workflow"=> 1
+                                                                                        "auto_publish"=> 1
                             ]             ]);
         }
 

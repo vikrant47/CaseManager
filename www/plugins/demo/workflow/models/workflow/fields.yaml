@@ -76,6 +76,12 @@ tabs:
             type: number
             tab: 'Model Configuration'
             required: 1
+        auto_publish:
+            label: Auto Publish
+            span: full
+            type: switch
+            tab: Definition
+            comment: 'Activate this flag to auto transition from Start to next configured state upon saving a work'
         definition:
             label: Definition
             prompt: 'Add new transition'

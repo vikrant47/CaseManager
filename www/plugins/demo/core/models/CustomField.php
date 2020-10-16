@@ -43,7 +43,7 @@ class CustomField extends Model
         'code' => 'regex:/^[a-zA-Z0-9_]*$/i',
     ];
 
-    public $immutables = ['code'];
+    public $immutables = ['code', 'model', 'type'];
     public $attachAuditedBy = true;
 
     public $belongsTo = [

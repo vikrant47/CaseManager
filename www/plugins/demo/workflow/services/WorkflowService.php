@@ -35,13 +35,12 @@ class WorkflowService
     public function searchWorkflow($channel)
     {
         $matchedWorkflow = null;
-        $model = $channel->model;
-        $modelClass = get_class($model);
+        $modelClass = $channel->model;
         /**@var $workflows Collection<ServiceChannel> */
         $workflows = Workflow::where('active', 1)->where('service_channel_id', '=', $channel->id)
             ->orderBy('sort_order', 'ASC')->get();
         $this->logger->info('Evaluating workflow to accept channel' . ModelUtil::toString($channel) . '. total = ' . $workflows->count());
-        return InMemoryQueryFilter::findMatchingEntity(collect([$model]), $workflows);
+        return InMemoryQueryFilter::findMatchingEntity(collect([$channel->model_ref]), $workflows);
     }
 
     /**
@@ -52,9 +51,12 @@ class WorkflowService
      */
     public function startWorkflow($workFlow, $work)
     {
-        $work->current_state_id = WorkflowState::START;
+        $work->workflow_state_id = WorkflowState::START;
         $work->workflow = $workFlow;
-        SecuredEntityService::save($work);
+        $work->save();
+        if ($workFlow->auto_publish) {
+            $this->makeTransition($work, $this->getNextStateConfig($workFlow, WorkflowState::START));
+        }
     }
 
     /**
@@ -66,20 +68,40 @@ class WorkflowService
      *  In above example State B is connected to State A(Backward), State C , State D
      * @param Workflow $workflow
      * @param string $stateId
-     * @return array A connection array that consists mapping of all connection
+     * @return Collection A connection array that consists mapping of all connection with queues
      */
-    public function getConnectedStates($workflow, $stateId)
+    public function getConnectedStateConfig($workflow, string $stateId)
     {
-        $connections = [];
+        $connections = collect([]);
         $definition = $workflow->definition;
         foreach ($definition as $stateConfig) {
             if ($stateConfig['from_state'] === $stateId) {
-                $connections[$stateConfig['to_state']] = ['backwardDirection' => false];
+                $connections->push([
+                    'backwardDirection' => false,
+                    'stateId' => $stateConfig['to_state'],
+                    'queueId' => $stateConfig['queue']
+                ]);
             } elseif ($stateConfig['to_state'] === $stateId) {
-                $connections[$stateConfig['to_state']] = ['backwardDirection' => true];
+                $connections->push([
+                    'backwardDirection' => true,
+                    'stateId' => $stateConfig['from_state'],
+                    'queueId' => $stateConfig['queue']
+                ]);
             }
         }
         return $connections;
+    }
+
+    /**
+     * This will return the next state with forward direction
+     * @return null|array
+     */
+    public function getNextStateConfig($workflow, string $stateId)
+    {
+        $connections = $this->getConnectedStateConfig($workflow, $stateId);
+        return $connections->first(function ($connection) {
+            return $connection['backwardDirection'] === false;
+        });
     }
 
     /**
@@ -98,17 +120,17 @@ class WorkflowService
      * Step 9. Update workflow state in current QueueEntity record
      * Step 10. Update current QueueEntity record
      * @param Work $work
-     * @param WorkflowState $toState
+     * @param string $toStateId
      * @param bool $backward_direction
      * @return WorkflowTransition started workflow instance
      */
-    public function makeTransition($work, $toState, $backward_direction = false)
+    public function makeTransition($work, $toStateId, $backward_direction = false)
     {
         $transition = new WorkflowTransition();
         $transition->work = $this;
-        $transition->from_state = $work->current_state;
-        $transition->to_state = $backward_direction;
-        $transition->backward_direction = $toState;
+        $transition->from_state = $work->workflow_state;
+        $transition->to_state = $toStateId;
+        $transition->backward_direction = $backward_direction;
         SecuredEntityService::save($transition);// saving by applying permissions
         return $transition;
     }

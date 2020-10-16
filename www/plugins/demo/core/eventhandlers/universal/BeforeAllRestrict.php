@@ -53,10 +53,8 @@ class BeforeAllRestrict
     {
         if (property_exists($model, 'immutables') && is_array($model->immutables)) {
             $immutables = $model->immutables;
-            $original = $model->getOriginal();
-            $current = $model->attributes;
             foreach ($immutables as $immutable) {
-                if ($original[$immutable] !== $current[$immutable]) {
+                if ($model->isDirty($immutable)) {
                     $message = 'Can not update field ' . ucwords(str_replace('_', ' ', $immutable));
                     throw new ValidationException([$immutable => $message]);
                 }

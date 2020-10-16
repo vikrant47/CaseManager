@@ -37,8 +37,7 @@ class ModelUtil
 
     public static function isChanged($model, string $prop)
     {
-        $original = $model->getOriginal();
-        return $original[$prop] !== $model->attributes[$prop];
+        return $model->isDirty($prop);
     }
 
     public static function fillDefaultColumnsInBelongsToMany(

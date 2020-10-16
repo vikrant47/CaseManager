@@ -51,7 +51,7 @@ class SqlLiteService
     {
         $this->connection->getSchemaBuilder()->create($tableNme, function ($table) use ($fields) {
             foreach ($fields as $field => $type) {
-                $table->{$type}($field);
+                $table->{$type}($field)->nullable();
             }
         });
         return $this;
