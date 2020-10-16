@@ -1,0 +1,4 @@
+title: Task
+modelClass: Demo\Workspace\Models\Task
+toolbar:
+    buttons: reorder_toolbar

@@ -10,7 +10,7 @@ use Demo\Core\Models\Permission;
 use Demo\Core\Models\Role;
 use Demo\Core\Services\SecuredEntityService;
 use Demo\Core\Services\SwooleServiceProvider;
-use Demo\Workflow\Models\WorkflowTransition;
+use Demo\Workspace\Models\WorkflowTransition;
 use Illuminate\Validation\UnauthorizedException;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Exception\ValidationException;

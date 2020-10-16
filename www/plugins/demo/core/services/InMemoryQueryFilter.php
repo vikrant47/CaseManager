@@ -7,7 +7,7 @@ namespace Demo\Core\Services;
 use Demo\Core\Classes\Beans\TwigEngine;
 use Demo\Core\Classes\Utils\ModelUtil;
 use Demo\Core\Models\CustomField;
-use Demo\Workflow\Models\Workflow;
+use Demo\Workspace\Models\Workflow;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;

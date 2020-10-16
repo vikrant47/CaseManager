@@ -1,0 +1,140 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        type: text
+        required: 1
+    active:
+        label: Active
+        span: auto
+        default: true
+        type: switch
+    description:
+        label: Description
+        size: ''
+        span: full
+        type: textarea
+    priority:
+        label: 'Priority'
+        span: auto
+        type: number
+        required: 1
+        default: 1
+        min: 1
+    application:
+        label: Application
+        nameFrom: code
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        service_channel:
+            emptyOption: '-- Select --'
+            label: Channel
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            required: 1
+            type: relation
+            tab: 'Model Configuration'
+            comment: 'Qualified Channel for workflow.'
+            #model_ref:
+            #   emptyOption: '-- Select --'
+            #  label: Model
+            # nameFrom: name
+            #descriptionFrom: description
+            #span: auto
+            #required: 1
+            #type: relation
+            #dependsOn: channel
+            #tab: 'Model Configuration'
+            #comment: 'Qualified Model for workflow.'
+        model_state_field:
+            label: State Field
+            span: auto
+            type: dropdown
+            showSearch: true
+            dependsOn: 'model_ref'
+            default: 'workflow_state_id'
+            tab: 'Model Configuration'
+            readOnly: true
+        condition:
+            context: update
+            label: Condition
+            span: auto
+            modelType: '${model.service_channel? model.service_channel.model:"Demo\\Workflow\\Models\\Work"}'
+            type: querybuilderwidget
+            tab: 'Model Configuration'
+            dependsOn:
+                - service_channel
+        sort_order:
+            label: Order
+            span: auto
+            default: 1
+            type: number
+            tab: 'Model Configuration'
+            required: 1
+        auto_publish:
+            label: Auto Publish
+            span: full
+            type: switch
+            tab: Definition
+            comment: 'Activate this flag to auto transition from Start to next configured state upon saving a work'
+        definition:
+            label: Definition
+            prompt: 'Add new transition'
+            span: full
+            type: repeater
+            tab: Definition
+            required: 1
+            form:
+                fields:
+                    from_state:
+                        label: 'From State'
+                        span: auto
+                        type: relation
+                        required: 1
+                    to_state:
+                        label: 'To State'
+                        span: auto
+                        type: relation
+                        required: 1
+                    queue:
+                        label: 'Queue'
+                        span: auto
+                        type: relation
+                        required: 1
+                    transition_ttl:
+                        label: ttl
+                        span: auto
+                        type: number
+                        min: -1
+                        default: -1
+                        comment: 'Max time for a work to stay in this transition. -1 = infinity'
+        _work:
+            label: 'Works'
+            span: full
+            targetModel: Demo\Workspace\Models\Work
+            list: default
+            type: relatedlist
+            tab: 'Works'
+            query:
+                where:
+                    workflow_id: '{{model.id}}'
+
+        _workflow_transition:
+            label: Transitions
+            span: full
+            targetModel: Demo\Workspace\Models\WorkflowTransition
+            list: default
+            type: relatedlist
+            tab: 'Workflow Transitions'
+            query:
+                join:
+                    model: Demo\Workspace\Models\Work
+                    key: id
+                    targetKey: work_id
+                    where:
+                        workflow_id: '{{model.id}}'

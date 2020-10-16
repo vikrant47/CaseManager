@@ -1,0 +1,10 @@
+name: Queue
+form: $/demo/workspace/models/queue/fields.yaml
+modelClass: Demo\Workspace\Models\Queue
+defaultRedirect: demo/workspace/queuecontroller
+create:
+    redirect: 'demo/workspace/queuecontroller/update/:id'
+    redirectClose: demo/workspace/queuecontroller
+update:
+    redirect: demo/workspace/queuecontroller
+    redirectClose: demo/workspace/queuecontroller

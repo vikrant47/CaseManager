@@ -1,4 +1,0 @@
-title: Task
-modelClass: Demo\Workflow\Models\Task
-toolbar:
-    buttons: reorder_toolbar

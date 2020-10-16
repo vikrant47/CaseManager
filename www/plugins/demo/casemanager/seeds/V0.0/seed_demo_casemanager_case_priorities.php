@@ -22,7 +22,8 @@ class SeedDemoCasemanagerCasePriorities implements Seedable
                                                                                         "description"=>"Priority one cases",
                                                                                         "value"=> 10,
                                                                                         "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "work_id"=> null
                             ]             ]);
         }
 

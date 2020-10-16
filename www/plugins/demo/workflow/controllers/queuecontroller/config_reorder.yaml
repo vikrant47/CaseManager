@@ -1,4 +1,0 @@
-title: Queue
-modelClass: Demo\Workflow\Models\Queue
-toolbar:
-    buttons: reorder_toolbar

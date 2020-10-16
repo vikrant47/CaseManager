@@ -17,13 +17,13 @@
 #
 #  queue:
 #    label: Queue
-#    modelClass: Demo\Workflow\Models\Queue
+#    modelClass: Demo\Workspace\Models\Queue
 #    conditions: queue_id in (:filtered)
 #    nameFrom: name
 #
 #  state:
 #    label: State
-#    modelClass: Demo\Workflow\Models\WorkflowState
+#    modelClass: Demo\Workspace\Models\WorkflowState
 #    conditions: workflow_state_id in (:filtered)
 #    nameFrom: name
 #

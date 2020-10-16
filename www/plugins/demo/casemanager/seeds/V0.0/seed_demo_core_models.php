@@ -14,6 +14,22 @@ class SeedDemoCoreModels implements Seedable
     {
             Db::table('demo_core_models')->insert([
             [
+                                                                            "id"=>"a32f3a77-e9ef-4366-9a62-ff9c2275ada3",
+                                                                                        "created_at"=>"2019-12-20 14:15:39",
+                                                                                        "updated_at"=>"2020-10-16 03:15:03",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "name"=>"Case Model",
+                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
+                                                                                        "controller"=>"Demo\Casemanager\Controllers\CaseController",
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "audit"=> 1,
+                                                                                        "viewable"=> false,
+                                                                                        "record_history"=> false,
+                                                                                        "audit_columns"=>"[\"title\",\"description\",\"priority_id\",\"case_number\",\"case_version\",\"suspect\",\"ttl\"]",
+                                                                                        "description"=> "",
+                                                                                        "attach_audited_by"=> 1
+                            ] ,            [
                                                                             "id"=>"34a6cd93-49e4-4dbf-b7d0-e825970d493d",
                                                                                         "created_at"=>"2020-04-27 11:51:21",
                                                                                         "updated_at"=>"2020-04-27 11:55:17",
@@ -45,22 +61,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "audit_columns"=> 0,
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false
-                            ] ,            [
-                                                                            "id"=>"a32f3a77-e9ef-4366-9a62-ff9c2275ada3",
-                                                                                        "created_at"=>"2019-12-20 14:15:39",
-                                                                                        "updated_at"=>"2020-06-01 13:38:12",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"Case Model",
-                                                                                        "model"=>"Demo\Casemanager\Models\CaseModel",
-                                                                                        "controller"=>"Demo\Casemanager\Controllers\CaseController",
-                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
-                                                                                        "audit"=> 1,
-                                                                                        "viewable"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"[\"case_number\",\"case_version\",\"description\",\"priority_id\",\"suspect\",\"ttl\",\"title\"]",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> 1
                             ]             ]);
         }
 

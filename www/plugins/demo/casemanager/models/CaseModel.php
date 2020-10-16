@@ -1,8 +1,8 @@
 <?php namespace Demo\Casemanager\Models;
 
-use Demo\Workflow\Models\Queue;
-use Demo\Workflow\Models\Work;
-use Demo\Workflow\Models\WorkflowState;
+use Demo\Workspace\Models\Queue;
+use Demo\Workspace\Models\Work;
+use Demo\Workspace\Models\WorkflowState;
 use Model;
 use Backend\Models\User;
 
@@ -13,7 +13,7 @@ class CaseModel extends Model
 {
     use \October\Rain\Database\Traits\Validation;
     use \Demo\Core\Classes\Traits\ModelTrait;
-    use \Demo\Workflow\Classes\Traits\WorkTrait;
+    use \Demo\Workspace\Classes\Traits\WorkTrait;
 
     /**
      * @var string The database table used by the model.

@@ -1,0 +1,35 @@
+1.0.1:
+    - 'Initialize application.'
+1.0.2:
+    - 'Created table demo_workspace_queues'
+    - builder_table_create_demo_workspace_queues.php
+1.0.3:
+    - 'Created table demo_workspace_tasks'
+    - builder_table_create_demo_workspace_tasks.php
+1.0.4:
+    - 'Created table demo_workspace_workflows'
+    - builder_table_create_demo_workspace_workflows.php
+1.0.5:
+    - 'Created table demo_workspace_works'
+    - builder_table_create_demo_workspace_works.php
+1.0.6:
+    - 'Created table demo_workspace_workflow_transitions'
+    - builder_table_create_demo_workspace_workflow_transitions.php
+1.0.7:
+    - 'Created table demo_workspace_queue_assignment_groups'
+    - builder_table_create_demo_workspace_queue_assignment_groups.php
+1.0.8:
+    - 'Created table demo_workspace_workflow_states'
+    - builder_table_create_demo_workspace_workflow_states.php
+1.0.9:
+    - 'Created table demo_workspace_queue_routing_rules'
+    - builder_table_create_demo_workspace_queue_routing_rules.php
+1.0.11:
+    - 'Created table demo_workspace_service_channels'
+    - builder_table_create_demo_workspace_service_channels.php
+1.0.12:
+    - 'Created table demo_workspace_work_profiles'
+    - builder_table_create_demo_workspace_work_profiles.php
+1.0.13:
+    - 'Altered table backend_users, added work profile columns'
+    - builder_table_alter_demo_core_users.php

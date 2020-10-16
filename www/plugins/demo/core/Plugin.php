@@ -17,7 +17,7 @@ use Demo\Core\FormWidgets\SearchableRelatedList;
 use Demo\Core\Middlewares\CorePluginMiddlerware;
 use Demo\Core\Services\InMemoryQueryFilter;
 use Demo\Core\Services\SwooleServiceProvider;
-use Demo\Workflow\EventHandlers\Universal\BeforeUpdateWorkState;
+use Demo\Workspace\EventHandlers\Universal\BeforeUpdateWorkState;
 use RainLab\Builder\Classes\ControlLibrary;
 use System\Classes\PluginBase;
 use BackendAuth;
