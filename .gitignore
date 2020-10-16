@@ -28,3 +28,4 @@ www/.travis.yml
 www/phpunit.phar
 www/.editorconfig
 swoole-ext
+/www/composer.phar
