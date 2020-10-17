@@ -13,7 +13,7 @@ class BuilderTableCreateDemoWorkflowQueues extends Migration
             $table->string('name', 255);
             $table->text('description');
             $table->boolean('active')->default(true);
-            $table->json('user_expression');
+            $table->json('user_expression')->default('[]');
             $table->integer('priority')->default(1);
             $table->boolean('age_priority')->default(true);
             $table->string('age_unit')->default('millisecond');

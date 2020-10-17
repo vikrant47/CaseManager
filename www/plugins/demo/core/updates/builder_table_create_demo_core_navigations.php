@@ -18,7 +18,7 @@ class BuilderTableCreateDemoCoreNavigations extends Migration
             $table->integer('version')->nullable()->default(0);
             $table->string('label');
             $table->string('icon');
-            $table->string('tooltip')->default(null);
+            $table->string('tooltip')->nullable();
             $table->string('position')->default('sidebar');
             $table->string('type');
             $table->boolean('active');
