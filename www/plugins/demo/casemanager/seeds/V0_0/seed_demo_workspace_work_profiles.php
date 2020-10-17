@@ -22,8 +22,8 @@ class SeedDemoWorkspaceWorkProfiles implements Seedable
                                                                                         "updated_at"=>"2020-10-04 13:58:53",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
-                                                                                        "version"=> 0,
-                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
+                                                                                        "version"=> 0
                             ]             ]);
         }
 

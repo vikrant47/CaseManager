@@ -22,6 +22,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Notification",
                                                                                         "icon"=>"oc-icon-envelope-o",
+                                                                                        "tooltip"=> "",
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"folder",
                                                                                         "active"=> 1,
                                                                                         "name"=>"notification",
@@ -31,17 +33,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=> "",
                                                                                         "form"=> "",
                                                                                         "view"=> "",
+                                                                                        "script"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "engine_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 3,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> "",
-                                                                                        "tooltip"=> "",
-                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                                                                                        "sort_order"=> 3
                             ] ,            [
                                                                             "id"=>"9ab44ba4-d108-437f-8025-b999fcffa10c",
                                                                                         "created_at"=>"2020-05-17 06:17:22",
@@ -51,6 +51,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Mail Templates",
                                                                                         "icon"=>"oc-icon-file-code-o",
+                                                                                        "tooltip"=> null,
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"list",
                                                                                         "active"=> 1,
                                                                                         "name"=>"mail-templates",
@@ -60,17 +62,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=> "",
                                                                                         "form"=> "",
                                                                                         "view"=> "",
+                                                                                        "script"=> null,
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "engine_application_id"=>"c79b3f36-a77a-4de9-a9f0-f890a99728ef",
                                                                                         "parent_id"=>"43098bfd-5bf8-4979-a9b4-1fb837f327f3",
-                                                                                        "sort_order"=> 4,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> null,
-                                                                                        "tooltip"=> null,
-                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                                                                                        "sort_order"=> 4
                             ]             ]);
         }
 

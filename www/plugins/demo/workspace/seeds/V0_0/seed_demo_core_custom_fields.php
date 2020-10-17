@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds workflow d */
+/**Auto generated using cmd _: php artisan core:run-seeds workspace d */
 class SeedDemoCoreCustomFields implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -20,6 +20,7 @@ class SeedDemoCoreCustomFields implements Seedable
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "name"=>"Workflow Profile",
+                                                                                        "code"=>"demo_workspace_work_profile_id",
                                                                                         "description"=> "",
                                                                                         "type"=>"string",
                                                                                         "model"=>"Demo\Core\Models\CoreUser",
@@ -27,8 +28,7 @@ class SeedDemoCoreCustomFields implements Seedable
                                                                                         "unsigned"=> false,
                                                                                         "allow_null"=> 1,
                                                                                         "default"=> "",
-                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
-                                                                                        "code"=>"demo_workspace_work_profile_id"
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad"
                             ]             ]);
         }
 

@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds workflow d */
+/**Auto generated using cmd _: php artisan core:run-seeds workspace d */
 class SeedDemoCoreNavigations implements Seedable
 {
     /**This will be executed to install seeds*/
@@ -22,6 +22,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Routing Rules",
                                                                                         "icon"=>"oc-icon-share-alt",
+                                                                                        "tooltip"=> "",
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"list",
                                                                                         "active"=> 1,
                                                                                         "name"=>"routing_rules",
@@ -31,17 +33,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=> "",
                                                                                         "form"=> null,
                                                                                         "view"=> "",
+                                                                                        "script"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=>"05443970-02d3-11eb-ae0e-9fa04abb3d8f",
-                                                                                        "sort_order"=> 7,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> "",
-                                                                                        "tooltip"=> "",
-                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "sort_order"=> 7
                             ] ,            [
                                                                             "id"=>"1f280b8a-9dbd-4b58-a295-59c0740b315d",
                                                                                         "created_at"=> null,
@@ -51,6 +51,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Service Channel",
                                                                                         "icon"=>"oc-icon-adjust",
+                                                                                        "tooltip"=> "",
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"list",
                                                                                         "active"=> 1,
                                                                                         "name"=>"service_channel",
@@ -60,17 +62,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=> "",
                                                                                         "form"=> null,
                                                                                         "view"=> "",
+                                                                                        "script"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 4,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> "",
-                                                                                        "tooltip"=> "",
-                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "sort_order"=> 4
                             ] ,            [
                                                                             "id"=>"05443970-02d3-11eb-ae0e-9fa04abb3d8f",
                                                                                         "created_at"=>"2020-09-30 04:11:31",
@@ -80,6 +80,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Queue",
                                                                                         "icon"=>"oc-icon-th-list",
+                                                                                        "tooltip"=>"queue",
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"folder",
                                                                                         "active"=> 1,
                                                                                         "name"=>"queue",
@@ -89,17 +91,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=> "",
                                                                                         "form"=> null,
                                                                                         "view"=> "",
+                                                                                        "script"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 2,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> "",
-                                                                                        "tooltip"=>"queue",
-                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "sort_order"=> 2
                             ] ,            [
                                                                             "id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
                                                                                         "created_at"=>"2020-05-09 15:13:06",
@@ -109,6 +109,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Workflow",
                                                                                         "icon"=>"oc-icon-puzzle-piece",
+                                                                                        "tooltip"=> "",
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"folder",
                                                                                         "active"=> 1,
                                                                                         "name"=>"workflow",
@@ -118,17 +120,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=> "",
                                                                                         "form"=> "",
                                                                                         "view"=> "",
+                                                                                        "script"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=> null,
-                                                                                        "sort_order"=> 5,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> "",
-                                                                                        "tooltip"=> "",
-                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "sort_order"=> 5
                             ] ,            [
                                                                             "id"=>"1167df07-11a5-467e-af94-28257f1bf241",
                                                                                         "created_at"=> null,
@@ -138,6 +138,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Queues",
                                                                                         "icon"=>"oc-icon-stack-overflow",
+                                                                                        "tooltip"=> "",
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"list",
                                                                                         "active"=> 1,
                                                                                         "name"=>"queues",
@@ -147,17 +149,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=> "",
                                                                                         "form"=> "",
                                                                                         "view"=> "",
+                                                                                        "script"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=>"05443970-02d3-11eb-ae0e-9fa04abb3d8f",
-                                                                                        "sort_order"=> 5,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> "",
-                                                                                        "tooltip"=> "",
-                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "sort_order"=> 5
                             ] ,            [
                                                                             "id"=>"2b9c5851-39a1-4c32-9bb9-b51958fdeee8",
                                                                                         "created_at"=> null,
@@ -167,6 +167,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Work Profile",
                                                                                         "icon"=>"oc-icon-user-md",
+                                                                                        "tooltip"=>"Work Profile",
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"list",
                                                                                         "active"=> 1,
                                                                                         "name"=>"work-profile",
@@ -176,17 +178,44 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=>"\$/demo/workspace/models/workprofile/columns.yaml",
                                                                                         "form"=> null,
                                                                                         "view"=> "",
+                                                                                        "script"=> "",
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83",
                                                                                         "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
                                                                                         "parent_id"=>"492e6fda-26f4-4115-aff6-b771a7220e46",
-                                                                                        "sort_order"=> 8,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> "",
-                                                                                        "tooltip"=>"Work Profile",
-                                                                                        "nav_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
+                                                                                        "sort_order"=> 8
+                            ] ,            [
+                                                                            "id"=>"f24a26a0-009a-11eb-80bf-e5293917c1ec",
+                                                                                        "created_at"=>"2020-09-27 08:25:05",
+                                                                                        "updated_at"=>"2020-10-17 02:41:47",
+                                                                                        "created_by_id"=> 1,
+                                                                                        "updated_by_id"=> 1,
+                                                                                        "version"=> 0,
+                                                                                        "label"=>"Workspace",
+                                                                                        "icon"=>"oc-icon-laptop",
+                                                                                        "tooltip"=>"Workspace",
+                                                                                        "position"=>"topnav",
+                                                                                        "type"=>"script",
+                                                                                        "active"=> 1,
+                                                                                        "name"=>"workspace-app",
+                                                                                        "description"=> "",
+                                                                                        "url"=> "",
+                                                                                        "model"=> null,
+                                                                                        "list"=> "",
+                                                                                        "form"=> null,
+                                                                                        "view"=> "",
+                                                                                        "script"=>"function(){\r\n    Engine.instance.ui.navigateToApp('casemanager');\r\n}",
+                                                                                        "uipage_id"=> null,
+                                                                                        "record_id"=> null,
+                                                                                        "dashboard_id"=> null,
+                                                                                        "widget_id"=> null,
+                                                                                        "nav_application_id"=>"68473c10-0017-11eb-a76c-5f4eddcf828f",
+                                                                                        "engine_application_id"=>"8374144e-94a5-470d-8d9e-4cbad05102ad",
+                                                                                        "parent_id"=>"c0d96860-ffd0-11ea-9efe-21afb4e6d919",
+                                                                                        "sort_order"=> 2
                             ]             ]);
         }
 
