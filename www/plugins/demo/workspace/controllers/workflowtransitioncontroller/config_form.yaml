@@ -1,0 +1,10 @@
+name: WorkflowTransitions
+form: $/demo/workspace/models/workflowtransition/fields.yaml
+modelClass: Demo\Workspace\Models\WorkflowTransition
+defaultRedirect: demo/workspace/workflowtransitions
+create:
+    redirect: 'demo/workspace/workflowtransitions/update/:id'
+    redirectClose: demo/workspace/workflowtransitions
+update:
+    redirect: demo/workspace/workflowtransitions
+    redirectClose: demo/workspace/workflowtransitions

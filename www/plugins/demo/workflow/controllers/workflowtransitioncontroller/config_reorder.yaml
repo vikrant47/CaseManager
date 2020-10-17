@@ -1,4 +1,0 @@
-title: WorkflowTransitions
-modelClass: Demo\Workflow\Models\WorkflowTransition
-toolbar:
-    buttons: reorder_toolbar

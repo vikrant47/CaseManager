@@ -1,0 +1,100 @@
+fields:
+    name:
+        label: Name
+        span: auto
+        required: 1
+        type: text
+    active:
+        label: Active
+        span: auto
+        type: switch
+    description:
+        label: Description
+        span: full
+        type: richeditor
+    application:
+        label: Application
+        nameFrom: name
+        descriptionFrom: version
+        span: auto
+        required: 1
+        type: relation
+tabs:
+    fields:
+        priority:
+            label: 'Priority'
+            span: auto
+            type: number
+            min: 0
+            comment: 'The tasks of queue with higher priority will be picked first than the queue with lower priority '
+            tab: Priority
+        age_priority:
+            label: 'Age Priority'
+            span: auto
+            type: switch
+            default: true
+            comment: 'Enable this to consider the age priority of the task while calculating the priority'
+            tab: 'Priority'
+        age_unit:
+            label: 'Age Unit'
+            span: auto
+            type: dropdown
+            emptyOption: '--Select--'
+            default: second
+            required: 1
+            tab: 'Priority'
+            dependsOn: age_priority
+            trigger:
+                action: show
+                field: age_priority
+                condition: checked
+            options:
+                millisecond: Milliseconds
+                second: Second
+                minutes: Minutes
+                hours: Hours
+                day: Day
+            comment: 'By what unit you would want to trigger change in age' # This should be duration widget
+        age_priority_boost:
+            label: 'Age Priority Boost'
+            span: auto
+            required: 1
+            type: number
+            default: 1
+            min: 0
+            tab: 'Priority'
+            dependsOn: age_priority
+            trigger:
+                action: show
+                field: age_priority
+                condition: checked
+            comment: 'The unit amount by which the priority will get increased when age is increased by given Age Unit'
+        routing_rule:
+            emptyOption: '--Select--'
+            label: 'Routing Rule'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            required: 1
+            type: relation
+            comment: 'Select Routing Rule'
+            tab: Configuration
+        assignment_groups:
+            emptyOption: '--Select--'
+            label: 'Assignment Groups'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            tab: Configuration
+secondaryTabs:
+    fields:
+        _tasks:
+            label: 'Tasks'
+            span: full
+            relation: HasMany
+            targetKey: id
+            targetModel: Demo\Workspace\Models\Task
+            key: queue_id
+            type: relatedlist
+            tab: 'Tasks'

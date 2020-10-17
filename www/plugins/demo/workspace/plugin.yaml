@@ -1,0 +1,80 @@
+plugin:
+    name: 'demo.workspace::lang.application.name'
+    description: 'demo.workspace::lang.application.description'
+    author: vikrant
+    icon: icon-recycle
+    homepage: ''
+model-alias:
+    Workflow: Workflows
+    Queue: Queues
+    Task: Tasks
+    work: 'Work'
+    WorkflowTransition: 'Workflow Transition'
+navigation:
+    main-menu-item:
+        label: Workflow
+        url: demo/workspace/workflow
+        icon: icon-recycle
+        permissions:
+            - workflow.table.read
+        order: '500'
+        sideMenu:
+            side-menu-item2:
+                label: Workflows
+                url: demo/workspace/workflow
+                icon: icon-recycle
+            side-menu-item4:
+                label: 'Works'
+                url: demo/workspace/workcontroller
+                icon: icon-tag
+            side-menu-item5:
+                label: 'Workflow Transitions'
+                url: demo/workspace/workflowtransitions
+                icon: icon-long-arrow-right
+            side-menu-item7:
+                label: 'Workflow States'
+                url: demo/workspace/workflowstate
+                icon: icon-dot-circle-o
+            side-menu-item9:
+                label: 'Service Channel'
+                url: demo/workspace/servicechannelcontroller
+                icon: icon-sitemap
+            side-menu-item:
+                label: Queues
+                url: demo/workspace/queue
+                icon: icon-stack-overflow
+            side-menu-item3:
+                label: Tasks
+                url: demo/workspace/task
+                icon: icon-stack-exchange
+            side-menu-item6:
+                label: 'Routing Rules'
+                url: demo/workspace/queueroutingrulecontroller
+                icon: icon-share-alt
+            side-menu-item8:
+                label: 'Pop Criteria'
+                url: demo/workspace/queuepopcriteriacontroller
+                icon: icon-code
+            side-menu-item10:
+                label: 'Work Profiles'
+                url: demo/workspace/workprofilecontroller
+                icon: icon-user-md
+permissions:
+    workflow.table.create:
+        tab: Workflow
+        label: 'Create Workflow'
+    workflow.table.update:
+        tab: Workflow
+        label: 'Update Workflow'
+    workflow.table.delete:
+        tab: Workflow
+        label: 'Delete Workflow'
+    workflow.table.read:
+        tab: Workflow
+        label: 'Read Workflow'
+    workflow.table.workflow:
+        tab: Workflow
+        label: 'Workflow Workflow'
+    workflow.item.push:
+        tab: Workflow
+        label: 'Push item to workflow'

@@ -1,5 +1,5 @@
 <?php
-namespace {{ application.plugin_code|replace({'.':'\\'})}}\Seeds;
+namespace {{ application.plugin_code|replace({'.':'\\'})}}\Seeds\{{ version }};
 
 use Schema;
 use Seeder;
@@ -30,7 +30,7 @@ class {{ className }} implements Seedable
             {%elseif value is empty %}
                 {% set phpString =  '"'~key~'"' ~ '=> null'%}
             {% else %}
-                {% set phpString =  '"'~key~'"' ~ '=>' ~ '"'~value|replace({'$':'\\$','\n':'\\n', "\r":'\\r','"':'\\"'})~'"' %}
+                {% set phpString =  '"'~key~'"' ~ '=>' ~ '"'~value|replace({'$':'\\$','\n':'\\n', "\r":'\\r','"':'\"'})~'"' %}
             {% endif %}
             {% if loop.last == false %}
                 {{ phpString|raw}},

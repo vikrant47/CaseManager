@@ -7,7 +7,7 @@ use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\AuditLog;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Services\SwooleServiceProvider;
-use Demo\Workflow\Models\WorkflowTransition;
+use Demo\Workspace\Models\WorkflowTransition;
 use System\Models\EventLog;
 use Webpatser\Uuid\Uuid;
 

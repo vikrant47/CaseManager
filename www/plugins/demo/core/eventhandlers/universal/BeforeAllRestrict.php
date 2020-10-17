@@ -8,8 +8,10 @@ use Demo\Core\Models\AuditLog;
 use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Permission;
 use Demo\Core\Models\Role;
+use Demo\Core\Services\SecuredEntityService;
 use Demo\Core\Services\SwooleServiceProvider;
-use Demo\Workflow\Models\WorkflowTransition;
+use Demo\Workspace\Models\WorkflowTransition;
+use Illuminate\Validation\UnauthorizedException;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Exception\ValidationException;
 use October\Rain\Support\Facades\Flash;
@@ -30,18 +32,29 @@ class BeforeAllRestrict
         if ($event === 'updating') {
             $this->restrictImmutable($model);
         }
+        $this->restrictSecured($event, $model);
         $this->restrictSystemRoleChanges($event, $model);
         $this->restrictSystemPermissionChanges($event, $model);
     }
 
+    /**This should be moved to after all restrict*/
+    public function restrictSecured($event, $model)
+    {
+        if ($model->SECURED === true) {
+            $esc = new SecuredEntityService(get_class($model));
+            if ($esc->canCRUD($model, Permission::getOperationByEloquentEvent($event)) === false) {
+                $message = 'You are not allowed to perform this operation';
+                throw new UnauthorizedException($message);
+            }
+        }
+    }
+
     public function restrictImmutable($model)
     {
-        if (property_exists($model, 'immutables')) {
+        if (property_exists($model, 'immutables') && is_array($model->immutables)) {
             $immutables = $model->immutables;
-            $original = $model->getOriginal();
-            $current = $model->attributes;
             foreach ($immutables as $immutable) {
-                if ($original[$immutable] !== $current[$immutable]) {
+                if ($model->isDirty($immutable)) {
                     $message = 'Can not update field ' . ucwords(str_replace('_', ' ', $immutable));
                     throw new ValidationException([$immutable => $message]);
                 }

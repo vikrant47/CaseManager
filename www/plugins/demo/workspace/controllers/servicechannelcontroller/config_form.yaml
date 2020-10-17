@@ -1,0 +1,10 @@
+name: ServiceChannelController
+form: $/demo/workspace/models/servicechannel/fields.yaml
+modelClass: Demo\Workspace\Models\ServiceChannel
+defaultRedirect: demo/workspace/servicechannelcontroller
+create:
+    redirect: 'demo/workspace/servicechannelcontroller/update/:id'
+    redirectClose: demo/workspace/servicechannelcontroller
+update:
+    redirect: demo/workspace/servicechannelcontroller
+    redirectClose: demo/workspace/servicechannelcontroller

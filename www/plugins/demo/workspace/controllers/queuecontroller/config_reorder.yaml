@@ -1,0 +1,4 @@
+title: Queue
+modelClass: Demo\Workspace\Models\Queue
+toolbar:
+    buttons: reorder_toolbar

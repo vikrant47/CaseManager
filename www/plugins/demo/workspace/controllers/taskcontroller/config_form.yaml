@@ -1,0 +1,10 @@
+name: Task
+form: $/demo/workspace/models/task/fields.yaml
+modelClass: Demo\Workspace\Models\Task
+defaultRedirect: demo/workspace/taskcontroller
+create:
+    redirect: 'demo/workspace/taskcontroller/update/:id'
+    redirectClose: demo/workspace/taskcontroller
+update:
+    redirect: demo/workspace/taskcontroller
+    redirectClose: demo/workspace/taskcontroller

@@ -20,7 +20,6 @@ columns:
         searchable: true
         label: backend::lang.user.full_name
         select: concat(first_name, ' ', last_name)
-        searchable: true
         invisible: true
 
     login:

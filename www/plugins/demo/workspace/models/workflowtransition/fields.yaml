@@ -1,0 +1,28 @@
+fields:
+    work:
+        label: 'Work'
+        nameFrom: id
+        descriptionFrom: description
+        span: auto
+        required: 1
+        type: relation
+    data:
+        label: Data
+        size: ''
+        span: full
+        type: codeeditor
+    from_state:
+        label: 'From State'
+        span: auto
+        type: relation
+    to_state:
+        label: 'To State'
+        span: auto
+        type: relation
+    workflow:
+        label: 'Workflow'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        readOnly: true
+        type: relation

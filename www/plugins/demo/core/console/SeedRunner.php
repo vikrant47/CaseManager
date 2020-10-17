@@ -76,9 +76,9 @@ class SeedRunner extends Command
             if ($operation === 'dump' || $operation === 'd') {
                 $this->info('***************** Dumping seeds for application ' . $application->name . 'V(' . $version . ') ******************');
                 $this->info('path = ' . $path);
-                $this->runDump($applicationGroup, $path, $clean);
+                $this->runDump($applicationGroup, $path, $version, $clean);
             } else if ($operation === 'fsclean' || $operation === 'fsc') { // remove seeds from filesystem
-                $this->runClean($application, $path);
+                $this->runClean($application, $path, $version);
             } else {
                 $this->info('***************** Collecting seeds for application ' . $application->name . 'V(' . $version . ') ******************');
                 $seedFiles = $this->getSeedsFiles($path);
@@ -87,9 +87,9 @@ class SeedRunner extends Command
                 } else {
                     foreach ($applicationGroup as $application) {
                         if ($operation === 'uninstall' || $operation === 'u') {
-                            $this->runUninstall($application, $seedFiles);
+                            $this->runUninstall($application, $seedFiles, $version);
                         } else if ($operation === 'install' || $operation === 'i') {
-                            $this->runInstall($application, $seedFiles);
+                            $this->runInstall($application, $seedFiles, $version);
                         }
                     }
                 }
@@ -138,7 +138,7 @@ class SeedRunner extends Command
             $applicationCode = $this->argument('application');
             $version = $this->argument('version');
             if (!$version) {
-                $version = 'V0.0';
+                $version = 'V0_0';
             }
             $clean = $this->option('clean');
             $operation = $this->argument('operation');
@@ -195,7 +195,7 @@ class SeedRunner extends Command
      * @param $files
      * @return void
      */
-    protected function runInstall($application, $files)
+    protected function runInstall($application, $files, $version)
     {
         // First we will resolve a "real" instance of the seed class from this
         // seed file name. Once we have the instances we can run the actual
@@ -206,7 +206,8 @@ class SeedRunner extends Command
             $this->info('Installing Seed from file ' . $file);
             $seed = $this->resolveToClass(
                 $application->plugin_code,
-                $name = $this->getSeedName($file)
+                $name = $this->getSeedName($file),
+                $version
             );
             $seed->install();
             $this->info('Seed installed from file ' . $file);
@@ -220,7 +221,7 @@ class SeedRunner extends Command
      * @param $files
      * @return void
      */
-    protected function runUninstall($application, $files)
+    protected function runUninstall($application, $files, $version)
     {
         $this->info('Uninstalling Seeds ........... ');
         // First we will resolve a "real" instance of the seed class from this
@@ -232,7 +233,8 @@ class SeedRunner extends Command
             $this->info('Uninstalling Seed from file ' . $file);
             $seed = $this->resolveToClass(
                 $application->plugin_code,
-                $name = $this->getSeedName($file)
+                $name = $this->getSeedName($file),
+                $version
             );
             $seed->uninstall();
             $this->info('Seed uninstalled from file ' . $file);
@@ -260,10 +262,10 @@ class SeedRunner extends Command
      * @param string $file
      * @return object
      */
-    public function resolveToClass($identifier, $file)
+    public function resolveToClass($identifier, $file, $version)
     {
         $identifier = explode('.', $identifier);
-        $class = '\\' . $identifier[0] . '\\' . $identifier[1] . '\\Seeds\\' . Str::studly($file);
+        $class = '\\' . $identifier[0] . '\\' . $identifier[1] . '\\Seeds\\' . $version . '\\' . Str::studly($file);
         $this->info('Loading class ' . $class . '');
         return new $class;
     }
@@ -293,7 +295,7 @@ class SeedRunner extends Command
     }
 
     /**@param $application Collection <EngineApplication> */
-    public function runDump($applications, $path, $cleanDir = false)
+    public function runDump($applications, $path, $version, $cleanDir = false)
     {
         $identifier = $applications->first()->plugin_code;
         $corePluginConnection = PluginConnection::getConnection('Demo.Core');
@@ -313,13 +315,13 @@ class SeedRunner extends Command
         if ($cleanDir) {
             $this->runClean($applications, $path);
         }
-        $this->dumpSeed(array_merge($pluggableTables, $applicationTables), $applications, $corePluginConnection->getTemplate('seed.file.twig'), $path);
+        $this->dumpSeed(array_merge($pluggableTables, $applicationTables), $applications, $corePluginConnection->getTemplate('seed.file.twig'), $path, $version);
     }
 
     /**
      * This will dump seed file in given path for the given application
      */
-    public function dumpSeed($tables, $applications, $template, $path)
+    public function dumpSeed($tables, $applications, $template, $path, $version)
     {
         $seedDir = $path;
         /*$seedDir = $path . DIRECTORY_SEPARATOR . strtolower($application->code);
@@ -348,6 +350,7 @@ class SeedRunner extends Command
                     'table' => $table,
                     'packagable' => $packagable,
                     'className' => 'Seed' . Str::studly($table),
+                    'version' => $version,
                 ]);
                 File::isDirectory($seedDir) or File::makeDirectory($seedDir, 0777, true, true);
                 File::put($seedPath, $contents);

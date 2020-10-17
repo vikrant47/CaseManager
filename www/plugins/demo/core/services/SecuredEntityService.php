@@ -4,6 +4,7 @@
 namespace Demo\Core\Services;
 
 use Demo\Core\Models\Permission;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\UnauthorizedException;
@@ -17,6 +18,37 @@ class SecuredEntityService
     protected $modelClass;
     protected $userSecurityService;
     protected $useEntityQuery = true;
+
+    /**
+     * This will save the model by appliying security
+     * @param Model $model
+     */
+    public static function save($model)
+    {
+        $model->SECURED = true;
+        $model->save();
+    }
+
+    /**
+     * This will save the model by appliying security
+     * @param Model $model
+     */
+    public static function update($model)
+    {
+        $model->SECURED = true;
+        $model->update();
+    }
+
+    /**
+     * This will save the model by appliying security
+     * @param Model $model
+     * @throws \Exception
+     */
+    public static function delete($model)
+    {
+        $model->SECURED = true;
+        $model->delete();
+    }
 
     /**
      * SecuredEntityService constructor.
@@ -39,7 +71,7 @@ class SecuredEntityService
     public function secureQuery($query, $operation = Permission::READ)
     {
         $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, $operation);
-        if($permissions->count()===0){
+        if ($permissions->count() === 0) {
             return $query;
         }
         return QueryFilter::apply($query, $this->userSecurityService->mergeConditions($permissions));
@@ -47,29 +79,54 @@ class SecuredEntityService
 
     /**
      * Check if user can insert give records
-     * @param Collection $data
-     * @return Collection Collection of allowed records
+     * Steps -
+     * Step1 - Collect all model attributes in collection
+     * Step2 - Add an index based key in this collection
+     * Step 3- Filter this cloned collection of attributes
+     * Step 4- Filter matched records in the original data set i.e. $data
+     * Step 5 - Return this filtered $data
+     * @param Collection<Model|array> $data
+     * @return Collection<Model|array> Collection of allowed records
      */
     public function filterAllowed($data, $operation)
     {
+        if ($data->count() === 0) {
+            return $data;
+        }
         $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, $operation);
         if ($permissions->count() === 0) {
             return collect([]);
         }
-        $inMemoryFilter = new InMemoryQueryFilter($data);
+        if ($this->userSecurityService->hasAstrixPermission($permissions)) {
+            return $data;
+        }
+        // converting entity to attributes with index based identifier
+        $attributeCollection = $data->map(function ($attributes, $index) {
+            if (!($attributes instanceof Model)) {
+                $attributes = $attributes->attributesToArray(); // php array assign as clone not ref
+            }
+            $attributes['_SECURITY_INDEX'] = $index;
+            return $attributes;
+        });
+        $inMemoryFilter = new InMemoryQueryFilter($attributeCollection);
         $inMemoryFilter->init();
         $query = $inMemoryFilter->createQuery();
         $inMemoryFilter->applyFilter($this->userSecurityService->mergeConditions($permissions));
         $allowed = $query->get();
         $inMemoryFilter->destroy();
-        return $allowed;
+        if ($allowed->count() === 0) {
+            return $allowed;
+        }
+        return $allowed->map(function ($matched) use ($data) {
+            return $data->get($matched['_SECURITY_INDEX']);
+        });
     }
 
     /**
-     * @param array $data
+     * @param array|Collection $data
      * @param bool $failIfDeniedAny
      */
-    public function inset(array $data, $failIfDeniedAny = true)
+    public function inset($data, $failIfDeniedAny = true)
     {
         if (is_array($data)) {
             $data = collect($data);
@@ -87,7 +144,7 @@ class SecuredEntityService
 
     /**
      * Check if user can insert the given model record
-     * @param $model
+     * @param Model|array $model
      * @return bool
      */
     public function canInsert($model)
@@ -97,7 +154,7 @@ class SecuredEntityService
 
     /**
      * Check if user can update the given model record
-     * @param $model
+     * @param Model|array $model
      * @return bool
      */
     public function canUpdate($model, $checkInMemory = false)
@@ -105,12 +162,19 @@ class SecuredEntityService
         if ($checkInMemory === true) {
             return $this->filterAllowed(collect([$model]), Permission::WRITE)->count() > 0;
         }
-        return $this->secureQuery(get_class($model)::where('id', '=', $model->id), Permission::WRITE)->count() > 0;
+        $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::WRITE);
+        if ($permissions->count() === 0) {
+            return false;
+        }
+        if ($this->userSecurityService->hasAstrixPermission($permissions)) {
+            return true;
+        }
+        return QueryFilter::apply($this->modelClass::where('id', '=', $model->id), $this->userSecurityService->mergeConditions($permissions))->count() > 0;
 
     }
 
     /**Check if user can delete the given model record
-     * @param $model
+     * @param Model|array $model
      * @return bool
      */
     public function canDelete($model, $checkInMemory = false)
@@ -118,6 +182,31 @@ class SecuredEntityService
         if ($checkInMemory === true) {
             return $this->filterAllowed(collect([$model]), Permission::DELETE)->count() > 0;
         }
-        return $this->secureQuery(get_class($model)::where('id', '=', $model->id), Permission::DELETE)->count() > 0;
+        $permissions = $this->userSecurityService->getRowLevelPermissions($this->modelClass, Permission::DELETE);
+        if ($permissions->count() === 0) {
+            return false;
+        }
+        if ($this->userSecurityService->hasAstrixPermission($permissions)) {
+            return true;
+        }
+        return QueryFilter::apply(get_class($model)::where('id', '=', $model->id), $this->userSecurityService->mergeConditions($permissions))->count() > 0;
+    }
+
+    /**Check if user can CRUD the given model record
+     * @param Model|array $model
+     * @return bool
+     */
+    public function canCRUD($model, $operation, $checkInMemory = false)
+    {
+        if ($operation === Permission::CREATE) {
+            return $this->canInsert($model);
+        }
+        if ($operation === Permission::WRITE) {
+            return $this->canUpdate($model, $checkInMemory);
+        }
+        if ($operation === Permission::DELETE) {
+            return $this->canDelete($model, $checkInMemory);
+        }
+        return false;
     }
 }

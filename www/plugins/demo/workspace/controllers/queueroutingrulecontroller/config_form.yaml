@@ -1,0 +1,10 @@
+name: QueueRoutingRuleController
+form: $/demo/workspace/models/queueroutingrule/fields.yaml
+modelClass: Demo\Workspace\Models\QueueRoutingRule
+defaultRedirect: demo/workspace/queueroutingrulecontroller
+create:
+    redirect: 'demo/workspace/queueroutingrulecontroller/update/:id'
+    redirectClose: demo/workspace/queueroutingrulecontroller
+update:
+    redirect: demo/workspace/queueroutingrulecontroller
+    redirectClose: demo/workspace/queueroutingrulecontroller

@@ -1,4 +1,0 @@
-title: ServiceChannelController
-modelClass: Demo\Workflow\Models\ServiceChannel
-toolbar:
-    buttons: reorder_toolbar

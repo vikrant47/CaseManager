@@ -6,7 +6,7 @@ use Backend\Classes\FormWidgetBase;
 use Demo\Core\Classes\Beans\TemplateEngine;
 use Demo\Core\Classes\Helpers\PluginConnection;
 use Demo\Core\Models\ModelModel;
-use Demo\Workflow\Models\Task;
+use Demo\Workspace\Models\Task;
 use October\Rain\Database\QueryBuilder;
 use October\Rain\Exception\ApplicationException;
 

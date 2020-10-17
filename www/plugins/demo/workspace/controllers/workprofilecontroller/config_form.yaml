@@ -1,0 +1,10 @@
+name: WorkProfileController
+form: $/demo/workspace/models/workprofile/fields.yaml
+modelClass: Demo\Workspace\Models\WorkProfile
+defaultRedirect: demo/workspace/workprofilecontroller
+create:
+    redirect: 'demo/workspace/workprofilecontroller/update/:id'
+    redirectClose: demo/workspace/workprofilecontroller
+update:
+    redirect: demo/workspace/workprofilecontroller
+    redirectClose: demo/workspace/workprofilecontroller

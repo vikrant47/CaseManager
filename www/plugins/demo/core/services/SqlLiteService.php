@@ -5,6 +5,7 @@ namespace Demo\Core\Services;
 
 
 use Illuminate\Database\Connection;
+use Illuminate\Database\Schema\SQLiteBuilder;
 use Illuminate\Support\Facades\Schema;
 
 class SqlLiteService
@@ -21,13 +22,14 @@ class SqlLiteService
         if ($phpType === 'array' || $phpType === 'object') {
             return 'jsonb';
         }
+        return $phpType;
     }
 
 
     public function createConnection()
     {
         if (empty($this->connection) || !$this->connection->getDoctrineConnection()->isConnected()) {
-            $this->connection = Schema::connection(SqlLiteService::SQLITE_MEM_CONNECTION);
+            $this->connection = Schema::connection(SqlLiteService::SQLITE_MEM_CONNECTION)->getConnection();
         }
         return $this->connection;
     }
@@ -49,7 +51,7 @@ class SqlLiteService
     {
         $this->connection->getSchemaBuilder()->create($tableNme, function ($table) use ($fields) {
             foreach ($fields as $field => $type) {
-                $this->{$type}($field);
+                $table->{$type}($field)->nullable();
             }
         });
         return $this;

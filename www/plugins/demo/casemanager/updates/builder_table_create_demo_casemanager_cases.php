@@ -23,7 +23,7 @@ class BuilderTableCreateDemoCasemanagerCases extends Migration
             $table->string('case_version', 255);
             $table->integer('version')->nullable()->default(0);
             $table->string('suspect', 255);
-            $table->timestamp('ttl');
+            $table->timestamp('ttl')->nullable();
             $table->text('comments', 255);
             $table->uuid('workflow_state_id')->nullable();
             $table->uuid('queue_id')->nullable();
