@@ -26,7 +26,7 @@ class SeedDemoWorkspaceServiceChannels implements Seedable
                                                                                         "priority"=> 1,
                                                                                         "active"=> 1,
                                                                                         "condition"=>"\"{\"condition\":\"AND\",\"rules\":[],\"not\":false,\"valid\":true}\"",
-                                                                                        "sort_order"=> 0,
+                                                                                        "sort_order"=> 0
                             ]             ]);
         }
 

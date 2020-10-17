@@ -6,7 +6,7 @@ use Seeder;
 use Demo\Core\Classes\Ifs\Seedable;
 use Db;
 
-/**Auto generated using cmd _: php artisan core:run-seeds workflow d */
+/**Auto generated using cmd _: php artisan core:run-seeds workspace d */
 class SeedDemoCoreModels implements Seedable
 {
     /**This will be executed to install seeds*/

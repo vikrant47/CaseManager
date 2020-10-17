@@ -22,6 +22,8 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "version"=> 0,
                                                                                         "label"=>"Tenants",
                                                                                         "icon"=>"oc-icon-code-fork",
+                                                                                        "tooltip"=> null,
+                                                                                        "position"=>"sidebar",
                                                                                         "type"=>"list",
                                                                                         "active"=> 1,
                                                                                         "name"=>"tenants",
@@ -31,17 +33,15 @@ class SeedDemoCoreNavigations implements Seedable
                                                                                         "list"=>"\$/demo/tenant/models/tenant/columns.yaml",
                                                                                         "form"=> null,
                                                                                         "view"=> "",
+                                                                                        "script"=> null,
                                                                                         "uipage_id"=> null,
                                                                                         "record_id"=> null,
                                                                                         "dashboard_id"=> null,
                                                                                         "widget_id"=> null,
+                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
                                                                                         "engine_application_id"=>"801c3e91-8be6-402e-9872-69d6ea29fe06",
                                                                                         "parent_id"=>"c1021025-5a8e-4344-af1e-178dd1d1d29e",
-                                                                                        "sort_order"=> 0,
-                                                                                        "position"=>"sidebar",
-                                                                                        "script"=> null,
-                                                                                        "tooltip"=> null,
-                                                                                        "nav_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4"
+                                                                                        "sort_order"=> 0
                             ]             ]);
         }
 
