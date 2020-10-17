@@ -32,7 +32,7 @@ class WorkflowService
      * This will search for a workflow for given model
      * @return Workflow matched channel
      */
-    public function searchWorkflow($channel)
+    public function searchWorkflow($channel, $model)
     {
         $matchedWorkflow = null;
         $modelClass = $channel->model;
@@ -40,7 +40,7 @@ class WorkflowService
         $workflows = Workflow::where('active', 1)->where('service_channel_id', '=', $channel->id)
             ->orderBy('sort_order', 'ASC')->get();
         $this->logger->info('Evaluating workflow to accept channel' . ModelUtil::toString($channel) . '. total = ' . $workflows->count());
-        return InMemoryQueryFilter::findMatchingEntity(collect([$channel->model_ref]), $workflows);
+        return InMemoryQueryFilter::findMatchingEntity(collect([$model]), $workflows);
     }
 
     /**

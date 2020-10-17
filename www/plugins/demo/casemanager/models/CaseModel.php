@@ -39,6 +39,7 @@ class CaseModel extends Model
      */
     public $rules = [
     ];
+    public $immutables = ['work_id'];
     public $attachAuditedBy = true;
 
 }

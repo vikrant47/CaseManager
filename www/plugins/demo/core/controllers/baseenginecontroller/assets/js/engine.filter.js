@@ -468,7 +468,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
     },
     select: function (options) {
         options = options || {};
-        options.operation = 'select';
+        options.operation = 'read';
         return this.query(options);
     },
     query: function (options) {
@@ -716,28 +716,35 @@ let RestQuery = Engine.instance.define('engine.data.RestQuery', {
 
     },
     findOne: function (query, ajaxOptions) {
-        query.offeset = 1;
-        return this.execute(query, ajaxOptions).then(function (result) {
-            if (result.length > 0) {
-                return result[0];
-            }
-            return result;
-        });
+        return this.execute({
+            query: query,
+            method: 'findOne',
+        }, ajaxOptions);
+    },
+    findById: function (query, ajaxOptions) {
+        return this.execute({query: query, method: 'findById'}, ajaxOptions);
     },
     findAll: function (query, ajaxOptions) {
-        return this.execute(query, ajaxOptions);
+        return this.execute({query: query, method: 'findAll'}, ajaxOptions);
     },
-    select: function (query, ajaxOptions) {
-        options.operation = 'select';
-        return this.execute(query, ajaxOptions);
+    create: function (data) {
+        return this.execute({
+            method: 'create',
+            data: data,
+        }, ajaxOptions);
     },
-    execute: function (query, ajaxOptions = {}) {
-        let q = Object.assign(this.static.toQueryBuilderRules(query), {
-            model: this.model,
-        });
-        q.model = q.model.replaceAll('.', '\\');
+    update: function (data, query) {
+        return this.execute({
+            method: 'update',
+            query: query,
+            data: data,
+        }, ajaxOptions);
+    },
+    execute: function (data, ajaxOptions = {}) {
+        data.query = this.static.toQueryBuilderRules(data.query);
+        data.model = q.model.replaceAll('.', '\\');
         return Engine.instance.ui.request('onQueryData', Object.assign({
-            data: q,
+            data: data,
             loadingContainer: ajaxOptions.loadingContainer || '.page-content',
         }, ajaxOptions));
     }

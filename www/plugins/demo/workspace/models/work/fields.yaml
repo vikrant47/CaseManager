@@ -10,16 +10,26 @@ fields:
         nameFrom: name
         descriptionFrom: description
         span: auto
+        emptyOption: '-- Select --'
         type: relation
     workflow_state:
         label: 'Workflow State'
         span: auto
+        emptyOption: '-- Select --'
         type: relation
     status:
         label: Status
         span: auto
-        type: text
+        type: dropdown
+        options:
+            init: Init
+            start: Start
+            assigned: Assigned
+            waiting: Waiting
+            finished: Finished
+            failed: Failed
         required: 1
+        readOnly: true
     priority:
         label: Priority
         span: auto
@@ -40,6 +50,7 @@ fields:
         nameFrom: email
         descriptionFrom: description
         span: auto
+        emptyOption: '-- Select --'
         type: relation
     context:
         label: Context

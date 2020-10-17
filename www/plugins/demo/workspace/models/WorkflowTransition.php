@@ -51,7 +51,7 @@ class WorkflowTransition extends Model
      * Check if the to state is a valid transition
      * When a transition is made it should have a valid from and to state values
      */
-    public function validate()
+    public function validateStates()
     {
         $validation = ['valid' => true];
         $workflow = $this->work->workflow;
@@ -85,9 +85,9 @@ class WorkflowTransition extends Model
         return $validation;
     }
 
-    public function beforeSave()
+    public function beforeValidate()
     {
-        $this->validate();
+        $this->validateStates();
     }
 
     /**

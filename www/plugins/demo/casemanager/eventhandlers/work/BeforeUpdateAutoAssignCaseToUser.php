@@ -30,12 +30,12 @@ class BeforeUpdateAutoAssignCaseToUser
         if ($model->model === CaseModel::class) {
             if ($model->isDirty('assigned_to_id') || $model->isDirty('workflow_state_id')) {
                 $entity = CaseModel::find($model->record_id);
-                $entity->assigned_to_id = $model->assigned_to_id;
-                $entity->workflow_state_id = $model->workflow_state_id; // TODO: fetch workflow_state_id field from workflow model_state_field
-                if ($entity->exists) {
+                if (!empty($entity)) {
+                    $entity->assigned_to_id = $model->assigned_to_id;
+                    $entity->workflow_state_id = $model->workflow_state_id; // TODO: fetch workflow_state_id field from workflow model_state_field
                     $entity->save();
+                    $logger->debug('Case with id ' . $entity->id . ' has been assigned to user ' . $model->assigned_to_id);
                 }
-                $logger->debug('Case with id ' . $entity->id . ' has been assigned to user ' . $model->assigned_to_id);
             }
         }
     }

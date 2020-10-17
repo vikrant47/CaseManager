@@ -32,9 +32,7 @@ class BeforeCreateTaskAssignQueueToCase
             if (!empty($work)) {
                 $entity = CaseModel::find($work->record_id);
                 $entity->queue_id = $model->queue_id;
-                if ($entity->exists) {
-                    $entity->save();
-                }
+                $entity->save();
                 $logger->debug('Case with id ' . $entity->id . ' has been assigned to user ' . $model->assigned_to_id);
             }
         }

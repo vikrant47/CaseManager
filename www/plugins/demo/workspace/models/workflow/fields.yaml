@@ -106,6 +106,12 @@ tabs:
                         span: auto
                         type: relation
                         required: 1
+                        dependsOn:
+                            - to_state
+                        trigger:
+                            action: hide
+                            field: to_state
+                            condition: 'value[8c7e9158-b65c-437a-a5d9-4b975f7b6f51]'
                     transition_ttl:
                         label: ttl
                         span: auto

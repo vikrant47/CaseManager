@@ -57,7 +57,9 @@ class Workflow extends Model
     ];
     public $attachAuditedBy = true;
 
-    public $immutables = ['engine_application_id', 'service_channel_id'];
+    public $immutables = ['engine_application_id', 'service_channel_id', 'model'];
+
+    public $attributes = ['condition' => '[]'];
 
     public function scopeChannelModels($query)
     {
@@ -87,6 +89,10 @@ class Workflow extends Model
         return $options;
     }
 
+    public function beforeValidate()
+    {
+        $this->model = $this->service_channel->model;
+    }
 
     public function validateDefinition()
     {
@@ -126,7 +132,6 @@ class Workflow extends Model
     public function beforeSave()
     {
         $this->validateDefinition();
-        $this->model = $this->service_channel->model;
     }
 
     /**

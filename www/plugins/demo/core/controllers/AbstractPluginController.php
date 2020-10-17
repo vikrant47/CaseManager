@@ -32,6 +32,7 @@ use Demo\Core\Services\QueryPagination;
 use Demo\Core\Services\RestQuery;
 use Demo\Tenant\Models\Tenant;
 use File;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 use October\Rain\Database\Builder;
@@ -39,7 +40,6 @@ use October\Rain\Exception\ApplicationException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use System\Classes\PluginManager;
 use Db;
-use Response;
 use timgws\QueryBuilderParser;
 use View;
 use Config;
@@ -401,8 +401,7 @@ class AbstractPluginController extends Controller
         $restQuery['model'] = $this->getModelClass();
         if (!empty($restQuery)) {
             $list['list']->bindEvent('list.extendQuery', function ($queryBuilder) use ($restQuery) {
-                $restQuery = new RestQuery($queryBuilder, $restQuery);
-                $restQuery->apply(false);
+                RestQuery::parse($queryBuilder, $restQuery);
             });
         }
         return $this->makeView('index', true, $runParams ? $runParams['params'] : []);
@@ -736,29 +735,34 @@ class AbstractPluginController extends Controller
 
     public function onQueryData()
     {
-        $table = Request::input('table');
         $pagination = Request::input('pagination');
         if (!empty($pagination)) {
             $pagination = ['offset' => 0];
         }
+        $errorMessages = [];
         $modelClass = Request::input('model');
-        $where = Request::input('where');
-        $attributes = Request::input('attributes');
-        $query = QueryFilter::getQuery([
-            'table' => $table,
-            'model' => $modelClass,
-            'where' => $where,
-            'attributes' => $attributes,
-            'pagination' => new QueryPagination($pagination),
-        ]);
-        $this->queryDataExtendQuery($query);
-        return $query->get();
+        $query = Request::input('query', []);
+        $data = Request::input('data', []);
+        $method = Request::input('method');
+        $restQuery = new RestQuery($modelClass);
+        if (empty($modelClass) || class_exists($modelClass)) {
+            $errorMessages['model'] = 'Invalid Model';
+        }
+        if (empty($method) || (!method_exists($restQuery, $method))) {
+            $errorMessages['method'] = 'Invalid Method';
+        }
+        if (count($errorMessages) > 0) {
+            return Response::create([
+                'errors' => $errorMessages,
+            ], Response::HTTP_BAD_REQUEST);
+        }
+        return RestQuery::executeMethod($modelClass, $method, $query, $data, true);
     }
 
     /**This will save the current app in user pref and return the home url*/
     public function onNavigateApplication()
     {
-        return Db::transaction(function () {
+        return DB::transaction(function () {
             $code = Request::input('code');
             if (empty($code)) {
                 throw new BadRequestHttpException('Empty code');

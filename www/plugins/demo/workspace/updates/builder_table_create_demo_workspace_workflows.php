@@ -19,6 +19,7 @@ class BuilderTableCreateDemoWorkflowWorkflows extends Migration
             $table->integer('priority');
             $table->integer('created_by_id');
             $table->integer('updated_by_id');
+            $table->uuid('service_channel_id');
             $table->uuid('engine_application_id');
             $table->integer('sort_order');
             $table->string('model',255);
