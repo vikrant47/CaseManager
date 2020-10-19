@@ -9,12 +9,14 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\UnauthorizedException;
 use Event;
+use October\Rain\Exception\ApplicationException;
 
 /**
  * This service will perform CRUD on model by applying security
  */
 class SecuredEntityService
 {
+    const MAX_ALLOWED_BULK_COUNT = 100;
     /**@var string $modelClass */
     protected $modelClass;
     protected $userSecurityService;
@@ -195,34 +197,41 @@ class SecuredEntityService
         if (is_array($data)) {
             $data = collect($data);
         }
-        $allowed = $this->filterAllowed($data, Permission::CREATE);
-        if ($allowed->count() === 0 || ($failIfDeniedAny === true && $data->count() !== $allowed->count())) {
-            throw new UnauthorizedException('Not authorized to create the records of type ' . $this->modelClass);
+        if ($data->count() > 0) {
+            if ($data->count() > self::MAX_ALLOWED_BULK_COUNT) {
+                throw new ApplicationException('We currently does not support more than ' . self::MAX_ALLOWED_BULK_COUNT . ' records in bulk operations');
+            }
+            $allowed = $this->filterAllowed($data, Permission::CREATE);
+            if ($allowed->count() === 0 || ($failIfDeniedAny === true && $data->count() !== $allowed->count())) {
+                throw new UnauthorizedException('Not authorized to create the records of type ' . $this->modelClass);
+            }
+            $reflect = new \ReflectionClass($this->modelClass);
+            $modelClassName = $reflect->getShortName();
+            $allowedModels = $allowed->map(function ($record) use ($modelClassName) {
+                /**@var Model $modelInstance */
+                $modelInstance = new $this->modelClass();
+                $modelInstance->setRawAttributes($record);
+                // $modelInstance->save(); // never execute multiple insert
+                return $modelInstance;
+            });
+            Event::fire('eloquent.bulkCreating: ' . $modelClassName, $allowedModels);
+            foreach ($allowedModels as $model) {
+                // $model->fireEvent('model.saveInternal');
+                Event::fire('eloquent.creating: ' . $modelClassName, $model);
+            }
+            $updatedModels = $allowedModels->map(function ($model) {
+                /**@var Model $model */
+                return $model->attributesToArray();
+            })->toArray();
+            $modelClassName::insert($updatedModels);
+            foreach ($allowedModels as $model) {
+                // $model->fireEvent('model.saveInternal');
+                Event::fire('eloquent.created: ' . $modelClassName, $model);
+            }
+            Event::fire('eloquent.bulkCreated: ' . $modelClassName, $allowedModels);
+            return $allowedModels;
         }
-        $reflect = new \ReflectionClass($this->modelClass);
-        $modelClassName = $reflect->getShortName();
-        $allowedModels = $allowed->map(function ($record) use ($modelClassName) {
-            /**@var Model $modelInstance */
-            $modelInstance = new $this->modelClass();
-            $modelInstance->setRawAttributes($record);
-            // $modelInstance->save(); // never execute multiple insert
-            return $modelInstance;
-        });
-        Event::fire('eloquent.bulkCreating: ' . $modelClassName, $allowedModels);
-        foreach ($allowedModels as $model) {
-            // $model->fireEvent('model.saveInternal');
-            Event::fire('eloquent.creating: ' . $modelClassName, $model);
-        }
-        $updatedModels = $allowedModels->map(function ($model) {
-            /**@var Model $model */
-            return $model->attributesToArray();
-        })->toArray();
-        $modelClassName::insert($updatedModels);
-        foreach ($allowedModels as $model) {
-            // $model->fireEvent('model.saveInternal');
-            Event::fire('eloquent.created: ' . $modelClassName, $model);
-        }
-        Event::fire('eloquent.bulkCreated: ' . $modelClassName, $allowedModels);
+        return $data;
     }
 
     /**
@@ -231,9 +240,14 @@ class SecuredEntityService
      */
     public function bulkUpdate($queryBuilder, $update, $failIfDeniedAny = true)
     {
-        $dataQuery = $queryBuilder->newQuery();
-        $models = $dataQuery->get();
-        if ($models->count() > 0) {
+        $countQuery = $queryBuilder->newQuery();
+        $count = $countQuery->count();
+        if ($count > 0) {
+            if ($count > self::MAX_ALLOWED_BULK_COUNT) {
+                throw new ApplicationException('We currently does not support more than ' . self::MAX_ALLOWED_BULK_COUNT . ' records in bulk operations');
+            }
+            $dataQuery = $queryBuilder->newQuery();
+            $models = $dataQuery->get();
             $allowed = $this->filterAllowed($models, Permission::WRITE);
             if ($allowed->count() === 0 || ($failIfDeniedAny === true && $models->count() !== $allowed->count())) {
                 throw new UnauthorizedException('Not authorized to update the records of type ' . $this->modelClass);
@@ -264,9 +278,14 @@ class SecuredEntityService
      */
     public function bulkDelete($queryBuilder, $failIfDeniedAny = true)
     {
-        $dataQuery = $queryBuilder->newQuery();
-        $models = $dataQuery->get();
-        if ($models->count() > 0) {
+        $countQuery = $queryBuilder->newQuery();
+        $count = $countQuery->count();
+        if ($count > 0) {
+            if ($count > self::MAX_ALLOWED_BULK_COUNT) {
+                throw new ApplicationException('We currently does not support more than ' . self::MAX_ALLOWED_BULK_COUNT . ' records in bulk operations');
+            }
+            $dataQuery = $queryBuilder->newQuery();
+            $models = $dataQuery->get();
             $reflect = new \ReflectionClass($this->modelClass);
             $modelClassName = $reflect->getShortName();
             $allowed = $this->filterAllowed($models, Permission::DELETE);

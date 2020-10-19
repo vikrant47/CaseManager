@@ -200,6 +200,11 @@ class RestQuery
      */
     public function select($json = [])
     {
+        if ($this->secured === true) {
+            if (!array_key_exists('limit', $json) || $json['limit'] > 100) {
+                $json['limit'] = SecuredEntityService::MAX_ALLOWED_BULK_COUNT;
+            }
+        }
         return $this->apply($json);
     }
 
