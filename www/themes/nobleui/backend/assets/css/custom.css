@@ -166,6 +166,7 @@ a {
 
 .custom-switch input:checked ~ span {
     /*background-color: #727cf5;*/
+    top: 0px;
     background: #4eb5f1;
 }
 
@@ -563,7 +564,7 @@ table.table.data thead td > a, table.table.data thead th > a, table.table.data t
 
 /***navigation ***/
 .navbar, .sidebar {
-    z-index: 1000;
+    z-index: 300;
 }
 
 
@@ -837,6 +838,12 @@ a.manage-widgets, .action a {
 }
 
 /***October cms widget css*/
+.form-group .field-repeater {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .recordfinder-list .list-scrollable-container > .list-scrollable {
     overflow: inherit;
 }

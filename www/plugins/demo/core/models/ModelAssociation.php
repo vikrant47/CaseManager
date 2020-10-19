@@ -16,7 +16,7 @@ class ModelAssociation extends Model
      * @var string The database table used by the model.
      */
     public $table = 'demo_core_model_associations';
-public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * @var array Validation rules
@@ -31,8 +31,9 @@ public $incrementing = false;
     public $belongsTo = [
         'source_model_ref' => [ModelModel::class, 'key' => 'source_model', 'otherKey' => 'model'],
         'target_model_ref' => [ModelModel::class, 'key' => 'target_model', 'otherKey' => 'model'],
-        'application' => [EngineApplication::class,'nameFrom'=>'name', 'key' => 'engine_application_id']
+        'application' => [EngineApplication::class, 'nameFrom' => 'name', 'key' => 'engine_application_id']
     ];
+    public $attachAuditedBy = true;
 
     public function getForeignKeyOptions()
     {

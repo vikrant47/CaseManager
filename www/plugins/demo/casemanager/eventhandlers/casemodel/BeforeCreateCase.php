@@ -20,7 +20,13 @@ class BeforeCreateCase
      */
     public function handler($event, $model)
     {
-        $work = request()->attributes->get('WORK_' . $model->id);
-        $model->work_id = $work->id;
+        $work = $model->work;
+        if ($event === 'creating') {
+            $work = request()->attributes->get('WORK_' . $model->id);
+            $model->work_id = $work->id;
+        }
+        $model->assigned_to_id = $work->assigned_to_id;
+        $model->workflow_state_id = $work->workflow_state_id; // TODO: fetch workflow_state_id field from workflow model_state_field
+
     }
 }

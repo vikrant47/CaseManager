@@ -17,7 +17,7 @@ use System\Models\EventLog;
 class BeforeUpdateAutoAssignCaseToUser
 {
     public $model = Work::class;
-    public $events = ['updating', 'creating'];
+    public $events = ['updating'];
     public $sort_order = 999;
 
     /**
@@ -28,7 +28,7 @@ class BeforeUpdateAutoAssignCaseToUser
     {
         $logger = PluginConnection::getCurrentLogger();
         if ($model->model === CaseModel::class) {
-            if ($model->isDirty('assigned_to_id') || $model->isDirty('workflow_state_id')) {
+            if ($event === 'updating' && ($model->isDirty('assigned_to_id') || $model->isDirty('workflow_state_id'))) {
                 $entity = CaseModel::find($model->record_id);
                 if (!empty($entity)) {
                     $entity->assigned_to_id = $model->assigned_to_id;

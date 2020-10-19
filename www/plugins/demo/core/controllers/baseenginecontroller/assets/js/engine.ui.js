@@ -219,7 +219,7 @@ let EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             $(document).trigger('engine.ui.navigate');
             window.history.pushState({href: link.url, skip: skipPushState}, '', link.url);
         }
-        let promise;
+        let promise = Promise.reject('Invalid link type.');
         if (link.type === 'list') {
             promise = EngineList.open({url: link.url});
         } else if (link.type === 'form') {
@@ -587,7 +587,7 @@ var EngineList = Engine.instance.define('engine.ui.EngineList', {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {list: this});
         Engine.instance.addActions(this.getActionContainer(), actions.filter(function (action) {
             return !action.toolbar;
-        }), {list: this});
+        }), {list: this, parent: this});
         // toolbar actions
         Engine.instance.addActions(this.getToolbar(), actions.filter(function (action) {
             return action.toolbar;
@@ -812,7 +812,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     },
     addActions: function (actionRecords) {
         var actions = Engine.instance.ui.toUIAction(actionRecords, this.modelRecord, {form: this});
-        Engine.instance.addActions(this.getActionContainer(), actions, {form: this});
+        Engine.instance.addActions(this.getActionContainer(), actions, {form: this, parent: this});
     }
 });
 

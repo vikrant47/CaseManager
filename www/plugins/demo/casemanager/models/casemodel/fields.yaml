@@ -43,7 +43,7 @@ tabs:
     fields:
         documents:
             label: ''
-            type: fileupload
+            type: mediafinder
             mode: file
             comment: 'Upload a document'
             tab: 'Documents'

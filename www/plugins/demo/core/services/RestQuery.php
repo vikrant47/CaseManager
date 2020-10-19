@@ -22,8 +22,11 @@ class RestQuery
     /**@var string */
     protected $modelClass;
 
-    /**@param string $modelClass model class */
-    public function __construct($modelClass, $secured)
+    /**
+     * @param string $modelClass model class
+     * @param bool $secured
+     */
+    public function __construct($modelClass, $secured = false)
     {
         $this->modelClass = $modelClass;
         $this->secured = $secured;
@@ -31,6 +34,11 @@ class RestQuery
             $queryBuilder = DB::table($queryBuilder);
         }
         $this->queryBuilder = $queryBuilder;*/
+    }
+
+    public function getModelClass()
+    {
+        return $this->modelClass;
     }
 
     public static function evalJSON($json)
@@ -44,6 +52,9 @@ class RestQuery
 
     public function sanitizeJson($json)
     {
+        if (!array_key_exists('model', $json)) {
+            $json['model'] = $this->modelClass;
+        }
         $json = self::evalJSON($json);
         if (!empty($model)) {
             $json['model'] = $model;
@@ -102,6 +113,7 @@ class RestQuery
         }
         /**attributes handling*/
         if (array_key_exists('attributes', $json) && is_array($json['attributes'])) {
+            $json['alias'] = array_key_exists('alias', $json) ? $json['alias'] : $sourceTable;
             $queryBuilder->select(array_map(function ($attribute) use ($json) {
                 return $json['alias'] . '.' . $attribute;
             }, $json['attributes']));
@@ -211,13 +223,18 @@ class RestQuery
         return $this->findOne(['where' => ['id' => $id]]);
     }
 
-    public function create($data = [], $failIfDeniedAny = false)
+    public function bulkCreate()
+    {
+
+    }
+
+    public function create($record = [], $failIfDeniedAny = false)
     {
         if ($this->secured) {
             $sec = new SecuredEntityService($this->modelClass);
-            $sec->inset($data, $failIfDeniedAny);
+            $sec->inset($record, $failIfDeniedAny);
         } else {
-            return $this->modelClass::insert($data);
+            return $this->modelClass::insert($record);
         }
     }
 

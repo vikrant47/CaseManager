@@ -15,7 +15,7 @@ fields:
     active:
         label: Active
         span: auto
-        default: 1
+        default: true
         required: 1
         type: switch
     toolbar:
@@ -27,11 +27,11 @@ fields:
     description:
         label: Description
         size: ''
-        span: auto
+        span: full
         type: richeditor
     application:
         label: Application
-        nameFrom: code
+        nameFrom: name
         descriptionFrom: version
         span: auto
         required: 1
@@ -58,13 +58,14 @@ tabs:
             emptyValue: null
             default: null
             tab: Config
-        script:
-            label: Script
-            size: large
-            language: javascript
+        context:
+            label: Context
+            options:
+                create: Create
+                update: Update
+                preview: Preview
             span: auto
-            required: 1
-            type: codeeditor
+            type: checkboxlist
             tab: Config
         sort_order:
             label: 'Sort Order'
@@ -73,6 +74,14 @@ tabs:
             type: number
             default: 0
             tab: Config
+        script:
+            label: Script
+            size: large
+            language: javascript
+            span: full
+            required: 1
+            type: codeeditor
+            tab: Script
         icon:
             label: Icon
             span: auto
@@ -86,9 +95,14 @@ tabs:
             type: text
             tab: Config
         html_attributes:
+            trigger:
+                action: show # always hide
+                field: send_mode
+                condition: value[mandrill][mailgun][ses]
+
             label: Attributes
             prompt: 'Add new item'
-            span: auto
+            span: full
             type: repeater
             tab: Config
             form:
@@ -101,16 +115,8 @@ tabs:
                         label: Value
                         span: auto
                         type: text
-        context:
-            label: Context
-            options:
-                create: Create
-                update: Update
-                preview: Preview
-            span: auto
-            type: checkboxlist
-            tab: Config
         roles:
+            lazy: true
             label: Roles
             mode: relation
             separator: comma

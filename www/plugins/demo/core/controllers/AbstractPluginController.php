@@ -733,30 +733,18 @@ class AbstractPluginController extends Controller
         return $query;
     }
 
-    public function onQueryData()
+    public function onInvokeApi()
     {
-        $pagination = Request::input('pagination');
-        if (!empty($pagination)) {
-            $pagination = ['offset' => 0];
+        $endpoint = Request::input('endpoint');
+        if (empty($endpoint)) {
+            throw new ApplicationException('No endpoint defined');
         }
-        $errorMessages = [];
-        $modelClass = Request::input('model');
-        $query = Request::input('query', []);
-        $data = Request::input('data', []);
-        $method = Request::input('method');
-        $restQuery = new RestQuery($modelClass);
-        if (empty($modelClass) || class_exists($modelClass)) {
-            $errorMessages['model'] = 'Invalid Model';
-        }
-        if (empty($method) || (!method_exists($restQuery, $method))) {
-            $errorMessages['method'] = 'Invalid Method';
-        }
-        if (count($errorMessages) > 0) {
-            return Response::create([
-                'errors' => $errorMessages,
-            ], Response::HTTP_BAD_REQUEST);
-        }
-        return RestQuery::executeMethod($modelClass, $method, $query, $data, true);
+        $backendController = app()->make(ltrim(\Backend\Classes\BackendController::class, '\\'));
+        /*$controllerRequest = ReflectionUtil::invoke(\Backend\Classes\BackendController::class, $backendController, 'getRequestedController', [$endpoint]);
+        if (empty($controllerRequest)) {
+            throw new ApplicationException('No controller found');
+        }*/
+        return $backendController->run($endpoint);
     }
 
     /**This will save the current app in user pref and return the home url*/

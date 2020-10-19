@@ -7,8 +7,7 @@ let ReferenceComponent = Engine.instance.define('engine.component.Reference', {
                         if (params.data.q) {
                             const nameFrom = association.nameFrom || 'name';
                             const otherKey = association.otherKey || 'id';
-                            new engine.data.Filter().select({
-                                model: association[0] || association.model,
+                            new engine.data.RestQuery( association[0] || association.model).findAll({
                                 attributes: [nameFrom, otherKey],
                                 limit: 20,
                                 where: params.data.q ? {

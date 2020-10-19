@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\UnauthorizedException;
+use Event;
 
 /**
  * This service will perform CRUD on model by applying security
@@ -59,6 +60,73 @@ class SecuredEntityService
         $this->modelClass = $modelClass;
         $this->useEntityQuery = $useEntityQuery;
         $this->userSecurityService = UserSecurityService::getInstance();
+    }
+
+    /**
+     * This will execute bulk operations with laravel eloquent events
+     * @param string $modelClass
+     * @param Collection $data
+     * @param string $operation
+     * @param Builder|null $queryBuilder this should be a model query
+     * @throws \ReflectionException
+     */
+    public static function executeBulkOperations($modelClass, $data, $operation, $queryBuilder = null)
+    {
+        $eventPrefix = substr($operation, 0, strlen($operation) - 1);
+        $eventPrefixCapitalized = ucfirst($eventPrefix);
+        $before = 'ing';
+        $after = 'ed';
+        $reflect = new \ReflectionClass($modelClass);
+        $modelClassName = $reflect->getShortName();
+        $originalModels = collect([]);
+        if ($operation === 'create') {
+            $originalData = $data;
+            $originalModels = $originalData->map(function ($record) use ($modelClassName) {
+                /**@var Model $modelInstance */
+                $modelInstance = new $this->modelClass();
+                $modelInstance->setRawAttributes($record);
+                // $modelInstance->save(); // never execute multiple insert
+                return $modelInstance;
+            });
+        } elseif ($operation === 'update' || $operation === 'delete') {
+            $dataQuery = $queryBuilder->newQuery();
+            $originalModels = $dataQuery->get();
+            if ($operation === 'update') {
+                $originalModels->each(function ($modelInstance) use ($data) {
+                    foreach ($data as $field => $value) {
+                        $modelInstance->{$field} = $value;
+                    }
+                });
+            }
+        }
+
+        Event::fire('eloquent.bulk' . $eventPrefixCapitalized . $before . ': ' . $modelClassName, $originalModels);
+        foreach ($originalModels as $model) {
+            // $model->fireEvent('model.saveInternal');
+            if ($operation !== 'update') {
+                Event::fire('eloquent.' . $eventPrefix . $before . ': ' . $modelClassName, $model);
+            }
+        }
+        if ($operation === 'create') {
+            $updatedModels = $originalModels->map(function ($model) {
+                /**@var Model $model */
+                return $model->attributesToArray();
+            })->toArray();
+            $modelClassName::insert($updatedModels);
+        } elseif ($operation === 'update') {
+            // bulk with update not possible
+            $originalModels->each(function ($model) {
+                $model->save();
+            });
+        } else {
+            $queryBuilder->delete();
+        }
+
+        foreach ($originalModels as $model) {
+            // $model->fireEvent('model.saveInternal');
+            Event::fire('eloquent.' . $eventPrefix . $after . ': ' . $modelClassName, $model);
+        }
+        Event::fire('eloquent.bulk' . $eventPrefixCapitalized . $after . ': ' . $modelClassName, $data);
     }
 
     /**@return Builder */
@@ -122,11 +190,7 @@ class SecuredEntityService
         });
     }
 
-    /**
-     * @param array|Collection $data
-     * @param bool $failIfDeniedAny
-     */
-    public function inset($data, $failIfDeniedAny = true)
+    public function bulkInsert($data, $failIfDeniedAny = true)
     {
         if (is_array($data)) {
             $data = collect($data);
@@ -135,16 +199,125 @@ class SecuredEntityService
         if ($allowed->count() === 0 || ($failIfDeniedAny === true && $data->count() !== $allowed->count())) {
             throw new UnauthorizedException('Not authorized to create the records of type ' . $this->modelClass);
         }
-        if ($this->useEntityQuery === true) {
-            return $this->modelClass::insert($allowed);
+        $reflect = new \ReflectionClass($this->modelClass);
+        $modelClassName = $reflect->getShortName();
+        $allowedModels = $allowed->map(function ($record) use ($modelClassName) {
+            /**@var Model $modelInstance */
+            $modelInstance = new $this->modelClass();
+            $modelInstance->setRawAttributes($record);
+            // $modelInstance->save(); // never execute multiple insert
+            return $modelInstance;
+        });
+        Event::fire('eloquent.bulkCreating: ' . $modelClassName, $allowedModels);
+        foreach ($allowedModels as $model) {
+            // $model->fireEvent('model.saveInternal');
+            Event::fire('eloquent.creating: ' . $modelClassName, $model);
         }
+        $updatedModels = $allowedModels->map(function ($model) {
+            /**@var Model $model */
+            return $model->attributesToArray();
+        })->toArray();
+        $modelClassName::insert($updatedModels);
+        foreach ($allowedModels as $model) {
+            // $model->fireEvent('model.saveInternal');
+            Event::fire('eloquent.created: ' . $modelClassName, $model);
+        }
+        Event::fire('eloquent.bulkCreated: ' . $modelClassName, $allowedModels);
+    }
+
+    /**
+     * Bulk update the data
+     * @param Builder $queryBuilder - Must be a model query builder
+     */
+    public function bulkUpdate($queryBuilder, $update, $failIfDeniedAny = true)
+    {
+        $dataQuery = $queryBuilder->newQuery();
+        $models = $dataQuery->get();
+        if ($models->count() > 0) {
+            $allowed = $this->filterAllowed($models, Permission::WRITE);
+            if ($allowed->count() === 0 || ($failIfDeniedAny === true && $models->count() !== $allowed->count())) {
+                throw new UnauthorizedException('Not authorized to update the records of type ' . $this->modelClass);
+            }
+            $allowedModels = $models->filter(function ($model) use ($allowed) {
+                return !empty($allowed->first(function ($granted) use ($model) {
+                    if ($granted['id'] === $model->id) {
+                        $model->_allowed = $granted;
+                    }
+                }));
+            });
+            foreach ($allowedModels as $model) {
+                foreach ($update as $field => $value) {
+                    if (array_key_exists($field, $model->_allowed)) { // filtering allowed fields
+                        $model->{$field} = $value;
+                    }
+                }
+                $model->save();
+            }
+            return $allowedModels;
+        }
+        return $models;
+    }
+
+    /**
+     * Bulk delete the data
+     * @param Builder $queryBuilder - Must be a model query builder
+     */
+    public function bulkDelete($queryBuilder, $failIfDeniedAny = true)
+    {
+        $dataQuery = $queryBuilder->newQuery();
+        $models = $dataQuery->get();
+        if ($models->count() > 0) {
+            $reflect = new \ReflectionClass($this->modelClass);
+            $modelClassName = $reflect->getShortName();
+            $allowed = $this->filterAllowed($models, Permission::DELETE);
+            if ($allowed->count() === 0 || ($failIfDeniedAny === true && $models->count() !== $allowed->count())) {
+                throw new UnauthorizedException('Not authorized to delete the records of type ' . $this->modelClass);
+            }
+            $allowedModels = $models->filter(function ($model) use ($allowed) {
+                return !empty($allowed->first(function ($granted) use ($model) {
+                    if ($granted['id'] === $model->id) {
+                        $model->_allowed = $granted;
+                    }
+                }));
+            });
+            Event::fire('eloquent.bulkDeleting: ' . $this->modelClass, $allowedModels);
+            foreach ($allowedModels as $model) {
+                // $model->fireEvent('model.saveInternal');
+                Event::fire('eloquent.deleting: ' . $modelClassName, $model);
+            }
+            $queryBuilder->delete();
+            foreach ($allowedModels as $model) {
+                // $model->fireEvent('model.saveInternal');
+                Event::fire('eloquent.deleted: ' . $modelClassName, $model);
+            }
+            Event::fire('eloquent.bulkDeleted: ' . $modelClassName, $allowedModels);
+            return $allowedModels;
+        }
+        return $models;
+    }
+
+    /**
+     * @param array $record
+     * @param bool $failIfDeniedAny
+     */
+    public function inset(array $record)
+    {
+        if (is_array($record)) {
+            $record = collect($record);
+        }
+        $allowed = $this->filterAllowed(collect([$record]), Permission::CREATE);
+        if ($allowed->count() === 0) {
+            throw new UnauthorizedException('Not authorized to create the records of type ' . $this->modelClass);
+        }
+        /**@var $model Model */
         $model = new $this->modelClass;
-        return $model->table::insert($allowed);
+        $model->setRawAttributes($record);
+        $model->save();
     }
 
     /**
      * Check if user can insert the given model record
-     * @param Model|array $model
+     * @param Collection $models
      * @return bool
      */
     public function canInsert($model)

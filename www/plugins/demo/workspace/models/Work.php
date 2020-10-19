@@ -43,7 +43,7 @@ class Work extends Model
         'priority' => 'required|numeric',
         'model' => 'required',
         'record_id' => 'required',
-        'context' => 'json',
+        'context' => 'array|nullable',
     ];
     public $attributes = [
         'status' => WorkStatus::INIT,
@@ -51,6 +51,7 @@ class Work extends Model
     ];
 
     public $attachAuditedBy = true;
+    public $jsonable = ['context'];
 
     public function makeForwardTransition($data = [])
     {
@@ -81,11 +82,11 @@ class Work extends Model
      * Step 9. Update workflow state in current QueueEntity record
      * Step 10. Update current QueueEntity record
      * @param null $next_state
-     * @param bool $backwardDirection
+     * @param bool $backward_direction
      * @param array $data
      * @throws ApplicationException
      */
-    public function makeTransition($next_state, $data = [], $backwardDirection = false)
+    public function makeTransition($next_state, $data = [], $backward_direction = false)
     {
         if ($this->workflow->active === 0) {
             throw new ApplicationException('Unable to execute an inactive workflow.');
@@ -118,7 +119,7 @@ class Work extends Model
         $this->assigned_to = null;
         request()->attributes->add([
             'WORKFLOW_ITEM_DATA_' . $this->id => $data,
-            'backwardDirection' => $backwardDirection,
+            'backward_direction' => $backward_direction,
         ]);
         $this->update();
     }
