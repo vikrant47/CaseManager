@@ -32,7 +32,7 @@ class WorkflowService
      * This will search for a workflow for given model
      * @return Workflow matched channel
      */
-    public function searchWorkflow($channel)
+    public function searchWorkflow($channel, $model)
     {
         $matchedWorkflow = null;
         $modelClass = $channel->model;
@@ -40,7 +40,7 @@ class WorkflowService
         $workflows = Workflow::where('active', 1)->where('service_channel_id', '=', $channel->id)
             ->orderBy('sort_order', 'ASC')->get();
         $this->logger->info('Evaluating workflow to accept channel' . ModelUtil::toString($channel) . '. total = ' . $workflows->count());
-        return InMemoryQueryFilter::findMatchingEntity(collect([$channel->model_ref]), $workflows);
+        return InMemoryQueryFilter::findMatchingEntity(collect([$model]), $workflows);
     }
 
     /**
@@ -77,15 +77,15 @@ class WorkflowService
         foreach ($definition as $stateConfig) {
             if ($stateConfig['from_state'] === $stateId) {
                 $connections->push([
-                    'backwardDirection' => false,
-                    'stateId' => $stateConfig['to_state'],
-                    'queueId' => $stateConfig['queue']
+                    'backward_direction' => false,
+                    'state_id' => $stateConfig['to_state'],
+                    'queue_id' => $stateConfig['queue']
                 ]);
             } elseif ($stateConfig['to_state'] === $stateId) {
                 $connections->push([
-                    'backwardDirection' => true,
-                    'stateId' => $stateConfig['from_state'],
-                    'queueId' => $stateConfig['queue']
+                    'backward_direction' => true,
+                    'state_id' => $stateConfig['from_state'],
+                    'queue_id' => $stateConfig['queue']
                 ]);
             }
         }
@@ -100,7 +100,7 @@ class WorkflowService
     {
         $connections = $this->getConnectedStateConfig($workflow, $stateId);
         return $connections->first(function ($connection) {
-            return $connection['backwardDirection'] === false;
+            return $connection['backward_direction'] === false;
         });
     }
 

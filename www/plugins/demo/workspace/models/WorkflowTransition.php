@@ -26,9 +26,9 @@ class WorkflowTransition extends Model
         'from_state_id' => 'required',
         'to_state_id' => 'required',
         'work_id' => 'required',
-        'created_by_id' => 'required',
-        'updated_by_id' => 'required',
-        'data' => 'json',
+        /*'created_by_id' => 'required',
+        'updated_by_id' => 'required',*/
+        'data' => 'array|nullable',
     ];
     public $attachAuditedBy = true;
 
@@ -45,20 +45,24 @@ class WorkflowTransition extends Model
     public $jsonable = ['data'];
 
     public $immutables = ['from_state_id', 'to_state_id', 'work_id', 'backward_direction'];
-
+    public $attributes = [];
 
     /**
      * Check if the to state is a valid transition
      * When a transition is made it should have a valid from and to state values
      */
-    public function validate()
+    public function validateStates()
     {
         $validation = ['valid' => true];
-        $workflow = $this->work->workflow;
+        $work = $this->work;
+        $workflow = $work->workflow;
         if ($workflow->active === false) {
             throw new ValidationException([
                 'workflow' => 'Unable to make transition for an inactive workflow.'
             ]);
+        }
+        if (empty($this->from_state_id)) {
+            $this->from_state_id = $this->work->workflow_state_id;
         }
         if ($this->work->workflow_state_id !== $this->from_state_id) {
             throw new ValidationException(['to_state' => 'From State not matched with associated work']);
@@ -67,7 +71,7 @@ class WorkflowTransition extends Model
         $connections = $workflowService->getConnectedStateConfig($workflow, $this->from_state_id);
         $toStateId = $this->to_state_id;
         $matched = $connections->filter(function ($connection) use ($toStateId) {
-            return $connection['state'] === $toStateId;
+            return $connection['state_id'] === $toStateId;
         });
         if ($matched->count() === 0) {
             $validation['valid'] = false;
@@ -75,19 +79,28 @@ class WorkflowTransition extends Model
             throw new ValidationException(['to_state' => 'To state not matched with workflow definition.']);
         }
         $matched = $matched->get(0);
-        // $this->backward_direction = $direction['backwardDirection']; // setting direction value
-        if ($matched['backwardDirection'] !== $this->backward_direction) {
+        if (empty($this->backward_direction)) {
+            $this->backward_direction = $matched['backward_direction']; // setting direction value
+        }
+        if ($matched['backward_direction'] !== $this->backward_direction) {
             $validation['valid'] = false;
             $validation['reason'] = 'direction_not_matched';
             throw new ValidationException(['backward_direction' => 'Invalid direction field']);
         }
-        $this->configured_queue_id = $matched['queueId'];
+        $this->configured_queue_id = $matched['queue_id'];
         return $validation;
     }
 
-    public function beforeSave()
+    public function beforeValidate()
     {
-        $this->validate();
+        if (!$this->exists) {
+            $this->validateStates();
+        }
+    }
+
+    public function beforeCreate()
+    {
+        $this->workflow_id = $this->work->workflow_id;
     }
 
     /**
@@ -96,6 +109,7 @@ class WorkflowTransition extends Model
     public function afterCreate()
     {
         $this->work->workflow_state_id = $this->to_state_id;
+        $this->work->assigned_to_id = null;
         $this->work->save();
     }
 }

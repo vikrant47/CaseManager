@@ -29,6 +29,15 @@ fields:
         required: 1
         type: relation
 tabs:
+    stretch: true
+    defaultTab: 'Model Configuration'
+    cssClass: text-blue
+    lazy:
+        - Works
+        - 'Workflow Transitions'
+    icons:
+        'Model Configuration': 'icon-gear'
+        Definition: 'icon-tools'
     fields:
         service_channel:
             emptyOption: '-- Select --'
@@ -91,6 +100,11 @@ tabs:
             required: 1
             form:
                 fields:
+                    name:
+                        label: Name
+                        span: full
+                        type: text
+                        required: 1
                     from_state:
                         label: 'From State'
                         span: auto
@@ -106,6 +120,12 @@ tabs:
                         span: auto
                         type: relation
                         required: 1
+                        dependsOn:
+                            - to_state
+                        trigger:
+                            action: hide
+                            field: to_state
+                            condition: 'value[8c7e9158-b65c-437a-a5d9-4b975f7b6f51]'
                     transition_ttl:
                         label: ttl
                         span: auto

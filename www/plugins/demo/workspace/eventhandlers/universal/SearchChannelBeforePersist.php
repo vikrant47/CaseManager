@@ -16,6 +16,8 @@ use Demo\Workspace\Models\WorkflowTransition;
 use Demo\Workspace\Services\ChannelService;
 use Demo\Workspace\Services\WorkflowService;
 use Demo\Workspace\Services\WorkService;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
 use Log;
 use October\Rain\Exception\ApplicationException;
 use System\Models\EventLog;
@@ -23,13 +25,15 @@ use System\Models\EventLog;
 class SearchChannelBeforePersist
 {
     public $model = 'universal';
-    public $events = ['created'];
-    public $sort_order = -1000;
+    public $events = ['creating'];
+    public $sort_order = 1000;
 
     /**
      * Find all channels based on Model and evaluate them one by one
      * If a channel qualifies than break the loop.
      * Only one channel is allowed to push an item
+     * @param string $event
+     * @param Model $model
      */
     public function handler($event, $model)
     {
@@ -49,7 +53,7 @@ class SearchChannelBeforePersist
             $work = $workService->newWork($channel, $model);
             $logger->debug('Searching workflow for channel ' . ModelUtil::toString($channel));
             $wrokflowService = new WorkflowService();
-            $workflow = $wrokflowService->searchWorkflow($channel);
+            $workflow = $wrokflowService->searchWorkflow($channel, $model);
             if ($workflow !== null) {
                 $wrokflowService->startWorkflow($workflow, $work);
             } else {
@@ -58,6 +62,7 @@ class SearchChannelBeforePersist
             if (!$work->exists) {
                 $work->save();
             }
+            \request()->attributes->set('WORK_'.$model->id , $work);
         }
     }
 }

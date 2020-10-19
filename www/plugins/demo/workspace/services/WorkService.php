@@ -13,6 +13,7 @@ use Demo\Workspace\Models\Workflow;
 use Demo\Workspace\Models\WorkflowState;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Exception\ValidationException;
+use Backend\Facades\BackendAuth;
 
 class WorkService
 {
@@ -23,11 +24,13 @@ class WorkService
      */
     public function newWork($channel, $model)
     {
+        $currentUser = BackendAuth::getUser();
         $work = new Work();
         $work->service_channel_id = $channel->id;
         $work->status = WorkStatus::INIT;
         $work->model = get_class($model);
         $work->record_id = $model->id;
+        $work->assigned_to_id = $currentUser->id;
         return $work;
     }
 }

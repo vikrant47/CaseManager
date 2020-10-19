@@ -109,7 +109,7 @@ Object.assign(Engine.prototype, {
             return args[key];
         }));
     },
-    onDocumentReady: function () {
+    applyActionDataAttributes: function () {
         var _this = this;
         var dataActionConfig = {
             show: function (value) {
@@ -143,6 +143,13 @@ Object.assign(Engine.prototype, {
                 }
             }
         });
+    },
+    onDocumentReady: function () {
+        const _this = this;
+        $(document).on('engine.list.init engine.form.init', function () {
+            _this.applyActionDataAttributes();
+        });
+        this.applyActionDataAttributes();
     },
     confirm: function (message, callback) {
         var _event = jQuery.Event('ajaxConfirmMessage');
@@ -233,7 +240,7 @@ Object.assign(Engine.prototype, {
                 action.active = action.active.call(action, $container, scope);
             }
             if (action.active) {
-                action.beforeRender.apply(this, [{name: 'afterRender'}, scope, action, $container]);
+                action.beforeRender.apply(action, [{name: 'beforeRender'}, scope, action, $container]);
                 var $template = $(action.template).data('action', action).data('scope', scope).prop('id', action.id);
                 if (action.label) {
                     var $textElement = $template;
@@ -283,6 +290,9 @@ Object.assign(Engine.prototype, {
                     $container.prepend($template);
                 } else {
                     $container.append($template);
+                }
+                if (action.hidden) {
+                    $template.hide();
                 }
                 if (action.actions && action.actions.length > 0) {
                     var $appendTo = $template;

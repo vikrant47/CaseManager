@@ -32,6 +32,7 @@ use Demo\Core\Services\QueryPagination;
 use Demo\Core\Services\RestQuery;
 use Demo\Tenant\Models\Tenant;
 use File;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 use October\Rain\Database\Builder;
@@ -39,7 +40,6 @@ use October\Rain\Exception\ApplicationException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use System\Classes\PluginManager;
 use Db;
-use Response;
 use timgws\QueryBuilderParser;
 use View;
 use Config;
@@ -401,8 +401,7 @@ class AbstractPluginController extends Controller
         $restQuery['model'] = $this->getModelClass();
         if (!empty($restQuery)) {
             $list['list']->bindEvent('list.extendQuery', function ($queryBuilder) use ($restQuery) {
-                $restQuery = new RestQuery($queryBuilder, $restQuery);
-                $restQuery->apply(false);
+                RestQuery::parse($queryBuilder, $restQuery);
             });
         }
         return $this->makeView('index', true, $runParams ? $runParams['params'] : []);
@@ -734,31 +733,24 @@ class AbstractPluginController extends Controller
         return $query;
     }
 
-    public function onQueryData()
+    public function onInvokeApi()
     {
-        $table = Request::input('table');
-        $pagination = Request::input('pagination');
-        if (!empty($pagination)) {
-            $pagination = ['offset' => 0];
+        $endpoint = Request::input('endpoint');
+        if (empty($endpoint)) {
+            throw new ApplicationException('No endpoint defined');
         }
-        $modelClass = Request::input('model');
-        $where = Request::input('where');
-        $attributes = Request::input('attributes');
-        $query = QueryFilter::getQuery([
-            'table' => $table,
-            'model' => $modelClass,
-            'where' => $where,
-            'attributes' => $attributes,
-            'pagination' => new QueryPagination($pagination),
-        ]);
-        $this->queryDataExtendQuery($query);
-        return $query->get();
+        $backendController = app()->make(ltrim(\Backend\Classes\BackendController::class, '\\'));
+        /*$controllerRequest = ReflectionUtil::invoke(\Backend\Classes\BackendController::class, $backendController, 'getRequestedController', [$endpoint]);
+        if (empty($controllerRequest)) {
+            throw new ApplicationException('No controller found');
+        }*/
+        return $backendController->run($endpoint);
     }
 
     /**This will save the current app in user pref and return the home url*/
     public function onNavigateApplication()
     {
-        return Db::transaction(function () {
+        return DB::transaction(function () {
             $code = Request::input('code');
             if (empty($code)) {
                 throw new BadRequestHttpException('Empty code');

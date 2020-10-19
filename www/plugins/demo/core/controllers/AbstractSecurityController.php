@@ -9,12 +9,15 @@ use Backend\Classes\Controller;
 use BackendAuth;
 use Demo\Core\Models\FormAction;
 use Demo\Core\Models\ListAction;
+use Demo\Core\Models\ModelModel;
 use Demo\Core\Models\Navigation;
 use Demo\Core\Models\Permission;
+use Demo\Core\Services\RestQuery;
 use Demo\Core\Services\SecuredEntityService;
 use Demo\Core\Services\SecurityService;
 use Demo\Core\Services\UserSecurityService;
 use DB;
+use Illuminate\Support\Facades\Request;
 use October\Rain\Exception\ApplicationException;
 use Flash;
 use Response;
@@ -105,7 +108,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
     {
         $securedEntityService = new SecuredEntityService(get_class($model));
         $formData = $this->asExtension('FormController')->formGetWidget()->getSaveData();
-        if($securedEntityService->canUpdate($formData)===false){
+        if ($securedEntityService->canUpdate($formData) === false) {
             return $this->forwardToAccessDenied(true);
         }
     }
@@ -116,7 +119,7 @@ abstract class AbstractSecurityController extends AbstractPluginController
     public function formBeforeDelete($model)
     {
         $securedEntityService = new SecuredEntityService(get_class($model));
-        if($securedEntityService->canDelete($model)===false){
+        if ($securedEntityService->canDelete($model) === false) {
             return $this->forwardToAccessDenied(true);
         }
     }
@@ -167,4 +170,44 @@ abstract class AbstractSecurityController extends AbstractPluginController
         $this->formBeforeDelete($model);
     }
 
+    /**Handler for rest query*/
+    public function onQueryData()
+    {
+        return DB::transaction(function () {
+            $pagination = Request::input('pagination');
+            if (!empty($pagination)) {
+                $pagination = ['offset' => 0];
+            }
+            $errorMessages = [];
+            $modelClass = Request::input('model');
+            $query = Request::input('query', []);
+            $data = Request::input('data', []);
+            $method = Request::input('method');
+            if (empty($modelClass)) {
+                $errorMessages['model'] = 'Empty Model reference';
+            }
+            if (!class_exists($modelClass)) {
+                $model = DB::table('demo_core_models')->where('name', $modelClass)->first(['model']);
+                if (empty($model)) {
+                    $errorMessages['model'] = 'Invalid model alias ' . $modelClass;
+                }
+                $modelClass = $model->model;
+            }
+            $restQuery = new RestQuery($modelClass);
+            if (empty($method) || (!method_exists($restQuery, $method))) {
+                $errorMessages['method'] = 'Invalid Method ' . $method;
+            }
+            if (count($errorMessages) > 0) {
+                return \Illuminate\Http\Response::create([
+                    'errors' => $errorMessages,
+                ], \Illuminate\Http\Response::HTTP_BAD_REQUEST);
+            }
+            $result = RestQuery::executeMethod($modelClass, $method, $query, $data, true);
+            if ($result instanceof \stdClass) {
+                $result = (array)$result;
+            }
+            return ['result' => $result];
+        });
+
+    }
 }
