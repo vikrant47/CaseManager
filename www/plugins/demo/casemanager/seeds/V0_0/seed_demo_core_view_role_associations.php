@@ -234,9 +234,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "role_id"=>"ab9cbba3-c481-4f23-85c7-37b9d8b52357",
                                                                                         "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ] ,            [
-                                                                            "id"=>"184c4380-127c-11eb-9d92-75a3174148c3",
-                                                                                        "created_at"=>"2020-10-20 02:29:35",
-                                                                                        "updated_at"=>"2020-10-20 02:29:35",
+                                                                            "id"=>"936a9cb0-1284-11eb-a6da-2911024d0699",
+                                                                                        "created_at"=>"2020-10-20 03:30:18",
+                                                                                        "updated_at"=>"2020-10-20 03:30:18",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 0,
@@ -245,9 +245,9 @@ class SeedDemoCoreViewRoleAssociations implements Seedable
                                                                                         "role_id"=>"e751a812-4da9-4726-b375-8495ac2d3354",
                                                                                         "engine_application_id"=>"df07f9b4-26c1-40ca-ba1f-1b77b1692b83"
                             ] ,            [
-                                                                            "id"=>"184cee00-127c-11eb-96bb-9579d3bff87d",
-                                                                                        "created_at"=>"2020-10-20 02:29:35",
-                                                                                        "updated_at"=>"2020-10-20 02:29:35",
+                                                                            "id"=>"936b18b0-1284-11eb-93e8-5d2eb61fd0f5",
+                                                                                        "created_at"=>"2020-10-20 03:30:18",
+                                                                                        "updated_at"=>"2020-10-20 03:30:18",
                                                                                         "created_by_id"=> 1,
                                                                                         "updated_by_id"=> 1,
                                                                                         "version"=> 0,
