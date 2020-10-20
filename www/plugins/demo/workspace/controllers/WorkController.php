@@ -63,7 +63,7 @@ class WorkController extends AbstractSecurityController
         }
         return Response::create($connections->filter(function ($connection) {
             return $connection['backward_direction'] === false;
-        }));
+        })->values());
     }
 
     public function onGetPreviousTransitionStates()
@@ -74,6 +74,6 @@ class WorkController extends AbstractSecurityController
         }
         return Response::create($connections->filter(function ($connection) {
             return $connection['backward_direction'] === true;
-        }));
+        })->values());
     }
 }

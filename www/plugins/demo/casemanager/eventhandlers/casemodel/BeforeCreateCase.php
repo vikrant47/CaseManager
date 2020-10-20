@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class BeforeCreateCase
 {
     public $model = CaseModel::class;
-    public $events = ['creating', 'updating'];
+    public $events = ['creating'];
     public $sort_order = 9999;
 
     /**
@@ -20,13 +20,10 @@ class BeforeCreateCase
      */
     public function handler($event, $model)
     {
-        $work = $model->work;
-        if ($event === 'creating') {
-            $work = request()->attributes->get('WORK_' . $model->id);
-            $model->work_id = $work->id;
-        }
+        $work = request()->attributes->get('WORK_' . $model->id);
+        $model->work_id = $work->id;
         $model->assigned_to_id = $work->assigned_to_id;
-        $model->workflow_state_id = $work->workflow_state_id; // TODO: fetch workflow_state_id field from workflow model_state_field
+        $model->workflow_state_id = $work->workflow_state_id; // TODO: fetch workflow_state_id field from workflow model_state_field*/
 
     }
 }

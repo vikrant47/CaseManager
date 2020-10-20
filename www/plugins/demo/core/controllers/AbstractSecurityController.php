@@ -202,6 +202,15 @@ abstract class AbstractSecurityController extends AbstractPluginController
                     'errors' => $errorMessages,
                 ], \Illuminate\Http\Response::HTTP_BAD_REQUEST);
             }
+            /*if ($method === 'paginate') {
+                return RestQuery::paginateQuery(
+                    $modelClass,
+                    $query,
+                    (int)Request::input('perPage', 15),
+                    (int)Request::input('page', 1),
+                    true
+                );
+            }*/
             $result = RestQuery::executeMethod($modelClass, $method, $query, $data, true);
             if ($result instanceof \stdClass) {
                 $result = (array)$result;

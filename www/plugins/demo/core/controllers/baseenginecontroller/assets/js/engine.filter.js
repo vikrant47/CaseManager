@@ -724,6 +724,12 @@ let RestQuery = Engine.instance.define('engine.data.RestQuery', {
         }
 
     },
+    paginate: function (query, ajaxOptions){
+        return this.execute({
+            query: query,
+            method: 'paginate',
+        }, ajaxOptions);
+    },
     findOne: function (query, ajaxOptions) {
         return this.execute({
             query: query,
