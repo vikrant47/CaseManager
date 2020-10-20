@@ -350,22 +350,6 @@ class SeedDemoCoreModels implements Seedable
                                                                                         "description"=> "",
                                                                                         "attach_audited_by"=> false
                             ] ,            [
-                                                                            "id"=>"9ad92a08-cf91-47e5-bc59-263614415960",
-                                                                                        "created_at"=>"2020-05-10 04:11:48",
-                                                                                        "updated_at"=>"2020-05-10 04:11:48",
-                                                                                        "created_by_id"=> 1,
-                                                                                        "updated_by_id"=> 1,
-                                                                                        "name"=>"workflow_transitions",
-                                                                                        "model"=>"Demo\Workspace\Models\WorkflowTransitions",
-                                                                                        "controller"=>"Demo\Workspace\Controllers\WorkflowTransitionsController",
-                                                                                        "engine_application_id"=>"dc81b635-1d0a-4f3e-83af-13642d56abe4",
-                                                                                        "audit"=> false,
-                                                                                        "viewable"=> false,
-                                                                                        "record_history"=> false,
-                                                                                        "audit_columns"=>"*",
-                                                                                        "description"=> "",
-                                                                                        "attach_audited_by"=> false
-                            ] ,            [
                                                                             "id"=>"7ccd8ade-691b-47f4-8999-54a616098cf8",
                                                                                         "created_at"=>"2020-05-10 04:11:48",
                                                                                         "updated_at"=>"2020-05-10 04:11:48",
