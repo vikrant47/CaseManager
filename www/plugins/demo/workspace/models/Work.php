@@ -42,8 +42,7 @@ class Work extends Model
         'status' => 'required',
         'priority' => 'required|numeric',
         'model' => 'required',
-        'record_id' => 'required',
-        'context' => 'array|nullable',
+        'record_id' => 'required'
     ];
     public $attributes = [
         'status' => WorkStatus::INIT,

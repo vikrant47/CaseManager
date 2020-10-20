@@ -180,7 +180,7 @@ class RestQuery
      * @param array $data
      * @return array|mixed
      */
-    public static function executeMethod($modelClass, $method, $json, $data = [], $secured = false)
+    public static function executeMethod($modelClass, $method, $json, $data = [], $secured = true)
     {
         if (!in_array($method, self::ENTITY_METHODS)) {
             throw new ApplicationException('Invalid entity method ' . $method);
@@ -189,7 +189,7 @@ class RestQuery
         if (in_array($method, self::DATA_METHODS)) {
             return $restQuery->{$method}($data, $json);
         } else {
-            return $restQuery->{$method}($json);
+            throw new ApplicationException('Invalid method ' . $method);
         }
     }
 
@@ -201,16 +201,34 @@ class RestQuery
     public function select($json = [])
     {
         if ($this->secured === true) {
-            if (!array_key_exists('limit', $json) || $json['limit'] > 100) {
-                $json['limit'] = SecuredEntityService::MAX_ALLOWED_BULK_COUNT;
+            $offset = array_key_exists('offset', $json) ? $json['offset'] : 0;
+            $limit = array_key_exists('limit', $json) ? $json['limit'] : SecuredEntityService::MAX_ALLOWED_BULK_COUNT;
+            if ($limit - $offset > 100) {
+                $limit = $offset + 100;
             }
+            $json['limit'] = $limit;
+            $json['offset'] = $offset;
         }
         return $this->apply($json);
     }
 
+    /**
+     * Paginate the given json
+     * json should contain perPage,page properties
+     */
+    public function paginate($json = [])
+    {
+        $perPage = array_key_exists('perPage', $json) ? $json['perPage'] : 15;
+        $page = array_key_exists('page', $json) ? $json['page'] : 1;
+        if ($perPage > 100) {
+            $perPage = SecuredEntityService::MAX_ALLOWED_BULK_COUNT;
+        }
+        return $this->apply($json)->paginate($perPage, [], 'paginate', $page);
+    }
+
     public function findAll($json = [])
     {
-        return $this->select($json)->get();
+        return $this->select($json);
     }
 
     public function findOne($json = [])
@@ -228,18 +246,23 @@ class RestQuery
         return $this->findOne(['where' => ['id' => $id]]);
     }
 
-    public function bulkCreate()
-    {
-
-    }
-
-    public function create($record = [], $failIfDeniedAny = false)
+    public function bulkCreate($data)
     {
         if ($this->secured) {
             $sec = new SecuredEntityService($this->modelClass);
-            $sec->inset($record, $failIfDeniedAny);
+            $sec->bulkInsert($data);
         } else {
-            return $this->modelClass::insert($record);
+            return $this->modelClass::insert($data);
+        }
+    }
+
+    public function create($record, $failIfDeniedAny = false)
+    {
+        if ($this->secured) {
+            $sec = new SecuredEntityService($this->modelClass);
+            $sec->insert($record);
+        } else {
+            return $this->modelClass::insert([$record]);
         }
     }
 

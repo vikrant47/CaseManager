@@ -25,7 +25,7 @@ class SeedDemoWorkspaceServiceChannels implements Seedable
                                                                                         "model"=>"Demo\Casemanager\Models\CaseModel",
                                                                                         "priority"=> 1,
                                                                                         "active"=> 1,
-                                                                                        "condition"=>"\"{\"condition\":\"AND\",\"rules\":[],\"not\":false,\"valid\":true}\"",
+                                                                                        "condition"=>"{\"condition\":\"AND\",\"rules\":[],\"not\":false,\"valid\":true}",
                                                                                         "sort_order"=> 0
                             ]             ]);
         }

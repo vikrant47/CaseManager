@@ -1,5 +1,7 @@
 <?php namespace Demo\Workspace\Models;
 
+use Backend\Facades\BackendAuth;
+use Demo\Core\Services\UserSecurityService;
 use Demo\Workspace\Services\WorkflowService;
 use Model;
 use Backend\Models\User;
@@ -59,6 +61,12 @@ class WorkflowTransition extends Model
         if ($workflow->active === false) {
             throw new ValidationException([
                 'workflow' => 'Unable to make transition for an inactive workflow.'
+            ]);
+        }
+        $currentUser = BackendAuth::getUser();
+        if ($work->assigned_to_id !== $currentUser->id) {
+            throw new ValidationException([
+                'assigned_to_id' => 'Unable to perform the action as you are not assigned.'
             ]);
         }
         if (empty($this->from_state_id)) {

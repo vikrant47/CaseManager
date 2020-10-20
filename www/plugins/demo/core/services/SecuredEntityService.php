@@ -269,7 +269,7 @@ class SecuredEntityService
             }
             return $allowedModels;
         }
-        return $models;
+        return collect([]);
     }
 
     /**
@@ -312,18 +312,15 @@ class SecuredEntityService
             Event::fire('eloquent.bulkDeleted: ' . $modelClassName, $allowedModels);
             return $allowedModels;
         }
-        return $models;
+        return collect([]);
     }
 
     /**
      * @param array $record
      * @param bool $failIfDeniedAny
      */
-    public function inset(array $record)
+    public function insert(array $record)
     {
-        if (is_array($record)) {
-            $record = collect($record);
-        }
         $allowed = $this->filterAllowed(collect([$record]), Permission::CREATE);
         if ($allowed->count() === 0) {
             throw new UnauthorizedException('Not authorized to create the records of type ' . $this->modelClass);

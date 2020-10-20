@@ -650,11 +650,11 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         afterOpen: function (form) {
             $(document).trigger('engine.form.open', form);
         },
-        open: function (url, context, recordId, container = '#page-content') {
+        open: function (url, context, recordId, el = '#page-content') {
             engine.ui.EngineForm.getInstance({
                 context: context,
                 recordId: recordId,
-                container: container,
+                el: el,
                 modelRecord: {
                     controller: url
                 },
@@ -742,6 +742,9 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         });
         return this;
     },
+    reload: function () {
+        return this.loadFormContent().render();
+    },
     build: function (url, wrap = false) {
         const _this = this;
         this.contentPromise = Engine.instance.ui.request('onBuildForm', {
@@ -751,9 +754,12 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         });
         return this;
     },
-    render: function (selector, appender = 'html') {
+    render: function (selector = null, appender = 'html') {
         const _this = this;
-        let $selector = selector instanceof jQuery ? selector : $(selector);
+        let $selector = this.$el;
+        if (selector) {
+            $selector = selector instanceof jQuery ? selector : $(selector)
+        }
         if ($selector.length === 0) {
             $selector = this.$el.get(0);
         }
@@ -780,7 +786,7 @@ var EngineForm = Engine.instance.define('engine.ui.EngineForm', {
         });
     },
     isNew: function () {
-
+        return this.settings.context === 'create';
     },
     getActionContainer: function () {
         return this.$el.find('.form-buttons .loading-indicator-container .actions');
