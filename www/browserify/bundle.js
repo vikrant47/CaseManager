@@ -2,7 +2,7 @@
 (function (global){(function (){
 global.window.modules = {
     rxjs: require('rxjs'),
-    lodash: require('lodash')
+    lodash: require('lodash'),
 }
 global.window.require = function (module) {
     if (!global.window.modules[module]) {

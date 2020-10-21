@@ -3,7 +3,7 @@ let ReferenceComponent = Engine.instance.define('engine.component.Reference', {
         getConfig: function (association) {
             return {
                 ajax: {
-                    transport: window.modules._.debounce(function (params, success, failure) {
+                    transport: _.debounce(function (params, success, failure) {
                         if (params.data.q) {
                             const nameFrom = association.nameFrom || 'name';
                             const otherKey = association.otherKey || 'id';

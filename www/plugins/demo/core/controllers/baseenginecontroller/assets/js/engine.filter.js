@@ -1,3 +1,4 @@
+const _ = require('lodash');
 let Filter = Engine.instance.define('engine.data.Filter', {
     static: {
         defaultPopupConfig: {
@@ -26,7 +27,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
             },
         },
         create: function (config) {
-            const setting = Object.assign({}, Filter.defaultConfig, config);
+            const setting = Object.assign({}, this.defaultConfig, config);
             let filter;
             if (setting.type === 'parent') {
                 filter = new engine.ParentFilter(setting.el);
@@ -159,7 +160,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         mergeDefinitions: function (definitions) {
             const mereged = {};
             for (const definition of definitions) {
-                window.modules._.merge(mereged, definition);
+                _.merge(mereged, definition);
             }
             return mereged;
         },
@@ -182,7 +183,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
             return definition.columns || [];
         },
         isEmptyRule: function (rule) {
-            return window.modules._.isEmpty(rule) || JSON.stringify(rule) === JSON.stringify({
+            return _.isEmpty(rule) || JSON.stringify(rule) === JSON.stringify({
                 "condition": "AND",
                 "not": "false",
                 "valid": "true"
@@ -288,7 +289,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         const _this = this;
         let formFields = engine.ui.EngineForm.getFormFields(this.definition).map(function (field) {
             if (field.type === 'relation') {
-                return Filter.queryBuilderTypeMappings.relation.call(_this, field, _this.definition);
+                return _this.static.queryBuilderTypeMappings.relation.call(_this, field, _this.definition);
             }
             return field;
         });
@@ -299,7 +300,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
             }) < 0;
         }).map(function (column) {
             return Object.assign({}, column, {
-                    label: window.modules._.startCase(column.name.replace(/_/g, ' ').replace('id', '')),
+                    label: _.startCase(column.name.replace(/_/g, ' ').replace('id', '')),
                     type: column.name.endsWith('id') ? 'relation' : column.type,
                 }
             )
@@ -311,8 +312,8 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         let qbFields = [];
         fields.forEach(function (field) {
             let qbField = Object.assign({id: field.name}, field);
-            if (typeof Filter.queryBuilderTypeMappings[qbField.type] === 'function') {
-                qbField = Filter.queryBuilderTypeMappings[qbField.type].call(_this, qbField, _this.definition);
+            if (typeof _this.static.queryBuilderTypeMappings[qbField.type] === 'function') {
+                qbField = _this.static.queryBuilderTypeMappings[qbField.type].call(_this, qbField, _this.definition);
             } else {
                 qbField.type = 'string';
             }
@@ -365,7 +366,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         this.setRules(this._appliedRules);
     },
     showInPopup: function (options) {
-        const settings = Object.assign({}, Filter.defaultPopupConfig, options);
+        const settings = Object.assign({}, this.static.defaultPopupConfig, options);
         this.popup = Engine.instance.ui.showPopup(Object.assign({
             content: this.$el,
             target: this,
@@ -388,7 +389,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
     setRules: function (rules) {
         /**TODO:Removing non relevant rules*/
         this._rules = rules;
-        if (!window.modules._.isEmpty(rules) && this.getQueryBuilder()) {
+        if (!_.isEmpty(rules) && this.getQueryBuilder()) {
             try {
                 this.getQueryBuilder().setRules(rules);
             } catch (e) {
@@ -446,7 +447,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         }
     },
     parseMongoQuery: function (query) {
-        if (!window.modules._.isEmpty(query)) {
+        if (!_.isEmpty(query)) {
             this.definition = this.definition || {
                 form: {
                     controls: {
@@ -571,7 +572,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         const ui = Engine.instance.ui;
         const _this = this;
         const breadcrumbData = this.getBreadcrumbData(this.getRules(), this.makeFields());
-        const template = doT.template(Filter.breadcrumbTemplate)({items: breadcrumbData});
+        const template = doT.template(_this.static.breadcrumbTemplate)({items: breadcrumbData});
         const $template = $(template).data('filter', this).data('breadcrumbData', breadcrumbData);
         $template.find('.breadcrumb-item').not('.breadcrumb-item-all').find('a').click(function () {
             const $this = $(this);
@@ -592,7 +593,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         this.parent = filter;
     },
     setFields: function (fields) {
-        if (window.modules._.isArray(fields)) {
+        if (_.isArray(fields)) {
             this.definition = {form: {controls: {fields: {}}}};
             for (const field of fields) {
                 this.addField(field);
