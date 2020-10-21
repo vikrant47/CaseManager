@@ -1,0 +1,6 @@
+plugin:
+    name: 'demo.flowdesigner::lang.plugin.name'
+    description: 'demo.flowdesigner::lang.plugin.description'
+    author: demo
+    icon: oc-icon-share-alt
+    homepage: ''
