@@ -159,7 +159,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         mergeDefinitions: function (definitions) {
             const mereged = {};
             for (const definition of definitions) {
-                Engine._.merge(mereged, definition);
+                window.modules._.merge(mereged, definition);
             }
             return mereged;
         },
@@ -182,7 +182,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
             return definition.columns || [];
         },
         isEmptyRule: function (rule) {
-            return Engine._.isEmpty(rule) || JSON.stringify(rule) === JSON.stringify({
+            return window.modules._.isEmpty(rule) || JSON.stringify(rule) === JSON.stringify({
                 "condition": "AND",
                 "not": "false",
                 "valid": "true"
@@ -299,7 +299,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
             }) < 0;
         }).map(function (column) {
             return Object.assign({}, column, {
-                    label: Engine._.startCase(column.name.replace(/_/g, ' ').replace('id', '')),
+                    label: window.modules._.startCase(column.name.replace(/_/g, ' ').replace('id', '')),
                     type: column.name.endsWith('id') ? 'relation' : column.type,
                 }
             )
@@ -388,7 +388,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
     setRules: function (rules) {
         /**TODO:Removing non relevant rules*/
         this._rules = rules;
-        if (!Engine._.isEmpty(rules) && this.getQueryBuilder()) {
+        if (!window.modules._.isEmpty(rules) && this.getQueryBuilder()) {
             try {
                 this.getQueryBuilder().setRules(rules);
             } catch (e) {
@@ -446,7 +446,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         }
     },
     parseMongoQuery: function (query) {
-        if (!Engine._.isEmpty(query)) {
+        if (!window.modules._.isEmpty(query)) {
             this.definition = this.definition || {
                 form: {
                     controls: {
@@ -592,7 +592,7 @@ let Filter = Engine.instance.define('engine.data.Filter', {
         this.parent = filter;
     },
     setFields: function (fields) {
-        if (Engine._.isArray(fields)) {
+        if (window.modules._.isArray(fields)) {
             this.definition = {form: {controls: {fields: {}}}};
             for (const field of fields) {
                 this.addField(field);
