@@ -1,9 +1,10 @@
+const rxjs = window.modules.rxjs;
 let Pagination = Engine.instance.define('engine.data.Pagination', {
     static: {
         template: `<nav aria-label="Engine Pagination" style="display: flex;cursor: pointer;">
                       <ul class="pagination">
                         <li class="page-item ml-1 {{?!it.hasPrev() }}disabled{{?}}">
-                            <a class="page-link prev" href="javascript:void(0)">Previous</a> 
+                            <a class="page-link prev" href="javascript:void(0)">Previous</a>
                         </li>
                         {{for(var i=0;i<it.getMaxPageNum();i++){}}
                             <li class="page-item ml-1"><a class="page-link goto {{?i==it.getCurrentPage()}}active{{?}}" href="javascript:void(0)" data-page="{{=i+1}}">{{=i+1}}</a></li>
@@ -14,7 +15,7 @@ let Pagination = Engine.instance.define('engine.data.Pagination', {
                             <li class="page-item ml-1"><a class="page-link goto {{?it.totalPage==it.getCurrentPage()}}active{{?}}" href="javascript:void(0)" data-page="{{=it.totalPage}}">{{=it.totalPage}}</a></li>
                         {{?}}
                         <li class="page-item ml-1 {{?!it.hasNext() }}disabled{{?}}">
-                             <a class="page-link next" href="javascript:void(0)">Next</a> 
+                             <a class="page-link next" href="javascript:void(0)">Next</a>
                         </li>
                       </ul>
                       <select class="form-control page-size ml-1" style="height: 27px;">

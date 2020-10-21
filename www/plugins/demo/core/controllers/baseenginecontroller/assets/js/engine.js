@@ -65,7 +65,7 @@ Object.assign(Engine.prototype, {
         this.overrideDefaults();
     },
     noConflicts: function () {
-        Engine._ = _.noConflict();
+        Engine._ = window.modules._;
     },
     overrideDefaults: function () {
         const s2CallbackOptions = ['dropdownParent'];
