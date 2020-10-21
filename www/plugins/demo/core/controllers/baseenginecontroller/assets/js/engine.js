@@ -65,7 +65,7 @@ Object.assign(Engine.prototype, {
         this.overrideDefaults();
     },
     noConflicts: function () {
-        Engine._ = window.modules._;
+        Engine._ = require('lodash');
     },
     overrideDefaults: function () {
         const s2CallbackOptions = ['dropdownParent'];

@@ -1,4 +1,4 @@
-const rxjs = window.modules.rxjs;
+const rxjs = require('rxjs');
 let Pagination = Engine.instance.define('engine.data.Pagination', {
     static: {
         template: `<nav aria-label="Engine Pagination" style="display: flex;cursor: pointer;">
