@@ -26,7 +26,7 @@ class QueryBuilderWidget extends FormWidgetBase
                 'type' => 'dropdown',
                 'ignoreIfEmpty' => true,
                 'default' => 'model',
-                'options' => QueryBuilderWidget::getModelFieldOptions()
+                'options' => WorkFlowDesigner::getModelFieldOptions()
             ]
         ];
     }

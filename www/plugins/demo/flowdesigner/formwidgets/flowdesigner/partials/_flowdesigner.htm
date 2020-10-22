@@ -1,0 +1,43 @@
+<?php
+$modelInstance = new \Demo\Core\Models\ModelModel();
+if ($fetchModelFromField === false) {
+    $modelInstance->model = $modelType;
+} else {
+
+}
+
+?>
+<style>
+    .query-builder .has-error {
+        background-color: #f7f6f6;
+        border-color: #f3a5a5;
+    }
+
+    .query-builder .rules-group-container {
+        border: 1px solid #e0dddd;
+        background: rgb(255, 255, 255);
+    }
+</style>
+<input id="<?= $id ?>-input" name="<?= $name ?>" type="hidden" value="<?= json_encode($value) ?>"/>
+<div id="<?= $id ?>"></div>
+<script>
+    (function () {
+        const $input = $('#<?= $id ?>-input');
+        $(document).ready(function () {
+            let rules = <?= json_encode($value) ?>;
+            try {
+                rules = JSON.parse(rules);
+            } catch (e) {
+            }
+            const filter = new engine.data.Filter('#<?= $id ?>', '#<?= $id ?>', rules);
+            filter.setModel('<?= str_replace('\\', '\\\\', $modelType)?>');
+            filter.build().then(function () {
+                filter.setRules(rules);
+            });
+            filter.on('engine.filter.rulesChanged', function (rules) {
+                $input.val(JSON.stringify(rules));
+            });
+        });
+    })();
+</script>
+
