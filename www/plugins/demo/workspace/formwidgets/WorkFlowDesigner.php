@@ -32,6 +32,7 @@ class WorkFlowDesigner extends FormWidgetBase
 
     public function render()
     {
+        $this->addJs('/plugins/demo/workspace/formwidgets/workflowdesigner/assests/js/workflowdesigner.js');
         return $this->makePartial('workflowdesigner');
     }
 }
