@@ -1,21 +1,26 @@
 {
-  "name": "www",
-  "version": "1.0.0",
-  "description": "The wizard installation is a recommended way to install October. It is simpler than the command-line installation and doesn't require any special skills.",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "lodash": "^4.17.20",
-    "mxgraph": "^4.2.0",
-    "rxjs": "^6.6.3",
-    "xml2json": "^0.12.0"
-  }
+    "name": "www",
+    "version": "1.0.0",
+    "description": "The wizard installation is a recommended way to install October. It is simpler than the command-line installation and doesn't require any special skills.",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "develop": "webpack --mode development --watch",
+        "build": "webpack --mode production"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "lodash": "^4.17.20",
+        "mxgraph": "^4.2.0",
+        "rxjs": "^6.6.3",
+        "xml2json": "^0.12.0"
+    },
+    "devDependencies": {
+        "webpack": "^5.1.3",
+        "webpack-cli": "^4.1.0"
+    }
 }
