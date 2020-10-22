@@ -10,7 +10,7 @@ use Demo\Workspace\Models\Task;
 use October\Rain\Database\QueryBuilder;
 use October\Rain\Exception\ApplicationException;
 
-class QueryBuilderWidget extends FormWidgetBase
+class FlowDesigner extends FormWidgetBase
 {
     static function getProperties()
     {
