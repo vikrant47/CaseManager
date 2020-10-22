@@ -30,3 +30,5 @@ www/.editorconfig
 swoole-ext
 /www/composer.phar
 /www/node_modules/
+/www/browserify/webpack.bundle.js
+/www/browserify/bundle.js
