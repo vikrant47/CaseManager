@@ -195,6 +195,8 @@ const EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         return urlInfo;
     },
     navigate: function (url, skipPushState) {
+        const EngineForm = require('./engine.form');
+        const EngineList = require('./engine.list');
         const link = this.getUrlInfo(url);
         if (!skipPushState) {
             $(document).trigger('engine.ui.navigate');

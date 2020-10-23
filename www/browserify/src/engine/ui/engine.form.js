@@ -1,4 +1,5 @@
 const Engine = require('../core/engine');
+const EngineObservable = require('../core/engine.observable');
 const EngineForm = Engine.instance.define('engine.ui.EngineForm', {
     static: {
         defaultSettings: {
@@ -23,9 +24,8 @@ const EngineForm = Engine.instance.define('engine.ui.EngineForm', {
                 if ($el.data('engineForm')) {
                     return $el.data('engineForm');
                 }
-            } else {
-                return new EngineForm(options);
             }
+            return new EngineForm(options);
         },
         getCurrentForm: function () {
             var $form = $(this.defaultSettings.el).eq(0);
@@ -41,7 +41,7 @@ const EngineForm = Engine.instance.define('engine.ui.EngineForm', {
             $(document).trigger('engine.form.open', form);
         },
         open: function (url, context, recordId, el = '#page-content') {
-            engine.ui.EngineForm.getInstance({
+            this.getInstance({
                 context: context,
                 recordId: recordId,
                 el: el,

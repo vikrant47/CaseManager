@@ -1,3 +1,5 @@
+const Engine = require('../core/engine');
+const EngineObservable = require('../core/engine.observable');
 const EngineList = Engine.instance.define('engine.ui.EngineList', {
     constructor: function (el, modelRecord) {
         this.modelRecord = modelRecord;

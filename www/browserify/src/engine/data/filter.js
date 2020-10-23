@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const Engine = require('../core/engine');
 const EngineObservable = require('../core/engine.observable');
+const Reference = require('../components/reference.component');
 const Filter = Engine.instance.define('engine.data.Filter', {
     static: {
         defaultPopupConfig: {
@@ -118,7 +119,7 @@ const Filter = Engine.instance.define('engine.data.Filter', {
                         plugin: 'select2',
                         values: {},
                         name: association.key,
-                        plugin_config: engine.component.Reference.getConfig(Object.assign(association, {nameFrom: field.nameFrom})),
+                        plugin_config: Reference.getConfig(Object.assign(association, {nameFrom: field.nameFrom})),
                     });
                 }
                 return this.static.queryBuilderTypeMappings.text(field);
