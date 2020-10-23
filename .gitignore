@@ -32,3 +32,4 @@ swoole-ext
 /www/node_modules/
 /www/browserify/webpack.bundle.js
 /www/browserify/bundle.js
+/www/browserify/dist/

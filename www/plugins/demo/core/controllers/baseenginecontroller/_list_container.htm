@@ -43,6 +43,7 @@ $modelRecord = $this->getListModelRecord($list);
 <script>
     (function ($list) {
         $(document).ready(function () {
+            const EngineList = require('engine.ui.EngineList');
             var listId = $list.prop('id');
             var listElem = $list.parents('.engine-list-wrapper').get(0);
             var list = EngineList.getInstance(listElem, $list.data('model'), listId);

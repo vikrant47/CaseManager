@@ -5,6 +5,7 @@ $modelRecord = $this->getModelRecord();
 <div class="engine-form-wrapper">
     <script>
         (function () {
+            const EngineForm = require('engine.ui.EngineForm');
             window.me = {id:<?=$this->user->id?>};
             var actions = <?=$formActions ? $formActions->toJSON() : '[]'?>;
             var modelRecord = <?=$modelRecord ? $modelRecord->toJSON() : 'null'?>;
