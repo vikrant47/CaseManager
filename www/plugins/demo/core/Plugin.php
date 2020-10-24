@@ -9,6 +9,7 @@ use Demo\Core\EventHandlers\Universal\BeforeDeleteCascade;
 use Demo\Core\EventHandlers\Universal\RestrictSystemRecordHandler;
 use Demo\Core\FormWidgets\DesignProviders\DefaultDesignProvider;
 use Demo\Core\FormWidgets\DurationWidget;
+use Demo\Core\FormWidgets\QueryBuilderWidget;
 use Demo\Core\FormWidgets\WorkFlowDesigner;
 use Demo\Core\FormWidgets\RelatedList;
 use Demo\Core\EventHandlers\Universal\UniversalWebhookHandler;
@@ -60,7 +61,7 @@ class Plugin extends PluginBase
     {
         return [
             RelatedList::class => ['code' => 'relatedlist', 'Label' => 'Related List'],
-            WorkFlowDesigner::class => ['code' => 'querybuilderwidget', 'Label' => 'Query Builder'],
+            QueryBuilderWidget::class => ['code' => 'querybuilderwidget', 'Label' => 'Query Builder'],
             DurationWidget::class => ['code' => 'durationwidget', 'Label' => 'Duration'],
             RelationDynamicDropdown::class => [
                 'label' => 'Relation Dynamic Dropdown',

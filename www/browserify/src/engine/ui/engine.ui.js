@@ -202,7 +202,7 @@ const EngineUI = Engine.instance.define('engine.ui.EngineUI', {
             $(document).trigger('engine.ui.navigate');
             window.history.pushState({href: link.url, skip: skipPushState}, '', link.url);
         }
-        let promise = Promise.reject('Invalid link type.');
+        let promise = null;
         if (link.type === 'list') {
             promise = EngineList.open({url: link.url});
         } else if (link.type === 'form') {
@@ -212,10 +212,8 @@ const EngineUI = Engine.instance.define('engine.ui.EngineUI', {
         } else {
             promise = this.open(link.url);
         }
-        if (promise) {
-            promise.catch(function (e) {
-                throw e;
-            });
+        if (!promise) {
+            promise = Promise.reject('Invalid link type.');
         }
         return promise;
     },

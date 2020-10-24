@@ -8,6 +8,7 @@ const getLocalModules = function () {
         'engine.ui.EngineForm': require('./engine/ui/engine.form'),
         'engine.ui.EngineList': require('./engine/ui/engine.list'),
         'themes.nobleui.theme': require('./themes/nobleui/theme'),
+        'engine.flowdesigner': require('./flowdesigner/flowdesigner'),
     };
 }
 /**require support for other scripts*/

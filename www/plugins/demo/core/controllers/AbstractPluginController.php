@@ -499,39 +499,39 @@ class AbstractPluginController extends Controller
     {
         $user = new CoreUser();
         $appId = $user->getUserApplicationId();
-        // return SessionCache::instance()->get('NAVIGATION'.$position, function () {
-        $query = Navigation::where([
-            'active' => true,
-            'position' => $position,
-        ])->where(function ($query) use ($appId) {
-            $query->where('nav_application_id', EngineApplication::UNIVERSAL_APP_ID)
-                ->orWhere('nav_application_id', $appId);
-        })->orderBy('sort_order', 'ASC');
-        $this->viewExtendQuery(Navigation::class, $query);
-        $navigations = $query->get()->map(function ($navigation) {
-            return ModelUtil::toPojo($navigation, ['model_ref'], [
-                'generated_url' => Navigation::getUrl($navigation),
-                'children' => null,
-            ]);
-        });
-        $parentRefs = [];
-        foreach ($navigations as $navigation) {
-            $parentRefs[$navigation->id] = $navigation;
-        }
-        foreach ($navigations as $navigation) {
-            if (!empty($navigation->parent_id) && array_key_exists($navigation->parent_id, $parentRefs)) {
-                $parent = $parentRefs[$navigation->parent_id];
-                if (empty($parent->children)) {
-                    $parent->children = new Collection();
-                }
-                $parent->children->push($navigation);
+        /*return SessionCache::instance()->get('NAVIGATION' . $position, function () use ($appId, $position, $user) {*/
+            $query = Navigation::where([
+                'active' => true,
+                'position' => $position,
+            ])->where(function ($query) use ($appId) {
+                $query->where('nav_application_id', EngineApplication::UNIVERSAL_APP_ID)
+                    ->orWhere('nav_application_id', $appId);
+            })->orderBy('sort_order', 'ASC');
+            $this->viewExtendQuery(Navigation::class, $query);
+            $navigations = $query->get()->map(function ($navigation) {
+                return ModelUtil::toPojo($navigation, ['model_ref'], [
+                    'generated_url' => Navigation::getUrl($navigation),
+                    'children' => null,
+                ]);
+            });
+            $parentRefs = [];
+            foreach ($navigations as $navigation) {
+                $parentRefs[$navigation->id] = $navigation;
             }
-        }
-        $parents = $navigations->filter(function ($navigation) {
-            return empty($navigation->parent_id);
-        });
-        return ModelUtil::sortForest($parents);
-        // });
+            foreach ($navigations as $navigation) {
+                if (!empty($navigation->parent_id) && array_key_exists($navigation->parent_id, $parentRefs)) {
+                    $parent = $parentRefs[$navigation->parent_id];
+                    if (empty($parent->children)) {
+                        $parent->children = new Collection();
+                    }
+                    $parent->children->push($navigation);
+                }
+            }
+            $parents = $navigations->filter(function ($navigation) {
+                return empty($navigation->parent_id);
+            });
+            return ModelUtil::sortForest($parents);
+       /* });*/
     }
 
     public function getListActions()

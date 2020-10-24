@@ -41,7 +41,7 @@ const EngineForm = Engine.instance.define('engine.ui.EngineForm', {
             $(document).trigger('engine.form.open', form);
         },
         open: function (url, context, recordId, el = '#page-content') {
-            return this.getInstance({
+            return new EngineForm({
                 context: context,
                 recordId: recordId,
                 el: el,

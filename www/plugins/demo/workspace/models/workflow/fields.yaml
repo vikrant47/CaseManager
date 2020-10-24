@@ -95,44 +95,10 @@ tabs:
             label: Definition
             prompt: 'Add new transition'
             span: full
-            type: repeater
+            type: workflowdesigner
             tab: Definition
             required: 1
-            form:
-                fields:
-                    name:
-                        label: Name
-                        span: full
-                        type: text
-                        required: 1
-                    from_state:
-                        label: 'From State'
-                        span: auto
-                        type: relation
-                        required: 1
-                    to_state:
-                        label: 'To State'
-                        span: auto
-                        type: relation
-                        required: 1
-                    queue:
-                        label: 'Queue'
-                        span: auto
-                        type: relation
-                        required: 1
-                        dependsOn:
-                            - to_state
-                        trigger:
-                            action: hide
-                            field: to_state
-                            condition: 'value[8c7e9158-b65c-437a-a5d9-4b975f7b6f51]'
-                    transition_ttl:
-                        label: ttl
-                        span: auto
-                        type: number
-                        min: -1
-                        default: -1
-                        comment: 'Max time for a work to stay in this transition. -1 = infinity'
+
         _work:
             label: 'Works'
             span: full

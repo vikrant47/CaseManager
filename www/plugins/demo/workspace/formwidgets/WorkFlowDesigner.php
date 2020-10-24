@@ -17,7 +17,12 @@ class WorkFlowDesigner extends FormWidgetBase
      * @var string A unique alias to identify this widget.
      */
     protected $defaultAlias = 'workflowDesigner';
-
+    public function init()
+    {
+        $this->vars['id'] = $this->getId();
+        $this->vars['name'] = $this->getFieldName();
+        $this->vars['value'] = $this->getLoadValue();
+    }
     //
     // Configurable properties
     //
@@ -32,7 +37,6 @@ class WorkFlowDesigner extends FormWidgetBase
 
     public function render()
     {
-        $this->addJs('/plugins/demo/workspace/formwidgets/workflowdesigner/assests/js/workflowdesigner.js');
         return $this->makePartial('workflowdesigner');
     }
 }
