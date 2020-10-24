@@ -41,7 +41,7 @@ const EngineForm = Engine.instance.define('engine.ui.EngineForm', {
             $(document).trigger('engine.form.open', form);
         },
         open: function (url, context, recordId, el = '#page-content') {
-            this.getInstance({
+            return this.getInstance({
                 context: context,
                 recordId: recordId,
                 el: el,
@@ -49,9 +49,7 @@ const EngineForm = Engine.instance.define('engine.ui.EngineForm', {
                     controller: url
                 },
                 url: url,
-            }).loadFormContent().render(container).then(function () {
-
-            });
+            }).loadFormContent().render();
         },
     },
     extends: EngineObservable,
